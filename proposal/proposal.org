@@ -1,0 +1,118 @@
+#+TITLE: Master Thesis Proposal
+#+SUBTITLE: A good title
+#+AUTHOR:Tobias Richter
+#+LATEX_HEADER: \usepackage[margin=1.0in]{geometry}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \onehalfspacing
+#+OPTIONS: H:4
+
+* Introduction
+** Research Motivation
+** Research Question (!)
+1. Is participating in the continuous intraday electricity market
+   a viable business model for EV carsharing fleets?
+2. Can sophisticated Machine Learning methods significantly improve the
+   effectivity of the proposed strategy?
+3. How does the proposed strategy compare to engaging in other types of
+   electricity markets? Can viable strategies be developed, which participate in the
+   different electricity markets at the same time?
+** Relevance of the Research
+*** Relevance to Science
+- Engaging on the intraday market in the context of VPPs for EV fleets not researched yet
+- Different electricity markets not compared yet
+- New bidding strategies, when acting on multiple markets on the same time
+- Application and comparison of Advanced ML Models (for spatial time-series forecasting)
+*** Relevance to Practice
+- More profitability for car sharing operators
+*** Relevance to Society
+- Grid stability and more efficient use of sustainable energies
+** Structure of the Research Proposal
+* Empirical Setting
+- Describe relevance and mechanisms of car-sharing and electricity market auctions
+- Show excerpts of the available data and explain.
+** Carsharing Fleets
+- Car2Go: Berlin, Stuttgart, San Diego, Kopenhagen?
+- Drive-now available?
+- Use same time span for car data as respective market data (!?)
+** Electricity Markets
+- Epex Spot Market: Continuous intraday trading data from 2016-2017.
+- Also replicate other studies? Or just take results form their papers?
+  - Day-ahead market data Nord Pool Spot (ELSPOT) (https://nordpoolspot.com)?
+  - Secondary reserve market data from Germany (https://regelleistung.net, https://transnetbw.de), Netherlands
+    (https://tennet.eu) and California ISO (https://caiso.com)
+* Literature Review
+** Electric Vehicles, Virtual Power Plants, V2G
+- Avci et al. (2015) - Electric vehicles with a battery switching station: Adoption and environmental impact
+  - Infrastructure and positioning aspects
+- Fridgen et al. (2014) - The value of information exchange in electric vehicle charging
+  - Customer sharing information leads to better utilization
+- He et al. (2016) - Optimal bidding strategy of battery storage in power markets considering performance-based regulation and battery cycle life
+  - Stationary storage
+  - Multiple energy market bidding at the same time(!)
+  - Battery degradation
+- Kara et al. (2015) - Estimating the benefits of electric vehicle smart charging at non-residential locations: A data-driven approach
+  - Intelligent Scheduling
+- Kim et al. (2012) - Carbitrage: Utility integration of electric vehicles and the smart grid
+  - Grid stability
+- Mak et al. (2013) - Infrastructure planning for electric vehicles with battery swapping
+  - Infrastructure and positioning aspects
+- Mashour and Moghaddas-Trafreshi (2011) - Bidding strategy of virtual power plant for participating in energy and spinning reserve markets
+  - Stationary storage
+  - Energy and Reserve Market bidding at the same time (!)
+- Peterson et al. (2010) - The economics of using plug-in hybrid electric vehicle battery packs for grid storage
+  - V2G
+** DSS, Intelligent Agents, State of the Art ML Techniques
+- Kahlen et al. (2017) - Electric Vehicle Virtual Power Plant Dilemma: Grid Balancing Versus Customer Mobility
+- Kahlen et al. (2017) - Fleetpower: Creating virtual power plants in sustainable smart electricity markets
+** Carsharing (?)
+- Firnkorn and Mueller (2011) - Free-Float Carsharing Environmental effects
+** Auction Theory (?)
+** More Papers
+**Main Papers**
+- Brand et al. (2017)
+- Flath et al. (2013) - Area pricing
+- Pudjianto et al. (2017) -
+- Reichert (2010) - V2G, battery degradation costs
+- Schill (2011)
+- Sioshansi (2012) - EV demand on Grid stability
+- Tomic and Kempton (2007) - V2G profitability dependent on market setup
+- Valogianni et al. (2014) - Smart charging w/ price incentives
+- Vytelingum et al. (2011) - Static storage capacity in households, dynamic pricing
+- Wagner et al. (2016) - Smart charging w/ price incentives
+- Wolfson et al. (2011) - Battery swapping infrastructure
+- Zhou et al. (2015) - Stationary storage, dynamic pricing, industrial setting
+
+**Touching Papers and Conference Papers**
+- Kahlen et al. (2014) - ECIS Conference Paper: Balancing with EVs - Simulation PowerTac?
+- Kahlen and Ketter (2015) - AI Conference Paper: Fleetpower
+- Kahlen et al. (2017) - Hawai System Science Conference Paper
+- Ketter et al. (2013) - Power Tac Smart Grid
+- Ketter et al. (2016) - MISQ Powertac
+- Ketter et al. (2016) - MISQ Competitive Benchmarking
+* Research Design
+** Methodology (!)
+*** Quantitative Study
+- What is the purpose of the study?
+  1. EV Capacity Prediction / Demand Prediction
+  2. Determine Bids/Asks/Market: Price Prediction
+- Mention Algorithms?
+  - Type of models or already detailed?
+  - Too early in proposal when focus is on ML?
+* Expected Contribution
+
+* Research Plan (Also for MA Thesis?)
+- 6 Month plan?
+
+* Wolf Requirements
+** MA Proposal
+
+- The proposal depicts the main background and motivation of your research topic.
+- Based on the proposal, a concise research question is to be derived and formulated.
+- The methodological approach shall be outlined.
+- The suggested methods and algorithms shall be listed.
+- Please give an overview on the respective data.
+- The proposal already has to include relevant literature references.
+- Please note that special focus shall be placed on the research question and the respective approach.
+
+** PhD Proposal
+- Specially attention is paid to related work, data, methods, and analysis, and potential contribution/conclusion.
