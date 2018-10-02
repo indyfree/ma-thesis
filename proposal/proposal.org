@@ -1,45 +1,84 @@
-#+TITLE: Master Thesis Proposal
-#+SUBTITLE: A good title
+#+TITLE: Portfolio Optimization of Electric Vehicle Virtual Power Plants in Smart Sustainable Electricity Markets: A ML-based Intelligent Agent Approach
+#+SUBTITLE: Master Thesis Proposal
 #+AUTHOR:Tobias Richter
-#+LATEX_HEADER: \usepackage[margin=1.0in]{geometry}
+#+LATEX_HEADER: \usepackage[margin=1.5in]{geometry}
 #+LATEX_HEADER: \usepackage{setspace}
 #+LATEX_HEADER: \onehalfspacing
 #+OPTIONS: H:4
 
 * Introduction
 ** Research Motivation
+
+- C0^2 emissions need to be reduced.
+- Transition to sustainable energy sources is a wicked problem.
+- Electric Vehicles powered by renewable energy sources is a needed measure to
+  reduce emissions.
+- Integration of renewables into the energy grid is difficult. Exogenous
+  factors like sun and wind make them highly intermittent and thus hard to
+  integrate into a power grid, which has to be balanced at all times.
+- Carsharing companies have centrally managed EV fleets at their hands that can be
+  turned into Virtual Power Plants (VPP). VPPs can be used to balance out excess
+  electricity or electricity insufficiency from the grid.
+- Using VPPs allows carsharing fleets to profitably act on electricity
+  markets. Buying electricity (charge EVs), when prices are low (excess energy) and
+  selling electricity (discharge EVs, V2G), when prices are high (energy insufficiency).
+- But: The usage of EVs as VPP compromises customer mobility and profitability of
+  the fleet.
+- Thus: An intelligent Agent is needed, which dynamically allocates parked, plugged-in EVs to be
+  used as VPP or stay idle, depending whether an EV is likely going to be rented out and how much
+  capacity it has available.
+- It is possible to act not only on one electricity market, but on multiple:
+
+  *Operating reserve markets* offer higher profits, due to a very low reaction time
+  between contractual agreement and physical delivery. They also bear a higher risk for the
+  fleet. Commitments have to be made one week in advance, where customer demands
+  are uncertain. To not face penalties for unfulfilled commitments, only a
+  conservative estimation of available battery capacity can be made. This leaves
+  a lot of potential EV capacity unused.
+
+  *Continuous intraday markets* allow participants to continuously trade electricity products up
+  to 15 minutes prior to delivery (in Germany). At this point it is possible to
+  predict customer demand with a high accuracy, which generates the possibility
+  to trade the remaining available capacity with a low risk.
+
 ** Research Question (!)
-1. Is participating in the continuous intraday electricity market
-   a viable business model for EV carsharing fleets?
-2. Can sophisticated Machine Learning methods significantly improve the
-   effectivity of the proposed strategy?
-3. How does the proposed strategy compare to engaging in other types of
-   electricity markets? Can viable strategies be developed, which participate in the
-   different electricity markets at the same time?
+
+1. Accurate forecasting of spatio-temporal customer demand patterns of carsharing EVs:
+   Predict available battery capacity of EV fleets.
+
+2. Dynamically learn the optimal allocation ratio of EVs to operating reserve
+   VPPs and intraday VPPs using a recurrent neural network approach.
+
+3. Develop an intelligent agent that autonomously acts on operating reserve and
+   day-ahead electricity markets with and integrated bidding strategy.
+
 ** Relevance of the Research
 *** Relevance to Science
-- Engaging on the intraday market in the context of VPPs for EV fleets not researched yet
-- Different electricity markets not compared yet
-- New bidding strategies, when acting on multiple markets on the same time
+- Dynamically optimize the allocation of EVs to different types of VPP using
+  recurrent neural networks.
+- In the context of EV VPPs an integrated bidding strategy to ac
 - Application and comparison of Advanced ML Models (for spatial time-series forecasting)
 *** Relevance to Practice
-- More profitability for car sharing operators
+
+- An intelligent agent will be developed, which can be used by carsharing
+  providers to dynamically allocate EVs of their fleet to VPPs on different
+  electricity markets. The agent will predict available capacity and auction
+  prices to profitably act on the operating reserve and continuous intraday
+  market. The profitability will be evaluated using real-world data from German
+  electricity markets.
+
 *** Relevance to Society
-- Grid stability and more efficient use of sustainable energies
-** Structure of the Research Proposal
+- Grid stability through balancing
+- Integration of more renewable sources into the energy grid
 * Empirical Setting
 - Describe relevance and mechanisms of car-sharing and electricity market auctions
 - Show excerpts of the available data and explain.
 ** Carsharing Fleets
-- Car2Go: Berlin, Stuttgart, San Diego, Kopenhagen?
-- Drive-now available?
+- Car2Go: Berlin
 - Use same time span for car data as respective market data (!?)
 ** Electricity Markets
 - Epex Spot Market: Continuous intraday trading data from 2016-2017.
-- Also replicate other studies? Or just take results form their papers?
-  - Day-ahead market data Nord Pool Spot (ELSPOT) (https://nordpoolspot.com)?
-  - Secondary reserve market data from Germany (https://regelleistung.net, https://transnetbw.de), Netherlands
-    (https://tennet.eu) and California ISO (https://caiso.com)
+- Secondary reserve market data from Germany (https://regelleistung.net)
 * Literature Review
 ** Electric Vehicles, Virtual Power Plants, V2G
 - Avci et al. (2015) - Electric vehicles with a battery switching station: Adoption and environmental impact
@@ -98,10 +137,12 @@
 - Mention Algorithms?
   - Type of models or already detailed?
   - Too early in proposal when focus is on ML?
+*** Event-based simulation
+*** ML-based Intelligent Agents
 * Expected Contribution
-
 * Research Plan (Also for MA Thesis?)
 - 6 Month plan?
+- Another test
 
 * Wolf Requirements
 ** MA Proposal
@@ -113,6 +154,13 @@
 - Please give an overview on the respective data.
 - The proposal already has to include relevant literature references.
 - Please note that special focus shall be placed on the research question and the respective approach.
+ cite:mehta14_ident_poten_bo2_oxide_polym
+
+
 
 ** PhD Proposal
 - Specially attention is paid to related work, data, methods, and analysis, and potential contribution/conclusion.
+
+
+
+bibliography:proposal.bib
