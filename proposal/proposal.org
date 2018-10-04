@@ -6,7 +6,8 @@
 #+LATEX_HEADER: \onehalfspacing
 #+OPTIONS: H:4
 
-* Introduction
+
+* Introduction (1-2 Pages)
 ** Research Motivation
 
 - C0^2 emissions need to be reduced.
@@ -42,14 +43,27 @@
   to trade the remaining available capacity with a low risk.
 
 ** Research Question (!)
+In the course of this thesis, following research questions will be addressed.
+They sequentially build up onto each other:
 
-1. Accurate forecasting of spatio-temporal customer demand patterns of carsharing EVs:
-   Predict available battery capacity of EV fleets.
+1. /How do spatio-temporal customer demand patterns of carsharing EVs look
+   like?/
 
-2. Dynamically learn the optimal allocation ratio of EVs to operating reserve
-   VPPs and intraday VPPs using a recurrent neural network approach.
+   Knowing customer demand patterns leads to a more accurate forecast of how much
+   available battery capacity an EV fleet will have at any point in time.
 
-3. Develop an intelligent agent that autonomously acts on operating reserve and
+2. /What is the optimal allocation ratio of the available capacity between operating
+   reserve VPPs and spot market VPPs?/
+
+   Dynamically determining the optimal share of capacity to trade on the
+   respective markets at any point in time will maximize profits, while reducing
+   the risk of foregone customer profits.
+
+3. /How does an integrated bidding strategy look like, which considers simultaneous trading
+   electricity at the secondary operating reserve market and the continuous intraday market?/
+
+
+   Develop an intelligent agent that autonomously acts on operating reserve and
    day-ahead electricity markets with and integrated bidding strategy.
 
 ** Relevance of the Research
@@ -70,16 +84,45 @@
 *** Relevance to Society
 - Grid stability through balancing
 - Integration of more renewable sources into the energy grid
-* Empirical Setting
+* Empirical Setting (1 Pages)
 - Describe relevance and mechanisms of car-sharing and electricity market auctions
 - Show excerpts of the available data and explain.
-** Carsharing Fleets
-- Car2Go: Berlin
 - Use same time span for car data as respective market data (!?)
+
+** Carsharing Fleets
+- EV car fleets
+- Environmental Impact: Future of mobility is electric, smart, and eventually autonomous
+- Carsharing business model: Flee float
+- Car2Go: Berlin
+- Exemplary data
+#+CAPTION: Exemplary Car2Go Trip Data
+#+NAME: Car2Go data
+| Car Id | State of Charge |
+|--------+-----------------|
+|      1 |               7 |
+|      2 |               9 |
+|      3 |               3 |
+
 ** Electricity Markets
+- Balancing vs. Spot Markets
+- Market designs
+*** Epex Spot Market: Continuous intraday trading
+- Market design
+- Exemplary data
 - Epex Spot Market: Continuous intraday trading data from 2016-2017.
-- Secondary reserve market data from Germany (https://regelleistung.net)
-* Literature Review
+*** German secondary operating reserve market
+- Market design
+- Exemplary data
+
+#+CAPTION: Exemplary Spot Market Auction Data
+#+NAME: spot market data
+| Bid Id | Price |
+|--------+-------|
+|      1 |     7 |
+|      2 |     9 |
+|      3 |     3 |
+- Secondary operating reserve market data from Germany (https://regelleistung.net)
+* Literature Review (1-2 Pages)
 ** Electric Vehicles, Virtual Power Plants, V2G
 - Avci et al. (2015) - Electric vehicles with a battery switching station: Adoption and environmental impact
   - Infrastructure and positioning aspects
@@ -103,11 +146,14 @@
 ** DSS, Intelligent Agents, State of the Art ML Techniques
 - Kahlen et al. (2017) - Electric Vehicle Virtual Power Plant Dilemma: Grid Balancing Versus Customer Mobility
 - Kahlen et al. (2017) - Fleetpower: Creating virtual power plants in sustainable smart electricity markets
+- Avci et al. (2018) - Managing electricity price modeling risk via ensemble forecasting: The case
+of Turkey
+ - Ensemble Forecasting: Time-series models, Seasonality models, Artificial
+   Neural Networks
 ** Carsharing (?)
 - Firnkorn and Mueller (2011) - Free-Float Carsharing Environmental effects
-** Auction Theory (?)
 ** More Papers
-**Main Papers**
+*** Main Papers
 - Brand et al. (2017)
 - Flath et al. (2013) - Area pricing
 - Pudjianto et al. (2017) -
@@ -120,29 +166,44 @@
 - Wagner et al. (2016) - Smart charging w/ price incentives
 - Wolfson et al. (2011) - Battery swapping infrastructure
 - Zhou et al. (2015) - Stationary storage, dynamic pricing, industrial setting
-
-**Touching Papers and Conference Papers**
+*** Touching Papers and Conference Papers
 - Kahlen et al. (2014) - ECIS Conference Paper: Balancing with EVs - Simulation PowerTac?
 - Kahlen and Ketter (2015) - AI Conference Paper: Fleetpower
 - Kahlen et al. (2017) - Hawai System Science Conference Paper
 - Ketter et al. (2013) - Power Tac Smart Grid
 - Ketter et al. (2016) - MISQ Powertac
 - Ketter et al. (2016) - MISQ Competitive Benchmarking
-* Research Design
-** Methodology (!)
+* Research Design (1-2 Pages)
+The research will be structured using the design science principles of Hevner et
+al. (2004). In Figure [[Research Design]] the proposed research design is depicted.
+We will place a special focus on the used methodologies, the developed artifact
+and the evaluation of the results.
+Drawing from the /Knowledge Base/, multiple methods will be compared and evaluated against each
+other and thus emphasising /Research Rigor/. Considering /Business Needs/, we
+will develop an /Artifact/ in form of a fully usable software system. Evaluating
+the results with real-world data with a simulation will make sure the /Artifact/
+is /applicable in the appropriate environment/, for example carsharing fleets.
+
+#+CAPTION: Research Design following Hevner et al., 2004
+#+NAME: Research Design
+[[./figures/Hevner_Proposal.png]]
+** Problem relevance: Environmental (People), carsharing (Business)
+** Methodologies
+Draw upon well researched statistical and machine learning methods: statistical pattern recognition, time-series forecasting and artificial neural networks.
 *** Quantitative Study
 - What is the purpose of the study?
   1. EV Capacity Prediction / Demand Prediction
-  2. Determine Bids/Asks/Market: Price Prediction
-- Mention Algorithms?
-  - Type of models or already detailed?
-  - Too early in proposal when focus is on ML?
-*** Event-based simulation
+  2. Dynamic VPP Allocation Learning
+  3. Determine Bids/Asks/Market: Price Prediction
 *** ML-based Intelligent Agents
-* Expected Contribution
-* Research Plan (Also for MA Thesis?)
-- 6 Month plan?
-- Another test
+** Artifact: Instantiation of an intelligent agent.
+** Evaluation: Event-based simulation using real-world data
+* Expected Contribution (0.5 Page)
+- Contribution to Society
+- Contribution to Practice
+* Research Plan (0.5 Page)
+
+
 
 * Wolf Requirements
 ** MA Proposal
@@ -154,7 +215,6 @@
 - Please give an overview on the respective data.
 - The proposal already has to include relevant literature references.
 - Please note that special focus shall be placed on the research question and the respective approach.
- cite:mehta14_ident_poten_bo2_oxide_polym
 
 
 
