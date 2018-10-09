@@ -20,7 +20,7 @@ is inevitable. But the transition to sustainable energy is a wicked problem
 proves to be difficult. Exogenous factors like wind and sun make them highly
 intermittent and thus hard to integrate into the power grid, which has to be
 balanced at all times.
-# Connection
+# Connection, Also Smart Sustainable Markets?
 
 The future of mobility is autonomous, connected, electric and shared. Carsharing
 companies already operate large, centrally-managed fleets of electric vehicles
@@ -36,36 +36,32 @@ By making their EVs available to be used as a VPP, carsharing companies
 compromise customer mobility and the profitability of their fleet. Renting out
 # ... than using it as a VPP?
 an EV is considerably more lucrative than using it for trading electricity.
-Knowing how many EVs are likely going to be rented out in a future point of time and
-thus obtaining an accurate forecast of available battery capacity is essential
-for a successful trading strategy. For the fleet owners it possible to act on
-multiple electricity markets simultaneously. Reaction time between contractual
+Knowing how many EVs are likely going to be rented out in a future point of time
+and thus obtaining an accurate forecast of available battery capacity is essential
+for a successful trading strategy. Moreover it possible for fleet owners to act on
+multiple electricity markets simultaneously. Electricity markets differ in
+price elasticity as well as reaction time between contractual agreement and
+physical delivery.
+
 # Citation needed
-agreement and physical delivery differs between the markets as well as price
-elasticity. Participating on operating reserve markets and spot markets at the
-same time allows to balance out profits and risks (..why?)
+Participating in operating reserve markets and spot markets at the same time
+can mitigates risks and increase profits. Allocating EVs to VPPs which
+participate on the respective markets is in it's essence an optimization problem.
+
+# Explain that the sweet spot changes, depending on price levels and capacity forecasts
+In this research we propose an portfolio optimizing strategy, in which the best
+composition of the VPP portfolio, consisting of operating reserve
+VPPs and spot market VPPs, will be dynamically determined. Since electricity
+price levels and customer demands change over time, an intelligent agent is
+needed that performs following tasks in real time: 1) Allocation of plugged in
+EVs to idle or VPP state, 2) Learning the "sweet spot" of VPP portfolio
+composition 3) Placing bids and asks corresponding electricity markets with an
+integrated trading strategy.
+The agent will be evaluated in an event-based simulation, bootstrapped with
+real-world data collected in Germany.
 
 
 
-
-
-
-- Thus: An intelligent Agent is needed, which dynamically allocates parked, plugged-in EVs to be
-  used as VPP or stay idle, depending whether an EV is likely going to be rented out and how much
-  capacity it has available.
-- It is possible to act not only on one electricity market, but on multiple:
-
-  *Operating reserve markets* offer higher profits, due to a very low reaction time
-  between contractual agreement and physical delivery. They also bear a higher risk for the
-  fleet. Commitments have to be made one week in advance, where customer demands
-  are uncertain. To not face penalties for unfulfilled commitments, only a
-  conservative estimation of available battery capacity can be made. This leaves
-  a lot of potential EV capacity unused.
-
-  *Continuous intraday markets* allow participants to continuously trade electricity products up
-  to 15 minutes prior to delivery (in Germany). At this point it is possible to
-  predict customer demand with a high accuracy, which generates the possibility
-  to trade the remaining available capacity with a low risk.
 
 ** Research Question (!)
 In the course of this thesis, following research questions will be addressed.
@@ -129,6 +125,18 @@ They sequentially build up onto each other:
 |      3 |               3 |
 
 ** Electricity Markets
+  *Operating reserve markets* offer higher profits, due to a very low reaction time
+  between contractual agreement and physical delivery. They also bear a higher risk for the
+  fleet. Commitments have to be made one week in advance, where customer demands
+  are uncertain. To not face penalties for unfulfilled commitments, only a
+  conservative estimation of available battery capacity can be made. This leaves
+  a lot of potential EV capacity unused.
+
+  *Continuous intraday markets* allow participants to continuously trade electricity products up
+  to 15 minutes prior to delivery (in Germany). At this point it is possible to
+  predict customer demand with a high accuracy, which generates the possibility
+  to trade the remaining available capacity with a low risk.
+
 - Balancing vs. Spot Markets
 - Market designs
 *** Epex Spot Market: Continuous intraday trading
@@ -222,6 +230,9 @@ Draw upon well researched statistical and machine learning methods: statistical 
   3. Determine Bids/Asks/Market: Price Prediction
 *** ML-based Intelligent Agents
 ** Artifact: Instantiation of an intelligent agent.
+- Thus: An intelligent Agent is needed, which dynamically allocates parked, plugged-in EVs to be
+  used as VPP or stay idle, depending whether an EV is likely going to be rented out and how much
+  capacity it has available.
 ** Evaluation: Event-based simulation using real-world data
 * Expected Contribution (0.5 Page)
 - Contribution to Society
