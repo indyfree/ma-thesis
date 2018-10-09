@@ -126,15 +126,15 @@ electricity markets.
 - EV car fleets
 - Environmental Impact: Future of mobility is electric, smart, and eventually autonomous
 - Carsharing business model: Flee float
+# TODO Car2Go daten andere Staedte
 - Car2Go: Berlin
 - Exemplary data
+
 #+CAPTION: Exemplary Car2Go Trip Data
 #+NAME: Car2Go data
-| Car Id | State of Charge |
-|--------+-----------------|
-|      1 |               7 |
-|      2 |               9 |
-|      3 |               3 |
+| Id                | Number plate | Coordinates         | Time                         | Interior status | Exterior status | Address                          | Fuel | Engine Type | Charging |
+|-------------------+--------------+---------------------+------------------------------+-----------------+-----------------+----------------------------------+------+-------------+----------|
+| WDD1760421J475841 | B-GO5239     | 13.37202 , 52.48079 | Thu Feb 23 00:00:01 CET 2017 | GOOD            | GOOD            | Gontermannstraße 8, 12101 Berlin |   72 | CE          |       -1 |
 
 ** Electricity Markets
  *Operating reserve markets* offer higher profits, due to a very low reaction time
