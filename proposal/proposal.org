@@ -1,4 +1,4 @@
-#+TITLE: Portfolio Optimization of Electric Vehicle Virtual Power Plants in Smart Sustainable Electricity Markets: A ML-based Intelligent Agent Approach
+#+TITLE: Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants in Smart Sustainable Electricity Markets: A ML-based Intelligent Agent Approach
 #+SUBTITLE: Master Thesis Proposal
 #+AUTHOR:Tobias Richter
 #+LATEX_HEADER: \usepackage[margin=1.5in]{geometry}
@@ -6,25 +6,50 @@
 #+LATEX_HEADER: \onehalfspacing
 #+OPTIONS: H:4
 
+#+Begin_Latex
+\pagebreak
+#+End_Latex
 
 * Introduction (1-2 Pages)
 ** Research Motivation
+One of the biggest challenges of our times is to stop the global warming. The
+emission of greenhouse gases needs to be reduced, $C0^2$ being one of the major
+factors. Increases usage of sustainable energy source plays an important role and
+is inevitable. But the transition to sustainable energy is a wicked problem
+[Ketter]. The integration of renewable energy sources into the electricity grid
+proves to be difficult. Exogenous factors like wind and sun make them highly
+intermittent and thus hard to integrate into the power grid, which has to be
+balanced at all times.
+# Connection
 
-- C0^2 emissions need to be reduced.
-- Transition to sustainable energy sources is a wicked problem.
-- Electric Vehicles powered by renewable energy sources is a needed measure to
-  reduce emissions.
-- Integration of renewables into the energy grid is difficult. Exogenous
-  factors like sun and wind make them highly intermittent and thus hard to
-  integrate into a power grid, which has to be balanced at all times.
-- Carsharing companies have centrally managed EV fleets at their hands that can be
-  turned into Virtual Power Plants (VPP). VPPs can be used to balance out excess
-  electricity or electricity insufficiency from the grid.
-- Using VPPs allows carsharing fleets to profitably act on electricity
-  markets. Buying electricity (charge EVs), when prices are low (excess energy) and
-  selling electricity (discharge EVs, V2G), when prices are high (energy insufficiency).
-- But: The usage of EVs as VPP compromises customer mobility and profitability of
-  the fleet.
+The future of mobility is autonomous, connected, electric and shared. Carsharing
+companies already operate large, centrally-managed fleets of electric vehicles
+(EV) in major cities around the world. EV fleets can be turned into virtual power
+plants, using their batteries as distributed and aggregated electricity storage.
+VPPs take part in balancing out the power grid trough trading electricity on the
+open markets. Carsharing companies can profitability act on the electricity
+markets, when buying electricity (charging EVs) when there is an excess and
+selling electricity (discharging EVs through vehicle-to-grid) when there is
+a shortage of electricity in the grid.
+
+By making their EVs available to be used as a VPP, carsharing companies
+compromise customer mobility and the profitability of their fleet. Renting out
+# ... than using it as a VPP?
+an EV is considerably more lucrative than using it for trading electricity.
+Knowing how many EVs are likely going to be rented out in a future point of time and
+thus obtaining an accurate forecast of available battery capacity is essential
+for a successful trading strategy. For the fleet owners it possible to act on
+multiple electricity markets simultaneously. Reaction time between contractual
+# Citation needed
+agreement and physical delivery differs between the markets as well as price
+elasticity. Participating on operating reserve markets and spot markets at the
+same time allows to balance out profits and risks (..why?)
+
+
+
+
+
+
 - Thus: An intelligent Agent is needed, which dynamically allocates parked, plugged-in EVs to be
   used as VPP or stay idle, depending whether an EV is likely going to be rented out and how much
   capacity it has available.
