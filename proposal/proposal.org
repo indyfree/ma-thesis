@@ -121,33 +121,79 @@ electricity markets.
 - Describe relevance and mechanisms of car-sharing and electricity market auctions
 - Show excerpts of the available data and explain.
 - Use same time span for car data as respective market data (!?)
+- Timespan: 01.12.2016 - 31.01.2018
 
 ** Carsharing Fleets
 - EV car fleets
 - Environmental Impact: Future of mobility is electric, smart, and eventually autonomous
+
 - Carsharing business model: Flee float
-# TODO Car2Go daten andere Staedte
-- Car2Go: Berlin
-- Exemplary data
+- Car2Go: Stuttgart
 
-#+CAPTION: Exemplary Car2Go Trip Data
-#+NAME: Car2Go data
-| Id                | Number plate | Coordinates         | Time                         | Interior status | Exterior status | Address                          | Fuel | Engine Type | Charging |
-|-------------------+--------------+---------------------+------------------------------+-----------------+-----------------+----------------------------------+------+-------------+----------|
-| WDD1760421J475841 | B-GO5239     | 13.37202 , 52.48079 | Thu Feb 23 00:00:01 CET 2017 | GOOD            | GOOD            | Gontermannstraße 8, 12101 Berlin |   72 | CE          |       -1 |
+#+CAPTION: Car2Go Raw Trip Data from Stuttgart
+#+ATTR_LATEX: :environment longtable :align |l|p{1.5cm}p{1.5cm}p{3.5cm}p{1.5cm}p{2.8cm}|
+| Number Plate | Latitude | Longitude | Street              | Zip Code | Engine Type |
+|--------------+----------+-----------+---------------------+----------+-------------|
+| S-GO2471     |  9.19121 |  48.68895 | Parkplatz Flughafen |    70692 | electric    |
+| S-GO2471     |  9.15922 |  48.78848 | Salzmannweg 3       |    70192 | electric    |
+| S-GO2471     |  9.17496 |  48.74928 | Felix-Dahn-Str.45   |    70597 | electric    |
+| S-GO2471     |  9.17496 |  48.74928 | Felix-Dahn-Str.45   |    70597 | electric    |
+| S-GO2471     |  9.17496 |  48.74928 | Felix-Dahn-Str.45   |    70597 | electric    |
+#+ATTR_LATEX: :environment longtable :align |l|p{1.5cm}p{1.5cm}p{3.5cm}p{1.5cm}p{2.8cm}|
+| Number Plate | Interior | Exterior | Timestamp        | Charging | State of Charge |
+|--------------+----------+----------+------------------+----------+-----------------|
+| S-GO2471     | good     | good     | 22.12.2017 20:10 | no       | 94              |
+| S-GO2471     | good     | good     | 24.12.2017 23:05 | no       | 72              |
+| S-GO2471     | good     | good     | 26.12.2017 00:40 | yes      | 81              |
+| S-GO2471     | good     | good     | 26.12.2017 00:45 | yes      | 83              |
+| S-GO2471     | good     | good     | 26.12.2017 00:50 | yes      | 84              |
 
+
+ (Fri, Sun, Tue, Tue, Tue)
 ** Electricity Markets
- *Operating reserve markets* offer higher profits, due to a very low reaction time
+*** Operating reserve market
+offer higher profits, due to a very low reaction time
  between contractual agreement and physical delivery. They also bear a higher risk for the
  fleet. Commitments have to be made one week in advance, where customer demands
  are uncertain. To not face penalties for unfulfilled commitments, only a
  conservative estimation of available battery capacity can be made. This leaves
  a lot of potential EV capacity unused.
 
- *Continuous intraday markets* allow participants to continuously trade electricity products up
+
+#+CAPTION: Anonymized List of Bids of the German Secondary Reserve Market at the 04.12.2017
+#+ATTR_LATEX: :float sideways :align |l|ccccc| :placement [hp]
+| Product[fn:product] | Capacity Price [EUR/MW] | Energy Price [EUR/MW] | Payment       | Offered [MW] | Accepted [MW] |
+|---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
+| NEG-HT              |                       0 |                   1.1 | TSO to bidder |            5 |             5 |
+| NEG-HT              |                       0 |                   251 | TSO to bidder |           15 |            15 |
+| NEG-HT              |                       0 |                   564 | TSO to bidder |           22 |            22 |
+| ...                 |                     ... |                   ... | ...           |          ... |           ... |
+| NEG-NT              |                       0 |                  21.9 | Bidder to TSO |            5 |             5 |
+| NEG-NT              |                       0 |                  22.4 | Bidder to TSO |            5 |             5 |
+| ...                 |                     ... |                   ... | ...           |          ... |           ... |
+| POS-NT              |                   696.6 |                  1200 | TSO to bidder |            5 |             5 |
+| POS-NT              |                  717.12 |                  1210 | TSO to bidder |           10 |             7 |
+
+[fn:product] NEG-NT = Product code for negative secondary control reserve to be
+provided between the hours of 00:00h and 08:00h as well as between 20:00h and
+24:00h from Monday through Friday as well as all day on Saturday, Sunday and public holidays
+applicable to all of Germany
+
+POS-HT = Product code for positive secondary
+control reserve to be provided between the hours of 08:00h and 20:00h from
+Monday through Friday.
+
+*** Continuous intraday market
+ allow participants to continuously trade electricity products up
  to 15 minutes prior to delivery (in Germany). At this point it is possible to
  predict customer demand with a high accuracy, which generates the possibility
  to trade the remaining available capacity with a low risk.
+
+ # The Org homepage[fn::https://orgmode.org] now looks a lot better than it used to.
+...
+
+
+
 
 - Balancing vs. Spot Markets
 - Market designs
