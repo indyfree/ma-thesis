@@ -6,19 +6,14 @@
 #+LATEX_HEADER: \onehalfspacing
 #+OPTIONS: H:4
 
-#+Begin_Latex
-\pagebreak
-#+End_Latex
-
 * Introduction (1-2 Pages)
 ** Research Motivation
 The global climate change is one biggest challenges of our time. Carbon
 emissions need to be reduced and the shift to sustainable energy sources is
 inevitable. But integration of renewables into the electricity
-grid proves to be difficult. Solar and wind energy is intermittent and hard
-to integrate into the power grid, which has to be balanced at all times.
-Sustainable electricity production is dependent on the weather, under- and
-oversupplies occur and destabilize the grid.
+grid proves to be difficult: Solar and wind energy is intermittent and hard
+to integrate into the power grid. Sustainable electricity production is dependent
+on the weather, under- and oversupplies occur and destabilize the grid.
 # TODO: Make introduction coherent
 # Electric vehicles (EV) powered by sustainable energy sources are
 # Connection, Also Smart Sustainable Markets?
@@ -32,31 +27,30 @@ turned into VPPs, using their batteries as combined electricity storage.
 In this way EV fleets can offer balancing services to the power grid or trade
 electricity on the open markets for arbitrage purposes.
 # Rewrite
-They can charge the fleet (buy electricity), when there is an excess of electricity and discharge EVs (sell
-electricity), when there is a shortage of electricity.
-
+Carsharing companies can charge the fleet (buy electricity), when there is an excess of
+electricity and discharge EVs (sell electricity), when there is a shortage of electricity.
 By making their EVs available to be used as a VPP, carsharing companies
 compromise customer mobility and the profitability of their fleet. Renting out
 an EV to a customer is considerably more lucrative than using it for trading electricity.
-# ... than using it as a VPP?
+
 Knowing how many EVs will most likely be rented out in a future point of time
 and consequently obtaining an accurate forecast of available battery capacity is essential
-for a successful trading strategy. Moreover it possible for fleet owners to act on
+for a successful trading strategy. Moreover it possible for fleet owners to trade on
 multiple electricity markets simultaneously. Electricity markets differ in
-price elasticity as well as reaction time between contractual agreement and
+price elasticity, as well as reaction time between contractual agreement and
 physical delivery.
 
 # TODO: Citation needed
 Participating in operating reserve markets and spot markets at the same time
-can mitigates risks and increase profits. Allocating EVs to VPPs which
-participate on the respective markets is in it's essence an optimization problem.
+can mitigates risks and increase profits. Allocating EVs to different types of VPPs, that
+participate on the respective markets is an optimization problem, which can be solved.
 
 In this research we propose an portfolio optimizing strategy, in which the best
 composition of the VPP portfolio, consisting of operating reserve
 VPPs and spot market VPPs, will be dynamically determined. To address changing
 electricity price levels and customer demands over time we additionally propose an
-the use of intelligent agent that learns from historical data and adjust to its
-current environment.
+the use of intelligent agent trading strategy, in which an agent learns from historical data
+and adjust to its current environment.
 The following tasks will be performed by the agent in real time: 1) /Allocation of plugged in
 EVs to idle or VPP state/, 2) /Learn the optimum of VPP portfolio
 composition/ 3) /Place bids and asks on corresponding electricity markets with an
@@ -79,35 +73,39 @@ They build upon another and will be sequentially addressed during this research:
   customer profits.
 
   # TODO: Introduce specific markets
-3. /How does an integrated bidding strategy look like, which considers trading electricity at the secondary operating reserve market and the continuous intraday market simultaneously?/
+3. /How does an integrated bidding strategy look like, which considers trading electricity
+    the secondary operating reserve market and the continuous intraday market simultaneously?/
 
-   Determine optimal auction prices to be placed on the corresponding markets.
+   Designing a strategy and determine optimal auction prices, which takes the specific market
+   designs of the German secondary operating reserve market and continuous intraday market into account.
 
 
 ** Relevance of the Research
 *** Relevance to Practice
 
 From a business perspective this research is mainly relevant to carsharing
-companies, such as Car2Go or DriveNow, which operate an EV fleet. We will show how
-such companies can increase their profits, using idle EVs as VPPs to trade
+companies, such as Car2Go or DriveNow, which are operating an EV fleet. We will show how
+these companies can increase their profits, using idle EVs as VPPs to trade
 electricity on multiple markets simultaneously.
 
-# TODO: DSS not introduced yet
-Implementing a decision support system (DSS) build upon agent using the
-proposed portfolio optimizing strategy. In live operation of system, it will
-allocate idle EVs to either type of VPP or to be available for renting
-
-
-predict available battery capacity and auction prices based on trip data of the
-fleet.
 # TODO: Consider notion of different (mutually exclusive states)
-The system allocates individual EVs to either type of VPP or to be available for renting.
-Moreover it determines asks, bids and capacities to trade on the individual
-markets. The profitability will be evaluated using real-world data from German
-electricity markets.
+# TODO: DSS not introduced yet
+We propose a the use of a decision support system (DSS), which allocates idle EVs to either type of VPP or to be available for renting. Moreover it will determine optimal ask, bids and capacities to trade on the individual electricity markets.
+
+# TODO: Different Section?
+Further we will evaluate the profitability of such methods, using real-world data from German electricity markets and trip data from a carsharing provider.
 
 *** Relevance to Science
 
+From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets (Peters et al. 2013, Bichler et al. 2010).
+We will draw upon work done in
+
+
+Specifically this research sits in the intersection of work done in using electric vehicles as VPP, agent-based
+
+Kahlen state very conversative results and propose the combination of multiple markets. In their approach the VPPs are mainly used to buy from the markets when electricity is cheap and thus charge their EVs basically for free (Citatation). V2G is almost never used... . We aim to...
+
+Design Science (Hevner et. al)
 - Agent Theory: Dynamically optimize the allocation of EVs to different types of VPP using
  recurrent neural networks.
 - Agent Theory/ML: Application and comparison of Advanced ML Models (for spatial time-series forecasting)
@@ -131,7 +129,9 @@ electricity markets.
 - Car2Go: Stuttgart
 
 #+CAPTION: Car2Go Raw Trip Data from Stuttgart
-#+ATTR_LATEX: :environment longtable :align |l|p{1.5cm}p{1.5cm}p{3.5cm}p{1.5cm}p{2.8cm}|
+#+ATTR_LATEX: :environment longtable :align l|p{1.5cm}p{1.5cm}p{3.5cm}p{1.5cm}p{2.8cm}
+|--------------+----------+-----------+---------------------+----------+-------------|
+|--------------+----------+-----------+---------------------+----------+-------------|
 | Number Plate | Latitude | Longitude | Street              | Zip Code | Engine Type |
 |--------------+----------+-----------+---------------------+----------+-------------|
 | S-GO2471     |  9.19121 |  48.68895 | Parkplatz Flughafen |    70692 | electric    |
@@ -139,7 +139,7 @@ electricity markets.
 | S-GO2471     |  9.17496 |  48.74928 | Felix-Dahn-Str.45   |    70597 | electric    |
 | S-GO2471     |  9.17496 |  48.74928 | Felix-Dahn-Str.45   |    70597 | electric    |
 | S-GO2471     |  9.17496 |  48.74928 | Felix-Dahn-Str.45   |    70597 | electric    |
-#+ATTR_LATEX: :environment longtable :align |l|p{1.5cm}p{1.5cm}p{3.5cm}p{1.5cm}p{2.8cm}|
+#+ATTR_LATEX: :environment longtable :align l|p{1.5cm}p{1.5cm}p{3.5cm}p{1.5cm}p{2.8cm}
 | Number Plate | Interior | Exterior | Timestamp        | Charging | State of Charge |
 |--------------+----------+----------+------------------+----------+-----------------|
 | S-GO2471     | good     | good     | 22.12.2017 20:10 | no       | 94              |
@@ -147,6 +147,8 @@ electricity markets.
 | S-GO2471     | good     | good     | 26.12.2017 00:40 | yes      | 81              |
 | S-GO2471     | good     | good     | 26.12.2017 00:45 | yes      | 83              |
 | S-GO2471     | good     | good     | 26.12.2017 00:50 | yes      | 84              |
+|--------------+----------+-----------+---------------------+----------+-------------|
+|--------------+----------+-----------+---------------------+----------+-------------|
 
 
  (Fri, Sun, Tue, Tue, Tue)
@@ -161,7 +163,9 @@ offer higher profits, due to a very low reaction time
 
 
 #+CAPTION: Anonymized List of Bids of the German Secondary Reserve Market at the 04.12.2017
-#+ATTR_LATEX: :float sideways :align |l|ccccc| :placement [hp]
+#+ATTR_LATEX: :float sideways :align l|ccccc :placement [hp]
+|---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
+|---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
 | Product[fn:product] | Capacity Price [EUR/MW] | Energy Price [EUR/MW] | Payment       | Offered [MW] | Accepted [MW] |
 |---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
 | NEG-HT              |                       0 |                   1.1 | TSO to bidder |            5 |             5 |
@@ -173,6 +177,8 @@ offer higher profits, due to a very low reaction time
 | ...                 |                     ... |                   ... | ...           |          ... |           ... |
 | POS-NT              |                   696.6 |                  1200 | TSO to bidder |            5 |             5 |
 | POS-NT              |                  717.12 |                  1210 | TSO to bidder |           10 |             7 |
+|---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
+|---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
 
 [fn:product] NEG-NT = Product code for negative secondary control reserve to be
 provided between the hours of 00:00h and 08:00h as well as between 20:00h and
@@ -189,8 +195,6 @@ Monday through Friday.
  predict customer demand with a high accuracy, which generates the possibility
  to trade the remaining available capacity with a low risk.
 
- # The Org homepage[fn::https://orgmode.org] now looks a lot better than it used to.
-...
 
 
 
@@ -265,7 +269,7 @@ of Turkey
 - Ketter et al. (2016) - MISQ Powertac
 - Ketter et al. (2016) - MISQ Competitive Benchmarking
 * Research Design (1-2 Pages)
-The research will be structured using the design science principles of Hevner et
+The research will be structured using the IS design science principles proposed by Hevner et
 al. (2004). In Figure [[Research Design]] the proposed research design is depicted.
 We will place a special focus on the used methodologies, the developed artifact
 and the evaluation of the results.
@@ -273,7 +277,7 @@ Drawing from the /Knowledge Base/, multiple methods will be compared and evaluat
 other and thus emphasising /Research Rigor/. Considering /Business Needs/, we
 will develop an /Artifact/ in form of a decision support system. Evaluating
 the results with real-world data with a simulation will make sure the /Artifact/
-is /applicable in the appropriate environment/, for example carsharing fleets.
+is /applicable in the appropriate environment/ (i.e. carsharing fleets).
 
 #+CAPTION: Research Design following Hevner et al., 2004
 #+NAME: Research Design
