@@ -1,10 +1,19 @@
 #+TITLE: Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants in Smart Sustainable Electricity Markets: A ML-based Intelligent Agent Approach
 #+SUBTITLE: Master Thesis Proposal
 #+AUTHOR:Tobias Richter
+
+# Formatting
 #+LATEX_HEADER: \usepackage[margin=1.5in]{geometry}
 #+LATEX_HEADER: \usepackage{setspace}
 #+LATEX_HEADER: \onehalfspacing
 #+OPTIONS: H:4
+
+# Bibliography
+#+LATEX_HEADER: \usepackage[apaciteclassic,sectionbib]{apacite}
+#+LATEX_HEADER: \bibliographystyle{apacitex}
+
+# TOC
+#+LATEX_HEADER: \usepackage[notbib,notlof,notlot,nottoc]{tocbibind}
 
 * Introduction (1-2 Pages)
 ** Research Motivation
@@ -90,20 +99,25 @@ electricity on multiple markets simultaneously.
 
 # TODO: Consider notion of different (mutually exclusive states)
 # TODO: DSS not introduced yet
-We propose a the use of a decision support system (DSS), which allocates idle EVs to either type of VPP or to be available for renting. Moreover it will determine optimal ask, bids and capacities to trade on the individual electricity markets.
+We propose the use of a decision support system (DSS), which allocates idle EVs to either type of VPP or to be available for renting. Moreover it will determine optimal ask, bids and capacities to trade on the individual electricity markets.
 
 # TODO: Different Section?
-Further we will evaluate the profitability of such methods, using real-world data from German electricity markets and trip data from a carsharing provider.
+Further, we will evaluate the profitability of such methods, using real-world data from German electricity markets and trip data from a carsharing provider.
 
 *** Relevance to Science
 
-From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets (Peters et al. 2013, Bichler et al. 2010).
-We will draw upon work done in
+From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets (Peters et al. 2013, Bichler et al. 2010). We will contribute to the body of Design Science in Information Systems (Hevner et. al.) and draw upon work done in multitude of fields: Virtual Power Plants in smart electricity markets, carsharing as a new way of sustainable mobility and advanced machine learning methods for forecasting and prediction.
+
+cite:kahlen18_elect_vehic_virtual_power_plant_dilem
+
+cite:kahlen17_fleet
+
+org-re
 
 
-Specifically this research sits in the intersection of work done in using electric vehicles as VPP, agent-based
+There has been work done on bidding on multiple energy markets at the same time. He et al. (2016) and Mashour and Moghaddas-Trafreshi (2011) use stationary storage developed optimal bidding strategies for jointly participating in day-ahead and spinning-reserver markets. We aim to use non-stationary storage (EV batteries) to participate in the continous intraday market and the secondary reserve market (known as real-time market in the US).
 
-Kahlen state very conversative results and propose the combination of multiple markets. In their approach the VPPs are mainly used to buy from the markets when electricity is cheap and thus charge their EVs basically for free (Citatation). V2G is almost never used... . We aim to...
+Kahlen present very conversative results and propose the combination of multiple markets in future work. In their approach the VPPs are mainly used to buy from the markets when electricity is cheap and thus charge their EVs basically for free (Citatation). V2G is almost never used... . We aim to...
 
 Design Science (Hevner et. al)
 - Agent Theory: Dynamically optimize the allocation of EVs to different types of VPP using
@@ -127,28 +141,29 @@ Design Science (Hevner et. al)
 
 - Carsharing business model: Flee float
 - Car2Go: Stuttgart
+- Exemplary Car2Go data is shown in Table ref:car2go-sample-data
 
-#+CAPTION: Car2Go Raw Trip Data from Stuttgart
+#+CAPTION: Car2Go Raw Trip Data from Stuttgart label:car2go-sample-data
 #+ATTR_LATEX: :environment longtable :align l|p{1.5cm}p{1.5cm}p{3.5cm}p{1.5cm}p{2.8cm}
-|--------------+----------+-----------+---------------------+----------+-------------|
-|--------------+----------+-----------+---------------------+----------+-------------|
-| Number Plate | Latitude | Longitude | Street              | Zip Code | Engine Type |
-|--------------+----------+-----------+---------------------+----------+-------------|
-| S-GO2471     |  9.19121 |  48.68895 | Parkplatz Flughafen |    70692 | electric    |
-| S-GO2471     |  9.15922 |  48.78848 | Salzmannweg 3       |    70192 | electric    |
-| S-GO2471     |  9.17496 |  48.74928 | Felix-Dahn-Str.45   |    70597 | electric    |
-| S-GO2471     |  9.17496 |  48.74928 | Felix-Dahn-Str.45   |    70597 | electric    |
-| S-GO2471     |  9.17496 |  48.74928 | Felix-Dahn-Str.45   |    70597 | electric    |
-#+ATTR_LATEX: :environment longtable :align l|p{1.5cm}p{1.5cm}p{3.5cm}p{1.5cm}p{2.8cm}
-| Number Plate | Interior | Exterior | Timestamp        | Charging | State of Charge |
-|--------------+----------+----------+------------------+----------+-----------------|
-| S-GO2471     | good     | good     | 22.12.2017 20:10 | no       | 94              |
-| S-GO2471     | good     | good     | 24.12.2017 23:05 | no       | 72              |
-| S-GO2471     | good     | good     | 26.12.2017 00:40 | yes      | 81              |
-| S-GO2471     | good     | good     | 26.12.2017 00:45 | yes      | 83              |
-| S-GO2471     | good     | good     | 26.12.2017 00:50 | yes      | 84              |
-|--------------+----------+-----------+---------------------+----------+-------------|
-|--------------+----------+-----------+---------------------+----------+-------------|
+|--------------+----------+-----------+---------------------+----------+-----------------|
+|--------------+----------+-----------+---------------------+----------+-----------------|
+| Number Plate | Latitude | Longitude | Street              | Zip Code | Engine Type     |
+|--------------+----------+-----------+---------------------+----------+-----------------|
+| S-GO2471     | 9.19121  | 48.68895  | Parkplatz Flughafen | 70692    | electric        |
+| S-GO2471     | 9.15922  | 48.78848  | Salzmannweg 3       | 70192    | electric        |
+| S-GO2471     | 9.17496  | 48.74928  | Felix-Dahn-Str.45   | 70597    | electric        |
+| S-GO2471     | 9.17496  | 48.74928  | Felix-Dahn-Str.45   | 70597    | electric        |
+| S-GO2471     | 9.17496  | 48.74928  | Felix-Dahn-Str.45   | 70597    | electric        |
+|--------------+----------+-----------+---------------------+----------+-----------------|
+| Number Plate | Interior | Exterior  | Timestamp           | Charging | State of Charge |
+|--------------+----------+-----------+---------------------+----------+-----------------|
+| S-GO2471     | good     | good      | 22.12.2017 20:10    | no       | 94              |
+| S-GO2471     | good     | good      | 24.12.2017 23:05    | no       | 72              |
+| S-GO2471     | good     | good      | 26.12.2017 00:40    | yes      | 81              |
+| S-GO2471     | good     | good      | 26.12.2017 00:45    | yes      | 83              |
+| S-GO2471     | good     | good      | 26.12.2017 00:50    | yes      | 84              |
+|--------------+----------+-----------+---------------------+----------+-----------------|
+|--------------+----------+-----------+---------------------+----------+-----------------|
 
 
  (Fri, Sun, Tue, Tue, Tue)
@@ -207,10 +222,10 @@ Monday through Friday.
 - Epex Spot Market: Continuous intraday trading data from 2016-2017.
 *** German secondary operating reserve market
 - Market design
-- Exemplary data
+- Exemplary data ref:spot-market-sample-data
 
-#+CAPTION: Exemplary Spot Market Auction Data
-#+NAME: spot market data
+
+#+CAPTION: Exemplary Spot Market Auction Data label:spot-market-sample-data
 | Bid Id | Price |
 |--------+-------|
 |      1 |     7 |
@@ -219,58 +234,58 @@ Monday through Friday.
 - Secondary operating reserve market data from Germany (https://regelleistung.net)
 * Literature Review (1-2 Pages)
 ** Electric Vehicles, Virtual Power Plants, V2G
-- Avci et al. (2015) - Electric vehicles with a battery switching station: Adoption and environmental impact
- - Infrastructure and positioning aspects
-- Fridgen et al. (2014) - The value of information exchange in electric vehicle charging
- - Customer sharing information leads to better utilization
-- He et al. (2016) - Optimal bidding strategy of battery storage in power markets considering performance-based regulation and battery cycle life
- - Stationary storage
- - Multiple energy market bidding at the same time(!)
- - Battery degradation
-- Kara et al. (2015) - Estimating the benefits of electric vehicle smart charging at non-residential locations: A data-driven approach
- - Intelligent Scheduling
-- Kim et al. (2012) - Carbitrage: Utility integration of electric vehicles and the smart grid
- - Grid stability
-- Mak et al. (2013) - Infrastructure planning for electric vehicles with battery swapping
- - Infrastructure and positioning aspects
-- Mashour and Moghaddas-Trafreshi (2011) - Bidding strategy of virtual power plant for participating in energy and spinning reserve markets
- - Stationary storage
- - Energy and Reserve Market bidding at the same time (!)
-- Peterson et al. (2010) - The economics of using plug-in hybrid electric vehicle battery packs for grid storage
- - V2G
+cite:peterson10_econom_using_plug_in_hybrid
+
+cite:mashhour11_biddin_strat_virtual_power_plant_1
+
+cite:mashhour11_biddin_strat_virtual_power_plant_2
+
+cite:mak13_infras_plann_elect_vehic_with_batter_swapp
+
+cite:kim12_carbit
+
+cite:kara15_estim_benef_elect_vehic_smart
+
+cite:he16_optim_biddin_strat_batter_storag
+
+cite:fridgen2014value
+
+cite:kahlen18_elect_vehic_virtual_power_plant_dilem
+
+cite:kahlen17_fleet
+
+cite:kahlen15_aggreg_elect_cars_sustain_virtual_power_plant
+
 ** DSS, Intelligent Agents, State of the Art ML Techniques
-- Kahlen et al. (2017) - Electric Vehicle Virtual Power Plant Dilemma: Grid Balancing Versus Customer Mobility
-- Kahlen et al. (2017) - Fleetpower: Creating virtual power plants in sustainable smart electricity markets
-- Avci et al. (2018) - Managing electricity price modeling risk via ensemble forecasting: The case
-of Turkey
- - Ensemble Forecasting: Time-series models, Seasonality models, Artificial
-  Neural Networks
+cite:avci18_manag_elect_price_model_risk
 ** Carsharing (?)
-- Firnkorn and Mueller (2011) - Free-Float Carsharing Environmental effects
+cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities
 ** More Papers
 *** Main Papers
-- Brand et al. (2017)
-- Flath et al. (2013) - Area pricing
-- Pudjianto et al. (2017) -
-- Reichert (2010) - V2G, battery degradation costs
-- Schill (2011)
-- Sioshansi (2012) - EV demand on Grid stability
-- Tomic and Kempton (2007) - V2G profitability dependent on market setup
-- Valogianni et al. (2014) - Smart charging w/ price incentives
-- Vytelingum et al. (2011) - Static storage capacity in households, dynamic pricing
-- Wagner et al. (2016) - Smart charging w/ price incentives
-- Wolfson et al. (2011) - Battery swapping infrastructure
-- Zhou et al. (2015) - Stationary storage, dynamic pricing, industrial setting
+
+cite:sioshansi12_or_forum_model_impac_elect
+
+cite:valogianni2014effective
+
+cite:vytelingum2011theoretical
+
+cite:wagner16_in_free_float
+
+cite:wolfson11_better_place
+
+cite:zhou16_elect_tradin_negat_prices
 *** Touching Papers and Conference Papers
-- Kahlen et al. (2014) - ECIS Conference Paper: Balancing with EVs - Simulation PowerTac?
-- Kahlen and Ketter (2015) - AI Conference Paper: Fleetpower
-- Kahlen et al. (2017) - Hawai System Science Conference Paper
-- Ketter et al. (2013) - Power Tac Smart Grid
-- Ketter et al. (2016) - MISQ Powertac
-- Ketter et al. (2016) - MISQ Competitive Benchmarking
+cite:ketter13_power_tac
+
+cite:ketter16_multiagent_comp_gaming
+
+cite:ketter16_comp_bench
+
+cite:ketter16_comp_bench
+
 * Research Design (1-2 Pages)
 The research will be structured using the IS design science principles proposed by Hevner et
-al. (2004). In Figure [[Research Design]] the proposed research design is depicted.
+al. (2004). In Figure ref:research-design the proposed research design is depicted.
 We will place a special focus on the used methodologies, the developed artifact
 and the evaluation of the results.
 Drawing from the /Knowledge Base/, multiple methods will be compared and evaluated against each
@@ -279,8 +294,7 @@ will develop an /Artifact/ in form of a decision support system. Evaluating
 the results with real-world data with a simulation will make sure the /Artifact/
 is /applicable in the appropriate environment/ (i.e. carsharing fleets).
 
-#+CAPTION: Research Design following Hevner et al., 2004
-#+NAME: Research Design
+#+CAPTION: Research Design following Hevner et al., 2004  label:research-design
 [[./figures/Hevner_Proposal.png]]
 ** Problem relevance: Environmental (People), carsharing (Business)
 ** Methodologies
@@ -313,12 +327,7 @@ Draw upon well researched statistical and machine learning methods: statistical 
 - Please give an overview on the respective data.
 - The proposal already has to include relevant literature references.
 - Please note that special focus shall be placed on the research question and the respective approach.
-
-
-
 ** PhD Proposal
-- Specially attention is paid to related work, data, methods, and analysis, and potential contribution/conclusion.
+ Specially attention is paid to related work, data, methods, and analysis, and potential contribution/conclusion.
 
-
-
-bibliography:proposal.bib
+bibliography:~/uni/ma-thesis/bibliography/references.bib
