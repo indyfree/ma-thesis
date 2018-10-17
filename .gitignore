@@ -1,3 +1,6 @@
+## Org-Mode specific
+*.tex
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
