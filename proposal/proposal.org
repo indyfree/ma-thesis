@@ -44,7 +44,7 @@ an EV to a customer is considerably more lucrative than using it for trading ele
 
 Knowing how many EVs will most likely be rented out in a future point of time
 and consequently obtaining an accurate forecast of available battery capacity is essential
-for a successful trading strategy. Moreover it possible for fleet owners to trade on
+for a successful trading strategy. Moreover it is possible for fleet owners to trade on
 multiple electricity markets simultaneously. Electricity markets differ in
 price elasticity, as well as reaction time between contractual agreement and
 physical delivery.
@@ -52,7 +52,7 @@ physical delivery.
 # TODO: Citation needed
 Participating in operating reserve markets and spot markets at the same time
 can mitigates risks and increase profits. Allocating EVs to different types of VPPs, that
-participate on the respective markets is an optimization problem, which can be solved.
+participate on the respective markets is an optimization problem, which aim to solve.
 
 In this research we propose an portfolio optimizing strategy, in which the best
 composition of the VPP portfolio, consisting of operating reserve
@@ -60,9 +60,10 @@ VPPs and spot market VPPs, will be dynamically determined. To address changing
 electricity price levels and customer demands over time we additionally propose an
 the use of intelligent agent trading strategy, in which an agent learns from historical data
 and adjust to its current environment.
+
 The following tasks will be performed by the agent in real time: 1) /Allocation of plugged in
 EVs to idle or VPP state/, 2) /Learn the optimum of VPP portfolio
-composition/ 3) /Place bids and asks on corresponding electricity markets with an
+composition/ and 3) /Place bids and asks on corresponding electricity markets with an
 integrated trading strategy/.
 
 ** Research Question
@@ -99,10 +100,11 @@ electricity on multiple markets simultaneously.
 
 # TODO: Consider notion of different (mutually exclusive states)
 # TODO: DSS not introduced yet
-We propose the use of a decision support system (DSS), which allocates idle EVs to either type of VPP or to be available for renting. Moreover it will determine optimal ask, bids and capacities to trade on the individual electricity markets.
+We propose the use of a decision support system (DSS), which allocates idle EVs to either type of VPP or to be available for renting. Furthermore the DSS will determine optimal ask, bids and capacities to trade on the individual electricity markets.
 
 # TODO: Different Section?
-Further, we will evaluate the profitability of such methods, using real-world data from German electricity markets and trip data from a carsharing provider.
+In addition, we will estimate the profitability increase, when implementing the proposed methods.
+This will be done using real-world data from German electricity markets and trip data from a German carsharing provider.
 
 *** Relevance to Science
 
@@ -310,9 +312,7 @@ Draw upon well researched statistical and machine learning methods: statistical 
  used as VPP or stay idle, depending whether an EV is likely going to be rented out and how much
  capacity it has available.
 ** Evaluation: Event-based simulation using real-world data
-* Expected Contribution (0.5 Page)
-- Contribution to Society
-- Contribution to Practice
+-Using real-world data from German electricity markets and trip data from a carsharing provider.
 * Research Plan (0.5 Page)
 
 
