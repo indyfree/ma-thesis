@@ -9,8 +9,8 @@
 #+OPTIONS: H:4
 
 # Bibliography
-#+LATEX_HEADER: \usepackage[apaciteclassic,sectionbib]{apacite}
-#+LATEX_HEADER: \bibliographystyle{apacitex}
+#+LATEX_HEADER: \usepackage[backend=biber, style=apa]{biblatex}
+#+LATEX_HEADER: \addbibresource{~/uni/ma-thesis/bibliography/references.bib}
 
 # TOC
 #+LATEX_HEADER: \usepackage[notbib,notlof,notlot,nottoc]{tocbibind}
@@ -234,7 +234,7 @@ Monday through Friday.
 - Secondary operating reserve market data from Germany (https://regelleistung.net)
 * Literature Review (1-2 Pages)
 ** Electric Vehicles, Virtual Power Plants, V2G
-cite:peterson10_econom_using_plug_in_hybrid
+textcite:peterson10_econom_using_plug_in_hybrid
 
 cite:mashhour11_biddin_strat_virtual_power_plant_1
 
@@ -330,4 +330,4 @@ Draw upon well researched statistical and machine learning methods: statistical 
 ** PhD Proposal
  Specially attention is paid to related work, data, methods, and analysis, and potential contribution/conclusion.
 
-bibliography:~/uni/ma-thesis/bibliography/references.bib
+\printbibliography
