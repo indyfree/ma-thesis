@@ -1,5 +1,4 @@
 #+TITLE: Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants in Smart Sustainable Electricity Markets: A ML-based Intelligent Agent Approach
-#+SUBTITLE: Master Thesis Proposal
 #+AUTHOR:Tobias Richter
 
 # Formatting
@@ -12,10 +11,45 @@
 #+LATEX_HEADER: \usepackage[backend=biber, style=apa]{biblatex}
 #+LATEX_HEADER: \addbibresource{~/uni/ma-thesis/bibliography/references.bib}
 
-# TOC
-#+LATEX_HEADER: \usepackage[notbib,notlof,notlot,nottoc]{tocbibind}
+# Title & TOC
+#+OPTIONS: title:nil toc:nil
+#+LATEX_HEADER: \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
 
-* Introduction (1-2 Pages)
+#+BEGIN_EXPORT latex
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+
+        \Large
+        \textbf{Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants in Smart Sustainable Electricity Markets: A ML-based Intelligent Agent Approach}
+
+        \vspace{1.5cm}
+        Master Thesis Proposal
+
+        \vspace{7.0cm}
+
+        \small
+        \textbf{Author}: Tobias Richter\\
+        \small
+        \textbf{Supervisor}: Prof. Dr. Wolfgang Ketter
+
+        \vspace{1cm}
+        \small
+        Department of Information Systems for Sustainable Society\\
+        Faculty of Management, Economics and Social Sciences\\
+        University of Cologne\\
+
+        \vspace{1cm}
+        October, 2018
+
+    \end{center}
+\end{titlepage}
+#+END_EXPORT
+
+\tableofcontents
+\clearpage
+
+* Introduction
 ** Research Motivation
 The global climate change is one biggest challenges of our time. Carbon
 emissions need to be reduced and the shift to sustainable energy sources is
