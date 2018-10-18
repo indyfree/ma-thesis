@@ -108,24 +108,21 @@ This will be done using real-world data from German electricity markets and trip
 
 *** Relevance to Science
 
-From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets (Peters et al. 2013, Bichler et al. 2010). We will contribute to the body of Design Science in Information Systems (Hevner et. al.) and draw upon work done in multitude of fields: Virtual Power Plants in smart electricity markets, carsharing as a new way of sustainable mobility and advanced machine learning methods for forecasting and prediction.
+From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets parencite:bichler10_resear_commen_desig_smart_market,peters2013reinforcement. We will contribute to the body of Design Science in Information Systems parencite:hevner04_desig_scien_infor_system_resear and draw upon work done in multitude of fields: Virtual Power Plants in smart electricity markets, carsharing as a new way of sustainable mobility and advanced machine learning methods for forecasting and prediction.
 
-cite:kahlen18_elect_vehic_virtual_power_plant_dilem
+- textcite:kahlen18_elect_vehic_virtual_power_plant_dilem work in spot-markets.
 
-cite:kahlen17_fleet
-
-org-re
+- textcite:kahlen17_fleet work in operating reserve markets.
 
 
-There has been work done on bidding on multiple energy markets at the same time. He et al. (2016) and Mashour and Moghaddas-Trafreshi (2011) use stationary storage developed optimal bidding strategies for jointly participating in day-ahead and spinning-reserver markets. We aim to use non-stationary storage (EV batteries) to participate in the continous intraday market and the secondary reserve market (known as real-time market in the US).
+There has been work done on bidding on multiple energy markets at the same time. textcite:he16_optim_biddin_strat_batter_storag and textcite:mashhour11_biddin_strat_virtual_power_plant_2,mashhour11_biddin_strat_virtual_power_plant_1 use stationary storage developed optimal bidding strategies for jointly participating in day-ahead and spinning-reserver markets. We aim to use non-stationary storage (EV batteries) to participate in the continous intraday market and the secondary reserve market (known as real-time market in the US).
 
 Kahlen present very conversative results and propose the combination of multiple markets in future work. In their approach the VPPs are mainly used to buy from the markets when electricity is cheap and thus charge their EVs basically for free (Citatation). V2G is almost never used... . We aim to...
 
-Design Science (Hevner et. al)
-- Agent Theory: Dynamically optimize the allocation of EVs to different types of VPP using
- recurrent neural networks.
-- Agent Theory/ML: Application and comparison of Advanced ML Models (for spatial time-series forecasting)
-- Auction Theory: Integrated trading strategy to participate in multiple markets
+# TODO: Scrap
+# Agent Theory: Dynamically optimize the allocation of EVs to different types of VPP using recurrent neural networks.
+# Agent Theory/ML: Application and comparison of Advanced ML Models (for spatial time-series forecasting)
+# Auction Theory: Integrated trading strategy to participate in multiple markets
 
 *** Relevance to Society
 - Grid stability through balancing
