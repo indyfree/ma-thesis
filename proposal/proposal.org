@@ -116,13 +116,12 @@ textcite:he16_optim_biddin_strat_batter_storag and textcite:mashhour11_biddin_st
 
 *** Relevance to Society
 
-This research contributes to the overall welfare of the society in a number of points. First, the VPPs provide extra balancing services to the power grid. This improves the grid stability, the VPPs can consume excess electricity (almost) instantly on demand. With the plan to integrate more intermittent renewable electricity sources into the grid, balancing services will become crucial in the future.
+This research contributes to the overall welfare of the society in three points. First, VPPs of EVs provide extra balancing services to the power grid. The VPPs can consume excess electricity (almost) instantly and stabilize the power grid like this. When integrating more intermittent renewable electricity sources into the grid in the future, such balancing services will become indispensable.
 # As opposed to idle-power plants or gas turbines
-- Second, Reduction of Electricity Prices
- Third, Carbon Emissions
+Second, a reduction of electricity prices for the end-consumer is expected. Integrating VPPs into the power grid increases the efficiency of the whole system and hence is  lowering prices. textcite:kahlen18_elect_vehic_virtual_power_plant_dilem show results, where electricity prices decrease up to 3.4% on the wholesale market. We anticipate similar results in our research.
 
-- This could lead to a decrease in CO2 emissions as renewable energy sources would not need to be curtailed.
-
+# TODO: Explain what curtailment means. Explain merit order, low marginal costs
+Third, VPPs can lead to a decrease in CO_2 emissions. With an increasing share of renewable energy production, the supply of sustainable electricity can excess total electricity demand at times of good weather conditions. The VPPs can consume this electricity by charging the EV fleet and the sustainable energy production does not need to be curtailed. The EV fleet can then feed the electricity back into the grid, when there is more demand than sustainable electricity production. With this mechanism the total CO_2 emissions can be reduced.
 
 * Empirical Setting (1 Pages)
 - Describe relevance and mechanisms of car-sharing and electricity market auctions
