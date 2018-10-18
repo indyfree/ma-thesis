@@ -115,8 +115,14 @@ Similar research has been carried out by textcite:kahlen18_elect_vehic_virtual_p
 textcite:he16_optim_biddin_strat_batter_storag and textcite:mashhour11_biddin_strat_virtual_power_plant_2,mashhour11_biddin_strat_virtual_power_plant_1 researched on optimal bidding strategies for using VPPs to jointly bid on multiple markets. The authors use stationary storage to participate in day-ahead and spinning-reserve markets. Contrarily, we aim to use non-stationary storage (i.e. EV batteries) to participate in the continuous intraday market and the secondary reserve market (known as real-time market in the US).
 
 *** Relevance to Society
-- Grid stability through balancing
-- Integration of more renewable sources into the energy grid
+
+This research contributes to the overall welfare of the society in a number of points. First, the VPPs provide extra balancing services to the power grid. This improves the grid stability, the VPPs can consume excess electricity (almost) instantly on demand. With the plan to integrate more intermittent renewable electricity sources into the grid, balancing services will become crucial in the future.
+# As opposed to idle-power plants or gas turbines
+- Second, Reduction of Electricity Prices
+ Third, Carbon Emissions
+
+- This could lead to a decrease in CO2 emissions as renewable energy sources would not need to be curtailed.
+
 
 * Empirical Setting (1 Pages)
 - Describe relevance and mechanisms of car-sharing and electricity market auctions
@@ -157,6 +163,26 @@ textcite:he16_optim_biddin_strat_batter_storag and textcite:mashhour11_biddin_st
 
  (Fri, Sun, Tue, Tue, Tue)
 ** Electricity Markets
+# Electricity markets are auctions where participants can buy and sell electricity
+# to match demand for electricity and supply of electricity generation. To match
+# participants asks (sell orders) and bids (buy orders) optimally we rely on smart
+# electronic market structures. Smart markets are auction mechanisms that rely on
+# optimization techniques to match demand and supply (McCabe et al., 1991; Gallien
+# and Wein, 2005; Bichler et al., 2010; Ketter, 2014)
+
+
+# In liberalized energy systems, where the production and distribution of electricity is
+# separated, there are several energy markets. Fleets of EVs could sell their storage on
+# all of these energy markets to benefit from price differences over time. However, not all
+# of them are equally well suited for this purpose. In principle the markets are different
+# from each other in terms of their reaction time between the contractual agreement
+# and physical delivery of electricity. This ranges from more than 24 hours, or usually
+# several months or years in advance in derivative markets, over day-ahead and spot
+# markets where the reaction time is usually several hours, to operating reserve markets,
+# where the reaction time is restricted to several minutes or seconds only. Figure 1.2
+# shows the energy markets that typically exist in liberalized energy systems and their
+# reaction times.
+
 *** Operating reserve market
 offer higher profits, due to a very low reaction time
  between contractual agreement and physical delivery. They also bear a higher risk for the
