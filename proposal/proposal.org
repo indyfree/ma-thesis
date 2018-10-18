@@ -90,8 +90,8 @@ They build upon another and will be sequentially addressed during this research:
    designs of the German secondary operating reserve market and continuous intraday market into account.
 
 
-** Relevance of the Research
-*** Relevance to Practice
+* Relevance of the Research
+** Relevance to Practice
 
 From a business perspective this research is mainly relevant to carsharing
 companies, such as Car2Go or DriveNow, which are operating an EV fleet. We will show how
@@ -106,7 +106,7 @@ We propose the use of a decision support system (DSS), which allocates idle EVs 
 In addition, we will estimate the profitability increase, when implementing the proposed methods.
 This will be done using real-world data from German electricity markets and trip data from a German carsharing provider.
 
-*** Relevance to Science
+** Relevance to Science
 
 From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets parencite:bichler10_resear_commen_desig_smart_market,peters2013reinforcement. We will contribute to the body of Design Science in Information Systems parencite:hevner04_desig_scien_infor_system_resear and draw upon work done in multitude of research areas: Virtual Power Plants in smart electricity markets, carsharing as a new way of sustainable mobility and advanced machine learning methods for forecasting and prediction.
 
@@ -114,7 +114,7 @@ Similar research has been carried out by textcite:kahlen18_elect_vehic_virtual_p
 
 textcite:he16_optim_biddin_strat_batter_storag and textcite:mashhour11_biddin_strat_virtual_power_plant_2,mashhour11_biddin_strat_virtual_power_plant_1 researched on optimal bidding strategies for using VPPs to jointly bid on multiple markets. The authors use stationary storage to participate in day-ahead and spinning-reserve markets. Contrarily, we aim to use non-stationary storage (i.e. EV batteries) to participate in the continuous intraday market and the secondary reserve market (known as real-time market in the US).
 
-*** Relevance to Society
+** Relevance to Society
 
 This research contributes to the overall welfare of the society in three points. First, VPPs of EVs provide extra balancing services to the power grid. The VPPs can consume excess electricity (almost) instantly and stabilize the power grid like this. When integrating more intermittent renewable electricity sources into the grid in the future, such balancing services will become indispensable.
 # As opposed to idle-power plants or gas turbines
