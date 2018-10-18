@@ -108,21 +108,11 @@ This will be done using real-world data from German electricity markets and trip
 
 *** Relevance to Science
 
-From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets parencite:bichler10_resear_commen_desig_smart_market,peters2013reinforcement. We will contribute to the body of Design Science in Information Systems parencite:hevner04_desig_scien_infor_system_resear and draw upon work done in multitude of fields: Virtual Power Plants in smart electricity markets, carsharing as a new way of sustainable mobility and advanced machine learning methods for forecasting and prediction.
+From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets parencite:bichler10_resear_commen_desig_smart_market,peters2013reinforcement. We will contribute to the body of Design Science in Information Systems parencite:hevner04_desig_scien_infor_system_resear and draw upon work done in multitude of research areas: Virtual Power Plants in smart electricity markets, carsharing as a new way of sustainable mobility and advanced machine learning methods for forecasting and prediction.
 
-- textcite:kahlen18_elect_vehic_virtual_power_plant_dilem work in spot-markets.
+Similar research has been carried out by textcite:kahlen18_elect_vehic_virtual_power_plant_dilem and textcite:kahlen17_fleet. In their research the authors concentrate on participating in one type of electricity market at a time. As proposed by citeauthor:kahlen18_elect_vehic_virtual_power_plant_dilem we will take this research further and use the EV VPPs to act on multiple types of electricity markets simultaneously. Moreover we aim to use sophisticated machine learning methods (i.e. recurrent neural networks, ensemble learning) to carry out more accurate forecasts of rental demand and dynamically learn allocation ratios to the individual markets.
 
-- textcite:kahlen17_fleet work in operating reserve markets.
-
-
-There has been work done on bidding on multiple energy markets at the same time. textcite:he16_optim_biddin_strat_batter_storag and textcite:mashhour11_biddin_strat_virtual_power_plant_2,mashhour11_biddin_strat_virtual_power_plant_1 use stationary storage developed optimal bidding strategies for jointly participating in day-ahead and spinning-reserver markets. We aim to use non-stationary storage (EV batteries) to participate in the continous intraday market and the secondary reserve market (known as real-time market in the US).
-
-Kahlen present very conversative results and propose the combination of multiple markets in future work. In their approach the VPPs are mainly used to buy from the markets when electricity is cheap and thus charge their EVs basically for free (Citatation). V2G is almost never used... . We aim to...
-
-# TODO: Scrap
-# Agent Theory: Dynamically optimize the allocation of EVs to different types of VPP using recurrent neural networks.
-# Agent Theory/ML: Application and comparison of Advanced ML Models (for spatial time-series forecasting)
-# Auction Theory: Integrated trading strategy to participate in multiple markets
+textcite:he16_optim_biddin_strat_batter_storag and textcite:mashhour11_biddin_strat_virtual_power_plant_2,mashhour11_biddin_strat_virtual_power_plant_1 researched on optimal bidding strategies for using VPPs to jointly bid on multiple markets. The authors use stationary storage to participate in day-ahead and spinning-reserve markets. Contrarily, we aim to use non-stationary storage (i.e. EV batteries) to participate in the continuous intraday market and the secondary reserve market (known as real-time market in the US).
 
 *** Relevance to Society
 - Grid stability through balancing
@@ -232,6 +222,11 @@ Monday through Friday.
 |      3 |     3 |
 - Secondary operating reserve market data from Germany (https://regelleistung.net)
 * Literature Review (1-2 Pages)
+# TODO: Scrap
+# Agent Theory: Dynamically optimize the allocation of EVs to different types of VPP using recurrent neural networks.
+# Agent Theory/ML: Application and comparison of Advanced ML Models (for spatial time-series forecasting)
+# Auction Theory: Integrated trading strategy to participate in multiple markets
+
 ** Electric Vehicles, Virtual Power Plants, V2G
 textcite:peterson10_econom_using_plug_in_hybrid
 
@@ -250,6 +245,8 @@ cite:he16_optim_biddin_strat_batter_storag
 cite:fridgen2014value
 
 cite:kahlen18_elect_vehic_virtual_power_plant_dilem
+
+- Kahlen present very conversative results and propose the combination of multiple markets in future work. In their approach the VPPs are mainly used to buy from the markets when electricity is cheap and thus charge their EVs basically for free (Citatation). V2G is almost never used.
 
 cite:kahlen17_fleet
 
