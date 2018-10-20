@@ -15,36 +15,7 @@
 #+OPTIONS: title:nil toc:nil
 #+LATEX_HEADER: \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
 
-#+BEGIN_EXPORT latex
-\begin{titlepage}
-    \begin{center}
-        \vspace*{1cm}
-
-        \Large
-        \textbf{Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants in Smart Sustainable Electricity Markets: A ML-based Intelligent Agent Approach}
-
-        \vspace{1.5cm}
-        Master Thesis Proposal
-
-        \vspace{7.0cm}
-
-        \small
-        \textbf{Author}: Tobias Richter\\
-        \small
-        \textbf{Supervisor}: Prof. Dr. Wolfgang Ketter
-
-        \vspace{1cm}
-        \small
-        Department of Information Systems for Sustainable Society\\
-        Faculty of Management, Economics and Social Sciences\\
-        University of Cologne\\
-
-        \vspace{1cm}
-        October, 2018
-
-    \end{center}
-\end{titlepage}
-#+END_EXPORT
+#+INCLUDE: "~/uni/ma-thesis/proposal/titlepage.tex" export latex
 
 \tableofcontents
 \clearpage
@@ -142,7 +113,7 @@ This will be done using real-world data from German electricity markets and trip
 
 ** Relevance to Science
 
-From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets parencite:bichler10_resear_commen_desig_smart_market,peters2013reinforcement. We will contribute to the body of Design Science in Information Systems parencite:hevner04_desig_scien_infor_system_resear and draw upon work done in multitude of research areas: Virtual Power Plants in smart electricity markets, carsharing as a new way of sustainable mobility and advanced machine learning methods for forecasting and prediction.
+From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets parencite:bichler10_resear_commen_desig_smart_market,peters2013reinforcement. We will contribute to the body of Design Science in Information Systems parencite:hevner04_desig_scien_infor_system_resear and draw upon work done in multitude of research areas: Virtual Power Plants in smart electricity markets parencite:pudjianto07_virtual_power_plant_system_integ, carsharing as a new way of sustainable mobility and advanced machine learning methods for forecasting and prediction.
 
 Similar research has been carried out by textcite:kahlen18_elect_vehic_virtual_power_plant_dilem and textcite:kahlen17_fleet. In their research the authors concentrate on participating in one type of electricity market at a time. As proposed by citeauthor:kahlen18_elect_vehic_virtual_power_plant_dilem we will take this research further and use the EV VPPs to act on multiple types of electricity markets simultaneously. Moreover we aim to use sophisticated machine learning methods (i.e. recurrent neural networks, ensemble learning) to carry out more accurate forecasts of rental demand and dynamically learn allocation ratios to the individual markets.
 
@@ -157,18 +128,21 @@ Second, a reduction of electricity prices for the end-consumer is expected. Inte
 # TODO: Explain what curtailment means. Explain merit order, low marginal costs
 Third, VPPs can lead to a decrease in CO_2 emissions. With an increasing share of renewable energy production, the supply of sustainable electricity can excess total electricity demand at times of good weather conditions. The VPPs can consume this electricity by charging the EV fleet and the sustainable energy production does not need to be curtailed. The EV fleet can then feed the electricity back into the grid, when there is more demand than sustainable electricity production. With this mechanism the total CO_2 emissions can be reduced.
 
-* Empirical Setting (1 Pages)
-- Describe relevance and mechanisms of car-sharing and electricity market auctions
-- Show excerpts of the available data and explain.
-- Use same time span for car data as respective market data (!?)
-- Timespan: 01.12.2016 - 31.01.2018
+* Empirical Setting (1 Page)
 
-** Carsharing Fleets
+# Sustainable energies
+We embed our research in the German markets, where the move to sustainable energies
+We obtained real-world trip data from Daimlers flee float carsharing service Car2Go. Additional
+- Describe relevance and mechanisms of car-sharing and electricity market auctions
+
+** Electric Vehicle Carsharing Fleets
 - EV car fleets
 - Environmental Impact: Future of mobility is electric, smart, and eventually autonomous
 
 - Carsharing business model: Flee float
-- Car2Go: Stuttgart
+- Car2Go: Stuttgart, 500 EVs
+- Stuttgart 220 Charging Stations
+- Model individual trips
 - Exemplary Car2Go data is shown in Table ref:car2go-sample-data
 
 #+CAPTION: Car2Go Raw Trip Data from Stuttgart label:car2go-sample-data

@@ -1,5 +1,5 @@
-## Org-Mode specific
-*.tex
+## Project specific
+proposal/proposal.tex
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
