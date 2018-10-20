@@ -131,21 +131,20 @@ Third, VPPs can lead to a decrease in CO_2 emissions. With an increasing share o
 * Empirical Setting (1 Page)
 
 # Sustainable energies
-We embed our research in the German markets, where the move to sustainable energies
-We obtained real-world trip data from Daimlers flee float carsharing service Car2Go. Additional
-- Describe relevance and mechanisms of car-sharing and electricity market auctions
+We chose to embed our research in the German market. Germany has a comparably high share of renewables in its energy mix and is pushing for a energy turnaround[fn:energiewende] (German: /Energiewende/) since 2010.
+# TOOD: Citation
+The high renewable energy content in the energy mix causes electricity prices to be more volatile, which makes Germany an attractive location for the use of VPPs.
+We obtained real-world trip data from Daimlers carsharing service Car2Go[fn::https://www.car2go.com] and electricity market data from European power exchange EPEX SPOT[fn::https://www.epexspot]. Additionally we collected data from the German electricity market operator regelleistung.net[fn::https://www.regelleistungen.net].
 
-** Electric Vehicle Carsharing Fleets
-- EV car fleets
-- Environmental Impact: Future of mobility is electric, smart, and eventually autonomous
+[fn:energiewende] citetitle:energiewende2010, cite:energiewende2010.
 
-- Carsharing business model: Flee float
-- Car2Go: Stuttgart, 500 EVs
-- Stuttgart 220 Charging Stations
-- Model individual trips
-- Exemplary Car2Go data is shown in Table ref:car2go-sample-data
+** Carsharing Fleets of Electric Vehicles
 
-#+CAPTION: Car2Go Raw Trip Data from Stuttgart label:car2go-sample-data
+We think that the future of mobility will be electric, shared, smart and eventually autonomous. Carsharing companies are already contributing to the first two points by operating large fleets of electric vehicles. This research addresses the third point: Using EV fleets to smartly participate on electricity markets, without compromising customer mobility.
+Carsharing providers like Daimler and BMW operate their carsharing fleets in a free-float model, where people can pick up and drop vehicles at any place withing the operating zone of the provider. Customers pay by the minute and are offered incentives to park EVs at charging stations. Analyzing free float trip data is substantially more difficult as trip data, which are bounded by fixed stations. Individual trips have to be reconstructed using the GPS data of the cars and predicting the rental demand is a complex matter. The demand differs depending at which place and at what time the EVs are parked.
+The dataset consists of 500 EVs in the German city Stuttgart. As displayed in Table ref:car2go-sample-data the data contain spatio-temporal attributes, such as timestamp, coordinates and address of the EVs. Additionally status attributes of the interior and exterior are given, the percentual state of charge and information whether the EV is plugged into one of the 200 charging stations in Stuttgart.
+
+#+CAPTION: Raw Car2Go Trip Data from Stuttgart label:car2go-sample-data
 #+ATTR_LATEX: :environment longtable :align l|p{1.5cm}p{1.5cm}p{3.5cm}p{1.5cm}p{2.8cm}
 |--------------+----------+-----------+---------------------+----------+-----------------|
 |--------------+----------+-----------+---------------------+----------+-----------------|
@@ -167,9 +166,10 @@ We obtained real-world trip data from Daimlers flee float carsharing service Car
 |--------------+----------+-----------+---------------------+----------+-----------------|
 |--------------+----------+-----------+---------------------+----------+-----------------|
 
+# TODO: Explain Sample trip (Fri, Sun, Tue, Tue, Tue)
 
- (Fri, Sun, Tue, Tue, Tue)
 ** Electricity Markets
+- Describe relevance and mechanisms and electricity market auctions
 # Electricity markets are auctions where participants can buy and sell electricity
 # to match demand for electricity and supply of electricity generation. To match
 # participants asks (sell orders) and bids (buy orders) optimally we rely on smart
@@ -190,7 +190,7 @@ We obtained real-world trip data from Daimlers flee float carsharing service Car
 # shows the energy markets that typically exist in liberalized energy systems and their
 # reaction times.
 
-*** Operating reserve market
+*** Operating Reserve Market
 offer higher profits, due to a very low reaction time
  between contractual agreement and physical delivery. They also bear a higher risk for the
  fleet. Commitments have to be made one week in advance, where customer demands
@@ -226,7 +226,7 @@ POS-HT = Product code for positive secondary
 control reserve to be provided between the hours of 08:00h and 20:00h from
 Monday through Friday.
 
-*** Continuous intraday market
+*** Continuous Intraday Market
  allow participants to continuously trade electricity products up
  to 15 minutes prior to delivery (in Germany). At this point it is possible to
  predict customer demand with a high accuracy, which generates the possibility
@@ -254,6 +254,7 @@ Monday through Friday.
 |      2 |     9 |
 |      3 |     3 |
 - Secondary operating reserve market data from Germany (https://regelleistung.net)
+
 * Literature Review (1-2 Pages)
 # TODO: Scrap
 # Agent Theory: Dynamically optimize the allocation of EVs to different types of VPP using recurrent neural networks.
