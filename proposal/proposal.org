@@ -57,9 +57,9 @@ physical delivery.
 # TODO: Citation needed
 Participating in operating reserve markets and spot markets at the same time
 can mitigates risks and increase profits. Allocating EVs to different types of VPPs, that
-participate on the respective markets is an optimization problem, which aim to solve.
+participate on the respective markets is an optimization problem, which we aim to solve.
 
-In this research we propose an portfolio optimizing strategy, in which the best
+In this research we propose a portfolio optimizing strategy, in which the best
 composition of the VPP portfolio, consisting of operating reserve
 VPPs and spot market VPPs, will be dynamically determined. To address changing
 electricity price levels and customer demands over time we additionally propose an
@@ -169,37 +169,16 @@ The dataset consists of 500 EVs in the German city Stuttgart. As displayed in Ta
 # TODO: Explain Sample trip (Fri, Sun, Tue, Tue, Tue)
 
 ** Electricity Markets
-- Describe relevance and mechanisms and electricity market auctions
-# Electricity markets are auctions where participants can buy and sell electricity
-# to match demand for electricity and supply of electricity generation. To match
-# participants asks (sell orders) and bids (buy orders) optimally we rely on smart
-# electronic market structures. Smart markets are auction mechanisms that rely on
-# optimization techniques to match demand and supply (McCabe et al., 1991; Gallien
-# and Wein, 2005; Bichler et al., 2010; Ketter, 2014)
 
+On electricity markets actors participate in auctions to match supply of electricity generation and demand of electricity consumption. Participants place asks (sale offers) and bids (purchase orders). The price is determined by an auction mechanism, which can take different forms, depending on the type of market. Germany, as many other countries, has an liberalized energy system in which the generation and distribution of electricity is decoupled. Multiple electricity markets exists, which differ in their reaction time between the order contract and the delivery of electricity. Day-ahead and spot markets have a reaction time between a day and several hours, whereas in operating reserve markets the reaction time ranges from minutes to seconds.
 
-# In liberalized energy systems, where the production and distribution of electricity is
-# separated, there are several energy markets. Fleets of EVs could sell their storage on
-# all of these energy markets to benefit from price differences over time. However, not all
-# of them are equally well suited for this purpose. In principle the markets are different
-# from each other in terms of their reaction time between the contractual agreement
-# and physical delivery of electricity. This ranges from more than 24 hours, or usually
-# several months or years in advance in derivative markets, over day-ahead and spot
-# markets where the reaction time is usually several hours, to operating reserve markets,
-# where the reaction time is restricted to several minutes or seconds only. Figure 1.2
-# shows the energy markets that typically exist in liberalized energy systems and their
-# reaction times.
+Carsharing Fleets can offer the capacity of their EV batteries on multiple markets at the same time to make use of the different market properties. On operating reserve markets prices are usually more volatile and consequently more attractive for VPPs. But they also bear a higher risk for the fleet. Commitments have to be made one week in advance, where customer demands are still of uncertain. To not face penalties for unfulfilled commitments only a conservative amount of capacity can be offered to the market. Spot markets allow participants to continuously trade electricity products up to fifteen minutes prior to delivery. At this point it is possible to predict if a EV is likely going to be rented out with a high accuracy. This creates the possibility to trade the remaining available capacity with a low risk at the spot market.
 
-*** Operating Reserve Market
-offer higher profits, due to a very low reaction time
- between contractual agreement and physical delivery. They also bear a higher risk for the
- fleet. Commitments have to be made one week in advance, where customer demands
- are uncertain. To not face penalties for unfulfilled commitments, only a
- conservative estimation of available battery capacity can be made. This leaves
- a lot of potential EV capacity unused.
+*** Secondary Operating Reserve Market
+In this research we will use bidding data from the German secondary reserve market between 06.06.2016 and 01.01.2018. The data contain weekly lists of anonymized bids, where the electricity product, the offered capacity, the capacity price and the energy price of the placed bid is listed. As also negative prices are allowed, the payment direction is included. Moreover we find information whether the bid was fully or partially accepted. That makes it easy to determine the clearing price.
 
-
-#+CAPTION: Anonymized List of Bids of the German Secondary Reserve Market at the 04.12.2017
+# TODO: Explain TSO?
+#+CAPTION: Anonymized List of Bids of the German Secondary Reserve Market (04.12.2017)
 #+ATTR_LATEX: :float sideways :align l|ccccc :placement [hp]
 |---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
 |---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
@@ -226,22 +205,8 @@ POS-HT = Product code for positive secondary
 control reserve to be provided between the hours of 08:00h and 20:00h from
 Monday through Friday.
 
-*** Continuous Intraday Market
- allow participants to continuously trade electricity products up
- to 15 minutes prior to delivery (in Germany). At this point it is possible to
- predict customer demand with a high accuracy, which generates the possibility
- to trade the remaining available capacity with a low risk.
+*** Continuous Intraday Spot Market
 
-
-
-
-
-- Balancing vs. Spot Markets
-- Market designs
-*** Epex Spot Market: Continuous intraday trading
-- Market design
-- Exemplary data
-- Epex Spot Market: Continuous intraday trading data from 2016-2017.
 *** German secondary operating reserve market
 - Market design
 - Exemplary data ref:spot-market-sample-data
@@ -253,7 +218,6 @@ Monday through Friday.
 |      1 |     7 |
 |      2 |     9 |
 |      3 |     3 |
-- Secondary operating reserve market data from Germany (https://regelleistung.net)
 
 * Literature Review (1-2 Pages)
 # TODO: Scrap
