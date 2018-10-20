@@ -251,3 +251,17 @@ cite:wolfson11_better_place
  :END:
 - Zhou et al. (2015) - Stationary storage, dynamic pricing, industrial setting
 cite:zhou16_elect_tradin_negat_prices
+
+** TODO 2007 - Virtual Power Plant and System Integration of Distributed Energy Resources
+ :PROPERTIES:
+  :Custom_ID: pudjianto07_virtual_power_plant_system_integ
+  :AUTHOR: Pudjianto, Ramsay \& Strbac
+  :JOURNAL: IET Renewable Power Generation
+  :YEAR: 2007
+  :VOLUME:
+  :PAGES: 10
+  :DOI: 10.1049/iet-rpg:20060023
+  :URL: https://doi.org/10.1049/iet-rpg:20060023
+ :END:
+- High impact paper VPP
+cite:pudjianto07_virtual_power_plant_system_integ
