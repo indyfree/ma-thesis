@@ -172,14 +172,16 @@ The dataset consists of 500 EVs in the German city Stuttgart. As displayed in Ta
 
 On electricity markets actors participate in auctions to match supply of electricity generation and demand of electricity consumption. Participants place asks (sale offers) and bids (purchase orders). The price is determined by an auction mechanism, which can take different forms, depending on the type of market. Germany, as many other countries, has an liberalized energy system in which the generation and distribution of electricity is decoupled. Multiple electricity markets exists, which differ in their reaction time between the order contract and the delivery of electricity. Day-ahead and spot markets have a reaction time between a day and several hours, whereas in operating reserve markets the reaction time ranges from minutes to seconds.
 
+The auction mechanism design is essential for electric markets parencite:kambil98_reeng_dutch_flower_auction. Electricity markets work according to the merit order principle. Resources are considered in an ascending order of the energy price until the capacity demand is met. The clearing price is determined by the energy price, at the point where supply meets demand. Payment models differ in the markets: In contrast to day-ahead market, where a uniform pricing schema is applied, in secondary reserve markets and intraday markets bidders get compensated by the price they bid for (pay-as-bid principle).
+
 Carsharing Fleets can offer the capacity of their EV batteries on multiple markets at the same time to make use of the different market properties. On operating reserve markets prices are usually more volatile and consequently more attractive for VPPs. But they also bear a higher risk for the fleet. Commitments have to be made one week in advance, where customer demands are still of uncertain. To not face penalties for unfulfilled commitments only a conservative amount of capacity can be offered to the market. Spot markets allow participants to continuously trade electricity products up to fifteen minutes prior to delivery. At this point it is possible to predict if a EV is likely going to be rented out with a high accuracy. This creates the possibility to trade the remaining available capacity with a low risk at the spot market.
 
 *** Secondary Operating Reserve Market
-In this research we will use bidding data from the German secondary reserve market between 06.06.2016 and 01.01.2018. The data contain weekly lists of anonymized bids, where the electricity product, the offered capacity, the capacity price and the energy price of the placed bid is listed. As also negative prices are allowed, the payment direction is included. Moreover we find information whether the bid was fully or partially accepted. That makes it easy to determine the clearing price.
+In this research we will use bidding data from the German secondary reserve market between 01.06.2016 and 01.01.2018. The data contain weekly lists of anonymized bids, where the electricity product, the offered capacity, the capacity price and the energy price of the placed bids are listed. As also negative prices are allowed, the payment direction is included as well. Moreover we find information about which amount of electricity accepted, i.e. either partially or fully. Bids which weren't accepted are not listed. An excerpt of the data can be found in Table ref:operating-reserve-market-sample-data.
 
 # TODO: Explain TSO?
 #+CAPTION: Anonymized List of Bids of the German Secondary Reserve Market (04.12.2017)
-#+ATTR_LATEX: :float sideways :align l|ccccc :placement [hp]
+#+ATTR_LATEX: :float sideways :align l|ccccc :placement [hp] label:operating-reserve-market-sample-data
 |---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
 |---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
 | Product[fn:product] | Capacity Price [EUR/MW] | Energy Price [EUR/MW] | Payment       | Offered [MW] | Accepted [MW] |
@@ -200,30 +202,20 @@ In this research we will use bidding data from the German secondary reserve mark
 provided between the hours of 00:00h and 08:00h as well as between 20:00h and
 24:00h from Monday through Friday as well as all day on Saturday, Sunday and public holidays
 applicable to all of Germany
-
-POS-HT = Product code for positive secondary
-control reserve to be provided between the hours of 08:00h and 20:00h from
+POS-HT = Product code for positive secondary control reserve to be provided between the hours of 08:00h and 20:00h from
 Monday through Friday.
 
 *** Continuous Intraday Spot Market
+The intraday spot data, which we will analyze
 
-*** German secondary operating reserve market
-- Market design
-- Exemplary data ref:spot-market-sample-data
-
-
-#+CAPTION: Exemplary Spot Market Auction Data label:spot-market-sample-data
-| Bid Id | Price |
-|--------+-------|
-|      1 |     7 |
-|      2 |     9 |
-|      3 |     3 |
 
 * Literature Review (1-2 Pages)
 # TODO: Scrap
 # Agent Theory: Dynamically optimize the allocation of EVs to different types of VPP using recurrent neural networks.
 # Agent Theory/ML: Application and comparison of Advanced ML Models (for spatial time-series forecasting)
 # Auction Theory: Integrated trading strategy to participate in multiple markets
+
+parencite:adomavicius09_desig_intel_softw_agent_auction
 
 ** Electric Vehicles, Virtual Power Plants, V2G
 textcite:peterson10_econom_using_plug_in_hybrid
