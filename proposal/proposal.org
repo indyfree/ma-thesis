@@ -174,13 +174,16 @@ On electricity markets actors participate in auctions to match supply of electri
 
 The auction mechanism design is essential for electric markets parencite:kambil98_reeng_dutch_flower_auction. Electricity markets work according to the merit order principle. Resources are considered in an ascending order of the energy price until the capacity demand is met. The clearing price is determined by the energy price, at the point where supply meets demand. Payment models differ in the markets: In contrast to day-ahead market, where a uniform pricing schema is applied, in secondary reserve markets and intraday markets bidders get compensated by the price they bid for (pay-as-bid principle).
 
+# TODO: Infrastructure constraints, not possible to offer EV batteries to the operating reserve market
 Carsharing Fleets can offer the capacity of their EV batteries on multiple markets at the same time to make use of the different market properties. On operating reserve markets prices are usually more volatile and consequently more attractive for VPPs. But they also bear a higher risk for the fleet. Commitments have to be made one week in advance, where customer demands are still of uncertain. To not face penalties for unfulfilled commitments only a conservative amount of capacity can be offered to the market. Spot markets allow participants to continuously trade electricity products up to fifteen minutes prior to delivery. At this point it is possible to predict if a EV is likely going to be rented out with a high accuracy. This creates the possibility to trade the remaining available capacity with a low risk at the spot market.
 
+# TODO: Include market volume, etc.
+# TODO: New German Mischpreisverfahren.
 *** Secondary Operating Reserve Market
 In this research we will use bidding data from the German secondary reserve market between 01.06.2016 and 01.01.2018. The data contain weekly lists of anonymized bids, where the electricity product, the offered capacity, the capacity price and the energy price of the placed bids are listed. As also negative prices are allowed, the payment direction is included as well. Moreover we find information about which amount of electricity accepted, i.e. either partially or fully. Bids which weren't accepted are not listed. An excerpt of the data can be found in Table ref:operating-reserve-market-sample-data.
 
 # TODO: Explain TSO?
-#+CAPTION: Anonymized List of Bids of the German Secondary Reserve Market (04.12.2017)
+#+CAPTION: Anonymized list of bids of the German secondary reserve Market (04.12.2017)
 #+ATTR_LATEX: :float sideways :align l|ccccc :placement [hp] label:operating-reserve-market-sample-data
 |---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
 |---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
@@ -205,8 +208,22 @@ applicable to all of Germany
 POS-HT = Product code for positive secondary control reserve to be provided between the hours of 08:00h and 20:00h from
 Monday through Friday.
 
+# Todo: Include market volume, etc.
 *** Continuous Intraday Spot Market
-The intraday spot data, which we will analyze
+We will embed this research in the EPEX Spot Intraday Continuous market. The data has been provided by ProCom[fn::https://procom-energy.de/] and encompasses data of order books and executed trades from 01.06.2016 till 01.01.2018.
+
+#+CAPTION: List of Trades of the German Secondary Reserve Market
+#+ATTR_LATEX: :float sideways :align l|ccccc :placement [hp] label:spot-market-sample-data
+|---------+---------------------+------------+-------+------------------+------------------+---------------+---------+--------------|
+|      id | exec_time           | unit_price |   qty | Buyer area       | Seller area      | Delivery date | Product | Product Time |
+|---------+---------------------+------------+-------+------------------+------------------+---------------+---------+--------------|
+| 8036071 | 2017-12-03 18:10:18 |       2810 |   900 | 10YDE-VE-------2 | 10YDE-RWENET---I |    2017-12-04 | H       |        12-13 |
+| 8036073 | 2017-12-03 20:58:57 |       3640 | 10000 | 10YDE-VE-------2 | 10YDE-VE-------2 |    2017-12-04 | H       |        12-13 |
+| 8036072 | 2017-12-03 20:58:57 |       3690 |   500 | 10YDE-EON------1 | 10YDE-VE-------2 |    2017-12-04 | H       |        12-13 |
+| 8036074 | 2017-12-04 05:00:30 |       3820 |  4000 | 10YDE-VE-------2 | 10YDE-VE-------2 |    2017-12-04 | H       |        12-13 |
+| 8036075 | 2017-12-04 05:01:20 |       3820 |  2900 | 10YDE-VE-------2 | 10YDE-VE-------2 |    2017-12-04 | H       |        12-13 |
+| 8036076 | 2017-12-04 05:02:17 |       3830 |  3600 | 10YDE-VE-------2 | 10YDE-EON------1 |    2017-12-04 | H       |        12-13 |
+|---------+---------------------+------------+-------+------------------+------------------+---------------+---------+--------------|
 
 
 * Literature Review (1-2 Pages)
@@ -270,7 +287,7 @@ cite:ketter16_comp_bench
 cite:ketter16_comp_bench
 
 * Research Design (1-2 Pages)
-The research will be structured using the IS design science principles proposed by Hevner et
+The research will be structured using the IS design science principles proposed citeauthor:hevner04_desig_scien_infor_system_resear
 al. (2004). In Figure ref:research-design the proposed research design is depicted.
 We will place a special focus on the used methodologies, the developed artifact
 and the evaluation of the results.
