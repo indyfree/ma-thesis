@@ -7,6 +7,9 @@
 #+LATEX_HEADER: \onehalfspacing
 #+OPTIONS: H:4
 
+# Typography
+#+LATEX_HEADER: \usepackage[official]{eurosym}
+
 # Bibliography
 #+LATEX_HEADER: \usepackage[backend=biber, style=apa]{biblatex}
 #+LATEX_HEADER: \addbibresource{~/uni/ma-thesis/bibliography/references.bib}
