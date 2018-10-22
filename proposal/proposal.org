@@ -4,6 +4,7 @@
 # Formatting
 #+LATEX_HEADER: \usepackage[margin=1.5in]{geometry}
 #+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \usepackage{caption}
 #+LATEX_HEADER: \onehalfspacing
 #+OPTIONS: H:4
 
@@ -183,26 +184,26 @@ Carsharing Fleets can offer the capacity of their EV batteries on multiple marke
 # TODO: Include market volume, etc.
 # TODO: New German Mischpreisverfahren.
 *** Secondary Operating Reserve Market
-In this research we will use bidding data from the German secondary reserve market between 01.06.2016 and 01.01.2018. The data contain weekly lists of anonymized bids, where the electricity product, the offered capacity, the capacity price and the energy price of the placed bids are listed. As also negative prices are allowed, the payment direction is included as well. Moreover we find information about which amount of electricity accepted, i.e. either partially or fully. Bids which weren't accepted are not listed. An excerpt of the data can be found in Table ref:operating-reserve-market-sample-data.
+In this research we will use bidding data from the German secondary reserve market between 01.06.2016 and 01.01.2018. The data contain weekly lists of anonymized bids, where the electricity product, the offered capacity, the capacity price and the energy price of the placed bids are listed. As also negative prices are allowed, the payment direction is included as well. Moreover we find information about which amount of electricity accepted, i.e. either partially or fully. Bids which weren't accepted are not listed. An excerpt of the data can be found in Table ref:operating-reserve-data.
 
 # TODO: Explain TSO?
-#+CAPTION: Anonymized list of bids of the German secondary reserve Market (04.12.2017)
-#+ATTR_LATEX: :float sideways :align l|ccccc :placement [hp] label:operating-reserve-market-sample-data
-|---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
-|---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
-| Product[fn:product] | Capacity Price [EUR/MW] | Energy Price [EUR/MW] | Payment       | Offered [MW] | Accepted [MW] |
-|---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
-| NEG-HT              |                       0 |                   1.1 | TSO to bidder |            5 |             5 |
-| NEG-HT              |                       0 |                   251 | TSO to bidder |           15 |            15 |
-| NEG-HT              |                       0 |                   564 | TSO to bidder |           22 |            22 |
-| ...                 |                     ... |                   ... | ...           |          ... |           ... |
-| NEG-NT              |                       0 |                  21.9 | Bidder to TSO |            5 |             5 |
-| NEG-NT              |                       0 |                  22.4 | Bidder to TSO |            5 |             5 |
-| ...                 |                     ... |                   ... | ...           |          ... |           ... |
-| POS-NT              |                   696.6 |                  1200 | TSO to bidder |            5 |             5 |
-| POS-NT              |                  717.12 |                  1210 | TSO to bidder |           10 |             7 |
-|---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
-|---------------------+-------------------------+-----------------------+---------------+--------------+---------------|
+#+CAPTION: List of bids of the German secondary reserve market label:operating-reserve-data
+#+ATTR_LATEX: :environment longtable :align l|ccccc :placement [hp]
+|---------------------+----------------------------+--------------------------+---------------+----------------+-----------------|
+|---------------------+----------------------------+--------------------------+---------------+----------------+-----------------|
+| Product[fn:product] | Capacity Price[fn:euro-mw] | Energy Price[fn:euro-mw] | Payment       | Offered[fn:mw] | Accepted[fn:mw] |
+|---------------------+----------------------------+--------------------------+---------------+----------------+-----------------|
+| NEG-HT              |                          0 |                      1.1 | TSO to bidder |              5 |               5 |
+| NEG-HT              |                          0 |                      251 | TSO to bidder |             15 |              15 |
+| NEG-HT              |                          0 |                      564 | TSO to bidder |             22 |              22 |
+| ...                 |                        ... |                      ... | ...           |            ... |             ... |
+| NEG-NT              |                          0 |                     21.9 | Bidder to TSO |              5 |               5 |
+| NEG-NT              |                          0 |                     22.4 | Bidder to TSO |              5 |               5 |
+| ...                 |                        ... |                      ... | ...           |            ... |             ... |
+| POS-NT              |                      696.6 |                     1200 | TSO to bidder |              5 |               5 |
+| POS-NT              |                     717.12 |                     1210 | TSO to bidder |             10 |               7 |
+|---------------------+----------------------------+--------------------------+---------------+----------------+-----------------|
+|---------------------+----------------------------+--------------------------+---------------+----------------+-----------------|
 
 [fn:product] NEG-NT = Product code for negative secondary control reserve to be
 provided between the hours of 00:00h and 08:00h as well as between 20:00h and
@@ -210,13 +211,21 @@ provided between the hours of 00:00h and 08:00h as well as between 20:00h and
 applicable to all of Germany
 POS-HT = Product code for positive secondary control reserve to be provided between the hours of 08:00h and 20:00h from
 Monday through Friday.
+[fn:euro-mw] Prices are in given in
+#+BEGIN_EXPORT latex
+\euro{} per megawatt
+#+END_EXPORT
+[fn:mw] Capacities are given in megawatts
 
 # Todo: Include market volume, etc.
 *** Continuous Intraday Spot Market
 We will embed this research in the EPEX Spot Intraday Continuous market. The data has been provided by ProCom[fn::https://procom-energy.de/] and encompasses data of order books and executed trades from 01.06.2016 till 01.01.2018.
 
-#+CAPTION: List of Trades of the German Secondary Reserve Market
-#+ATTR_LATEX: :float sideways :align l|cccccccc :placement [hp] label:spot-market-sample-data
+#+BEGIN_EXPORT latex
+{\captionsetup[table]{aboveskip=0.5cm}
+#+END_EXPORT
+#+CAPTION: List of Trades of the German Secondary Reserve Market label:spot-market-sample-data
+#+ATTR_LATEX: :float sideways :align l|cccccccc :placement [hp]
 |---------+---------------------+------------+----------+------------+-------------+---------------+---------+--------------|
 |      id | Exec Time           | Unit Price | Quantity | Buyer area | Seller area | Delivery date | Product | Product Time |
 |---------+---------------------+------------+----------+------------+-------------+---------------+---------+--------------|
@@ -227,6 +236,9 @@ We will embed this research in the EPEX Spot Intraday Continuous market. The dat
 | 8036075 | 2017-12-04 05:01:20 |       3820 |     2900 | 50HERTZ    | 50HERTZ     |    2017-12-04 | H       |        12-13 |
 | 8036076 | 2017-12-04 05:02:17 |       3830 |     3600 | 50HERTZ    | TENNET      |    2017-12-04 | H       |        12-13 |
 |---------+---------------------+------------+----------+------------+-------------+---------------+---------+--------------|
+#+BEGIN_EXPORT latex
+}
+#+END_EXPORT
 
 * Literature Review (1-2 Pages)
 # TODO: Scrap
