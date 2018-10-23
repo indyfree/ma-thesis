@@ -117,7 +117,7 @@ This will be done using real-world data from German electricity markets and trip
 
 ** Relevance to Science
 
-From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets parencite:bichler10_resear_commen_desig_smart_market,peters2013reinforcement. We will contribute to the body of Design Science in Information Systems parencite:hevner04_desig_scien_infor_system_resear and draw upon work done in multitude of research areas: Virtual Power Plants in smart electricity markets parencite:pudjianto07_virtual_power_plant_system_integ, carsharing as a new way of sustainable mobility and advanced machine learning methods for forecasting and prediction.
+From a scientific perspective this research is relevant to the stream of agent-based decision making in smart markets parencite:bichler10_desig_smart_market,peters13_reinf_learn_approac_to_auton. We will contribute to the body of Design Science in Information Systems parencite:hevner04_desig_scien_infor_system_resear and draw upon work done in multitude of research areas: Virtual Power Plants in smart electricity markets parencite:pudjianto07_virtual_power_plant_system_integ, carsharing as a new way of sustainable mobility and advanced machine learning methods for forecasting and prediction.
 
 Similar research has been carried out by textcite:kahlen18_elect_vehic_virtual_power_plant_dilem and textcite:kahlen17_fleet. In their research the authors concentrate on participating in one type of electricity market at a time. As proposed by citeauthor:kahlen18_elect_vehic_virtual_power_plant_dilem we will take this research further and use the EV VPPs to act on multiple types of electricity markets simultaneously. Moreover we aim to use sophisticated machine learning methods (i.e. recurrent neural networks, ensemble learning) to carry out more accurate forecasts of rental demand and dynamically learn allocation ratios to the individual markets.
 
@@ -244,68 +244,62 @@ As displayed in Table ref:spot-market-sample-data trades can have a very short l
 # Agent Theory/ML: Application and comparison of Advanced ML Models (for spatial time-series forecasting)
 # Auction Theory: Integrated trading strategy to participate in multiple markets
 
-parencite:adomavicius09_desig_intel_softw_agent_auction
+- IS can help with climate change
+- Use IS to align organizational goals with sustainability (carsharing and CO_2 emission) with DSS (Doing good by doing well)
+- Use EV Fleets to align mobility goals with battery storage goals
+- Demonstrate this with intelligent agent in an simulation similar to PowerTAC
 
-# Cars
-** Smart Charging and Discharging Electric Vehicles Fleets, Virtual Power Plants, V2G
-textcite:peterson10_econom_using_plug_in_hybrid
+** Smart Charging
+- Charging EVs at the same time can cause issues in the Grid. Overload transformers and substation parencite:kim12_carbit,sioshansi12_or_forum_model_impac_elect
+- Solution in prev. literature: Smart charging: Charge when the list is less congested, reduce peak demands
+- EV fleets are given financial incentive, because the price is lower(?) parencite:valogianni14_effec_manag_elect_vehic_storag
+- parencite:kara15_estim_benef_elect_vehic_smart Smart scheduling would result in even lower electricity costs for consumers
+- Emphasize need for research on charging from the grid.
 
-cite:mak13_infras_plann_elect_vehic_with_batter_swapp
 
-cite:kim12_carbit
+- parencite:fridgen14
 
-cite:kara15_estim_benef_elect_vehic_smart
+** Vehicle-to-Grid
+- Extension of the Smart Charging concept
+- Shown succesfully with stationary storage parencite:mashhour11_biddin_strat_virtual_power_plant_2
+- parencite:he16_optim_biddin_strat_batter_storag Battery life cycles, important.
+- Also included in this study.
 
-cite:fridgen2014value
+- V2G profitable parencite:reichert10_consid_highl_effic_bidir_batter,peterson10_econom_using_plug_in_hybrid, but battery costs crucial
 
-cite:kahlen18_elect_vehic_virtual_power_plant_dilem
+** Dynamic pricing using batteries
+- parencite:vytelingum11_theor_pract_found_large_scale show that dynamic pricing for household is profitable
+- Dynamic pricing in industries also profitable parencite:zhou15_elect_tradin_negat_prices
+-
+** General EV profitability when used as Grid Storage
+- parencite:schill11_elect_vehic_imper_elect_market find EVS are profitable for consumer electricity prices when used as Storage (V2G)
+- parencite:tomic07_using_fleet_elect_drive_vehic_grid_suppor  V2G profitable, especially when high variablity in electricity prices
+  - Shorter interval between sale and delivery, the larger the benefits
 
+** Electricity Brokers
+- Studies have assumption that car owners or household can trade on wholesale markets, not realistic due to minimum capacity requirements
+- Electricity Brokers parencite:ketter13_power_tac introduced to act on behalf of a group
+- parencite:brandt17_evaluat_busin_model_vehic_grid_integ and parencite:kahlen14_balan_with_elect_vehic
+
+** VPP
+- parencite:mak13_infras_plann_elect_vehic_with_batter_swapp
+
+** Carsharing
+- parencite:firnkorn15_free_float_elect_carsh_fleet_smart_cities Freefloat carsharing reduce carbon emissions
+- cite:wagner16_in_free_float
+
+
+- Previous studies were trips known in advance: deterministic, free-float add uncertainty, per-minute
+- EV either committed to be charged or discharged or free for renting. In reality trips are more spontaneous
+- Offering EV capacity for control reserves not shown in business setting
+- Other than parencite:kahlen18_elect_vehic_virtual_power_plant_dilem,kahlen17_fleet this has not been done yet.
 - Kahlen present very conversative results and propose the combination of multiple markets in future work. In their approach the VPPs are mainly used to buy from the markets when electricity is cheap and thus charge their EVs basically for free (Citatation). V2G is almost never used.
-
-cite:kahlen17_fleet
-
-cite:kahlen15_aggreg_elect_cars_sustain_virtual_power_plant
-
-cite:sioshansi12_or_forum_model_impac_elect
-
-cite:valogianni2014effective
-
-# Non-Cars
-** Using Intelligent Agents for Virtual Power Plants and Electricity Trading
-
-cite:vytelingum2011theoretical
-
-
-*** Multiple Markets
-cite:he16_optim_biddin_strat_batter_storag
-
-cite:mashhour11_biddin_strat_virtual_power_plant_1
-
-cite:mashhour11_biddin_strat_virtual_power_plant_2
-
+- We will build on Kahlen results and introduce an integrated bidding strategy. We will draw on previous results from
+cite:he16_optim_biddin_strat_batter_storag,mashhour11_biddin_strat_virtual_power_plant_2 and act on multiple markets.
 
 ** Electricity Forecasting
-cite:avci18_manag_elect_price_model_risk
-** Carsharing
-cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities
-cite:wagner16_in_free_float
-** More Papers
-*** Main Papers
-
-
-
-
-
-
-cite:zhou15_elect_tradin_negat_prices
-*** Touching Papers and Conference Papers
-cite:ketter13_power_tac
-
-cite:ketter16_multiagent_comp_gaming
-
-cite:ketter16_comp_bench
-
-cite:ketter16_comp_bench
+- cite:avci18_manag_elect_price_model_risk
+# More papers from HD
 
 * Research Design (1-2 Pages)
 The research will be structured using the IS design science principles proposed citeauthor:hevner04_desig_scien_infor_system_resear
