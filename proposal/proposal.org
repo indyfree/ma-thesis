@@ -134,9 +134,7 @@ Third, VPPs can lead to a decrease in CO_2 emissions. With an increasing share o
 
 * Empirical Setting
 
-We chose to embed our research in the German carsharing and electricity market. Germany has a comparably high share of renewables in its energy mix and is pushing for a energy turnaround[fn:energiewende] (German: /Energiewende/) since 2010. The high renewable energy content in the energy mix causes electricity prices to be more volatile, which makes Germany an attractive location for the use of VPPs. We obtained real-world trip data from Daimlers carsharing service Car2Go[fn::https://www.car2go.com] and electricity market data from European power exchange EPEX SPOT[fn::https://www.epexspot]. Additionally we collected data from the German electricity market operator regelleistung.net[fn::https://www.regelleistungen.net].
-
-[fn:energiewende] citetitle:energiewende2010, cite:energiewende2010.
+We chose to embed our research in the German carsharing and electricity market. Germany has a comparably high share of renewables in its energy mix and is pushing for a energy turnaround[fn:1] (German: /Energiewende/) since 2010. The high renewable energy content in the energy mix causes electricity prices to be more volatile, which makes Germany an attractive location for the use of VPPs. We obtained real-world trip data from Daimlers carsharing service Car2Go[fn:2] and electricity market data from European power exchange EPEX SPOT[fn:3]. Additionally we collected data from the German electricity market operator regelleistung.net[fn:4].
 
 ** Carsharing Fleets of Electric Vehicles
 
@@ -185,41 +183,23 @@ In this research we will use bidding data from the German secondary reserve mark
 # TODO: Explain TSO?
 #+CAPTION: List of Bids of the German Secondary Reserve Market label:operating-reserve-data
 #+ATTR_LATEX: :environment longtable :align c|ccccc :placement [hp]
-|---------------------+------------------------------+-------------------------------+---------------+-----------------+------------------|
-|---------------------+------------------------------+-------------------------------+---------------+-----------------+------------------|
-| Product[fn:product] | Capacity Price[fn:cap-price] | Energy Price[fn:energy-price] | Payment       | Offered[fn:cap] | Accepted[fn:cap] |
-|---------------------+------------------------------+-------------------------------+---------------+-----------------+------------------|
-| NEG-HT              |                            0 |                           1.1 | TSO to bidder |               5 |                5 |
-| NEG-HT              |                            0 |                           251 | TSO to bidder |              15 |               15 |
-| NEG-HT              |                            0 |                           564 | TSO to bidder |              22 |               22 |
-| ...                 |                          ... |                           ... | ...           |             ... |              ... |
-| NEG-NT              |                            0 |                          21.9 | Bidder to TSO |               5 |                5 |
-| NEG-NT              |                            0 |                          22.4 | Bidder to TSO |               5 |                5 |
-| ...                 |                          ... |                           ... | ...           |             ... |              ... |
-| POS-NT              |                        696.6 |                          1200 | TSO to bidder |               5 |                5 |
-| POS-NT              |                       717.12 |                          1210 | TSO to bidder |              10 |                7 |
-|---------------------+------------------------------+-------------------------------+---------------+-----------------+------------------|
-|---------------------+------------------------------+-------------------------------+---------------+-----------------+------------------|
-
-[fn:product] NEG-NT = Product code for negative secondary control reserve to be
-provided between the hours of 00:00h and 08:00h as well as between 20:00h and
-24:00h from Monday through Friday as well as all day on Saturday, Sunday and public holidays
-applicable to all of Germany
-POS-HT = Product code for positive secondary control reserve to be provided between the hours of 08:00h and 20:00h from
-Monday through Friday.
-[fn:cap-price] Capacity prices are in given in
-#+BEGIN_EXPORT latex
-\euro{}/MW.
-#+END_EXPORT
-[fn:energy-price] Energy prices are in given in
-#+BEGIN_EXPORT latex
-\euro{}/MWh.
-#+END_EXPORT
-[fn:cap] Capacities are given in MW.
-
-# Todo: Include market volume, etc.
+|---------------+----------------------+--------------------+---------------+---------------+----------------|
+|---------------+----------------------+--------------------+---------------+---------------+----------------|
+| Product[fn:5] | Capacity Price[fn:6] | Energy Price[fn:7] | Payment       | Offered[fn:8] | Accepted[fn:8] |
+|---------------+----------------------+--------------------+---------------+---------------+----------------|
+| NEG-HT        |                    0 |                1.1 | TSO to bidder |             5 |              5 |
+| NEG-HT        |                    0 |                251 | TSO to bidder |            15 |             15 |
+| NEG-HT        |                    0 |                564 | TSO to bidder |            22 |             22 |
+| ...           |                  ... |                ... | ...           |           ... |            ... |
+| NEG-NT        |                    0 |               21.9 | Bidder to TSO |             5 |              5 |
+| NEG-NT        |                    0 |               22.4 | Bidder to TSO |             5 |              5 |
+| ...           |                  ... |                ... | ...           |           ... |            ... |
+| POS-NT        |                696.6 |               1200 | TSO to bidder |             5 |              5 |
+| POS-NT        |               717.12 |               1210 | TSO to bidder |            10 |              7 |
+|---------------+----------------------+--------------------+---------------+---------------+----------------|
+|---------------+----------------------+--------------------+---------------+---------------+----------------|
 *** Continuous Intraday Spot Market
-We will embed this research in the EPEX Spot Intraday Continuous market. The data has been provided by ProCom[fn::https://procom-energy.de/] and encompasses data of order books and executed trades from 01.06.2016 till 01.01.2018.
+We will embed this research in the EPEX Spot Intraday Continuous market. The data has been provided by ProCom[fn:9] and encompasses data of order books and executed trades from 01.06.2016 till 01.01.2018.
 As displayed in Table ref:spot-market-sample-data trades can have a very short lead time before delivery. Electricity products are: 30-minute contracts, hourly contracts and block contracts can be traded. Participants can submit limit orders at any time during the trading window and equally change or withdraw the order at any time before the order is accepted. Limit orders are specified as quantity/price pairs. When an order to buy (bids) and an order to sell (asks) is matched the trade will get executed. The order book is visible to all participants, hence it is known which unmatched orders exists at the time of interest.
 
 #+BEGIN_EXPORT latex
@@ -227,40 +207,35 @@ As displayed in Table ref:spot-market-sample-data trades can have a very short l
 #+END_EXPORT
 #+CAPTION: List of Trades of the German Secondary Reserve Market label:spot-market-sample-data
 #+ATTR_LATEX: :float sideways :align c|cccccccc :placement [hp]
-|---------------------+---------+---------------------------+-----------------------+------------+-------------+---------------+---------+--------------|
-|---------------------+---------+---------------------------+-----------------------+------------+-------------+---------------+---------+--------------|
-| Exec time           |      ID | Unit price[fn:unit-price] | Quantity[fn:quantity] | Buyer area | Seller area | Delivery date | Product | Product time |
-|---------------------+---------+---------------------------+-----------------------+------------+-------------+---------------+---------+--------------|
-| 2017-12-04 06:54:55 | 8031392 |                      5100 |                  5500 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:53:26 | 8031391 |                      5900 |                 10000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:53:26 | 8031390 |                      5890 |                 10000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:53:15 | 8031389 |                      5230 |                  7000 | 50Hertz    | 50Hertz     |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:53:13 | 8031386 |                      5900 |                   500 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:53:13 | 8031387 |                      5100 |                  3600 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:53:13 | 8031388 |                      5200 |                  1400 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:53:02 | 8031385 |                      5890 |                 11000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:52:38 | 8031380 |                      6000 |                 10000 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:52:38 | 8031381 |                      5750 |                  8000 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:52:38 | 8031382 |                      5800 |                  2000 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:52:38 | 8031383 |                      5890 |                  4000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:52:38 | 8031384 |                      6000 |                  4000 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:52:27 | 8031379 |                      5230 |                  8000 | 50Hertz    | 50Hertz     |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:51:33 | 8031378 |                      6600 |                  5000 | TransnetBW | TransnetBW  |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:51:28 | 8031377 |                      5400 |                  8000 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:51:24 | 8031376 |                      5400 |                  7000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:49:34 | 8031375 |                      5100 |                  4000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:49:26 | 8031374 |                      5400 |                  5000 | 50Hertz    | 50Hertz     |    2017-12-04 | H       |        08-09 |
-| 2017-12-04 06:49:23 | 8031373 |                      5510 |                  8000 | 50Hertz    | 50Hertz     |    2017-12-04 | H       |        08-09 |
-|---------------------+---------+---------------------------+-----------------------+------------+-------------+---------------+---------+--------------|
-|---------------------+---------+---------------------------+-----------------------+------------+-------------+---------------+---------+--------------|
+|---------------------+---------+-------------------+-----------------+------------+-------------+---------------+---------+--------------|
+|---------------------+---------+-------------------+-----------------+------------+-------------+---------------+---------+--------------|
+| Exec time           |      ID | Unit price[fn:10] | Quantity[fn:11] | Buyer area | Seller area | Delivery date | Product | Product time |
+|---------------------+---------+-------------------+-----------------+------------+-------------+---------------+---------+--------------|
+| 2017-12-04 06:54:55 | 8031392 |              5100 |            5500 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:53:26 | 8031391 |              5900 |           10000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:53:26 | 8031390 |              5890 |           10000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:53:15 | 8031389 |              5230 |            7000 | 50Hertz    | 50Hertz     |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:53:13 | 8031386 |              5900 |             500 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:53:13 | 8031387 |              5100 |            3600 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:53:13 | 8031388 |              5200 |            1400 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:53:02 | 8031385 |              5890 |           11000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:52:38 | 8031380 |              6000 |           10000 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:52:38 | 8031381 |              5750 |            8000 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:52:38 | 8031382 |              5800 |            2000 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:52:38 | 8031383 |              5890 |            4000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:52:38 | 8031384 |              6000 |            4000 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:52:27 | 8031379 |              5230 |            8000 | 50Hertz    | 50Hertz     |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:51:33 | 8031378 |              6600 |            5000 | TransnetBW | TransnetBW  |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:51:28 | 8031377 |              5400 |            8000 | Amprion    | Amprion     |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:51:24 | 8031376 |              5400 |            7000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:49:34 | 8031375 |              5100 |            4000 | TenneT     | TenneT      |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:49:26 | 8031374 |              5400 |            5000 | 50Hertz    | 50Hertz     |    2017-12-04 | H       |        08-09 |
+| 2017-12-04 06:49:23 | 8031373 |              5510 |            8000 | 50Hertz    | 50Hertz     |    2017-12-04 | H       |        08-09 |
+|---------------------+---------+-------------------+-----------------+------------+-------------+---------------+---------+--------------|
+|---------------------+---------+-------------------+-----------------+------------+-------------+---------------+---------+--------------|
 #+BEGIN_EXPORT latex
 }
 #+END_EXPORT
-[fn:unit-price] Unit prices are given in
-#+BEGIN_EXPORT latex
-\euro{}c/MWh.
-#+END_EXPORT
-[fn:quantity] Quantities are given in kW.
 
 * Literature Review (1-2 Pages)
 # TODO: Scrap
@@ -377,3 +352,43 @@ Draw upon well researched statistical and machine learning methods: statistical 
  Specially attention is paid to related work, data, methods, and analysis, and potential contribution/conclusion.
 
 \printbibliography
+
+* Footnotes
+
+[fn:1] citetitle:energiewende2010, cite:energiewende2010.
+
+[fn:2] https://www.car2go.com
+
+[fn:3] https://www.epexspot
+
+[fn:4] https://www.regelleistungen.net
+
+[fn:5] NEG-NT = Product code for negative secondary control reserve to be
+provided between the hours of 00:00h and 08:00h as well as between 20:00h and
+24:00h from Monday through Friday as well as all day on Saturday, Sunday and public holidays
+applicable to all of Germany.
+POS-HT = Product code for positive secondary control reserve to be provided between the hours of 08:00h and 20:00h from
+Monday through Friday.
+
+[fn:6] Capacity prices are in given in
+#+BEGIN_EXPORT latex
+\euro{}/MW.
+#+END_EXPORT
+
+[fn:7] Energy prices are in given in
+#+BEGIN_EXPORT latex
+\euro{}/MWh.
+#+END_EXPORT
+
+[fn:8] Capacities are given in MW.
+
+# Todo: Include market volume, etc.
+
+[fn:9] https://procom-energy.de/
+
+[fn:10] Unit prices are given in
+#+BEGIN_EXPORT latex
+\euro{}c/MWh.
+#+END_EXPORT
+
+[fn:11] Quantities are given in kW.
