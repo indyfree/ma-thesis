@@ -198,6 +198,7 @@ In this research we will use bidding data from the German secondary reserve mark
 | POS-NT        |               717.12 |               1210 | TSO to bidder |            10 |              7 |
 |---------------+----------------------+--------------------+---------------+---------------+----------------|
 |---------------+----------------------+--------------------+---------------+---------------+----------------|
+
 *** Continuous Intraday Spot Market
 We will embed this research in the EPEX Spot Intraday Continuous market. The data has been provided by ProCom[fn:9] and encompasses data of order books and executed trades from 01.06.2016 till 01.01.2018.
 As displayed in Table ref:spot-market-sample-data trades can have a very short lead time before delivery. Electricity products are: 30-minute contracts, hourly contracts and block contracts can be traded. Participants can submit limit orders at any time during the trading window and equally change or withdraw the order at any time before the order is accepted. Limit orders are specified as quantity/price pairs. When an order to buy (bids) and an order to sell (asks) is matched the trade will get executed. The order book is visible to all participants, hence it is known which unmatched orders exists at the time of interest.
@@ -205,7 +206,7 @@ As displayed in Table ref:spot-market-sample-data trades can have a very short l
 #+BEGIN_EXPORT latex
 {\captionsetup[table]{aboveskip=0.5cm}
 #+END_EXPORT
-#+CAPTION: List of Trades of the German Secondary Reserve Market label:spot-market-sample-data
+#+CAPTION: List of Trades of the EPEX Spot Intraday Continous Market label:spot-market-sample-data
 #+ATTR_LATEX: :float sideways :align c|cccccccc :placement [hp]
 |---------------------+---------+-------------------+-----------------+------------+-------------+---------------+---------+--------------|
 |---------------------+---------+-------------------+-----------------+------------+-------------+---------------+---------+--------------|
