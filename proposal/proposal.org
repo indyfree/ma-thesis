@@ -270,20 +270,15 @@ As displayed in Table ref:spot-market-sample-data trades can have a very short l
 
 parencite:adomavicius09_desig_intel_softw_agent_auction
 
-** Electric Vehicles, Virtual Power Plants, V2G
+# Cars
+** Smart Charging and Discharging Electric Vehicles Fleets, Virtual Power Plants, V2G
 textcite:peterson10_econom_using_plug_in_hybrid
-
-cite:mashhour11_biddin_strat_virtual_power_plant_1
-
-cite:mashhour11_biddin_strat_virtual_power_plant_2
 
 cite:mak13_infras_plann_elect_vehic_with_batter_swapp
 
 cite:kim12_carbit
 
 cite:kara15_estim_benef_elect_vehic_smart
-
-cite:he16_optim_biddin_strat_batter_storag
 
 cite:fridgen2014value
 
@@ -295,24 +290,38 @@ cite:kahlen17_fleet
 
 cite:kahlen15_aggreg_elect_cars_sustain_virtual_power_plant
 
-** DSS, Intelligent Agents, State of the Art ML Techniques
-cite:avci18_manag_elect_price_model_risk
-** Carsharing (?)
-cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities
-** More Papers
-*** Main Papers
-
 cite:sioshansi12_or_forum_model_impac_elect
 
 cite:valogianni2014effective
 
+# Non-Cars
+** Using Intelligent Agents for Virtual Power Plants and Electricity Trading
+
 cite:vytelingum2011theoretical
 
+
+*** Multiple Markets
+cite:he16_optim_biddin_strat_batter_storag
+
+cite:mashhour11_biddin_strat_virtual_power_plant_1
+
+cite:mashhour11_biddin_strat_virtual_power_plant_2
+
+
+** Electricity Forecasting
+cite:avci18_manag_elect_price_model_risk
+** Carsharing
+cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities
 cite:wagner16_in_free_float
+** More Papers
+*** Main Papers
 
-cite:wolfson11_better_place
 
-cite:zhou16_elect_tradin_negat_prices
+
+
+
+
+cite:zhou15_elect_tradin_negat_prices
 *** Touching Papers and Conference Papers
 cite:ketter13_power_tac
 
