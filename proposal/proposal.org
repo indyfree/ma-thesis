@@ -71,7 +71,7 @@ the use of intelligent agent trading strategy, in which an agent learns from his
 and adjust to its current environment.
 
 The following tasks will be performed by the agent in real time: 1) /Allocation of plugged in
-EVs to idle or VPP state/, 2) /Learn the optimum of VPP portfolio
+EVs to idle or VPP state/, 2) /Learn the optimal VPP portfolio
 composition/ and 3) /Place bids and asks on corresponding electricity markets with an
 integrated trading strategy/.
 
