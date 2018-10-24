@@ -199,9 +199,10 @@ In this research we will use bidding data from the German secondary reserve mark
 |---------------+----------------------+--------------------+---------------+---------------+----------------|
 |---------------+----------------------+--------------------+---------------+---------------+----------------|
 
-*** Continuous Intraday Spot Market
+*** Intraday Continuous Spot Market
 We will embed this research in the EPEX Spot Intraday Continuous market. The data has been provided by ProCom[fn:9] and encompasses data of order books and executed trades from 01.06.2016 till 01.01.2018.
-As displayed in Table ref:spot-market-sample-data trades can have a very short lead time before delivery. Electricity products are: 30-minute contracts, hourly contracts and block contracts can be traded. Participants can submit limit orders at any time during the trading window and equally change or withdraw the order at any time before the order is accepted. Limit orders are specified as quantity/price pairs. When an order to buy (bids) and an order to sell (asks) is matched the trade will get executed. The order book is visible to all participants, hence it is known which unmatched orders exists at the time of interest.
+# TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
+As displayed in Table ref:spot-market-sample-data, trades can have a very short lead time before delivery. Electricity products are: 30-minute contracts, hourly contracts and block contracts. The products can be traded up until 30 minutes before delivery (5 minutes, when in the same control area). Participants can submit limit orders at any time during the trading window and equally change or withdraw the order at any time before the order is accepted. Limit orders are specified as quantity/price pairs. When an order to buy (bids) and an order to sell (asks) is matched the trade will get executed. The order book is visible to all participants, hence it is known which unmatched orders exists at the time of interest.
 
 #+BEGIN_EXPORT latex
 {\captionsetup[table]{aboveskip=0.5cm}
@@ -244,10 +245,18 @@ As displayed in Table ref:spot-market-sample-data trades can have a very short l
 # Agent Theory/ML: Application and comparison of Advanced ML Models (for spatial time-series forecasting)
 # Auction Theory: Integrated trading strategy to participate in multiple markets
 
+1. Agent based sustainable society
+
+2. Electric Vehicles, Smart Charging and Virtual Power Plants
+
+3. Electricity Price Forecasting
+
+
 - IS can help with climate change
 - Use IS to align organizational goals with sustainability (carsharing and CO_2 emission) with DSS (Doing good by doing well)
 - Use EV Fleets to align mobility goals with battery storage goals
 - Demonstrate this with intelligent agent in an simulation similar to PowerTAC
+**
 
 ** Smart Charging
 - Charging EVs at the same time can cause issues in the Grid. Overload transformers and substation parencite:kim12_carbit,sioshansi12_or_forum_model_impac_elect
