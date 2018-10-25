@@ -18,12 +18,14 @@
 # Title & TOC
 #+OPTIONS: title:nil toc:nil
 #+LATEX_HEADER: \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
+#+LATEX_HEADER: \pagenumbering{roman}
 
 #+INCLUDE: "~/uni/ma-thesis/proposal/titlepage.tex" export latex
 
 \tableofcontents
 \clearpage
 
+#+LATEX: \pagenumbering{arabic}
 * Introduction
 ** Research Motivation
 The global climate change is one biggest challenges of our time. Carbon
@@ -331,24 +333,9 @@ Draw upon well researched statistical and machine learning methods: statistical 
  capacity it has available.
 ** Evaluation: Event-based simulation using real-world data
 -Using real-world data from German electricity markets and trip data from a carsharing provider.
-* Research Plan (0.5 Page)
 
-
-
-* Wolf Requirements
-** MA Proposal
-
-- The proposal depicts the main background and motivation of your research topic.
-- Based on the proposal, a concise research question is to be derived and formulated.
-- The methodological approach shall be outlined.
-- The suggested methods and algorithms shall be listed.
-- Please give an overview on the respective data.
-- The proposal already has to include relevant literature references.
-- Please note that special focus shall be placed on the research question and the respective approach.
-** PhD Proposal
- Specially attention is paid to related work, data, methods, and analysis, and potential contribution/conclusion.
-
-\printbibliography
+#+LATEX: \clearpage
+#+LATEX: \printbibliography
 
 * Footnotes
 
@@ -379,7 +366,6 @@ Monday through Friday.
 
 [fn:8] Capacities are given in MW.
 
-# Todo: Include market volume, etc.
 
 [fn:9] https://procom-energy.de/
 
@@ -389,3 +375,4 @@ Monday through Friday.
 #+END_EXPORT
 
 [fn:11] Quantities are given in kW.
+
