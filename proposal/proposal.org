@@ -1,4 +1,4 @@
-#+TITLE: Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants in Smart Sustainable Electricity Markets: A ML-based Intelligent Agent Approach
+#+TITLE: Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants in Smart Sustainable Electricity Markets: A Reinforcement Learning Approach
 #+AUTHOR:Tobias Richter
 
 # Formatting
