@@ -240,10 +240,6 @@ As displayed in Table ref:spot-market-sample-data, trades can have a very short 
 #+END_EXPORT
 
 * Literature Review (1-2 Pages)
-# TODO: Scrap
-# Agent Theory: Dynamically optimize the allocation of EVs to different types of VPP using recurrent neural networks.
-# Agent Theory/ML: Application and comparison of Advanced ML Models (for spatial time-series forecasting)
-# Auction Theory: Integrated trading strategy to participate in multiple markets
 
 1. Agent based sustainable society
 
@@ -258,32 +254,13 @@ As displayed in Table ref:spot-market-sample-data, trades can have a very short 
 - Demonstrate this with intelligent agent in an simulation similar to PowerTAC
 **
 
-** Smart Charging
-- Charging EVs at the same time can cause issues in the Grid. Overload transformers and substation parencite:kim12_carbit,sioshansi12_or_forum_model_impac_elect
-- Solution in prev. literature: Smart charging: Charge when the list is less congested, reduce peak demands
-- EV fleets are given financial incentive, because the price is lower(?) parencite:valogianni14_effec_manag_elect_vehic_storag
-- parencite:kara15_estim_benef_elect_vehic_smart Smart scheduling would result in even lower electricity costs for consumers
-- Emphasize need for research on charging from the grid.
+** Smart Charging and Vehicle-to-Grid
+Charging whole EV fleets at the same time in the same area can overload transformers and substations, which causes severe problems to the grid parencite:kim12_carbit,sioshansi12_or_forum_model_impac_elect. A proposed solution is smart charging: EVs get charged when the grid is less congested to reduce peak demand. textcite:valogianni14_effec_manag_elect_vehic_storag find that using intelligent agents to facilitate smart charging EVs can be substantially beneficial for households. textcite:kara15_estim_benef_elect_vehic_smart present results, where smart charging reduced electricity bills for users of public EV charging stations in California.
+An extension of the smart charging concept is Vehicle-to-Grid (V2G), where enabled EVs can discharge their batteries back into to the grid. textcite:schill11_elect_vehic_imper_elect_market find that EVs can be beneficial for consumer electricity prices when they are used as storage. Similar results were shown by
+textcite:reichert10_consid_highl_effic_bidir_batter,peterson10_econom_using_plug_in_hybrid, but they point out that battery technology and battery costs are a crucial factor. textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor show that V2G can profitable, especially when there is a high variability in electricity prices on the market. They find that a shorter interval between sale and physical delivery increases the benefits.
 
+Successful trading strategies to participate on multiple markets have been found by textcite:mashhour11_biddin_strat_virtual_power_plant_2 using stationary storage. The authors use VPPs to participate on the spinning reserve market and day-ahead market at the same time. Similar research has been done by textcite:he16_optim_biddin_strat_batter_storag, taking battery life cycle into account, which proves to be a decisive factor. In this thesis, we aim to jointly participate on the operating reserve and spot market with non-stationary storage, while considering battery life cycle as well. Following textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor findings, we choose the intraday continuous market over the day-ahead market, as it has the lowest reaction time of spot markets.
 
-- parencite:fridgen14
-
-** Vehicle-to-Grid
-- Extension of the Smart Charging concept
-- Shown succesfully with stationary storage parencite:mashhour11_biddin_strat_virtual_power_plant_2
-- parencite:he16_optim_biddin_strat_batter_storag Battery life cycles, important.
-- Also included in this study.
-
-- V2G profitable parencite:reichert10_consid_highl_effic_bidir_batter,peterson10_econom_using_plug_in_hybrid, but battery costs crucial
-
-** Dynamic pricing using batteries
-- parencite:vytelingum11_theor_pract_found_large_scale show that dynamic pricing for household is profitable
-- Dynamic pricing in industries also profitable parencite:zhou15_elect_tradin_negat_prices
--
-** General EV profitability when used as Grid Storage
-- parencite:schill11_elect_vehic_imper_elect_market find EVS are profitable for consumer electricity prices when used as Storage (V2G)
-- parencite:tomic07_using_fleet_elect_drive_vehic_grid_suppor  V2G profitable, especially when high variablity in electricity prices
-  - Shorter interval between sale and delivery, the larger the benefits
 
 ** Electricity Brokers
 - Studies have assumption that car owners or household can trade on wholesale markets, not realistic due to minimum capacity requirements
