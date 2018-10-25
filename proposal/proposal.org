@@ -22,10 +22,10 @@
 
 #+INCLUDE: "~/uni/ma-thesis/proposal/titlepage.tex" export latex
 
-\tableofcontents
-\clearpage
-
+#+LATEX: \tableofcontents
+#+LATEX: \clearpage
 #+LATEX: \pagenumbering{arabic}
+
 * Introduction
 ** Research Motivation
 The global climate change is one biggest challenges of our time. Carbon
