@@ -123,7 +123,7 @@ From a scientific perspective this research is relevant to the stream of agent-b
 
 Similar research has been carried out by textcite:kahlen18_elect_vehic_virtual_power_plant_dilem and textcite:kahlen17_fleet. In their research the authors concentrate on participating in one type of electricity market at a time. As proposed by citeauthor:kahlen18_elect_vehic_virtual_power_plant_dilem we will take this research further and use the EV VPPs to act on multiple types of electricity markets simultaneously. Moreover we aim to use sophisticated machine learning methods (i.e. recurrent neural networks, ensemble learning) to carry out more accurate forecasts of rental demand and dynamically learn allocation ratios to the individual markets.
 
-textcite:he16_optim_biddin_strat_batter_storag and textcite:mashhour11_biddin_strat_virtual_power_plant_2,mashhour11_biddin_strat_virtual_power_plant_1 researched on optimal bidding strategies for using VPPs to jointly bid on multiple markets. The authors use stationary storage to participate in day-ahead and spinning-reserve markets. Contrarily, we aim to use non-stationary storage (i.e. EV batteries) to participate in the continuous intraday market and the secondary reserve market (known as real-time market in the US).
+textcite:he16_optim_biddin_strat_batter_storag and textcite:mashhour11_biddin_strat_virtual_power_plant_2,mashhour11_biddin_strat_virtual_power_plant_1 conducted research on optimal bidding strategies for using VPPs to jointly bid on multiple markets. The authors use stationary storage to participate in day-ahead and spinning-reserve markets. Contrarily, we aim to use non-stationary storage (i.e. EV batteries) to participate in the continuous intraday market and the secondary reserve market (known as real-time market in the US).
 
 ** Relevance to Society
 
@@ -311,7 +311,7 @@ al. (2004). In Figure ref:research-design the proposed research design is depict
 We will place a special focus on the used methodologies, the developed artifact
 and the evaluation of the results.
 Drawing from the /Knowledge Base/, multiple methods will be compared and evaluated against each
-other and thus emphasising /Research Rigor/. Considering /Business Needs/, we
+other and thus emphasizing /Research Rigor/. Considering /Business Needs/, we
 will develop an /Artifact/ in form of a decision support system. Evaluating
 the results with real-world data with a simulation will make sure the /Artifact/
 is /applicable in the appropriate environment/ (i.e. carsharing fleets).
