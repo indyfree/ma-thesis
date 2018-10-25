@@ -302,13 +302,29 @@ As displayed in Table ref:spot-market-sample-data, trades can have a very short 
 - EV either committed to be charged or discharged or free for renting. In reality trips are more spontaneous
 - Offering EV capacity for control reserves not shown in business setting
 - Other than parencite:kahlen18_elect_vehic_virtual_power_plant_dilem,kahlen17_fleet this has not been done yet.
-- Kahlen present very conversative results and propose the combination of multiple markets in future work. In their approach the VPPs are mainly used to buy from the markets when electricity is cheap and thus charge their EVs basically for free (Citatation). V2G is almost never used.
+- Kahlen present very conversative results and propose the combination of multiple markets in future work. In their approach the VPPs are mainly used to buy from the markets when electricity is cheap and thus charge their EVs basically for free (Citation). V2G is almost never used.
 - We will build on Kahlen results and introduce an integrated bidding strategy. We will draw on previous results from
 cite:he16_optim_biddin_strat_batter_storag,mashhour11_biddin_strat_virtual_power_plant_2 and act on multiple markets.
 
-** Electricity Forecasting
-- cite:avci18_manag_elect_price_model_risk
-# More papers from HD
+** Electricity Price Forecasting and Neural Networks
+In review papers of electricity price forecasting techniques Neural Networks (NN) play an essential role. textcite:aggarwal09_elect_price_forec_dereg_market found that 17 papers, which have published in relevant journals at the time, use NN models (including recurrent NN, and fuzzy NN) to forecast electricity prices. In comparison only 12 papers covered time-series and causal models. In a more recent review paper, textcite:weron14_elect_price_forec consider disjoint sets of papers, where 95 papers belonging in the 'neural network' category and 100 in the 'statistical time series' category. This shows the relevance of advanced AI and deep learning methods for electricity markets. To the best of our knowledge, these methods have not been considered for bidding on multiple electricity markets with EV fleets yet, as we aim to do. Another promising approach is the use of ensemble forecasting, where multiple forecasts are evaluated together to provide less risky predictions parencite:avci18_manag_elect_price_model_risk.
+
+** Reinforcement Learning in Smart Grids
+Previous research shows that intelligent agents equipped with Reinforcement Learning (RL) methods can successfully take action in the smart grid. textcite:reddy11_strat,reddy11_learn_behav_multip_auton_agent show that autonomous broker agents parencite:ketter13_power_tac, which aggregate distributed electricity producers and operate on different electricity markets, can learn their strategies using RL. textcite:peters13_reinf_learn_approac_to_auton build on that work and further enhance the method, by learning over larger state spaces to accommodate arbitrary economic signals. This is especially beneficial because future smart markets might change in their structure and intelligent agents should adapt to a variety of market structures and conditions.
+textcite:valogianni14_effec_manag_elect_vehic_storag adopt RL methods to learn electricity consumption behavior of households. The authors implement the methods in intelligent agents to smart charge EVs more effectively. textcite:vandael15_reinf_learn_heuris_ev_fleet use RL to learn collective EV fleet charging behavior to profitably purchase electricity on the day-ahead market.
+
+
+RL is a perfect solution to learn the
+Problem for VPP composition, no time series where we can learn from.
+- Reward Function: Overall profitability of the Fleet
+- States: Predicted rental demand (i.e. battery capacity), Electricity prices on both markets
+- Actions: Allocate capacity to VPP types.
+Evaluated against a benchmark model, where the composition of VPP is just an optimization function of
+
+# It is imperative that the design of an electricity broker agent can adapt to a wide variety of market structures and conditions. This is because there is considerable variability in the structure that a future Smart Electricity Market might have, and also because such flexibility is generally beneficial for high performance in dynamic environments.
+
+
+# Reinforcement Learning (RL) offers a suitable framework to address the challenges faced by a broker acting in environments with unknown dynamics, and with the objective to collect the highest net present value over all current and future rewards
 
 * Research Design (1-2 Pages)
 The research will be structured using the IS design science principles proposed citeauthor:hevner04_desig_scien_infor_system_resear
