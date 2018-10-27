@@ -39,10 +39,10 @@ on the weather; under- and oversupplies occur and destabilize the grid.
 # Connection, Also Smart Sustainable Markets?
 # The future of mobility is autonomous, connected, electric and shared.
 
-Virtual power plants (VPP) play an important role in stabilizing the grid.
+Virtual Power Plants (VPP) play an important role in stabilizing the grid.
 VPPs aggregate distributed power sources to consume and produce electricity when
 it is needed. Carsharing companies operate large, centrally managed fleets of
-electric vehicles (EV) in major cities around the world. These EV fleets can be
+Electric Vehicles (EV) in major cities around the world. These EV fleets can be
 turned into VPPs, using their batteries as combined electricity storage.
 In this way, EV fleets can offer balancing services to the power grid or trade
 electricity on the open markets for arbitrage purposes.
@@ -63,7 +63,7 @@ physical delivery.
 We state, that participating in operating reserve markets and spot markets at the same time
 can mitigate risks and increase profits. In this research we propose a portfolio optimizing strategy, in which the best
 composition of the VPP portfolio, consisting of operating reserve
-VPPs and spot market VPPs, will be dynamically learned using a reinforcement learning (RL) approach.
+VPPs and spot market VPPs, will be dynamically learned using a /Reinforcement Learning/ (RL) approach.
 An intelligent agent using RL can adapt to changing electricity price levels and customer demands.
 The agent learns from historical data, its current environment and realized profits to adjust its trading strategy dynamically.
 
@@ -88,7 +88,7 @@ They build upon another and will be sequentially addressed during this research:
   respective markets will maximize profits while reducing the risk of foregone
   customer profits.
 
-  # TODO: Introduce specific markets
+# TODO: Introduce specific markets
 3. /How does an integrated bidding strategy look like, which considers trading electricity
     the secondary operating reserve market and the continuous intraday market simultaneously?/
 
@@ -116,7 +116,7 @@ This will be done using real-world data from German electricity markets and trip
 
 From a scientific perspective, this research is relevant to the stream of agent-based decision making in smart markets parencite:bichler10_desig_smart_market,peters13_reinf_learn_approac_to_auton. We will contribute to the body of Design Science in Information Systems parencite:hevner04_desig_scien_infor_system_resear and draw upon work, which has been done in multitude of research areas: Virtual Power Plants in smart electricity markets parencite:pudjianto07_virtual_power_plant_system_integ, carsharing as a new way of sustainable mobility and advanced machine learning and AI methods for forecasting and prediction.
 
-Similar research has been carried out by textcite:kahlen18_elect_vehic_virtual_power_plant_dilem and textcite:kahlen17_fleet. In their research, the authors concentrate on participating in one type of electricity market at a time. As proposed by citeauthor:kahlen18_elect_vehic_virtual_power_plant_dilem we will take this research further and use the EV VPPs to act on multiple types of electricity markets simultaneously. Moreover, we aim to use sophisticated machine learning methods (i.e. reinforcement learning, neural networks, ensemble learning) to carry out more accurate forecasts of rental demand and dynamically learn allocation ratios to the individual markets.
+Similar research has been carried out by textcite:kahlen18_elect_vehic_virtual_power_plant_dilem and textcite:kahlen17_fleet. In their papers, the authors concentrate on participating in one type of electricity market at a time. As proposed by citeauthor:kahlen18_elect_vehic_virtual_power_plant_dilem we will take this research further and use the EV VPPs to act on multiple types of electricity markets simultaneously. Moreover, we aim to use sophisticated machine learning methods (i.e. reinforcement learning, neural networks, ensemble learning) to carry out more accurate forecasts of rental demand and dynamically learn allocation ratios to the individual markets.
 
 textcite:he16_optim_biddin_strat_batter_storag and textcite:mashhour11_biddin_strat_virtual_power_plant_2,mashhour11_biddin_strat_virtual_power_plant_1 conducted research on optimal bidding strategies for using VPPs to jointly bid on multiple markets. The authors use stationary storage to participate in day-ahead and spinning-reserve markets. Contrarily, we aim to use non-stationary storage (i.e. EV batteries) to participate in the continuous intraday market and the secondary reserve market (known as real-time market in the US).
 
@@ -136,7 +136,7 @@ We chose to embed our research in the German carsharing and electricity market. 
 ** Carsharing Fleets of Electric Vehicles
 
 We think that the future of mobility will be electric, shared, smart and eventually autonomous. Carsharing companies are already contributing to the first two points by operating large fleets of electric vehicles. This research addresses the third point: Using EV fleets to smartly participate on electricity markets, without compromising customer mobility.
-Carsharing providers like Daimler and BMW operate their carsharing fleets in a free-float model, where customers can pick up and drop vehicles at any place withing the operating zone of the provider. Customers pay by the minute and are offered incentives to park EVs at charging stations. Analyzing free float trip data is substantially more difficult than fixed trip data. Individual trips have to be reconstructed using the GPS data of the cars and predicting the rental demand is a complex matter. Demand patterns differ depending at which place and at what time the EVs are parked.
+Carsharing providers like Daimler and BMW operate their carsharing fleets in a free-float model, where customers can pick up and drop vehicles at any place withing the operating zone of the provider. Customers pay by the minute and are offered incentives to park EVs at charging stations. Analyzing free-float trip data is substantially more difficult than fixed trip data. Individual trips have to be reconstructed using the GPS data of the cars and predicting the rental demand is a complex matter. Demand patterns differ depending at which place and at what time the EVs are parked.
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table ref:car2go-sample-data the data contain spatio-temporal attributes, such as timestamp, coordinates and address of the EVs. Additionally status attributes of the interior and exterior are given, the relative state of charge and information whether the EV is plugged into one of the 200 charging stations in Stuttgart.
 
 #+CAPTION: Raw Car2Go Trip Data from Stuttgart label:car2go-sample-data
@@ -175,7 +175,7 @@ Carsharing Fleets can offer the capacity of their EV batteries on multiple marke
 # TODO: Include market volume, etc.
 # TODO: New German Mischpreisverfahren.
 *** Secondary Operating Reserve Market
-In this research we will use bidding data from the German secondary reserve market between 01.06.2016 and 01.01.2018. The data contain weekly lists of anonymized bids, where the electricity product, the offered capacity, the capacity price and the energy price of the placed bids are listed. As also negative prices are allowed, the payment direction is included as well. Moreover we find information about the amount of electricity accepted, i.e. either partially or fully. Bids which weren't accepted are not listed. An excerpt of the data can be found in Table ref:operating-reserve-data.
+In this research we will use bidding data from the German secondary reserve market between 01.06.2016 and 01.01.2018. The data contain weekly lists of anonymized bids, where the electricity product, the offered capacity, the capacity price and the energy price of the placed bids are listed. As negative prices are allowed as well, the payment direction is included as well. Moreover we find information about the amount of electricity accepted, i.e. either partially or fully. Bids which weren't accepted are not listed. An excerpt of the data can be found in Table ref:operating-reserve-data.
 
 # TODO: Explain TSO?
 #+CAPTION: List of Bids of the German Secondary Reserve Market label:operating-reserve-data
@@ -237,7 +237,7 @@ We will embed this research in the EPEX Spot Intraday Continuous market. The dat
 
 * Literature Review
 
-** Smart Charging and Vehicle-to-Grid
+** Smart Charging and EV fleets
 
 Charging whole EV fleets at the same time can overload transformers and substations, which causes severe problems to the grid parencite:kim12_carbit,sioshansi12_or_forum_model_impac_elect. A proposed solution is smart charging: To reduce peak demand EVs get charged when the grid is less congested. textcite:valogianni14_effec_manag_elect_vehic_storag find that using intelligent agents to facilitate smart charging, can substantially benefit households. textcite:kara15_estim_benef_elect_vehic_smart present results, where smart charging reduced electricity bills for users of public EV charging stations in California.
 An extension of the smart charging concept is Vehicle-to-Grid (V2G). EVs equipped with V2G devices can discharge their batteries back into to the grid. textcite:schill11_elect_vehic_imper_elect_market find that EVs can be beneficial for consumer electricity prices when they are used as storage. Similar results were shown by
