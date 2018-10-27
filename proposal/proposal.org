@@ -60,16 +60,12 @@ price elasticity, as well as reaction time between contractual agreement and
 physical delivery.
 
 # TODO: Citation needed
-Participating in operating reserve markets and spot markets at the same time
-can mitigate risks and increase profits. Allocating EVs to different types of VPPs, that
-using a reinforcement learning approach.
-
-In this research we propose a portfolio optimizing strategy, in which the best
+We state, that participating in operating reserve markets and spot markets at the same time
+can mitigate risks and increase profits. In this research we propose a portfolio optimizing strategy, in which the best
 composition of the VPP portfolio, consisting of operating reserve
-VPPs and spot market VPPs, will be dynamically learned. To address changing
-electricity price levels and customer demands over time we additionally propose
-the use of an intelligent agent. The agent learns from historical data, its current environment
-and realized profits to adjust its trading strategy dynamically.
+VPPs and spot market VPPs, will be dynamically learned using a reinforcement learning (RL) approach.
+An intelligent agent using RL can adapt to changing electricity price levels and customer demands.
+The agent learns from historical data, its current environment and realized profits to adjust its trading strategy dynamically.
 
 The following tasks will be performed by the agent in real time: 1) /Allocation of plugged in
 EVs to idle or VPP state/, 2) /Learn the optimal VPP portfolio
