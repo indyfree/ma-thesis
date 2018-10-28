@@ -19,7 +19,7 @@
 # Title & TOC
 #+OPTIONS: title:nil toc:nil
 #+LATEX_HEADER: \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
-#+LATEX_HEADER: \pagenumbering{roman}
+#+LATEX_HEADER: \pagenumbering{gobble}
 
 #+INCLUDE: "~/uni/ma-thesis/proposal/titlepage.tex" export latex
 
