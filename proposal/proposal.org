@@ -9,6 +9,17 @@
 #+LATEX_HEADER: \onehalfspacing
 #+OPTIONS: H:4
 
+# Header and Footer
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \pagestyle{fancy}
+#+LATEX_HEADER: \fancyhead{}
+#+LATEX_HEADER: \fancyfoot{}
+#+LATEX_HEADER: \fancyhead[LE,RO]{\leftmark}
+#+LATEX_HEADER: \fancyhead[RE,LO]{T. Richter}
+#+LATEX_HEADER: \fancyfoot[C]{\thepage}
+#+LATEX_HEADER: \renewcommand{\headrulewidth}{0.4pt}
+#+LATEX_HEADER: \renewcommand{\footrulewidth}{0pt}
+
 # Typography
 #+LATEX_HEADER: \usepackage[official]{eurosym}
 
