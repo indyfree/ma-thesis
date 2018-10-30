@@ -157,7 +157,6 @@ In this research, we will use bidding data from the German secondary reserve mar
 |---------------+----------------------+--------------------+---------------+---------------+----------------|
 |---------------+----------------------+--------------------+---------------+---------------+----------------|
 
-*** Intraday Continuous Spot Market
 #+BEGIN_EXPORT latex
 {\captionsetup[table]{aboveskip=0.5cm}
 #+END_EXPORT
@@ -192,6 +191,7 @@ In this research, we will use bidding data from the German secondary reserve mar
 #+BEGIN_EXPORT latex
 }
 #+END_EXPORT
+*** Intraday Continuous Spot Market
 
 # TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
 We choose to use the EPEX Spot Intraday Continuous market in this research. The data have been provided by ProCom GmbH[fn:9] and encompass order books and executed trades from 01.06.2016 until 01.01.2018. As displayed in Table ref:spot-market-sample-data, trades can have a very short lead time before delivery, which is beneficial for our proposed trading strategy. Electricity products are 30-minute contracts, hourly contracts, and block contracts. The products can be traded up until 30 minutes before delivery (5 minutes in the same control area). Participants can submit limit orders at any time during the trading window and equally change or withdraw the order at any time before the order is accepted. Limit orders are specified as quantity/price pairs. When an order to buy (bid) and an order to sell (ask) is matched the trade will get executed. The order book is visible to all participants, hence it is known which unmatched orders exist at the time of interest.
