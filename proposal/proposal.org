@@ -157,9 +157,7 @@ In this research, we will use bidding data from the German secondary reserve mar
 |---------------+----------------------+--------------------+---------------+---------------+----------------|
 |---------------+----------------------+--------------------+---------------+---------------+----------------|
 
-#+BEGIN_EXPORT latex
-{\captionsetup[table]{aboveskip=0.5cm}
-#+END_EXPORT
+#+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
 #+CAPTION: List of Trades of the EPEX Spot Intraday Continous Market label:spot-market-sample-data
 #+ATTR_LATEX: :float sideways :align c|cccccccc :placement [hp]
 |---------------------+---------+-------------------+-----------------+------------+-------------+----------------+--------------+---------------|
@@ -188,9 +186,7 @@ In this research, we will use bidding data from the German secondary reserve mar
 | 2017-12-04 06:49:23 | 8031373 |              5510 |            8000 | 50Hertz    | 50Hertz     | H              |        08-09 |    2017-12-04 |
 |---------------------+---------+-------------------+-----------------+------------+-------------+----------------+--------------+---------------|
 |---------------------+---------+-------------------+-----------------+------------+-------------+----------------+--------------+---------------|
-#+BEGIN_EXPORT latex
-}
-#+END_EXPORT
+#+LATEX:}
 *** Intraday Continuous Spot Market
 
 # TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
@@ -280,23 +276,17 @@ Third, VPPs can lead to a decrease in CO_2 emissions. With an increasing share o
 POS-HT = Positive secondary control reserve to be provided between the hours of 08:00h and 20:00h.
 
 [fn:6] Capacity prices are in given in
-#+BEGIN_EXPORT latex
-\euro{}/MW.
-#+END_EXPORT
+#+LATEX: \euro{}/MW.
 
 [fn:7] Energy prices are in given in
-#+BEGIN_EXPORT latex
-\euro{}/MWh.
-#+END_EXPORT
+#+LATEX: \euro{}/MWh.
 
 [fn:8] Capacities are given in MW.
 
 [fn:9] https://procom-energy.de/
 
 [fn:10] Unit prices are given in
-#+BEGIN_EXPORT latex
-\euro{}c/MWh.
-#+END_EXPORT
+#+LATEX: \euro{}c/MWh.
 
 [fn:11] Quantities are given in kW.
 
