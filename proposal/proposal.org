@@ -15,7 +15,7 @@
 #+LATEX_HEADER: \fancyhead{}
 #+LATEX_HEADER: \fancyfoot{}
 #+LATEX_HEADER: \fancyhead[LE,RO]{\leftmark}
-#+LATEX_HEADER: \fancyhead[RE,LO]{T. Richter}
+#+LATEX_HEADER: \fancyhead[RE,LO]{Tobias Richter}
 #+LATEX_HEADER: \fancyfoot[C]{\thepage}
 #+LATEX_HEADER: \renewcommand{\headrulewidth}{0.4pt}
 #+LATEX_HEADER: \renewcommand{\footrulewidth}{0pt}
