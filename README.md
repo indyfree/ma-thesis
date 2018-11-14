@@ -1,4 +1,4 @@
-# Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants in Smart Sustainable Electricity Markets
+# Reinforcement Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants
 My Master Thesis written with emacs + org-mode + org-ref + bibtex + latex .
 
 Topics:
