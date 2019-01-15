@@ -43,6 +43,16 @@
 
 * Introduction (10%)
 ** Research Motivation
+- cite:lopes11_integ_elect_vehic_elect_power_system
+It is also expected that the amount of intermittent RES
+that can be safely integrated into the electric power system
+may increase due to EV storage capacity [11]. Given the
+uncontrollability of these energy sources, since they only
+produce energy when the primary renewable resource is
+available, EV capability to store energy and inject it later
+into the system will avoid spillage of clean energy,
+resulting in the decreased usage of the conventional fossil
+fuel units and expensive generators during peak hours.
 ** Research Question
 ** Relevance
 
