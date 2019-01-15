@@ -265,3 +265,18 @@ cite:zhou16_elect_tradin_negat_prices
  :END:
 - High impact paper VPP
 cite:pudjianto07_virtual_power_plant_system_integ
+
+** TODO 2011 - Integration of Electric Vehicles in the Electric Power System
+ :PROPERTIES:
+  :Custom_ID: lopes11_integ_elect_vehic_elect_power_system
+  :AUTHOR: J A P Lopes, F J Soares \& P M R Almeida
+  :JOURNAL: Proceedings of the IEEE
+  :YEAR: 2011
+  :VOLUME: 99
+  :PAGES: 168-183
+  :DOI: 10.1109/jproc.2010.2066250
+  :URL: https://doi.org/10.1109/jproc.2010.2066250
+ :END:
+
+ - General Paper about integration, smart charging, risk and oppourtunities
+cite:lopes11_integ_elect_vehic_elect_power_system
