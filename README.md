@@ -7,6 +7,9 @@ Topics:
  - Reinforcement Learning
  - Agent-based simulation
 
+Simulation used for experiments:
+ - [evsim](https://github.com/indyfree/evsim)
+
 Tools used:
  - [emacs](https://www.gnu.org/software/emacs/)
  - [org-mode](https://orgmode.org/)
