@@ -160,9 +160,31 @@ this topic.
 ** Car Sharing of Electric Vehicles
 ** Reinforcement Learning in Smart Grids
 
-Previous research showed that intelligent agents equipped with Reinforcement Learning methods can successfully take action in the smart grid. textcite:reddy11_strat,reddy11_learn_behav_multip_auton_agent conducted research, in which autonomous broker agents parencite:ketter13_power_tac learn their strategies using RL. textcite:peters13_reinf_learn_approac_to_auton build on that work and further enhance the method, by learning over larger state spaces to accommodate arbitrary economic signals. This is especially beneficial in smart markets, because the markets structures might change in the future and intelligent agents should adapt to a variety of market structures and conditions.
-textcite:valogianni14_effec_manag_elect_vehic_storag adopt RL methods to learn electricity consumption behavior of households. The authors implement these methods in intelligent agents to smart charge EVs more effectively. textcite:vandael15_reinf_learn_heuris_ev_fleet use RL to learn collective EV fleet charging behavior to profitably purchase electricity on the day-ahead market. We consider RL a perfect fit for the design of our proposed intelligent agent,
-especially as a solution for our Research Question 2. When dynamically optimizing the VPP portfolio composition of the fleet, there is no historical data available to train a model. Using RL and a reward function that maximizes the overall profitability of the fleet, the agent can learn from its environment with unknown dynamics and take a certain set of actions. The agent can consider different states (e.g. current and forecasted rental demand levels and electricity prices) to take actions (e.g. allocate battery capacity to different types of VPPs) that maximizes the reward function.
+Previous research showed that intelligent agents equipped with Reinforcement
+Learning methods can successfully take action in the smart grid.
+textcite:reddy11_strat,reddy11_learn_behav_multip_auton_agent conducted
+research, in which autonomous broker agents parencite:ketter13_power_tac learn
+their strategies using RL. textcite:peters13_reinf_learn_approac_to_auton build
+on that work and further enhance the method, by learning over larger state
+spaces to accommodate arbitrary economic signals. This is especially beneficial
+in smart markets, because the markets structures might change in the future and
+intelligent agents should adapt to a variety of market structures and
+conditions.
+textcite:valogianni14_effec_manag_elect_vehic_storag adopt RL methods to learn
+electricity consumption behavior of households. The authors implement these
+methods in intelligent agents to smart charge EVs more effectively.
+textcite:vandael15_reinf_learn_heuris_ev_fleet use RL to learn collective EV
+fleet charging behavior to profitably purchase electricity on the day-ahead
+market. We consider RL a perfect fit for the design of our proposed intelligent
+agent,
+especially as a solution for our Research Question 2. When dynamically
+optimizing the VPP portfolio composition of the fleet, there is no historical
+data available to train a model. Using RL and a reward function that maximizes
+the overall profitability of the fleet, the agent can learn from its environment
+with unknown dynamics and take a certain set of actions. The agent can consider
+different states (e.g. current and forecasted rental demand levels and
+electricity prices) to take actions (e.g. allocate battery capacity to different
+types of VPPs) that maximizes the reward function.
 
 * Theoretical Background (10%)
 ** Electricity Markets
