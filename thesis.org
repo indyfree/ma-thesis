@@ -22,9 +22,10 @@
 # Title & TOC
 #+OPTIONS: title:nil toc:nil
 #+LATEX_HEADER: \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
-#+LATEX_HEADER: \pagenumbering{gobble}
+#+LATEX_HEADER: \pagenumbering{Roman}
 
 #+INCLUDE: "~/uni/ma-thesis/titlepage.tex" export latex
+#+LATEX: \setcounter{page}{2}
 
 #+LATEX: \tableofcontents
 #+LATEX: \clearpage
