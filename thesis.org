@@ -231,6 +231,7 @@ https://www.mobilityhouse.com/de_de/elektroautos/smart/smart-eq-fortwo.html#smar
 ** Generalisability
 ** Future Electricity Landscape
 ** Limitations
+# NOTE: Section Limitations
 * Conclusion (5%)
 ** Contribution
 ** Future Research
@@ -240,6 +241,8 @@ https://www.mobilityhouse.com/de_de/elektroautos/smart/smart-eq-fortwo.html#smar
 #+LATEX: \clearpage
 #+LATEX: \printbibliography
 
+- See parencite:vazquez-canteli19_reinf_learn_deman_respon conclusion for
+  limitations in RL.
 * Footnotes
 
 [fn:1] citetitle:energiewende2010, cite:energiewende2010.
