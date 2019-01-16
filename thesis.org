@@ -24,7 +24,7 @@
 #+LATEX_HEADER: \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
 #+LATEX_HEADER: \pagenumbering{gobble}
 
-#+INCLUDE: "~/uni/ma-thesis/proposal/titlepage.tex" export latex
+#+INCLUDE: "~/uni/ma-thesis/titlepage.tex" export latex
 
 #+LATEX: \tableofcontents
 #+LATEX: \clearpage
