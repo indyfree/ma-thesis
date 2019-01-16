@@ -155,7 +155,7 @@ simultaneously. With this approach we aim to align the potentially higher
 profits on the balancing markets with accurate capacity estimations, which can
 be made on intraday markets. We follow
 textcite:kahlen15_aggreg_elect_cars_sustain_virtual_power_plant with this
-approach, which also propose a combination of multiple markets in future work on
+approach, who also propose a combination of multiple markets in future work on
 this topic.
 ** Car Sharing of Electric Vehicles
 ** Reinforcement Learning in Smart Grids
