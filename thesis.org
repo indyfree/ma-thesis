@@ -125,12 +125,12 @@ carsharing, an approach which offers more flexibility to its users, saves
 resources and reduces carbon emissions
 parencite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. In most previous
 studies concerning using EVs for electricity trading, it was assumed that trips
-were fixed and known in advance. The free-float concept adds uncertainty and
+are fixed and known in advance. The free-float concept adds uncertainty and
 nondeterministic behavior, as cars can be picked up and parked everywhere and
 billing is done by the minute. This makes predicting when and where a car is
-going to be rented out a complex issue, which e.g.
-textcite:wagner16_in_free_float address by taking Points of Interests (POI) from
-Google Maps as an additional predictor.
+will be rented out a complex issue. textcite:wagner16_in_free_float address this
+problem by taking Points of Interests from Google Maps as an additional
+predictor.
 
 textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor,kahlen17_fleet showed
 that is possible to use free-floating carsharing fleets as VPPs to profitably
