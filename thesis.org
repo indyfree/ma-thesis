@@ -2,23 +2,12 @@
 #+AUTHOR:Tobias Richter
 
 # Formatting
-#+LATEX_CLASS_OPTIONS: [a4paper]
-#+LATEX_HEADER: \usepackage[margin=1.5in]{geometry}
+#+LATEX_CLASS_OPTIONS: [12pt, article]
+#+LATEX_HEADER: \usepackage[a4paper, left=5cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 #+LATEX_HEADER: \usepackage{setspace}
 #+LATEX_HEADER: \usepackage{caption}
 #+LATEX_HEADER: \onehalfspacing
 #+OPTIONS: H:4
-
-# Header and Footer
-#+LATEX_HEADER: \usepackage{fancyhdr}
-#+LATEX_HEADER: \pagestyle{fancy}
-#+LATEX_HEADER: \fancyhead{}
-#+LATEX_HEADER: \fancyfoot{}
-#+LATEX_HEADER: \fancyhead[LE,RO]{\leftmark}
-#+LATEX_HEADER: \fancyhead[RE,LO]{Tobias Richter}
-#+LATEX_HEADER: \fancyfoot[C]{\thepage}
-#+LATEX_HEADER: \renewcommand{\headrulewidth}{0.4pt}
-#+LATEX_HEADER: \renewcommand{\footrulewidth}{0pt}
 
 # Typography
 #+LATEX_HEADER: \usepackage[official]{eurosym}
