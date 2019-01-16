@@ -109,7 +109,7 @@ reaction time of spot markets.
 Previous studies often make the assumption that car owners or households can
 directly trade on electricity markets. In reality, this is not possible due to
 minimum capacity requirements of the markets. For example, the German secondary
-reserve market has a 1 MWh minimum trading capacity, while the maximum battery
+reserve market has a 1 MW minimum trading capacity, while the maximum battery
 capacity of i.e. a /Smart ForTwo Electric/ is 16.50 kWh.
 textcite:ketter13_power_tac introduced the notion of electricity brokers,
 intelligent agents that act on behalf of a group of individuals or households to
