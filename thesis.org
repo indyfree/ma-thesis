@@ -63,9 +63,9 @@ grid stability. Smart charging reduces peaks in electricity demand ("Peak Cuttin
 complement times of low demand ("Valley Filling").
 
 
-- Peak demand usually occurs then and then
-- Smart charging has a vast body of literature
-- Smart charging price incentives (Kahlen, Vallogiani)
+# - Peak demand usually occurs then and then
+# - Smart charging has a vast body of literature
+# - Smart charging price incentives (Kahlen, Vallogiani)
 
 # NOTE: Section Smart charging examples and studies
 textcite:valogianni14_effec_manag_elect_vehic_storag find that using intelligent
@@ -88,7 +88,7 @@ profitable, especially when there is a high variability in electricity prices on
 the market. The authors state that shorter intervals between sale and physical
 delivery increase the benefits.
 
-- Explain and prove why leaving out V2G.
+# Explain and prove why leaving out V2G.
 
  # NOTE: Section Trading strategies, on multiple markets
 Successful trading strategies to jointly participate in multiple markets have
@@ -114,7 +114,9 @@ directly trade on electricity markets. In reality, this is not possible due to
 minimum capacity requirements of the markets. For example, the German secondary
 reserve market has a 1 MW minimum trading capacity, while the maximum battery
 capacity of i.e. a /Smart ForTwo Electric/ is 16.50 kWh.
-- And a "normal" charger has 4.6kW to 22kW.
+
+# - And a "normal" charger has 4.6kW to 22kW.
+
 textcite:ketter13_power_tac introduced the notion of electricity brokers,
 intelligent agents that act on behalf of a group of individuals or households to
 participate on electricity markets.
@@ -281,7 +283,7 @@ Stuttgart.
 * Evaluation (20%)
 ** Event-based Simulation
 ** Benchmark: Ad-hoc Strategies
-- Decision Tree like models
+# - Decision Tree like models
 ** FleetRL
 ** Sensitivity Analysis: Prediction Accuracy
 ** Sensitivity Analysis: Infrastructure Changes

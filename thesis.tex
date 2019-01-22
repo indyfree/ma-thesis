@@ -1,4 +1,4 @@
-% Created 2019-01-16 Wed 12:44
+% Created 2019-01-22 Tue 10:34
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, article]{article}
 \usepackage[utf8]{inputenc}
@@ -72,30 +72,21 @@
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org6ab5af2}
+\label{sec:org902aebd}
 \subsection{Research Motivation}
-\label{sec:org984852a}
+\label{sec:org2fc85fb}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
-It is also expected that the amount of intermittent RES
-that can be safely integrated into the electric power system
-may increase due to EV storage capacity [11]. Given the
-uncontrollability of these energy sources, since they only
-produce energy when the primary renewable resource is
-available, EV capability to store energy and inject it later
-into the system will avoid spillage of clean energy,
-resulting in the decreased usage of the conventional fossil
-fuel units and expensive generators during peak hours.
 \subsection{Research Question}
-\label{sec:org4608ff2}
+\label{sec:org1767070}
 \subsection{Relevance}
-\label{sec:org422c191}
+\label{sec:org60aef8b}
 
 \section{Related Literature (10\%)}
-\label{sec:org0eab3d5}
+\label{sec:org634d02c}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org1917fbe}
+\label{sec:orgf963a9f}
 The increasing penetration of EVs has a substantial effect on electricity consumption
 patterns. During charging periods, power flows and grid losses increase
 considerably and challenge the grid. Operators have to reinforce the grid in
@@ -109,11 +100,6 @@ smart charging, EVs get charged when the grid is less congested to achieve more
 grid stability. Smart charging reduces peaks in electricity demand ("Peak Cutting") and
 complement times of low demand ("Valley Filling").
 
-\begin{itemize}
-\item Peak demand usually occurs then and then
-\item Smart charging has a vast body of literature
-\item Smart charging price incentives (Kahlen, Vallogiani)
-\end{itemize}
 
 \textcite{valogianni14_effec_manag_elect_vehic_storag} find that using intelligent
 agents to facilitate smart charging, can substantially benefit households.
@@ -133,9 +119,6 @@ profitable, especially when there is a high variability in electricity prices on
 the market. The authors state that shorter intervals between sale and physical
 delivery increase the benefits.
 
-\begin{itemize}
-\item Explain and prove why leaving out V2G.
-\end{itemize}
 Successful trading strategies to jointly participate in multiple markets have
 been developed by \textcite{mashhour11_biddin_strat_virtual_power_plant_2}. Using
 stationary storage the authors use VPPs to participate in the spinning reserve
@@ -155,9 +138,7 @@ directly trade on electricity markets. In reality, this is not possible due to
 minimum capacity requirements of the markets. For example, the German secondary
 reserve market has a 1 MW minimum trading capacity, while the maximum battery
 capacity of i.e. a \emph{Smart ForTwo Electric} is 16.50 kWh.
-\begin{itemize}
-\item And a "normal" charger has 4.6kW to 22kW.
-\end{itemize}
+
 \textcite{ketter13_power_tac} introduced the notion of electricity brokers,
 intelligent agents that act on behalf of a group of individuals or households to
 participate on electricity markets.
@@ -189,14 +170,6 @@ committed to being used as a VPP or to be free for rent. Rental
 profits are considerably higher than profits to be made from electricity
 trading.
 
-\begin{itemize}
-\item So you don't want to allocate a EV to VPP when it could have been rented out
-\item A central point are  the prediction are made on a aggregated fleet level, how
-much capacity you want to trade
-\item Allocations are then made on likelihood that a Car is rented out and expected
-benefits
-\end{itemize}
-
 Another central problem is that offering capacity to the grid, which
 you can not provide, results in heavy penalties, which should be avoided at all
 costs. To address this issue, the authors make use of asymmetric objective
@@ -218,7 +191,7 @@ approach, who also propose a combination of multiple markets in future work on
 this topic.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:orgf875efc}
+\label{sec:org1490728}
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning methods can successfully take action in the smart grid.
@@ -250,112 +223,135 @@ electricity prices) to take actions (e.g. allocate battery capacity to different
 types of VPPs) that maximizes the reward function.
 
 \section{Theoretical Background (10\%)}
-\label{sec:org0f53be5}
+\label{sec:orgaf21431}
 \subsection{Electricity Markets}
-\label{sec:org3f757aa}
+\label{sec:orgf07fb15}
 \subsubsection{Balancing Market}
-\label{sec:org5b71c33}
+\label{sec:org0b591a3}
 \subsubsection{Spot Market}
-\label{sec:org9445373}
+\label{sec:org1a94506}
 \subsection{Reinforcement Learning}
-\label{sec:orgfeebb4e}
+\label{sec:org4b6e42b}
 \subsubsection{Notation}
-\label{sec:org677782e}
-\textbf{State set for every single quantity used.}
-
-
+\label{sec:org55217da}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the layer.
 \subsubsection{Markow Decision Processes}
-\label{sec:org164edd6}
+\label{sec:org9938da2}
 \subsubsection{Q-Learning}
-\label{sec:orge643acd}
+\label{sec:orgedcc844}
 \subsubsection{Function Approximation}
-\label{sec:org32066b6}
+\label{sec:org2cc8d66}
 \subsubsection{Exploitation-Exploration Tradeoff}
-\label{sec:org017ec87}
+\label{sec:org538ff1e}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:orgf7098cd}
+\label{sec:orga34af71}
 \section{Empirical Setting / Data (5\%)}
-\label{sec:orgad55f8d}
+\label{sec:org0357892}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org5dadf87}
-Car2Go FourTwo assumptions:
-\url{https://www.mobilityhouse.com/de\_de/elektroautos/smart/smart-eq-fortwo.html\#smart-eq-fortwo-ladeinformationen}
+\label{sec:orga156fee}
+\subsubsection{Raw Data}
+\label{sec:orgaf86904}
+The dataset consists of 500 EVs in Stuttgart. As displayed in Table
+\ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
+timestamp, coordinates, and address of the EVs. Additionally, status attributes
+of the interior and exterior are given, the relative state of charge and
+information whether the EV is plugged into one of the 200 charging stations in
+Stuttgart.
 
-\begin{itemize}
-\item 17.6 Kwh battery capacity
-\item 160km reach with fully charged battery
+\begin{longtable}{l|ccccc}
+\caption{Raw Car2Go Trip Data from Stuttgart \label{car2go-sample-data}}
+\\
+\hline
+\hline
+Number Plate & Latitude & Longitude & Street & Zip Code & Engine Type\\
+\hline
+\endfirsthead
+\multicolumn{6}{l}{Continued from previous page} \\
+\hline
 
-\item 4.6 KW Charging capacity
-\item 4h to fully charge at 4.6KW (Non-linear charging)
-\end{itemize}
-\subsection{Electricity Markets}
-\label{sec:org8f8aec8}
+Number Plate & Latitude & Longitude & Street & Zip Code & Engine Type \\
+
+\hline
+\endhead
+\hline\multicolumn{6}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+S-GO2471 & 9.19121 & 48.68895 & Parkplatz Flughafen & 70692 & electric\\
+S-GO2471 & 9.15922 & 48.78848 & Salzmannweg 3 & 70192 & electric\\
+S-GO2471 & 9.17496 & 48.74928 & Felix-Dahn-Str.45 & 70597 & electric\\
+S-GO2471 & 9.17496 & 48.74928 & Felix-Dahn-Str.45 & 70597 & electric\\
+S-GO2471 & 9.17496 & 48.74928 & Felix-Dahn-Str.45 & 70597 & electric\\
+\hline
+Number Plate & Interior & Exterior & Timestamp & Charging & State of Charge\\
+\hline
+S-GO2471 & good & good & 22.12.2017 20:10 & no & 94\\
+S-GO2471 & good & good & 24.12.2017 23:05 & no & 72\\
+S-GO2471 & good & good & 26.12.2017 00:40 & yes & 81\\
+S-GO2471 & good & good & 26.12.2017 00:45 & yes & 83\\
+S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
+\hline
+\hline
+\end{longtable}
+\subsubsection{Preprocessing Steps}
+\label{sec:org33df93b}
+\subsection{Electricity Markets Data}
+\label{sec:org4f9230b}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org10f5e3e}
-\begin{itemize}
-\item Relax 1 MW minimum bidding assumption
-\begin{itemize}
-\item 500kw
-\item 100kw
-\end{itemize}
-\end{itemize}
+\label{sec:org653861a}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:orga256575}
-\subsection{Preprocessing Steps?}
-\label{sec:org6a0d853}
+\label{sec:org8ae48ff}
 
 \section{Research Design/Method? (5\%)}
-\label{sec:orgad19ad5}
+\label{sec:org6ffe9a2}
 \subsection{IS-Design Science Research}
-\label{sec:orgca72d31}
+\label{sec:org6a6e64e}
 \subsection{Event-based Simulation}
-\label{sec:org86b589a}
+\label{sec:orgcceecc5}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:orga065f9d}
+\label{sec:org3333b49}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org6a96b59}
+\label{sec:orgb441588}
 \subsection{Reinforcement Learning Approach}
-\label{sec:orgf7ba4f2}
+\label{sec:org9eff4ae}
 \subsection{Bidding Strategy}
-\label{sec:org2909839}
+\label{sec:orgc6778e6}
 
 \section{Evaluation (20\%)}
-\label{sec:org1d1d0a4}
+\label{sec:org3381d2e}
 \subsection{Event-based Simulation}
-\label{sec:org66e9672}
+\label{sec:orgc180ef0}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org8130c51}
-\begin{itemize}
-\item Decision Tree like models
-\end{itemize}
+\label{sec:org7456ed5}
 \subsection{FleetRL}
-\label{sec:orgde7ef6b}
+\label{sec:orgb57d845}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:orgd2e063b}
+\label{sec:org90f67d6}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org1376e34}
-\subsection{Triple Bottom Line? (Emissions)}
-\label{sec:orgfce7092}
-
+\label{sec:orgfec839e}
 \section{Discussion (5\%)}
-\label{sec:orga280bff}
+\label{sec:org22ff714}
 \subsection{Generalisability}
-\label{sec:org5090d94}
+\label{sec:org73294c2}
 \subsection{Future Electricity Landscape}
-\label{sec:org451132e}
+\label{sec:org898dad4}
 \subsection{Limitations}
-\label{sec:orgf2925d7}
+\label{sec:org5fc2a7c}
 \section{Conclusion (5\%)}
-\label{sec:org24f5bf9}
+\label{sec:org9ad7c7c}
 \subsection{Contribution}
-\label{sec:org5e61fd4}
+\label{sec:orged231da}
 \subsection{Future Research}
-\label{sec:org6642b51}
+\label{sec:orgd76cdcc}
 
 
 
 \clearpage
 \printbibliography
+
+\begin{itemize}
+\item See \parencite{vazquez-canteli19_reinf_learn_deman_respon} conclusion for
+limitations in RL.
+\end{itemize}
 \end{document}
