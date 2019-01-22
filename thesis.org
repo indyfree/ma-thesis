@@ -51,44 +51,61 @@
 # NOTE: Section General Problem and Intro of Smart Charging
 The increasing penetration of EVs has a substantial effect on electricity consumption
 patterns. During charging periods, power flows and grid losses increase
-considerably and challenge the grid. Operators have to reinforce the grid in
-order that transformers and substations don't get overloaded
-parencite:lopes11_integ_elect_vehic_elect_power_system. Loading multiple EVs in the
-same neighbourhood, or worse whole EV fleets at once, stress the grid.
-textcite:kim12_carbit find that in these cases, even brown- or blackouts are
-possible. Despite these challenges, it is possible to postpone the physical
-reinforcement by adopting smart charging strategies parencite:kim12_carbit. In
-smart charging, EVs get charged when the grid is less congested to achieve more
-grid stability. Smart charging reduces peaks in electricity demand ("Peak Cutting") and
-complement times of low demand ("Valley Filling").
-
-
-# - Peak demand usually occurs then and then
-# - Smart charging has a vast body of literature
-# - Smart charging price incentives (Kahlen, Vallogiani)
-
+considerably and challenge the grid. Operators have to reinforce the grid
+to ensure that transformers and substations do not get overloaded
+parencite:sioshansi12_impac_elect_tarif_plug_in,lopes11_integ_elect_vehic_elect_power_system.
+Loading multiple EVs in the same neighbourhood, or worse whole EV fleets at
+once, stress the grid. textcite:kim12_carbit find that in these cases, even
+brown- or blackouts are possible. Despite these challenges, it is possible to
+postpone the physical reinforcement by adopting smart charging strategies
+parencite:kim12_carbit. In smart charging, EVs get charged when the grid is less
+congested to achieve more grid stability. Smart charging reduces peaks in
+electricity demand, called /Peak Cutting/ and complement the grid in times of
+low demand, called /Valley Filling/. Smart charging has been researched
+thoroughly in the IS literature.
 # NOTE: Section Smart charging examples and studies
 textcite:valogianni14_effec_manag_elect_vehic_storag find that using intelligent
-agents to facilitate smart charging, can substantially benefit households.
-textcite:kara15_estim_benef_elect_vehic_smart present results, in which smart
-charging reduced electricity bills for users of public EV charging stations in
-California.
-
-# NOTE: Most of it is V2G which is not really relevant for us. Move
-# explanation above? Or only explanation and then State why we don't use V2g.
-An extension of the smart charging concept is Vehicle-to-Grid (V2G). EVs
-equipped with V2G devices can discharge their batteries back into the grid.
+agents to schedule EV charging, substantially reshapes the energy demand and
+reduces peak demand without violating individual household preferences. Moreover,
+they show that the proposed smart charging behaviour reduced average energy
+prices and thus economically benefit households. In another study
+textcite:kara15_estim_benef_elect_vehic_smart investigate the effect of smart
+charging on public charging stations in California. Controlling for
+arrival and departure times, the authors present beneficial results for the
+distribution system operator (DSO) and the owners of EVs. Again a price
+reduction in energy bills and a peak load reduction could be determined.
+An extension of the smart charging concept is Vehicle-to-Grid (V2G). When
+equipped with V2G devices, EVs can discharge their batteries back into the grid.
+Several authors conduct research on this technology in respect to grid stabilization
+effects and arbitrage possibilities.
 textcite:schill11_elect_vehic_imper_elect_market find that EVs can be beneficial
-for consumer electricity prices when they are used as storage. Similar results were shown by
-textcite:reichert10_consid_highl_effic_bidir_batter and
-textcite:peterson10_econom_using_plug_in_hybrid, they point out that battery
-technology and battery costs are a crucial factor for profitability.
-textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor show that V2G can
-profitable, especially when there is a high variability in electricity prices on
-the market. The authors state that shorter intervals between sale and physical
-delivery increase the benefits.
-
-# Explain and prove why leaving out V2G.
+for average consumer electricity prices when they the EVs can be used as storage.
+Excess EV battery capacity can be used to charge in off-peak hours and discharge
+in peak hours, when the prices are higher. These arbitrage possibilities,
+reverses welfare effects of generators and increases general overall welfare and
+consumer surplus. textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor
+show that the arbitrage opportunities are especially prominent when a high
+variability in electricity prices on the target market exists. The authors state
+that short intervals between the contract of sale and the physical delivery of
+electricity increase the benefits. Consequently ancillary service markets, like
+frequency control and operating reserve markets are attractive for smart
+charging.
+# NOTE: Section Not looking at V2G. Explain and prove why leaving out V2G.
+textcite:peterson10_econom_using_plug_in_hybrid investigate energy arbitrage
+profitability with V2G in the light of battery depreciation costs in three
+cities in the US. Their results indicate that large-scale use of EV batteries
+for grid storage does not yield enough profits to incentives owners to
+participate in V2G activities. Considering battery depreciation cost they arrive
+at an annual profit of only 6 - 72 dollars per EV.
+textcite:brandt17_evaluat_busin_model_vehic_grid_integ evaluated a V2G business
+model for parking garage operators operating on the German frequency regulation
+market. When taking infrastructure costs and battery depreciation costs into
+account they arrived at the conclusion that the business model is not
+profitable, despite generous assumptions about EV adoption rates and auction
+mechanisms in their simulation.
+# TODO: Add Kahlen not using V2G
+Taking the results from the aforementioned studies into account, we arrived at
+the conclusion to not include V2G into our simulation.
 
  # NOTE: Section Trading strategies, on multiple markets
 Successful trading strategies to jointly participate in multiple markets have
@@ -284,6 +301,7 @@ Stuttgart.
 ** Event-based Simulation
 ** Benchmark: Ad-hoc Strategies
 # - Decision Tree like models
+# - Metric: Peak-to-average (PAR) ratio reduction.
 ** FleetRL
 ** Sensitivity Analysis: Prediction Accuracy
 ** Sensitivity Analysis: Infrastructure Changes
