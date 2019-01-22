@@ -238,7 +238,7 @@ The input to the network $x \in \mathbb{R}^D$ is fed to the first residual layer
 *** Function Approximation
 *** Exploitation-Exploration Tradeoff
 *** Deep Reinforcement Learning
-* Empirical Setting / Data (5%)
+* Empirical Setting / Data (10%)
 ** Carsharing Fleets of Electric Vehicles
 # Car2Go FourTwo assumptions:
 # https://www.mobilityhouse.com/de_de/elektroautos/smart/smart-eq-fortwo.html#smart-eq-fortwo-ladeinformationen
@@ -288,16 +288,12 @@ Stuttgart.
 #   - 100kw
 *** Intraday Continuous Spot Market
 
-* Research Design/Method? (5%)
-** IS-Design Science Research
-** Event-based Simulation
-
 * Model: FleetRL (20%)
 ** Mobility Demand & Clearing Price Prediction
 ** Reinforcement Learning Approach
 ** Bidding Strategy
 
-* Evaluation (20%)
+* Evaluation (30%)
 ** Event-based Simulation
 ** Benchmark: Ad-hoc Strategies
 # - Decision Tree like models
@@ -305,11 +301,11 @@ Stuttgart.
 ** FleetRL
 ** Sensitivity Analysis: Prediction Accuracy
 ** Sensitivity Analysis: Infrastructure Changes
+** Sensitivity Analysis: Bidding Strategy
 * Discussion (5%)
-** Generalisability
+** Generalizability
 ** Future Electricity Landscape
 ** Limitations
-# NOTE: Section Limitations
 * Conclusion (5%)
 ** Contribution
 ** Future Research

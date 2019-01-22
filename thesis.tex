@@ -1,4 +1,4 @@
-% Created 2019-01-22 Tue 16:15
+% Created 2019-01-22 Tue 16:22
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, article]{article}
 \usepackage[utf8]{inputenc}
@@ -72,21 +72,21 @@
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:orgea5845f}
+\label{sec:org7d03d03}
 \subsection{Research Motivation}
-\label{sec:orgd08fbd9}
+\label{sec:org709afec}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org63bf2e4}
+\label{sec:orgb299c32}
 \subsection{Relevance}
-\label{sec:org83b169c}
+\label{sec:org00e9e66}
 
 \section{Related Literature (10\%)}
-\label{sec:org6164dda}
+\label{sec:org8ceac6c}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orga3ccbb1}
+\label{sec:orga21a834}
 The increasing penetration of EVs has a substantial effect on electricity consumption
 patterns. During charging periods, power flows and grid losses increase
 considerably and challenge the grid. Operators have to reinforce the grid
@@ -217,7 +217,7 @@ approach, who also propose a combination of multiple markets in future work on
 this topic.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:orgb1d0001}
+\label{sec:orgd9be94c}
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning methods can successfully take action in the smart grid.
@@ -249,34 +249,34 @@ electricity prices) to take actions (e.g. allocate battery capacity to different
 types of VPPs) that maximizes the reward function.
 
 \section{Theoretical Background (10\%)}
-\label{sec:org802dc7e}
+\label{sec:orgdf0fb74}
 \subsection{Electricity Markets}
-\label{sec:org3ad005f}
+\label{sec:orgd0b9664}
 \subsubsection{Balancing Market}
-\label{sec:org4569dd6}
+\label{sec:orgff0370f}
 \subsubsection{Spot Market}
-\label{sec:orgf6cfe64}
+\label{sec:org40a0db6}
 \subsection{Reinforcement Learning}
-\label{sec:org38b94f0}
+\label{sec:orgad00e74}
 \subsubsection{Notation}
-\label{sec:orgce51b8f}
+\label{sec:orge3d5ea7}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the layer.
 \subsubsection{Markow Decision Processes}
-\label{sec:org6909b1c}
+\label{sec:org9ea46af}
 \subsubsection{Q-Learning}
-\label{sec:org356349b}
+\label{sec:org00f55c5}
 \subsubsection{Function Approximation}
-\label{sec:org71125e7}
+\label{sec:org5cdd940}
 \subsubsection{Exploitation-Exploration Tradeoff}
-\label{sec:orgc2849b1}
+\label{sec:org7f235e5}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:org62ea073}
-\section{Empirical Setting / Data (5\%)}
-\label{sec:orga725db2}
+\label{sec:orgd0d9fc0}
+\section{Empirical Setting / Data (10\%)}
+\label{sec:org923edf3}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org1d3cf0d}
+\label{sec:org6697fe8}
 \subsubsection{Raw Data}
-\label{sec:org990e317}
+\label{sec:orgab46ca6}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -320,56 +320,51 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:orgcdaaddd}
+\label{sec:org160536e}
 \subsection{Electricity Markets Data}
-\label{sec:org4e841a9}
+\label{sec:org08414e5}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:orga70bbe5}
+\label{sec:orge3aa01d}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:org2fde2cc}
-
-\section{Research Design/Method? (5\%)}
-\label{sec:orgbe8ea59}
-\subsection{IS-Design Science Research}
-\label{sec:orga2fca89}
-\subsection{Event-based Simulation}
-\label{sec:org59cb168}
+\label{sec:org52111d3}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:org3044378}
+\label{sec:org34b4336}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:orga579d02}
+\label{sec:orgfa88958}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org3965d05}
+\label{sec:orgd5c1872}
 \subsection{Bidding Strategy}
-\label{sec:orgcde3a49}
+\label{sec:org5db0a5d}
 
-\section{Evaluation (20\%)}
-\label{sec:org357e891}
+\section{Evaluation (30\%)}
+\label{sec:org705932f}
 \subsection{Event-based Simulation}
-\label{sec:org13e5f02}
+\label{sec:orgdae7f2d}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:orgb8a7c62}
+\label{sec:org30a622d}
 \subsection{FleetRL}
-\label{sec:org6e699c5}
+\label{sec:org197d7f0}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org249589d}
+\label{sec:org643445a}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:orgf12276d}
+\label{sec:orgbfbe0bf}
+\subsection{Sensitivity Analysis: Bidding Strategy}
+\label{sec:org18e4348}
 \section{Discussion (5\%)}
-\label{sec:orgcdd913a}
-\subsection{Generalisability}
-\label{sec:orgd14040f}
+\label{sec:orgeafac31}
+\subsection{Generalizability}
+\label{sec:org4f2e92d}
 \subsection{Future Electricity Landscape}
-\label{sec:org0acfb06}
+\label{sec:orgf3fdfb4}
 \subsection{Limitations}
-\label{sec:orga86691b}
+\label{sec:orgc5f6230}
 \section{Conclusion (5\%)}
-\label{sec:org6150029}
+\label{sec:orgb219132}
 \subsection{Contribution}
-\label{sec:org75f7b04}
+\label{sec:org31118d8}
 \subsection{Future Research}
-\label{sec:orgf9632db}
+\label{sec:org5a4ca48}
 
 
 
