@@ -34,15 +34,15 @@
 * Introduction (10%)
 ** Research Motivation
 - cite:lopes11_integ_elect_vehic_elect_power_system
-It is also expected that the amount of intermittent RES
-that can be safely integrated into the electric power system
-may increase due to EV storage capacity [11]. Given the
-uncontrollability of these energy sources, since they only
-produce energy when the primary renewable resource is
-available, EV capability to store energy and inject it later
-into the system will avoid spillage of clean energy,
-resulting in the decreased usage of the conventional fossil
-fuel units and expensive generators during peak hours.
+# It is also expected that the amount of intermittent RES
+# that can be safely integrated into the electric power system
+# may increase due to EV storage capacity [11]. Given the
+# uncontrollability of these energy sources, since they only
+# produce energy when the primary renewable resource is
+# available, EV capability to store energy and inject it later
+# into the system will avoid spillage of clean energy,
+# resulting in the decreased usage of the conventional fossil
+# fuel units and expensive generators during peak hours.
 ** Research Question
 ** Relevance
 
@@ -61,6 +61,7 @@ reinforcement by adopting smart charging strategies parencite:kim12_carbit. In
 smart charging, EVs get charged when the grid is less congested to achieve more
 grid stability. Smart charging reduces peaks in electricity demand ("Peak Cutting") and
 complement times of low demand ("Valley Filling").
+
 
 - Peak demand usually occurs then and then
 - Smart charging has a vast body of literature
@@ -147,11 +148,11 @@ committed to being used as a VPP or to be free for rent. Rental
 profits are considerably higher than profits to be made from electricity
 trading.
 
-- So you don't want to allocate a EV to VPP when it could have been rented out
-- A central point are  the prediction are made on a aggregated fleet level, how
-  much capacity you want to trade
-- Allocations are then made on likelihood that a Car is rented out and expected
-  benefits
+# - So you don't want to allocate a EV to VPP when it could have been rented out
+# - A central point are  the prediction are made on a aggregated fleet level, how
+#   much capacity you want to trade
+# - Allocations are then made on likelihood that a Car is rented out and expected
+#   benefits
 
 Another central problem is that offering capacity to the grid, which
 you can not provide, results in heavy penalties, which should be avoided at all
@@ -211,9 +212,7 @@ types of VPPs) that maximizes the reward function.
 *** Spot Market
 ** Reinforcement Learning
 *** Notation
-*State set for every single quantity used.*
-
-
+# NOTE: State set for every single quantity used.
 The input to the network $x \in \mathbb{R}^D$ is fed to the first residual layer to get the activation $y = x + \sigma(w x + b) \in \mathbb{R}^D$ with $w \in \mathbb{R}^{D \times D}$, and $b \in \mathbb{R}^D$ the weights and bias of the layer.
 *** Markow Decision Processes
 *** Q-Learning
@@ -222,17 +221,17 @@ The input to the network $x \in \mathbb{R}^D$ is fed to the first residual layer
 *** Deep Reinforcement Learning
 * Empirical Setting / Data (5%)
 ** Carsharing Fleets of Electric Vehicles
-Car2Go FourTwo assumptions:
-https://www.mobilityhouse.com/de_de/elektroautos/smart/smart-eq-fortwo.html#smart-eq-fortwo-ladeinformationen
+# Car2Go FourTwo assumptions:
+# https://www.mobilityhouse.com/de_de/elektroautos/smart/smart-eq-fortwo.html#smart-eq-fortwo-ladeinformationen
 
 
-- 17.6 Kwh battery capacity
-- 140km reach with fully charged battery
+# - 17.6 Kwh battery capacity
+# - 140km reach with fully charged battery
 
-- 3.3 (!) KW Charging capacity
-- 6h to fully charge at 4.6KW (Non-linear charging)
-- Introduced 2012, 450, later 50 more (see wiki)
-- Third Gen Smart ForTwo electric
+# - 3.3 (!) KW Charging capacity
+# - 6h to fully charge at 4.6KW (Non-linear charging)
+# - Introduced 2012, 450, later 50 more (see wiki)
+# - Third Gen Smart ForTwo electric
 *** Raw Data
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 ref:car2go-sample-data, the data contain spatio-temporal attributes, such as
@@ -265,9 +264,9 @@ Stuttgart.
 *** Preprocessing Steps
 ** Electricity Markets Data
 *** Secondary Operating Reserve Market
-- Relax 1 MW minimum bidding assumption
-  - 500kw
-  - 100kw
+# - Relax 1 MW minimum bidding assumption
+#   - 500kw
+#   - 100kw
 *** Intraday Continuous Spot Market
 
 * Research Design/Method? (5%)
