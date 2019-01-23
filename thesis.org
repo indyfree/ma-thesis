@@ -54,15 +54,14 @@ patterns. During charging periods, power flows and grid losses increase
 considerably and challenge the grid. Operators have to reinforce the grid
 to ensure that transformers and substations do not get overloaded
 parencite:sioshansi12_impac_elect_tarif_plug_in,lopes11_integ_elect_vehic_elect_power_system.
-Loading multiple EVs in the same neighbourhood, or worse whole EV fleets at
-once, stress the grid. textcite:kim12_carbit find that in these cases, even
-brown- or blackouts are possible. Despite these challenges, it is possible to
-postpone the physical reinforcement by adopting smart charging strategies
-parencite:kim12_carbit. In smart charging, EVs get charged when the grid is less
-congested to achieve more grid stability. Smart charging reduces peaks in
-electricity demand, called /Peak Cutting/ and complement the grid in times of
-low demand, called /Valley Filling/. Smart charging has been researched
-thoroughly in the IS literature.
+Loading multiple EVs in the same neighbourhood, or worse, whole EV fleets at
+once, stress the grid. In these cases, even brown- or blackouts are possible
+parencite:kim12_carbit. Despite these challenges, it is possible to postpone the
+physical reinforcement by adopting smart charging strategies. In smart charging,
+EVs get charged when the grid is less congested to achieve more grid stability.
+Smart charging reduces peaks in electricity demand, called /Peak Cutting/ and
+complement the grid in times of low demand, called /Valley Filling/. Smart
+charging has been researched thoroughly in the IS literature.
 # NOTE: Section Smart charging examples and studies
 textcite:valogianni14_effec_manag_elect_vehic_storag find that using intelligent
 agents to schedule EV charging, substantially reshapes the energy demand and
@@ -72,47 +71,51 @@ prices and thus economically benefit households. In another study
 textcite:kara15_estim_benef_elect_vehic_smart investigate the effect of smart
 charging on public charging stations in California. Controlling for
 arrival and departure times, the authors present beneficial results for the
-distribution system operator (DSO) and the owners of EVs. Again a price
+distribution system operator (DSO) and the owners of EVs. A price
 reduction in energy bills and a peak load reduction could be determined.
 An extension of the smart charging concept is Vehicle-to-Grid (V2G). When
 equipped with V2G devices, EVs can discharge their batteries back into the grid.
 Several authors conduct research on this technology in respect to grid stabilization
 effects and arbitrage possibilities.
 textcite:schill11_elect_vehic_imper_elect_market find that EVs can be beneficial
-for average consumer electricity prices when they the EVs can be used as storage.
+for average consumer electricity prices when the EVs can be used as storage.
 Excess EV battery capacity can be used to charge in off-peak hours and discharge
 in peak hours, when the prices are higher. These arbitrage possibilities,
 reverses welfare effects of generators and increases general overall welfare and
 consumer surplus. textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor
 show that the arbitrage opportunities are especially prominent when a high
-variability in electricity prices on the target market exists. The authors state
-that short intervals between the contract of sale and the physical delivery of
-electricity increase the benefits. Consequently ancillary service markets, like
-frequency control and operating reserve markets are attractive for smart
-charging.
+variability in electricity prices on the target electricity market exists. The
+authors state that short intervals between the contract of sale and the physical
+delivery of electricity increase arbitrage benefits. Consequently ancillary service
+markets, like frequency control and operating reserve markets are attractive for
+smart charging.
+
 # NOTE: Section Not looking at V2G. Explain and prove why leaving out V2G.
 textcite:peterson10_econom_using_plug_in_hybrid investigate energy arbitrage
-profitability with V2G in the light of battery depreciation costs in three
-cities in the US. Their results indicate that large-scale use of EV batteries
-for grid storage does not yield enough profits to incentives owners to
-participate in V2G activities. Considering battery depreciation cost they arrive
-at an annual profit of only 6 - 72 dollars per EV.
-textcite:brandt17_evaluat_busin_model_vehic_grid_integ evaluated a V2G business
+profitability with V2G in the light of battery depreciation costs in the US.
+Their results indicate that large-scale use of EV batteries for grid storage
+does not yield enough profits to incentivize owners to participate in V2G
+activities. Considering battery depreciation cost they arrive at an annual
+profit of only 6\dollar - 72\dollar per EV.
+textcite:brandt17_evaluat_busin_model_vehic_grid_integ evaluated a business
 model for parking garage operators operating on the German frequency regulation
 market. When taking infrastructure costs and battery depreciation costs into
-account they arrived at the conclusion that the business model is not
-profitable, despite generous assumptions about EV adoption rates and auction
-mechanisms in their simulation.
-# TODO: Add Kahlen not using V2G
-Taking the results from the aforementioned studies into account, we arrived at
-the conclusion to not include V2G into our simulation.
+account they concluded that the proposed vehicle-grid
+integration is not profitable. Even with generous assumptions about EV adoption
+rates in Germany and altered auction mechanisms they arrived at negative profits.
+parencite:kahlen17_fleet used EV fleets to offer balancing services to the grid.
+Evaluating the impact of V2G in their model the authors come to the conclusion
+that V2G would only be profitable if reserve power prices would be twice as
+high. Given the results from the aforementioned studies, we decided not to
+include V2G into our model, since expected profits are, at most, marginal.
 
- # NOTE: Section Trading strategies, on multiple markets
+# NOTE: Section Trading strategies, on multiple markets
 Successful trading strategies to jointly participate in multiple markets have
 been developed by textcite:mashhour11_biddin_strat_virtual_power_plant_2. Using
 stationary storage the authors use VPPs to participate in the spinning reserve
 market and day-ahead market at the same time. Similar research has been done by
-textcite:he16_optim_biddin_strat_batter_storag. The authors take the battery
+textcite:he16_optim_biddin_strat_batter_storag. The authors additionally take
+the battery
 life cycle into account, which proves to be a decisive factor. In contrast, we
 aim to jointly participate in the operating reserve and spot market with
 /non-stationary/ storage, while considering the battery life cycle as well.
