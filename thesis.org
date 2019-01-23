@@ -306,6 +306,8 @@ Stuttgart.
 ** Generalizability
 ** Future Electricity Landscape
 ** Limitations
+# - See parencite:vazquez-canteli19_reinf_learn_deman_respon conclusion for
+#   limitations in RL.
 * Conclusion (5%)
 ** Contribution
 # TODO: Compare to most simular studies.
@@ -316,9 +318,6 @@ Stuttgart.
 
 #+LATEX: \clearpage
 #+LATEX: \printbibliography
-
-- See parencite:vazquez-canteli19_reinf_learn_deman_respon conclusion for
-  limitations in RL.
 * Footnotes
 
 [fn:1] citetitle:energiewende2010, cite:energiewende2010.
