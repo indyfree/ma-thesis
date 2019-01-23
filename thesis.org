@@ -244,6 +244,8 @@ types of VPPs) that maximizes the reward function.
 * Theoretical Background (10%)
 ** Electricity Markets
 *** Balancing Market
+# parencite:brandt17_evaluat_busin_model_vehic_grid_integ has a good section
+# explaining the markets.
 *** Spot Market
 ** Reinforcement Learning
 *** Notation
