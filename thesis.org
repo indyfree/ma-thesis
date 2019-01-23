@@ -292,6 +292,8 @@ Stuttgart.
 *** Intraday Continuous Spot Market
 
 * Model: FleetRL (20%)
+** Information Assumptions
+# See: parencite:mashhour11_biddin_strat_virtual_power_plant_1
 ** Mobility Demand & Clearing Price Prediction
 ** Reinforcement Learning Approach
 ** Bidding Strategy
