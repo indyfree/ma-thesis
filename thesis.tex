@@ -1,4 +1,4 @@
-% Created 2019-01-23 Wed 10:45
+% Created 2019-01-23 Wed 12:55
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, article]{article}
 \usepackage[utf8]{inputenc}
@@ -72,21 +72,21 @@
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org445821a}
+\label{sec:org6c2d102}
 \subsection{Research Motivation}
-\label{sec:org753532c}
+\label{sec:orgc11755b}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org87e304b}
+\label{sec:org09462f1}
 \subsection{Relevance}
-\label{sec:orgff0fcf7}
+\label{sec:org068eb29}
 
 \section{Related Literature (10\%)}
-\label{sec:org8b80dd3}
+\label{sec:org15f0709}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orge7e875a}
+\label{sec:org9ab0c43}
 The increasing penetration of EVs has a substantial effect on electricity consumption
 patterns. During charging periods, power flows and grid losses increase
 considerably and challenge the grid. Operators have to reinforce the grid
@@ -137,27 +137,40 @@ profit of only 6\$ - 72\$ per EV.
 \textcite{brandt17_evaluat_busin_model_vehic_grid_integ} evaluated a business
 model for parking garage operators operating on the German frequency regulation
 market. When taking infrastructure costs and battery depreciation costs into
-account they concluded that the proposed vehicle-grid
-integration is not profitable. Even with generous assumptions about EV adoption
-rates in Germany and altered auction mechanisms they arrived at negative profits.
+account they concluded that the proposed vehicle-grid integration is not
+profitable. Even with generous assumptions about EV adoption rates in Germany
+and altered auction mechanisms they arrived at negative profits.
 \parencite{kahlen17_fleet} used EV fleets to offer balancing services to the grid.
 Evaluating the impact of V2G in their model the authors come to the conclusion
 that V2G would only be profitable if reserve power prices would be twice as
 high. Given the results from the aforementioned studies, we decided not to
 include V2G into our model, since expected profits are, at most, marginal.
 
-Successful trading strategies to jointly participate in multiple markets have
-been developed by \textcite{mashhour11_biddin_strat_virtual_power_plant_2}. Using
-stationary storage the authors use VPPs to participate in the spinning reserve
-market and day-ahead market at the same time. Similar research has been done by
-\textcite{he16_optim_biddin_strat_batter_storag}. The authors take the battery
-life cycle into account, which proves to be a decisive factor. In contrast, we
-aim to jointly participate in the operating reserve and spot market with
-\emph{non-stationary} storage, while considering the battery life cycle as well.
-Following the findings of
-\textcite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}, we choose the
-intraday continuous market over the day-ahead market, as it has the lowest
-reaction time of the spot markets.
+To maximize profits, it is essential for market participants to develop good
+bidding strategies. Successful bidding strategies to jointly participate in
+multiple markets have been developed e.g. by
+\textcite{mashhour11_biddin_strat_virtual_power_plant_2}. The authors use VPPs of
+stationary battery storage to participate in the spinning reserve market and
+the day-ahead market at the same time. They developed a non-equilibrium model,
+which solves the presented mixed-integer program with Genetic Programming (GP).
+Contrarily, we use a model-free RL agent that learns an optimal policy (i.e.
+trading strategy) from actions it takes in the environment (i.e. bidding on
+electricity markets). Using a model-free approach is especially beneficial for
+us, since additional unknown variables and constraints (i.e. customer mobility
+demand), makes it very hard to formulate a mathematical model.
+
+Similar research to \textcite{mashhour11_biddin_strat_virtual_power_plant_2} has
+been done by \textcite{he16_optim_biddin_strat_batter_storag}. The authors
+additionally incorporate battery life cycle in their profit maximization model,
+which proves to be a decisive factor. In contrast to the authors, we jointly
+participated in the secondary operating reserve and spot market with the
+\emph{non-stationary} storage of EV batteries. Because shared EVs have to satisfy
+mobility demands, they have to be charged nonetheless, which allows us to safely
+exclude battery deprecation from our model. Further, we choose the intraday
+continuous market over the day-ahead market, as it has the lowest reaction time
+of the spot markets, and thus offers potentially higher profits
+\parencite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}.
+
 
 
 Previous studies often make the assumption that car owners or households can
@@ -218,7 +231,7 @@ approach, who also propose a combination of multiple markets in future work on
 this topic.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org508772f}
+\label{sec:orgf782ada}
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning methods can successfully take action in the smart grid.
@@ -250,34 +263,34 @@ electricity prices) to take actions (e.g. allocate battery capacity to different
 types of VPPs) that maximizes the reward function.
 
 \section{Theoretical Background (10\%)}
-\label{sec:orgebbeb6e}
+\label{sec:orgbbbf773}
 \subsection{Electricity Markets}
-\label{sec:org02a9a69}
+\label{sec:org3343b91}
 \subsubsection{Balancing Market}
-\label{sec:org42044ab}
+\label{sec:org6dcd76c}
 \subsubsection{Spot Market}
-\label{sec:org7f9318f}
+\label{sec:org8edb461}
 \subsection{Reinforcement Learning}
-\label{sec:orgef16cd2}
+\label{sec:org5303750}
 \subsubsection{Notation}
-\label{sec:org66ff3d8}
+\label{sec:org4fcd4e4}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the layer.
 \subsubsection{Markow Decision Processes}
-\label{sec:orgae899cb}
+\label{sec:orga8dcaef}
 \subsubsection{Q-Learning}
-\label{sec:orgabfeb8c}
+\label{sec:orgd9d527c}
 \subsubsection{Function Approximation}
-\label{sec:org5d53aa5}
+\label{sec:orgb96a454}
 \subsubsection{Exploitation-Exploration Tradeoff}
-\label{sec:orgdf4b9b2}
+\label{sec:orgdfd7273}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:org31031bb}
+\label{sec:org22e561f}
 \section{Empirical Setting / Data (10\%)}
-\label{sec:org32cd6dc}
+\label{sec:org5221bf0}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:orge4c100d}
+\label{sec:orga05d2fb}
 \subsubsection{Raw Data}
-\label{sec:org67a96be}
+\label{sec:org0d0f5a4}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -321,59 +334,56 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:orgaf00692}
+\label{sec:org2d060bb}
 \subsection{Electricity Markets Data}
-\label{sec:orgb086458}
+\label{sec:orgb060943}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:orgfeec876}
+\label{sec:orged2724f}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:orge41b31a}
+\label{sec:orgcd82e67}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:org5303cc8}
+\label{sec:orgb3589e8}
+\subsection{Information Assumptions}
+\label{sec:org67ba226}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org60a6a05}
+\label{sec:orga911f2f}
 \subsection{Reinforcement Learning Approach}
-\label{sec:orgb7e3110}
+\label{sec:org4c58fc2}
 \subsection{Bidding Strategy}
-\label{sec:org4cff154}
+\label{sec:org1cc0316}
 
 \section{Evaluation (30\%)}
-\label{sec:orgd9d2553}
+\label{sec:org75759f8}
 \subsection{Event-based Simulation}
-\label{sec:org97ae083}
+\label{sec:orga02b142}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org4df23dd}
+\label{sec:org33d7461}
 \subsection{FleetRL}
-\label{sec:orgd7d96b0}
+\label{sec:orgce64637}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:orgfe5f5bf}
+\label{sec:org0ce6e5f}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org6ac957c}
+\label{sec:orgb87950b}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:orgc0bdff3}
+\label{sec:org4e0919a}
 \section{Discussion (5\%)}
-\label{sec:orgd6eed87}
+\label{sec:org1c1e36c}
 \subsection{Generalizability}
-\label{sec:orgdb55f73}
+\label{sec:orged32c61}
 \subsection{Future Electricity Landscape}
-\label{sec:org12a4269}
+\label{sec:orgd0125af}
 \subsection{Limitations}
-\label{sec:org5b1d8fa}
+\label{sec:org786b142}
 \section{Conclusion (5\%)}
-\label{sec:orgabaaa83}
+\label{sec:org97c0269}
 \subsection{Contribution}
-\label{sec:org9c41fa0}
+\label{sec:orgf934762}
 \subsection{Future Research}
-\label{sec:org9d766c2}
+\label{sec:org1fc09e8}
 
 
 
 \clearpage
 \printbibliography
-
-\begin{itemize}
-\item See \parencite{vazquez-canteli19_reinf_learn_deman_respon} conclusion for
-limitations in RL.
-\end{itemize}
 \end{document}

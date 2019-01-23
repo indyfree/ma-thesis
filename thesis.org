@@ -62,6 +62,7 @@ EVs get charged when the grid is less congested to achieve more grid stability.
 Smart charging reduces peaks in electricity demand, called /Peak Cutting/ and
 complement the grid in times of low demand, called /Valley Filling/. Smart
 charging has been researched thoroughly in the IS literature.
+
 # NOTE: Section Smart charging examples and studies
 textcite:valogianni14_effec_manag_elect_vehic_storag find that using intelligent
 agents to schedule EV charging, substantially reshapes the energy demand and
@@ -100,29 +101,41 @@ profit of only 6\dollar - 72\dollar per EV.
 textcite:brandt17_evaluat_busin_model_vehic_grid_integ evaluated a business
 model for parking garage operators operating on the German frequency regulation
 market. When taking infrastructure costs and battery depreciation costs into
-account they concluded that the proposed vehicle-grid
-integration is not profitable. Even with generous assumptions about EV adoption
-rates in Germany and altered auction mechanisms they arrived at negative profits.
+account they concluded that the proposed vehicle-grid integration is not
+profitable. Even with generous assumptions about EV adoption rates in Germany
+and altered auction mechanisms they arrived at negative profits.
 parencite:kahlen17_fleet used EV fleets to offer balancing services to the grid.
 Evaluating the impact of V2G in their model the authors come to the conclusion
 that V2G would only be profitable if reserve power prices would be twice as
 high. Given the results from the aforementioned studies, we decided not to
 include V2G into our model, since expected profits are, at most, marginal.
 
-# NOTE: Section Trading strategies, on multiple markets
-Successful trading strategies to jointly participate in multiple markets have
-been developed by textcite:mashhour11_biddin_strat_virtual_power_plant_2. Using
-stationary storage the authors use VPPs to participate in the spinning reserve
-market and day-ahead market at the same time. Similar research has been done by
-textcite:he16_optim_biddin_strat_batter_storag. The authors additionally take
-the battery
-life cycle into account, which proves to be a decisive factor. In contrast, we
-aim to jointly participate in the operating reserve and spot market with
-/non-stationary/ storage, while considering the battery life cycle as well.
-Following the findings of
-textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor, we choose the
-intraday continuous market over the day-ahead market, as it has the lowest
-reaction time of the spot markets.
+# NOTE: Section Trading strategies on multiple markets, battery depreciation
+To maximize profits, it is essential for market participants to develop good
+bidding strategies. Successful bidding strategies to jointly participate in
+multiple markets have been developed e.g. by
+textcite:mashhour11_biddin_strat_virtual_power_plant_2. The authors use VPPs of
+stationary battery storage to participate in the spinning reserve market and
+the day-ahead market at the same time. They developed a non-equilibrium model,
+which solves the presented mixed-integer program with Genetic Programming (GP).
+Contrarily, we use a model-free RL agent that learns an optimal policy (i.e.
+trading strategy) from actions it takes in the environment (i.e. bidding on
+electricity markets). Using a model-free approach is especially beneficial for
+us, since additional unknown variables and constraints (i.e. customer mobility
+demand), makes it very hard to formulate a mathematical model.
+# TODO: Revise above paragraph, more clarity and concise
+Similar research to textcite:mashhour11_biddin_strat_virtual_power_plant_2 has
+been done by textcite:he16_optim_biddin_strat_batter_storag. The authors
+additionally incorporate battery life cycle in their profit maximization model,
+which proves to be a decisive factor. In contrast to the authors, we jointly
+participated in the secondary operating reserve and spot market with the
+/non-stationary/ storage of EV batteries. Because shared EVs have to satisfy
+mobility demands, they have to be charged nonetheless, which allows us to safely
+exclude battery deprecation from our model. Further, we choose the intraday
+continuous market over the day-ahead market, as it has the lowest reaction time
+of the spot markets, and thus offers potentially higher profits
+parencite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
+# TODO: GA vs RL
 
 
 # NOTE: Section Intelligent Agents within Smart Charging
