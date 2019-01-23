@@ -308,6 +308,8 @@ Stuttgart.
 ** Limitations
 * Conclusion (5%)
 ** Contribution
+# TODO: Compare to most simular studies.
+# parencite:kahlen18_elect_vehic_virtual_power_plant_dilem,vandael15_reinf_learn_heuris_ev_fleet etc..
 ** Future Research
 
 
