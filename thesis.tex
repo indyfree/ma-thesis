@@ -1,4 +1,4 @@
-% Created 2019-01-23 Wed 12:55
+% Created 2019-01-23 Wed 14:45
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, article]{article}
 \usepackage[utf8]{inputenc}
@@ -72,21 +72,21 @@
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org6c2d102}
+\label{sec:org1ece1e5}
 \subsection{Research Motivation}
-\label{sec:orgc11755b}
+\label{sec:org8b7caa5}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org09462f1}
+\label{sec:org70c040e}
 \subsection{Relevance}
-\label{sec:org068eb29}
+\label{sec:orgb51ded0}
 
 \section{Related Literature (10\%)}
-\label{sec:org15f0709}
+\label{sec:org5bd73e5}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org9ab0c43}
+\label{sec:org7a24360}
 The increasing penetration of EVs has a substantial effect on electricity consumption
 patterns. During charging periods, power flows and grid losses increase
 considerably and challenge the grid. Operators have to reinforce the grid
@@ -171,14 +171,13 @@ continuous market over the day-ahead market, as it has the lowest reaction time
 of the spot markets, and thus offers potentially higher profits
 \parencite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}.
 
-
-
-Previous studies often make the assumption that car owners or households can
-directly trade on electricity markets. In reality, this is not possible due to
-minimum capacity requirements of the markets. For example, the German secondary
-reserve market has a 1 MW minimum trading capacity, while the maximum battery
-capacity of i.e. a \emph{Smart ForTwo Electric} is 16.50 kWh.
-
+Previous studies often assume that car owners or households can directly trade
+on electricity markets. In reality, this is not possible due to minimum capacity
+requirements of the market or reliability requirements for i.e.
+regulation capacity, that single EVs do not meet. For example, the German
+Control Reserve Market (GCRM) has 1MW to 5MW minimum trading capacity, depending
+on the specific market. In order to reach the minimum capacity over 200 EVs
+would need to be connected to a the Grid via a normal 4.6kW charging station.
 \textcite{ketter13_power_tac} introduced the notion of electricity brokers,
 intelligent agents that act on behalf of a group of individuals or households to
 participate on electricity markets.
@@ -231,7 +230,7 @@ approach, who also propose a combination of multiple markets in future work on
 this topic.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:orgf782ada}
+\label{sec:orgcec771d}
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning methods can successfully take action in the smart grid.
@@ -263,34 +262,34 @@ electricity prices) to take actions (e.g. allocate battery capacity to different
 types of VPPs) that maximizes the reward function.
 
 \section{Theoretical Background (10\%)}
-\label{sec:orgbbbf773}
+\label{sec:org3ba4f7e}
 \subsection{Electricity Markets}
-\label{sec:org3343b91}
+\label{sec:org86c1313}
 \subsubsection{Balancing Market}
-\label{sec:org6dcd76c}
+\label{sec:org5caaed0}
 \subsubsection{Spot Market}
-\label{sec:org8edb461}
+\label{sec:org2f75a1d}
 \subsection{Reinforcement Learning}
-\label{sec:org5303750}
+\label{sec:orgb3aa847}
 \subsubsection{Notation}
-\label{sec:org4fcd4e4}
+\label{sec:orgfcf6441}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the layer.
 \subsubsection{Markow Decision Processes}
-\label{sec:orga8dcaef}
+\label{sec:org260b44f}
 \subsubsection{Q-Learning}
-\label{sec:orgd9d527c}
+\label{sec:org4f5f4e6}
 \subsubsection{Function Approximation}
-\label{sec:orgb96a454}
+\label{sec:org9fad7af}
 \subsubsection{Exploitation-Exploration Tradeoff}
-\label{sec:orgdfd7273}
+\label{sec:orgbddec1e}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:org22e561f}
+\label{sec:org96d7cad}
 \section{Empirical Setting / Data (10\%)}
-\label{sec:org5221bf0}
+\label{sec:org817d906}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:orga05d2fb}
+\label{sec:org286162e}
 \subsubsection{Raw Data}
-\label{sec:org0d0f5a4}
+\label{sec:orgfe55865}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -334,53 +333,53 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org2d060bb}
+\label{sec:org1121011}
 \subsection{Electricity Markets Data}
-\label{sec:orgb060943}
+\label{sec:orgaba50cc}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:orged2724f}
+\label{sec:org833d3bd}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:orgcd82e67}
+\label{sec:orge1c6623}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:orgb3589e8}
+\label{sec:org5ace4d0}
 \subsection{Information Assumptions}
-\label{sec:org67ba226}
+\label{sec:org3f3261d}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:orga911f2f}
+\label{sec:org6cdc7c3}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org4c58fc2}
+\label{sec:org5fd572f}
 \subsection{Bidding Strategy}
-\label{sec:org1cc0316}
+\label{sec:orgfcf264a}
 
 \section{Evaluation (30\%)}
-\label{sec:org75759f8}
+\label{sec:orgd779ddf}
 \subsection{Event-based Simulation}
-\label{sec:orga02b142}
+\label{sec:org3db4d14}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org33d7461}
+\label{sec:orgf526f92}
 \subsection{FleetRL}
-\label{sec:orgce64637}
+\label{sec:orge228891}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org0ce6e5f}
+\label{sec:org23fc633}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:orgb87950b}
+\label{sec:org527f091}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org4e0919a}
+\label{sec:org68efb3b}
 \section{Discussion (5\%)}
-\label{sec:org1c1e36c}
+\label{sec:orgb8c98a5}
 \subsection{Generalizability}
-\label{sec:orged32c61}
+\label{sec:org57c4a22}
 \subsection{Future Electricity Landscape}
-\label{sec:orgd0125af}
+\label{sec:orgeec02f7}
 \subsection{Limitations}
-\label{sec:org786b142}
+\label{sec:org2337731}
 \section{Conclusion (5\%)}
-\label{sec:org97c0269}
+\label{sec:org3507dc7}
 \subsection{Contribution}
-\label{sec:orgf934762}
+\label{sec:orgc03d014}
 \subsection{Future Research}
-\label{sec:org1fc09e8}
+\label{sec:org71a8f51}
 
 
 

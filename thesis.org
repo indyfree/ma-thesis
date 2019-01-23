@@ -135,32 +135,28 @@ exclude battery deprecation from our model. Further, we choose the intraday
 continuous market over the day-ahead market, as it has the lowest reaction time
 of the spot markets, and thus offers potentially higher profits
 parencite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
-# TODO: GA vs RL
-
 
 # NOTE: Section Intelligent Agents within Smart Charging
-
 # TODO: Extend section on intelligent agents and electricity brokers, state that
 # we are applying this concept with VPP on top.
-Previous studies often make the assumption that car owners or households can
-directly trade on electricity markets. In reality, this is not possible due to
-minimum capacity requirements of the markets. For example, the German secondary
-reserve market has a 1 MW minimum trading capacity, while the maximum battery
-capacity of i.e. a /Smart ForTwo Electric/ is 16.50 kWh.
-
-# - And a "normal" charger has 4.6kW to 22kW.
-
-textcite:ketter13_power_tac introduced the notion of electricity brokers,
-intelligent agents that act on behalf of a group of individuals or households to
-participate on electricity markets.
+Previous studies often assume that car owners or households can directly trade
+on electricity markets. In reality, this is not possible due to minimum capacity
+requirements of the market or reliability requirements for i.e.
+regulation capacity, that single EVs do not meet. For example, the German
+Control Reserve Market (GCRM) has 1MW to 5MW minimum trading capacity, depending
+on the specific market. In order to reach the minimum capacity, over 200 EVs
+would need to be connected to a the grid via a normal 4.6kW charging station at
+the same time. textcite:ketter13_power_tac introduced the notion of electricity brokers,
+aggregators that act on behalf of a group of individuals or households to
+participate in electricity markets.
 textcite:brandt17_evaluat_busin_model_vehic_grid_integ and
 textcite:kahlen14_balan_with_elect_vehic successfully showed in simulations that
 electricity brokers can overcome the capacity issues by aggregating distributed
 electricity sources.
 
 # NOTE: Section Carsharing and EV fleets
-Carsharing providers which manage large EV fleets, can use their EVs as VPPs to
-participate on electricity markets. We look at the concept of free float
+Carsharing providers which manage large EV fleets, can use their vehicles as
+VPPs to participate in electricity markets. We look at the concept of free float
 carsharing, an approach which offers more flexibility to its users, saves
 resources and reduces carbon emissions
 parencite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. In most previous
@@ -171,12 +167,13 @@ billing is done by the minute. This makes predictions about the where and when
 of a car rental a complex issue. textcite:wagner16_in_free_float address this
 problem by taking Points of Interests from Google Maps as an additional
 predictor.
+# But we....
 
 # NOTE: Section Kahlen in more detail and what we'll do differently
 textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor,kahlen17_fleet showed
 that is possible to use free floating carsharing fleets as VPPs to profitably
 offer balancing services to the grid. The authors also showed that with a
-similar approach, carsharing companies can participate on day-ahead markets for
+similar approach, carsharing companies can participate in day-ahead markets for
 arbitrage purposes parencite:kahlen18_elect_vehic_virtual_power_plant_dilem. A
 central dilemma within this research is to decide whether an EV should be
 committed to being used as a VPP or to be free for rent. Rental
