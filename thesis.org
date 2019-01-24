@@ -46,6 +46,7 @@
 ** Research Question
 ** Relevance
 
+#+LATEX: \clearpage
 * Related Literature (10%)
 ** Smart Charging and Balancing the Electric Grid with EV Fleets
 # NOTE: Section General Problem and Intro of Smart Charging
