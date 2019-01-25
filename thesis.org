@@ -91,7 +91,6 @@ authors state that short intervals between the contract of sale and the physical
 delivery of electricity increase arbitrage benefits. Consequently ancillary service
 markets, like frequency control and operating reserve markets are attractive for
 smart charging.
-
 # NOTE: Section Not looking at V2G. Explain and prove why leaving out V2G.
 textcite:peterson10_econom_using_plug_in_hybrid investigate energy arbitrage
 profitability with V2G in the light of battery depreciation costs in the US.
@@ -115,12 +114,12 @@ include V2G into our model, since expected profits are, at most, marginal.
 To maximize profits, it is essential for market participants to develop good
 bidding strategies. Successful bidding strategies to jointly participate in
 multiple markets have been developed e.g. by
-textcite:mashhour11_biddin_strat_virtual_power_plant_2. The authors use VPPs of
+textcite:mashhour11_biddin_strat_virtual_power_plant_2. The authors use
 stationary battery storage to participate in the spinning reserve market and
 the day-ahead market at the same time. They developed a non-equilibrium model,
 which solves the presented mixed-integer program with Genetic Programming (GP).
 Contrarily, we use a model-free RL agent that learns an optimal policy (i.e.
-trading strategy) from actions it takes in the environment (i.e. bidding on
+a trading strategy) from actions it takes in the environment (i.e. bidding on
 electricity markets). Using a model-free approach is especially beneficial for
 us, since additional unknown variables and constraints (i.e. customer mobility
 demand), makes it very hard to formulate a mathematical model.
@@ -132,9 +131,9 @@ which proves to be a decisive factor. In contrast to the authors, we jointly
 participated in the secondary operating reserve and spot market with the
 /non-stationary/ storage of EV batteries. Because shared EVs have to satisfy
 mobility demands, they have to be charged nonetheless, which allows us to safely
-exclude battery deprecation from our model. Further, we choose the intraday
+exclude battery deprecation from our model. Further, we chose the intraday
 continuous market over the day-ahead market, as it has the lowest reaction time
-of the spot markets, and thus offers potentially higher profits
+of the spot markets, and thus potentially offers higher profits
 parencite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
 
 # NOTE: Section Intelligent Agents within Smart Charging
@@ -142,71 +141,94 @@ parencite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
 # we are applying this concept with VPP on top.
 Previous studies often assume that car owners or households can directly trade
 on electricity markets. In reality, this is not possible due to minimum capacity
-requirements of the market or reliability requirements for i.e.
-regulation capacity, that single EVs do not meet. For example, the German
-Control Reserve Market (GCRM) has 1MW to 5MW minimum trading capacity, depending
-on the specific market. In order to reach the minimum capacity, over 200 EVs
-would need to be connected to a the grid via a normal 4.6kW charging station at
-the same time. textcite:ketter13_power_tac introduced the notion of electricity brokers,
-aggregators that act on behalf of a group of individuals or households to
-participate in electricity markets.
+requirements of the markets, that single EVs do not meet. For example, the German
+Control Reserve Market (GCRM) has a minimum trading capacity of 1MW to 5MW,
+depending on the specific market. In order to reach the minimum capacity, over
+200 EVs would need to be connected to the grid via a normal 4.6kW charging
+station at the same time. textcite:ketter13_power_tac introduced the notion of
+electricity brokers, aggregators that act on behalf of a group of individuals or
+households to participate in electricity markets.
 textcite:brandt17_evaluat_busin_model_vehic_grid_integ and
-textcite:kahlen14_balan_with_elect_vehic successfully showed in simulations that
-electricity brokers can overcome the capacity issues by aggregating distributed
-electricity sources.
-
+textcite:kahlen14_balan_with_elect_vehic successfully showed in their studies
+that electricity brokers can overcome the capacity issues by aggregating EV
+batteries. In addition to electricity brokers, we apply the concept of Virtual
+Power Plants (VPPs). VPPs are flexible portfolios of distributed energy
+resources, which are presented with a single load profile to the system
+operator, making them eligible for market participation and ancillary service
+provisioning parencite:pudjianto07_virtual_power_plant_system_integ. Hence VPPs
+allow to provide aggregated regulation capacity to the market without knowing
+which exact sources provide the promised capacity until delivery time
+parencite:kahlen17_fleet. This concept is specifically useful when dealing with
+EV fleets: VPPs enable carsharing providers to issue bids and asks based on an
+estimate of available fleet capacity, without knowing beforehand which exact EVs
+will provide the capacity at the time of delivery. Based on the battery charge
+and the availability EVs, an intelligent agent will decide in real-time which
+vehicles provide the capacity.
 # NOTE: Section Carsharing and EV fleets
-Carsharing providers which manage large EV fleets, can use their vehicles as
-VPPs to participate in electricity markets. We look at the concept of free float
-carsharing, an approach which offers more flexibility to its users, saves
-resources and reduces carbon emissions
+Carsharing providers manage large EV fleets, which makes it possible for them to
+use the presented concepts as a viable business extension. We look at free float
+carsharing, a popular concept where cars can be picked up and parked everywhere
+and billing is done by the minute. Free float carsharing offers more flexibility
+to its users, saves resources and reduces carbon emissions
 parencite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. In most previous
-studies concerning using EVs for electricity trading, it was assumed that trips
-are fixed and known in advance. The free float concept adds uncertainty and
-nondeterministic behavior, as cars can be picked up and parked everywhere and
-billing is done by the minute. This makes predictions about the where and when
-of a car rental a complex issue. textcite:wagner16_in_free_float address this
-problem by taking Points of Interests from Google Maps as an additional
-predictor.
-# But we....
-
+studies concerned with using EVs for electricity trading, it was assumed that
+trips are fixed and known in advance, e.g. in
+textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. The free float
+concept adds uncertainty and nondeterministic behavior, which make predictions
+about where and when a car will be rented out a complex issue.
 # NOTE: Section Kahlen in more detail and what we'll do differently
-textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor,kahlen17_fleet showed
-that is possible to use free floating carsharing fleets as VPPs to profitably
-offer balancing services to the grid. The authors also showed that with a
-similar approach, carsharing companies can participate in day-ahead markets for
-arbitrage purposes parencite:kahlen18_elect_vehic_virtual_power_plant_dilem. A
-central dilemma within this research is to decide whether an EV should be
-committed to being used as a VPP or to be free for rent. Rental
-profits are considerably higher than profits to be made from electricity
-trading.
+textcite:kahlen17_fleet showed that is possible to use free float carsharing
+fleets as VPPs to profitably offer balancing services to the grid. The authors
+compared cases from three different cities across Europe and the US.
+They used an event-based simulation, bootstrapped with real-world carsharing
+and secondary operating reserve market data from the respective cities, to
+arrive at their results. A central dilemma within this research is to decide
+whether an EV should be committed to being used as a VPP or to be free for
+rent, in the core a classification problem. Since rental profits are
+considerably higher than profits to be made from electricity trading, it is
+crucial to not allocate an EV to a VPP when it could have been rented out
+otherwise. To deal with the asymmetric payoff, citeauthor:kahlen17_fleet use
+stratified sampling in their classifier. This method gives rental
+misclassifications higher weights, which reduces the likelihood of EVs to
+participate in VPP activities. The authors use a Random Forest regression model
+to predict the available balancing capacity to offer to the market. The
+predictions are done on an aggregated fleet level, in order to leverage
+risk-pooling effects. The decision which EVs will provide the regulation
+capacity is made at delivery time based on the likelihood that the vehicle is
+rented out and on the expected (predicted) benefits of the EV.
 
-# - So you don't want to allocate a EV to VPP when it could have been rented out
-# - A central point are  the prediction are made on a aggregated fleet level, how
-#   much capacity you want to trade
-# - Allocations are then made on likelihood that a Car is rented out and expected
-#   benefits
+In a similar study the authors showed, that carsharing companies can
+participate in day-ahead markets for arbitrage purposes
+parencite:kahlen18_elect_vehic_virtual_power_plant_dilem. In this paper the authors
+use a time-series model to predict available trading capacity, due to the closer
+time between commitment and delivery. Another central problem for carsharing
+provider is that committed trades which can't be fulfilled result in heavy
+penalties from the system operator or electricity exchange. In other words, it
+should be avoided at all costs, that the fleet commits to buy any amount of
+electricity, for which it does not have enough available EVs to charge it at
+delivery time. To address this issue, the authors develop a mean asymmetric
+weighted (MAW) objective function. They use it for their time-series based
+prediction model, to penalize committing an EV to VPP when it would have been
+rented out otherwise.
 
-Another central problem is that offering capacity to the grid, which
-you can not provide, results in heavy penalties, which should be avoided at all
-costs. To address this issue, the authors make use of asymmetric objective
-functions that heavily penalize committing an EV to a VPP, when it would have
-been rented otherwise. Therefore only very conservative estimations and
-commitments of available overall capacity to be traded on the markets are made.
-This results in a high amount of foregone profits when bidding on the balancing
-market. textcite:kahlen15_aggreg_elect_cars_sustain_virtual_power_plant state
-that in 42% to 80% of the time EVs are /not/ committed to a VPP when it would have been
-profitable (i.e. the EV has not been rented out).
+Because of the two issues mentioned above,
+textcite:kahlen18_elect_vehic_virtual_power_plant_dilem can only make very
+conservative estimations and commitments of available overall capacity to be
+traded on the markets, which results in a high amount of foregone profits. This
+effect is especially prominent when participating on the secondary operating
+reserve market, since commitments have to be made one week in advance, where
+mobility demands are still uncertain.
+textcite:kahlen17_fleet state that in 42% to 80% of the cases EVs are /not/
+committed to a VPP when it would have been profitable to do so.
 
 # NOTE: Section Short summary what we will do
 We are proposing a solution, in which the EV fleet participates on the balancing
-market and intraday market simultaneously. With this approach we aim to align
-the potentially higher profits on the balancing markets with the more accurate
-capacity estimations, which can be made on intraday markets (because time
-between commitment and delivery is smaller). We follow
-textcite:kahlen15_aggreg_elect_cars_sustain_virtual_power_plant with this
-approach, who also propose a combination of multiple markets in future work on
-this topic.
+market and intraday market simultaneously. With this approach we align the
+potentially higher profits on the balancing markets, mentioned in
+textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor with the more
+accurate capacity estimations, which can be made on intraday markets. We followed
+textcite:kahlen17_fleet with this approach, who proposed to work on a combination
+of multiple markets in the future.
 
 ** Reinforcement Learning in Smart Grids
 
