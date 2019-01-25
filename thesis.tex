@@ -1,4 +1,4 @@
-% Created 2019-01-25 Fri 15:54
+% Created 2019-01-25 Fri 17:04
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, article]{article}
 \usepackage[utf8]{inputenc}
@@ -72,40 +72,41 @@
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org4ddbfb4}
+\label{sec:org37341b3}
 \subsection{Research Motivation}
-\label{sec:orgbc734e0}
+\label{sec:orgb331de1}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org4054004}
+\label{sec:org1121d93}
 \subsection{Relevance}
-\label{sec:org64cf4cc}
+\label{sec:org389c6ec}
 
 \clearpage
 \section{Related Literature (10\%)}
-\label{sec:orgea28912}
+\label{sec:org0f3b408}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org1b5d057}
+\label{sec:org1c2cdd9}
 The increasing penetration of EVs has a substantial effect on electricity consumption
 patterns. During charging periods, power flows and grid losses increase
 considerably and challenge the grid. Operators have to reinforce the grid
 to ensure that transformers and substations do not get overloaded
 \parencite{sioshansi12_impac_elect_tarif_plug_in,lopes11_integ_elect_vehic_elect_power_system}.
-Loading multiple EVs in the same neighbourhood, or worse, whole EV fleets at
+Loading multiple EVs in the same neighborhood, or worse, whole EV fleets at
 once, stress the grid. In these cases, even brown- or blackouts are possible
 \parencite{kim12_carbit}. Despite these challenges, it is possible to postpone the
 physical reinforcement by adopting smart charging strategies. In smart charging,
 EVs get charged when the grid is less congested to achieve more grid stability.
 Smart charging reduces peaks in electricity demand, called \emph{Peak Cutting} and
 complement the grid in times of low demand, called \emph{Valley Filling}. Smart
-charging has been researched thoroughly in the IS literature.
+charging has been researched thoroughly in the IS literature, in the following
+we will outline some of the most important contributions.
 
 \textcite{valogianni14_effec_manag_elect_vehic_storag} find that using intelligent
-agents to schedule EV charging, substantially reshapes the energy demand and
+agents to schedule EV charging substantially reshapes the energy demand and
 reduces peak demand without violating individual household preferences. Moreover,
-they show that the proposed smart charging behaviour reduced average energy
+they show that the proposed smart charging behavior reduced average energy
 prices and thus economically benefit households. In another study
 \textcite{kara15_estim_benef_elect_vehic_smart} investigate the effect of smart
 charging on public charging stations in California. Controlling for
@@ -114,59 +115,59 @@ distribution system operator (DSO) and the owners of EVs. A price
 reduction in energy bills and a peak load reduction could be determined.
 An extension of the smart charging concept is Vehicle-to-Grid (V2G). When
 equipped with V2G devices, EVs can discharge their batteries back into the grid.
-Several authors conduct research on this technology in respect to grid stabilization
+Several authors researched this technology in respect to grid stabilization
 effects and arbitrage possibilities.
 \textcite{schill11_elect_vehic_imper_elect_market} find that EVs can be beneficial
-for average consumer electricity prices when the EVs can be used as storage.
-Excess EV battery capacity can be used to charge in off-peak hours and discharge
-in peak hours, when the prices are higher. These arbitrage possibilities,
-reverses welfare effects of generators and increases general overall welfare and
-consumer surplus. \textcite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}
-show that the arbitrage opportunities are especially prominent when a high
-variability in electricity prices on the target electricity market exists. The
-authors state that short intervals between the contract of sale and the physical
-delivery of electricity increase arbitrage benefits. Consequently ancillary service
-markets, like frequency control and operating reserve markets are attractive for
-smart charging.
+for average consumer electricity prices. Excess EV battery capacity can be used
+to charge in off-peak hours and discharge in peak hours when the prices are
+higher. These arbitrage possibilities reverse welfare effects of generators
+and increases general overall welfare and consumer surplus.
+\textcite{tomic07_using_fleet_elect_drive_vehic_grid_suppor} show that the
+arbitrage opportunities are especially prominent when a high variability in
+electricity prices on the target electricity market exists. The authors state
+that short intervals between the contract of sale and the physical delivery of
+electricity increase arbitrage benefits. Consequently ancillary service markets,
+like frequency control and operating reserve markets, are attractive for smart
+charging.
 
 \textcite{peterson10_econom_using_plug_in_hybrid} investigate energy arbitrage
 profitability with V2G in the light of battery depreciation costs in the US.
 Their results indicate that large-scale use of EV batteries for grid storage
-does not yield enough profits to incentivize owners to participate in V2G
-activities. Considering battery depreciation cost they arrive at an annual
+does not yield enough profits to incentivize EV owners to participate in V2G
+activities. Considering battery depreciation cost, they arrive at an annual
 profit of only 6\$ - 72\$ per EV.
 \textcite{brandt17_evaluat_busin_model_vehic_grid_integ} evaluated a business
 model for parking garage operators operating on the German frequency regulation
 market. When taking infrastructure costs and battery depreciation costs into
-account they concluded that the proposed vehicle-grid integration is not
+account, they concluded that the proposed vehicle-grid integration is not
 profitable. Even with generous assumptions about EV adoption rates in Germany
 and altered auction mechanisms they arrived at negative profits.
 \parencite{kahlen17_fleet} used EV fleets to offer balancing services to the grid.
-Evaluating the impact of V2G in their model the authors come to the conclusion
-that V2G would only be profitable if reserve power prices would be twice as
-high. Given the results from the aforementioned studies, we decided not to
-include V2G into our model, since expected profits are, at most, marginal.
+Evaluating the impact of V2G in their model the authors conclude that V2G would
+only be profitable if reserve power prices would be twice as high. Given the
+results from the studies mentioned above, we decided not to include V2G into our
+model, since expected profits are marginal.
 
-To maximize profits, it is essential for market participants to develop good
+In order to maximize profits, it is essential for market participants to develop good
 bidding strategies. Successful bidding strategies to jointly participate in
-multiple markets have been developed e.g. by
+multiple markets have been developed, e.g. by
 \textcite{mashhour11_biddin_strat_virtual_power_plant_2}. The authors use
 stationary battery storage to participate in the spinning reserve market and
 the day-ahead market at the same time. They developed a non-equilibrium model,
 which solves the presented mixed-integer program with Genetic Programming (GP).
-Contrarily, we use a model-free RL agent that learns an optimal policy (i.e.
-a trading strategy) from actions it takes in the environment (i.e. bidding on
+Contrarily, we use a model-free RL agent that learns an optimal policy (i.e.,
+a trading strategy) from actions it takes in the environment (i.e., bidding on
 electricity markets). Using a model-free approach is especially beneficial for
-us, since additional unknown variables and constraints (i.e. customer mobility
-demand), makes it very hard to formulate a mathematical model.
+us, since additional unknown variables and constraints (i.e., customer mobility
+demand), make it complicated to formulate a mathematical model.
 
-Similar research to \textcite{mashhour11_biddin_strat_virtual_power_plant_2} has
-been done by \textcite{he16_optim_biddin_strat_batter_storag}. The authors
-additionally incorporate battery life cycle in their profit maximization model,
+\textcite{he16_optim_biddin_strat_batter_storag} have done similar research to
+\textcite{mashhour11_biddin_strat_virtual_power_plant_2}. The authors additionally
+incorporate battery life cycle in their profit maximization model,
 which proves to be a decisive factor. In contrast to the authors, we jointly
 participated in the secondary operating reserve and spot market with the
 \emph{non-stationary} storage of EV batteries. Because shared EVs have to satisfy
-mobility demands, they have to be charged nonetheless, which allows us to safely
+mobility demands, they have to be charged in any case, which allows us to safely
 exclude battery deprecation from our model. Further, we chose the intraday
 continuous market over the day-ahead market, as it has the lowest reaction time
 of the spot markets, and thus potentially offers higher profits
@@ -188,7 +189,7 @@ batteries. In addition to electricity brokers, we apply the concept of Virtual
 Power Plants (VPPs). VPPs are flexible portfolios of distributed energy
 resources, which are presented with a single load profile to the system
 operator, making them eligible for market participation and ancillary service
-provisioning \parencite{pudjianto07_virtual_power_plant_system_integ}. Hence VPPs
+provisioning \parencite{pudjianto07_virtual_power_plant_system_integ}. Hence, VPPs
 allow to provide aggregated regulation capacity to the market without knowing
 which exact sources provide the promised capacity until delivery time
 \parencite{kahlen17_fleet}. This concept is specifically useful when dealing with
@@ -255,16 +256,15 @@ mobility demands are still uncertain.
 committed to a VPP when it would have been profitable to do so.
 
 We are proposing a solution, in which the EV fleet participates on the balancing
-market and intraday market simultaneously. With this approach we aim to align
-the potentially higher profits on the balancing markets, mentioned in
-\textcite{tomic07_using_fleet_elect_drive_vehic_grid_suppor} with the more
-accurate capacity estimations, which can be made on intraday markets (because
-time between commitment and delivery is smaller). We follow
-\textcite{kahlen17_fleet} with this approach, who propose to work on a combination
+market and intraday market simultaneously. With this approach we align the
+potentially higher profits on the balancing markets, already mentioned by
+\textcite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}, with the more
+accurate capacity estimations that can be made on intraday markets. We followed
+\textcite{kahlen17_fleet} with this approach, who proposed to work on a combination
 of multiple markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org5d62e47}
+\label{sec:org7e5e9fe}
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning methods can successfully take action in the smart grid.
@@ -296,34 +296,34 @@ electricity prices) to take actions (e.g. allocate battery capacity to different
 types of VPPs) that maximizes the reward function.
 
 \section{Theoretical Background (10\%)}
-\label{sec:org62de494}
+\label{sec:org7b5352e}
 \subsection{Electricity Markets}
-\label{sec:orge4f99ab}
+\label{sec:orge74c198}
 \subsubsection{Balancing Market}
-\label{sec:orgb584271}
+\label{sec:orge55de2b}
 \subsubsection{Spot Market}
-\label{sec:org4e03099}
+\label{sec:org11b76dd}
 \subsection{Reinforcement Learning}
-\label{sec:orge230dfb}
+\label{sec:org73d00ce}
 \subsubsection{Notation}
-\label{sec:orga3292e6}
+\label{sec:org3ecbefc}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the layer.
 \subsubsection{Markow Decision Processes}
-\label{sec:org0bdda87}
+\label{sec:org5bddca2}
 \subsubsection{Q-Learning}
-\label{sec:orgfd9a3cd}
+\label{sec:org7a5fbc4}
 \subsubsection{Function Approximation}
-\label{sec:org0aed21e}
+\label{sec:org9b3af21}
 \subsubsection{Exploitation-Exploration Tradeoff}
-\label{sec:orgaf28345}
+\label{sec:org1eedf76}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:org3fc7007}
+\label{sec:orga2e55aa}
 \section{Empirical Setting / Data (10\%)}
-\label{sec:orgcb33429}
+\label{sec:org67728df}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:orge51c26a}
+\label{sec:orgfb8ca95}
 \subsubsection{Raw Data}
-\label{sec:org586f6de}
+\label{sec:orga86c302}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -367,53 +367,53 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org4d4c016}
+\label{sec:org00e73c0}
 \subsection{Electricity Markets Data}
-\label{sec:orgc7f317e}
+\label{sec:orgb2392d1}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org12ee4b3}
+\label{sec:org4599c82}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:org0263b71}
+\label{sec:org353a355}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:org9eaea82}
+\label{sec:orga0638fa}
 \subsection{Information Assumptions}
-\label{sec:org64862bf}
+\label{sec:orgf98b4a3}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org837e77e}
+\label{sec:org4945e27}
 \subsection{Reinforcement Learning Approach}
-\label{sec:orgab7e5d5}
+\label{sec:orgb1783be}
 \subsection{Bidding Strategy}
-\label{sec:org78d7098}
+\label{sec:orgf01bf14}
 
 \section{Evaluation (30\%)}
-\label{sec:org9c2819f}
+\label{sec:org240d1ee}
 \subsection{Event-based Simulation}
-\label{sec:orgd69131d}
+\label{sec:org443e21d}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org9bb6aa3}
+\label{sec:orgc6a201e}
 \subsection{FleetRL}
-\label{sec:org9eb5f87}
+\label{sec:org9243625}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:orga6919f3}
+\label{sec:org9b02a6c}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:orgfb21a6b}
+\label{sec:orga739dfe}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org3ccddee}
+\label{sec:org79f71e2}
 \section{Discussion (5\%)}
-\label{sec:orga4fdc2c}
+\label{sec:orgd83f9a8}
 \subsection{Generalizability}
-\label{sec:org9bf7528}
+\label{sec:org8ddaa76}
 \subsection{Future Electricity Landscape}
-\label{sec:orgae17e0b}
+\label{sec:orgf31ec59}
 \subsection{Limitations}
-\label{sec:org5658a42}
+\label{sec:orgd39e1d6}
 \section{Conclusion (5\%)}
-\label{sec:org5105ebf}
+\label{sec:org63d238d}
 \subsection{Contribution}
-\label{sec:orgb4ff80e}
+\label{sec:org5c8f0c4}
 \subsection{Future Research}
-\label{sec:orgfdf0ab6}
+\label{sec:org744172a}
 
 
 
