@@ -172,9 +172,9 @@ use the presented concepts as a viable business extension. We look at free float
 carsharing, a popular concept where cars can be picked up and parked everywhere,
 and billing is done by the minute. Free float carsharing offers more flexibility
 to its users, saves resources and reduces carbon emissions
-parencite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. In most previous
-studies concerned with using EVs for electricity trading, it was assumed that
-trips are fixed and known in advance, e.g., in
+parencite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Most previous
+studies concerned with using EVs for electricity trading, assumed that trips are
+fixed and known in advance, e.g., in
 textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. The free float
 concept adds uncertainty and nondeterministic behavior, which make predictions
 about future rentals a complex issue.
@@ -193,33 +193,31 @@ payoff, citeauthor:kahlen17_fleet use stratified sampling in their classifier.
 This method gives rental misclassifications higher weights, which reduces the
 likelihood of EVs to participate in VPP activities. The authors use a Random
 Forest regression model to predict the available balancing capacity, which they
-use to place bids and asks on the market. The predictions are made on an
-aggregated fleet level, in order to leverage risk-pooling effects. The agent
-decides which EVs will provide the regulation capacity at the delivery time
-based on the likelihood that the vehicle is rented out and on the expected
-(predicted) benefits of the EV.
-In a similar study, the authors showed that carsharing companies could
-participate in day-ahead markets for arbitrage purposes
-parencite:kahlen18_elect_vehic_virtual_power_plant_dilem. In this paper, the
-authors use a time-series model to predict available trading capacity, due to
-less time between commitment and delivery. Another central problem for
-the carsharing provider is that committed trades which can not be fulfilled result
-in substantial penalties from the system operator or electricity exchange. In
-other words, it should be avoided at all costs, that the fleet commits to buy
-any amount of electricity, for which it does not have enough available EVs to
-charge it at delivery time. To address this issue, the authors develop a mean
-asymmetric weighted (MAW) objective function. They use it for their time-series
-based prediction model, to penalize committing an EV to VPP when it would have
-been rented out otherwise.
-Because of the two issues mentioned above,
-textcite:kahlen18_elect_vehic_virtual_power_plant_dilem can only make very
-conservative estimations and commitments of overall available trading capacity,
-which results in a high amount of foregone profits. This effect is especially
-prominent when participating in the secondary operating reserve market since
-commitments have to be made one week in advance when mobility demands are
-still uncertain. textcite:kahlen17_fleet state that in 42% to 80% of the cases
-EVs are /not/ committed to a VPP when it would have been profitable to do so.
-
+use to place bids and asks on the market. An agent predicts available capacity
+on an aggregated fleet level, in order to leverage risk-pooling effects. Only at
+the delivery time the agent decides which EVs will provide the regulation
+capacity based on the likelihood that the vehicle is rented out and on the
+expected benefits of the EV. In a similar study, the authors showed that
+carsharing companies could participate in day-ahead markets for arbitrage
+purposes parencite:kahlen18_elect_vehic_virtual_power_plant_dilem. In this
+paper, the authors use a time-series model to predict available trading
+capacity, due to less time between commitment and delivery. Another central
+problem for the carsharing provider is that committed trades which can not be
+fulfilled result in substantial penalties from the system operator or
+electricity exchange. In other words, it should be avoided at all costs, that
+the fleet commits to buy any amount of electricity, for which it does not have
+enough available EVs to charge it at the delivery time. To address this issue,
+the authors develop a mean asymmetric weighted (MAW) objective function. They
+use it for their time-series based prediction model, to penalize committing an
+EV to VPP when it would have been rented out otherwise. Because of the two
+issues mentioned above, textcite:kahlen18_elect_vehic_virtual_power_plant_dilem
+can only make very conservative estimations and commitments of overall available
+trading capacity, which results in a high amount of foregone profits. This
+effect is especially prominent when participating in the secondary operating
+reserve market since commitments have to be made one week in advance when
+mobility demands are still uncertain. textcite:kahlen17_fleet state that in 42%
+to 80% of the cases EVs are /not/ committed to a VPP when it would have been
+profitable to do so.
 # NOTE: Section Short summary what we will do
 We are proposing a solution, in which the EV fleet participates in the balancing
 market and intraday market simultaneously. With this approach, we align the
