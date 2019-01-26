@@ -84,12 +84,12 @@ textcite:schill11_elect_vehic_imper_elect_market find that EVs can be beneficial
 for average consumer electricity prices. Excess EV battery capacity can be used
 to charge in off-peak hours and discharge in peak hours when the prices are
 higher. These arbitrage possibilities reverse welfare effects of generators
-and increases general overall welfare and consumer surplus.
+and increase general overall welfare and consumer surplus.
 textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor show that the
 arbitrage opportunities are especially prominent when a high variability in
 electricity prices on the target electricity market exists. The authors state
 that short intervals between the contract of sale and the physical delivery of
-electricity increase arbitrage benefits. Consequently ancillary service markets,
+electricity increase arbitrage benefits. Consequently, ancillary service markets,
 like frequency control and operating reserve markets, are attractive for smart
 charging.
 
@@ -106,7 +106,7 @@ market. When taking infrastructure costs and battery depreciation costs into
 account, they concluded that the proposed vehicle-grid integration is not
 profitable. Even with generous assumptions about EV adoption rates in Germany
 and altered auction mechanisms they arrived at negative profits.
-parencite:kahlen17_fleet used EV fleets to offer balancing services to the grid.
+textcite:kahlen17_fleet used EV fleets to offer balancing services to the grid.
 Evaluating the impact of V2G in their model the authors conclude that V2G would
 only be profitable if reserve power prices would be twice as high. Given the
 results from the studies mentioned above, we decided not to include V2G into our
@@ -159,7 +159,7 @@ resources, which are presented with a single load profile to the system
 operator, making them eligible for market participation and ancillary service
 provisioning parencite:pudjianto07_virtual_power_plant_system_integ. Hence, VPPs
 allow providing regulation capacity to the market without knowing which exact
-sources provide the promised capacity until delivery time
+sources provide the promised capacity until the delivery time
 parencite:kahlen17_fleet. This concept is specially useful when dealing with
 EV fleets: VPPs enable carsharing providers to issue bids and asks based on an
 estimate of available fleet capacity, without knowing beforehand which exact EVs
@@ -198,8 +198,8 @@ aggregated fleet level, in order to leverage risk-pooling effects. The agent
 decides which EVs will provide the regulation capacity at the delivery time
 based on the likelihood that the vehicle is rented out and on the expected
 (predicted) benefits of the EV.
-In a similar study the authors showed, that carsharing companies can participate
-in day-ahead markets for arbitrage purposes
+In a similar study, the authors showed that carsharing companies could
+participate in day-ahead markets for arbitrage purposes
 parencite:kahlen18_elect_vehic_virtual_power_plant_dilem. In this paper, the
 authors use a time-series model to predict available trading capacity, due to
 less time between commitment and delivery. Another central problem for
@@ -215,8 +215,8 @@ Because of the two issues mentioned above,
 textcite:kahlen18_elect_vehic_virtual_power_plant_dilem can only make very
 conservative estimations and commitments of overall available trading capacity,
 which results in a high amount of foregone profits. This effect is especially
-prominent when participating on the secondary operating reserve market since
-commitments have to be made one week in advance, when mobility demands are
+prominent when participating in the secondary operating reserve market since
+commitments have to be made one week in advance when mobility demands are
 still uncertain. textcite:kahlen17_fleet state that in 42% to 80% of the cases
 EVs are /not/ committed to a VPP when it would have been profitable to do so.
 
