@@ -219,36 +219,49 @@ mobility demands are still uncertain. textcite:kahlen17_fleet state that in 42%
 to 80% of the cases EVs are /not/ committed to a VPP when it would have been
 profitable to do so.
 # NOTE: Section Short summary what we will do
-We are proposing a solution, in which the EV fleet participates in the balancing
-market and intraday market simultaneously. With this approach, we align the
-potentially higher profits on the balancing markets, already mentioned by
-textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor, with the more
-accurate capacity estimations for intraday markets. We followed
+# TODO: Rework
+This research is proposing a solution, in which the EV fleet participates in the
+balancing market and intraday market simultaneously. With this approach, we
+align the potentially higher profits on the balancing markets, already mentioned
+by textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor, with more
+accurate capacity predictions for intraday markets. We followed
 textcite:kahlen17_fleet with this approach, who proposed to work on a combination
 of multiple markets in the future.
 
 ** Reinforcement Learning in Smart Grids
 
 Previous research showed that intelligent agents equipped with Reinforcement
-Learning methods can successfully take action in the smart grid.
-textcite:reddy11_strat,reddy11_learn_behav_multip_auton_agent conducted
-research, in which autonomous broker agents parencite:ketter13_power_tac learn
-their strategies using RL. textcite:peters13_reinf_learn_approac_to_auton build
-on that work and further enhance the method, by learning over larger state
-spaces to accommodate arbitrary economic signals. This method is especially
-beneficial in smart markets because the markets structures might change in the
-future and intelligent agents should adapt to a variety of market structures and
-conditions.
+Learning methods can successfully take action in the smart grid. The following
+chapter outlines different research approaches of RL in the domain of smart
+grids. For a more thorough description, mathematical formulations and common
+issues of RL refer to Chapter ref:reinforcement-learning.
 
-parencite:vazquez-canteli19_reinf_learn_deman_respon
+textcite:reddy11_learn_behav_multip_auton_agent,reddy11_strat use autonomous
+broker agents to buy and sell electricity from DER on a proposed /Tariff
+Market/. The agents uses Markov Decision Processes (MDPs) and RL to learn pricing
+strategies to profitably participate in the Tariff Market. To control for a
+large number of possible states in the domain, the authors used /Q-Learning/
+with derived state space features. Based on descriptive statistics, they define
+derived price and market participant features. By engaging with its
+environment, the agent learns an optional sequence of actions (policy) based on
+a the states. textcite:peters13_reinf_learn_approac_to_auton build on that work
+and further enhance the method, by using function approximation. Function
+approximation allows to efficiently learn strategies over large state spaces, by
+deriving a function that describes the states instead of defining discrete
+states. Using this technique, the agent is able adapt to arbitrary economic
+signals from its environment, which resulted in better performance than previous
+approaches. Moreover, the authors applied feature selection and regularization
+methods to explore the agents adaption process. These methods are particularly
+beneficial in smart markets because market design, structures, and conditions
+might change in the future, hence intelligent agents should be able to adapt to
+it parencite:peters13_reinf_learn_approac_to_auton.
 
-
-textcite:valogianni14_effec_manag_elect_vehic_storag adopt RL methods to learn
-electricity consumption behavior of households. The authors implement these
-methods in intelligent agents to smart charge EVs more effectively.
 textcite:vandael15_reinf_learn_heuris_ev_fleet use RL to learn collective EV
 fleet charging behavior to profitably purchase electricity on the day-ahead
-market. We consider RL a perfect fit for the design of our proposed intelligent
+market.
+
+
+We consider RL a perfect fit for the design of our proposed intelligent
 agent, especially as a solution for our Research Question 2. When dynamically
 optimizing the VPP portfolio composition of the fleet, there is no historical
 data available to train a model. Using RL and a reward function that maximizes
@@ -264,7 +277,7 @@ types of VPPs) that maximizes the reward function.
 # parencite:brandt17_evaluat_busin_model_vehic_grid_integ has a good section
 # explaining the markets.
 *** Spot Market
-** Reinforcement Learning
+** Reinforcement Learning label:reinforcement-learning
 *** Notation
 # NOTE: State set for every single quantity used.
 The input to the network $x \in \mathbb{R}^D$ is fed to the first residual layer to get the activation $y = x + \sigma(w x + b) \in \mathbb{R}^D$ with $w \in \mathbb{R}^{D \times D}$, and $b \in \mathbb{R}^D$ the weights and bias of the layer.

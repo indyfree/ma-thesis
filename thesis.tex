@@ -1,4 +1,4 @@
-% Created 2019-01-26 Sat 01:00
+% Created 2019-01-26 Sat 15:39
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, article]{article}
 \usepackage[utf8]{inputenc}
@@ -72,22 +72,22 @@
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org4e04345}
+\label{sec:org894dea9}
 \subsection{Research Motivation}
-\label{sec:orgdce937f}
+\label{sec:org88627b1}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org88d69ab}
+\label{sec:org3e76f57}
 \subsection{Relevance}
-\label{sec:orgbe14924}
+\label{sec:org44f7e5e}
 
 \clearpage
 \section{Related Literature (10\%)}
-\label{sec:org968a945}
+\label{sec:org7d539ef}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org9d2281d}
+\label{sec:orgb55ed8a}
 The increasing penetration of EVs has a substantial effect on electricity consumption
 patterns. During charging periods, power flows and grid losses increase
 considerably and challenge the grid. Operators have to reinforce the grid
@@ -204,9 +204,9 @@ use the presented concepts as a viable business extension. We look at free float
 carsharing, a popular concept where cars can be picked up and parked everywhere,
 and billing is done by the minute. Free float carsharing offers more flexibility
 to its users, saves resources and reduces carbon emissions
-\parencite{firnkorn15_free_float_elect_carsh_fleet_smart_cities}. In most previous
-studies concerned with using EVs for electricity trading, it was assumed that
-trips are fixed and known in advance, e.g., in
+\parencite{firnkorn15_free_float_elect_carsh_fleet_smart_cities}. Most previous
+studies concerned with using EVs for electricity trading, assumed that trips are
+fixed and known in advance, e.g., in
 \textcite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}. The free float
 concept adds uncertainty and nondeterministic behavior, which make predictions
 about future rentals a complex issue.
@@ -225,62 +225,74 @@ payoff, \citeauthor{kahlen17_fleet} use stratified sampling in their classifier.
 This method gives rental misclassifications higher weights, which reduces the
 likelihood of EVs to participate in VPP activities. The authors use a Random
 Forest regression model to predict the available balancing capacity, which they
-use to place bids and asks on the market. The predictions are made on an
-aggregated fleet level, in order to leverage risk-pooling effects. The agent
-decides which EVs will provide the regulation capacity at the delivery time
-based on the likelihood that the vehicle is rented out and on the expected
-(predicted) benefits of the EV.
-In a similar study, the authors showed that carsharing companies could
-participate in day-ahead markets for arbitrage purposes
-\parencite{kahlen18_elect_vehic_virtual_power_plant_dilem}. In this paper, the
-authors use a time-series model to predict available trading capacity, due to
-less time between commitment and delivery. Another central problem for
-the carsharing provider is that committed trades which can not be fulfilled result
-in substantial penalties from the system operator or electricity exchange. In
-other words, it should be avoided at all costs, that the fleet commits to buy
-any amount of electricity, for which it does not have enough available EVs to
-charge it at delivery time. To address this issue, the authors develop a mean
-asymmetric weighted (MAW) objective function. They use it for their time-series
-based prediction model, to penalize committing an EV to VPP when it would have
-been rented out otherwise.
-Because of the two issues mentioned above,
-\textcite{kahlen18_elect_vehic_virtual_power_plant_dilem} can only make very
-conservative estimations and commitments of overall available trading capacity,
-which results in a high amount of foregone profits. This effect is especially
-prominent when participating in the secondary operating reserve market since
-commitments have to be made one week in advance when mobility demands are
-still uncertain. \textcite{kahlen17_fleet} state that in 42\% to 80\% of the cases
-EVs are \emph{not} committed to a VPP when it would have been profitable to do so.
+use to place bids and asks on the market. An agent predicts available capacity
+on an aggregated fleet level, in order to leverage risk-pooling effects. Only at
+the delivery time the agent decides which EVs will provide the regulation
+capacity based on the likelihood that the vehicle is rented out and on the
+expected benefits of the EV. In a similar study, the authors showed that
+carsharing companies could participate in day-ahead markets for arbitrage
+purposes \parencite{kahlen18_elect_vehic_virtual_power_plant_dilem}. In this
+paper, the authors use a time-series model to predict available trading
+capacity, due to less time between commitment and delivery. Another central
+problem for the carsharing provider is that committed trades which can not be
+fulfilled result in substantial penalties from the system operator or
+electricity exchange. In other words, it should be avoided at all costs, that
+the fleet commits to buy any amount of electricity, for which it does not have
+enough available EVs to charge it at the delivery time. To address this issue,
+the authors develop a mean asymmetric weighted (MAW) objective function. They
+use it for their time-series based prediction model, to penalize committing an
+EV to VPP when it would have been rented out otherwise. Because of the two
+issues mentioned above, \textcite{kahlen18_elect_vehic_virtual_power_plant_dilem}
+can only make very conservative estimations and commitments of overall available
+trading capacity, which results in a high amount of foregone profits. This
+effect is especially prominent when participating in the secondary operating
+reserve market since commitments have to be made one week in advance when
+mobility demands are still uncertain. \textcite{kahlen17_fleet} state that in 42\%
+to 80\% of the cases EVs are \emph{not} committed to a VPP when it would have been
+profitable to do so.
 
-We are proposing a solution, in which the EV fleet participates in the balancing
-market and intraday market simultaneously. With this approach, we align the
-potentially higher profits on the balancing markets, already mentioned by
-\textcite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}, with the more
-accurate capacity estimations for intraday markets. We followed
+This research is proposing a solution, in which the EV fleet participates in the
+balancing market and intraday market simultaneously. With this approach, we
+align the potentially higher profits on the balancing markets, already mentioned
+by \textcite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}, with more
+accurate capacity predictions for intraday markets. We followed
 \textcite{kahlen17_fleet} with this approach, who proposed to work on a combination
 of multiple markets in the future.
 
-
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:orgaba83b6}
+\label{sec:orgdc844dd}
 
 Previous research showed that intelligent agents equipped with Reinforcement
-Learning methods can successfully take action in the smart grid.
-\textcite{reddy11_strat,reddy11_learn_behav_multip_auton_agent} conducted
-research, in which autonomous broker agents \parencite{ketter13_power_tac} learn
-their strategies using RL. \textcite{peters13_reinf_learn_approac_to_auton} build
-on that work and further enhance the method, by learning over larger state
-spaces to accommodate arbitrary economic signals. This method is especially
-beneficial in smart markets because the markets structures might change in the
-future and intelligent agents should adapt to a variety of market structures and
-conditions.
+Learning methods can successfully take action in the smart grid. The following
+chapter outlines different research approaches of RL in the domain of smart
+grids. For a more thorough description, mathematical formulations and common
+issues of RL refer to Chapter \ref{reinforcement-learning}.
 
-\parencite{vazquez-canteli19_reinf_learn_deman_respon}
 
+\textcite{reddy11_learn_behav_multip_auton_agent,reddy11_strat} use autonomous
+broker agents to buy and sell electricity from DER on a proposed \emph{Tariff
+Market}. The agents uses Markov Decision Processes (MDPs) and RL to learn pricing
+strategies to profitably participate in the Tariff Market. To control for a
+large number of possible states in the domain, the authors used \emph{Q-Learning}
+with derived state space features. Based on descriptive statistics, they define
+derived price and market participant features. By engaging with its
+environment, the agent learns an optional sequence of actions (policy) based on
+a the states. \textcite{peters13_reinf_learn_approac_to_auton} build on that work
+and further enhance the method, by using function approximation. Function
+approximation allows to efficiently learn strategies over large state spaces, by
+deriving a function that describes the states instead of defining discrete
+states. Using this technique, the agent is able adapt to arbitrary economic
+signals from its environment, which resulted in better performance than previous
+approaches. Moreover, the authors applied feature selection and regularization
+methods to explore the agents adaption process. These methods are particularly
+beneficial in smart markets because market design, structures, and conditions
+might change in the future, hence intelligent agents should be able to adapt to
+it \parencite{peters13_reinf_learn_approac_to_auton}.
 
 \textcite{valogianni14_effec_manag_elect_vehic_storag} adopt RL methods to learn
-electricity consumption behavior of households. The authors implement these
-methods in intelligent agents to smart charge EVs more effectively.
+electricity consumption behavior of households.
+
+
 \textcite{vandael15_reinf_learn_heuris_ev_fleet} use RL to learn collective EV
 fleet charging behavior to profitably purchase electricity on the day-ahead
 market. We consider RL a perfect fit for the design of our proposed intelligent
@@ -294,34 +306,34 @@ electricity prices) to take actions (e.g., allocate battery capacity to differen
 types of VPPs) that maximizes the reward function.
 
 \section{Theoretical Background (10\%)}
-\label{sec:org3e97b6e}
+\label{sec:org500d2ff}
 \subsection{Electricity Markets}
-\label{sec:orgdb9f096}
+\label{sec:org009b182}
 \subsubsection{Balancing Market}
-\label{sec:org3cfadee}
+\label{sec:org04340b1}
 \subsubsection{Spot Market}
-\label{sec:org671295b}
-\subsection{Reinforcement Learning}
-\label{sec:orgbcc6760}
+\label{sec:orgf102757}
+\subsection{Reinforcement Learning \label{reinforcement-learning}}
+\label{sec:org9192611}
 \subsubsection{Notation}
-\label{sec:orgba570cf}
+\label{sec:org5a05e74}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the layer.
 \subsubsection{Markow Decision Processes}
-\label{sec:org611ec57}
+\label{sec:org7371ec7}
 \subsubsection{Q-Learning}
-\label{sec:org350514c}
+\label{sec:org417a45f}
 \subsubsection{Function Approximation}
-\label{sec:org0d4dbee}
+\label{sec:org787edc3}
 \subsubsection{Exploitation-Exploration Tradeoff}
-\label{sec:orge662874}
+\label{sec:org6542f17}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:org1e01a6c}
+\label{sec:orge44eb0c}
 \section{Empirical Setting / Data (10\%)}
-\label{sec:orgfe604a9}
+\label{sec:orgc3c291d}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:orga84902c}
+\label{sec:orgeacc8f0}
 \subsubsection{Raw Data}
-\label{sec:orgad0d57a}
+\label{sec:orgbf004b2}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -365,53 +377,53 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org0c4c2ec}
+\label{sec:org0f00a46}
 \subsection{Electricity Markets Data}
-\label{sec:org64e0541}
+\label{sec:org0302a29}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org2d0f431}
+\label{sec:org1cc0987}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:org3e0f31a}
+\label{sec:org1fa86ca}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:orgfe40104}
+\label{sec:org74cd71c}
 \subsection{Information Assumptions}
-\label{sec:orgc5c61d5}
+\label{sec:orge72a07b}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org927ab91}
+\label{sec:org90dbf5d}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org990ad74}
+\label{sec:org68da0d0}
 \subsection{Bidding Strategy}
-\label{sec:orga13282c}
+\label{sec:org1d110cd}
 
 \section{Evaluation (30\%)}
-\label{sec:org6129e08}
+\label{sec:orgd5e3cfd}
 \subsection{Event-based Simulation}
-\label{sec:org7b8a7e2}
+\label{sec:org9b5e2d2}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org31e7863}
+\label{sec:orgdf5400a}
 \subsection{FleetRL}
-\label{sec:orgcb91c41}
+\label{sec:orgf254e59}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:orgbf2f71e}
+\label{sec:org662cc0e}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org7e425ad}
+\label{sec:org61dfb5c}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org7aaae9b}
+\label{sec:orgb71946c}
 \section{Discussion (5\%)}
-\label{sec:org4366c67}
+\label{sec:org2081a77}
 \subsection{Generalizability}
-\label{sec:orga4daa72}
+\label{sec:org2115602}
 \subsection{Future Electricity Landscape}
-\label{sec:org5c66e1c}
+\label{sec:org4894b79}
 \subsection{Limitations}
-\label{sec:org5e1c957}
+\label{sec:orgf7964b9}
 \section{Conclusion (5\%)}
-\label{sec:org36d9e0a}
+\label{sec:org42c601a}
 \subsection{Contribution}
-\label{sec:org275ee1c}
+\label{sec:org061d737}
 \subsection{Future Research}
-\label{sec:org9bb4df2}
+\label{sec:org62cf0e1}
 
 
 
