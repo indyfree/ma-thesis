@@ -1,4 +1,4 @@
-% Created 2019-01-26 Sat 15:39
+% Created 2019-01-28 Mon 12:24
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, article]{article}
 \usepackage[utf8]{inputenc}
@@ -72,22 +72,22 @@
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org894dea9}
+\label{sec:orgb1daa3e}
 \subsection{Research Motivation}
-\label{sec:org88627b1}
+\label{sec:org5545d78}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org3e76f57}
+\label{sec:orge56137a}
 \subsection{Relevance}
-\label{sec:org44f7e5e}
+\label{sec:org74d81e2}
 
 \clearpage
 \section{Related Literature (10\%)}
-\label{sec:org7d539ef}
+\label{sec:org1fd6e46}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orgb55ed8a}
+\label{sec:org350ab5e}
 The increasing penetration of EVs has a substantial effect on electricity consumption
 patterns. During charging periods, power flows and grid losses increase
 considerably and challenge the grid. Operators have to reinforce the grid
@@ -260,14 +260,13 @@ accurate capacity predictions for intraday markets. We followed
 of multiple markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:orgdc844dd}
+\label{sec:org07d4fb9}
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning methods can successfully take action in the smart grid. The following
 chapter outlines different research approaches of RL in the domain of smart
 grids. For a more thorough description, mathematical formulations and common
 issues of RL refer to Chapter \ref{reinforcement-learning}.
-
 
 \textcite{reddy11_learn_behav_multip_auton_agent,reddy11_strat} use autonomous
 broker agents to buy and sell electricity from DER on a proposed \emph{Tariff
@@ -289,51 +288,61 @@ beneficial in smart markets because market design, structures, and conditions
 might change in the future, hence intelligent agents should be able to adapt to
 it \parencite{peters13_reinf_learn_approac_to_auton}.
 
-\textcite{valogianni14_effec_manag_elect_vehic_storag} adopt RL methods to learn
-electricity consumption behavior of households.
-
-
 \textcite{vandael15_reinf_learn_heuris_ev_fleet} use RL to learn collective EV
 fleet charging behavior to profitably purchase electricity on the day-ahead
-market. We consider RL a perfect fit for the design of our proposed intelligent
-agent, especially as a solution for our Research Question 2. When dynamically
-optimizing the VPP portfolio composition of the fleet, there is no historical
-data available to train a model. Using RL and a reward function that maximizes
-the overall profitability of the fleet, the agent can learn from its environment
-with unknown dynamics and take a certain set of actions. The agent can consider
+market. Similar to \textcite{kahlen18_elect_vehic_virtual_power_plant_dilem} the
+problem is framed from the viewpoint of the aggregator which tries to define a
+cost-effective day-ahead charging plan in the absence of knowing EV charging
+parameters, like departure time. A crucial point of the study is weighting low
+charging prices versus imbalance costs that have to be paid when an excessive or
+insufficient  amount of electricity is bought from the market. Contrarily,
+\textcite{kahlen18_elect_vehic_virtual_power_plant_dilem} don't consider imbalance
+cost in their model and avoid them by always sacrificing EV mobility in order to
+balance the market. \textcite{vandael15_reinf_learn_heuris_ev_fleet} use a
+\emph{fitted Q Iteration} to control for continuous variables in their state and
+action space. In order to achieve faster convergence, they additionally optimize
+the \emph{temperature step} parameter of the Boltzmann exploration probability.
+
+
+RL an optimal fit for the design of our proposed intelligent agent, especially
+as a solution for our Research Question 2. When dynamically optimizing the VPP
+portfolio composition of the fleet, there is no historical data available to
+train a model. Using RL and a reward function that maximizes the overall
+profitability of the fleet, the agent can learn from its environment with
+unknown dynamics and take a certain set of actions. The agent can consider
 different states (e.g., current and forecasted rental demand levels and
-electricity prices) to take actions (e.g., allocate battery capacity to different
-types of VPPs) that maximizes the reward function.
+electricity prices) to take actions (e.g., allocate battery capacity to
+different types of VPPs) that maximizes the reward function.
 
 \section{Theoretical Background (10\%)}
-\label{sec:org500d2ff}
+\label{sec:orgb2167de}
 \subsection{Electricity Markets}
-\label{sec:org009b182}
+\label{sec:orgde36b0a}
 \subsubsection{Balancing Market}
-\label{sec:org04340b1}
+\label{sec:orge3158c7}
 \subsubsection{Spot Market}
-\label{sec:orgf102757}
+\label{sec:org58c19f8}
 \subsection{Reinforcement Learning \label{reinforcement-learning}}
-\label{sec:org9192611}
+\label{sec:org18e53c4}
 \subsubsection{Notation}
-\label{sec:org5a05e74}
+\label{sec:org803dfb4}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the layer.
 \subsubsection{Markow Decision Processes}
-\label{sec:org7371ec7}
+\label{sec:org2410421}
 \subsubsection{Q-Learning}
-\label{sec:org417a45f}
+\label{sec:orgcc840f2}
 \subsubsection{Function Approximation}
-\label{sec:org787edc3}
+\label{sec:org6aaaa50}
 \subsubsection{Exploitation-Exploration Tradeoff}
-\label{sec:org6542f17}
+\label{sec:org30bdd14}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:orge44eb0c}
+\label{sec:org8786acc}
 \section{Empirical Setting / Data (10\%)}
-\label{sec:orgc3c291d}
+\label{sec:org761850b}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:orgeacc8f0}
+\label{sec:org4402e76}
 \subsubsection{Raw Data}
-\label{sec:orgbf004b2}
+\label{sec:org63cc9ee}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -377,53 +386,55 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org0f00a46}
+\label{sec:orgfab2ccb}
 \subsection{Electricity Markets Data}
-\label{sec:org0302a29}
+\label{sec:org92c3f2f}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org1cc0987}
+\label{sec:orga85f720}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:org1fa86ca}
+\label{sec:orgce53298}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:org74cd71c}
+\label{sec:org856cecb}
 \subsection{Information Assumptions}
-\label{sec:orge72a07b}
+\label{sec:org81ecb7f}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org90dbf5d}
+\label{sec:org9a80f97}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org68da0d0}
+\label{sec:orgec6f17e}
 \subsection{Bidding Strategy}
-\label{sec:org1d110cd}
+\label{sec:org859c09b}
+\subsection{Dispatch Heuristic / Algorithm}
+\label{sec:org7d40757}
 
 \section{Evaluation (30\%)}
-\label{sec:orgd5e3cfd}
+\label{sec:org8ff67db}
 \subsection{Event-based Simulation}
-\label{sec:org9b5e2d2}
+\label{sec:orga9b9d68}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:orgdf5400a}
+\label{sec:org486e473}
 \subsection{FleetRL}
-\label{sec:orgf254e59}
+\label{sec:org619bf2f}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org662cc0e}
+\label{sec:org07e5b96}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org61dfb5c}
+\label{sec:org8acb3fe}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:orgb71946c}
+\label{sec:orgbacd41c}
 \section{Discussion (5\%)}
-\label{sec:org2081a77}
+\label{sec:org16cbc3a}
 \subsection{Generalizability}
-\label{sec:org2115602}
+\label{sec:org2e610d6}
 \subsection{Future Electricity Landscape}
-\label{sec:org4894b79}
+\label{sec:orgf6668ac}
 \subsection{Limitations}
-\label{sec:orgf7964b9}
+\label{sec:org74a16ae}
 \section{Conclusion (5\%)}
-\label{sec:org42c601a}
+\label{sec:org3013469}
 \subsection{Contribution}
-\label{sec:org061d737}
+\label{sec:orgc8ee62b}
 \subsection{Future Research}
-\label{sec:org62cf0e1}
+\label{sec:orgdb2dbe1}
 
 
 

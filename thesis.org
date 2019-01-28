@@ -258,18 +258,33 @@ it parencite:peters13_reinf_learn_approac_to_auton.
 
 textcite:vandael15_reinf_learn_heuris_ev_fleet use RL to learn collective EV
 fleet charging behavior to profitably purchase electricity on the day-ahead
-market.
+market. Similar to textcite:kahlen18_elect_vehic_virtual_power_plant_dilem the
+problem is framed from the viewpoint of the aggregator which tries to define a
+cost-effective day-ahead charging plan in the absence of knowing EV charging
+parameters, like departure time. A crucial point of the study is weighting low
+charging prices versus imbalance costs that have to be paid when an excessive or
+insufficient  amount of electricity is bought from the market. Contrarily,
+textcite:kahlen18_elect_vehic_virtual_power_plant_dilem don't consider imbalance
+cost in their model and avoid them by always sacrificing EV mobility in order to
+balance the market. textcite:vandael15_reinf_learn_heuris_ev_fleet use a
+/fitted Q Iteration/ to control for continuous variables in their state and
+action space. In order to achieve faster convergence, they additionally optimize
+the /temperature step/ parameter of the Boltzmann exploration probability.
+
+parencite:vazquez-canteli19_reinf_learn_deman_respon
 
 
-We consider RL a perfect fit for the design of our proposed intelligent
-agent, especially as a solution for our Research Question 2. When dynamically
-optimizing the VPP portfolio composition of the fleet, there is no historical
-data available to train a model. Using RL and a reward function that maximizes
-the overall profitability of the fleet, the agent can learn from its environment
-with unknown dynamics and take a certain set of actions. The agent can consider
+
+
+RL an optimal fit for the design of our proposed intelligent agent, especially
+as a solution for our Research Question 2. When dynamically optimizing the VPP
+portfolio composition of the fleet, there is no historical data available to
+train a model. Using RL and a reward function that maximizes the overall
+profitability of the fleet, the agent can learn from its environment with
+unknown dynamics and take a certain set of actions. The agent can consider
 different states (e.g., current and forecasted rental demand levels and
-electricity prices) to take actions (e.g., allocate battery capacity to different
-types of VPPs) that maximizes the reward function.
+electricity prices) to take actions (e.g., allocate battery capacity to
+different types of VPPs) that maximizes the reward function.
 
 * Theoretical Background (10%)
 ** Electricity Markets
