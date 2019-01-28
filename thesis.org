@@ -342,6 +342,8 @@ Stuttgart.
 ** Mobility Demand & Clearing Price Prediction
 ** Reinforcement Learning Approach
 ** Bidding Strategy
+** Dispatch Heuristic / Algorithm
+# - See parencite:vandael15_reinf_learn_heuris_ev_fleet
 
 * Evaluation (30%)
 ** Event-based Simulation
