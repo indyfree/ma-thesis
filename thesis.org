@@ -356,6 +356,8 @@ Stuttgart.
 # See: parencite:mashhour11_biddin_strat_virtual_power_plant_1
 ** Mobility Demand & Clearing Price Prediction
 ** Reinforcement Learning Approach
+# - Multi-agent bidding approach, with learning complete bidding strategy?
+#   parencite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
 ** Bidding Strategy
 ** Dispatch Heuristic / Algorithm
 # - See parencite:vandael15_reinf_learn_heuris_ev_fleet
