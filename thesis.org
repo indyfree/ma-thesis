@@ -271,10 +271,34 @@ balance the market. textcite:vandael15_reinf_learn_heuris_ev_fleet use a
 action space. In order to achieve faster convergence, they additionally optimize
 the /temperature step/ parameter of the Boltzmann exploration probability.
 
-parencite:vazquez-canteli19_reinf_learn_deman_respon
 
+textcite:dusparic13_multi proposed a multi-agent approach for residential demand
+response. The authors investigated a setting where 9  EVs were connected to the
+same transformer. The RL agents had to take care of charging at minimal costs,
+without overloading the transformer. textcite:dusparic13_multi utilized
+/W-Learning/ to address learning multiple policies (i.e., objectives like
+ensuring minimum battery charged or ensuring charging at low costs) at the same
+time. textcite:taylor14_accel_learn_trans_learn extend this research by
+employing Transfer Learning and /Distributed W-Learning/ to achieve
+communication between learning processes of the agents in a multi-objective,
+multi-agent setting. textcite:dauer13_market_based_ev_charg_coord proposed a
+market-based EV fleet charging solution. The authors introduce a double-auction
+call market where agents trade the available transformer capacity with regards
+to comply with minimum required SoC. The participating EV agents autonomously
+learn their bidding strategy with standard /Q-Learning/ and discrete state and
+action spaces. textcite:giorgio13_elect_vehic presented a multi-agent solution to
+minimizing charging costs of EVs, which requires neither prior knowledge of
+electricity prices, nor future price predictions. Similar to the previous study
+the authors employ standard /Q-learning/ and the \epsilon-greedy approach for
+action selection.
 
+# - parencite:vaya14_optim
+# - parencite:vaya15_optim_biddin_strat_plug_in
+# - parencite:shi11_real
+# - parencite:chis16_reinf_learn_based_plug_in
+# - parencite:ko18_mobil_aware_vehic_to_grid
 
+# parencite:vazquez-canteli19_reinf_learn_deman_respon
 
 RL an optimal fit for the design of our proposed intelligent agent, especially
 as a solution for our Research Question 2. When dynamically optimizing the VPP
