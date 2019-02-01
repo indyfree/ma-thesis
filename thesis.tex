@@ -1,4 +1,4 @@
-% Created 2019-01-28 Mon 18:50
+% Created 2019-02-01 Fri 11:19
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, article]{article}
 \usepackage[utf8]{inputenc}
@@ -72,22 +72,22 @@
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org24b87cf}
+\label{sec:orgbd273aa}
 \subsection{Research Motivation}
-\label{sec:org3d455eb}
+\label{sec:orgce3ebee}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:orgb0cdc5c}
+\label{sec:org210990c}
 \subsection{Relevance}
-\label{sec:orgce93ac7}
+\label{sec:orgfefa7a6}
 
 \clearpage
 \section{Related Literature (10\%)}
-\label{sec:orgab28c8c}
+\label{sec:org7189c2c}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org8bc2384}
+\label{sec:orgc2bcf6c}
 The increasing penetration of EVs has a substantial effect on electricity consumption
 patterns. During charging periods, power flows and grid losses increase
 considerably and challenge the grid. Operators have to reinforce the grid
@@ -260,7 +260,7 @@ accurate capacity predictions for intraday markets. We followed
 of multiple markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org2018acc}
+\label{sec:orgf714b3f}
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning methods can successfully take action in the smart grid. The following
@@ -306,7 +306,7 @@ the \emph{temperature step} parameter of the Boltzmann exploration probability.
 
 \textcite{dusparic13_multi} proposed a multi-agent approach for residential demand
 response. The authors investigated a setting where 9  EVs were connected to the
-same transformer. The RL agents had to take care of charging at minimal costs,
+same transformer. The RL agents had learned to charge at minimal costs,
 without overloading the transformer. \textcite{dusparic13_multi} utilized
 \emph{W-Learning} to address learning multiple policies (i.e., objectives like
 ensuring minimum battery charged or ensuring charging at low costs) at the same
@@ -319,50 +319,64 @@ call market where agents trade the available transformer capacity with regards
 to comply with minimum required SoC. The participating EV agents autonomously
 learn their bidding strategy with standard \emph{Q-Learning} and discrete state and
 action spaces. \textcite{giorgio13_elect_vehic} presented a multi-agent solution to
-minimizing charging costs of EVs, which requires neither prior knowledge of
+minimizing charging costs of EVs, which required neither prior knowledge of
 electricity prices, nor future price predictions. Similar to the previous study
 the authors employ standard \emph{Q-learning} and the \(\epsilon\)-greedy approach for
-action selection.
+action selection. \textcite{vaya14_optim} also proposed a multi-agent approach,
+where the individual EVs are modeled as agents that actively place bids in the
+spot market. Again, the agents use \emph{Q-learning}, with \(\epsilon\)-greedy to learn
+their optimal bidding strategy. The strategy, builds on the agents
+willingness-to-pay, depending on the urgency to charge. The urgency to charge is
+determined by variables like state of charge, time of departure, minimum
+required energy before departure, and price developments on the market. The
+authors compare this approach with a centralized aggregator-based approach
+\parencite{vaya15_optim_biddin_strat_plug_in}. Compared to the centralized
+approach, where the aggregator manages charging and places bids for the whole
+fleet, the multi-agent approach was slightly more costly, but solved scalability
+and privacy problems.
 
-RL an optimal fit for the design of our proposed intelligent agent, especially
-as a solution for our Research Question 2. When dynamically optimizing the VPP
-portfolio composition of the fleet, there is no historical data available to
-train a model. Using RL and a reward function that maximizes the overall
-profitability of the fleet, the agent can learn from its environment with
-unknown dynamics and take a certain set of actions. The agent can consider
+\parencite{vazquez-canteli19_reinf_learn_deman_respon}
+
+We consider RL an optimal fit for the design of our proposed intelligent agent,
+especially as a solution for our Research Question 2. When dynamically
+optimizing the VPP portfolio composition of the fleet, there is no historical
+data available to train a model. Using RL and a reward function that maximizes
+the overall profitability of the fleet, the agent can learn from its environment
+with unknown dynamics and take a certain set of actions. The agent can consider
 different states (e.g., current and forecasted rental demand levels and
 electricity prices) to take actions (e.g., allocate battery capacity to
 different types of VPPs) that maximizes the reward function.
 
+
 \section{Theoretical Background (10\%)}
-\label{sec:org18fce17}
+\label{sec:org7f00caa}
 \subsection{Electricity Markets}
-\label{sec:orga4b99a0}
+\label{sec:orgf5f9a7c}
 \subsubsection{Balancing Market}
-\label{sec:orgc6111f5}
+\label{sec:orge325643}
 \subsubsection{Spot Market}
-\label{sec:org6933961}
+\label{sec:orgcbf29c7}
 \subsection{Reinforcement Learning \label{reinforcement-learning}}
-\label{sec:orgcfd1100}
+\label{sec:org9021d15}
 \subsubsection{Notation}
-\label{sec:orge334ea1}
+\label{sec:orgcd16b71}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the layer.
 \subsubsection{Markow Decision Processes}
-\label{sec:org66acc91}
+\label{sec:orgb42b11d}
 \subsubsection{Q-Learning}
-\label{sec:orgead1f7e}
+\label{sec:org7689d60}
 \subsubsection{Function Approximation}
-\label{sec:org3207aa1}
+\label{sec:orge6da9a4}
 \subsubsection{Exploitation-Exploration Tradeoff}
-\label{sec:orgcfc68c1}
+\label{sec:org8b7d767}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:orgced58d6}
+\label{sec:orga0abf99}
 \section{Empirical Setting / Data (10\%)}
-\label{sec:orgaf43ebb}
+\label{sec:orgb122112}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org632ea0d}
+\label{sec:org561933f}
 \subsubsection{Raw Data}
-\label{sec:org524714f}
+\label{sec:org2f7a53b}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -406,55 +420,55 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org320216b}
+\label{sec:org0274fb1}
 \subsection{Electricity Markets Data}
-\label{sec:org5e763ec}
+\label{sec:org0f6d218}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org193c27c}
+\label{sec:orgb0d0223}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:orgd6e7248}
+\label{sec:orgbc72438}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:org7438b56}
+\label{sec:org8485422}
 \subsection{Information Assumptions}
-\label{sec:org6ba757c}
+\label{sec:org338a252}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org73708f2}
+\label{sec:orgdd7e11d}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org5c267f1}
+\label{sec:org521a3b0}
 \subsection{Bidding Strategy}
-\label{sec:org5449397}
+\label{sec:org0cbac9e}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org5362b14}
+\label{sec:org7172101}
 
 \section{Evaluation (30\%)}
-\label{sec:orge1c53c5}
+\label{sec:org26d39f6}
 \subsection{Event-based Simulation}
-\label{sec:org633107e}
+\label{sec:orgbbf63bd}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org43016fc}
+\label{sec:org519e557}
 \subsection{FleetRL}
-\label{sec:orgc55419a}
+\label{sec:org516f1a2}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org0d63ae2}
+\label{sec:orgfe3d6b3}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:orge97d1f0}
+\label{sec:orgd92604d}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org0be8800}
+\label{sec:org678c5d6}
 \section{Discussion (5\%)}
-\label{sec:orgc3c15d4}
+\label{sec:orgf6e5dea}
 \subsection{Generalizability}
-\label{sec:org70dc4f6}
+\label{sec:org2d25a48}
 \subsection{Future Electricity Landscape}
-\label{sec:orgd4d0350}
+\label{sec:org8619260}
 \subsection{Limitations}
-\label{sec:orgd3c8d77}
+\label{sec:org61a138a}
 \section{Conclusion (5\%)}
-\label{sec:org0813ecd}
+\label{sec:org6496ca6}
 \subsection{Contribution}
-\label{sec:org216feeb}
+\label{sec:org1b76559}
 \subsection{Future Research}
-\label{sec:org94486ec}
+\label{sec:org5d27b92}
 
 
 

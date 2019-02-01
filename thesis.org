@@ -274,7 +274,7 @@ the /temperature step/ parameter of the Boltzmann exploration probability.
 
 textcite:dusparic13_multi proposed a multi-agent approach for residential demand
 response. The authors investigated a setting where 9  EVs were connected to the
-same transformer. The RL agents had to take care of charging at minimal costs,
+same transformer. The RL agents had learned to charge at minimal costs,
 without overloading the transformer. textcite:dusparic13_multi utilized
 /W-Learning/ to address learning multiple policies (i.e., objectives like
 ensuring minimum battery charged or ensuring charging at low costs) at the same
@@ -287,28 +287,37 @@ call market where agents trade the available transformer capacity with regards
 to comply with minimum required SoC. The participating EV agents autonomously
 learn their bidding strategy with standard /Q-Learning/ and discrete state and
 action spaces. textcite:giorgio13_elect_vehic presented a multi-agent solution to
-minimizing charging costs of EVs, which requires neither prior knowledge of
+minimizing charging costs of EVs, which required neither prior knowledge of
 electricity prices, nor future price predictions. Similar to the previous study
 the authors employ standard /Q-learning/ and the \epsilon-greedy approach for
-action selection.
-
-# - parencite:vaya14_optim
-# - parencite:vaya15_optim_biddin_strat_plug_in
+action selection. textcite:vaya14_optim also proposed a multi-agent approach,
+where the individual EVs are modeled as agents that actively place bids in the
+spot market. Again, the agents use /Q-learning/, with an \epsilon-greedy policy
+to learn their optimal bidding strategy. The strategy, builds on the agents
+willingness-to-pay, depending on the urgency to charge. The urgency to charge is
+determined by variables like state of charge, time of departure, minimum
+required energy before departure, and price developments on the market. The
+authors compare this approach with a centralized aggregator-based approach
+parencite:vaya15_optim_biddin_strat_plug_in. Compared to the centralized
+approach, where the aggregator manages charging and places bids for the whole
+fleet, the multi-agent approach was slightly more costly, but solved scalability
+and privacy problems.
 # - parencite:shi11_real
 # - parencite:chis16_reinf_learn_based_plug_in
 # - parencite:ko18_mobil_aware_vehic_to_grid
 
-# parencite:vazquez-canteli19_reinf_learn_deman_respon
+parencite:vazquez-canteli19_reinf_learn_deman_respon
 
-RL an optimal fit for the design of our proposed intelligent agent, especially
-as a solution for our Research Question 2. When dynamically optimizing the VPP
-portfolio composition of the fleet, there is no historical data available to
-train a model. Using RL and a reward function that maximizes the overall
-profitability of the fleet, the agent can learn from its environment with
-unknown dynamics and take a certain set of actions. The agent can consider
+We consider RL an optimal fit for the design of our proposed intelligent agent,
+especially as a solution for our Research Question 2. When dynamically
+optimizing the VPP portfolio composition of the fleet, there is no historical
+data available to train a model. Using RL and a reward function that maximizes
+the overall profitability of the fleet, the agent can learn from its environment
+with unknown dynamics and take a certain set of actions. The agent can consider
 different states (e.g., current and forecasted rental demand levels and
 electricity prices) to take actions (e.g., allocate battery capacity to
 different types of VPPs) that maximizes the reward function.
+
 
 * Theoretical Background (10%)
 ** Electricity Markets
