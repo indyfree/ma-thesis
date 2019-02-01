@@ -262,7 +262,7 @@ market. Similar to textcite:kahlen18_elect_vehic_virtual_power_plant_dilem the
 problem is framed from the viewpoint of the aggregator which tries to define a
 cost-effective day-ahead charging plan in the absence of knowing EV charging
 parameters, like departure time. A crucial point of the study is weighting low
-charging prices versus imbalance costs that have to be paid when an excessive or
+charging prices against imbalance costs that have to be paid when an excessive or
 insufficient  amount of electricity is bought from the market. Contrarily,
 textcite:kahlen18_elect_vehic_virtual_power_plant_dilem don't consider imbalance
 cost in their model and avoid them by always sacrificing EV mobility in order to
@@ -274,25 +274,25 @@ the /temperature step/ parameter of the Boltzmann exploration probability.
 
 textcite:dusparic13_multi proposed a multi-agent approach for residential demand
 response. The authors investigated a setting where 9  EVs were connected to the
-same transformer. The RL agents had learned to charge at minimal costs,
+same transformer. The RL agents learned to charge at minimal costs,
 without overloading the transformer. textcite:dusparic13_multi utilized
-/W-Learning/ to address learning multiple policies (i.e., objectives like
+/W-Learning/ to learn multiple policies (i.e., objectives like
 ensuring minimum battery charged or ensuring charging at low costs) at the same
-time. textcite:taylor14_accel_learn_trans_learn extend this research by
+time. textcite:taylor14_accel_learn_trans_learn extended this research by
 employing Transfer Learning and /Distributed W-Learning/ to achieve
 communication between learning processes of the agents in a multi-objective,
 multi-agent setting. textcite:dauer13_market_based_ev_charg_coord proposed a
-market-based EV fleet charging solution. The authors introduce a double-auction
+market-based EV fleet charging solution. The authors introduced a double-auction
 call market where agents trade the available transformer capacity with regards
 to comply with minimum required SoC. The participating EV agents autonomously
 learn their bidding strategy with standard /Q-Learning/ and discrete state and
 action spaces. textcite:giorgio13_elect_vehic presented a multi-agent solution to
 minimizing charging costs of EVs, which required neither prior knowledge of
 electricity prices, nor future price predictions. Similar to the previous study
-the authors employ standard /Q-learning/ and the \epsilon-greedy approach for
+the authors employ standard /Q-Learning/ and the \epsilon-greedy approach for
 action selection. textcite:vaya14_optim also proposed a multi-agent approach,
 where the individual EVs are modeled as agents that actively place bids in the
-spot market. Again, the agents use /Q-learning/, with an \epsilon-greedy policy
+spot market. Again, the agents use /Q-Learning/, with an \epsilon-greedy policy
 to learn their optimal bidding strategy. The strategy, builds on the agents
 willingness-to-pay, depending on the urgency to charge. The urgency to charge is
 determined by variables like state of charge, time of departure, minimum
@@ -301,10 +301,25 @@ authors compare this approach with a centralized aggregator-based approach
 parencite:vaya15_optim_biddin_strat_plug_in. Compared to the centralized
 approach, where the aggregator manages charging and places bids for the whole
 fleet, the multi-agent approach was slightly more costly, but solved scalability
-and privacy problems.
-# - parencite:shi11_real
-# - parencite:chis16_reinf_learn_based_plug_in
-# - parencite:ko18_mobil_aware_vehic_to_grid
+and privacy problems. textcite:shi11_real consider a V2G control problem
+assuming real-time pricing. The authors proposed an online learning algorithm
+modeled as a discrete-time Markov Decision Process (MDP) and solved through
+/Q-Learning/. The algorithm controls the V2G actions of the EV and can react to
+real-time price signals of the market. It is a single-agent approaches where the
+action space only compromises the control actions charging, discharging and
+regulation. textcite:chis16_reinf_learn_based_plug_in looked at reducing costs
+of charging for single EVs using known day-ahead prices and predicted next-day
+prices. For prediction a Bayesian ANN was employed and /fitted Q-Learning/ was
+used to learn daily charging levels. In their research, the authors used
+function approximation and batch reinforcement learning, an offline, model-free
+learning method. textcite:ko18_mobil_aware_vehic_to_grid proposed a centralized
+controller for managing V2G activities in multiple microgrids. The proposed
+method considers mobility and electricity demands of microgrids, as well es SoC
+of the EVs. The authors formulate a MDP with discrete state and action spaces
+and use standard /Q-Learning/ with \epsilon-greedy policy to derive an optimal
+charging policy, which takes microgrid autonomy and electricity prices into
+account.
+
 
 parencite:vazquez-canteli19_reinf_learn_deman_respon
 
