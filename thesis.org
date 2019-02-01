@@ -383,6 +383,7 @@ Stuttgart.
 # - Multi-agent bidding approach, with learning complete bidding strategy?
 #   parencite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
 ** Bidding Strategy
+# NOTE: Assume aggregator is a price taker
 ** Dispatch Heuristic / Algorithm
 # - See parencite:vandael15_reinf_learn_heuris_ev_fleet
 
