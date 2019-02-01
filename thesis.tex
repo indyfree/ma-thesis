@@ -1,4 +1,4 @@
-% Created 2019-02-01 Fri 14:45
+% Created 2019-02-01 Fri 15:04
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, article]{article}
 \usepackage[utf8]{inputenc}
@@ -72,22 +72,22 @@
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org0765a94}
+\label{sec:org2d90436}
 \subsection{Research Motivation}
-\label{sec:orge82cb25}
+\label{sec:org1f20683}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org845f9a0}
+\label{sec:org466b35c}
 \subsection{Relevance}
-\label{sec:org52acc5e}
+\label{sec:org3969756}
 
 \clearpage
 \section{Related Literature (10\%)}
-\label{sec:orgdd084e2}
+\label{sec:org7b2337e}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org623aeeb}
+\label{sec:org4b2feb3}
 The increasing penetration of EVs has a substantial effect on electricity consumption
 patterns. During charging periods, power flows and grid losses increase
 considerably and challenge the grid. Operators have to reinforce the grid
@@ -260,7 +260,7 @@ accurate capacity predictions for intraday markets. We followed
 of multiple markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org8dbef3a}
+\label{sec:org3d72fed}
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning methods can successfully take action in the smart grid. The following
@@ -294,7 +294,7 @@ market. Similar to \textcite{kahlen18_elect_vehic_virtual_power_plant_dilem} the
 problem is framed from the viewpoint of the aggregator which tries to define a
 cost-effective day-ahead charging plan in the absence of knowing EV charging
 parameters, like departure time. A crucial point of the study is weighting low
-charging prices versus imbalance costs that have to be paid when an excessive or
+charging prices against imbalance costs that have to be paid when an excessive or
 insufficient  amount of electricity is bought from the market. Contrarily,
 \textcite{kahlen18_elect_vehic_virtual_power_plant_dilem} don't consider imbalance
 cost in their model and avoid them by always sacrificing EV mobility in order to
@@ -306,48 +306,49 @@ the \emph{temperature step} parameter of the Boltzmann exploration probability.
 
 \textcite{dusparic13_multi} proposed a multi-agent approach for residential demand
 response. The authors investigated a setting where 9  EVs were connected to the
-same transformer. The RL agents had learned to charge at minimal costs,
-without overloading the transformer. \textcite{dusparic13_multi} utilized
-\emph{W-Learning} to address learning multiple policies (i.e., objectives like
-ensuring minimum battery charged or ensuring charging at low costs) at the same
-time. \textcite{taylor14_accel_learn_trans_learn} extend this research by
-employing Transfer Learning and \emph{Distributed W-Learning} to achieve
-communication between learning processes of the agents in a multi-objective,
-multi-agent setting. \textcite{dauer13_market_based_ev_charg_coord} proposed a
-market-based EV fleet charging solution. The authors introduce a double-auction
-call market where agents trade the available transformer capacity with regards
-to comply with minimum required SoC. The participating EV agents autonomously
-learn their bidding strategy with standard \emph{Q-Learning} and discrete state and
-action spaces. \textcite{giorgio13_elect_vehic} presented a multi-agent solution to
+same transformer. The RL agents learned to charge at minimal costs, without
+overloading the transformer. \textcite{dusparic13_multi} utilized \emph{W-Learning} to
+learn multiple policies (i.e., objectives like ensuring minimum battery charged
+or ensuring charging at low costs) at the same time.
+\textcite{taylor14_accel_learn_trans_learn} extended this research by employing
+Transfer Learning and \emph{Distributed W-Learning} to achieve communication between
+learning processes of the agents in a multi-objective, multi-agent setting.
+\textcite{dauer13_market_based_ev_charg_coord} proposed a market-based EV fleet
+charging solution. The authors introduced a double-auction call market where
+agents trade the available transformer capacity, complying with the minimum
+required State of Charge (SoC). The participating EV agents autonomously learn
+their bidding strategy with standard \emph{Q-Learning} and discrete state and action
+spaces. \textcite{giorgio13_elect_vehic} presented a multi-agent solution to
 minimizing charging costs of EVs, which required neither prior knowledge of
 electricity prices, nor future price predictions. Similar to the previous study
-the authors employ standard \emph{Q-Learning} and the \(\epsilon\)-greedy approach for
+the authors employed standard \emph{Q-Learning} and the \(\epsilon\)-greedy approach for
 action selection. \textcite{vaya14_optim} also proposed a multi-agent approach,
 where the individual EVs are modeled as agents that actively place bids in the
 spot market. Again, the agents use \emph{Q-Learning}, with an \(\epsilon\)-greedy policy
-to learn their optimal bidding strategy. The strategy, builds on the agents
-willingness-to-pay, depending on the urgency to charge. The urgency to charge is
-determined by variables like state of charge, time of departure, minimum
-required energy before departure, and price developments on the market. The
-authors compare this approach with a centralized aggregator-based approach
+to learn their optimal bidding strategy. The strategy relies on the agents
+willingness-to-pay which depends on the urgency to charge. The urgency to charge
+is determined by variables like SoC, time of departure, minimum required energy
+before departure, and price developments on the market. The authors compared
+this approach with a centralized aggregator-based approach
 \parencite{vaya15_optim_biddin_strat_plug_in}. Compared to the centralized
 approach, where the aggregator manages charging and places bids for the whole
 fleet, the multi-agent approach was slightly more costly, but solved scalability
 and privacy problems. \textcite{shi11_real} consider a V2G control problem
 assuming real-time pricing. The authors proposed an online learning algorithm
-modeled as a discrete-time MDP and solved through \emph{Q-Learning}. The algorithm
-controls the V2G actions of the EV and can react to real-time price signals of
-the market. It is a single-agent approaches where the action space only
-compromises the control actions charging, discharging and regulation.
+modeled as a discrete-time Markov Decision Process (MDP) and solved through
+\emph{Q-Learning}. The algorithm controls the V2G actions of the EV and can react to
+real-time price signals of the market. In this single-agent approach the action
+space only compromises charging, discharging and regulation actions, which makes
+it relatively easy to learn an optimal policy.
 \textcite{chis16_reinf_learn_based_plug_in} looked at reducing costs of charging
-for single EVs using known day-ahead prices and predicted next-day prices.
-For prediction a Bayesian ANN was employed and \emph{fitted Q-Learning} was used
-learn daily battery levels to be charged. In their research, the authors used
-function approximation and batch reinforcement learning, an offline, model-free
-learning method. \textcite{ko18_mobil_aware_vehic_to_grid} proposed a centralized
+for single EVs using known day-ahead prices and predicted next-day prices. A
+Bayesian ANN was employed for prediction and \emph{fitted Q-Learning} was used to
+learn daily charging levels. In their research, the authors used function
+approximation and batch reinforcement learning, an offline, model-free learning
+method. \textcite{ko18_mobil_aware_vehic_to_grid} proposed a centralized
 controller for managing V2G activities in multiple microgrids. The proposed
 method considers mobility and electricity demands of microgrids, as well es SoC
-of the EVs. The authors formulate a MDP with discrete state and action spaces
+of the EVs. The authors formulated a MDP with discrete state and action spaces
 and use standard \emph{Q-Learning} with \(\epsilon\)-greedy policy to derive an optimal
 charging policy, which takes microgrid autonomy and electricity prices into
 account.
@@ -367,34 +368,34 @@ different types of VPPs) that maximizes the reward function.
 
 
 \section{Theoretical Background (10\%)}
-\label{sec:org802b83c}
+\label{sec:org4b5116d}
 \subsection{Electricity Markets}
-\label{sec:org7f0db7b}
+\label{sec:org994572c}
 \subsubsection{Balancing Market}
-\label{sec:orgc9c6c9e}
+\label{sec:org36e8ff0}
 \subsubsection{Spot Market}
-\label{sec:org21c6376}
+\label{sec:org1e57bc2}
 \subsection{Reinforcement Learning \label{reinforcement-learning}}
-\label{sec:orgd6b9d6e}
+\label{sec:org01e6cd9}
 \subsubsection{Notation}
-\label{sec:orged76b96}
+\label{sec:org4c59fee}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the layer.
 \subsubsection{Markow Decision Processes}
-\label{sec:orge7f5e05}
+\label{sec:org67d7b87}
 \subsubsection{Q-Learning}
-\label{sec:org9489dde}
+\label{sec:org35de80d}
 \subsubsection{Function Approximation}
-\label{sec:org9b677b5}
+\label{sec:orgf0b1435}
 \subsubsection{Exploitation-Exploration Tradeoff}
-\label{sec:orgf64a41b}
+\label{sec:org45c8892}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:org24354b6}
+\label{sec:org9a1c086}
 \section{Empirical Setting / Data (10\%)}
-\label{sec:org4668d11}
+\label{sec:org923ecf0}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org7d498ba}
+\label{sec:orgf0cde39}
 \subsubsection{Raw Data}
-\label{sec:orga76be11}
+\label{sec:org8571ff8}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -438,55 +439,55 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org0ed231c}
+\label{sec:orgc374dd4}
 \subsection{Electricity Markets Data}
-\label{sec:orgbfaf618}
+\label{sec:orgd0ca472}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org711af00}
+\label{sec:org342b721}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:org7b7538d}
+\label{sec:org6617823}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:org9ad5eac}
+\label{sec:org1d773b9}
 \subsection{Information Assumptions}
-\label{sec:orgb2cdd3c}
+\label{sec:org2fa1940}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org5684e81}
+\label{sec:org7d6478b}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org124eba4}
+\label{sec:org78f54d2}
 \subsection{Bidding Strategy}
-\label{sec:orgdf19335}
+\label{sec:orge9e44ac}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org58a6e24}
+\label{sec:org83cd246}
 
 \section{Evaluation (30\%)}
-\label{sec:org5268982}
+\label{sec:org5312aed}
 \subsection{Event-based Simulation}
-\label{sec:orgd762a41}
+\label{sec:orgea7d24c}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org9c0dee8}
+\label{sec:orgf198a04}
 \subsection{FleetRL}
-\label{sec:org70ef34b}
+\label{sec:org72240d7}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:orgcf73cd5}
+\label{sec:orgfd4530f}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:orgb5e02f4}
+\label{sec:orge568a06}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org40ece89}
+\label{sec:org983f789}
 \section{Discussion (5\%)}
-\label{sec:org9218856}
+\label{sec:orgc5cea8c}
 \subsection{Generalizability}
-\label{sec:org99ba43d}
+\label{sec:orge3d6b16}
 \subsection{Future Electricity Landscape}
-\label{sec:org15f5c6b}
+\label{sec:org2ae7295}
 \subsection{Limitations}
-\label{sec:org53d9178}
+\label{sec:orga7ddfca}
 \section{Conclusion (5\%)}
-\label{sec:org28e3ca8}
+\label{sec:orgec8d41f}
 \subsection{Contribution}
-\label{sec:orgdc13cdc}
+\label{sec:org919b889}
 \subsection{Future Research}
-\label{sec:org6a3960c}
+\label{sec:org24c84cf}
 
 
 
