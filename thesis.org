@@ -322,34 +322,14 @@ and use standard /Q-Learning/ with \epsilon-greedy policy to derive an optimal
 charging policy, which takes microgrid autonomy and electricity prices into
 account.
 
-
-parencite:vazquez-canteli19_reinf_learn_deman_respon
-
-We consider RL an optimal fit for the design of our proposed intelligent agent.
-
-
-# Vazquez:
-# It is important to note that the RL algorithms to be used should be
-# chosen according to the difficulty of the problem being tackled. Not
-# every problem requires the use of all these techniques, or of “deep
-# learning”, but sometimes simpler algorithms are enough to solve a
-# given problem.
-
-
-# Given is
-# adaptability and capacity to learn preferences of the user through in-
-# teraction and without an explicit mathematical model, RL is an algo-
-# rithm with a great potential of applicability for complex, real-world
-# applications, specifically DR.
-
-especially as a solution for our Research Question 2. When dynamically
-optimizing the VPP portfolio composition of the fleet, there is no historical
-data available to train a model. Using RL and a reward function that maximizes
-the overall profitability of the fleet, the agent can learn from its environment
-with unknown dynamics and take a certain set of actions. The agent can consider
-different states (e.g., current and forecasted rental demand levels and
-electricity prices) to take actions (e.g., allocate battery capacity to
-different types of VPPs) that maximizes the reward function.
+It should be noted that advanced RL methods and techniques are not the only
+solutions for problems in the smart grid. Often basic algorithms and heuristics
+are good enough to solve the task. Despite that, this paper considers RL an
+optimal fit for the design of our proposed intelligent agent. Given the ability
+to learn user behavior (e.g., mobility demand) and the flexibility to adapt to
+the environment (e.g., electricity prices) RL methods are a promising way of
+solving complex challenges in smart grids
+parencite:vazquez-canteli19_reinf_learn_deman_respon.
 
 
 * Theoretical Background (10%)
