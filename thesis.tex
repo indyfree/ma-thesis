@@ -1,4 +1,4 @@
-% Created 2019-02-02 Sat 11:54
+% Created 2019-02-02 Sat 18:26
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt, article]{article}
 \usepackage[utf8]{inputenc}
@@ -21,6 +21,7 @@
 \usepackage[official]{eurosym}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{notation}
 \usepackage[backend=biber, style=apa]{biblatex}
 \addbibresource{~/uni/ma-thesis/bibliography/references.bib}
 \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
@@ -69,25 +70,29 @@
 
 \tableofcontents
 \clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org844b798}
+\label{sec:org574db38}
 \subsection{Research Motivation}
-\label{sec:org21bc1ad}
+\label{sec:orgc5882fe}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:orgfd30123}
+\label{sec:org1b1eb24}
 \subsection{Relevance}
-\label{sec:orge9cbd95}
+\label{sec:org2d14179}
 
 \clearpage
 \section{Related Literature (10\%)}
-\label{sec:orgde11da4}
+\label{sec:org4a2e975}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orgc9716db}
+\label{sec:orgb109428}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -95,7 +100,7 @@ grid to ensure that transformers and substations do not get overloaded
 \parencite{sioshansi12_impac_elect_tarif_plug_in,lopes11_integ_elect_vehic_elect_power_system}.
 Loading multiple EVs in the same neighborhood, or worse, whole EV fleets at
 once, stress the grid. In these cases, even brown- or blackouts are possible
-\parencite{kim12_carbit}. Despite these challenges, it is possible to postpone the
+\shortcite{kim12_carbit}. Despite these challenges, it is possible to postpone the
 physical reinforcement by adopting smart charging strategies. In smart charging,
 EVs get charged when the grid is less congested to achieve more grid stability.
 Smart charging reduces peaks in electricity demand, called \emph{Peak Cutting} and
@@ -259,7 +264,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:orgabb1d87}
+\label{sec:org5410004}
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning methods can successfully take action in the smart grid. The following
@@ -333,7 +338,7 @@ aggregator-based approach which they developed in another paper
 approach, where the aggregator manages charging and places bids for the whole
 fleet, the multi-agent approach caused slightly more costs but solved
 scalability and privacy problems. \textcite{shi11_real} consider a V2G control
-problem assuming real-time pricing. The authors proposed an online learning
+problem, while assuming real-time pricing. The authors proposed an online learning
 algorithm which they modeled as a discrete-time MDP and solved through
 \emph{Q-Learning}. The algorithm controls the V2G actions of the EV and can react to
 real-time price signals of the market. In this single-agent approach, the action
@@ -363,34 +368,127 @@ solving complex challenges in smart grids
 
 
 \section{Theoretical Background (10\%)}
-\label{sec:orgedfa37a}
+\label{sec:org43fbab4}
 \subsection{Electricity Markets}
-\label{sec:orgd20572d}
+\label{sec:org15e69bd}
 \subsubsection{Balancing Market}
-\label{sec:org168661d}
+\label{sec:org99a15c6}
 \subsubsection{Spot Market}
-\label{sec:org53af842}
+\label{sec:orgdf761f1}
 \subsection{Reinforcement Learning \label{reinforcement-learning}}
-\label{sec:orgd7d7c0d}
+\label{sec:org90cdc72}
 \subsubsection{Notation}
-\label{sec:org2511302}
-The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the layer.
-\subsubsection{Markow Decision Processes}
-\label{sec:orgff1c56d}
-\subsubsection{Q-Learning}
-\label{sec:org59125c5}
+\label{sec:orge8ec75b}
+
+
+
+
+
+The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer
+to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in
+\mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the
+layer.
+\subsubsection{Introduction}
+\label{sec:org1b7d00c}
+\parencite{vazquez-canteli19_reinf_learn_deman_respon}.
+
+
+\paragraph{Elements of Reinforcement Learning}
+\label{sec:org1efb30e}
+\subparagraph{Policy}
+\label{sec:org541b6bd}
+\begin{itemize}
+\item Agent behavior at a given time
+\item Mapping states to actions
+\item Function or Lookup table
+\item Sufficient to determine behavior
+\item Policies may be stochastic, give probabilities for each action
+\end{itemize}
+\subparagraph{Reward signal}
+\label{sec:org6485859}
+\begin{itemize}
+\item Goal of the RL problem
+\item Numeric signal the environment sends to the agent
+\item Agents objective is to maximize the reward signal on the long run
+\item Reward signal primary reason to change the policy: Low reward following an
+action of the policy may result in changing the policy to select another action
+\item Rewards determine the immediate desirability of a state
+\item Reward signals can be stochastic functions of the state and the actions
+\end{itemize}
+\subparagraph{Value function}
+\label{sec:org6366db4}
+\begin{itemize}
+\item Value of a state is the total amount of reward an agent can expect to
+accumulate over the future, starting from that state
+\item Values indicate the long-term desirability of states, taking future states and
+their rewards into account.
+\item We seek actions cause states of highest value, because these actions obtain
+the greatest amount of reward in int long run.
+\item Values must be estimated and re-estimated over the agents lifetime.
+\item Efficiently estimating values is the most important component.
+\end{itemize}
+\subparagraph{Model of the environment}
+\label{sec:orga263ad5}
+\begin{itemize}
+\item Model allows inferences to be made about how the environment will behave.
+E.g., Given state and action the model predicts the next state and next reward.
+\item Model-based methods are used for \textbf{\textbf{Planning}}: Deciding on a course of action by
+considering possible future situations before they happen.
+\begin{itemize}
+\item \textbf{\textbf{Control}}: Model-free methods are simpler methods, what are explicitly trial-and-error learners
+\end{itemize}
+\end{itemize}
+\paragraph{Planning vs. Control}
+\label{sec:orgf5e8977}
+\paragraph{On-Policy vs. Off-Policy}
+\label{sec:org15d115c}
+\paragraph{Policy Iteration}
+\label{sec:orgbdf8eea}
+\paragraph{Value Iteration}
+\label{sec:org97c1be8}
+\subsubsection{Markov Decision Processes}
+\label{sec:orgfbc507c}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/mdp_interaction.png}
+\caption[Markov Decision Process]{The agent-environment interaction in a Markov decision process \parencite{sutton18_reinf}}
+\end{figure}
+\begin{itemize}
+\item Classical formulation of sequential decision making
+\item Actions influence immediate rewards, but also future rewards
+\item Trade-off between immediate and delayed reward
+\end{itemize}
+\subsubsection{Tabular Methods}
+\label{sec:org6bdeffe}
+\paragraph{Dynamic Programming}
+\label{sec:org6d207bd}
+\paragraph{Monte-Carlo Methods}
+\label{sec:org754775a}
+\paragraph{Temporal-Difference Learning}
+\label{sec:org8541c49}
+\subparagraph{TD Prediction}
+\label{sec:orge323d50}
+\subparagraph{SARSA: On-policy TD Control}
+\label{sec:org9fc07f4}
+\subparagraph{Q-learning: Off-policy TD Control}
+\label{sec:org45a2ee8}
+\paragraph{Q-Learning}
+\label{sec:org3a6eed4}
 \subsubsection{Function Approximation}
-\label{sec:orgb936237}
-\subsubsection{Exploitation-Exploration Tradeoff}
-\label{sec:orgbc995b8}
+\label{sec:org9b1c2de}
+\subsubsection{Exploitation-Exploration Trade-off}
+\label{sec:org2cf39a7}
+\paragraph{\(\epsilon\)-greedy Method}
+\label{sec:org2611581}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:orgd547dee}
+\label{sec:org2ac31a7}
 \section{Empirical Setting / Data (10\%)}
-\label{sec:org39dd63b}
+\label{sec:org56bfdd9}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:orgcbac50e}
+\label{sec:org55eba46}
 \subsubsection{Raw Data}
-\label{sec:org046d073}
+\label{sec:org4930131}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -434,55 +532,55 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org91eef8b}
+\label{sec:orga9b3f04}
 \subsection{Electricity Markets Data}
-\label{sec:orgead4ac0}
+\label{sec:orgab457a9}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org4350d32}
+\label{sec:orge865a2d}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:orgfff6706}
+\label{sec:org245b80b}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:org04e3406}
+\label{sec:org9442245}
 \subsection{Information Assumptions}
-\label{sec:org34b34dd}
+\label{sec:orgc1b3b13}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org02b02f0}
+\label{sec:orgc3ea2dd}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org7a412f5}
+\label{sec:org6c95a9c}
 \subsection{Bidding Strategy}
-\label{sec:org816c229}
+\label{sec:org70fa7cb}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org22b0d90}
+\label{sec:orgbedd951}
 
 \section{Evaluation (30\%)}
-\label{sec:orgde1870a}
+\label{sec:org629dcf2}
 \subsection{Event-based Simulation}
-\label{sec:org68efaf4}
+\label{sec:orgecc026f}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org756ef12}
+\label{sec:orgd2041f6}
 \subsection{FleetRL}
-\label{sec:org1530af2}
+\label{sec:orgceec76e}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org8751bce}
+\label{sec:orged1e787}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:orgcfb089f}
+\label{sec:org129c6a9}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org985c90d}
+\label{sec:orge633e7e}
 \section{Discussion (5\%)}
-\label{sec:org9e45348}
+\label{sec:orgc02956b}
 \subsection{Generalizability}
-\label{sec:org48eece4}
+\label{sec:org579a702}
 \subsection{Future Electricity Landscape}
-\label{sec:orgc1fcfb2}
+\label{sec:orgee248cf}
 \subsection{Limitations}
-\label{sec:orgd5d4593}
+\label{sec:org3bfc2c8}
 \section{Conclusion (5\%)}
-\label{sec:orgd99b26e}
+\label{sec:org591338d}
 \subsection{Contribution}
-\label{sec:org52a5863}
+\label{sec:org86bfc97}
 \subsection{Future Research}
-\label{sec:orge1ca5d5}
+\label{sec:org6674f0e}
 
 
 
