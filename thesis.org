@@ -303,7 +303,7 @@ parencite:vaya15_optim_biddin_strat_plug_in. Compared to the centralized
 approach, where the aggregator manages charging and places bids for the whole
 fleet, the multi-agent approach caused slightly more costs but solved
 scalability and privacy problems. textcite:shi11_real consider a V2G control
-problem assuming real-time pricing. The authors proposed an online learning
+problem, while assuming real-time pricing. The authors proposed an online learning
 algorithm which they modeled as a discrete-time MDP and solved through
 /Q-Learning/. The algorithm controls the V2G actions of the EV and can react to
 real-time price signals of the market. In this single-agent approach, the action
