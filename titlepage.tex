@@ -1,19 +1,30 @@
+\makeatletter
 \begin{titlepage}
     \begin{center}
         \vspace*{1cm}
 
         \Large
-        \textbf{Reinforcement Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants}
+        \textbf{\@title}
 
         \vspace{1.5cm}
-        Master Thesis
 
-        \vspace{8.0cm}
+        \thesistype{}
+
+        \vspace{1cm}
+
+        \begin{figure}[htbp]
+             \centering
+             \includegraphics[width=.5\linewidth]{./Figures/UoC_Logo.png}
+        \end{figure}
+
+        \vspace{1cm}
 
         \large
-        \textbf{Author}: Tobias Richter\\
+        \textbf{Author}: \thesisauthor{} (Student ID: \studentID{})\\
         \large
-        \textbf{Supervisor}: Prof. Dr. Wolfgang Ketter
+        \textbf{Supervisor}: \supervisor{}\\
+        \large
+        \textbf{Co-Supervisor}: \cosupervisor{}
 
         \vspace{1cm}
         \large
@@ -22,7 +33,8 @@
         University of Cologne\\
 
         \vspace{1cm}
-        October, 2018
+        \@date
 
     \end{center}
 \end{titlepage}
+\makeatother
