@@ -31,6 +31,10 @@
 
 #+LATEX: \tableofcontents
 #+LATEX: \clearpage
+#+LATEX: \listoffigures
+#+LATEX: \clearpage
+#+LATEX: \listoftables
+#+LATEX: \clearpage
 #+LATEX: \pagenumbering{arabic}
 
 * Introduction (10%)
