@@ -2,8 +2,8 @@
 #+AUTHOR:Tobias Richter
 
 # Formatting
-#+LATEX_CLASS_OPTIONS: [12pt, article]
-#+LATEX_HEADER: \usepackage[a4paper, left=5cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+#+LATEX_CLASS_OPTIONS: [a4paper, twoside, 12pt]
+#+LATEX_HEADER: \usepackage[left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm, bindingoffset=1.5cm, head=15pt]{geometry}
 #+LATEX_HEADER: \usepackage{setspace}
 #+LATEX_HEADER: \usepackage{caption}
 #+LATEX_HEADER: \onehalfspacing
@@ -13,16 +13,7 @@
 #+LATEX_HEADER: \usepackage[official]{eurosym}
 #+LATEX_HEADER: \usepackage{amsmath}
 #+LATEX_HEADER: \usepackage{amssymb}
-
 #+LATEX_HEADER: \usepackage{notation}
-
-# Thesis setup
-#+LATEX_HEADER: \newcommand{\thesisdate}{April 30, 2019}
-#+LATEX_HEADER: \newcommand{\thesisauthor}{Tobias Richter}
-#+LATEX_HEADER: \newcommand{\studentID}{999999999}
-#+LATEX_HEADER: \newcommand{\thesistype}{Master Thesis}
-#+LATEX_HEADER: \newcommand{\supervisor}{Univ.-Prof. Dr. Wolfgang Ketter}
-#+LATEX_HEADER: \newcommand{\cosupervisor}{Max Mustermann}
 
 # Headers setup
 #+LATEX_HEADER:\usepackage{fancyhdr}
@@ -42,11 +33,25 @@
 # Title & TOC
 #+OPTIONS: title:nil toc:nil
 #+LATEX_HEADER: \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
-#+LATEX_HEADER: \pagenumbering{Roman}
 
+# Thesis setup
+#+LATEX_HEADER: \newcommand{\thesisdate}{April 30, 2019}
+# TODO: Use Author?
+#+LATEX_HEADER: \newcommand{\thesisauthor}{Tobias Richter}
+#+LATEX_HEADER: \newcommand{\studentID}{999999999}
+#+LATEX_HEADER: \newcommand{\thesistype}{Master Thesis}
+#+LATEX_HEADER: \newcommand{\supervisor}{Univ.-Prof. Dr. Wolfgang Ketter}
+#+LATEX_HEADER: \newcommand{\cosupervisor}{Max Mustermann}
+
+# Titlepage
 #+INCLUDE: "~/uni/ma-thesis/titlepage.tex" export latex
-#+LATEX: \setcounter{page}{2}
 
+# SOOA
+#+INCLUDE: "~/uni/ma-thesis/SOOA.tex" export latex
+
+# TOC, LOF, LOT
+#+LATEX_HEADER: \pagenumbering{Roman}
+#+LATEX: \setcounter{page}{1}
 #+LATEX: \tableofcontents
 #+LATEX: \clearpage
 #+LATEX: \listoffigures
