@@ -16,6 +16,24 @@
 
 #+LATEX_HEADER: \usepackage{notation}
 
+# Thesis setup
+#+LATEX_HEADER: \newcommand{\thesisdate}{April 30, 2019}
+#+LATEX_HEADER: \newcommand{\thesisauthor}{Tobias Richter}
+#+LATEX_HEADER: \newcommand{\studentID}{999999999}
+#+LATEX_HEADER: \newcommand{\thesistype}{Master Thesis}
+#+LATEX_HEADER: \newcommand{\supervisor}{Univ.-Prof. Dr. Wolfgang Ketter}
+#+LATEX_HEADER: \newcommand{\cosupervisor}{Max Mustermann}
+
+# Headers setup
+#+LATEX_HEADER:\usepackage{fancyhdr}
+#+LATEX_HEADER:\pagestyle{fancy}
+#+LATEX_HEADER:\fancyhead{}
+#+LATEX_HEADER:\fancyfoot{}
+#+LATEX_HEADER:\fancyhead[LE,RO]{\textsl{\leftmark}}
+#+LATEX_HEADER:\fancyhead[RE,LO]{\thesisauthor}
+#+LATEX_HEADER:\fancyfoot[C]{\thepage}
+#+LATEX_HEADER:\renewcommand{\headrulewidth}{0.4pt}
+#+LATEX_HEADER:\renewcommand{\footrulewidth}{0pt}
 
 # Bibliography
 #+LATEX_HEADER: \usepackage[backend=biber, style=apa]{biblatex}
