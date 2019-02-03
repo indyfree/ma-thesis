@@ -1,4 +1,4 @@
-% Created 2019-02-03 Sun 22:57
+% Created 2019-02-03 Sun 23:33
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -27,7 +27,7 @@
 \fancyhead{}
 \fancyfoot{}
 \fancyhead[LE,RO]{\textsl{\leftmark}}
-\fancyhead[RE,LO]{\thesisauthor}
+\fancyhead[RE,LO]{Tobias Richter}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -35,12 +35,10 @@
 \let\cite\shortcite
 \let\textcite\shortciteA
 \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
-\newcommand{\thesisdate}{April 30, 2019}
-\newcommand{\thesisauthor}{Tobias Richter}
-\newcommand{\studentID}{999999999}
+\newcommand{\studentID}{558305}
 \newcommand{\thesistype}{Master Thesis}
 \newcommand{\supervisor}{Univ.-Prof. Dr. Wolfgang Ketter}
-\newcommand{\cosupervisor}{Max Mustermann}
+\newcommand{\cosupervisor}{Karsten Schroer, Philipp Arthur Kienscherf}
 \pagenumbering{Roman}
 \author{Tobias Richter}
 \date{\today}
@@ -60,7 +58,7 @@
         \vspace*{1cm}
 
         \Large
-        \textbf{\@title}
+        \textbf{\@title{}}
 
         \vspace{1.5cm}
 
@@ -70,13 +68,13 @@
 
         \begin{figure}[htbp]
              \centering
-             \includegraphics[width=.5\linewidth]{./img/UoC_Logo.png}
+             \includegraphics[width=.5\linewidth]{./fig/UoC_Logo.png}
         \end{figure}
 
         \vspace{1cm}
 
         \large
-        \textbf{Author}: \thesisauthor{} (Student ID: \studentID{})\\
+        \textbf{Author}: \@author{} (Student ID: \studentID{})\\
         \large
         \textbf{Supervisor}: \supervisor{}\\
         \large
@@ -89,7 +87,7 @@
         University of Cologne\\
 
         \vspace{1cm}
-        \@date
+        \@date{}
 
     \end{center}
 \end{titlepage}
@@ -114,7 +112,7 @@ Die Strafbarkeit einer falschen eidesstattlichen Versicherung ist mir bekannt, n
 
 \vspace{3cm}
 \noindent
-\textbf{\thesisauthor{}}
+\textbf{\@author{}}
 
 \vspace{0.5cm}
 \noindent
@@ -131,22 +129,22 @@ Köln, den xx.xx.20xx
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:orgbdbbe1d}
+\label{sec:org817e467}
 \subsection{Research Motivation}
-\label{sec:org7648ab1}
+\label{sec:orgc23d056}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:orge82edf5}
+\label{sec:org001a4f7}
 \subsection{Relevance}
-\label{sec:orgc8f8977}
+\label{sec:org21be2fe}
 
 \clearpage
 \section{Related Literature (10\%)}
-\label{sec:org91d845c}
+\label{sec:org5b19ead}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org7e88b3a}
+\label{sec:orgb0dce67}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -318,7 +316,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org82847da}
+\label{sec:org3748e15}
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning methods can successfully take action in the smart grid. The following
@@ -422,17 +420,17 @@ solving complex challenges in smart grids
 
 
 \section{Theoretical Background (10\%)}
-\label{sec:org5a8afe9}
+\label{sec:orgde5126a}
 \subsection{Electricity Markets}
-\label{sec:org6cdb7d5}
+\label{sec:orgcfe458f}
 \subsubsection{Balancing Market}
-\label{sec:org75b8497}
+\label{sec:orgf191063}
 \subsubsection{Spot Market}
-\label{sec:orgf583ac3}
+\label{sec:org7fb37aa}
 \subsection{Reinforcement Learning \label{reinforcement-learning}}
-\label{sec:orge973559}
+\label{sec:org86b496c}
 \subsubsection{Notation}
-\label{sec:orgdba3623}
+\label{sec:orga9f4e43}
 
 
 
@@ -443,15 +441,15 @@ to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in
 \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the
 layer.
 \subsubsection{Introduction}
-\label{sec:org1bbb560}
+\label{sec:orgda5cb0f}
 \cite{vazquez-canteli19_reinf_learn_deman_respon}.
 
 
 \paragraph{Elements of Reinforcement Learning}
-\label{sec:orgc7a8ac6}
+\label{sec:org6bf5b8e}
 \begin{enumerate}
 \item Policy
-\label{sec:org3454fb8}
+\label{sec:org3b64b98}
 \begin{itemize}
 \item Agent behavior at a given time
 \item Mapping states to actions
@@ -460,7 +458,7 @@ layer.
 \item Policies may be stochastic, give probabilities for each action
 \end{itemize}
 \item Reward signal
-\label{sec:orge197453}
+\label{sec:org1f9e392}
 \begin{itemize}
 \item Goal of the RL problem
 \item Numeric signal the environment sends to the agent
@@ -471,7 +469,7 @@ action of the policy may result in changing the policy to select another action
 \item Reward signals can be stochastic functions of the state and the actions
 \end{itemize}
 \item Value function
-\label{sec:orgc5d911d}
+\label{sec:org99ffa3d}
 \begin{itemize}
 \item Value of a state is the total amount of reward an agent can expect to
 accumulate over the future, starting from that state
@@ -483,7 +481,7 @@ the greatest amount of reward in int long run.
 \item Efficiently estimating values is the most important component.
 \end{itemize}
 \item Model of the environment
-\label{sec:orgb3d1f06}
+\label{sec:orgb58d5b8}
 \begin{itemize}
 \item Model allows inferences to be made about how the environment will behave.
 E.g., Given state and action the model predicts the next state and next reward.
@@ -495,19 +493,19 @@ considering possible future situations before they happen.
 \end{itemize}
 \end{enumerate}
 \paragraph{Planning vs. Control}
-\label{sec:orgac272c3}
+\label{sec:org8224dab}
 \paragraph{On-Policy vs. Off-Policy}
-\label{sec:org36ad234}
+\label{sec:org17ad62a}
 \paragraph{Policy Iteration}
-\label{sec:org6d44c7d}
+\label{sec:org3377a46}
 \paragraph{Value Iteration}
-\label{sec:orgaf9ff44}
+\label{sec:org3f23347}
 \subsubsection{Markov Decision Processes}
-\label{sec:orgaf448b5}
+\label{sec:org437caa3}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=.9\linewidth]{./img/mdp_interaction.png}
+\includegraphics[width=.9\linewidth]{./fig/mdp_interaction.png}
 \caption[Markov Decision Process]{The agent-environment interaction in a Markov decision process \cite{sutton18_reinf}}
 \end{figure}
 \begin{itemize}
@@ -516,37 +514,37 @@ considering possible future situations before they happen.
 \item Trade-off between immediate and delayed reward
 \end{itemize}
 \subsubsection{Tabular Methods}
-\label{sec:orge01239f}
+\label{sec:orge9ae482}
 \paragraph{Dynamic Programming}
-\label{sec:orgac86627}
+\label{sec:org92189db}
 \paragraph{Monte-Carlo Methods}
-\label{sec:org108aa16}
+\label{sec:orga410571}
 \paragraph{Temporal-Difference Learning}
-\label{sec:org313e355}
+\label{sec:org5c9468b}
 \begin{enumerate}
 \item TD Prediction
-\label{sec:org774cc3a}
+\label{sec:org5abb7f1}
 \item SARSA: On-policy TD Control
-\label{sec:org04aba3d}
+\label{sec:org969082d}
 \item Q-learning: Off-policy TD Control
-\label{sec:org5ed0e76}
+\label{sec:org5770b43}
 \end{enumerate}
 \paragraph{Q-Learning}
-\label{sec:org163ee7c}
+\label{sec:org80c5094}
 \subsubsection{Function Approximation}
-\label{sec:org0c40ff9}
+\label{sec:orge30b02d}
 \subsubsection{Exploitation-Exploration Trade-off}
-\label{sec:org9f94dc5}
+\label{sec:orgeda100e}
 \paragraph{\(\epsilon\)-greedy Method}
-\label{sec:org401063b}
+\label{sec:org24dc8d2}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:org2b35354}
+\label{sec:org87bf818}
 \section{Empirical Setting / Data (10\%)}
-\label{sec:orge1637d4}
+\label{sec:orgbcc5603}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:orgf23f249}
+\label{sec:org0cb9189}
 \subsubsection{Raw Data}
-\label{sec:orgd5f1589}
+\label{sec:orgcf26099}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -590,55 +588,55 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org1f9803d}
+\label{sec:org39049ba}
 \subsection{Electricity Markets Data}
-\label{sec:org07fc509}
+\label{sec:org37bef3c}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:orgdb4755e}
+\label{sec:orgcbde2c2}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:org67d3d0f}
+\label{sec:org0dd9e25}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:orgb9af7fa}
+\label{sec:org9ca3858}
 \subsection{Information Assumptions}
-\label{sec:orgae2815c}
+\label{sec:org7c1da74}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org2ea7c5a}
+\label{sec:org5c95c6d}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org541f128}
+\label{sec:org75dcd95}
 \subsection{Bidding Strategy}
-\label{sec:orgf7bc275}
+\label{sec:org95eefef}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org424de5e}
+\label{sec:orgf5e70dc}
 
 \section{Evaluation (30\%)}
-\label{sec:org5687a4b}
+\label{sec:orgadc21db}
 \subsection{Event-based Simulation}
-\label{sec:org5538d97}
+\label{sec:org2d89c25}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:orgeb5db11}
+\label{sec:orge6ab547}
 \subsection{FleetRL}
-\label{sec:org258ccc9}
+\label{sec:org636337b}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:orgc377a7a}
+\label{sec:org4a56efa}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org178c661}
+\label{sec:orgb67fd8a}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org60172db}
+\label{sec:orgb3ee576}
 \section{Discussion (5\%)}
-\label{sec:org147b4e0}
+\label{sec:org68e059a}
 \subsection{Generalizability}
-\label{sec:orgc5a66e6}
+\label{sec:org962e037}
 \subsection{Future Electricity Landscape}
-\label{sec:orgf10eefd}
+\label{sec:orgf0ba672}
 \subsection{Limitations}
-\label{sec:org0b4157a}
+\label{sec:org7cfb617}
 \section{Conclusion (5\%)}
-\label{sec:orgad80c4b}
+\label{sec:org7f769c5}
 \subsection{Contribution}
-\label{sec:org87747da}
+\label{sec:orgf3396c4}
 \subsection{Future Research}
-\label{sec:orgc8cd230}
+\label{sec:org3574a59}
 
 
 \bibliography{bibliography/references}
