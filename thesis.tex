@@ -1,6 +1,6 @@
-% Created 2019-02-02 Sat 18:26
+% Created 2019-02-03 Sun 22:57
 % Intended LaTeX compiler: pdflatex
-\documentclass[12pt, article]{article}
+\documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
@@ -14,7 +14,7 @@
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
-\usepackage[a4paper, left=5cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm, bindingoffset=1.5cm, head=15pt]{geometry}
 \usepackage{setspace}
 \usepackage{caption}
 \onehalfspacing
@@ -22,9 +22,25 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{notation}
-\usepackage[backend=biber, style=apa]{biblatex}
-\addbibresource{~/uni/ma-thesis/bibliography/references.bib}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[LE,RO]{\textsl{\leftmark}}
+\fancyhead[RE,LO]{\thesisauthor}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\usepackage{apacite}
+\let\cite\shortcite
+\let\textcite\shortciteA
 \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
+\newcommand{\thesisdate}{April 30, 2019}
+\newcommand{\thesisauthor}{Tobias Richter}
+\newcommand{\studentID}{999999999}
+\newcommand{\thesistype}{Master Thesis}
+\newcommand{\supervisor}{Univ.-Prof. Dr. Wolfgang Ketter}
+\newcommand{\cosupervisor}{Max Mustermann}
 \pagenumbering{Roman}
 \author{Tobias Richter}
 \date{\today}
@@ -38,22 +54,33 @@
  pdflang={English}}
 \begin{document}
 
+\makeatletter
 \begin{titlepage}
     \begin{center}
         \vspace*{1cm}
 
         \Large
-        \textbf{Reinforcement Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants}
+        \textbf{\@title}
 
         \vspace{1.5cm}
-        Master Thesis
 
-        \vspace{8.0cm}
+        \thesistype{}
+
+        \vspace{1cm}
+
+        \begin{figure}[htbp]
+             \centering
+             \includegraphics[width=.5\linewidth]{./img/UoC_Logo.png}
+        \end{figure}
+
+        \vspace{1cm}
 
         \large
-        \textbf{Author}: Tobias Richter\\
+        \textbf{Author}: \thesisauthor{} (Student ID: \studentID{})\\
         \large
-        \textbf{Supervisor}: Prof. Dr. Wolfgang Ketter
+        \textbf{Supervisor}: \supervisor{}\\
+        \large
+        \textbf{Co-Supervisor}: \cosupervisor{}
 
         \vspace{1cm}
         \large
@@ -62,12 +89,39 @@
         University of Cologne\\
 
         \vspace{1cm}
-        October, 2018
+        \@date
 
     \end{center}
 \end{titlepage}
-\setcounter{page}{2}
+\makeatother
+\clearpage
 
+\thispagestyle{empty}
+\section*{Eidesstattliche Versicherung}
+\label{sec:SOOA}
+
+\vspace{2.5cm}
+
+% Statement of original authorship - Needs to be in German
+% see also here: https://www.wiso.uni-koeln.de/sites/fakultaet/dokumente/PA/formulare/eidesstattliche_erklaerung.pdf
+
+Hiermit versichere ich an Eides statt, dass ich die vorliegende Arbeit selbstständig und ohne die Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Alle Stellen, die wörtlich oder sinngemäß aus veröffentlichten und nicht veröffentlichten Schriften entnommen wurden, sind als solche kenntlich gemacht. Die Arbeit ist in gleicher oder ähnlicher Form oder auszugsweise im Rahmen einer anderen Prüfung noch nicht vorgelegt worden. Ich versichere, dass die eingereichte elektronische Fassung der eingereichten Druckfassung vollständig entspricht.
+
+\vspace{1cm}
+
+\noindent
+Die Strafbarkeit einer falschen eidesstattlichen Versicherung ist mir bekannt, namentlich die Strafandrohung gemäß § 156 StGB bis zu drei Jahren Freiheitsstrafe oder Geldstrafe bei vorsätzlicher Begehung der Tat bzw. gemäß § 161 Abs. 1 StGB bis zu einem Jahr Freiheitsstrafe oder Geldstrafe bei fahrlässiger Begehung.
+
+\vspace{3cm}
+\noindent
+\textbf{\thesisauthor{}}
+
+\vspace{0.5cm}
+\noindent
+Köln, den xx.xx.20xx
+\clearpage
+
+\setcounter{page}{1}
 \tableofcontents
 \clearpage
 \listoffigures
@@ -77,30 +131,30 @@
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org574db38}
+\label{sec:orgbdbbe1d}
 \subsection{Research Motivation}
-\label{sec:orgc5882fe}
+\label{sec:org7648ab1}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org1b1eb24}
+\label{sec:orge82edf5}
 \subsection{Relevance}
-\label{sec:org2d14179}
+\label{sec:orgc8f8977}
 
 \clearpage
 \section{Related Literature (10\%)}
-\label{sec:org4a2e975}
+\label{sec:org91d845c}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orgb109428}
+\label{sec:org7e88b3a}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
 grid to ensure that transformers and substations do not get overloaded
-\parencite{sioshansi12_impac_elect_tarif_plug_in,lopes11_integ_elect_vehic_elect_power_system}.
+\cite{sioshansi12_impac_elect_tarif_plug_in,lopes11_integ_elect_vehic_elect_power_system}.
 Loading multiple EVs in the same neighborhood, or worse, whole EV fleets at
 once, stress the grid. In these cases, even brown- or blackouts are possible
-\shortcite{kim12_carbit}. Despite these challenges, it is possible to postpone the
+\cite{kim12_carbit}. Despite these challenges, it is possible to postpone the
 physical reinforcement by adopting smart charging strategies. In smart charging,
 EVs get charged when the grid is less congested to achieve more grid stability.
 Smart charging reduces peaks in electricity demand, called \emph{Peak Cutting} and
@@ -175,7 +229,7 @@ they have to be charged in any case, which allows us to safely exclude battery
 deprecation from our model. Further, we chose the intraday market over the
 day-ahead market, as it has the lowest reaction time of the spot markets, and
 thus potentially offers higher profits
-\parencite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}.
+\cite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}.
 
 Previous studies often assume that car owners or households can directly trade
 on electricity markets. In reality, this is not possible due to the minimum
@@ -193,10 +247,10 @@ batteries. In addition to electricity brokers, we apply the concept of Virtual
 Power Plants (VPPs). VPPs are flexible portfolios of distributed energy
 resources, which are presented with a single load profile to the system
 operator, making them eligible for market participation and ancillary service
-provisioning \parencite{pudjianto07_virtual_power_plant_system_integ}. Hence, VPPs
+provisioning \cite{pudjianto07_virtual_power_plant_system_integ}. Hence, VPPs
 allow providing regulation capacity to the market without knowing which exact
 sources provide the promised capacity until the delivery time
-\parencite{kahlen17_fleet}. This concept is specially useful when dealing with EV
+\cite{kahlen17_fleet}. This concept is specially useful when dealing with EV
 fleets: VPPs enable carsharing providers to issue bids and asks based on an
 estimate of available fleet capacity, without knowing beforehand which exact EVs
 will provide the capacity at the time of delivery. Based on the battery charge
@@ -208,7 +262,7 @@ use the presented concepts as a viable business extension. Free float carsharing
 is a popular concept where which allows cars to be picked up and parked
 everywhere, and the customers are billed is by the minute. Free float carsharing
 offers more flexibility to its users, saves resources and reduces carbon
-emissions \parencite{firnkorn15_free_float_elect_carsh_fleet_smart_cities}. Most
+emissions \cite{firnkorn15_free_float_elect_carsh_fleet_smart_cities}. Most
 previous studies concerned with using EVs for electricity trading, assumed that
 trips are fixed and known in advance, e.g., in
 \textcite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}. The free float
@@ -235,7 +289,7 @@ the delivery time the agent decides which EVs will provide the regulation
 capacity based on the likelihood that the vehicle is rented out and on the
 expected benefits of the EV. In a similar study, the authors showed that
 carsharing companies could participate in day-ahead markets for arbitrage
-purposes \parencite{kahlen18_elect_vehic_virtual_power_plant_dilem}. In this
+purposes \cite{kahlen18_elect_vehic_virtual_power_plant_dilem}. In this
 paper, the authors use a time-series model to predict available trading
 capacity, due to less time between commitment and delivery. Another central
 problem for the carsharing provider is that committed trades which can not be
@@ -259,12 +313,12 @@ This research is proposing a solution, in which the EV fleet participates in the
 balancing market and intraday market simultaneously. With this approach, we
 align the potentially higher profits on the balancing markets, with more
 accurate capacity predictions for intraday markets
-\parencite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}. This research followed
+\cite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}. This research followed
 \textcite{kahlen17_fleet} with, who proposed to work on a combination of multiple
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org5410004}
+\label{sec:org82847da}
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning methods can successfully take action in the smart grid. The following
@@ -290,7 +344,7 @@ approaches. Moreover, the authors applied feature selection and regularization
 methods to explore the agent's adaption process. These methods are particularly
 beneficial in smart markets because market design, structures, and conditions
 might change in the future; hence intelligent agents should be able to adapt to
-it \parencite{peters13_reinf_learn_approac_to_auton}.
+it \cite{peters13_reinf_learn_approac_to_auton}.
 
 \textcite{vandael15_reinf_learn_heuris_ev_fleet} facilitate learned EV fleet
 charging behavior to optimally purchase electricity on the day-ahead market.
@@ -334,7 +388,7 @@ willingness-to-pay which depends on the urgency to charge. State variables like
 SoC, time of departure and price development on the market determine the urgency
 to charge. The authors compared this approach with a centralized
 aggregator-based approach which they developed in another paper
-\parencite{vaya15_optim_biddin_strat_plug_in}. Compared to the centralized
+\cite{vaya15_optim_biddin_strat_plug_in}. Compared to the centralized
 approach, where the aggregator manages charging and places bids for the whole
 fleet, the multi-agent approach caused slightly more costs but solved
 scalability and privacy problems. \textcite{shi11_real} consider a V2G control
@@ -364,21 +418,21 @@ optimal fit for the design of our proposed intelligent agent. Given the ability
 to learn user behavior (e.g., mobility demand) and the flexibility to adapt to
 the environment (e.g., electricity prices) RL methods are a promising way of
 solving complex challenges in smart grids
-\parencite{vazquez-canteli19_reinf_learn_deman_respon}.
+\cite{vazquez-canteli19_reinf_learn_deman_respon}.
 
 
 \section{Theoretical Background (10\%)}
-\label{sec:org43fbab4}
+\label{sec:org5a8afe9}
 \subsection{Electricity Markets}
-\label{sec:org15e69bd}
+\label{sec:org6cdb7d5}
 \subsubsection{Balancing Market}
-\label{sec:org99a15c6}
+\label{sec:org75b8497}
 \subsubsection{Spot Market}
-\label{sec:orgdf761f1}
+\label{sec:orgf583ac3}
 \subsection{Reinforcement Learning \label{reinforcement-learning}}
-\label{sec:org90cdc72}
+\label{sec:orge973559}
 \subsubsection{Notation}
-\label{sec:orge8ec75b}
+\label{sec:orgdba3623}
 
 
 
@@ -389,14 +443,15 @@ to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in
 \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the
 layer.
 \subsubsection{Introduction}
-\label{sec:org1b7d00c}
-\parencite{vazquez-canteli19_reinf_learn_deman_respon}.
+\label{sec:org1bbb560}
+\cite{vazquez-canteli19_reinf_learn_deman_respon}.
 
 
 \paragraph{Elements of Reinforcement Learning}
-\label{sec:org1efb30e}
-\subparagraph{Policy}
-\label{sec:org541b6bd}
+\label{sec:orgc7a8ac6}
+\begin{enumerate}
+\item Policy
+\label{sec:org3454fb8}
 \begin{itemize}
 \item Agent behavior at a given time
 \item Mapping states to actions
@@ -404,8 +459,8 @@ layer.
 \item Sufficient to determine behavior
 \item Policies may be stochastic, give probabilities for each action
 \end{itemize}
-\subparagraph{Reward signal}
-\label{sec:org6485859}
+\item Reward signal
+\label{sec:orge197453}
 \begin{itemize}
 \item Goal of the RL problem
 \item Numeric signal the environment sends to the agent
@@ -415,8 +470,8 @@ action of the policy may result in changing the policy to select another action
 \item Rewards determine the immediate desirability of a state
 \item Reward signals can be stochastic functions of the state and the actions
 \end{itemize}
-\subparagraph{Value function}
-\label{sec:org6366db4}
+\item Value function
+\label{sec:orgc5d911d}
 \begin{itemize}
 \item Value of a state is the total amount of reward an agent can expect to
 accumulate over the future, starting from that state
@@ -427,8 +482,8 @@ the greatest amount of reward in int long run.
 \item Values must be estimated and re-estimated over the agents lifetime.
 \item Efficiently estimating values is the most important component.
 \end{itemize}
-\subparagraph{Model of the environment}
-\label{sec:orga263ad5}
+\item Model of the environment
+\label{sec:orgb3d1f06}
 \begin{itemize}
 \item Model allows inferences to be made about how the environment will behave.
 E.g., Given state and action the model predicts the next state and next reward.
@@ -438,21 +493,22 @@ considering possible future situations before they happen.
 \item \textbf{\textbf{Control}}: Model-free methods are simpler methods, what are explicitly trial-and-error learners
 \end{itemize}
 \end{itemize}
+\end{enumerate}
 \paragraph{Planning vs. Control}
-\label{sec:orgf5e8977}
+\label{sec:orgac272c3}
 \paragraph{On-Policy vs. Off-Policy}
-\label{sec:org15d115c}
+\label{sec:org36ad234}
 \paragraph{Policy Iteration}
-\label{sec:orgbdf8eea}
+\label{sec:org6d44c7d}
 \paragraph{Value Iteration}
-\label{sec:org97c1be8}
+\label{sec:orgaf9ff44}
 \subsubsection{Markov Decision Processes}
-\label{sec:orgfbc507c}
+\label{sec:orgaf448b5}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./img/mdp_interaction.png}
-\caption[Markov Decision Process]{The agent-environment interaction in a Markov decision process \parencite{sutton18_reinf}}
+\caption[Markov Decision Process]{The agent-environment interaction in a Markov decision process \cite{sutton18_reinf}}
 \end{figure}
 \begin{itemize}
 \item Classical formulation of sequential decision making
@@ -460,35 +516,37 @@ considering possible future situations before they happen.
 \item Trade-off between immediate and delayed reward
 \end{itemize}
 \subsubsection{Tabular Methods}
-\label{sec:org6bdeffe}
+\label{sec:orge01239f}
 \paragraph{Dynamic Programming}
-\label{sec:org6d207bd}
+\label{sec:orgac86627}
 \paragraph{Monte-Carlo Methods}
-\label{sec:org754775a}
+\label{sec:org108aa16}
 \paragraph{Temporal-Difference Learning}
-\label{sec:org8541c49}
-\subparagraph{TD Prediction}
-\label{sec:orge323d50}
-\subparagraph{SARSA: On-policy TD Control}
-\label{sec:org9fc07f4}
-\subparagraph{Q-learning: Off-policy TD Control}
-\label{sec:org45a2ee8}
+\label{sec:org313e355}
+\begin{enumerate}
+\item TD Prediction
+\label{sec:org774cc3a}
+\item SARSA: On-policy TD Control
+\label{sec:org04aba3d}
+\item Q-learning: Off-policy TD Control
+\label{sec:org5ed0e76}
+\end{enumerate}
 \paragraph{Q-Learning}
-\label{sec:org3a6eed4}
+\label{sec:org163ee7c}
 \subsubsection{Function Approximation}
-\label{sec:org9b1c2de}
+\label{sec:org0c40ff9}
 \subsubsection{Exploitation-Exploration Trade-off}
-\label{sec:org2cf39a7}
+\label{sec:org9f94dc5}
 \paragraph{\(\epsilon\)-greedy Method}
-\label{sec:org2611581}
+\label{sec:org401063b}
 \subsubsection{Deep Reinforcement Learning}
-\label{sec:org2ac31a7}
+\label{sec:org2b35354}
 \section{Empirical Setting / Data (10\%)}
-\label{sec:org56bfdd9}
+\label{sec:orge1637d4}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org55eba46}
+\label{sec:orgf23f249}
 \subsubsection{Raw Data}
-\label{sec:org4930131}
+\label{sec:orgd5f1589}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -532,58 +590,57 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:orga9b3f04}
+\label{sec:org1f9803d}
 \subsection{Electricity Markets Data}
-\label{sec:orgab457a9}
+\label{sec:org07fc509}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:orge865a2d}
+\label{sec:orgdb4755e}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:org245b80b}
+\label{sec:org67d3d0f}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:org9442245}
+\label{sec:orgb9af7fa}
 \subsection{Information Assumptions}
-\label{sec:orgc1b3b13}
+\label{sec:orgae2815c}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:orgc3ea2dd}
+\label{sec:org2ea7c5a}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org6c95a9c}
+\label{sec:org541f128}
 \subsection{Bidding Strategy}
-\label{sec:org70fa7cb}
+\label{sec:orgf7bc275}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:orgbedd951}
+\label{sec:org424de5e}
 
 \section{Evaluation (30\%)}
-\label{sec:org629dcf2}
+\label{sec:org5687a4b}
 \subsection{Event-based Simulation}
-\label{sec:orgecc026f}
+\label{sec:org5538d97}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:orgd2041f6}
+\label{sec:orgeb5db11}
 \subsection{FleetRL}
-\label{sec:orgceec76e}
+\label{sec:org258ccc9}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:orged1e787}
+\label{sec:orgc377a7a}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org129c6a9}
+\label{sec:org178c661}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:orge633e7e}
+\label{sec:org60172db}
 \section{Discussion (5\%)}
-\label{sec:orgc02956b}
+\label{sec:org147b4e0}
 \subsection{Generalizability}
-\label{sec:org579a702}
+\label{sec:orgc5a66e6}
 \subsection{Future Electricity Landscape}
-\label{sec:orgee248cf}
+\label{sec:orgf10eefd}
 \subsection{Limitations}
-\label{sec:org3bfc2c8}
+\label{sec:org0b4157a}
 \section{Conclusion (5\%)}
-\label{sec:org591338d}
+\label{sec:orgad80c4b}
 \subsection{Contribution}
-\label{sec:org86bfc97}
+\label{sec:org87747da}
 \subsection{Future Research}
-\label{sec:org6674f0e}
+\label{sec:orgc8cd230}
 
 
-
-\clearpage
-\printbibliography
+\bibliography{bibliography/references}
+\bibliographystyle{apacite}
 \end{document}

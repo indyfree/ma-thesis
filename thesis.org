@@ -27,8 +27,9 @@
 #+LATEX_HEADER:\renewcommand{\footrulewidth}{0pt}
 
 # Bibliography
-#+LATEX_HEADER: \usepackage[backend=biber, style=apa]{biblatex}
-#+LATEX_HEADER: \addbibresource{~/uni/ma-thesis/bibliography/references.bib}
+#+LATEX_HEADER: \usepackage{apacite}
+#+LATEX_HEADER: \let\cite\shortcite
+#+LATEX_HEADER: \let\textcite\shortciteA
 
 # Title & TOC
 #+OPTIONS: title:nil toc:nil
@@ -83,10 +84,10 @@ The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
 grid to ensure that transformers and substations do not get overloaded
-parencite:sioshansi12_impac_elect_tarif_plug_in,lopes11_integ_elect_vehic_elect_power_system.
+cite:sioshansi12_impac_elect_tarif_plug_in,lopes11_integ_elect_vehic_elect_power_system.
 Loading multiple EVs in the same neighborhood, or worse, whole EV fleets at
 once, stress the grid. In these cases, even brown- or blackouts are possible
-parencite:kim12_carbit. Despite these challenges, it is possible to postpone the
+cite:kim12_carbit. Despite these challenges, it is possible to postpone the
 physical reinforcement by adopting smart charging strategies. In smart charging,
 EVs get charged when the grid is less congested to achieve more grid stability.
 Smart charging reduces peaks in electricity demand, called /Peak Cutting/ and
@@ -164,7 +165,7 @@ they have to be charged in any case, which allows us to safely exclude battery
 deprecation from our model. Further, we chose the intraday market over the
 day-ahead market, as it has the lowest reaction time of the spot markets, and
 thus potentially offers higher profits
-parencite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
+cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
 
 # NOTE: Section Intelligent Agents within Smart Charging
 # TODO: Extend section on intelligent agents and electricity brokers, state that
@@ -185,10 +186,10 @@ batteries. In addition to electricity brokers, we apply the concept of Virtual
 Power Plants (VPPs). VPPs are flexible portfolios of distributed energy
 resources, which are presented with a single load profile to the system
 operator, making them eligible for market participation and ancillary service
-provisioning parencite:pudjianto07_virtual_power_plant_system_integ. Hence, VPPs
+provisioning cite:pudjianto07_virtual_power_plant_system_integ. Hence, VPPs
 allow providing regulation capacity to the market without knowing which exact
 sources provide the promised capacity until the delivery time
-parencite:kahlen17_fleet. This concept is specially useful when dealing with EV
+cite:kahlen17_fleet. This concept is specially useful when dealing with EV
 fleets: VPPs enable carsharing providers to issue bids and asks based on an
 estimate of available fleet capacity, without knowing beforehand which exact EVs
 will provide the capacity at the time of delivery. Based on the battery charge
@@ -200,7 +201,7 @@ use the presented concepts as a viable business extension. Free float carsharing
 is a popular concept where which allows cars to be picked up and parked
 everywhere, and the customers are billed is by the minute. Free float carsharing
 offers more flexibility to its users, saves resources and reduces carbon
-emissions parencite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Most
+emissions cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Most
 previous studies concerned with using EVs for electricity trading, assumed that
 trips are fixed and known in advance, e.g., in
 textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. The free float
@@ -227,7 +228,7 @@ the delivery time the agent decides which EVs will provide the regulation
 capacity based on the likelihood that the vehicle is rented out and on the
 expected benefits of the EV. In a similar study, the authors showed that
 carsharing companies could participate in day-ahead markets for arbitrage
-purposes parencite:kahlen18_elect_vehic_virtual_power_plant_dilem. In this
+purposes cite:kahlen18_elect_vehic_virtual_power_plant_dilem. In this
 paper, the authors use a time-series model to predict available trading
 capacity, due to less time between commitment and delivery. Another central
 problem for the carsharing provider is that committed trades which can not be
@@ -252,7 +253,7 @@ This research is proposing a solution, in which the EV fleet participates in the
 balancing market and intraday market simultaneously. With this approach, we
 align the potentially higher profits on the balancing markets, with more
 accurate capacity predictions for intraday markets
-parencite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. This research followed
+cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. This research followed
 textcite:kahlen17_fleet with, who proposed to work on a combination of multiple
 markets in the future.
 
@@ -282,7 +283,7 @@ approaches. Moreover, the authors applied feature selection and regularization
 methods to explore the agent's adaption process. These methods are particularly
 beneficial in smart markets because market design, structures, and conditions
 might change in the future; hence intelligent agents should be able to adapt to
-it parencite:peters13_reinf_learn_approac_to_auton.
+it cite:peters13_reinf_learn_approac_to_auton.
 
 textcite:vandael15_reinf_learn_heuris_ev_fleet facilitate learned EV fleet
 charging behavior to optimally purchase electricity on the day-ahead market.
@@ -328,7 +329,7 @@ willingness-to-pay which depends on the urgency to charge. State variables like
 SoC, time of departure and price development on the market determine the urgency
 to charge. The authors compared this approach with a centralized
 aggregator-based approach which they developed in another paper
-parencite:vaya15_optim_biddin_strat_plug_in. Compared to the centralized
+cite:vaya15_optim_biddin_strat_plug_in. Compared to the centralized
 approach, where the aggregator manages charging and places bids for the whole
 fleet, the multi-agent approach caused slightly more costs but solved
 scalability and privacy problems. textcite:shi11_real consider a V2G control
@@ -358,13 +359,13 @@ optimal fit for the design of our proposed intelligent agent. Given the ability
 to learn user behavior (e.g., mobility demand) and the flexibility to adapt to
 the environment (e.g., electricity prices) RL methods are a promising way of
 solving complex challenges in smart grids
-parencite:vazquez-canteli19_reinf_learn_deman_respon.
+cite:vazquez-canteli19_reinf_learn_deman_respon.
 
 
 * Theoretical Background (10%)
 ** Electricity Markets
 *** Balancing Market
-# parencite:brandt17_evaluat_busin_model_vehic_grid_integ has a good section
+# cite:brandt17_evaluat_busin_model_vehic_grid_integ has a good section
 # explaining the markets.
 *** Spot Market
 ** Reinforcement Learning label:reinforcement-learning
@@ -381,7 +382,7 @@ to get the activation $y = x + \sigma(w x + b) \in \mathbb{R}^D$ with $w \in
 \mathbb{R}^{D \times D}$, and $b \in \mathbb{R}^D$ the weights and bias of the
 layer.
 *** Introduction
-parencite:vazquez-canteli19_reinf_learn_deman_respon.
+cite:vazquez-canteli19_reinf_learn_deman_respon.
 
 
 **** Elements of Reinforcement Learning
@@ -420,7 +421,7 @@ parencite:vazquez-canteli19_reinf_learn_deman_respon.
 **** Value Iteration
 *** Markov Decision Processes
 
-#+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process parencite:sutton18_reinf
+#+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf
 [[./img/mdp_interaction.png]]
 - Classical formulation of sequential decision making
 - Actions influence immediate rewards, but also future rewards
@@ -490,15 +491,15 @@ Stuttgart.
 
 * Model: FleetRL (20%)
 ** Information Assumptions
-# See: parencite:mashhour11_biddin_strat_virtual_power_plant_1
+# See: cite:mashhour11_biddin_strat_virtual_power_plant_1
 ** Mobility Demand & Clearing Price Prediction
 ** Reinforcement Learning Approach
 # - Multi-agent bidding approach, with learning complete bidding strategy?
-#   parencite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
+#   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
 ** Bidding Strategy
 # NOTE: Assume aggregator is a price taker
 ** Dispatch Heuristic / Algorithm
-# - See parencite:vandael15_reinf_learn_heuris_ev_fleet
+# - See cite:vandael15_reinf_learn_heuris_ev_fleet
 
 * Evaluation (30%)
 ** Event-based Simulation
@@ -513,18 +514,18 @@ Stuttgart.
 ** Generalizability
 ** Future Electricity Landscape
 ** Limitations
-# - See parencite:vazquez-canteli19_reinf_learn_deman_respon conclusion for
+# - See cite:vazquez-canteli19_reinf_learn_deman_respon conclusion for
 #   limitations in RL.
 * Conclusion (5%)
 ** Contribution
 # TODO: Compare to most simular studies.
-# parencite:kahlen18_elect_vehic_virtual_power_plant_dilem,vandael15_reinf_learn_heuris_ev_fleet etc..
+# cite:kahlen18_elect_vehic_virtual_power_plant_dilem,vandael15_reinf_learn_heuris_ev_fleet etc..
 ** Future Research
 
 
+bibliography:~/uni/ma-thesis/bibliography/references.bib
+bibliographystyle:apacite
 
-#+LATEX: \clearpage
-#+LATEX: \printbibliography
 * Footnotes
 
 [fn:1] citetitle:energiewende2010, cite:energiewende2010.
