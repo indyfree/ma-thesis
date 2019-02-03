@@ -422,7 +422,7 @@ cite:vazquez-canteli19_reinf_learn_deman_respon.
 *** Markov Decision Processes
 
 #+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf
-[[./img/mdp_interaction.png]]
+[[./fig/mdp_interaction.png]]
 - Classical formulation of sequential decision making
 - Actions influence immediate rewards, but also future rewards
 - Trade-off between immediate and delayed reward
