@@ -1,137 +1,142 @@
+\section*{Summary of Notation}
+Capital letters are used for random variables, whereas lower case letters are used for
+the values of random variables and for scalar functions. Quantities that are required to
+be real-valued vectors are written in bold and in lower case (even if random variables).
 \begin{tabbing}
-\=~~~~~~~~~~~~~~~~~~  \= \kill
-\>$\defeq$            \> equality relationship that is true by definition\\
-\>$\approx$           \> approximately equal\\
-\>$\propto$           \> proportional to\\
-\>$\Pr{X\!=\!x}$      \> probability that a random variable $X$ takes on the value $x$\\
-\>$X\sim p$           \> random variable $X$ selected from distribution $p(x)\defeq\Pr{X\!=\!x}$\\
-\>$\E{X}$             \> expectation of a random variable $X$, i.e., $\E{X}\defeq\sum_x p(x)x$\\
-\>$\arg\max_a f(a)$   \> a value of $a$ at which $f(a)$ takes its maximal value\\
-\>$\ln x$             \> natural logarithm of $x$\\
-\>$e^x$               \> the base of the natural logarithm, $e\approx 2.71828$, carried to power $x$; $e^{\ln x}=x$\\
-\>$\Re$               \> set of real numbers\\
-\>$f:\X\rightarrow\Y$ \> function $f$ from elements of set $\X$ to elements of set $\Y$\\
-\>$\leftarrow$        \> assignment\\
-\>$(a,b]$             \> the real interval between $a$ and $b$ including $b$ but not including $a$\\
-\\
-\>$\e$                \> probability of taking a random action in an \e-greedy policy\\
-\>$\alpha, \beta$     \> step-size parameters\\
-\>$\gamma$            \> discount-rate parameter\\
-\>$\lambda$           \> decay-rate parameter for eligibility traces\\
-\>$\ind{\text{\emph{predicate}}}$ \>indicator function ($\ind{\text{\emph{predicate}}}\defeq1$ if the \emph{predicate} is true, else 0)\\
-\\
-\>In a multi-arm bandit problem:\\
-\>$k$                 \> number of actions (arms)\\
-\>$t$                 \> discrete time step or play number\\
-\>$\qstar(a)$         \> true value (expected reward) of action $a$\\
-\>$Q_t(a)$            \> estimate at time $t$ of $\qstar(a)$\\
-\>$N_t(a)$            \> number of times action $a$ has been selected up prior to time $t$\\
-\>$H_t(a)$            \> learned preference for selecting action $a$ at time $t$\\
-\>$\pi_t(a)$          \> probability of selecting action $a$ at time $t$\\
-\>$\bar R_t$          \> estimate at time $t$ of the expected reward given $\pi_t$\\
-\\
-\>In a Markov Decision Process:\\
-\>$s, s'$             \> states\\
-\>$a$                 \> an action\\
-\>$r$                 \> a reward\\
-\>$\S$                \> set of all nonterminal states \\
-\>$\S^+$              \> set of all states, including the terminal state \\
-\>$\A(s)$             \> set of all actions available in state $s$\\
-\>$\R$                \> set of all possible rewards, a finite subset of $\Re$\\
-\>$\subset$           \> subset of; e.g., $\R\subset\Re$\\
-\>$\in$               \> is an element of; e.g., $s\in\S$, $r\in\R$\\
-\>$|\S|$              \> number of elements in set $\S$\\
-\\
-\>$t$                 \> discrete time step\\
-\>$T, T(t)$           \> final time step of an episode, or of the episode including time step $t$\\
-\>$A_t$               \> action at time $t$\\
-\>$S_t$               \> state at time $t$, typically due, stochastically, to $S_{t-1}$ and $A_{t-1}$\\
-\>$R_t$               \> reward at time $t$, typically due, stochastically, to $S_{t-1}$ and $A_{t-1}$\\
-\>$\pi$               \> policy (decision-making rule)\\
-\>$\pi(s)$            \> action taken in state $s$ under {\it deterministic\/} policy $\pi$\\
-\>$\pi(a|s)$          \> probability of taking action $a$ in state $s$ under {\it stochastic\/} policy $\pi$\\
-\\
-\>$G_t$               \> return following time $t$\\
-\>$h$                 \> horizon, the time step one looks up to in a forward view\\
-\>$G_{t:t+n}, G_{t:h}$\> $n$-step return from $t+1$ to $t+n$, or to $h$ (discounted and corrected) \\
-\>$\bar G_{t:h}$      \> flat return (undiscounted and uncorrected) from $t+1$ to $h$\\
-\>$G^\lambda_t$       \> $\lambda$-return\\
-\>$G^\lambda_{t:h}$   \> truncated, corrected $\lambda$-return\\
-\>$G^{\lambda s}_t$, $G^{\lambda a}_t$    \> $\lambda$-return, corrected by estimated state, or action, values \\
-\\
-\>$\p(s',r|s,a)$      \> probability of transition to state $s'$ with reward $r$, from state $s$ and action $a$\\
-\>$\p(s'|s,a)$        \> probability of transition to state $s'$, from state $s$ taking action $a$\\
-\>$r(s,a)$            \> expected immediate reward from state $s$ after action $a$\\
-\>$r(s,a,s')$         \> expected immediate reward on transition from $s$ to $s'$ under action $a$\\
-\\
-\>$\vpi(s)$           \> value of state $s$ under policy $\pi$ (expected return)\\
-\>$\vstar(s)$         \> value of state $s$ under the optimal policy \\
-\>$\qpi(s,a)$         \> value of taking action $a$ in state $s$ under policy $\pi$\\
-\>$\qstar(s,a)$       \> value of taking action $a$ in state $s$ under the optimal policy \\
-\\
-\>$V, V_t$            \> array estimates of state-value function $\vpi$ or $\vstar$\\
-\>$Q, Q_t$            \> array estimates of action-value function $\qpi$ or $\qstar$\\
-\>$\bar V_t(s)$       \> expected approximate action value, e.g., $\bar V_t(s)\defeq\sum_a\pi(a|s)Q_{t}(s,a)$\\
-\>$U_t$               \> target for estimate at time $t$\\
-\\
-\>$\delta_t$          \> temporal-difference (TD) error at $t$ (a random variable) \\
-\>$\delta^s_t, \delta^a_t$ \> state- and action-specific forms of the TD error \\
-\>$n$                 \> in $n$-step methods, $n$ is the number of steps of bootstrapping\\
-\\
-\>$d$                 \> dimensionality---the number of components of $\w$\\
-\>$d'$                \> alternate dimensionality---the number of components of $\th$\\
-\>$\w,\w_t$           \> $d$-vector of weights underlying an approximate value function\\
-\>$w_i,w_{t,i}$ \> $i$th component of learnable weight vector\\
-\>$\hat v(s,\w)$      \> approximate value of state $s$ given weight vector $\w$\\
-\>$v_\w(s)$           \> alternate notation for $\hat v(s,\w)$\\
-\>$\hat q(s,a,\w)$    \> approximate value of state--action pair $s,a$ given weight vector $\w$\\
-\>$\grad \hat v(s,\w)$\> column vector of partial derivatives of $\hat v(s,\w)$ with respect to $\w$\\
-\>$\grad \hat q(s,a,\w)$\> column vector of partial derivatives of $\hat q(s,a,\w)$ with respect to $\w$\\
-\\
-\>$\x(s)$             \> vector of features visible when in state $s$\\
-\>$\x(s,a)$           \> vector of features visible when in state $s$ taking action $a$\\
-\>$x_i(s), x_i(s,a)$  \> $i$th component of vector $\x(s)$ or $\x(s, a)$\\
-\>$\x_t$              \> shorthand for $\x(S_t)$ or $\x(S_t,A_t)$\\
-\>$\w\tr\x$           \> inner product of vectors, $\w\tr\x\defeq\sum_i w_i x_i$; e.g., $\hat v(s,\w)\defeq\w\tr\x(s)$\\
-\>$\v,\v_t$           \> secondary $d$-vector of weights, used to learn $\w$ \\
-\>$\z_t$              \> $d$-vector of eligibility traces at time $t$ \\
-\\
-\>$\th, \th_t$        \> parameter vector of target policy \\
-\>$\pi(a|s,\th)$      \> probability of taking action $a$ in state $s$ given parameter vector $\th$\\
-\>$\pi_\th$           \> policy corresponding to parameter $\th$\\
-\>$\grad\pi(a|s,\th)$ \>column vector of partial derivatives of $\pi(a|s,\th)$ with respect to $\th$\\
-\>$J(\th)$            \> performance measure for the policy $\pi_\th$\\
-\>$\grad J(\th)$      \> column vector of partial derivatives of $J(\th)$ with respect to $\th$\\
-\>$h(s,a,\th)$        \> preference for selecting action $a$ in state $s$ based on $\th$\\
-\\
-\>$b(a|s)$            \> behavior policy used to select actions while learning about target policy $\pi$ \\
-\>$b(s)$              \> a baseline function $b:\S\mapsto\Re$ for policy-gradient methods\\
-\>$b$                 \> branching factor for an MDP or search tree \\
-\>$\rho_{t:h}$        \> importance sampling ratio for time $t$ through time $h$ \\
-\>$\rho_{t}$          \> importance sampling ratio for time $t$ alone, $\rho_t\defeq\rho_{t:t}$\\
-\>$r(\pi)$            \> average reward (reward rate) for policy $\pi$ \\
-\>$\bar R_t$          \> estimate of $r(\pi)$ at time $t$\\
-\\
-\>$\mu(s)$            \> on-policy distribution over states \\
-\>$\bm\mu$            \> $|\S|$-vector of the $\mu(s)$ for all $s\in\S$\\
-\>$\norm{v}$          \> $\mu$-weighted squared norm of value function $v$, i.e., $\norm{v}\defeq\sum_{s\in\S} \mu(s)v(s)^2$\\
-\>$\eta(s)$           \> expected number of visits to state $s$ per episode\\
-\>$\Pi$               \> projection operator for value functions \\
-\>$B_\pi$             \> Bellman operator for value functions \\
-\\
-\>${\bf A}$           \> $d\times d$ matrix ${\bf A}\defeq\E{\x_t\bigl(\x_t-\g\x_{t+1}\bigr)\tr}$\\
-\>${\bf b}$           \> $d$-dimensional vector ${\bf b}\defeq\E{R_{t+1}\x_t}$\\
-\>$\w_{\rm TD}$       \> TD fixed point $\w_{\rm TD}\defeq {\bf A}^{-1}{\bf b}$ (a $d$-vector\\
-\>${\bf I}$           \> identity matrix\\
-\>${\bf P}$           \> $|\S|\times |\S|$ matrix of state-transition probabilities under $\pi$\\
-\>${\bf D}$           \> $|\S|\times |\S|$ diagonal matrix with $\bm\mu$ on its diagonal\\
-\>${\bf X}$           \> $|\S|\times d$ matrix with the $\x(s)$ as its rows\\
-\\
-\>$\bar\delta_\w(s)$  \> Bellman error (expected TD error) for $v_\w$ at state $s$\\
-\>$\bar\delta_\w$, BE \> Bellman error vector, with components $\bar\delta_\w(s)$\\
-\>$\MSVEm(\w)$        \> mean square value error $\MSVEm(\w)\defeq\norm{v_\w-\vpi}$\\
-\>$\MSBEm(\w)$        \> mean square Bellman error $\MSBEm(\w)\defeq\norm{\bar\delta_\w}$\\
-\>$\MSPBEm(\w)$       \> mean square projected Bellman error $\MSPBEm(\w)\defeq\norm{\Pi\bar\delta_\w}$\\
-\>$\MSTDEm(\w)$       \> mean square temporal-difference error $\MSTDEm(\w)\defeq\EE{b}{\rho_t\delta_t^2}$ \\
-\>$\MSREm(\w)$        \> mean square return error\\
+    \=~~~~~~~~~~~~~~~~~~  \= \kill
+    \>$\defeq$            \> equality relationship that is true by definition\\
+    \>$\approx$           \> approximately equal\\
+    \>$\propto$           \> proportional to\\
+    \>$\Pr{X\!=\!x}$      \> probability that a random variable $X$ takes on the value $x$\\
+    \>$X\sim p$           \> random variable $X$ selected from distribution $p(x)\defeq\Pr{X\!=\!x}$\\
+    \>$\E{X}$             \> expectation of a random variable $X$, i.e., $\E{X}\defeq\sum_x p(x)x$\\
+    \>$\arg\max_a f(a)$   \> a value of $a$ at which $f(a)$ takes its maximal value\\
+    % \>$\ln x$             \> natural logarithm of $x$\\
+    % \>$e^x$               \> the base of the natural logarithm, $e\approx 2.71828$, carried to power $x$; $e^{\ln x}=x$\\
+    % \>$\Re$               \> set of real numbers\\
+    % \>$f:\X\rightarrow\Y$ \> function $f$ from elements of set $\X$ to elements of set $\Y$\\
+    % \>$\leftarrow$        \> assignment\\
+    % \>$(a,b]$             \> the real interval between $a$ and $b$ including $b$ but not including $a$\\
+    \\
+    \>$\e$                \> probability of taking a random action in an \e-greedy policy\\
+    \>$\alpha, \beta$     \> step-size parameters\\
+    \>$\gamma$            \> discount-rate parameter\\
+    \>$\lambda$           \> decay-rate parameter for eligibility traces\\
+    % \>$\ind{\text{\emph{predicate}}}$ \>indicator function ($\ind{\text{\emph{predicate}}}\defeq1$ if the \emph{predicate} is true, else 0)\\
+    \\
+    % \>In a multi-arm bandit problem:\\
+    % \>$k$                 \> number of actions (arms)\\
+    % \>$t$                 \> discrete time step or play number\\
+    % \>$\qstar(a)$         \> true value (expected reward) of action $a$\\
+    % \>$Q_t(a)$            \> estimate at time $t$ of $\qstar(a)$\\
+    % \>$N_t(a)$            \> number of times action $a$ has been selected up prior to time $t$\\
+    % \>$H_t(a)$            \> learned preference for selecting action $a$ at time $t$\\
+    % \>$\pi_t(a)$          \> probability of selecting action $a$ at time $t$\\
+    % \>$\bar R_t$          \> estimate at time $t$ of the expected reward given $\pi_t$\\
+    % \\
+    \>In a Markov Decision Process:\\
+    \>$s, s'$             \> states\\
+    \>$a$                 \> an action\\
+    \>$r$                 \> a reward\\
+    \>$\S$                \> set of all nonterminal states \\
+    \>$\S^+$              \> set of all states, including the terminal state \\
+    \>$\A(s)$             \> set of all actions available in state $s$\\
+    \>$\R$                \> set of all possible rewards, a finite subset of $\Re$\\
+    \>$\subset$           \> subset of; e.g., $\R\subset\Re$\\
+    \>$\in$               \> is an element of; e.g., $s\in\S$, $r\in\R$\\
+    \>$|\S|$              \> number of elements in set $\S$\\
+    \\
+    \>$t$                 \> discrete time step\\
+    \>$T, T(t)$           \> final time step of an episode, or of the episode including time step $t$\\
+    \>$A_t$               \> action at time $t$\\
+    \>$S_t$               \> state at time $t$, typically due, stochastically, to $S_{t-1}$ and $A_{t-1}$\\
+    \>$R_t$               \> reward at time $t$, typically due, stochastically, to $S_{t-1}$ and $A_{t-1}$\\
+    \>$\pi$               \> policy (decision-making rule)\\
+    \>$\pi(s)$            \> action taken in state $s$ under {\it deterministic\/} policy $\pi$\\
+    \>$\pi(a|s)$          \> probability of taking action $a$ in state $s$ under {\it stochastic\/} policy $\pi$\\
+    \\
+    \>$G_t$               \> return following time $t$\\
+    \>$h$                 \> horizon, the time step one looks up to in a forward view\\
+    \>$G_{t:t+n}, G_{t:h}$\> $n$-step return from $t+1$ to $t+n$, or to $h$ (discounted and corrected) \\
+    % \>$\bar G_{t:h}$      \> flat return (undiscounted and uncorrected) from $t+1$ to $h$\\
+    % \>$G^\lambda_t$       \> $\lambda$-return\\
+    % \>$G^\lambda_{t:h}$   \> truncated, corrected $\lambda$-return\\
+    % \>$G^{\lambda s}_t$, $G^{\lambda a}_t$    \> $\lambda$-return, corrected by estimated state, or action, values \\
+    % \\
+    % \>$\p(s',r|s,a)$      \> probability of transition to state $s'$ with reward $r$, from state $s$ and action $a$\\
+    % \>$\p(s'|s,a)$        \> probability of transition to state $s'$, from state $s$ taking action $a$\\
+    % \>$r(s,a)$            \> expected immediate reward from state $s$ after action $a$\\
+    % \>$r(s,a,s')$         \> expected immediate reward on transition from $s$ to $s'$ under action $a$\\
+    % \\
+    % \>$\vpi(s)$           \> value of state $s$ under policy $\pi$ (expected return)\\
+    % \>$\vstar(s)$         \> value of state $s$ under the optimal policy \\
+    % \>$\qpi(s,a)$         \> value of taking action $a$ in state $s$ under policy $\pi$\\
+    % \>$\qstar(s,a)$       \> value of taking action $a$ in state $s$ under the optimal policy \\
+    % \\
+    % \>$V, V_t$            \> array estimates of state-value function $\vpi$ or $\vstar$\\
+    % \>$Q, Q_t$            \> array estimates of action-value function $\qpi$ or $\qstar$\\
+    % \>$\bar V_t(s)$       \> expected approximate action value, e.g., $\bar V_t(s)\defeq\sum_a\pi(a|s)Q_{t}(s,a)$\\
+    % \>$U_t$               \> target for estimate at time $t$\\
+    % \\
+    % \>$\delta_t$          \> temporal-difference (TD) error at $t$ (a random variable) \\
+    % \>$\delta^s_t, \delta^a_t$ \> state- and action-specific forms of the TD error \\
+    % \>$n$                 \> in $n$-step methods, $n$ is the number of steps of bootstrapping\\
+    % \\
+    % \>$d$                 \> dimensionality---the number of components of $\w$\\
+    % \>$d'$                \> alternate dimensionality---the number of components of $\th$\\
+    % \>$\w,\w_t$           \> $d$-vector of weights underlying an approximate value function\\
+    % \>$w_i,w_{t,i}$ \> $i$th component of learnable weight vector\\
+    % \>$\hat v(s,\w)$      \> approximate value of state $s$ given weight vector $\w$\\
+    % \>$v_\w(s)$           \> alternate notation for $\hat v(s,\w)$\\
+    % \>$\hat q(s,a,\w)$    \> approximate value of state--action pair $s,a$ given weight vector $\w$\\
+    % \>$\grad \hat v(s,\w)$\> column vector of partial derivatives of $\hat v(s,\w)$ with respect to $\w$\\
+    % \>$\grad \hat q(s,a,\w)$\> column vector of partial derivatives of $\hat q(s,a,\w)$ with respect to $\w$\\
+    % \\
+    % \>$\x(s)$             \> vector of features visible when in state $s$\\
+    % \>$\x(s,a)$           \> vector of features visible when in state $s$ taking action $a$\\
+    % \>$x_i(s), x_i(s,a)$  \> $i$th component of vector $\x(s)$ or $\x(s, a)$\\
+    % \>$\x_t$              \> shorthand for $\x(S_t)$ or $\x(S_t,A_t)$\\
+    % \>$\w\tr\x$           \> inner product of vectors, $\w\tr\x\defeq\sum_i w_i x_i$; e.g., $\hat v(s,\w)\defeq\w\tr\x(s)$\\
+    % \>$\v,\v_t$           \> secondary $d$-vector of weights, used to learn $\w$ \\
+    % \>$\z_t$              \> $d$-vector of eligibility traces at time $t$ \\
+    % \\
+    % \>$\th, \th_t$        \> parameter vector of target policy \\
+    % \>$\pi(a|s,\th)$      \> probability of taking action $a$ in state $s$ given parameter vector $\th$\\
+    % \>$\pi_\th$           \> policy corresponding to parameter $\th$\\
+    % \>$\grad\pi(a|s,\th)$ \>column vector of partial derivatives of $\pi(a|s,\th)$ with respect to $\th$\\
+    % \>$J(\th)$            \> performance measure for the policy $\pi_\th$\\
+    % \>$\grad J(\th)$      \> column vector of partial derivatives of $J(\th)$ with respect to $\th$\\
+    % \>$h(s,a,\th)$        \> preference for selecting action $a$ in state $s$ based on $\th$\\
+    % \\
+    % \>$b(a|s)$            \> behavior policy used to select actions while learning about target policy $\pi$ \\
+    % \>$b(s)$              \> a baseline function $b:\S\mapsto\Re$ for policy-gradient methods\\
+    % \>$b$                 \> branching factor for an MDP or search tree \\
+    % \>$\rho_{t:h}$        \> importance sampling ratio for time $t$ through time $h$ \\
+    % \>$\rho_{t}$          \> importance sampling ratio for time $t$ alone, $\rho_t\defeq\rho_{t:t}$\\
+    % \>$r(\pi)$            \> average reward (reward rate) for policy $\pi$ \\
+    % \>$\bar R_t$          \> estimate of $r(\pi)$ at time $t$\\
+    % \\
+    % \>$\mu(s)$            \> on-policy distribution over states \\
+    % \>$\bm\mu$            \> $|\S|$-vector of the $\mu(s)$ for all $s\in\S$\\
+    % \>$\norm{v}$          \> $\mu$-weighted squared norm of value function $v$, i.e., $\norm{v}\defeq\sum_{s\in\S} \mu(s)v(s)^2$\\
+    % \>$\eta(s)$           \> expected number of visits to state $s$ per episode\\
+    % \>$\Pi$               \> projection operator for value functions \\
+    % \>$B_\pi$             \> Bellman operator for value functions \\
+    % \\
+    % \>${\bf A}$           \> $d\times d$ matrix ${\bf A}\defeq\E{\x_t\bigl(\x_t-\g\x_{t+1}\bigr)\tr}$\\
+    % \>${\bf b}$           \> $d$-dimensional vector ${\bf b}\defeq\E{R_{t+1}\x_t}$\\
+    % \>$\w_{\rm TD}$       \> TD fixed point $\w_{\rm TD}\defeq {\bf A}^{-1}{\bf b}$ (a $d$-vector\\
+    % \>${\bf I}$           \> identity matrix\\
+    % \>${\bf P}$           \> $|\S|\times |\S|$ matrix of state-transition probabilities under $\pi$\\
+    % \>${\bf D}$           \> $|\S|\times |\S|$ diagonal matrix with $\bm\mu$ on its diagonal\\
+    % \>${\bf X}$           \> $|\S|\times d$ matrix with the $\x(s)$ as its rows\\
+    % \\
+    % \>$\bar\delta_\w(s)$  \> Bellman error (expected TD error) for $v_\w$ at state $s$\\
+    % \>$\bar\delta_\w$, BE \> Bellman error vector, with components $\bar\delta_\w(s)$\\
+    % \>$\MSVEm(\w)$        \> mean square value error $\MSVEm(\w)\defeq\norm{v_\w-\vpi}$\\
+    % \>$\MSBEm(\w)$        \> mean square Bellman error $\MSBEm(\w)\defeq\norm{\bar\delta_\w}$\\
+    % \>$\MSPBEm(\w)$       \> mean square projected Bellman error $\MSPBEm(\w)\defeq\norm{\Pi\bar\delta_\w}$\\
+    % \>$\MSTDEm(\w)$       \> mean square temporal-difference error $\MSTDEm(\w)\defeq\EE{b}{\rho_t\delta_t^2}$ \\
+    % \>$\MSREm(\w)$        \> mean square return error\\
 \end{tabbing}
+\clearpage
