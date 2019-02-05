@@ -31,6 +31,9 @@
 #+LATEX_HEADER: \let\cite\shortcite
 #+LATEX_HEADER: \let\textcite\shortciteA
 
+# Acronyms
+#+LATEX_HEADER: \usepackage[nohyperlinks]{acronym}
+
 # No Title & No TOC from org-mode
 #+OPTIONS: title:nil toc:nil
 #+LATEX_HEADER: \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
@@ -55,6 +58,11 @@
 #+LATEX: \listoftables
 #+LATEX: \clearpage
 #+LATEX: \pagenumbering{arabic}
+
+# Abbreviation & Notation
+#+INCLUDE: "~/uni/ma-thesis/abbreviations.tex" export latex
+#+INCLUDE: "~/uni/ma-thesis/notation.tex" export latex
+
 
 * Introduction (10%)
 ** Research Motivation
@@ -370,13 +378,7 @@ cite:vazquez-canteli19_reinf_learn_deman_respon.
 # explaining the markets.
 *** Spot Market
 ** Reinforcement Learning label:reinforcement-learning
-# #+INCLUDE: "~/uni/ma-thesis/notation.tex" export latex
 *** Notation
-
-
-
-
-
 # NOTE: State set for every single quantity used.
 The input to the network $x \in \mathbb{R}^D$ is fed to the first residual layer
 to get the activation $y = x + \sigma(w x + b) \in \mathbb{R}^D$ with $w \in
