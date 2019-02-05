@@ -1,4 +1,14 @@
-#+TITLE: todo
+#+TITLE: Thesis Todo
 
 * Inbox
 ** TODO Concise Wording of regulation capacity, balancing power, frequency regulation...
+** TODO Comment Literature Review
+Structure the whole section in a stricter way. I mean that the question I always
+asked myself why reading was: "so what?" What is you Ziel? As far as I
+understand, you wanna motivate you methodology by showing what previous
+literature has done, and how the methodology can be improved (?). If this is the
+case, I would state it clearly under Section 2. and then explain what is the
+structure of 2.1 and 2.2.
+Should you maybe provide more definition? In my guidelines, the literature
+review is also the Teil in which I should have defined all the terms/concepts
+that I used later on.
