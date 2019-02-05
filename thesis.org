@@ -36,7 +36,7 @@
 
 # No Title & No TOC from org-mode
 #+OPTIONS: title:nil toc:nil
-#+LATEX_HEADER: \usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
+#+LATEX_HEADER: \usepackage[notlof,notlot,nottoc]{tocbibind}
 
 # Thesis setup
 #+LATEX_HEADER: \newcommand{\studentID}{558305}
