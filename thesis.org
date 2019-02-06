@@ -434,10 +434,10 @@ ref:agent-environment-interaction depicts the /Agent-Environment Interface/.
 #+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf label:agent-environment-interaction
 [[./fig/mdp_interaction.png]]
 In RL the agent and the environment continuously interact with each other. The
-agent takes actions, that influence the environment, which in return presents rewards to
-the agent. The goal if the agent is to maximize rewards over time, trough an
-optimal choice of actions. More precisely, in each discrete timestep $t$ = 0, 1,
-2, 3, ..., $T$, the RL agent interacts with the environment. The latter is
+agent takes actions, that influence the environment, which in return presents
+rewards to the agent. The goal if the agent is to maximize rewards over time,
+trough an optimal choice of actions. More precisely, in each discrete timestep
+$t=0,1,2,...,T$, the RL agent interacts with the environment. The latter is
 perceived by the agent as a representation of the environments' /state/, $S_t
 \in \S$. Based on the state, the agents selects an /action/, $A_t\in\A$, and
 receives a numerical /reward/ signal, $R_{t+1}\in\R\subset\Re$, in the next
@@ -445,14 +445,14 @@ timestep. Actions influence immediate rewards and successive states, and
 consequently future rewards. The agent has to continuously make a trade-off
 between immediate and delayed rewards.
 
-The /dynamics/ of a MDP are defined by the probability that a state $s'\in
-\S$ and a reward $r\in\R$ occurs, given the preceding state $s\in\S$ and
-action $a\in\A$. In /finite/ MDPs, the random variables $\R_t$ and $S_t$ have
+The /dynamics/ of a MDP are defined by the probability that a state $s'\in \S$
+and a reward $r\in\R$ occurs, given the preceding state $s\in\S$ and action
+$a\in\A$. In /finite/ MDPs, the random variables $\R_t$ and $S_t$ have
 well-defined probability density functions (pdfs), which are solely dependent on
-the previous state and action. Consequently, it is possible to define ($\defeq$) the
-/dynamics/ of the MDP as following:
+the previous state and action. Consequently, it is possible to define ($\defeq$)
+the /dynamics/ of the MDP as following:
 \begin{equation}
-p(s',r|s,a) \defeq \Pr{S_t=s',R_t=r|S_{t-1}=s,A_t=a},
+    p(s',r|s,a) \defeq \Pr{S_t=s',R_t=r|S_{t-1}=s,A_t=a},
 \end{equation}
 for all $s',s\in\S$, $r\in\R$ and $a\in\A$. Note that each possible value of
 the state $\S_t$ depends only on the immediately preceding state $\S_{t-1}$.
@@ -462,16 +462,70 @@ property is assumed throughout the thesis.
 The dynamics function allows computing the /state-transition probabilities/,
 another important characteristic of an MDP, as following:
 \begin{equation}
-p(s'|s,a) \defeq \Pr{S_t=s'|S_{t-1}=s,A_t=a} = \sum_{r\in\R}{p(s', r|s, a)},
+    p(s'|s,a) \defeq \Pr{S_t=s'|S_{t-1}=s,A_t=a} = \sum_{r\in\R}{p(s', r|s, a)},
 \end{equation}
-for all $s', s \in \S$, $r\in\R$ and $a\in\A$.
-**** Goals and Rewards
-**** Returns and Episodes
-**** Policy and Value functions
-- Value function (of states, or state-action pairs)
-- Policy:
-- Optimal policy
-- Optimal state-value function
+for all $s',s\in\S$, $r\in\R$ and $a\in\A$.
+
+# NOTE: Section Goals and Rewards
+The use of a /reward signal/ $R_t$ to formalize the agent's goal is a very
+unique feature of RL. Each timestep the agent receives the rewards as a scalar
+value $\R_t\in\Re$. The sole purpose of the RL agent is to maximize the
+long-term cumulative reward (as opposed to the immediate reward). The long-term
+cumulative reward can also be expressed as the /expected return/ $G_t$:
+\begin{equation}
+\begin{split}
+    G_t &\defeq R_{t+1} + \gamma R_{t+2} + \gamma R_{t+3} + \cdots \\
+    &= \sum_{k=0}^{\infty}{\gamma^k R_{t+k+1}} \\
+    &= R_{t+1} + \gamma G_{t+1},
+\end{split}
+\end{equation}
+where $\gamma$, $0\leq\gamma\leq 1$, is the /discount rate/ parameter. The
+discount rate determines how "myopic" the agent is. If $\gamma$ approaches 0,
+the agent is more concerned with maximizing immediate rewards. When $\gamma =
+1$, the agent takes future rewards strongly into account, the agent is
+"farsighted".
+
+# TODO: Section Policies and Value Functions
+# NOTE: State-Value Function
+# NOTE: Action-Value Function
+\begin{align}
+    \vpi(s) &\defeq \EE{\pi}{G_t|S_t=s}, \text{ for all } s\in\S \\
+    \qpi(s,a) &\defeq \EE{\pi}{G_t|S_t=s, A_t=a}, \text{ for all } a\in\A, s\in\S
+\end{align}
+
+# NOTE: Bellman-Equation
+\begin{equation} \label{eq-bellman}
+\begin{split}
+    \vpi(s) &\defeq \EE{\pi}{G_t|S_t=s} \\
+    &= \EE{\pi}{R_{t+1}+\gamma G_{t+1}|S_t=s} \\
+    &= \sum_{a}{\pi(a|s)}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vpi(s')\bigg],
+\end{split}
+\end{equation}
+$a\in\A$, $s,s'\in\S$, $r\in\R$. Equation ref:eq-bellman is the /Bellman Equation/.
+
+
+# TODO: Section Dynamic Programming: Policy Iteration, Value Iteration
+
+
+# TODO: Section Monte Carlo Prediction, Estimation and Control
+
+
+# TODO: Temporal-Difference Learning
+# NOTE: TD (Prediction?)
+\begin{equation}
+    V(S_t) \leftarrow V(S_t) + \alpha\big[R_{t+1}+\gamma V(S_{t+1}) - V(S_t)\big]
+\end{equation}
+
+# NOTE: Sarsa: On-policy TD Control
+\begin{equation} \label{eq-sarsa}
+    Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma Q(S_{t+1},A_{t+1}) - Q(S_t, A_t)\big]
+\end{equation}
+
+# NOTE: Q-learning: Off-policy TD Control
+\begin{equation} \label{eq-qlearning}
+    Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma\max_a Q(S_{t+1},a) - Q(S_t, A_t)\big]
+\end{equation}
+
 
 **** Policy Iteration
 **** Value Iteration
