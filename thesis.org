@@ -452,9 +452,9 @@ well-defined probability density functions (pdfs), which are solely dependent on
 the previous state and action. Consequently, it is possible to define ($\defeq$) the
 /dynamics/ of the MDP as following:
 \begin{equation}
-p(s',r|s,a) \defeq \Pr{\S_t=s',\R_t=r|\S_{t-1}=s,\A_t=a},
+p(s',r|s,a) \defeq \Pr{S_t=s',R_t=r|S_{t-1}=s,A_t=a},
 \end{equation}
-for all $s', s \in \S$, $r\in\R$ and $a\in\A$. Note that each possible value of
+for all $s',s\in\S$, $r\in\R$ and $a\in\A$. Note that each possible value of
 the state $\S_t$ depends only on the immediately preceding state $\S_{t-1}$.
 When a state includes all information of /all/ previous states, the state
 possesses the so-called /Markov property/. If not noted otherwise, the Markov
@@ -462,7 +462,7 @@ property is assumed throughout the thesis.
 The dynamics function allows computing the /state-transition probabilities/,
 another important characteristic of an MDP, as following:
 \begin{equation}
-p(s'|s,a) \defeq \Pr{\S_t=s'|\S_{t-1}=s,\A_t=a} = \sum_{r\in\R}{p(s', r|s, a)},
+p(s'|s,a) \defeq \Pr{S_t=s'|S_{t-1}=s,A_t=a} = \sum_{r\in\R}{p(s', r|s, a)},
 \end{equation}
 for all $s', s \in \S$, $r\in\R$ and $a\in\A$.
 **** Goals and Rewards
