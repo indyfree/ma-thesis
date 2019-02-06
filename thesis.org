@@ -81,6 +81,8 @@
 
 #+LATEX: \clearpage
 * Related Literature (10%)
+# TODO: Introductory paragraph
+
 ** Smart Charging and Balancing the Electric Grid with EV Fleets
 # NOTE: Section General Problem and Intro of Smart Charging
 # NOTE: The physical reinforcement of the power grid is a costly and lengthy
@@ -371,6 +373,7 @@ solving complex challenges in smart grids
 cite:vazquez-canteli19_reinf_learn_deman_respon.
 
 
+#+LATEX: \clearpage
 * Theoretical Background (10%)
 ** Electricity Markets
 *** Balancing Market
@@ -378,24 +381,25 @@ cite:vazquez-canteli19_reinf_learn_deman_respon.
 # explaining the markets.
 *** Spot Market
 ** Reinforcement Learning label:reinforcement-learning
+The following chapter will give an overview about the most important RL
+ideas and concepts and will introduce the corresponding mathematical formulations.
+cite:vazquez-canteli19_reinf_learn_deman_respon.
+
 *** Notation
 # NOTE: State set for every single quantity used.
 The input to the network $x \in \mathbb{R}^D$ is fed to the first residual layer
 to get the activation $y = x + \sigma(w x + b) \in \mathbb{R}^D$ with $w \in
 \mathbb{R}^{D \times D}$, and $b \in \mathbb{R}^D$ the weights and bias of the
 layer.
-*** Introduction
-cite:vazquez-canteli19_reinf_learn_deman_respon.
 
-
-**** Elements of Reinforcement Learning
-***** Policy
+*** Elements of Reinforcement Learning
+**** Policy
 - Agent behavior at a given time
 - Mapping states to actions
 - Function or Lookup table
 - Sufficient to determine behavior
 - Policies may be stochastic, give probabilities for each action
-***** Reward signal
+**** Reward signal
 - Goal of the RL problem
 - Numeric signal the environment sends to the agent
 - Agents objective is to maximize the reward signal on the long run
@@ -403,7 +407,7 @@ cite:vazquez-canteli19_reinf_learn_deman_respon.
   action of the policy may result in changing the policy to select another action
 - Rewards determine the immediate desirability of a state
 - Reward signals can be stochastic functions of the state and the actions
-***** Value function
+**** Value function
 - Value of a state is the total amount of reward an agent can expect to
   accumulate over the future, starting from that state
 - Values indicate the long-term desirability of states, taking future states and
@@ -412,7 +416,7 @@ cite:vazquez-canteli19_reinf_learn_deman_respon.
   the greatest amount of reward in int long run.
 - Values must be estimated and re-estimated over the agents lifetime.
 - Efficiently estimating values is the most important component.
-***** Model of the environment
+**** Model of the environment
 - Model allows inferences to be made about how the environment will behave.
   E.g., Given state and action the model predicts the next state and next reward.
 - Model-based methods are used for **Planning**: Deciding on a course of action by
@@ -420,8 +424,7 @@ cite:vazquez-canteli19_reinf_learn_deman_respon.
  - **Control**: Model-free methods are simpler methods, what are explicitly trial-and-error learners
 **** Planning vs. Control
 **** On-Policy vs. Off-Policy
-**** Policy Iteration
-**** Value Iteration
+**** Exploitation-Exploration Trade-off
 *** Markov Decision Processes
 
 #+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf
@@ -429,19 +432,32 @@ cite:vazquez-canteli19_reinf_learn_deman_respon.
 - Classical formulation of sequential decision making
 - Actions influence immediate rewards, but also future rewards
 - Trade-off between immediate and delayed reward
-*** Tabular Methods
+**** Goals and Rewards
+**** Returns and Episodes
+**** Policy and Value functions
+- Value function (of states, or state-action pairs)
+- Policy:
+- Optimal policy
+- Optimal state-value function
+
+**** Policy Iteration
+**** Value Iteration
+*** Tabular Methods:
 **** Dynamic Programming
 **** Monte-Carlo Methods
 **** Temporal-Difference Learning
 ***** TD Prediction
 ***** SARSA: On-policy TD Control
 ***** Q-learning: Off-policy TD Control
-**** Q-Learning
-*** Function Approximation
+***** Q-Learning
+*** Approximation Methods
 # NOTE: Everything tabular so far
-*** Exploitation-Exploration Trade-off
-**** \epsilon-greedy Method
-*** Deep Reinforcement Learning
+**** On-policy Prediction with Approximation
+***** Linear Methods
+***** Non-linear Methods: ANN
+# NOTE: Deep Reinforcement Learning
+**** (On-policy Control with Approximation)
+#+LATEX: \clearpage
 * Empirical Setting / Data (10%)
 ** Carsharing Fleets of Electric Vehicles
 # Car2Go FourTwo assumptions:
