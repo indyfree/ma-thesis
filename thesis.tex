@@ -1,4 +1,4 @@
-% Created 2019-02-05 Tue 12:14
+% Created 2019-02-06 Wed 12:43
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -21,7 +21,7 @@
 \usepackage[official]{eurosym}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{notation}
+\usepackage{format/notation}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
@@ -34,7 +34,8 @@
 \usepackage{apacite}
 \let\cite\shortcite
 \let\textcite\shortciteA
-\usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
+\usepackage[nohyperlinks]{acronym}
+\usepackage[notlof,notlot,nottoc]{tocbibind}
 \newcommand{\studentID}{558305}
 \newcommand{\thesistype}{Master Thesis}
 \newcommand{\supervisor}{Univ.-Prof. Dr. Wolfgang Ketter}
@@ -48,7 +49,7 @@
  pdftitle={Reinforcement Learning Portfolio Optimization of Electric Vehicle Virtual Power Plants},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 26.1 (Org mode 9.2)},
+ pdfcreator={Emacs 26.1 (Org mode 9.2.1)},
  pdflang={English}}
 \begin{document}
 
@@ -127,23 +128,169 @@ Köln, den xx.xx.20xx
 \clearpage
 \pagenumbering{arabic}
 
+\section*{List of Abbreviations} \markboth{LIST OF ABBREVIATIONS}{}
+\begin{acronym}[GCRM]
+	\acro {DSO}{Distribution System Operator}
+	\acro {EV}{Electric Vehicle}
+	\acro {GP}{Genetic Programming}
+	\acro {GCRM}{German Control Reserve Market}
+	\acro {MAW}{Mean Asymetric Weighted Objective Function}
+	\acro {RL}{Reinforcement Learning}
+	\acro {V2G}{Vehicle-to-Grid}
+	\acro {VPP}{Virtual Power Plant}
+\end{acronym}
+\clearpage
+\section*{Summary of Notation} \markboth{SUMMARY OF NOTATION}{}
+Capital letters are used for random variables, whereas lower case letters are used for
+the values of random variables and for scalar functions. Quantities that are required to
+be real-valued vectors are written in bold and in lower case (even if random variables).
+\begin{tabbing}
+    \=~~~~~~~~~~~~~~~~~~  \= \kill
+    \>$\defeq$            \> equality relationship that is true by definition\\
+    \>$\approx$           \> approximately equal\\
+    \>$\propto$           \> proportional to\\
+    \>$\Pr{X\!=\!x}$      \> probability that a random variable $X$ takes on the value $x$\\
+    \>$X\sim p$           \> random variable $X$ selected from distribution $p(x)\defeq\Pr{X\!=\!x}$\\
+    \>$\E{X}$             \> expectation of a random variable $X$, i.e., $\E{X}\defeq\sum_x p(x)x$\\
+    \>$\arg\max_a f(a)$   \> a value of $a$ at which $f(a)$ takes its maximal value\\
+    % \>$\ln x$             \> natural logarithm of $x$\\
+    % \>$e^x$               \> the base of the natural logarithm, $e\approx 2.71828$, carried to power $x$; $e^{\ln x}=x$\\
+    % \>$\Re$               \> set of real numbers\\
+    % \>$f:\X\rightarrow\Y$ \> function $f$ from elements of set $\X$ to elements of set $\Y$\\
+    % \>$\leftarrow$        \> assignment\\
+    % \>$(a,b]$             \> the real interval between $a$ and $b$ including $b$ but not including $a$\\
+    \\
+    \>$\e$                \> probability of taking a random action in an \e-greedy policy\\
+    \>$\alpha, \beta$     \> step-size parameters\\
+    \>$\gamma$            \> discount-rate parameter\\
+    \>$\lambda$           \> decay-rate parameter for eligibility traces\\
+    % \>$\ind{\text{\emph{predicate}}}$ \>indicator function ($\ind{\text{\emph{predicate}}}\defeq1$ if the \emph{predicate} is true, else 0)\\
+    \\
+    \>In a Markov Decision Process:\\
+    \>$s, s'$             \> states\\
+    \>$a$                 \> an action\\
+    \>$r$                 \> a reward\\
+    \>$\S$                \> set of all nonterminal states \\
+    % \>$\S^+$              \> set of all states, including the terminal state \\
+    \>$\A(s)$             \> set of all actions available in state $s$\\
+    \>$\R$                \> set of all possible rewards, a finite subset of $\Re$\\
+    \>$\subset$           \> subset of; e.g., $\R\subset\Re$\\
+    \>$\in$               \> is an element of; e.g., $s\in\S$, $r\in\R$\\
+    \>$|\S|$              \> number of elements in set $\S$\\
+    \\
+    \>$t$                 \> discrete time step\\
+    \>$T, T(t)$           \> final time step of an episode, or of the episode including time step $t$\\
+    \>$A_t$               \> action at time $t$\\
+    \>$S_t$               \> state at time $t$, typically due, stochastically, to $S_{t-1}$ and $A_{t-1}$\\
+    \>$R_t$               \> reward at time $t$, typically due, stochastically, to $S_{t-1}$ and $A_{t-1}$\\
+    \>$\pi$               \> policy (decision-making rule)\\
+    \>$\pi(s)$            \> action taken in state $s$ under {\it deterministic\/} policy $\pi$\\
+    \>$\pi(a|s)$          \> probability of taking action $a$ in state $s$ under {\it stochastic\/} policy $\pi$\\
+    \\
+    \>$G_t$               \> return following time $t$\\
+    \>$h$                 \> horizon, the time step one looks up to in a forward view\\
+    \>$G_{t:t+n}, G_{t:h}$\> $n$-step return from $t+1$ to $t+n$, or to $h$ (discounted and corrected) \\
+    % \>$\bar G_{t:h}$      \> flat return (undiscounted and uncorrected) from $t+1$ to $h$\\
+    % \>$G^\lambda_t$       \> $\lambda$-return\\
+    % \>$G^\lambda_{t:h}$   \> truncated, corrected $\lambda$-return\\
+    % \>$G^{\lambda s}_t$, $G^{\lambda a}_t$    \> $\lambda$-return, corrected by estimated state, or action, values \\
+    % \\
+    % \>$\p(s',r|s,a)$      \> probability of transition to state $s'$ with reward $r$, from state $s$ and action $a$\\
+    % \>$\p(s'|s,a)$        \> probability of transition to state $s'$, from state $s$ taking action $a$\\
+    % \>$r(s,a)$            \> expected immediate reward from state $s$ after action $a$\\
+    % \>$r(s,a,s')$         \> expected immediate reward on transition from $s$ to $s'$ under action $a$\\
+    % \\
+    % \>$\vpi(s)$           \> value of state $s$ under policy $\pi$ (expected return)\\
+    % \>$\vstar(s)$         \> value of state $s$ under the optimal policy \\
+    % \>$\qpi(s,a)$         \> value of taking action $a$ in state $s$ under policy $\pi$\\
+    % \>$\qstar(s,a)$       \> value of taking action $a$ in state $s$ under the optimal policy \\
+    % \\
+    % \>$V, V_t$            \> array estimates of state-value function $\vpi$ or $\vstar$\\
+    % \>$Q, Q_t$            \> array estimates of action-value function $\qpi$ or $\qstar$\\
+    % \>$\bar V_t(s)$       \> expected approximate action value, e.g., $\bar V_t(s)\defeq\sum_a\pi(a|s)Q_{t}(s,a)$\\
+    % \>$U_t$               \> target for estimate at time $t$\\
+    % \\
+    % \>$\delta_t$          \> temporal-difference (TD) error at $t$ (a random variable) \\
+    % \>$\delta^s_t, \delta^a_t$ \> state- and action-specific forms of the TD error \\
+    % \>$n$                 \> in $n$-step methods, $n$ is the number of steps of bootstrapping\\
+    % \\
+    % \>$d$                 \> dimensionality---the number of components of $\w$\\
+    % \>$d'$                \> alternate dimensionality---the number of components of $\th$\\
+    % \>$\w,\w_t$           \> $d$-vector of weights underlying an approximate value function\\
+    % \>$w_i,w_{t,i}$ \> $i$th component of learnable weight vector\\
+    % \>$\hat v(s,\w)$      \> approximate value of state $s$ given weight vector $\w$\\
+    % \>$v_\w(s)$           \> alternate notation for $\hat v(s,\w)$\\
+    % \>$\hat q(s,a,\w)$    \> approximate value of state--action pair $s,a$ given weight vector $\w$\\
+    % \>$\grad \hat v(s,\w)$\> column vector of partial derivatives of $\hat v(s,\w)$ with respect to $\w$\\
+    % \>$\grad \hat q(s,a,\w)$\> column vector of partial derivatives of $\hat q(s,a,\w)$ with respect to $\w$\\
+    % \\
+    % \>$\x(s)$             \> vector of features visible when in state $s$\\
+    % \>$\x(s,a)$           \> vector of features visible when in state $s$ taking action $a$\\
+    % \>$x_i(s), x_i(s,a)$  \> $i$th component of vector $\x(s)$ or $\x(s, a)$\\
+    % \>$\x_t$              \> shorthand for $\x(S_t)$ or $\x(S_t,A_t)$\\
+    % \>$\w\tr\x$           \> inner product of vectors, $\w\tr\x\defeq\sum_i w_i x_i$; e.g., $\hat v(s,\w)\defeq\w\tr\x(s)$\\
+    % \>$\v,\v_t$           \> secondary $d$-vector of weights, used to learn $\w$ \\
+    % \>$\z_t$              \> $d$-vector of eligibility traces at time $t$ \\
+    % \\
+    % \>$\th, \th_t$        \> parameter vector of target policy \\
+    % \>$\pi(a|s,\th)$      \> probability of taking action $a$ in state $s$ given parameter vector $\th$\\
+    % \>$\pi_\th$           \> policy corresponding to parameter $\th$\\
+    % \>$\grad\pi(a|s,\th)$ \>column vector of partial derivatives of $\pi(a|s,\th)$ with respect to $\th$\\
+    % \>$J(\th)$            \> performance measure for the policy $\pi_\th$\\
+    % \>$\grad J(\th)$      \> column vector of partial derivatives of $J(\th)$ with respect to $\th$\\
+    % \>$h(s,a,\th)$        \> preference for selecting action $a$ in state $s$ based on $\th$\\
+    % \\
+    % \>$b(a|s)$            \> behavior policy used to select actions while learning about target policy $\pi$ \\
+    % \>$b(s)$              \> a baseline function $b:\S\mapsto\Re$ for policy-gradient methods\\
+    % \>$b$                 \> branching factor for an MDP or search tree \\
+    % \>$\rho_{t:h}$        \> importance sampling ratio for time $t$ through time $h$ \\
+    % \>$\rho_{t}$          \> importance sampling ratio for time $t$ alone, $\rho_t\defeq\rho_{t:t}$\\
+    % \>$r(\pi)$            \> average reward (reward rate) for policy $\pi$ \\
+    % \>$\bar R_t$          \> estimate of $r(\pi)$ at time $t$\\
+    % \\
+    % \>$\mu(s)$            \> on-policy distribution over states \\
+    % \>$\bm\mu$            \> $|\S|$-vector of the $\mu(s)$ for all $s\in\S$\\
+    % \>$\norm{v}$          \> $\mu$-weighted squared norm of value function $v$, i.e., $\norm{v}\defeq\sum_{s\in\S} \mu(s)v(s)^2$\\
+    % \>$\eta(s)$           \> expected number of visits to state $s$ per episode\\
+    % \>$\Pi$               \> projection operator for value functions \\
+    % \>$B_\pi$             \> Bellman operator for value functions \\
+    % \\
+    % \>${\bf A}$           \> $d\times d$ matrix ${\bf A}\defeq\E{\x_t\bigl(\x_t-\g\x_{t+1}\bigr)\tr}$\\
+    % \>${\bf b}$           \> $d$-dimensional vector ${\bf b}\defeq\E{R_{t+1}\x_t}$\\
+    % \>$\w_{\rm TD}$       \> TD fixed point $\w_{\rm TD}\defeq {\bf A}^{-1}{\bf b}$ (a $d$-vector\\
+    % \>${\bf I}$           \> identity matrix\\
+    % \>${\bf P}$           \> $|\S|\times |\S|$ matrix of state-transition probabilities under $\pi$\\
+    % \>${\bf D}$           \> $|\S|\times |\S|$ diagonal matrix with $\bm\mu$ on its diagonal\\
+    % \>${\bf X}$           \> $|\S|\times d$ matrix with the $\x(s)$ as its rows\\
+    % \\
+    % \>$\bar\delta_\w(s)$  \> Bellman error (expected TD error) for $v_\w$ at state $s$\\
+    % \>$\bar\delta_\w$, BE \> Bellman error vector, with components $\bar\delta_\w(s)$\\
+    % \>$\MSVEm(\w)$        \> mean square value error $\MSVEm(\w)\defeq\norm{v_\w-\vpi}$\\
+    % \>$\MSBEm(\w)$        \> mean square Bellman error $\MSBEm(\w)\defeq\norm{\bar\delta_\w}$\\
+    % \>$\MSPBEm(\w)$       \> mean square projected Bellman error $\MSPBEm(\w)\defeq\norm{\Pi\bar\delta_\w}$\\
+    % \>$\MSTDEm(\w)$       \> mean square temporal-difference error $\MSTDEm(\w)\defeq\EE{b}{\rho_t\delta_t^2}$ \\
+    % \>$\MSREm(\w)$        \> mean square return error\\
+\end{tabbing}
+\clearpage
+
+
 \section{Introduction (10\%)}
-\label{sec:org1c63685}
+\label{sec:org21e4096}
 \subsection{Research Motivation}
-\label{sec:org17bfec9}
+\label{sec:orge6e510e}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org84ab790}
+\label{sec:org72fb586}
 \subsection{Relevance}
-\label{sec:org4eef115}
+\label{sec:orgdac4024}
 
 \clearpage
 \section{Related Literature (10\%)}
-\label{sec:org4f1c7e5}
+\label{sec:orgfa59ac7}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orge47b9a1}
+\label{sec:orgd13a5bd}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -197,7 +344,7 @@ model for parking garage operators operating on the German frequency regulation
 market. When taking infrastructure costs and battery depreciation costs into
 account, they conclude that the proposed vehicle-grid integration is not
 profitable. Even with generous assumptions about EV adoption rates in Germany
-and altered auction mechanisms, they arrive at negative profits.
+and altered auction mechanisms, the authors arrived at negative profits.
 \textcite{kahlen17_fleet} used EV fleets to offer balancing services to the grid.
 Evaluating the impact of V2G in their model, the authors conclude that V2G would
 only be profitable if reserve power prices were twice as high. Considering the
@@ -315,7 +462,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org947fe81}
+\label{sec:org8760f13}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -423,37 +570,32 @@ solving complex challenges in smart grids
 \cite{vazquez-canteli19_reinf_learn_deman_respon}.
 
 
+\clearpage
 \section{Theoretical Background (10\%)}
-\label{sec:orgda76940}
+\label{sec:orge9d8304}
 \subsection{Electricity Markets}
-\label{sec:org6cc80d5}
+\label{sec:org5216000}
 \subsubsection{Balancing Market}
-\label{sec:org6dbe576}
+\label{sec:org62ccb7c}
 \subsubsection{Spot Market}
-\label{sec:org6e64321}
+\label{sec:org2f6cbbe}
 \subsection{Reinforcement Learning \label{reinforcement-learning}}
-\label{sec:orgc6e0b04}
+\label{sec:org163ffc0}
+The following chapter will give an overview about the most important RL
+ideas and concepts and will introduce the corresponding mathematical formulations.
+\cite{vazquez-canteli19_reinf_learn_deman_respon}.
+
 \subsubsection{Notation}
-\label{sec:org5c50765}
-
-
-
-
-
+\label{sec:orgb0b034e}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer
 to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in
 \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the
 layer.
-\subsubsection{Introduction}
-\label{sec:orgb648f4b}
-\cite{vazquez-canteli19_reinf_learn_deman_respon}.
 
-
-\paragraph{Elements of Reinforcement Learning}
-\label{sec:org45aa595}
-\begin{enumerate}
-\item Policy
-\label{sec:org52a8b5a}
+\subsubsection{Elements of Reinforcement Learning}
+\label{sec:org8bed046}
+\paragraph{Policy}
+\label{sec:orgdab4d11}
 \begin{itemize}
 \item Agent behavior at a given time
 \item Mapping states to actions
@@ -461,8 +603,8 @@ layer.
 \item Sufficient to determine behavior
 \item Policies may be stochastic, give probabilities for each action
 \end{itemize}
-\item Reward signal
-\label{sec:orga48b40a}
+\paragraph{Reward signal}
+\label{sec:org040e2ba}
 \begin{itemize}
 \item Goal of the RL problem
 \item Numeric signal the environment sends to the agent
@@ -472,8 +614,8 @@ action of the policy may result in changing the policy to select another action
 \item Rewards determine the immediate desirability of a state
 \item Reward signals can be stochastic functions of the state and the actions
 \end{itemize}
-\item Value function
-\label{sec:org8e17c2f}
+\paragraph{Value function}
+\label{sec:orge010092}
 \begin{itemize}
 \item Value of a state is the total amount of reward an agent can expect to
 accumulate over the future, starting from that state
@@ -484,8 +626,8 @@ the greatest amount of reward in int long run.
 \item Values must be estimated and re-estimated over the agents lifetime.
 \item Efficiently estimating values is the most important component.
 \end{itemize}
-\item Model of the environment
-\label{sec:org28bf7d6}
+\paragraph{Model of the environment}
+\label{sec:orgf9532d2}
 \begin{itemize}
 \item Model allows inferences to be made about how the environment will behave.
 E.g., Given state and action the model predicts the next state and next reward.
@@ -495,60 +637,113 @@ considering possible future situations before they happen.
 \item \textbf{\textbf{Control}}: Model-free methods are simpler methods, what are explicitly trial-and-error learners
 \end{itemize}
 \end{itemize}
-\end{enumerate}
-\paragraph{Planning vs. Control}
-\label{sec:org711663c}
-\paragraph{On-Policy vs. Off-Policy}
-\label{sec:org4f0785f}
-\paragraph{Policy Iteration}
-\label{sec:org1aef583}
-\paragraph{Value Iteration}
-\label{sec:org3a1d04f}
-\subsubsection{Markov Decision Processes}
-\label{sec:org8c913ee}
 
+\paragraph{Planning vs. Control}
+\label{sec:orgca7a5a9}
+\paragraph{On-Policy vs. Off-Policy}
+\label{sec:orgb812c5f}
+\paragraph{Exploitation-Exploration Trade-off}
+\label{sec:org7b89384}
+\subsubsection{Markov Decision Processes}
+\label{sec:org1e56e8a}
+Markov Decision Processes (MDPs) are a classical formulation of sequential
+decision making and an idealized mathematical formulation of the RL problem. MDPs
+allow to derive exact theoretical statements about the learning problem. Figure
+\ref{agent-environment-interaction} depicts the \emph{Agent-Environment Interface}.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./fig/mdp_interaction.png}
-\caption[Markov Decision Process]{The agent-environment interaction in a Markov decision process \cite{sutton18_reinf}}
+\caption[Markov Decision Process]{The agent-environment interaction in a Markov decision process \cite{sutton18_reinf} \label{agent-environment-interaction}}
 \end{figure}
+In RL the agent and the environment continuously interact with each other. The
+agent takes actions, that influence the environment, which in return presents rewards to
+the agent. The goal if the agent is to maximize rewards over time, trough an
+optimal choice of actions. More precisely, in each discrete timestep \(t\) = 0, 1,
+2, 3, \ldots{}, \(T\), the RL agent interacts with the environment. The latter is
+perceived by the agent as a representation of the environments' \emph{state}, \(S_t
+\in \S\). Based on the state, the agents selects an \emph{action}, \(A_t\in\A\), and
+receives a numerical \emph{reward} signal, \(R_{t+1}\in\R\subset\Re\), in the next
+timestep. Actions influence immediate rewards and successive states, and
+consequently future rewards. The agent has to continuously make a trade-off
+between immediate and delayed rewards.
+
+The \emph{dynamics} of the MDP are defined by the probability that a state \(s'\in
+\S\) and a reward \(r\in\R\) occurs, given the preceding state \(s\in\S\) and
+action \(a\in\A\). In \emph{finite} MDPs, the random variables \(\R_t\) and \(S_t\) have
+well-defined probability density functions (pdfs), which are solely dependent on
+the previous state and action. Consequently, it is possible to define (\(\defeq\)) the
+\emph{dynamics} of the MDP as following:
+\begin{equation} \label{mdp-dynamics}
+p(s',r|s,a) \defeq \Pr{\S_t=s', \R_t=r | \S_{t-1}=s, \A_t=a},
+\end{equation}
+for all \(s', s \in \S\), \(r\in\R\) and \(a\in\A\).
+
+See eq. \ref{mdp-dynamics}
+
+
+
+
+
+
 \begin{itemize}
 \item Classical formulation of sequential decision making
 \item Actions influence immediate rewards, but also future rewards
 \item Trade-off between immediate and delayed reward
 \end{itemize}
-\subsubsection{Tabular Methods}
-\label{sec:orgaaea4f2}
+\paragraph{Goals and Rewards}
+\label{sec:orgf53597f}
+\paragraph{Returns and Episodes}
+\label{sec:org8ad9e37}
+\paragraph{Policy and Value functions}
+\label{sec:org6b8e651}
+\begin{itemize}
+\item Value function (of states, or state-action pairs)
+\item Policy:
+\item Optimal policy
+\item Optimal state-value function
+\end{itemize}
+
+\paragraph{Policy Iteration}
+\label{sec:orgd170bae}
+\paragraph{Value Iteration}
+\label{sec:org47489f6}
+\subsubsection{Tabular Methods:}
+\label{sec:orgc91e87d}
 \paragraph{Dynamic Programming}
-\label{sec:orgc6906ec}
+\label{sec:orge92dd72}
 \paragraph{Monte-Carlo Methods}
-\label{sec:org534d84a}
+\label{sec:org4e02147}
 \paragraph{Temporal-Difference Learning}
-\label{sec:orge3616d2}
+\label{sec:orgc1c512e}
 \begin{enumerate}
 \item TD Prediction
-\label{sec:orgdb97be9}
+\label{sec:org2585978}
 \item SARSA: On-policy TD Control
-\label{sec:org8ee028c}
+\label{sec:orge33181e}
 \item Q-learning: Off-policy TD Control
-\label{sec:orge347979}
+\label{sec:orge28b812}
+\item Q-Learning
+\label{sec:orgf86759e}
 \end{enumerate}
-\paragraph{Q-Learning}
-\label{sec:org974db76}
-\subsubsection{Function Approximation}
-\label{sec:orgc4f5d0a}
-\subsubsection{Exploitation-Exploration Trade-off}
-\label{sec:orga6d946a}
-\paragraph{\(\epsilon\)-greedy Method}
-\label{sec:orgd48d40a}
-\subsubsection{Deep Reinforcement Learning}
-\label{sec:org27267d1}
+\subsubsection{Approximation Methods}
+\label{sec:org11c3202}
+\paragraph{On-policy Prediction with Approximation}
+\label{sec:org232f173}
+\begin{enumerate}
+\item Linear Methods
+\label{sec:org2099446}
+\item Non-linear Methods: ANN
+\label{sec:org71122bd}
+\end{enumerate}
+\paragraph{(On-policy Control with Approximation)}
+\label{sec:orga42ac5d}
+\clearpage
 \section{Empirical Setting / Data (10\%)}
-\label{sec:org3f5d0fd}
+\label{sec:org16fd4a5}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org886b401}
+\label{sec:orgc2abd99}
 \subsubsection{Raw Data}
-\label{sec:orgc1fe57d}
+\label{sec:org111cbea}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -592,57 +787,58 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:orga5a40f6}
+\label{sec:orgf73764c}
 \subsection{Electricity Markets Data}
-\label{sec:orgb7721b1}
+\label{sec:orgd85aaba}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org397587e}
+\label{sec:org2e55b05}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:orgbc6f0b4}
+\label{sec:org9cb4926}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:org399f11e}
+\label{sec:org6006681}
 \subsection{Information Assumptions}
-\label{sec:orgff5523b}
+\label{sec:orge5c301b}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org9227acd}
+\label{sec:org64670fc}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org3bf91c1}
+\label{sec:org8bdab96}
 \subsection{Bidding Strategy}
-\label{sec:orgef2b407}
+\label{sec:org4eac1ef}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org240dfa5}
+\label{sec:org5831fac}
 
 \section{Evaluation (30\%)}
-\label{sec:orgf895bd8}
+\label{sec:orge501fbc}
 \subsection{Event-based Simulation}
-\label{sec:orgf84fbf9}
+\label{sec:org45602d3}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:orgfdddec0}
+\label{sec:org7dba5c2}
 \subsection{FleetRL}
-\label{sec:org4390659}
+\label{sec:org8e1f79f}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:orgb1d4866}
+\label{sec:org4b4bf6b}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:orgb2c9f07}
+\label{sec:orgf1d0cde}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:orgdc142bc}
+\label{sec:orgfbd634a}
 \section{Discussion (5\%)}
-\label{sec:org3fae917}
+\label{sec:org49e52e6}
 \subsection{Generalizability}
-\label{sec:orga884d5b}
+\label{sec:org6ce11cb}
 \subsection{Future Electricity Landscape}
-\label{sec:org050282d}
+\label{sec:orgbf9fc80}
 \subsection{Limitations}
-\label{sec:org7010458}
+\label{sec:org0cd1c67}
 \section{Conclusion (5\%)}
-\label{sec:org9f39eb9}
+\label{sec:orgbda18d2}
 \subsection{Contribution}
-\label{sec:org0c8d8b6}
+\label{sec:org13b4826}
 \subsection{Future Research}
-\label{sec:org51e1a49}
+\label{sec:org9d143d1}
 
 
+\clearpage
 \bibliography{bibliography/references}
 \bibliographystyle{apacite}
 \end{document}

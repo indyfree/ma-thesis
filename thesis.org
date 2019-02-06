@@ -422,16 +422,39 @@ layer.
 - Model-based methods are used for **Planning**: Deciding on a course of action by
   considering possible future situations before they happen.
  - **Control**: Model-free methods are simpler methods, what are explicitly trial-and-error learners
+
 **** Planning vs. Control
 **** On-Policy vs. Off-Policy
 **** Exploitation-Exploration Trade-off
 *** Markov Decision Processes
-
-#+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf
+Markov Decision Processes (MDPs) are a classical formulation of sequential
+decision making and an idealized mathematical formulation of the RL problem. MDPs
+allow to derive exact theoretical statements about the learning problem. Figure
+ref:agent-environment-interaction depicts the /Agent-Environment Interface/.
+#+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf label:agent-environment-interaction
 [[./fig/mdp_interaction.png]]
-- Classical formulation of sequential decision making
-- Actions influence immediate rewards, but also future rewards
-- Trade-off between immediate and delayed reward
+In RL the agent and the environment continuously interact with each other. The
+agent takes actions, that influence the environment, which in return presents rewards to
+the agent. The goal if the agent is to maximize rewards over time, trough an
+optimal choice of actions. More precisely, in each discrete timestep $t$ = 0, 1,
+2, 3, ..., $T$, the RL agent interacts with the environment. The latter is
+perceived by the agent as a representation of the environments' /state/, $S_t
+\in \S$. Based on the state, the agents selects an /action/, $A_t\in\A$, and
+receives a numerical /reward/ signal, $R_{t+1}\in\R\subset\Re$, in the next
+timestep. Actions influence immediate rewards and successive states, and
+consequently future rewards. The agent has to continuously make a trade-off
+between immediate and delayed rewards.
+
+The /dynamics/ of a MDP are defined by the probability that a state $s'\in
+\S$ and a reward $r\in\R$ occurs, given the preceding state $s\in\S$ and
+action $a\in\A$. In /finite/ MDPs, the random variables $\R_t$ and $S_t$ have
+well-defined probability density functions (pdfs), which are solely dependent on
+the previous state and action. Consequently, it is possible to define ($\defeq$) the
+/dynamics/ of the MDP as following:
+\begin{equation}
+p(s',r|s,a) \defeq \Pr{\S_t=s', \R_t=r | \S_{t-1}=s, \A_t=a},
+\end{equation}
+for all $s', s \in \S$, $r\in\R$ and $a\in\A$.
 **** Goals and Rewards
 **** Returns and Episodes
 **** Policy and Value functions
@@ -542,6 +565,7 @@ Stuttgart.
 ** Future Research
 
 
+#+LATEX: \clearpage
 bibliography:~/uni/ma-thesis/bibliography/references.bib
 bibliographystyle:apacite
 
