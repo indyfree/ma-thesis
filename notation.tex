@@ -6,14 +6,14 @@ be real-valued vectors are written in bold and in lower case (even if random var
     \=~~~~~~~~~~~~~~~~~~  \= \kill
     \>$\defeq$            \> equality relationship that is true by definition\\
     \>$\approx$           \> approximately equal\\
-    \>$\propto$           \> proportional to\\
+    % \>$\propto$           \> proportional to\\
     \>$\Pr{X\!=\!x}$      \> probability that a random variable $X$ takes on the value $x$\\
-    \>$X\sim p$           \> random variable $X$ selected from distribution $p(x)\defeq\Pr{X\!=\!x}$\\
+    % \>$X\sim p$           \> random variable $X$ selected from distribution $p(x)\defeq\Pr{X\!=\!x}$\\
     \>$\E{X}$             \> expectation of a random variable $X$, i.e., $\E{X}\defeq\sum_x p(x)x$\\
-    \>$\arg\max_a f(a)$   \> a value of $a$ at which $f(a)$ takes its maximal value\\
+    % \>$\arg\max_a f(a)$   \> a value of $a$ at which $f(a)$ takes its maximal value\\
     % \>$\ln x$             \> natural logarithm of $x$\\
     % \>$e^x$               \> the base of the natural logarithm, $e\approx 2.71828$, carried to power $x$; $e^{\ln x}=x$\\
-    % \>$\Re$               \> set of real numbers\\
+    \>$\Re$               \> set of real numbers\\
     % \>$f:\X\rightarrow\Y$ \> function $f$ from elements of set $\X$ to elements of set $\Y$\\
     \>$\leftarrow$        \> assignment\\
     % \>$(a,b]$             \> the real interval between $a$ and $b$ including $b$ but not including $a$\\
@@ -21,20 +21,19 @@ be real-valued vectors are written in bold and in lower case (even if random var
     \>$\e$                \> probability of taking a random action in an \e-greedy policy\\
     \>$\alpha, \beta$     \> step-size parameters\\
     \>$\gamma$            \> discount-rate parameter\\
-    \>$\lambda$           \> decay-rate parameter for eligibility traces\\
+    % \>$\lambda$           \> decay-rate parameter for eligibility traces\\
     % \>$\ind{\text{\emph{predicate}}}$ \>indicator function ($\ind{\text{\emph{predicate}}}\defeq1$ if the \emph{predicate} is true, else 0)\\
     \\
-    \>In a Markov Decision Process:\\
     \>$s, s'$             \> states\\
     \>$a$                 \> an action\\
     \>$r$                 \> a reward\\
     \>$\S$                \> set of all nonterminal states \\
     % \>$\S^+$              \> set of all states, including the terminal state \\
-    \>$\A(s)$             \> set of all actions available in state $s$\\
+    \>$\A$                \> set of all available actions\\
     \>$\R$                \> set of all possible rewards, a finite subset of $\Re$\\
     \>$\subset$           \> subset of; e.g., $\R\subset\Re$\\
     \>$\in$               \> is an element of; e.g., $s\in\S$, $r\in\R$\\
-    \>$|\S|$              \> number of elements in set $\S$\\
+    % \>$|\S|$              \> number of elements in set $\S$\\
     \\
     \>$t$                 \> discrete time step\\
     \>$T, T(t)$           \> final time step of an episode, or of the episode including time step $t$\\
@@ -46,25 +45,25 @@ be real-valued vectors are written in bold and in lower case (even if random var
     \>$\pi(a|s)$          \> probability of taking action $a$ in state $s$ under {\it stochastic\/} policy $\pi$\\
     \\
     \>$G_t$               \> return following time $t$\\
-    \>$h$                 \> horizon, the time step one looks up to in a forward view\\
-    \>$G_{t:t+n}, G_{t:h}$\> $n$-step return from $t+1$ to $t+n$, or to $h$ (discounted and corrected) \\
+    % \>$h$                 \> horizon, the time step one looks up to in a forward view\\
+    % \>$G_{t:t+n}, G_{t:h}$\> $n$-step return from $t+1$ to $t+n$, or to $h$ (discounted and corrected) \\
     % \>$\bar G_{t:h}$      \> flat return (undiscounted and uncorrected) from $t+1$ to $h$\\
     % \>$G^\lambda_t$       \> $\lambda$-return\\
     % \>$G^\lambda_{t:h}$   \> truncated, corrected $\lambda$-return\\
     % \>$G^{\lambda s}_t$, $G^{\lambda a}_t$    \> $\lambda$-return, corrected by estimated state, or action, values \\
     % \\
-    % \>$\p(s',r|s,a)$      \> probability of transition to state $s'$ with reward $r$, from state $s$ and action $a$\\
-    % \>$\p(s'|s,a)$        \> probability of transition to state $s'$, from state $s$ taking action $a$\\
+    \>$\p(s',r|s,a)$      \> probability of transition to state $s'$ with reward $r$, from state $s$ and action $a$\\
+    \>$\p(s'|s,a)$        \> probability of transition to state $s'$, from state $s$ taking action $a$\\
     % \>$r(s,a)$            \> expected immediate reward from state $s$ after action $a$\\
     % \>$r(s,a,s')$         \> expected immediate reward on transition from $s$ to $s'$ under action $a$\\
     % \\
-    % \>$\vpi(s)$           \> value of state $s$ under policy $\pi$ (expected return)\\
-    % \>$\vstar(s)$         \> value of state $s$ under the optimal policy \\
-    % \>$\qpi(s,a)$         \> value of taking action $a$ in state $s$ under policy $\pi$\\
-    % \>$\qstar(s,a)$       \> value of taking action $a$ in state $s$ under the optimal policy \\
+    \>$\vpi(s)$           \> value of state $s$ under policy $\pi$ (expected return)\\
+    \>$\vstar(s)$         \> value of state $s$ under the optimal policy \\
+    \>$\qpi(s,a)$         \> value of taking action $a$ in state $s$ under policy $\pi$\\
+    \>$\qstar(s,a)$       \> value of taking action $a$ in state $s$ under the optimal policy \\
     % \\
-    % \>$V, V_t$            \> array estimates of state-value function $\vpi$ or $\vstar$\\
-    % \>$Q, Q_t$            \> array estimates of action-value function $\qpi$ or $\qstar$\\
+    \>$V, V_t$            \> array estimates of state-value function $\vpi$ or $\vstar$\\
+    \>$Q, Q_t$            \> array estimates of action-value function $\qpi$ or $\qstar$\\
     % \>$\bar V_t(s)$       \> expected approximate action value, e.g., $\bar V_t(s)\defeq\sum_a\pi(a|s)Q_{t}(s,a)$\\
     % \>$U_t$               \> target for estimate at time $t$\\
     % \\

@@ -501,7 +501,7 @@ the agent is more concerned with maximizing immediate rewards. When $\gamma =
     &= \sum_{a}{\pi(a|s)}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vpi(s')\bigg],
 \end{split}
 \end{equation}
-$a\in\A$, $s,s'\in\S$, $r\in\R$. Equation ref:eq-bellman is the /Bellman Equation/.
+where $a\in\A$, $s,s'\in\S$, $r\in\R$. Equation ref:eq-bellman is the /Bellman Equation/.
 
 
 # TODO: Section Dynamic Programming: Policy Iteration, Value Iteration
