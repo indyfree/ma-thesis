@@ -488,10 +488,30 @@ the agent is more concerned with maximizing immediate rewards. When $\gamma =
 # TODO: Section Policies and Value Functions
 # NOTE: State-Value Function
 # NOTE: Action-Value Function
-\begin{align}
-    \vpi(s) &\defeq \EE{\pi}{G_t|S_t=s}, \text{ for all } s\in\S \\
-    \qpi(s,a) &\defeq \EE{\pi}{G_t|S_t=s, A_t=a}, \text{ for all } a\in\A, s\in\S
-\end{align}
+An essential task of almost every RL agent is, to estimate /value functions/.
+These functions describe how "good" it is to be in a given state, or how "good"
+it is to perform an action in a given state. More formally they take a state, or
+a state-action pair as input and give the expected return as output. The
+expected return is obviously dependent on the actions the agent will take in the
+future. Consequently, value functions are formulated with respect to a /policy/
+\pi. The policy describes the probability of an action, the agent will perform,
+given the state. More formally, the policy is defined as
+$\pi(a|s)\defeq\Pr{A_t\!=\!a|S_t\!=\!s}$, a PDF of all $a\in\A$ for each
+$s\in\S$. In general, RL methods determine how the policy is updated, based on
+the agents interaction with the environment.
+
+As mentioned, there are value function of states and of state-action pairs:
+The /state-value function of policy/ $\pi$ is denoted as $\vpi(s)$ and is defined
+as the expected return when starting in $s$ and following policy $\pi$ (Eq.
+ref:eq-state-value). The /action-value function of policy/ $\pi$ is denoted as
+$\qpi(s,a)$ and is defined as the expected return when starting in $s$, taking
+action $a$ and following policy $\pi$ (Eq. ref:eq-action-value).
+\begin{equation} \label{eq-state-value}
+    \vpi(s) \defeq \EE{\pi}{G_t|S_t\!=\!s}, \text{ for all } s\in\S
+\end{equation}
+\begin{equation} \label{eq-action-value}
+    \qpi(s,a) \defeq \EE{\pi}{G_t|S_t\!=\!s, A_t\!=\!a}, \text{ for all } a\in\A, s\in\S
+\end{equation}
 
 # NOTE: Bellman-Equation
 \begin{equation} \label{eq-bellman}
