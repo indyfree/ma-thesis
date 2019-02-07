@@ -473,7 +473,7 @@ unique characteristic of RL. Each timestep the agent receives the rewards as a s
 value $\R_t\in\Re$. The sole purpose of the RL agent is to maximize the
 long-term cumulative reward (as opposed to the immediate reward). The long-term
 cumulative reward can also be expressed as the /expected return/ $G_t$:
-\begin{equation}
+\begin{equation} \label{eq-expected-return}
 \begin{split}
     G_t &\defeq R_{t+1} + \gamma R_{t+2} + \gamma R_{t+3} + \cdots \\
     &= \sum_{k=0}^{\infty}{\gamma^k R_{t+k+1}} \\
@@ -486,10 +486,8 @@ the agent is more concerned with maximizing immediate rewards. When $\gamma\!=\!
 1$, the agent takes future rewards strongly into account, the agent is
 "farsighted".
 
-# TODO: Section Policies and Value Functions
-# NOTE: State-Value Function
-# NOTE: Action-Value Function
-An essential task of almost every RL agent is, to estimate /value functions/.
+# NOTE: Section Policies and Value Functions
+An essential task of almost every RL agent is estimating /value functions/.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally they take a state, or
 a state-action pair as input and give the expected return as output. The
@@ -515,6 +513,10 @@ action $a$ and following policy $\pi$ (Eq. ref:eq-action-value).
 \end{equation}
 
 # NOTE: Bellman-Equation
+A central characteristic of value functions is that, values are related to
+expected values of successive states. This recursive relationship (similar to Eq.
+ref:eq-expected-return) is heavily used in RL and has been formulated as the
+/Bellman equation/. The Bellman equation for $\vpi(s)$ is defined as follows:
 \begin{equation} \label{eq-bellman}
 \begin{split}
     \vpi(s) &\defeq \EE{\pi}{G_t|S_t=s} \\
@@ -522,7 +524,15 @@ action $a$ and following policy $\pi$ (Eq. ref:eq-action-value).
     &= \sum_{a}{\pi(a|s)}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vpi(s')\bigg],
 \end{split}
 \end{equation}
-where $a\in\A$, $s,s'\in\S$, $r\in\R$. Equation ref:eq-bellman is the /Bellman Equation/.
+where $a\in\A$, $s,s'\in\S$, $r\in\R$.
+The Bellman equation (ref:eq-bellman) states the following: The value of a state
+equals the immediate reward and expected value of all possible successor states,
+weighted by their probability of occurring. $\vpi(s)$ is the only solution to its
+Bellman function. Similar Bellman equations to Equation ref:eq-bellman can be
+formed for e.g., $\qpi(s,a)$. Bellman equations form the basis for computing and
+approximating value functions and were an important milestone in RL.
+
+
 
 
 # TODO: Section Dynamic Programming: Policy Iteration, Value Iteration
