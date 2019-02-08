@@ -1,6 +1,7 @@
 #+TITLE: Thesis Todo
 
 * Inbox
+** TODO First and last sentence of a paragraph should explain it well enough
 ** TODO Fix paragraph spacing
 
 [[file:~/uni/ma-thesis/thesis.org::*Theoretical%20Background%20(10%25)][Theoretical Background (10%)]]
