@@ -431,20 +431,20 @@ Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
 possible solutions. Figure
-ref:agent-environment-interaction depicts the /Agent-Environment Interface/.
+ref:agent-environment-interaction depicts the /agent-environment interaction/.
 #+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf label:agent-environment-interaction
 [[./fig/mdp_interaction.png]]
 In RL the agent and the environment continuously interact with each other. The
-agent takes actions, that influence the environment, which in return presents
-rewards to the agent. The goal if the agent is to maximize rewards over time,
-trough an optimal choice of actions. More precisely, in each discrete timestep
-$t\!=\!0,1,2,...,T$ the RL agent interacts with the environment. The latter is
-perceived by the agent as a representation of the environment, called /state/, $S_t
-\in \S$. Based on the state, the agents selects an /action/, $A_t\in\A$, and
-receives a numerical /reward/ signal, $R_{t+1}\in\R\subset\Re$, in the next
-timestep. Actions influence immediate rewards and successive states, and
-consequently future rewards. The agent has to continuously make a trade-off
-between immediate and delayed rewards to achieve its long-term goal.
+agent takes actions that influence the environment, which in return presents
+rewards to the agent. The agent's goal is to maximize rewards over time, trough
+an optimal choice of actions. In each discrete timestep $t\!=\!0,1,2,...,T$ the
+RL agent interacts with the environment, which is perceived by the agent as a
+representation, called /state/, $S_t \in \S$. Based on the state, the agents
+selects an /action/, $A_t\in\A$, and receives a numerical /reward/ signal,
+$R_{t+1}\in\R\subset\Re$, in the next timestep. Actions influence immediate
+rewards and successive states, and consequently also influence future rewards.
+The agent has to continuously make a trade-off between immediate rewards and
+delayed rewards to achieve its long-term goal.
 
 The /dynamics/ of a MDP are defined by the probability that a state $s'\in \S$
 and a reward $r\in\R$ occurs, given the preceding state $s\in\S$ and an action
@@ -482,22 +482,23 @@ cumulative reward can also be expressed as the /expected return/ $G_t$:
 \end{equation}
 where $\gamma$, $0\leq\gamma\leq 1$, is the /discount rate/ parameter. The
 discount rate determines how "myopic" the agent is. If $\gamma$ approaches 0,
-the agent is more concerned with maximizing immediate rewards. When $\gamma\!=\!
-1$, the agent takes future rewards strongly into account, the agent is
-"farsighted".
+the agent is more concerned with maximizing immediate rewards. On the contrary,
+when $\gamma\!=\! 1$, the agent takes future rewards strongly into account, the
+agent is "farsighted".
 
 # NOTE: Section Policies and Value Functions
 An essential task of almost every RL agent is estimating /value functions/.
 These functions describe how "good" it is to be in a given state, or how "good"
-it is to perform an action in a given state. More formally they take a state, or
-a state-action pair as input and give the expected return as output. The
-expected return is obviously dependent on the actions the agent will take in the
-future. Consequently, value functions are formulated with respect to a /policy/
-\pi. The policy describes the probability of an action, the agent will perform,
-given the state. More formally, the policy is defined as
+it is to perform an action in a given state. More formally, they take a state
+$s$ or a state-action pair $s,a$ as input and give the expected return $G_t$ as
+output. The expected return is obviously dependent on the actions the agent will
+take in the future. Consequently, value functions are formulated with respect to
+a /policy/ \pi. The policy is a mapping of states to actions, it describes the
+probability of an action, the agent will perform, given the state. More
+formally, the policy is defined as
 $\pi(a|s)\defeq\Pr{A_t\!=\!a|S_t\!=\!s}$, a PDF of all $a\in\A$ for each
-$s\in\S$. In general, RL methods determine how the policy is updated, based on
-the agents interaction with the environment.
+$s\in\S$. The various different RL approaches differ in how the policy is
+updated, based on the agents interaction with the environment.
 
 As mentioned, there are value function of states and of state-action pairs:
 The /state-value function of policy/ $\pi$ is denoted as $\vpi(s)$ and is defined
@@ -513,10 +514,11 @@ action $a$ and following policy $\pi$ (Eq. ref:eq-action-value).
 \end{equation}
 
 # NOTE: Bellman-Equation
-A central characteristic of value functions is that, values are related to
-expected values of successive states. This recursive relationship (similar to Eq.
-ref:eq-expected-return) is heavily used in RL and has been formulated as the
-/Bellman equation/. The Bellman equation for $\vpi(s)$ is defined as follows:
+A central characteristic of value functions is the recursive relationship
+between values. Similar to Equation (ref:eq-expected-return), current values are
+related to expected values of successive states. This relationship is heavily
+used in RL and has been formulated as the /Bellman equation/. The Bellman
+equation for $\vpi(s)$ is defined as follows:
 \begin{equation} \label{eq-bellman}
 \begin{split}
     \vpi(s) &\defeq \EE{\pi}{G_t|S_t=s} \\
@@ -528,9 +530,9 @@ where $a\in\A$, $s,s'\in\S$, $r\in\R$.
 The Bellman equation (ref:eq-bellman) states the following: The value of a state
 equals the immediate reward and expected value of all possible successor states,
 weighted by their probability of occurring. $\vpi(s)$ is the only solution to its
-Bellman function. Similar Bellman equations to Equation ref:eq-bellman can be
+Bellman function. Similar Bellman equations to Equation (ref:eq-bellman) can be
 formed for e.g., $\qpi(s,a)$. Bellman equations form the basis for computing and
-approximating value functions and were an important milestone in RL.
+approximating value functions and were an important milestone in RL history.
 
 
 
