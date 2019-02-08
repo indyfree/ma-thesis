@@ -543,7 +543,7 @@ optimality equation/:
     \vstar(s) &= \max_{a\in\A(s)}q_{\pi_*}(s,a) \\
     &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma G_{t+1}|S_t\!=\!s, A_t\!=a} \\
     &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma \vstar(S_{t+1})|S_t\!=\!s, A_t\!=a} \\
-    &= \max_{a}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vstar(s')\bigg],
+    &= \max_{a}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vstar(s')\bigg],of
 \end{split}
 \end{equation}
 where $a\!\in\!\A$, $s,s'\!\in\!\S$, $r\!\in\!\R$.
@@ -555,15 +555,10 @@ when the dynamics of the environment $p$ are known. Similar Bellman equations to
 Equations (ref:eq-bellman) and (ref:eq-bellman-optimality) can also be be formed
 for $\qpi(s,a)$ and $\qstar(s,a)$. Bellman equations form the basis for
 computing and approximating value functions and were an important milestone in
-RL history.
-
-#+BEGIN_QUOTE
-The methods of dynamic programming can be related even more
-closely to the Bellman optimality equation. Many reinforcement learning methods can
-be clearly understood as approximately solving the Bellman optimality equation, using
-actual experienced transitions in place of knowledge of the expected
-transitions. We will explore some of these methods in the following Chapters
-#+END_QUOTE
+RL history. Most RL methods are /approximately/ solving the Bellman optimality
+equation (ref:eq-bellman-optimality), by using experienced state transitions
+instead of the expected transitions. The most common methods will be explored in
+the following chapters.
 
 *** Tabular Methods
 # TODO: Section Dynamic Programming: Policy Iteration, Value Iteration
