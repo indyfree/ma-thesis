@@ -538,7 +538,15 @@ approximating value functions and were an important milestone in RL history.
 
 
 # TODO: Section Dynamic Programming: Policy Iteration, Value Iteration
+/Dynamic Programming/ (DP) is a method to compute optimal policies, the ultimate
+goal of every RL method. DP makes use of value functions to facilitate the search for
+good policies. Despite the limited utility of DP in real-world settings, it
+provides the theoretical foundation for all other RL methods. In fact, all of
+these methods try to achieve the same goal, but without the assumption of a perfect
+model of the environment (e.g., known /state-transition probabilities/, Eq.
+ref:eq-state-transition) and less computational effort.
 
+# NOTE: Add greedy-policy
 
 # TODO: Section Monte Carlo Prediction, Estimation and Control
 
