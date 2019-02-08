@@ -1,6 +1,9 @@
 #+TITLE: Thesis Todo
 
 * Inbox
+** TODO Fix paragraph spacing
+
+[[file:~/uni/ma-thesis/thesis.org::*Theoretical%20Background%20(10%25)][Theoretical Background (10%)]]
 ** TODO Concise Wording of regulation capacity, balancing power, frequency regulation...
 ** TODO Comment Literature Review
 Structure the whole section in a stricter way. I mean that the question I always
