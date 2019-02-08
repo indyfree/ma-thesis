@@ -384,7 +384,6 @@ cite:vazquez-canteli19_reinf_learn_deman_respon.
 The following chapter will give an overview about the most important RL
 ideas and concepts and will introduce the corresponding mathematical formulations.
 cite:vazquez-canteli19_reinf_learn_deman_respon.
-
 *** Notation
 # NOTE: State set for every single quantity used.
 The input to the network $x \in \mathbb{R}^D$ is fed to the first residual layer
@@ -452,20 +451,20 @@ $a\in\A$. In /finite/ MDPs, the random variables $\R_t$ and $S_t$ have
 well-defined probability density functions (PDF), which are solely dependent on
 the previous state and action. Consequently, it is possible to define ($\defeq$)
 the /dynamics/ of the MDP as following:
-\begin{equation}
+\begin{equation} \label{eq-dynamics}
     p(s',r|s,a) \defeq \Pr{S_t=s',R_t=r|S_{t-1}=s,A_t=a},
 \end{equation}
-for all $s',s\in\S$, $r\in\R$ and $a\in\A$. Note that each possible value of
+for all $s',s\!\in\!\S$, $r\!\in\!\R$ and $a\!\in\!\A$. Note that each possible value of
 the state $\S_t$ depends only on the immediately preceding state $\S_{t-1}$.
 When a state includes all information of /all/ previous states, the state
 possesses the so-called /Markov property/. If not noted otherwise, the Markov
 property is assumed throughout the thesis.
 The dynamics function allows computing the /state-transition probabilities/,
 another important characteristic of an MDP, as following:
-\begin{equation}
+\begin{equation} \label{eq-state-transition}
     p(s'|s,a) \defeq \Pr{S_t\!=\!s'|S_{t-1}\!=\!s,A_t\!=\!a} = \sum_{r\in\R}{p(s', r|s, a)},
 \end{equation}
-for all $s',s\in\S$, $r\in\R$ and $a\in\A$.
+for $s',s\!\in\!\S$, $r\!\in\!\R$ and $a\!\in\!\A$.
 
 # NOTE: Section Goals and Rewards
 The use of a /reward signal/ $R_t$ to formalize the agent's goal is a very
@@ -486,7 +485,7 @@ the agent is more concerned with maximizing immediate rewards. On the contrary,
 when $\gamma\!=\! 1$, the agent takes future rewards strongly into account, the
 agent is "farsighted".
 
-# NOTE: Section Policies and Value Functions
+*** Policies and Value Functions
 An essential task of almost every RL agent is estimating /value functions/.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -496,8 +495,8 @@ take in the future. Consequently, value functions are formulated with respect to
 a /policy/ \pi. The policy is a mapping of states to actions, it describes the
 probability of an action, the agent will perform, given the state. More
 formally, the policy is defined as
-$\pi(a|s)\defeq\Pr{A_t\!=\!a|S_t\!=\!s}$, a PDF of all $a\in\A$ for each
-$s\in\S$. The various different RL approaches differ in how the policy is
+$\pi(a|s)\defeq\Pr{A_t\!=\!a|S_t\!=\!s}$, a PDF of all $a\!\in\!\A$ for each
+$s\!\in\!\S$. The various different RL approaches differ in how the policy is
 updated, based on the agents interaction with the environment.
 
 As mentioned, there are value function of states and of state-action pairs:
@@ -505,20 +504,27 @@ The /state-value function of policy/ $\pi$ is denoted as $\vpi(s)$ and is define
 as the expected return when starting in $s$ and following policy $\pi$ (Eq.
 ref:eq-state-value). The /action-value function of policy/ $\pi$ is denoted as
 $\qpi(s,a)$ and is defined as the expected return when starting in $s$, taking
-action $a$ and following policy $\pi$ (Eq. ref:eq-action-value).
+action $a$ and following policy $\pi$ afterwards (Eq. ref:eq-action-value).
 \begin{equation} \label{eq-state-value}
     \vpi(s) \defeq \EE{\pi}{G_t|S_t\!=\!s}, \text{ for all } s\in\S
 \end{equation}
 \begin{equation} \label{eq-action-value}
     \qpi(s,a) \defeq \EE{\pi}{G_t|S_t\!=\!s, A_t\!=\!a}, \text{ for all } a\in\A, s\in\S
 \end{equation}
+An /optimal policy/ $\pi_*$ has a greater (or equal) expected return than all
+other policies.  The /optimal state-value function/ is defined as following:
+\begin{equation}
+    \vstar(s) \defeq \max_a \vpi(s), \text{ for all } s\in\S
+\end{equation}
+A similar definitions hold for the /optimal action-value function/ $\qstar$.
 
-# NOTE: Bellman-Equation
+*** Bellman Equations
 A central characteristic of value functions is the recursive relationship
 between values. Similar to Equation (ref:eq-expected-return), current values are
 related to expected values of successive states. This relationship is heavily
-used in RL and has been formulated as the /Bellman equation/. The Bellman
-equation for $\vpi(s)$ is defined as follows:
+used in RL and has been formulated as /Bellman equations/
+cite:bellman57_dynam_progr. The Bellman equation for $\vpi(s)$ is defined as
+follows:
 \begin{equation} \label{eq-bellman}
 \begin{split}
     \vpi(s) &\defeq \EE{\pi}{G_t|S_t=s} \\
@@ -526,17 +532,40 @@ equation for $\vpi(s)$ is defined as follows:
     &= \sum_{a}{\pi(a|s)}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vpi(s')\bigg],
 \end{split}
 \end{equation}
-where $a\in\A$, $s,s'\in\S$, $r\in\R$.
-The Bellman equation (ref:eq-bellman) states the following: The value of a state
-equals the immediate reward and expected value of all possible successor states,
-weighted by their probability of occurring. $\vpi(s)$ is the only solution to its
-Bellman function. Similar Bellman equations to Equation (ref:eq-bellman) can be
-formed for e.g., $\qpi(s,a)$. Bellman equations form the basis for computing and
-approximating value functions and were an important milestone in RL history.
+where $a\!\in\!\A$, $s,s'\!\in\!\S$, $r\!\in\!\R$.
+In other words, the value of a state equals the immediate reward and expected
+value of all possible successor states, weighted by their probability of
+occurring. $\vpi(s)$ is the only solution to its Bellman equation. The Bellman
+equation of the optimal value function $v_*$ is called the /Bellman
+optimality equation/:
+\begin{equation} \label{eq-bellman-optimality}
+\begin{split}
+    \vstar(s) &= \max_{a\in\A(s)}q_{\pi_*}(s,a) \\
+    &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma G_{t+1}|S_t\!=\!s, A_t\!=a} \\
+    &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma \vstar(S_{t+1})|S_t\!=\!s, A_t\!=a} \\
+    &= \max_{a}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vstar(s')\bigg],
+\end{split}
+\end{equation}
+where $a\!\in\!\A$, $s,s'\!\in\!\S$, $r\!\in\!\R$.
+In other words, the value of a state under an optimal policy equals the expected
+return for the best action from that state. Note that the Bellman optimality
+equation does not reference to specific policy, it has a unique solution
+independent from one. It can be seen as a equation system, which can be solved
+when the dynamics of the environment $p$ are known. Similar Bellman equations to
+Equations (ref:eq-bellman) and (ref:eq-bellman-optimality) can also be be formed
+for $\qpi(s,a)$ and $\qstar(s,a)$. Bellman equations form the basis for
+computing and approximating value functions and were an important milestone in
+RL history.
 
+#+BEGIN_QUOTE
+The methods of dynamic programming can be related even more
+closely to the Bellman optimality equation. Many reinforcement learning methods can
+be clearly understood as approximately solving the Bellman optimality equation, using
+actual experienced transitions in place of knowledge of the expected
+transitions. We will explore some of these methods in the following Chapters
+#+END_QUOTE
 
-
-
+*** Tabular Methods
 # TODO: Section Dynamic Programming: Policy Iteration, Value Iteration
 /Dynamic Programming/ (DP) is a method to compute optimal policies, the ultimate
 goal of every RL method. DP makes use of value functions to facilitate the search for
@@ -549,7 +578,6 @@ ref:eq-state-transition) and less computational effort.
 # NOTE: Add greedy-policy
 
 # TODO: Section Monte Carlo Prediction, Estimation and Control
-
 
 # TODO: Temporal-Difference Learning
 # NOTE: TD (Prediction?)
@@ -568,16 +596,6 @@ ref:eq-state-transition) and less computational effort.
 \end{equation}
 
 
-**** Policy Iteration
-**** Value Iteration
-*** Tabular Methods:
-**** Dynamic Programming
-**** Monte-Carlo Methods
-**** Temporal-Difference Learning
-***** TD Prediction
-***** SARSA: On-policy TD Control
-***** Q-learning: Off-policy TD Control
-***** Q-Learning
 *** Approximation Methods
 # NOTE: Everything tabular so far
 **** On-policy Prediction with Approximation

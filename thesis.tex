@@ -1,4 +1,4 @@
-% Created 2019-02-08 Fri 11:00
+% Created 2019-02-08 Fri 15:42
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -131,6 +131,7 @@ Köln, den xx.xx.20xx
 \section*{List of Abbreviations} \markboth{LIST OF ABBREVIATIONS}{}
 \begin{acronym}[GCRM]
 	\acro{DSO}{Distribution System Operator}
+	\acro{DP}{Dynamic Programming}
 	\acro{EV}{Electric Vehicle}
 	\acro{GP}{Genetic Programming}
 	\acro{GCRM}{German Control Reserve Market}
@@ -276,22 +277,22 @@ be real-valued vectors are written in bold and in lower case (even if random var
 
 
 \section{Introduction (10\%)}
-\label{sec:orge27de86}
+\label{sec:org49f7bb4}
 \subsection{Research Motivation}
-\label{sec:org65cdc50}
+\label{sec:org0c626b2}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:orgd56775f}
+\label{sec:org6b2252e}
 \subsection{Relevance}
-\label{sec:org73cced0}
+\label{sec:org200b83d}
 
 \clearpage
 \section{Related Literature (10\%)}
-\label{sec:org0234f1a}
+\label{sec:org20163c4}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orga8b56e8}
+\label{sec:org3f6af4b}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -463,7 +464,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org496327b}
+\label{sec:orgf27d506}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -573,30 +574,29 @@ solving complex challenges in smart grids
 
 \clearpage
 \section{Theoretical Background (10\%)}
-\label{sec:org2be7c89}
+\label{sec:org9779deb}
 \subsection{Electricity Markets}
-\label{sec:org256fba7}
+\label{sec:org82153f7}
 \subsubsection{Balancing Market}
-\label{sec:org5d57e5f}
+\label{sec:org153cfa1}
 \subsubsection{Spot Market}
-\label{sec:orgd6a294b}
+\label{sec:org9be4717}
 \subsection{Reinforcement Learning \label{reinforcement-learning}}
-\label{sec:org9f2c3a4}
+\label{sec:orgea0290c}
 The following chapter will give an overview about the most important RL
 ideas and concepts and will introduce the corresponding mathematical formulations.
 \cite{vazquez-canteli19_reinf_learn_deman_respon}.
-
 \subsubsection{Notation}
-\label{sec:org43680d1}
+\label{sec:org52fd169}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer
 to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in
 \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the
 layer.
 
 \subsubsection{Elements of Reinforcement Learning}
-\label{sec:org60bf6b8}
+\label{sec:org14208c7}
 \paragraph{Policy}
-\label{sec:orgfda5b5a}
+\label{sec:orgd34cd26}
 \begin{itemize}
 \item Agent behavior at a given time
 \item Mapping states to actions
@@ -605,7 +605,7 @@ layer.
 \item Policies may be stochastic, give probabilities for each action
 \end{itemize}
 \paragraph{Reward signal}
-\label{sec:org00d4db2}
+\label{sec:org7e7cb99}
 \begin{itemize}
 \item Goal of the RL problem
 \item Numeric signal the environment sends to the agent
@@ -616,7 +616,7 @@ action of the policy may result in changing the policy to select another action
 \item Reward signals can be stochastic functions of the state and the actions
 \end{itemize}
 \paragraph{Value function}
-\label{sec:org7687bef}
+\label{sec:org7f4a3c8}
 \begin{itemize}
 \item Value of a state is the total amount of reward an agent can expect to
 accumulate over the future, starting from that state
@@ -628,7 +628,7 @@ the greatest amount of reward in int long run.
 \item Efficiently estimating values is the most important component.
 \end{itemize}
 \paragraph{Model of the environment}
-\label{sec:orgb7e3b04}
+\label{sec:org21d7b66}
 \begin{itemize}
 \item Model allows inferences to be made about how the environment will behave.
 E.g., Given state and action the model predicts the next state and next reward.
@@ -640,13 +640,13 @@ considering possible future situations before they happen.
 \end{itemize}
 
 \paragraph{Planning vs. Control}
-\label{sec:orgf3185de}
+\label{sec:org9ce48e1}
 \paragraph{On-Policy vs. Off-Policy}
-\label{sec:org0281ee0}
+\label{sec:org9ee80fc}
 \paragraph{Exploitation-Exploration Trade-off}
-\label{sec:org5f51c4a}
+\label{sec:org0d3d0d0}
 \subsubsection{Markov Decision Processes}
-\label{sec:org85eca8c}
+\label{sec:orgda93969}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -675,20 +675,20 @@ and a reward \(r\in\R\) occurs, given the preceding state \(s\in\S\) and an acti
 well-defined probability density functions (PDF), which are solely dependent on
 the previous state and action. Consequently, it is possible to define (\(\defeq\))
 the \emph{dynamics} of the MDP as following:
-\begin{equation}
+\begin{equation} \label{eq-dynamics}
     p(s',r|s,a) \defeq \Pr{S_t=s',R_t=r|S_{t-1}=s,A_t=a},
 \end{equation}
-for all \(s',s\in\S\), \(r\in\R\) and \(a\in\A\). Note that each possible value of
+for all \(s',s\!\in\!\S\), \(r\!\in\!\R\) and \(a\!\in\!\A\). Note that each possible value of
 the state \(\S_t\) depends only on the immediately preceding state \(\S_{t-1}\).
 When a state includes all information of \emph{all} previous states, the state
 possesses the so-called \emph{Markov property}. If not noted otherwise, the Markov
 property is assumed throughout the thesis.
 The dynamics function allows computing the \emph{state-transition probabilities},
 another important characteristic of an MDP, as following:
-\begin{equation}
+\begin{equation} \label{eq-state-transition}
     p(s'|s,a) \defeq \Pr{S_t\!=\!s'|S_{t-1}\!=\!s,A_t\!=\!a} = \sum_{r\in\R}{p(s', r|s, a)},
 \end{equation}
-for all \(s',s\in\S\), \(r\in\R\) and \(a\in\A\).
+for \(s',s\!\in\!\S\), \(r\!\in\!\R\) and \(a\!\in\!\A\).
 
 The use of a \emph{reward signal} \(R_t\) to formalize the agent's goal is a very
 unique characteristic of RL. Each timestep the agent receives the rewards as a scalar
@@ -708,6 +708,8 @@ the agent is more concerned with maximizing immediate rewards. On the contrary,
 when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, the
 agent is "farsighted".
 
+\subsubsection{Policies and Value Functions}
+\label{sec:orge3b2a3f}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -717,8 +719,8 @@ take in the future. Consequently, value functions are formulated with respect to
 a \emph{policy} \(\pi\). The policy is a mapping of states to actions, it describes the
 probability of an action, the agent will perform, given the state. More
 formally, the policy is defined as
-\(\pi(a|s)\defeq\Pr{A_t\!=\!a|S_t\!=\!s}\), a PDF of all \(a\in\A\) for each
-\(s\in\S\). The various different RL approaches differ in how the policy is
+\(\pi(a|s)\defeq\Pr{A_t\!=\!a|S_t\!=\!s}\), a PDF of all \(a\!\in\!\A\) for each
+\(s\!\in\!\S\). The various different RL approaches differ in how the policy is
 updated, based on the agents interaction with the environment.
 
 As mentioned, there are value function of states and of state-action pairs:
@@ -726,19 +728,28 @@ The \emph{state-value function of policy} \(\pi\) is denoted as \(\vpi(s)\) and 
 as the expected return when starting in \(s\) and following policy \(\pi\) (Eq.
 \ref{eq-state-value}). The \emph{action-value function of policy} \(\pi\) is denoted as
 \(\qpi(s,a)\) and is defined as the expected return when starting in \(s\), taking
-action \(a\) and following policy \(\pi\) (Eq. \ref{eq-action-value}).
+action \(a\) and following policy \(\pi\) afterwards (Eq. \ref{eq-action-value}).
 \begin{equation} \label{eq-state-value}
     \vpi(s) \defeq \EE{\pi}{G_t|S_t\!=\!s}, \text{ for all } s\in\S
 \end{equation}
 \begin{equation} \label{eq-action-value}
     \qpi(s,a) \defeq \EE{\pi}{G_t|S_t\!=\!s, A_t\!=\!a}, \text{ for all } a\in\A, s\in\S
 \end{equation}
+An \emph{optimal policy} \(\pi_*\) has a greater (or equal) expected return than all
+other policies.  The \emph{optimal state-value function} is defined as following:
+\begin{equation}
+    \vstar(s) \defeq \max_a \vpi(s), \text{ for all } s\in\S
+\end{equation}
+A similar definitions hold for the \emph{optimal action-value function} \(\qstar\).
 
+\subsubsection{Bellman Equations}
+\label{sec:org2f01b1d}
 A central characteristic of value functions is the recursive relationship
 between values. Similar to Equation (\ref{eq-expected-return}), current values are
 related to expected values of successive states. This relationship is heavily
-used in RL and has been formulated as the \emph{Bellman equation}. The Bellman
-equation for \(\vpi(s)\) is defined as follows:
+used in RL and has been formulated as \emph{Bellman equations}
+\cite{bellman57_dynam_progr}. The Bellman equation for \(\vpi(s)\) is defined as
+follows:
 \begin{equation} \label{eq-bellman}
 \begin{split}
     \vpi(s) &\defeq \EE{\pi}{G_t|S_t=s} \\
@@ -746,15 +757,48 @@ equation for \(\vpi(s)\) is defined as follows:
     &= \sum_{a}{\pi(a|s)}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vpi(s')\bigg],
 \end{split}
 \end{equation}
-where \(a\in\A\), \(s,s'\in\S\), \(r\in\R\).
-The Bellman equation (\ref{eq-bellman}) states the following: The value of a state
-equals the immediate reward and expected value of all possible successor states,
-weighted by their probability of occurring. \(\vpi(s)\) is the only solution to its
-Bellman function. Similar Bellman equations to Equation (\ref{eq-bellman}) can be
-formed for e.g., \(\qpi(s,a)\). Bellman equations form the basis for computing and
-approximating value functions and were an important milestone in RL.
+where \(a\!\in\!\A\), \(s,s'\!\in\!\S\), \(r\in\R\).
+In other words, the value of a state equals the immediate reward and expected
+value of all possible successor states, weighted by their probability of
+occurring. \(\vpi(s)\) is the only solution to its Bellman equation. The Bellman
+equation of the optimal value function \(v_*\) is called the \emph{Bellman
+optimality equation}:
+\begin{equation} \label{eq-bellman-optimality}
+\begin{split}
+    \vstar(s) &= \max_{a\in\A(s)}q_{\pi_*}(s,a) \\
+    &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma G_{t+1}|S_t\!=\!s, A_t\!=a} \\
+    &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma \vstar(S_{t+1})|S_t\!=\!s, A_t\!=a} \\
+    &= \max_{a}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vstar(s')\bigg],
+\end{split}
+\end{equation}
+where \(a\!\in\!\A\), \(s,s'\!\in\!\S\), \(r\!\in\!\R\).
+In other words, the value of a state under an optimal policy equals the expected
+return for the best action from that state. Note that the Bellman optimality
+equation does not reference to specific policy, it has a unique solution
+independent from one. It can be seen as a equation system, which can be solved
+when the dynamics of the environment \(p\) are known. Similar Bellman equations to
+Equations (\ref{eq-bellman}) and (\ref{eq-bellman-optimality}) can also be be formed
+for \(\qpi(s,a)\) and \(\qstar(s,a)\). Bellman equations form the basis for
+computing and approximating value functions and were an important milestone in
+RL history.
 
+\begin{quote}
+The methods of dynamic programming can be related even more
+closely to the Bellman optimality equation. Many reinforcement learning methods can
+be clearly understood as approximately solving the Bellman optimality equation, using
+actual experienced transitions in place of knowledge of the expected
+transitions. We will explore some of these methods in the following Chapters
+\end{quote}
 
+\subsubsection{Tabular Methods}
+\label{sec:orge434615}
+\emph{Dynamic Programming} (DP) is a method to compute optimal policies, the ultimate
+goal of every RL method. DP makes use of value functions to facilitate the search for
+good policies. Despite the limited utility of DP in real-world settings, it
+provides the theoretical foundation for all other RL methods. In fact, all of
+these methods try to achieve the same goal, but without the assumption of a perfect
+model of the environment (e.g., known \emph{state-transition probabilities}, Eq.
+\ref{eq-state-transition}) and less computational effort.
 
 
 \begin{equation}
@@ -770,47 +814,25 @@ approximating value functions and were an important milestone in RL.
 \end{equation}
 
 
-\paragraph{Policy Iteration}
-\label{sec:orgbbd3d53}
-\paragraph{Value Iteration}
-\label{sec:org2566665}
-\subsubsection{Tabular Methods:}
-\label{sec:orgd7b2c7e}
-\paragraph{Dynamic Programming}
-\label{sec:org5a7fb27}
-\paragraph{Monte-Carlo Methods}
-\label{sec:orgab2c769}
-\paragraph{Temporal-Difference Learning}
-\label{sec:org89132c1}
-\begin{enumerate}
-\item TD Prediction
-\label{sec:orgae8cffb}
-\item SARSA: On-policy TD Control
-\label{sec:orgcb9dc40}
-\item Q-learning: Off-policy TD Control
-\label{sec:org7ea91c5}
-\item Q-Learning
-\label{sec:org28e04e3}
-\end{enumerate}
 \subsubsection{Approximation Methods}
-\label{sec:org1522e5d}
+\label{sec:org6102132}
 \paragraph{On-policy Prediction with Approximation}
-\label{sec:orgb85a91f}
+\label{sec:orga0fdf81}
 \begin{enumerate}
 \item Linear Methods
-\label{sec:org7d1cc41}
+\label{sec:orgd4b1ac9}
 \item Non-linear Methods: ANN
-\label{sec:orgf6528f8}
+\label{sec:org1203f07}
 \end{enumerate}
 \paragraph{(On-policy Control with Approximation)}
-\label{sec:org194d6e8}
+\label{sec:org9813111}
 \clearpage
 \section{Empirical Setting / Data (10\%)}
-\label{sec:org6ce4737}
+\label{sec:orgd13df97}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:orgf477ffd}
+\label{sec:org10c6cc9}
 \subsubsection{Raw Data}
-\label{sec:orgba7ae25}
+\label{sec:org9bd3fb3}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -854,55 +876,55 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org2ac87cf}
+\label{sec:org830c3b5}
 \subsection{Electricity Markets Data}
-\label{sec:orgf6caf4c}
+\label{sec:org46677da}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:orgb912282}
+\label{sec:org7c2eca6}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:org904e52b}
+\label{sec:org1b79846}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:orgc5cd920}
+\label{sec:org75de310}
 \subsection{Information Assumptions}
-\label{sec:orga4fc715}
+\label{sec:org599f471}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org5c95ba2}
+\label{sec:org65f65f3}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org1d6fcd9}
+\label{sec:org8c65d9a}
 \subsection{Bidding Strategy}
-\label{sec:orgfdae817}
+\label{sec:org2097f9a}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org3a47b53}
+\label{sec:orgbc4230b}
 
 \section{Evaluation (30\%)}
-\label{sec:org89902a8}
+\label{sec:org6025dcd}
 \subsection{Event-based Simulation}
-\label{sec:orgfc4d894}
+\label{sec:orgea33d15}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org156b066}
+\label{sec:orgc6a9e3c}
 \subsection{FleetRL}
-\label{sec:org7e3821c}
+\label{sec:org85a4305}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:orga93dcc6}
+\label{sec:org6185b4f}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org8829ac2}
+\label{sec:orgfe2d350}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org494c9b3}
+\label{sec:orgbc3eb94}
 \section{Discussion (5\%)}
-\label{sec:org83dbe88}
+\label{sec:orgecc58e0}
 \subsection{Generalizability}
-\label{sec:org79a5880}
+\label{sec:orgabca2b6}
 \subsection{Future Electricity Landscape}
-\label{sec:org4069f79}
+\label{sec:org44eaf94}
 \subsection{Limitations}
-\label{sec:orgcef5ec5}
+\label{sec:org6a4c742}
 \section{Conclusion (5\%)}
-\label{sec:org10a6b0c}
+\label{sec:org34dbbd4}
 \subsection{Contribution}
-\label{sec:org527b947}
+\label{sec:org09d9779}
 \subsection{Future Research}
-\label{sec:org6f2e928}
+\label{sec:orgf2e93a2}
 
 
 \clearpage
