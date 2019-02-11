@@ -493,16 +493,16 @@ it is to perform an action in a given state. More formally, they take a state
 $s$ or a state-action pair $s,a$ as input and give the expected return $G_t$ as
 output. The expected return is obviously dependent on the actions the agent will
 take in the future. Consequently, value functions are formulated with respect to
-a /policy/ \pi. The policy is a mapping of states to actions, it describes the
-probability of an action, the agent will perform, given the state. More
-formally, the policy is defined as
+a /policy/ \pi. A policy is a mapping of states to actions, it describes the
+probability that an agent performs a certain action, based on the current the
+state. More formally, the policy is defined as
 $\pi(a|s)\defeq\Pr{A_t\!=\!a|S_t\!=\!s}$, a PDF of all $a\!\in\!\A$ for each
 $s\!\in\!\S$. The various different RL approaches differ in how the policy is
-updated, based on the agents interaction with the environment.
+updated, based on the agent's interaction with the environment.
 
-As mentioned, there are value function of states and of state-action pairs:
-The /state-value function of policy/ $\pi$ is denoted as $\vpi(s)$ and is defined
-as the expected return when starting in $s$ and following policy $\pi$ (Eq.
+As mentioned, there are value function of states and of state-action pairs: The
+/state-value function of policy/ $\pi$ is denoted as $\vpi(s)$ and is defined as
+the expected return when starting in $s$ and following policy $\pi$ (Eq.
 ref:eq-state-value). The /action-value function of policy/ $\pi$ is denoted as
 $\qpi(s,a)$ and is defined as the expected return when starting in $s$, taking
 action $a$ and following policy $\pi$ afterwards (Eq. ref:eq-action-value).
@@ -517,11 +517,11 @@ other policies.  The /optimal state-value function/ is defined as following:
 \begin{equation}
     \vstar(s) \defeq \max_a \vpi(s), \text{ for all } s\in\S
 \end{equation}
-A similar definitions hold for the /optimal action-value function/ $\qstar$.
+The /optimal action-value function/ $\qstar$ is defined accordingly.
 
 *** Bellman Equations
 A central characteristic of value functions is the recursive relationship
-between values. Similar to Equation (ref:eq-expected-return), current values are
+between the values. Similar to Equation (ref:eq-expected-return), current values are
 related to expected values of successive states. This relationship is heavily
 used in RL and has been formulated as /Bellman equations/
 cite:bellman57_dynam_progr. The Bellman equation for $\vpi(s)$ is defined as
@@ -544,22 +544,22 @@ optimality equation/:
     \vstar(s) &= \max_{a\in\A(s)}q_{\pi_*}(s,a) \\
     &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma G_{t+1}|S_t\!=\!s, A_t\!=a} \\
     &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma \vstar(S_{t+1})|S_t\!=\!s, A_t\!=a} \\
-    &= \max_{a}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vstar(s')\bigg],of
+    &= \max_{a}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vstar(s')\bigg]
 \end{split}
 \end{equation}
-where $a\!\in\!\A$, $s,s'\!\in\!\S$, $r\!\in\!\R$.
-In other words, the value of a state under an optimal policy equals the expected
-return for the best action from that state. Note that the Bellman optimality
-equation does not reference to specific policy, it has a unique solution
-independent from one. It can be seen as a equation system, which can be solved
-when the dynamics of the environment $p$ are known. Similar Bellman equations to
-Equations (ref:eq-bellman) and (ref:eq-bellman-optimality) can also be be formed
-for $\qpi(s,a)$ and $\qstar(s,a)$. Bellman equations form the basis for
-computing and approximating value functions and were an important milestone in
-RL history. Most RL methods are /approximately/ solving the Bellman optimality
-equation (ref:eq-bellman-optimality), by using experienced state transitions
-instead of the expected transitions. The most common methods will be explored in
-the following chapters.
+where $a\!\in\!\A$, $s,s'\!\in\!\S$, $r\!\in\!\R$. In other words, the value of
+a state under an optimal policy equals the expected return for the best action
+from that state. Note that the Bellman optimality equation does not reference to
+specific policy, it has a unique solution independent from one. It can be seen
+as a equation system, which can be solved when the dynamics of the environment
+$p$ are known. Similar Bellman equations to Equations (ref:eq-bellman) and
+(ref:eq-bellman-optimality) can also be be formed for $\qpi(s,a)$ and
+$\qstar(s,a)$. Bellman equations form the basis for computing and approximating
+value functions and were an important milestone in RL history. Most RL methods
+are /approximately/ solving the Bellman optimality equation
+(ref:eq-bellman-optimality), by using experienced state transitions instead of
+expected transitions. The most common methods will be explored in the following
+chapters.
 
 *** Tabular Methods
 # TODO: Section Dynamic Programming: Policy Iteration, Value Iteration
