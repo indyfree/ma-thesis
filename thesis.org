@@ -621,7 +621,33 @@ in finite MDPs with a perfect model of the environment.
 # TODO: Section Monte Carlo Prediction, Estimation and Control
 
 # TODO: Temporal-Difference Learning
-# NOTE: TD (Prediction?)
+- Learning from actual experience, Requires no propior knowledge of
+  environment/model but can still achieve optimal behaviour
+- Method to *learn* from partial returns (as opposed to averaging over complete
+  returns from episode, as in MC, and opposed to *compute* value function in DP
+  when full knowledge of MDP available)
+- When model not available it is useful to estimate /action/ values $\qstar$. In
+  DP, because of full knowledge of the environment, it was possible to just look
+  on step ahead, and chose the action that leads the reward and next state.
+  Without a model (model-free) that is not possible, the vale of each
+  action needs to be estimated. Consequently, the algorithm needs to visit every
+  /state-action/ pair, as opposed to just the state. That is a problem, since
+  not every /state-action/ pair will be visited when following a deterministic
+  policy, as in DP. Hence, with following a policy $\pi$ the algorithm will only
+  observe returns for one of the actions. (Since a deterministic policy
+  $\pi(a|s)$ returns exactly one action, given the current state.) /Exploration/
+  needs to be maintained. In order to evaluate the value function for
+  /state-action/ pairs $\qpi$, continual exploration needs to be ensured. One
+  way to achieve exploration is to only consider /stochastic/ policies.
+  Stochastic policies have a non-zero probability of selecting all actions in
+  each state.
+
+- On-policy ($\epsilon$-greedy policy) vs off-policy (/target/ (deterministic) and /behaviour/
+  policies (stochastic, exploratory), importance sampling)
+
+
+
+# NOTE: TD(0) Prediction?
 \begin{equation}
     V(S_t) \leftarrow V(S_t) + \alpha\big[R_{t+1}+\gamma V(S_{t+1}) - V(S_t)\big]
 \end{equation}
