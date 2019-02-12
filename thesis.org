@@ -677,18 +677,32 @@ Without that knowledge, the value of each action in a given state needs to be
 estimated. This constitutes a problem, since not every /state-action/ pair will
 be visited when the agent follows a deterministic policy. A deterministic policy
 $\pi(a|s)$ returns exactly one action given the current state, hence the agent
-will only observes returns for one of the actions. In order to evaluate the
+will only observe returns for one of the actions. In order to evaluate the
 value function for /state-action/ pairs $\qpi$, continual /exploration/ needs to
 be ensured. On other words, the agent has to explore state-action pairs which
 are seemingly disadvantageous given the current policy. This dilemma is also
 called the /exploration-exploitation/ trade-off. One way to achieve exploration
 is to only consider /stochastic/ policies. Stochastic policies have a non-zero
-probability of selecting all actions in each state.
-# NOTE: Sarsa: On-policy TD Control
-- On-policy ($\epsilon$-greedy policy)
-- Continually estimate $\qpi$ for the behaviours policy \pi and change \pi
-  towards greediness with respect to $\qpi$. (cited)
+probability of selecting all actions in each state. A typical stochastic policy
+is the \epsilon-greedy policy, which selects the action with the highest
+estimated value, except for a probability \epsilon, it selects an action at
+random.
 
+# NOTE: Image of GPI for q?
+
+There are two approaches to make use of stochastic policies to ensure all
+actions are chosen infinitely often. /On-policy/ methods improve the
+(stochastic) decision policy, by continually estimating $\qpi$ in regard to
+$\pi$, while simultaneously driving $\pi$ towards $\qpi$, e.g., with a
+\epsilon-greedy action selection. /Off-policy/ methods improve the deterministic
+decision policy, by using a second stochastic policy to generate behaviour. The
+first policy is becoming the optimal policy by evaluating the exploratory
+behaviour of the second policy. /Off-policy/ approaches are considered more
+powerful than the simpler /on-policy/ approaches. On the other side they require
+additional concepts and are slower to converge.
+
+# NOTE: Sarsa: On-policy TD Control
+A popular /on-policy/ TD Control method is SARSA.
 Estimate state-value function similar to ref:eq-td-prediction
 \begin{equation} \label{eq-sarsa}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma Q(S_{t+1},A_{t+1}) - Q(S_t, A_t)\big]
