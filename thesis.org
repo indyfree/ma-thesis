@@ -270,7 +270,7 @@ Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
 following chapter outlines different research approaches of RL in the domain of
 smart grids. For a more thorough description, mathematical formulations and
-common issues, of RL refer to Chapter ref:reinforcement-learning.
+common issues, of RL refer to Chapter ref:sec-reinforcement-learning.
 
 textcite:reddy11_learn_behav_multip_auton_agent,reddy11_strat used autonomous
 broker agents to buy and sell electricity from DER on a proposed /Tariff
@@ -381,7 +381,7 @@ cite:vazquez-canteli19_reinf_learn_deman_respon.
 # cite:brandt17_evaluat_busin_model_vehic_grid_integ has a good section
 # explaining the markets.
 *** Spot Market
-** Reinforcement Learning label:reinforcement-learning
+** Reinforcement Learning label:sec-reinforcement-learning
 The following chapter will give an overview about the most important RL
 ideas and concepts and will introduce the corresponding mathematical formulations.
 cite:vazquez-canteli19_reinf_learn_deman_respon.
@@ -513,24 +513,32 @@ $\pi(a|s)\defeq\Pr{A_t\!=\!a|S_t\!=\!s}$, a PDF of all $a\!\in\!\A$ for each
 $s\!\in\!\S$. The various different RL approaches differ in how the policy is
 updated, based on the agent's interaction with the environment.
 
-As mentioned, there are value function of states and of state-action pairs: The
-/state-value function of policy/ $\pi$ is denoted as $\vpi(s)$ and is defined as
-the expected return when starting in $s$ and following policy $\pi$ (Eq.
-ref:eq-state-value). The /action-value function of policy/ $\pi$ is denoted as
-$\qpi(s,a)$ and is defined as the expected return when starting in $s$, taking
-action $a$ and following policy $\pi$ afterwards (Eq. ref:eq-action-value).
+As mentioned, there are value function of states and of state-action pairs:
+The /state-value function of policy/ $\pi$ is denoted as $\vpi(s)$ and is
+defined as the expected return when starting in $s$ and following policy $\pi$:
 \begin{equation} \label{eq-state-value}
     \vpi(s) \defeq \EE{\pi}{G_t|S_t\!=\!s}, \text{ for all } s\in\S
 \end{equation}
+The /action-value function of policy/ $\pi$ is denoted as $\qpi(s,a)$ and is
+defined as the expected return when starting in $s$, taking action $a$ and
+following policy $\pi$ afterwards:
 \begin{equation} \label{eq-action-value}
     \qpi(s,a) \defeq \EE{\pi}{G_t|S_t\!=\!s, A_t\!=\!a}, \text{ for all } a\in\A, s\in\S
 \end{equation}
 An /optimal policy/ $\pi_*$ has a greater (or equal) expected return than all
-other policies.  The /optimal state-value function/ is defined as following:
+other policies.  The /optimal/ state-value function and /optimal/ action-value
+function are defined as following:
 \begin{equation}
     \vstar(s) \defeq \max_a \vpi(s), \text{ for all } s\in\S
 \end{equation}
-The /optimal action-value function/ $\qstar$ is defined accordingly.
+\begin{equation}
+    \qstar(s,a) \defeq \max_a \qpi(s), \text{ for all } s\in\S, a\in\A
+\end{equation}
+The /optimal/ action-value function describes the expected return, when taking
+action $a$ in state $s$ following the optimal policy $\pi_*$ afterwards.
+Estimating $\qstar$ to obtain an optimal policy is a substantial part of RL and
+has been known as /Q-learning/ cite:watkins92_q_learn. Details can be found in
+Chapter ref:sec-td-learning.
 
 *** Bellman Equations
 A central characteristic of value functions is the recursive relationship
@@ -574,10 +582,10 @@ are /approximately/ solving the Bellman optimality equation
 expected transitions. The most common methods will be explored in the following
 chapters.
 
-*** Tabular Methods
+*** Dynamic Programming
 # TODO: Intro Tabular Methods
 - DP, TD, Monte Carlo all use some variation of GPI.
-
+# TODO: Label as "Planning"
 
 # NOTE: Section Dynamic Programming: Policy Iteration, Value Iteration
 /Dynamic Programming/ (DP) is a method to compute optimal policies, the ultimate
@@ -634,6 +642,8 @@ in finite MDPs with a perfect model of the environment.
 
 # TODO: Section Monte Carlo Prediction, Estimation and Control
 
+
+*** Temporal-Difference Learning label:sec-td-learning
 # TODO: Temporal-Difference Learning
 - Learning from actual experience, Requires no prior knowledge of
   environment/model but can still achieve optimal behaviour
@@ -681,7 +691,6 @@ the occurred return.
 \begin{equation} \label{eq-q-learning}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma\max_a Q(S_{t+1},a) - Q(S_t, A_t)\big]
 \end{equation}
-
 
 *** Approximation Methods
 # NOTE: Everything tabular so far
