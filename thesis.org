@@ -572,7 +572,7 @@ where $a\!\in\!\A$, $s,s'\!\in\!\S$, $r\!\in\!\R$. In other words, the value of
 a state under an optimal policy equals the expected return for the best action
 from that state. Note that the Bellman optimality equation does not reference to
 specific policy, it has a unique solution independent from one. It can be seen
-as a equation system, which can be solved when the dynamics of the environment
+as an equation system, which can be solved when the dynamics of the environment
 $p$ are known. Similar Bellman equations to Equations (ref:eq-bellman) and
 (ref:eq-bellman-optimality) can also be be formed for $\qpi(s,a)$ and
 $\qstar(s,a)$. Bellman equations form the basis for computing and approximating
@@ -643,51 +643,65 @@ in finite MDPs with a perfect model of the environment.
 # TODO: Section Monte Carlo Prediction, Estimation and Control
 
 
-*** Temporal-Difference Learning label:sec-td-learning
 # TODO: Temporal-Difference Learning
-- Learning from actual experience, Requires no prior knowledge of
-  environment/model but can still achieve optimal behaviour
-- Method to *learn* from partial returns (as opposed to averaging over complete
-  returns from episode, as in MC, and opposed to *compute* value function in DP
-  when full knowledge of MDP available)
-- When model not available it is useful to estimate /action/ values $\qstar$. In
-  DP, because of full knowledge of the environment, it was possible to just look
-  on step ahead, and chose the action that leads the reward and next state.
-  Without a model (model-free) that is not possible, the vale of each
-  action needs to be estimated. Consequently, the algorithm needs to visit every
-  /state-action/ pair, as opposed to just the state. That is a problem, since
-  not every /state-action/ pair will be visited when following a deterministic
-  policy, as in DP. Hence, with following a policy $\pi$ the algorithm will only
-  observe returns for one of the actions. (Since a deterministic policy
-  $\pi(a|s)$ returns exactly one action, given the current state.) /Exploration/
-  needs to be maintained. In order to evaluate the value function for
-  /state-action/ pairs $\qpi$, continual exploration needs to be ensured. One
-  way to achieve exploration is to only consider /stochastic/ policies.
-  Stochastic policies have a non-zero probability of selecting all actions in
-  each state.
+*** Temporal-Difference Learning label:sec-td-learning
+The previous chapter dealt with solving a /planning/ problem, that is computing
+an optimal solution (i.e., an optimal policy $\pi_*$) of an MDP, when the model
+of the environment dynamics is fully known. In the following chapters we will
+look at /model-free/ prediction and /model-free/ control. As opposed to
+planning, model-free methods learn from actual experience and require no prior
+knowledge of the environment. Remarkably, these methods can still achieve
+optimal behavior.
 
-- On-policy ($\epsilon$-greedy policy) vs off-policy (/target/ (deterministic)
-  and /behaviour/ policies (stochastic, exploratory), importance sampling)
-
+# NOTE: Model-free Prediction
 # NOTE: TD(0) Prediction
-When estimating state values with Temporal-Difference (TD) learning, also called
-TD prediction, the estimate $V$ of $\vpi$ is updated using past experience of
-following the policy $\pi$. TD methods update $V(S_t)$ every time step, at time
-$t\!+\!1$ they immediately make an update using the observed reward $R_{t+1}$ and the
-estimate $V(S_{t+1})$, as opposed to wait till the end of the episode to observe
-the occurred return.
-\begin{equation}
-    V(S_t) \leftarrow V(S_t) + \alpha\big[R_{t+1}+\gamma V(S_{t+1}) - V(S_t)\big]
+The /TD prediction problem/ is concerned with estimating state values $\vpi$
+using past experience of following a given policy $\pi$. TD methods update an
+estimate $V$ of $\vpi$ in every timestep. At time $t\!+\!1$ they immediately
+perform an update operation on $V(S_t)$. Because of the step-by-step nature of
+TD learning, it is also categorized as /online learning/. Also note that TD
+methods perform update operations on value estimates based on other learned
+estimates, a procedure called /bootstrapping/. In a simple TD prediction method,
+the value estimates $V$ are updated as following:
+\begin{equation} \label{eq-td-prediction}
+    V(S_t) \leftarrow V(S_t) + \alpha\big[R_{t+1}+\gamma V(S_{t+1}) - V(S_t)\big],
 \end{equation}
-- called /TD(0)/ or /one-step TD/ update the value of a state using the observed
-  rewards $R_{t+1}$ and the estimated value $V(S_{t+1})$
+where \alpha is a constant /step-size/ parameter and \gamma is the
+/discount-rate/. Here, the update of value of a state is performed using the
+observed reward $R_{t+1}$ and the estimated value $V(S_{t+1})$.
 
+When a model is not available, it is useful to estimate the /action values/,
+instead of /state values/. If the environment is completely known, it is
+possible for the agent to look one step ahead and select the best action.
+Without that knowledge, the value of each action in a given state needs to be
+estimated. This constitutes a problem, since not every /state-action/ pair will
+be visited when the agent follows a deterministic policy. A deterministic policy
+$\pi(a|s)$ returns exactly one action given the current state, hence the agent
+will only observes returns for one of the actions. In order to evaluate the
+value function for /state-action/ pairs $\qpi$, continual /exploration/ needs to
+be ensured. On other words, the agent has to explore state-action pairs which
+are seemingly disadvantageous given the current policy. This dilemma is also
+called the /exploration-exploitation/ trade-off. One way to achieve exploration
+is to only consider /stochastic/ policies. Stochastic policies have a non-zero
+probability of selecting all actions in each state.
 # NOTE: Sarsa: On-policy TD Control
+- On-policy ($\epsilon$-greedy policy)
+- Continually estimate $\qpi$ for the behaviours policy \pi and change \pi
+  towards greediness with respect to $\qpi$. (cited)
+
+Estimate state-value function similar to ref:eq-td-prediction
 \begin{equation} \label{eq-sarsa}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma Q(S_{t+1},A_{t+1}) - Q(S_t, A_t)\big]
 \end{equation}
 
+
+- Sarsa converges to an optimal policy as long as all state-action pairs are
+  visited and infinite number of times (cited)
+
+
 # NOTE: Q-learning: Off-policy TD Control
+# NOTE: Explain off-policy i.e. cite:sutton18_reinf p.103
+- off-policy (/target/ (deterministic) and /behaviour/ policies (stochastic, exploratory), importance sampling)
 \begin{equation} \label{eq-q-learning}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma\max_a Q(S_{t+1},a) - Q(S_t, A_t)\big]
 \end{equation}

@@ -1,4 +1,4 @@
-% Created 2019-02-12 Tue 10:05
+% Created 2019-02-12 Tue 15:11
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -136,6 +136,7 @@ Köln, den xx.xx.20xx
 	\acro{GPI}{Generalized Policy Iteration}
 	\acro{GCRM}{German Control Reserve Market}
 	\acro{MAW}{Mean Asymmetric Weighted Objective Function}
+	\acro{MC}{Monte Carlo}
 	\acro{MDP}{Markov Decision Process}
 	\acro{PDF}{Probability Density Function}
 	\acro{RL}{Reinforcement Learning}
@@ -279,22 +280,22 @@ be real-valued vectors are written in bold and in lower case (even if random var
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:orgb07b4b3}
+\label{sec:org168cbc9}
 \subsection{Research Motivation}
-\label{sec:org3fd4fea}
+\label{sec:org751ede8}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:orgd686482}
+\label{sec:org9a75fb5}
 \subsection{Relevance}
-\label{sec:org0117284}
+\label{sec:org919dd82}
 
 \clearpage
 \section{Related Literature (10\%)}
-\label{sec:org038ee95}
+\label{sec:org42dcd88}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orgb5329e4}
+\label{sec:orgd16dbd1}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -466,7 +467,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:orge9883f5}
+\label{sec:org0b267fa}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -576,29 +577,29 @@ solving complex challenges in smart grids
 
 \clearpage
 \section{Theoretical Background (10\%)}
-\label{sec:orge6ff7ba}
+\label{sec:org6f787fe}
 \subsection{Electricity Markets}
-\label{sec:orgea1271b}
+\label{sec:org9cdf063}
 \subsubsection{Balancing Market}
-\label{sec:orgb39cc3e}
+\label{sec:org407a409}
 \subsubsection{Spot Market}
-\label{sec:orgd98433b}
+\label{sec:orgfe96a86}
 \subsection{Reinforcement Learning \label{sec-reinforcement-learning}}
-\label{sec:org2d1a77e}
+\label{sec:org14f43e3}
 The following chapter will give an overview about the most important RL
 ideas and concepts and will introduce the corresponding mathematical formulations.
 \cite{vazquez-canteli19_reinf_learn_deman_respon}.
 \subsubsection{Notation}
-\label{sec:org18c40d0}
+\label{sec:org062a43b}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer
 to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in
 \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the
 layer.
 
 \subsubsection{Elements of Reinforcement Learning}
-\label{sec:org15d707a}
+\label{sec:orge8450e3}
 \paragraph{Policy}
-\label{sec:orgae213f5}
+\label{sec:orgc13ec17}
 \begin{itemize}
 \item Agent behavior at a given time
 \item Mapping states to actions
@@ -607,7 +608,7 @@ layer.
 \item Policies may be stochastic, give probabilities for each action
 \end{itemize}
 \paragraph{Reward signal}
-\label{sec:orgc14565d}
+\label{sec:org73c243d}
 \begin{itemize}
 \item Goal of the RL problem
 \item Numeric signal the environment sends to the agent
@@ -618,7 +619,7 @@ action of the policy may result in changing the policy to select another action
 \item Reward signals can be stochastic functions of the state and the actions
 \end{itemize}
 \paragraph{Value function}
-\label{sec:orgd138eba}
+\label{sec:org9e5e467}
 \begin{itemize}
 \item Value of a state is the total amount of reward an agent can expect to
 accumulate over the future, starting from that state
@@ -630,7 +631,7 @@ the greatest amount of reward in int long run.
 \item Efficiently estimating values is the most important component.
 \end{itemize}
 \paragraph{Model of the environment}
-\label{sec:org209255b}
+\label{sec:org4f2b606}
 \begin{itemize}
 \item Model allows inferences to be made about how the environment will behave.
 E.g., Given state and action the model predicts the next state and next reward.
@@ -642,7 +643,7 @@ considering possible future situations before they happen.
 \end{itemize}
 
 \paragraph{Planning vs. Control}
-\label{sec:org148eb25}
+\label{sec:org0292f19}
 \begin{itemize}
 \item Control: Prediction problem and Control problem
 \item Control: Interested in approximating action-value functions
@@ -651,19 +652,19 @@ the environment
 \end{itemize}
 
 \paragraph{Generalized Policy Iteration (GPI)}
-\label{sec:org457e7d7}
+\label{sec:org117c846}
 \begin{itemize}
 \item Interacting processes of policy evaluation and policy improvement
 \end{itemize}
 \paragraph{On-Policy vs. Off-Policy}
-\label{sec:orgf92453e}
+\label{sec:org026cdcc}
 \begin{itemize}
 \item On-Policy: \(\epsilon\)-greedy policy
 \end{itemize}
 \paragraph{Exploitation-Exploration Trade-off}
-\label{sec:org8c16a71}
+\label{sec:orgbcf0e6c}
 \paragraph{Online vs. Offline}
-\label{sec:org2883aed}
+\label{sec:org2eff9d5}
 \begin{itemize}
 \item Offline: Monte Carlo, returns from completed episodes, long waits
 \item Online: Temporal-Difference: Online, fully incremental
@@ -673,7 +674,7 @@ the environment
 \end{itemize}
 
 \subsubsection{Markov Decision Processes}
-\label{sec:org7fcb78d}
+\label{sec:orgdb7bc7e}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -736,7 +737,7 @@ when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, th
 agent is "farsighted".
 
 \subsubsection{Policies and Value Functions}
-\label{sec:orgbd88ca8}
+\label{sec:orgd933e7c}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -778,7 +779,7 @@ has been known as \emph{Q-learning} \cite{watkins92_q_learn}. Details can be fou
 Chapter \ref{sec-td-learning}.
 
 \subsubsection{Bellman Equations}
-\label{sec:org0b3feb3}
+\label{sec:orge34e825}
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (\ref{eq-expected-return}), current values are
 related to expected values of successive states. This relationship is heavily
@@ -810,7 +811,7 @@ where \(a\!\in\!\A\), \(s,s'\!\in\!\S\), \(r\!\in\!\R\). In other words, the val
 a state under an optimal policy equals the expected return for the best action
 from that state. Note that the Bellman optimality equation does not reference to
 specific policy, it has a unique solution independent from one. It can be seen
-as a equation system, which can be solved when the dynamics of the environment
+as an equation system, which can be solved when the dynamics of the environment
 \(p\) are known. Similar Bellman equations to Equations (\ref{eq-bellman}) and
 (\ref{eq-bellman-optimality}) can also be be formed for \(\qpi(s,a)\) and
 \(\qstar(s,a)\). Bellman equations form the basis for computing and approximating
@@ -821,11 +822,10 @@ expected transitions. The most common methods will be explored in the following
 chapters.
 
 \subsubsection{Dynamic Programming}
-\label{sec:org441d9dd}
+\label{sec:org116d68f}
 \begin{itemize}
 \item DP, TD, Monte Carlo all use some variation of GPI.
 \end{itemize}
-
 
 \emph{Dynamic Programming} (DP) is a method to compute optimal policies, the ultimate
 goal of every RL method. DP makes use of value functions to facilitate the
@@ -878,77 +878,90 @@ given \(v_0\), the sequence \({v_k}\) converges to the optimal value function
 (\ref{eq-bellman-optimality}) is simply turned into an update rule. Both of the
 algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
-
-
 \subsubsection{Temporal-Difference Learning \label{sec-td-learning}}
-\label{sec:org1fca197}
-\begin{itemize}
-\item Learning from actual experience, Requires no prior knowledge of
-environment/model but can still achieve optimal behaviour
-\item Method to \textbf{learn} from partial returns (as opposed to averaging over complete
-returns from episode, as in MC, and opposed to \textbf{compute} value function in DP
-when full knowledge of MDP available)
-\item When model not available it is useful to estimate \emph{action} values \(\qstar\). In
-DP, because of full knowledge of the environment, it was possible to just look
-on step ahead, and chose the action that leads the reward and next state.
-Without a model (model-free) that is not possible, the vale of each
-action needs to be estimated. Consequently, the algorithm needs to visit every
-\emph{state-action} pair, as opposed to just the state. That is a problem, since
-not every \emph{state-action} pair will be visited when following a deterministic
-policy, as in DP. Hence, with following a policy \(\pi\) the algorithm will only
-observe returns for one of the actions. (Since a deterministic policy
-\(\pi(a|s)\) returns exactly one action, given the current state.) \emph{Exploration}
-needs to be maintained. In order to evaluate the value function for
-\emph{state-action} pairs \(\qpi\), continual exploration needs to be ensured. One
-way to achieve exploration is to only consider \emph{stochastic} policies.
-Stochastic policies have a non-zero probability of selecting all actions in
-each state.
+\label{sec:orgf9a9759}
+The previous chapter dealt with solving a \emph{planning} problem, that is computing
+an optimal solution (i.e., an optimal policy \(\pi_*\)) of an MDP, when the model
+of the environment dynamics is fully known. In the following chapters we will
+look at \emph{model-free} prediction and \emph{model-free} control. As opposed to
+planning, model-free methods learn from actual experience and require no prior
+knowledge of the environment. Remarkably, these methods can still achieve
+optimal behavior.
 
-\item On-policy (\$\(\epsilon\)\$-greedy policy) vs off-policy (\emph{target} (deterministic)
-and \emph{behaviour} policies (stochastic, exploratory), importance sampling)
-\end{itemize}
-
-When estimating state values with Temporal-Difference (TD) learning, also called
-TD prediction, the estimate \(V\) of \(\vpi\) is updated using past experience of
-following the policy \(\pi\). TD methods update \(V(S_t)\) every time step, at time
-\(t\!+\!1\) they immediately make an update using the observed reward \(R_{t+1}\) and the
-estimate \(V(S_{t+1})\), as opposed to wait till the end of the episode to observe
-the occurred return.
-\begin{equation}
-    V(S_t) \leftarrow V(S_t) + \alpha\big[R_{t+1}+\gamma V(S_{t+1}) - V(S_t)\big]
+The \emph{TD prediction problem} is concerned with estimating state values \(\vpi\)
+using past experience of following a given policy \(\pi\). TD methods update an
+estimate \(V\) of \(\vpi\) in every timestep. At time \(t\!+\!1\) they immediately
+perform an update operation on \(V(S_t)\). Because of the step-by-step nature of
+TD learning, it is also categorized as \emph{online learning}. Also note that TD
+methods perform update operations on value estimates based on other learned
+estimates, a procedure called \emph{bootstrapping}. In a simple TD prediction method,
+the value estimates \(V\) are updated as following:
+\begin{equation} \label{eq-td-prediction}
+    V(S_t) \leftarrow V(S_t) + \alpha\big[R_{t+1}+\gamma V(S_{t+1}) - V(S_t)\big],
 \end{equation}
+where \(\alpha\) is a constant \emph{step-size} parameter and \(\gamma\) is the
+\emph{discount-rate}. Here, the update of value of a state is performed using the
+observed reward \(R_{t+1}\) and the estimated value \(V(S_{t+1})\).
+
+When a model is not available, it is useful to estimate the \emph{action values},
+instead of \emph{state values}. If the environment is completely known, it is
+possible for the agent to look one step ahead and select the best action.
+Without that knowledge, the value of each action in a given state needs to be
+estimated. This constitutes a problem, since not every \emph{state-action} pair will
+be visited when the agent follows a deterministic policy. A deterministic policy
+\(\pi(a|s)\) returns exactly one action given the current state, hence the agent
+will only observes returns for one of the actions. In order to evaluate the
+value function for \emph{state-action} pairs \(\qpi\), continual \emph{exploration} needs to
+be ensured. On other words, the agent has to explore state-action pairs which
+are seemingly disadvantageous given the current policy. This dilemma is also
+called the \emph{exploration-exploitation} trade-off. One way to achieve exploration
+is to only consider \emph{stochastic} policies. Stochastic policies have a non-zero
+probability of selecting all actions in each state.
+
 \begin{itemize}
-\item called \emph{TD(0)} or \emph{one-step TD} update the value of a state using the observed
-rewards \(R_{t+1}\) and the estimated value \(V(S_{t+1})\)
+\item On-policy (\$\(\epsilon\)\$-greedy policy)
+\item Continually estimate \(\qpi\) for the behaviours policy \(\pi\) and change \(\pi\)
+towards greediness with respect to \(\qpi\). (cited)
 \end{itemize}
 
+Estimate state-value function similar to \ref{eq-td-prediction}
 \begin{equation} \label{eq-sarsa}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma Q(S_{t+1},A_{t+1}) - Q(S_t, A_t)\big]
 \end{equation}
 
+
+\begin{itemize}
+\item Sarsa converges to an optimal policy as long as all state-action pairs are
+visited and infinite number of times (cited)
+\end{itemize}
+
+
+\begin{itemize}
+\item off-policy (\emph{target} (deterministic) and \emph{behaviour} policies (stochastic, exploratory), importance sampling)
+\end{itemize}
 \begin{equation} \label{eq-q-learning}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma\max_a Q(S_{t+1},a) - Q(S_t, A_t)\big]
 \end{equation}
 
 \subsubsection{Approximation Methods}
-\label{sec:org718fa84}
+\label{sec:orgb3a31db}
 \paragraph{On-policy Prediction with Approximation}
-\label{sec:org0ca789d}
+\label{sec:orgd3b59a1}
 \begin{enumerate}
 \item Linear Methods
-\label{sec:org2c93122}
+\label{sec:orgeba3ff7}
 \item Non-linear Methods: ANN
-\label{sec:orga00c0b2}
+\label{sec:org7df9009}
 \end{enumerate}
 \paragraph{(On-policy Control with Approximation)}
-\label{sec:orgaea0145}
+\label{sec:orgb65fe85}
 \clearpage
 \section{Empirical Setting / Data (10\%)}
-\label{sec:orgb6ee8dd}
+\label{sec:orgb76a707}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org1b204f0}
+\label{sec:orgaf62d5b}
 \subsubsection{Raw Data}
-\label{sec:org4cc78a3}
+\label{sec:orgefaaf2a}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -992,55 +1005,55 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:orgef5d836}
+\label{sec:orgda1b567}
 \subsection{Electricity Markets Data}
-\label{sec:org2e59506}
+\label{sec:org93c5eb7}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org6d57e7c}
+\label{sec:org24bc68a}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:orgc77e396}
+\label{sec:org0d4e9ed}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:orgb4e7d4d}
+\label{sec:orgf02e07a}
 \subsection{Information Assumptions}
-\label{sec:org3ada6d3}
+\label{sec:org0d09568}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org6698b45}
+\label{sec:orgaca9296}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org443bbc4}
+\label{sec:orgb9ecc73}
 \subsection{Bidding Strategy}
-\label{sec:orge191e5b}
+\label{sec:orgcb96bc3}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:orgfa48b31}
+\label{sec:org08f08d6}
 
 \section{Evaluation (30\%)}
-\label{sec:org26b46cb}
+\label{sec:org2583985}
 \subsection{Event-based Simulation}
-\label{sec:org1b6608e}
+\label{sec:orgd75ac01}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org4866ede}
+\label{sec:org472c1d7}
 \subsection{FleetRL}
-\label{sec:org2f1eba2}
+\label{sec:orgdd053a8}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org7e538a6}
+\label{sec:org4156a7e}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org39b24db}
+\label{sec:org1f67a41}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:orgdbf68a0}
+\label{sec:orgbc641a5}
 \section{Discussion (5\%)}
-\label{sec:orgfefc869}
+\label{sec:org45351e3}
 \subsection{Generalizability}
-\label{sec:orgcd4ceb4}
+\label{sec:orgecf6460}
 \subsection{Future Electricity Landscape}
-\label{sec:org5e8d04d}
+\label{sec:orgb3b4440}
 \subsection{Limitations}
-\label{sec:org8db779d}
+\label{sec:org7a55646}
 \section{Conclusion (5\%)}
-\label{sec:org328f3da}
+\label{sec:org02046a5}
 \subsection{Contribution}
-\label{sec:orgc7f6749}
+\label{sec:orgb00aea0}
 \subsection{Future Research}
-\label{sec:org96afc76}
+\label{sec:org54c8330}
 
 
 \clearpage
