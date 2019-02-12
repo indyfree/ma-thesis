@@ -816,34 +816,3 @@ Stuttgart.
 bibliography:~/uni/ma-thesis/bibliography/references.bib
 bibliographystyle:apacite
 
-* Footnotes
-
-[fn:1] citetitle:energiewende2010, cite:energiewende2010.
-
-[fn:2] https://www.car2go.com
-
-[fn:3] https://www.epexspot.com
-
-[fn:4] https://www.regelleistungen.net
-
-[fn:5] NEG-NT = Negative secondary control reserve to be provided between 00:00h and 08:00h and between 20:00h and 24:00h.
-
-POS-HT = Positive secondary control reserve to be provided between the hours of 08:00h and 20:00h.
-
-[fn:6] Capacity prices are in given in
-#+LATEX: \euro{}/MW.
-
-[fn:7] Energy prices are in given in
-#+LATEX: \euro{}/MWh.
-
-[fn:8] Capacities are given in MW.
-
-[fn:9] https://procom-energy.de/
-
-[fn:10] Unit prices are given in
-#+LATEX: \euro{}c/MWh.
-
-[fn:11] Quantities are given in kW.
-
-[fn:12] Products: are: H = Hourly, Q = Quarterly and B = Block.
-
