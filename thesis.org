@@ -104,6 +104,7 @@ complement the grid in times of low demand, called /Valley Filling/. Smart
 charging has been researched thoroughly in the IS literature, in the following
 we will outline some of the most important contributions.
 
+
 # NOTE: Section Smart charging examples and studies
 textcite:valogianni14_effec_manag_elect_vehic_storag found that using
 intelligent agents to schedule EV charging substantially reshapes the energy
@@ -653,8 +654,7 @@ planning, model-free methods learn from actual experience and require no prior
 knowledge of the environment. Remarkably, these methods can still achieve
 optimal behavior.
 
-# NOTE: Model-free Prediction
-# NOTE: TD(0) Prediction
+# NOTE: Model-free TD Prediction
 The /TD prediction problem/ is concerned with estimating state values $\vpi$
 using past experience of following a given policy $\pi$. TD methods update an
 estimate $V$ of $\vpi$ in every timestep. At time $t\!+\!1$ they immediately
@@ -670,7 +670,7 @@ where \alpha is a constant /step-size/ parameter and \gamma is the
 /discount-rate/. Here, the update of value of a state is performed using the
 observed reward $R_{t+1}$ and the estimated value $V(S_{t+1})$.
 
-When a model is not available, it is useful to estimate the /action values/,
+When a model is not available, it is useful to estimate /action values/,
 instead of /state values/. If the environment is completely known, it is
 possible for the agent to look one step ahead and select the best action.
 Without that knowledge, the value of each action in a given state needs to be
@@ -698,27 +698,47 @@ $\pi$, while simultaneously driving $\pi$ towards $\qpi$, e.g., with a
 decision policy, by using a second stochastic policy to generate behaviour. The
 first policy is becoming the optimal policy by evaluating the exploratory
 behaviour of the second policy. /Off-policy/ approaches are considered more
-powerful than the simpler /on-policy/ approaches. On the other side they require
-additional concepts and are slower to converge.
+powerful than /on-policy/ approaches, and have a variety of additional
+use-cases. On the other side, they often have a greater variance and take longer
+time to converge to an optimum.
+
+# NOTE: Mention that prediction is the main difference?
 
 # NOTE: Sarsa: On-policy TD Control
-A popular /on-policy/ TD Control method is SARSA.
-Estimate state-value function similar to ref:eq-td-prediction
+A popular /on-policy/ TD control method is SARSA, developed by
+textcite:rummery94_q. In the prediction step, the action-value function
+$\qpi(s,a)$ of all actions and states has to be estimated for the current
+policy $\pi$. This can be done similar to TD prediction of state values (Eq.
+ref:eq-td-prediction). Instead of considering state transition, transitions from
+state-action pair to state-action pair are considered in this case. The update
+rule is constructed as follows:
 \begin{equation} \label{eq-sarsa}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma Q(S_{t+1},A_{t+1}) - Q(S_t, A_t)\big]
 \end{equation}
-
-
-- Sarsa converges to an optimal policy as long as all state-action pairs are
-  visited and infinite number of times (cited)
-
+After every transition from a state $S_t$, an update operation using the events
+$(S_t, A_t, R_{t+1}, S_{t+1}, A_{t+1})$ is performed. This quintuple also
+constituted the name SARSA. The according on-policy control step of the
+algorithm is straightforward, and uses a \epsilon-greedy policy improvement, as
+described in the previous paragraph. It has been shown that SARSA converges to
+the optimal policy $\pi_*$, when assuming infinite visits to all state-action
+pairs.
 
 # NOTE: Q-learning: Off-policy TD Control
 # NOTE: Explain off-policy i.e. cite:sutton18_reinf p.103
-- off-policy (/target/ (deterministic) and /behaviour/ policies (stochastic, exploratory), importance sampling)
+
+A breakthrough in RL has been achieved when textcite:watkins92_q_learn developed
+the /off-policy/ TD control algorithm, called Q-learning. The update rule is
+defined as follows:
 \begin{equation} \label{eq-q-learning}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma\max_a Q(S_{t+1},a) - Q(S_t, A_t)\big]
 \end{equation}
+In this case, the estimated action values $Q$ are updated towards the best
+estimated action value of the next time step. In this way, $Q$ directly
+approximates the optimal action-value function $q_*$, independently of the
+policy the agent follows.
+
+
+- off-policy (/target/ (deterministic) and /behaviour/ policies (stochastic, exploratory))
 
 *** Approximation Methods
 # NOTE: Everything tabular so far
