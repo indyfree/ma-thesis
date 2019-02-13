@@ -367,12 +367,12 @@ into special consideration.
 
 It should be noted that advanced RL methods and techniques are not the only
 solutions for problems in the smart grid, often basic algorithms and heuristics
-provide satisfactory results. Despite that, our paper considers RL as an optimal
-fit for the design of our proposed intelligent agent. Given the ability to learn
-user behavior (e.g., mobility demand) and the flexibility to adapt to the
-environment (e.g., electricity prices), RL methods are a promising way of
-solving complex challenges in smart grids
-cite:vazquez-canteli19_reinf_learn_deman_respon.
+provide satisfactory results cite:vazquez-canteli19_reinf_learn_deman_respon.
+Despite that, our paper considers RL as an optimal fit for the design of our
+proposed intelligent agent. Given the ability to learn user behavior (e.g.,
+mobility demand) and the flexibility to adapt to the environment (e.g.,
+electricity prices), RL methods are a promising way of solving complex
+challenges in smart grids.
 
 
 #+LATEX: \clearpage
