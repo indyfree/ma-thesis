@@ -449,8 +449,10 @@ decision making and an idealized mathematical formulation of the RL problem. MDP
 allow to derive exact theoretical statements about the learning problem and
 possible solutions. Figure
 ref:agent-environment-interaction depicts the /agent-environment interaction/.
-#+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf label:agent-environment-interaction
+#+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process \protect\footnotemark label:agent-environment-interaction
 [[./fig/mdp_interaction.png]]
+#+LATEX: \footnotetext{\textbf{Figure 3.1} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
+
 In RL the agent and the environment continuously interact with each other. The
 agent takes actions that influence the environment, which in return presents
 rewards to the agent. The agent's goal is to maximize rewards over time, trough
@@ -687,8 +689,11 @@ is the /\epsilon-greedy policy/, which selects the action with the highest
 estimated value, except for a probability \epsilon, it selects an action at
 random.
 
-#+CAPTION[On-policy control with SARSA]: On-policy control with SARSA cite:sutton18_reinf label:fig-sarsa
+
+#+CAPTION[On-policy control with SARSA]: On-policy control with SARSA \protect\footnotemark label:fig-sarsa
 [[./fig/on-policy.png]]
+#+LATEX: \footnotetext{The in-text figure of \textbf{Chapter 5.3} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
+
 
 There are two approaches to make use of stochastic policies to ensure all
 actions are chosen infinitely often. On-policy methods improve the (stochastic)
