@@ -688,16 +688,16 @@ random.
 [[./fig/on-policy.png]]
 
 There are two approaches to make use of stochastic policies to ensure all
-actions are chosen infinitely often. On-policy methods improve the
-(stochastic) decision policy, by continually estimating $\qpi$ in regard to
-$\pi$, while simultaneously driving $\pi$ towards $\qpi$, e.g., with a
-\epsilon-greedy action selection. Figure ref:fig-sarsa depicts the process.
-Off-policy methods improve the deterministic decision policy, by using a second
-stochastic policy to generate behaviour. The first policy is becoming the
-optimal policy by evaluating the exploratory behaviour of the second policy.
-Off-policy approaches are considered more powerful than on-policy approaches,
-and have a variety of additional use-cases. On the other side, they often have a
-greater variance and take longer time to converge to an optimum.
+actions are chosen infinitely often. On-policy methods improve the (stochastic)
+decision policy, by continually estimating $\qpi$ in regard to $\pi$, while
+simultaneously driving $\pi$ towards $\qpi$, e.g., with a \epsilon-greedy action
+selection. Figure ref:fig-sarsa depicts this learning process. Off-policy
+methods improve the deterministic decision policy, by using a second stochastic
+policy to generate behaviour. The first policy is becoming the optimal policy by
+evaluating the exploratory behaviour of the second policy. Off-policy approaches
+are considered more powerful than on-policy approaches, and have a variety of
+additional use-cases. On the other side, they often have a greater variance and
+take longer time to converge to an optimum.
 # NOTE: Mention that prediction is the main difference?
 
 # NOTE: Section: Sarsa: On-policy TD Control
@@ -726,14 +726,23 @@ defined as follows:
 \begin{equation} \label{eq-q-learning}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma\max_a Q(S_{t+1},a) - Q(S_t, A_t)\big]
 \end{equation}
-In this case, the estimated action values $Q$ are updated towards the best
-estimated action value of the next time step. In this way, $Q$ directly
-approximates the optimal action-value function $q_*$, independently of the
-policy the agent follows.
+Here, the estimated action values $Q$ are updated towards the best estimated
+action value of the next time step. In this way, $Q$ directly approximates the
+optimal action-value function $q_*$, independently of the policy the agent
+follows. Due to this simplification Q-learning is a widely used model-free
+method, and its convergence can be proved easily.
 
-
-- off-policy (/target/ (deterministic) and /behaviour/ policies (stochastic, exploratory))
-
+This chapter covered the most important RL methods. They are online methods,
+learn from actual experience, and can be easily applied to real-world problems
+with low computational effort. Moreover, the mathematical complexity of the
+presented approaches is limited and they can be easiliy implemented into
+computer programs. Temporal-Difference learning is a /tabular/ method, Q-values
+are stored and updated in a lookup table. If state and action spaces are
+continous or the number of states and actionsn is very high, a table
+representation computational infeasible and the speed of convergence is
+drastically reduced. In this case, a /function approximator/ can replace the
+lookup table. The next chapter will briefly cover approximation methods, which
+are used to train such function approximators.
 *** Approximation Methods label:sec-approximation
 # NOTE: Everything tabular so far
 **** On-policy Prediction with Approximation
