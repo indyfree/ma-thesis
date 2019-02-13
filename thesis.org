@@ -585,31 +585,33 @@ chapters.
 
 *** Dynamic Programming
 # TODO: Intro Tabular Methods
-- DP, TD, Monte Carlo all use some variation of GPI.
-# TODO: Label as "Planning"
 
 # NOTE: Section Dynamic Programming: Policy Iteration, Value Iteration
 /Dynamic Programming/ (DP) is a method to compute optimal policies, the ultimate
 goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
-satisfies the Bellman equation) is found, optimal policies can be easily
-obtained. Despite the limited utility of DP in real-world settings, it provides
-the theoretical foundation for all other RL methods. In fact, all of these
-methods try to achieve the same goal, but without the assumption of a perfect
-model of the environment (e.g., known /state-transition probabilities/, Eq.
-ref:eq-state-transition) and less computational effort.
+satisfies the optimality Bellman equation) is found, optimal policies can be
+easily obtained. Despite the limited utility of DP in real-world settings, it
+provides the theoretical foundation for all other RL methods. In fact, all of
+the RL methods try to achieve the same goal, but without the assumption of a
+perfect model of the environment (e.g., known /state-transition probabilities/,
+Eq. ref:eq-state-transition) and less computational effort. Because DP assumes
+full knowledge of the environment it is known as /planning/, where optimal
+solutions are /computed/. In /control/ problems (Chapter ref:sec-td-learning and
+ref:sec-approximation) optimal solutions are /learned/ from an unkown
+environment.
 
 The two most popular DP algorithms that compute optimal policies are called
 /policy iteration/ and /value iteration/. These methods perform "sweeps" through
 the whole state set and update the estimated value of each state via an
-/expected update/ operation. In /policy iteration/, a value function for a given
+/expected update/ operation. In policy iteration, a value function for a given
 policy $\vpi$ needs to be computed first (/policy evaluation/). A sequence of
 approximated value functions $\{v_k\}$ are updated using the Bellman equation
 for $\vpi$ (Eq. ref:eq-bellman) until convergence to $\vpi$ is achieved. After
 computing the value function for a given policy, it is possible to modify the
 policy and see if the value $\vpi(s)$ for a given state increases (/policy
 improvement/). A way of doing this, is evaluating the action-value function
-$\qpi(s,a)$ by taking the best short-term action $a\!\in\!A$ at a given
+$\qpi(s,a)$ by /greedily/ taking the best short-term action $a\!\in\!A$ at a given
 timestep. Alternating between these two steps monotonically improves policies
 and value functions till they converge to the optimum. This algorithm is called
 /policy iteration/:
@@ -619,15 +621,13 @@ and value functions till they converge to the optimum. This algorithm is called
     \pi_2 \xrightarrow{\text{ E }} \hdots \xrightarrow{\text{ I }}
     \pi_* \xrightarrow{\text{ E }} \vstar,
 \end{equation}
-where $\xrightarrow{\text{ E }}$ denotes a /policy evaluation/ and
-$\xrightarrow{\text{ I }}$ denotes a /policy improvement/ and $\pi_*$ and
-$\vstar$ are the optimal policy and value function, respectively.
-# TODO: Add greedy-policy and strict improvement
-Note that in each iteration of the policy iteration algorithm, a policy
-evaluation has to performed, which requires multiple sweeps through the state
-space. In /value iteration/ the policy evaluation step is stopped after one
-sweep. In this case, the two previous steps can be combined into one single
-update step:
+where $\xrightarrow{\text{ E }}$ denotes a policy evaluation step,
+$\xrightarrow{\text{ I }}$ denotes a policy improvement step, and $\pi_*$,
+$\vstar$ are the optimal policy and optimal value function, respectively. Note
+that in each iteration of the policy iteration algorithm, a policy evaluation
+has to performed, which requires multiple sweeps through the state space. In
+/value iteration/ the policy evaluation step is stopped after one sweep. In this
+case, the two previous steps can be combined into one single update step:
 \begin{equation}
 \begin{split}
     v_{k+1}(s) &\defeq \max_a \EE{}{R_{t+1}+\gamma \vstar(S_{t+1})|S_t\!=\!s, A_t\!=a} \\
@@ -641,10 +641,6 @@ ${\vstar}$. In value iteration, the Bellman optimality equation
 algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
 
-# TODO: Section Monte Carlo Prediction, Estimation and Control
-
-
-# TODO: Temporal-Difference Learning
 *** Temporal-Difference Learning label:sec-td-learning
 The previous chapter dealt with solving a /planning/ problem, that is computing
 an optimal solution (i.e., an optimal policy $\pi_*$) of an MDP, when the model
@@ -654,15 +650,15 @@ planning, model-free methods learn from actual experience and require no prior
 knowledge of the environment. Remarkably, these methods can still achieve
 optimal behavior.
 
-# NOTE: Model-free TD Prediction
+# NOTE: Section: Model-free TD Prediction
 The /TD prediction problem/ is concerned with estimating state values $\vpi$
 using past experience of following a given policy $\pi$. TD methods update an
 estimate $V$ of $\vpi$ in every timestep. At time $t\!+\!1$ they immediately
 perform an update operation on $V(S_t)$. Because of the step-by-step nature of
 TD learning, it is also categorized as /online learning/. Also note that TD
 methods perform update operations on value estimates based on other learned
-estimates, a procedure called /bootstrapping/. In a simple TD prediction method,
-the value estimates $V$ are updated as following:
+estimates, a procedure called /bootstrapping/. In simple TD prediction, the
+value estimates $V$ are updated as following:
 \begin{equation} \label{eq-td-prediction}
     V(S_t) \leftarrow V(S_t) + \alpha\big[R_{t+1}+\gamma V(S_{t+1}) - V(S_t)\big],
 \end{equation}
@@ -678,13 +674,13 @@ estimated. This constitutes a problem, since not every /state-action/ pair will
 be visited when the agent follows a deterministic policy. A deterministic policy
 $\pi(a|s)$ returns exactly one action given the current state, hence the agent
 will only observe returns for one of the actions. In order to evaluate the
-value function for /state-action/ pairs $\qpi$, continual /exploration/ needs to
-be ensured. On other words, the agent has to explore state-action pairs which
-are seemingly disadvantageous given the current policy. This dilemma is also
-called the /exploration-exploitation/ trade-off. One way to achieve exploration
-is to only consider /stochastic/ policies. Stochastic policies have a non-zero
-probability of selecting all actions in each state. A typical stochastic policy
-is the \epsilon-greedy policy, which selects the action with the highest
+value function for all /state-action/ pairs $\qpi$, continual /exploration/
+needs to be ensured. On other words, the agent has to explore state-action pairs
+which are seemingly disadvantageous given the current policy. This dilemma is
+also called the /exploration-exploitation/ trade-off. One way to achieve
+exploration are /stochastic/ policies. Stochastic policies have a non-zero
+probability of selecting each actions in each state. A typical stochastic policy
+is the /\epsilon-greedy policy/, which selects the action with the highest
 estimated value, except for a probability \epsilon, it selects an action at
 random.
 
@@ -692,27 +688,26 @@ random.
 [[./fig/on-policy.png]]
 
 There are two approaches to make use of stochastic policies to ensure all
-actions are chosen infinitely often. /On-policy/ methods improve the
+actions are chosen infinitely often. On-policy methods improve the
 (stochastic) decision policy, by continually estimating $\qpi$ in regard to
 $\pi$, while simultaneously driving $\pi$ towards $\qpi$, e.g., with a
-\epsilon-greedy action selection. /Off-policy/ methods improve the deterministic
-decision policy, by using a second stochastic policy to generate behaviour. The
-first policy is becoming the optimal policy by evaluating the exploratory
-behaviour of the second policy. /Off-policy/ approaches are considered more
-powerful than /on-policy/ approaches, and have a variety of additional
-use-cases. On the other side, they often have a greater variance and take longer
-time to converge to an optimum.
-
+\epsilon-greedy action selection. Figure ref:fig-sarsa depicts the process.
+Off-policy methods improve the deterministic decision policy, by using a second
+stochastic policy to generate behaviour. The first policy is becoming the
+optimal policy by evaluating the exploratory behaviour of the second policy.
+Off-policy approaches are considered more powerful than on-policy approaches,
+and have a variety of additional use-cases. On the other side, they often have a
+greater variance and take longer time to converge to an optimum.
 # NOTE: Mention that prediction is the main difference?
 
-# NOTE: Sarsa: On-policy TD Control
-A popular /on-policy/ TD control method is SARSA, developed by
+# NOTE: Section: Sarsa: On-policy TD Control
+A popular on-policy TD control method is SARSA, developed by
 textcite:rummery94_q. In the prediction step, the action-value function
 $\qpi(s,a)$ of all actions and states has to be estimated for the current
 policy $\pi$. This can be done similar to TD prediction of state values (Eq.
-ref:eq-td-prediction). Instead of considering state transition, transitions from
-state-action pair to state-action pair are considered in this case. The update
-rule is constructed as follows:
+ref:eq-td-prediction). Instead of considering state transition, state-action
+transitions are considered in this case. The update rule is constructed as
+follows:
 \begin{equation} \label{eq-sarsa}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma Q(S_{t+1},A_{t+1}) - Q(S_t, A_t)\big]
 \end{equation}
@@ -724,9 +719,7 @@ described in the previous paragraph. It has been shown that SARSA converges to
 the optimal policy $\pi_*$, when assuming infinite visits to all state-action
 pairs.
 
-# NOTE: Q-learning: Off-policy TD Control
-# NOTE: Explain off-policy i.e. cite:sutton18_reinf p.103
-
+# NOTE: Section: Q-learning: Off-policy TD Control
 A breakthrough in RL has been achieved when textcite:watkins92_q_learn developed
 the /off-policy/ TD control algorithm, called Q-learning. The update rule is
 defined as follows:
@@ -741,7 +734,7 @@ policy the agent follows.
 
 - off-policy (/target/ (deterministic) and /behaviour/ policies (stochastic, exploratory))
 
-*** Approximation Methods
+*** Approximation Methods label:sec-approximation
 # NOTE: Everything tabular so far
 **** On-policy Prediction with Approximation
 ***** Linear Methods
