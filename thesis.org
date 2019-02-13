@@ -688,7 +688,8 @@ is the \epsilon-greedy policy, which selects the action with the highest
 estimated value, except for a probability \epsilon, it selects an action at
 random.
 
-# NOTE: Image of GPI for q?
+#+CAPTION[On-policy control with SARSA]: On-policy control with SARSA cite:sutton18_reinf label:fig-sarsa
+[[./fig/on-policy.png]]
 
 There are two approaches to make use of stochastic policies to ensure all
 actions are chosen infinitely often. /On-policy/ methods improve the
