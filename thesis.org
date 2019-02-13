@@ -34,6 +34,9 @@
 # Acronyms
 #+LATEX_HEADER: \usepackage[nohyperlinks]{acronym}
 
+# Footnotes
+#+LATEX_HEADER: \interfootnotelinepenalty=10000
+
 # No Title & No TOC from org-mode
 #+OPTIONS: title:nil toc:nil
 #+LATEX_HEADER: \usepackage[notlof,notlot,nottoc]{tocbibind}
