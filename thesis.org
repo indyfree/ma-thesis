@@ -82,8 +82,7 @@
 # fuel units and expensive generators during peak hours.
 ** Research Question
 ** Relevance
-
-#+LATEX: \clearpage
+# #+LATEX: \clearpage
 * Related Literature (10%)
 # TODO: Introductory paragraph
 
@@ -740,8 +739,8 @@ This chapter covered the most important RL methods. They work online,
 learn from experience, and can be easily applied to real-world problems
 with low computational effort. Moreover, the mathematical complexity of the
 presented approaches is limited, and they can be easily implemented into
-computer programs. Temporal-Difference learning is a /tabular/ method, Q-values
-are stored and updated in a lookup table.
+computer programs. Temporal-Difference learning is a /tabular/ method, in which
+Q-values are stored and updated in a lookup table.
 # NOTE: Can be extended using eligibility traces?
 If the state and action spaces are continuous or the number of states and actions is
 very large, a table representation is computational infeasible and the speed of
@@ -771,26 +770,38 @@ Adjusting one weight affects the values of many states. On the other side, optim
 an estimate for one state negatively affects the accuracy of the estimates for
 other states. This effect motivates to specify a state distribution
 $\mu$, which represents the importance of the prediction error for each state.
-The prediction error of a state is defined as the squared difference between the
-predicted (i.e., approximated) value $\hat v(s,\w)$ and the true value $\vpi(s)$.
-Consequently, the objective function of the supervised learning problem can be
-defined as the /Mean Squared Value Error/ $\MSVEm$, which weights
-the prediction error with the state distribution $\mu$:
+In on-policy prediciton $\mu(s)$ is often selected to be proportion of time spend
+in each state $s$. The prediction error of a state is defined as the squared
+difference between the predicted (i.e., approximated) value $\hat v(s,\w)$ and
+the true value $\vpi(s)$. Consequently, the objective function of the supervised
+learning problem can be defined as the /Mean Squared Value Error/ $\MSVEm$,
+which weights the prediction error with the state distribution $\mu(s)$:
 \begin{equation}
     \MSVEm(\w) \defeq \sum_{s\in\S}{\mu(s)\bigg[\vpi(s)-\hat v(s,\w)\bigg]^2}, \text{ where } \w\in\Re^d
 \end{equation}
-Minimizing $\MSVEm$ in respect to $\hat v$ will yield in a value function that
-helps achieving the primary goal of finding a better policy. Remember that $\hat v$
+Minimizing $\MSVEm$ in respect to $\hat v$ will yield a value function, which
+facilitates finding a better policy, the primary goal of RL. Remember that $\hat v$
 can take any form of linear or non-linear function of the features of a state.
 In practice, deep artificial neural networks networks (ANNs) have shown great
-success
+success, which coined the term /Deep Reinforcement Learning/
 cite:mnih15_human_level_contr_throug_deep_reinf_learn,silver16_master_game_go_with_deep.
 A simplified feedforward ANN can be found in Figure ref:fig-ann. ANN have the advantage
 that they can theoretically approximate any continuous function by adjusting the
-connection weights of the network $\w\in\Re^{d\times d}$.
+connection weights of the network $\w\in\Re^{d\times d}$
+cite:cybenko89_approx_by_super_sigmoid_funct. Advancements in the field of /Deep
+Learning/ facilitated remarkable performance improvements in RL applications.
+Despite that, the RL theory is mostly limited to tabular and linear
+approximation methods, refer to textcite:bengio09_learn_deep_archit_ai for a
+comprehensive review of deep learning methods.
 #+CAPTION[Artificial Neural Network]: A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes cite:sutton18_reinf. \protect\footnotemark label:fig-ann
 [[./fig/ann.png]]
 #+LATEX: \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
+*** Further Advancements
+- Eligibility traces
+- W-Learning
+- Fitted Q-Iteration
+- Actor-Critic
+- Distributed Actor-Critic Diff-DAC?
 
 * Empirical Setting / Data (10%)
 ** Carsharing Fleets of Electric Vehicles

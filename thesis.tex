@@ -1,4 +1,4 @@
-% Created 2019-02-14 Thu 12:33
+% Created 2019-02-14 Thu 14:14
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -282,22 +282,20 @@ be real-valued vectors are written in bold and in lower case (even if random var
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org5911709}
+\label{sec:org804914f}
 \subsection{Research Motivation}
-\label{sec:orgedb51aa}
+\label{sec:org7df6396}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:orgfbb6e9b}
+\label{sec:orgc6af0e0}
 \subsection{Relevance}
-\label{sec:org3532569}
-
-\clearpage
+\label{sec:org10371e4}
 \section{Related Literature (10\%)}
-\label{sec:org1f9bbac}
+\label{sec:org1e73f49}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org1e10e2a}
+\label{sec:org64f620c}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -470,7 +468,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org905bd81}
+\label{sec:org45da27c}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -580,27 +578,27 @@ challenges in smart grids.
 
 \clearpage
 \section{Theoretical Background (10\%)}
-\label{sec:org940f971}
+\label{sec:org3081380}
 \subsection{Electricity Markets}
-\label{sec:org858dd7d}
+\label{sec:org483a8fd}
 \subsubsection{Balancing Market}
-\label{sec:org17f28eb}
+\label{sec:org34ceef3}
 \subsubsection{Spot Market}
-\label{sec:orgdfc99a8}
+\label{sec:org5bccc60}
 \subsection{Reinforcement Learning \label{sec-reinforcement-learning}}
-\label{sec:orgc36e8e4}
+\label{sec:orgf79943e}
 The following chapter will give an overview about the most important RL
 ideas and concepts and will introduce the corresponding mathematical formulations.
 \cite{vazquez-canteli19_reinf_learn_deman_respon}.
 \subsubsection{Notation}
-\label{sec:org50456fd}
+\label{sec:orgd4aaa56}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer
 to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in
 \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the
 layer.
 
 \subsubsection{Markov Decision Processes}
-\label{sec:orgadd474f}
+\label{sec:orga5e8d30}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -665,7 +663,7 @@ when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, th
 agent is "farsighted".
 
 \subsubsection{Policies and Value Functions}
-\label{sec:orgb60ed00}
+\label{sec:org2ef2318}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -708,7 +706,7 @@ has been known as \emph{Q-learning} \cite{watkins92_q_learn}. Details can be fou
 Chapter \ref{sec-td-learning}.
 
 \subsubsection{Bellman Equations}
-\label{sec:org098bee3}
+\label{sec:orgb241b05}
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (\ref{eq-expected-return}), current values are
 related to expected values of successive states. This relationship is heavily
@@ -751,7 +749,7 @@ expected transition probabilities. The most common methods will be explored in
 the following chapters.
 
 \subsubsection{Dynamic Programming}
-\label{sec:org58db8b4}
+\label{sec:orge8dec3c}
 \emph{Dynamic Programming} (DP) is a method to compute optimal policies, the primary
 goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
@@ -806,7 +804,7 @@ algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
 
 \subsubsection{Temporal-Difference Learning \label{sec-td-learning}}
-\label{sec:orgf185a0d}
+\label{sec:org84e215d}
 The previous chapter dealt with solving a \emph{planning} problem, that is computing
 an optimal solution (i.e., an optimal policy \(\pi_*\)) of an MDP when a perfect
 model of the environment is known. In the following chapters, we will look at
@@ -899,8 +897,8 @@ This chapter covered the most important RL methods. They work online,
 learn from experience, and can be easily applied to real-world problems
 with low computational effort. Moreover, the mathematical complexity of the
 presented approaches is limited, and they can be easily implemented into
-computer programs. Temporal-Difference learning is a \emph{tabular} method, Q-values
-are stored and updated in a lookup table.
+computer programs. Temporal-Difference learning is a \emph{tabular} method, in which
+Q-values are stored and updated in a lookup table.
 
 If the state and action spaces are continuous or the number of states and actions is
 very large, a table representation is computational infeasible and the speed of
@@ -908,7 +906,7 @@ convergence is drastically reduced. In this case, a \emph{function approximator}
 replace the lookup table. The next chapter will briefly cover function approximation,
 as well as other advancements in RL.
 \subsubsection{Approximation Methods}
-\label{sec:org85cc821}
+\label{sec:org5fdccc4}
 All of the previous chapters covered tabular RL, which is the theoretical
 foundation for all other methods. But in many real-world use cases the state
 space is enormous and it is improbable to find an optimal value function with
@@ -931,36 +929,51 @@ Adjusting one weight affects the values of many states. On the other side, optim
 an estimate for one state negatively affects the accuracy of the estimates for
 other states. This effect motivates to specify a state distribution
 \(\mu\), which represents the importance of the prediction error for each state.
-The prediction error of a state is defined as the squared difference between the
-predicted (i.e., approximated) value \(\hat v(s,\w)\) and the true value \(\vpi(s)\).
-Consequently, the objective function of the supervised learning problem can be
-defined as the \emph{Mean Squared Value Error} \(\MSVEm\), which weights
-the prediction error with the state distribution \(\mu\):
+In on-policy prediciton \(\mu(s)\) is often selected to be proportion of time spend
+in each state \(s\). The prediction error of a state is defined as the squared
+difference between the predicted (i.e., approximated) value \(\hat v(s,\w)\) and
+the true value \(\vpi(s)\). Consequently, the objective function of the supervised
+learning problem can be defined as the \emph{Mean Squared Value Error} \(\MSVEm\),
+which weights the prediction error with the state distribution \(\mu(s)\):
 \begin{equation}
     \MSVEm(\w) \defeq \sum_{s\in\S}{\mu(s)\bigg[\vpi(s)-\hat v(s,\w)\bigg]^2}, \text{ where } \w\in\Re^d
 \end{equation}
-Minimizing \(\MSVEm\) in respect to \(\hat v\) will yield in a value function that
-helps achieving the primary goal of finding a better policy. Remember that \(\hat v\)
+Minimizing \(\MSVEm\) in respect to \(\hat v\) will yield a value function, which
+facilitates finding a better policy, the primary goal of RL. Remember that \(\hat v\)
 can take any form of linear or non-linear function of the features of a state.
 In practice, deep artificial neural networks networks (ANNs) have shown great
-success
+success, which coined the term \emph{Deep Reinforcement Learning}
 \cite{mnih15_human_level_contr_throug_deep_reinf_learn,silver16_master_game_go_with_deep}.
-A simplified feedforward ANN can be found in Figure \ref{fig-ann}, ANN have the advantage
+A simplified feedforward ANN can be found in Figure \ref{fig-ann}. ANN have the advantage
 that they can theoretically approximate any continuous function by adjusting the
-connection weights of the network \(\w\in\Re^{d\times d}\).
+connection weights of the network \(\w\in\Re^{d\times d}\)
+\cite{cybenko89_approx_by_super_sigmoid_funct}. Advancements in the field of \emph{Deep
+Learning} facilitated remarkable performance improvements in RL applications.
+Despite that, the RL theory is mostly limited to tabular and linear
+approximation methods, refer to \textcite{bengio09_learn_deep_archit_ai} for a
+comprehensive review of deep learning methods.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./fig/ann.png}
 \caption[Artificial Neural Network]{A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes \cite{sutton18_reinf}. \protect\footnotemark \label{fig-ann}}
 \end{figure}
 \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
+\subsubsection{Further Advancements}
+\label{sec:orgbf69854}
+\begin{itemize}
+\item Eligibility traces
+\item W-Learning
+\item Fitted Q-Iteration
+\item Actor-Critic
+\item Distributed Actor-Critic Diff-DAC?
+\end{itemize}
 
 \section{Empirical Setting / Data (10\%)}
-\label{sec:orgea38fcd}
+\label{sec:orgfa5e73b}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org7ca4b1e}
+\label{sec:orgc33c442}
 \subsubsection{Raw Data}
-\label{sec:org4ccd781}
+\label{sec:orgd25ef44}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -1004,55 +1017,55 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org92c82a7}
+\label{sec:org79ef965}
 \subsection{Electricity Markets Data}
-\label{sec:org5fc2fc8}
+\label{sec:org8ae8fc1}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org84d0489}
+\label{sec:orge6a732b}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:orga23153c}
+\label{sec:orgab44d70}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:org423ec2c}
+\label{sec:org508d071}
 \subsection{Information Assumptions}
-\label{sec:orge729062}
+\label{sec:orgf4cb5a0}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org6d1942e}
+\label{sec:org039f8a5}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org92ccc15}
+\label{sec:orgc7bf94b}
 \subsection{Bidding Strategy}
-\label{sec:orgf7655e6}
+\label{sec:org5bd5185}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org0ca312d}
+\label{sec:orgf37697f}
 
 \section{Evaluation (30\%)}
-\label{sec:orgcb6eaf5}
+\label{sec:orgabb0134}
 \subsection{Event-based Simulation}
-\label{sec:orge140c9c}
+\label{sec:org589628f}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org660ad9f}
+\label{sec:orgaa8b08d}
 \subsection{FleetRL}
-\label{sec:org904baa6}
+\label{sec:orga2359cd}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org2b38dc9}
+\label{sec:org2ede78a}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:orgfb6bf1d}
+\label{sec:org3eac211}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:orgbe55309}
+\label{sec:org2368b3d}
 \section{Discussion (5\%)}
-\label{sec:orge6e3c66}
+\label{sec:orgebd4138}
 \subsection{Generalizability}
-\label{sec:org8d02784}
+\label{sec:org0dfa728}
 \subsection{Future Electricity Landscape}
-\label{sec:orgaa15039}
+\label{sec:org6f9ea02}
 \subsection{Limitations}
-\label{sec:orgba65e1f}
+\label{sec:org15df470}
 \section{Conclusion (5\%)}
-\label{sec:orgb3a1c94}
+\label{sec:orgb67488b}
 \subsection{Contribution}
-\label{sec:org72e8b7c}
+\label{sec:orgcae5c2f}
 \subsection{Future Research}
-\label{sec:org5e88949}
+\label{sec:org4456a28}
 
 
 \clearpage
