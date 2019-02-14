@@ -71,11 +71,11 @@ be real-valued vectors are written in bold and in lower case (even if random var
     % \>$\delta^s_t, \delta^a_t$ \> state- and action-specific forms of the TD error \\
     % \>$n$                 \> in $n$-step methods, $n$ is the number of steps of bootstrapping\\
     % \\
-    % \>$d$                 \> dimensionality---the number of components of $\w$\\
+    \>$d$                 \> dimensionality---the number of components of $\w$\\
     % \>$d'$                \> alternate dimensionality---the number of components of $\th$\\
-    % \>$\w,\w_t$           \> $d$-vector of weights underlying an approximate value function\\
+    \>$\w$           \> $d$-vector of weights underlying an approximate value function\\
     % \>$w_i,w_{t,i}$ \> $i$th component of learnable weight vector\\
-    % \>$\hat v(s,\w)$      \> approximate value of state $s$ given weight vector $\w$\\
+    \>$\hat v(s,\w)$      \> approximate value of state $s$ given weight vector $\w$\\
     % \>$v_\w(s)$           \> alternate notation for $\hat v(s,\w)$\\
     % \>$\hat q(s,a,\w)$    \> approximate value of state--action pair $s,a$ given weight vector $\w$\\
     % \>$\grad \hat v(s,\w)$\> column vector of partial derivatives of $\hat v(s,\w)$ with respect to $\w$\\
@@ -122,7 +122,7 @@ be real-valued vectors are written in bold and in lower case (even if random var
     % \\
     % \>$\bar\delta_\w(s)$  \> Bellman error (expected TD error) for $v_\w$ at state $s$\\
     % \>$\bar\delta_\w$, BE \> Bellman error vector, with components $\bar\delta_\w(s)$\\
-    % \>$\MSVEm(\w)$        \> mean square value error $\MSVEm(\w)\defeq\norm{v_\w-\vpi}$\\
+    \>$\MSVEm(\w)$        \> mean square value error $\MSVEm(\w)\defeq\norm{v_\w-\vpi}$\\
     % \>$\MSBEm(\w)$        \> mean square Bellman error $\MSBEm(\w)\defeq\norm{\bar\delta_\w}$\\
     % \>$\MSPBEm(\w)$       \> mean square projected Bellman error $\MSPBEm(\w)\defeq\norm{\Pi\bar\delta_\w}$\\
     % \>$\MSTDEm(\w)$       \> mean square temporal-difference error $\MSTDEm(\w)\defeq\EE{b}{\rho_t\delta_t^2}$ \\
