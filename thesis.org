@@ -686,7 +686,7 @@ have a non-zero probability of selecting each action in each state. A typical
 stochastic policy is the /\epsilon-greedy policy/, which selects the action with
 the highest estimated value, except for a probability \epsilon, it selects an
 action at random.
-#+CAPTION[On-policy control with SARSA]: On-policy control with SARSA cite:sutton18_reinf. \protect\footnotemark label:fig-sarsa
+#+CAPTION[On-policy control with Sarsa]: On-policy control with Sarsa cite:sutton18_reinf. \protect\footnotemark label:fig-sarsa
 [[./fig/on-policy.png]]
 #+LATEX: \footnotetext{The in-text figure of \textbf{Chapter 5.3} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 
@@ -704,7 +704,7 @@ take more time to converge to an optimum.
 # NOTE: Mention that prediction is the main difference?
 
 # NOTE: Section: Sarsa: On-policy TD Control
-A popular on-policy TD control method is SARSA, developed by
+A popular on-policy TD control method is Sarsa, developed by
 textcite:rummery94_q. In the prediction step, the action-value function
 $\qpi(s,a)$ of all actions and states has to be estimated for the current
 policy $\pi$. The estimation can be done similar to TD prediction of state
@@ -716,9 +716,9 @@ constructed as follows:
 \end{equation}
 After every transition from a state $S_t$, an update operation using the events
 $(S_t, A_t, R_{t+1}, S_{t+1}, A_{t+1})$ is performed. This quintuple also
-constituted the name SARSA. The on-policy control step of the algorithm is
+constituted the name Sarsa. The on-policy control step of the algorithm is
 straightforward, and uses a \epsilon-greedy policy improvement, as described in
-the previous paragraph. It has been shown that SARSA converges to the optimal
+the previous paragraph. It has been shown that Sarsa converges to the optimal
 policy $\pi_*$ under the assumption of infinite visits to all state-action
 pairs.
 
@@ -785,7 +785,7 @@ can take any form of linear or non-linear function of the features of a state.
 In practice, deep artificial neural networks networks (ANNs) have shown great
 success, which coined the term /Deep Reinforcement Learning/
 cite:mnih15_human_level_contr_throug_deep_reinf_learn,silver16_master_game_go_with_deep.
-A simplified feedforward ANN can be found in Figure ref:fig-ann. ANN have the advantage
+A simple feedforward ANN can be found in Figure ref:fig-ann. ANN have the advantage
 that they can theoretically approximate any continuous function by adjusting the
 connection weights of the network $\w\in\Re^{d\times d}$
 cite:cybenko89_approx_by_super_sigmoid_funct. Advancements in the field of /Deep
