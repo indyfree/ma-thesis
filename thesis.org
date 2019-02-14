@@ -748,8 +748,8 @@ convergence is drastically reduced. In this case, a /function approximator/ can
 replace the lookup table. The next chapter will briefly cover function approximation,
 as well as other advancements in RL.
 *** Approximation Methods
-All of the previous chapters covered tabular RL, which is the theoretical
-foundation for all other methods. But in many real-world use cases the state
+So far, only tabular RL methods have been covered, which is the theoretical
+foundation of RL in general. But in many real-world use cases the state
 space is enormous and it is improbable to find an optimal value function with
 tabular methods. Not only is the memory is problem to store such a large table,
 but also the time needed to fill every entry with meaningful results.
@@ -796,12 +796,29 @@ comprehensive review of deep learning methods.
 #+CAPTION[Artificial Neural Network]: A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes cite:sutton18_reinf. \protect\footnotemark label:fig-ann
 [[./fig/ann.png]]
 #+LATEX: \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
-*** Further Advancements
-- Eligibility traces
-- W-Learning
-- Fitted Q-Iteration
-- Actor-Critic
-- Distributed Actor-Critic Diff-DAC?
+*** Further Topics
+The previous chapters provided a detailed overview of the most important
+concepts and mathematical foundations in RL. In the research there are many more
+topics that were not covered here. Some of the most common topics are listed in
+the following:
+/Eligibility traces/ offer a way to more general learning and faster convergence
+rates. Almost any TD method can be extended to use eligibility traces, a popular
+methods is Watkins's Q($\lambda$) cite:watkins89_learn_from_delay_rewar.
+Fitted-Q Iteration cite:ernst03_iterat combined Q-learning and /fitted value
+iteration/ with batch-mode RL. In batch-mode the whole dataset is available
+offline, contrary to online RL where the data is acquired by the agent's action
+in its the environment. /Actor-critic/ methods
+cite:sutton84_tempor_credit_assig_reinf_learn directly learn a parameterized
+policy instead of action-values, which inherently allow continuous state spaces
+and learning appropriate levels of exploration. Simultaneously to learning the
+policy, they approximate a state-value function, which serves as a "critic" to
+the learned policy, the "actor". In the current theory most RL models are single-agent
+models. For certain real-world applications multi-agent RL algorithms are
+necessary to coordinate interaction between the agents. When multiple learning
+agents interact with a non-stationary environment, convergence and stability are
+a serious problem. /W-learning/
+cite:humphrys96_action_selec_method_using_reinf_learn is an multi-agent approach
+that aims to solve these difficulties.
 
 * Empirical Setting / Data (10%)
 ** Carsharing Fleets of Electric Vehicles
@@ -893,4 +910,3 @@ bibliographystyle:apacite
 
 * Footnotes
 
-#  LocalWords:  dimentionality

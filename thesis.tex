@@ -1,4 +1,4 @@
-% Created 2019-02-14 Thu 14:14
+% Created 2019-02-14 Thu 17:08
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -282,20 +282,20 @@ be real-valued vectors are written in bold and in lower case (even if random var
 \pagenumbering{arabic}
 
 \section{Introduction (10\%)}
-\label{sec:org804914f}
+\label{sec:org821ee1e}
 \subsection{Research Motivation}
-\label{sec:org7df6396}
+\label{sec:orgbd3e95e}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:orgc6af0e0}
+\label{sec:orgee890a8}
 \subsection{Relevance}
-\label{sec:org10371e4}
+\label{sec:orga11bc13}
 \section{Related Literature (10\%)}
-\label{sec:org1e73f49}
+\label{sec:org94bea06}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org64f620c}
+\label{sec:org7d91c77}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -468,7 +468,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org45da27c}
+\label{sec:org2581650}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -578,27 +578,27 @@ challenges in smart grids.
 
 \clearpage
 \section{Theoretical Background (10\%)}
-\label{sec:org3081380}
+\label{sec:org2b56fc9}
 \subsection{Electricity Markets}
-\label{sec:org483a8fd}
+\label{sec:org5ba22de}
 \subsubsection{Balancing Market}
-\label{sec:org34ceef3}
+\label{sec:org78acb58}
 \subsubsection{Spot Market}
-\label{sec:org5bccc60}
+\label{sec:org20d6240}
 \subsection{Reinforcement Learning \label{sec-reinforcement-learning}}
-\label{sec:orgf79943e}
+\label{sec:orgbb89b3f}
 The following chapter will give an overview about the most important RL
 ideas and concepts and will introduce the corresponding mathematical formulations.
 \cite{vazquez-canteli19_reinf_learn_deman_respon}.
 \subsubsection{Notation}
-\label{sec:orgd4aaa56}
+\label{sec:org846c06d}
 The input to the network \(x \in \mathbb{R}^D\) is fed to the first residual layer
 to get the activation \(y = x + \sigma(w x + b) \in \mathbb{R}^D\) with \(w \in
 \mathbb{R}^{D \times D}\), and \(b \in \mathbb{R}^D\) the weights and bias of the
 layer.
 
 \subsubsection{Markov Decision Processes}
-\label{sec:orga5e8d30}
+\label{sec:org2f8a48d}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -663,7 +663,7 @@ when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, th
 agent is "farsighted".
 
 \subsubsection{Policies and Value Functions}
-\label{sec:org2ef2318}
+\label{sec:org7f26859}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -706,7 +706,7 @@ has been known as \emph{Q-learning} \cite{watkins92_q_learn}. Details can be fou
 Chapter \ref{sec-td-learning}.
 
 \subsubsection{Bellman Equations}
-\label{sec:orgb241b05}
+\label{sec:orgf279355}
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (\ref{eq-expected-return}), current values are
 related to expected values of successive states. This relationship is heavily
@@ -749,7 +749,7 @@ expected transition probabilities. The most common methods will be explored in
 the following chapters.
 
 \subsubsection{Dynamic Programming}
-\label{sec:orge8dec3c}
+\label{sec:orge14cf84}
 \emph{Dynamic Programming} (DP) is a method to compute optimal policies, the primary
 goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
@@ -804,7 +804,7 @@ algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
 
 \subsubsection{Temporal-Difference Learning \label{sec-td-learning}}
-\label{sec:org84e215d}
+\label{sec:org1ddf467}
 The previous chapter dealt with solving a \emph{planning} problem, that is computing
 an optimal solution (i.e., an optimal policy \(\pi_*\)) of an MDP when a perfect
 model of the environment is known. In the following chapters, we will look at
@@ -906,7 +906,7 @@ convergence is drastically reduced. In this case, a \emph{function approximator}
 replace the lookup table. The next chapter will briefly cover function approximation,
 as well as other advancements in RL.
 \subsubsection{Approximation Methods}
-\label{sec:org5fdccc4}
+\label{sec:org70a9609}
 All of the previous chapters covered tabular RL, which is the theoretical
 foundation for all other methods. But in many real-world use cases the state
 space is enormous and it is improbable to find an optimal value function with
@@ -958,22 +958,37 @@ comprehensive review of deep learning methods.
 \caption[Artificial Neural Network]{A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes \cite{sutton18_reinf}. \protect\footnotemark \label{fig-ann}}
 \end{figure}
 \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
-\subsubsection{Further Advancements}
-\label{sec:orgbf69854}
-\begin{itemize}
-\item Eligibility traces
-\item W-Learning
-\item Fitted Q-Iteration
-\item Actor-Critic
-\item Distributed Actor-Critic Diff-DAC?
-\end{itemize}
+\subsubsection{Further Topics}
+\label{sec:orga07835a}
+The previous chapters provided a detailed overview of the most important
+concepts and mathematical foundations in RL. In the research there are many more
+topics that were not covered here. Some of the most common topics are listed in
+the following:
+\emph{Eligibility traces} offer a way to more general learning and faster convergence
+rates. Almost any TD method can be extended to use eligibility traces, a popular
+methods is Watkins's Q(\(\lambda\)) \cite{watkins89_learn_from_delay_rewar}.
+Fitted-Q Iteration \cite{ernst03_iterat} combined Q-learning and \emph{fitted value
+iteration} with batch-mode RL. In batch-mode the whole dataset is available
+offline, contrary to online RL where the data is acquired by the agent's action
+in its the environment. \emph{Actor-critic} methods
+\cite{sutton84_tempor_credit_assig_reinf_learn} directly learn a parameterized
+policy instead of action-values, which inherently allow continuous state spaces
+and learning appropriate levels of exploration. Simultaneously to learning the
+policy, they approximate a state-value function, which serves as a "critic" to
+the learned policy, the "actor". In the current theory most RL models are single-agent
+models. For certain real-world applications multi-agent RL algorithms are
+necessary to coordinate interaction between the agents. When multiple learning
+agents interact with a non-stationary environment, convergence and stability are
+a serious problem. \emph{W-learning}
+\cite{humphrys96_action_selec_method_using_reinf_learn} is an multi-agent approach
+that aims to solve these difficulties.
 
 \section{Empirical Setting / Data (10\%)}
-\label{sec:orgfa5e73b}
+\label{sec:org3b0643e}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:orgc33c442}
+\label{sec:org6f8596e}
 \subsubsection{Raw Data}
-\label{sec:orgd25ef44}
+\label{sec:org487aea7}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -1017,55 +1032,55 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org79ef965}
+\label{sec:orgcf4f9d8}
 \subsection{Electricity Markets Data}
-\label{sec:org8ae8fc1}
+\label{sec:org643c300}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:orge6a732b}
+\label{sec:orgb9f4e7c}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:orgab44d70}
+\label{sec:org94968b3}
 
 \section{Model: FleetRL (20\%)}
-\label{sec:org508d071}
+\label{sec:org6f5b538}
 \subsection{Information Assumptions}
-\label{sec:orgf4cb5a0}
+\label{sec:org95a89d5}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org039f8a5}
+\label{sec:orgb2c5630}
 \subsection{Reinforcement Learning Approach}
-\label{sec:orgc7bf94b}
+\label{sec:orgafd7598}
 \subsection{Bidding Strategy}
-\label{sec:org5bd5185}
+\label{sec:org0ef1203}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:orgf37697f}
+\label{sec:orgaaafb3e}
 
 \section{Evaluation (30\%)}
-\label{sec:orgabb0134}
+\label{sec:org0c5d516}
 \subsection{Event-based Simulation}
-\label{sec:org589628f}
+\label{sec:org9e1f717}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:orgaa8b08d}
+\label{sec:org40370ad}
 \subsection{FleetRL}
-\label{sec:orga2359cd}
+\label{sec:org3d3a46c}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org2ede78a}
+\label{sec:org7ee4b34}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org3eac211}
+\label{sec:org31fc772}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org2368b3d}
+\label{sec:org8d50161}
 \section{Discussion (5\%)}
-\label{sec:orgebd4138}
+\label{sec:orga2f59e1}
 \subsection{Generalizability}
-\label{sec:org0dfa728}
+\label{sec:orgc2418bd}
 \subsection{Future Electricity Landscape}
-\label{sec:org6f9ea02}
+\label{sec:org9b40e96}
 \subsection{Limitations}
-\label{sec:org15df470}
+\label{sec:org9c887e7}
 \section{Conclusion (5\%)}
-\label{sec:orgb67488b}
+\label{sec:org5a45e2a}
 \subsection{Contribution}
-\label{sec:orgcae5c2f}
+\label{sec:org662ea52}
 \subsection{Future Research}
-\label{sec:org4456a28}
+\label{sec:org3a0a4a5}
 
 
 \clearpage
