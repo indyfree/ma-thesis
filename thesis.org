@@ -748,29 +748,30 @@ convergence is drastically reduced. In this case, a /function approximator/ can
 replace the lookup table. The next chapter will briefly cover function approximation,
 as well as other advancements in RL.
 *** Approximation Methods
-So far, only tabular RL methods have been covered, which is the theoretical
-foundation of RL in general. But in many real-world use cases the state
-space is enormous and it is improbable to find an optimal value function with
-tabular methods. Not only is the memory is problem to store such a large table,
-but also the time needed to fill every entry with meaningful results.
-Contrarily, /function approximation/ tries to find a function that approximates
-the optimal value function as closely as possible, with limited computational
-resources. The experience with a small subset of visited states is generalized
-to approximate values of the whole state set. Function approximation has been
-widely studied in supervised machine learning: Gradient methods, as well as
-linear and non-linear models have shown good results for RL.
+Up to this point, only tabular RL methods have been covered, which form the
+theoretical foundation of RL in general. But in many real-world use cases, the
+state space is enormous and it is improbable to find an optimal value function
+with tabular methods. Not only is it a problem to store such a large table in the
+memory, but also would it take an almost infinite amount of time to fill every
+entry with meaningful results. Contrarily, /function approximation/ tries to
+find a function that approximates the optimal value function as closely as
+possible, with limited computational resources. The experience with a small
+subset of visited states is generalized to approximate values of the whole state
+set. Function approximation has been widely studied in supervised machine
+learning: Gradient methods, as well as linear and non-linear models have shown
+good results for RL.
 # Assumption. Non-stationary, no-iid
 The approximated value of a state $s$ is denoted as the parameterized
-functional form $\hat v(s,\w)\!\approx\!\vpi(s)$, given the weight vector
+functional form $\hat v(s,\w)\!\approx\!\vpi(s)$, given a weight vector
 $\w\!\in\!\Re^d$. Function approximation methods are approximating $\vpi$ by
-learning (i.e., adjusting) a weight vector $\w$ from experience of following
+learning (i.e., adjusting) the weight vector $\w$ from the experience of following
 the policy $\pi$. By assumption, the dimensionality $d$ of $\w$ is much lower than
 the number of states, which is the reason for the desired generalization effect:
-Adjusting one weight affects the values of many states. On the other side, optimizing
+Adjusting one weight affects the values of many states. However, optimizing
 an estimate for one state negatively affects the accuracy of the estimates for
-other states. This effect motivates to specify a state distribution
-$\mu$, which represents the importance of the prediction error for each state.
-In on-policy prediciton $\mu(s)$ is often selected to be proportion of time spend
+other states. This effect motivates the specification of a state distribution
+$\mu(s)$, which represents the importance of the prediction error for each state.
+In on-policy prediction, $\mu(s)$ is often selected to be proportion of time spend
 in each state $s$. The prediction error of a state is defined as the squared
 difference between the predicted (i.e., approximated) value $\hat v(s,\w)$ and
 the true value $\vpi(s)$. Consequently, the objective function of the supervised
@@ -780,18 +781,19 @@ which weights the prediction error with the state distribution $\mu(s)$:
     \MSVEm(\w) \defeq \sum_{s\in\S}{\mu(s)\bigg[\vpi(s)-\hat v(s,\w)\bigg]^2}, \text{ where } \w\in\Re^d
 \end{equation}
 Minimizing $\MSVEm$ in respect to $\hat v$ will yield a value function, which
-facilitates finding a better policy, the primary goal of RL. Remember that $\hat v$
-can take any form of linear or non-linear function of the features of a state.
+facilitates finding a better policy --- the primary goal of RL. Remember that $\hat v$
+can take any form of a linear or non-linear function of the state $s$.
+
 In practice, deep artificial neural networks networks (ANNs) have shown great
-success, which coined the term /Deep Reinforcement Learning/
+success as function approximators, which coined the term /Deep Reinforcement Learning/
 cite:mnih15_human_level_contr_throug_deep_reinf_learn,silver16_master_game_go_with_deep.
-A simple feedforward ANN can be found in Figure ref:fig-ann. ANN have the advantage
+A simple feedforward ANN can be found in Figure ref:fig-ann. ANNs have the advantage
 that they can theoretically approximate any continuous function by adjusting the
 connection weights of the network $\w\in\Re^{d\times d}$
 cite:cybenko89_approx_by_super_sigmoid_funct. Advancements in the field of /Deep
 Learning/ facilitated remarkable performance improvements in RL applications.
 Despite that, the RL theory is mostly limited to tabular and linear
-approximation methods, refer to textcite:bengio09_learn_deep_archit_ai for a
+approximation methods. Refer to textcite:bengio09_learn_deep_archit_ai for a
 comprehensive review of deep learning methods.
 #+CAPTION[Artificial Neural Network]: A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes cite:sutton18_reinf. \protect\footnotemark label:fig-ann
 [[./fig/ann.png]]
@@ -799,24 +801,22 @@ comprehensive review of deep learning methods.
 *** Further Topics
 The previous chapters provided a detailed overview of the most important
 concepts and mathematical foundations in RL. In the research there are many more
-topics that were not covered here. Some of the most common topics are listed in
-the following:
-/Eligibility traces/ offer a way to more general learning and faster convergence
-rates. Almost any TD method can be extended to use eligibility traces, a popular
-methods is Watkins's Q($\lambda$) cite:watkins89_learn_from_delay_rewar.
-Fitted-Q Iteration cite:ernst03_iterat combined Q-learning and /fitted value
-iteration/ with batch-mode RL. In batch-mode the whole dataset is available
-offline, contrary to online RL where the data is acquired by the agent's action
-in its the environment. /Actor-critic/ methods
-cite:sutton84_tempor_credit_assig_reinf_learn directly learn a parameterized
-policy instead of action-values, which inherently allow continuous state spaces
-and learning appropriate levels of exploration. Simultaneously to learning the
-policy, they approximate a state-value function, which serves as a "critic" to
-the learned policy, the "actor". In the current theory most RL models are single-agent
-models. For certain real-world applications multi-agent RL algorithms are
-necessary to coordinate interaction between the agents. When multiple learning
-agents interact with a non-stationary environment, convergence and stability are
-a serious problem. /W-learning/
+topics that were not covered here. /Eligibility traces/ offer a way to more
+general learning and faster convergence rates. Almost any TD method can be
+extended to use eligibility traces, a popular methods is called Watkins's Q($\lambda$)
+cite:watkins89_learn_from_delay_rewar. /Fitted-Q Iteration/ cite:ernst03_iterat
+combined Q-learning and fitted value iteration with batch-mode RL. In
+batch-mode the whole dataset is available offline, contrary to online RL where
+the data is acquired by the agent's action in its the environment.
+/Actor-critic/ methods cite:sutton84_tempor_credit_assig_reinf_learn directly
+learn a parameterized policy instead of action-values, which inherently allow
+continuous state spaces and learning appropriate levels of exploration.
+Simultaneously to learning the policy, they approximate a state-value function,
+which serves as a "critic" to the learned policy, the "actor". In the current
+theory most RL models are single-agent models. For certain real-world
+applications multi-agent RL algorithms are necessary to coordinate interaction
+between the agents. When multiple learning agents interact with a non-stationary
+environment, convergence and stability are a serious problem. /W-learning/
 cite:humphrys96_action_selec_method_using_reinf_learn is an multi-agent approach
 that aims to solve these difficulties.
 
