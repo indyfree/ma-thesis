@@ -687,7 +687,7 @@ have a non-zero probability of selecting each action in each state. A typical
 stochastic policy is the /\epsilon-greedy policy/, which selects the action with
 the highest estimated value, except for a probability \epsilon, it selects an
 action at random.
-#+CAPTION[On-policy control with SARSA]: On-policy control with SARSA cite:sutton18_reinf \protect\footnotemark label:fig-sarsa
+#+CAPTION[On-policy control with SARSA]: On-policy control with SARSA cite:sutton18_reinf. \protect\footnotemark label:fig-sarsa
 [[./fig/on-policy.png]]
 #+LATEX: \footnotetext{The in-text figure of \textbf{Chapter 5.3} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 
@@ -780,20 +780,18 @@ the prediction error with the state distribution $\mu$:
     \MSVEm(\w) \defeq \sum_{s\in\S}{\mu(s)\bigg[\vpi(s)-\hat v(s,\w)\bigg]^2}, \text{ where } \w\in\Re^d
 \end{equation}
 Minimizing $\MSVEm$ in respect to $\hat v$ will yield in a value function that
-helps achieving the primary goal of finding a better policy. Remember, $\hat v$
+helps achieving the primary goal of finding a better policy. Remember that $\hat v$
 can take any form of linear or non-linear function of the features of a state.
 In practice, deep artificial neural networks networks (ANNs) have shown great
 success
 cite:mnih15_human_level_contr_throug_deep_reinf_learn,silver16_master_game_go_with_deep.
+A simplified feedforward ANN can be found in Figure ref:fig-ann. ANN have the advantage
+that they can theoretically approximate any continuous function by adjusting the
+connection weights of the network $\w\in\Re^{d\times d}$.
+#+CAPTION[Artificial Neural Network]: A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes cite:sutton18_reinf. \protect\footnotemark label:fig-ann
+[[./fig/ann.png]]
+#+LATEX: \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 
-
-
-**** On-policy Prediction with Approximation
-***** Linear Methods
-***** Non-linear Methods: ANN
-# NOTE: Deep Reinforcement Learning
-**** (On-policy Control with Approximation)
-#+LATEX: \clearpage
 * Empirical Setting / Data (10%)
 ** Carsharing Fleets of Electric Vehicles
 # Car2Go FourTwo assumptions:
