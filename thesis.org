@@ -474,13 +474,13 @@ the /dynamics/ of the MDP as following:
 \begin{equation} \label{eq-dynamics}
     p(s',r|s,a) \defeq \Pr{S_t=s',R_t=r|S_{t-1}=s,A_t=a},
 \end{equation}
-for all $s',s\!\in\!\S$, $r\!\in\!\R$ and $a\!\in\!\A$. Note that each possible value of
-the state $\S_t$ depends only on the immediately preceding state $\S_{t-1}$.
-When a state includes all information of /all/ previous states, the state
-possesses the so-called /Markov property/. If not noted otherwise, the Markov
-property is assumed throughout the Chapter ref:sec-reinforcement-learning.
-The dynamics function allows computing the /state-transition probabilities/,
-another important characteristic of an MDP, as following:
+for all $s',s\!\in\!\S$, $r\!\in\!\R$ and $a\!\in\!\A$. Note that each possible
+value of the state $\S_t$ depends only on the immediately preceding state
+$\S_{t-1}$. When a state includes all information of /all/ previous states, the
+state possesses the so-called /Markov property/. If not noted otherwise, the
+Markov property is assumed throughout the whole chapter. The dynamics function
+allows computing the /state-transition probabilities/, another important
+characteristic of an MDP, as following:
 \begin{equation} \label{eq-state-transition}
     p(s'|s,a) \defeq \Pr{S_t\!=\!s'|S_{t-1}\!=\!s,A_t\!=\!a} = \sum_{r\in\R}{p(s', r|s, a)},
 \end{equation}
@@ -700,7 +700,7 @@ methods improve the deterministic decision policy, by using a second stochastic
 policy to generate behavior. The first policy is becoming the optimal policy by
 evaluating the exploratory behavior of the second policy. Off-policy approaches
 are considered more powerful than on-policy approaches and have a variety of
-additional use-cases. On the other side, they often have a higher variance and
+additional use cases. On the other side, they often have a higher variance and
 take more time to converge to an optimum.
 # NOTE: Mention that prediction is the main difference?
 
@@ -743,14 +743,51 @@ presented approaches is limited, and they can be easily implemented into
 computer programs. Temporal-Difference learning is a /tabular/ method, Q-values
 are stored and updated in a lookup table.
 # NOTE: Can be extended using eligibility traces?
-If state and action spaces are continuous or the number of states and actions is
-very high, a table representation computational infeasible and the speed of
+If the state and action spaces are continuous or the number of states and actions is
+very large, a table representation is computational infeasible and the speed of
 convergence is drastically reduced. In this case, a /function approximator/ can
-replace the lookup table. The next chapter will briefly cover approximation
-methods, which are used to train such function approximators, as well as other
-advancements in general reinforcement learning.
+replace the lookup table. The next chapter will briefly cover function approximation,
+as well as other advancements in RL.
 *** Approximation Methods
-# NOTE: Everything tabular so far
+All of the previous chapters covered tabular RL, which is the theoretical
+foundation for all other methods. But in many real-world use cases the state
+space is enormous and it is improbable to find an optimal value function with
+tabular methods. Not only is the memory is problem to store such a large table,
+but also the time needed to fill every entry with meaningful results.
+Contrarily, /function approximation/ tries to find a function that approximates
+the optimal value function as closely as possible, with limited computational
+resources. The experience with a small subset of visited states is generalized
+to approximate values of the whole state set. Function approximation has been
+widely studied in supervised machine learning: Gradient methods, as well as
+linear and non-linear models have shown good results for RL.
+# Assumption. Non-stationary, no-iid
+The approximated value of a state $s$ is denoted as the parameterized
+functional form $\hat v(s,\w)\!\approx\!\vpi(s)$, given the weight vector
+$\w\!\in\!\Re^d$. Function approximation methods are approximating $\vpi$ by
+learning (i.e., adjusting) a weight vector $\w$ from experience of following
+the policy $\pi$. By assumption, the dimensionality $d$ of $\w$ is much lower than
+the number of states, which is the reason for the desired generalization effect:
+Adjusting one weight affects the values of many states. On the other side, optimizing
+an estimate for one state negatively affects the accuracy of the estimates for
+other states. This effect motivates to specify a state distribution
+$\mu$, which represents the importance of the prediction error for each state.
+The prediction error of a state is defined as the squared difference between the
+predicted (i.e., approximated) value $\hat v(s,\w)$ and the true value $\vpi(s)$.
+Consequently, the objective function of the supervised learning problem can be
+defined as the /Mean Squared Value Error/ $\MSVEm$, which weights
+the prediction error with the state distribution $\mu$:
+\begin{equation}
+    \MSVEm(\w) \defeq \sum_{s\in\S}{\mu(s)\bigg[\vpi(s)-\hat v(s,\w)\bigg]^2}, \text{ where } \w\in\Re^d
+\end{equation}
+Minimizing $\MSVEm$ in respect to $\hat v$ will yield in a value function that
+helps achieving the primary goal of finding a better policy. Remember, $\hat v$
+can take any form of linear or non-linear function of the features of a state.
+In practice, deep artificial neural networks networks (ANNs) have shown great
+success
+cite:mnih15_human_level_contr_throug_deep_reinf_learn,silver16_master_game_go_with_deep.
+
+
+
 **** On-policy Prediction with Approximation
 ***** Linear Methods
 ***** Non-linear Methods: ANN
@@ -846,3 +883,5 @@ bibliography:~/uni/ma-thesis/bibliography/references.bib
 bibliographystyle:apacite
 
 * Footnotes
+
+#  LocalWords:  dimentionality
