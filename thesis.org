@@ -655,7 +655,7 @@ model-free methods learn from experience and require no prior knowledge of the
 environment. Remarkably, these methods can still achieve optimal behavior.
 
 # NOTE: Section: Model-free TD Prediction
-The /TD prediction problem/ is concerned with estimating state values $\vpi$
+The /TD prediction problem/ is concerned with estimating state-values $\vpi$
 using past experiences of following a given policy $\pi$. TD methods update an
 estimate $V$ of $\vpi$ in every timestep. At time $t\!+\!1$ they immediately
 perform an update operation on $V(S_t)$. Because of the step-by-step nature of
@@ -667,11 +667,11 @@ value estimates $V$ are updated as following:
     V(S_t) \leftarrow V(S_t) + \alpha\big[R_{t+1}+\gamma V(S_{t+1}) - V(S_t)\big],
 \end{equation}
 where \alpha is a constant /step-size/ parameter and \gamma is the
-/discount rate/. Here, the update of the state value is performed using the
+/discount rate/. Here, the update of the state-value is performed using the
 observed reward $R_{t+1}$ and the estimated value $V(S_{t+1})$.
 
-When a model is not available, it is useful to estimate /action values/, instead
-of /state values/. If the environment is completely known, it is possible for
+When a model is not available, it is useful to estimate /action-values/, instead
+of /state-values/. If the environment is completely known, it is possible for
 the agent to look one step ahead and select the best action. Without that
 knowledge, the value of each action in a given state needs to be estimated. The
 latter constitutes a problem, since not every /state-action/ pair will be
@@ -730,8 +730,8 @@ defined as follows:
 \begin{equation} \label{eq-q-learning}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma\max_a Q(S_{t+1},a) - Q(S_t, A_t)\big]
 \end{equation}
-Here, the estimated action values $Q$ are updated towards the highest estimated
-action value of the next time step. In this way, $Q$ directly approximates the
+Here, the estimated action-values $Q$ are updated towards the highest estimated
+action-value of the next time step. In this way, $Q$ directly approximates the
 optimal action-value function $q_*$, independently of the policy the agent
 follows. Due to this simplification, Q-learning is a widely used model-free
 method, and its convergence can be proved easily.
@@ -739,7 +739,7 @@ method, and its convergence can be proved easily.
 This chapter covered the most important RL methods. They work online,
 learn from experience, and can be easily applied to real-world problems
 with low computational effort. Moreover, the mathematical complexity of the
-presented approaches is limited and they can be easily implemented into
+presented approaches is limited, and they can be easily implemented into
 computer programs. Temporal-Difference learning is a /tabular/ method, Q-values
 are stored and updated in a lookup table.
 # NOTE: Can be extended using eligibility traces?
