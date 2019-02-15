@@ -303,19 +303,20 @@ to adapt to it cite:peters13_reinf_learn_approac_to_auton.
 
 textcite:vandael15_reinf_learn_heuris_ev_fleet facilitated learned EV fleet
 charging behavior to optimally purchase electricity on the day-ahead market.
-Similarly to textcite:kahlen18_elect_vehic_virtual_power_plant_dilem, the problem
-is framed from the viewpoint of an aggregator that tries to define a
+Similarly to textcite:kahlen18_elect_vehic_virtual_power_plant_dilem, the
+problem is framed from the viewpoint of an aggregator that tries to define a
 cost-effective day-ahead charging plan in the absence of knowing EV charging
-parameters, such as departure time. A crucial point of the study is weighting low
-charging prices against costs that have to be paid when an excessive
-or insufficient  amount of electricity is bought from the market (imbalance costs). Contrarily,
-textcite:kahlen18_elect_vehic_virtual_power_plant_dilem did not consider
-imbalance cost in their model and avoid them by sacrificing customer mobility in order
-to balance the market (i.e., not showing the EV available for rent, when it is
-providing balancing capacity). textcite:vandael15_reinf_learn_heuris_ev_fleet
-used a /fitted Q Iteration/ to control for continuous variables in their state and
-action space. In order to achieve fast convergence, they additionally optimized
-the /temperature step/ parameter of the Boltzmann exploration probability.
+parameters, such as departure time. A crucial point of the study is weighting
+low charging prices against costs that have to be paid when an excessive or
+insufficient  amount of electricity is bought from the market (imbalance costs).
+Contrarily, textcite:kahlen18_elect_vehic_virtual_power_plant_dilem did not
+consider imbalance cost in their model and avoid them by sacrificing customer
+mobility in order to balance the market (i.e., not showing the EV available for
+rent, when it is providing balancing capacity).
+textcite:vandael15_reinf_learn_heuris_ev_fleet used a /fitted Q Iteration/ to
+control for continuous variables in their state and action space. In order to
+achieve fast convergence, they additionally optimized the /temperature step/
+parameter of the Boltzmann exploration probability.
 
 
 # TODO: More paragraphs, order or summarize.
