@@ -444,7 +444,7 @@ The agent has to continuously make a trade-off between immediate rewards and
 delayed rewards to achieve its long-term goal.
 
 The /dynamics/ of a MDP are defined by the probability that a state $s'\in \S$
-and a reward $r\in\R$ occurs, given the preceding state $s\in\S$ and an action
+and a reward $r\in\R$ occurs, given the preceding state $s\in\S$ and action
 $a\in\A$. In /finite/ MDPs, the random variables $\R_t$ and $S_t$ have
 well-defined probability density functions (PDF), which are solely dependent on
 the previous state and action. Consequently, it is possible to define ($\defeq$)
@@ -721,7 +721,7 @@ representation is computational infeasible and the speed of convergence is
 drastically reduced. In this case, a /function approximator/ can replace the
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
-*** Approximation Methodsl:sec-approx  label:sec-fa
+*** Approximation Methods label:sec-fa
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
