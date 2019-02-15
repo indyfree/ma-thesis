@@ -395,57 +395,33 @@ challenges in smart grids.
 # explaining the markets.
 *** Spot Market
 ** Reinforcement Learning label:sec-reinforcement-learning
-The following chapter will give an overview about the most important RL
-ideas and concepts and will introduce the corresponding mathematical formulations.
-cite:vazquez-canteli19_reinf_learn_deman_respon.
-# *** Elements of Reinforcement Learning
-# **** Policy
-# - Agent behavior at a given time
-# - Mapping states to actions
-# - Function or Lookup table
-# - Sufficient to determine behavior
-# - Policies may be stochastic, give probabilities for each action
-# **** Reward signal
-# - Goal of the RL problem
-# - Numeric signal the environment sends to the agent
-# - Agents objective is to maximize the reward signal on the long run
-# - Reward signal primary reason to change the policy: Low reward following an
-#   action of the policy may result in changing the policy to select another action
-# - Rewards determine the immediate desirability of a state
-# - Reward signals can be stochastic functions of the state and the actions
-# **** Value function
-# - Value of a state is the total amount of reward an agent can expect to
-#   accumulate over the future, starting from that state
-# - Values indicate the long-term desirability of states, taking future states and
-#   their rewards into account.
-# - We seek actions cause states of highest value, because these actions obtain
-#   the greatest amount of reward in int long run.
-# - Values must be estimated and re-estimated over the agents lifetime.
-# - Efficiently estimating values is the most important component.
-# **** Model of the environment
-# - Model allows inferences to be made about how the environment will behave.
-#   E.g., Given state and action the model predicts the next state and next reward.
-# - Model-based methods are used for **Planning**: Deciding on a course of action by
-#   considering possible future situations before they happen.
-#  - **Control**: Model-free methods are simpler methods, what are explicitly trial-and-error learners
+The following chapter will give an overview about the most important
+Reinforcement Learning (RL) concepts and will introduce the corresponding
+mathematical formulations. The notation, equations and insights are mostly
+adapted from cite:sutton18_reinf, the de-facto reference book of RL research.
 
-# **** Planning vs. Control
-# - Control: Prediction problem and Control problem
-# - Control: Interested in approximating action-value functions
-#   $\rightarrow$ Can be used to improve policy without knowing the complete model of
-#   the environment
+RL is an agent-based machine learning algorithm in
+which the agent learns to perform an optimal set of actions through interaction
+with its environment. The agents objective is to maximize rewards it receives
+based on the actions it takes. Immediate rewards have to be weighted against
+long-term cumulative returns that also on its future actions. The RL problem is
+formalized as Markov Decision Processes (MDPs) which will be introduced in
+Chapter ref:sec-mdp. The most important task of RL agents is to continuously
+estimate the value of the environments state. Values indicate the long-term
+desirability of a state, that is the total amount of reward the agent can expect
+to accumulate over the future, following a learned set of actions, called the
+policy. Policies and values are covered in Chapter ref:sec-policies, whereas the
+core mathematical foundations for evaluating policies and updating value
+functions are introduced in Chapter ref:sec-bellman. When the model of the
+environment is fully known, the learning problem is reduced to a planning
+problem (Chapter ref:sec-dp) in which optimal policies can be computed with
+iterative approaches. Model-free RL approaches can be applied when rewards and
+state transitions are unknown and the agents behavior has to be learned from
+experience (Chapter ref:sec-td-learning). The last two chapter cover methods
+that solve the RL problem more efficiently, tackle new challenges and are widely
+used in practice and research.
 
-# **** Generalized Policy Iteration (GPI)
-# - Interacting processes of policy evaluation and policy improvement
-# **** On-Policy vs. Off-Policy
-# - On-Policy: \epsilon-greedy policy
-# **** Exploitation-Exploration Trade-off
-# **** Online vs. Offline
-# - Offline: Monte Carlo, returns from completed episodes, long waits
-# - Online: Temporal-Difference: Online, fully incremental
-#   - Continuing tasks, no episodes
-
-*** Markov Decision Processes
+*** Markov Decision Processes label:sec-mdp
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -506,7 +482,7 @@ the agent is more concerned with maximizing immediate rewards. On the contrary,
 when $\gamma\!=\! 1$, the agent takes future rewards strongly into account, the
 agent is "farsighted".
 
-*** Policies and Value Functions
+*** Policies and Value Functions label:sec-policies
 An essential task of almost every RL agent is estimating /value functions/.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -547,7 +523,7 @@ Estimating $\qstar$ to obtain an optimal policy is a substantial part of RL and
 has been known as /Q-learning/ cite:watkins92_q_learn, which is described in
 Chapter ref:sec-td-learning.
 
-*** Bellman Equations
+*** Bellman Equations label:sec-bellman
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (ref:eq-expected-return), current values
 are related to expected values of successive states. This relationship is
@@ -588,7 +564,7 @@ are /approximately/ solving the Bellman optimality equation, by using
 experienced state transitions instead of expected transition probabilities. The
 most common methods will be explored in the following chapters.
 
-*** Dynamic Programming
+*** Dynamic Programming  label:sec-dp
 # NOTE: Intro Tabular Methods?
 # NOTE: Section Dynamic Programming: Policy Iteration, Value Iteration
 /Dynamic Programming/ (DP) is a method to compute optimal policies, the primary
@@ -745,7 +721,7 @@ representation is computational infeasible and the speed of convergence is
 drastically reduced. In this case, a /function approximator/ can replace the
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
-*** Approximation Methods
+*** Approximation Methodsl:sec-approx  label:sec-fa
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
