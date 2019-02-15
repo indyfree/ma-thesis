@@ -1,4 +1,4 @@
-% Created 2019-02-15 Fri 10:26
+% Created 2019-02-15 Fri 10:32
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -203,21 +203,21 @@ be real-valued vectors are written in bold and in lower case (even if random var
 \pagenumbering{arabic}
 
 \section{Introduction}
-\label{sec:orgd6edf78}
+\label{sec:orgc45dc18}
 \subsection{Research Motivation}
-\label{sec:org656b77b}
+\label{sec:orgb52fb0e}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org2a096d1}
+\label{sec:orge5796e8}
 \subsection{Relevance}
-\label{sec:org34ed58a}
+\label{sec:org4971a65}
 
 \section{Related Literature}
-\label{sec:orgebb02b0}
+\label{sec:org2f52f40}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orgf8080db}
+\label{sec:org404fdaa}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -390,7 +390,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:orgb8497cd}
+\label{sec:orgfdc754b}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -501,19 +501,20 @@ challenges in smart grids.
 
 \clearpage
 \section{Theoretical Background}
-\label{sec:org17c5236}
+\label{sec:org1716292}
 \subsection{Electricity Markets}
-\label{sec:orgad38107}
+\label{sec:orgde1f75f}
 \subsubsection{Balancing Market}
-\label{sec:org48fa71b}
+\label{sec:org5d9bef3}
 \subsubsection{Spot Market}
-\label{sec:orgbb3b39f}
+\label{sec:orge26b288}
 \subsection{Reinforcement Learning \label{sec-reinforcement-learning}}
-\label{sec:orgf5b6d6a}
+\label{sec:orgfebcfc0}
 The following chapter will give an overview about the most important
 Reinforcement Learning (RL) concepts and will introduce the corresponding
-mathematical formulations. The notation, equations and insights are mostly
-adapted from \cite{sutton18_reinf}, the de-facto reference book of RL research.
+mathematical formulations. If not noted otherwise, the notation, equations and
+insights are adapted from \cite{sutton18_reinf}, the de-facto reference book of RL
+research.
 
 RL is an agent-based machine learning algorithm in
 which the agent learns to perform an optimal set of actions through interaction
@@ -537,7 +538,7 @@ that solve the RL problem more efficiently, tackle new challenges and are widely
 used in practice and research.
 
 \subsubsection{Markov Decision Processes \label{sec-mdp}}
-\label{sec:org84bcf68}
+\label{sec:org83827ff}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -602,7 +603,7 @@ when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, th
 agent is "farsighted".
 
 \subsubsection{Policies and Value Functions \label{sec-policies}}
-\label{sec:orgd19d392}
+\label{sec:org174dd2d}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -644,7 +645,7 @@ has been known as \emph{Q-learning} \cite{watkins92_q_learn}, which is described
 Chapter \ref{sec-td-learning}.
 
 \subsubsection{Bellman Equations \label{sec-bellman}}
-\label{sec:orgbbbda21}
+\label{sec:org9deb092}
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (\ref{eq-expected-return}), current values
 are related to expected values of successive states. This relationship is
@@ -686,7 +687,7 @@ experienced state transitions instead of expected transition probabilities. The
 most common methods will be explored in the following chapters.
 
 \subsubsection{Dynamic Programming  \label{sec-dp}}
-\label{sec:org3e55264}
+\label{sec:org1ef1884}
 \emph{Dynamic Programming} (DP) is a method to compute optimal policies, the primary
 goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
@@ -740,7 +741,7 @@ algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
 
 \subsubsection{Temporal-Difference Learning \label{sec-td-learning}}
-\label{sec:org317b0d3}
+\label{sec:org0865ec0}
 The previous chapter dealt with solving a \emph{planning} problem, that is computing
 an optimal solution (i.e., an optimal policy \(\pi_*\)) of an MDP when a perfect
 model of the environment is known. In the following chapters, we will look at
@@ -842,7 +843,7 @@ drastically reduced. In this case, a \emph{function approximator} can replace th
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
 \subsubsection{Approximation Methodsl:sec-approx  \label{sec-fa}}
-\label{sec:orgec65e32}
+\label{sec:orgd3ef0a4}
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
@@ -898,7 +899,7 @@ comprehensive review of deep learning methods.
 \end{figure}
 \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 \subsubsection{Further Topics}
-\label{sec:org2591d61}
+\label{sec:orga87fcf1}
 The previous chapters provided a detailed overview of the most important
 concepts and mathematical foundations in RL. In the research there are many more
 topics that were not covered here. \emph{Eligibility traces} offer a way to more
@@ -921,11 +922,11 @@ environment, convergence and stability are a serious problem. \emph{W-learning}
 that aims to solve these difficulties.
 
 \section{Empirical Setting}
-\label{sec:orga044bc6}
+\label{sec:orge61dc43}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org27d0290}
+\label{sec:org7ed43ee}
 \subsubsection{Raw Data}
-\label{sec:org8f37b36}
+\label{sec:org3a05bf7}
 The dataset consists of 500 EVs in Stuttgart. As displayed in Table
 \ref{car2go-sample-data}, the data contain spatio-temporal attributes, such as
 timestamp, coordinates, and address of the EVs. Additionally, status attributes
@@ -969,55 +970,55 @@ S-GO2471 & good & good & 26.12.2017 00:50 & yes & 84\\
 \hline
 \end{longtable}
 \subsubsection{Preprocessing Steps}
-\label{sec:org072bcdb}
+\label{sec:org04c443a}
 \subsection{Electricity Markets Data}
-\label{sec:org85d0227}
+\label{sec:org778cb87}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:orgb03672f}
+\label{sec:orgdbd3092}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:orgb52b754}
+\label{sec:orgc0f1839}
 
 \section{Model: FleetRL}
-\label{sec:orga56fa31}
+\label{sec:org0b09eb3}
 \subsection{Information Assumptions}
-\label{sec:orgd6c96ca}
+\label{sec:orgb7646af}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:orgce91de1}
+\label{sec:org6b66c00}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org25567f1}
+\label{sec:org305a2c0}
 \subsection{Bidding Strategy}
-\label{sec:org2cdf767}
+\label{sec:orgcb6e463}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org1694fd0}
+\label{sec:org8be89fe}
 
 \section{Evaluation}
-\label{sec:org92280eb}
+\label{sec:orgb976604}
 \subsection{Event-based Simulation}
-\label{sec:org5eea4f4}
+\label{sec:orgc43afaf}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:orgd7353d7}
+\label{sec:orgaec7cfd}
 \subsection{FleetRL}
-\label{sec:org388bbe7}
+\label{sec:org6594e5e}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org48cf715}
+\label{sec:orgf9dc274}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org358fafe}
+\label{sec:org797da8a}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org3e2dd5c}
+\label{sec:orgcbc2993}
 \section{Discussion}
-\label{sec:org004170e}
+\label{sec:org4de6753}
 \subsection{Generalizability}
-\label{sec:orge7072bd}
+\label{sec:org130b555}
 \subsection{Future Electricity Landscape}
-\label{sec:org4972ee2}
+\label{sec:orgbb0cc41}
 \subsection{Limitations}
-\label{sec:org39010a7}
+\label{sec:org8804ca1}
 \section{Conclusion}
-\label{sec:orgc2969e5}
+\label{sec:orgb2a9c02}
 \subsection{Contribution}
-\label{sec:orgb596fec}
+\label{sec:org5f704f5}
 \subsection{Future Research}
-\label{sec:org137a363}
+\label{sec:org44f6367}
 
 
 \clearpage

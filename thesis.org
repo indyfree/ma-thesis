@@ -395,18 +395,18 @@ challenges in smart grids.
 # explaining the markets.
 *** Spot Market
 ** Reinforcement Learning label:sec-reinforcement-learning
-The following chapter will give an overview about the most important
-Reinforcement Learning (RL) concepts and will introduce the corresponding
-mathematical formulations. The notation, equations and insights are mostly
-adapted from cite:sutton18_reinf, the de-facto reference book of RL research.
+The following chapter will give an overview of the most important Reinforcement
+Learning (RL) concepts and will introduce the corresponding mathematical
+formulations. If not noted otherwise, the notation, equations, and insights are
+adopted from cite:sutton18_reinf, the de-facto reference book of RL research.
 
 RL is an agent-based machine learning algorithm in
 which the agent learns to perform an optimal set of actions through interaction
-with its environment. The agents objective is to maximize rewards it receives
+with its environment. The agents objective is to maximize the rewards it receives
 based on the actions it takes. Immediate rewards have to be weighted against
 long-term cumulative returns that also on its future actions. The RL problem is
 formalized as Markov Decision Processes (MDPs) which will be introduced in
-Chapter ref:sec-mdp. The most important task of RL agents is to continuously
+Chapter ref:sec-mdp. A critical task of RL agents is to continuously
 estimate the value of the environments state. Values indicate the long-term
 desirability of a state, that is the total amount of reward the agent can expect
 to accumulate over the future, following a learned set of actions, called the
@@ -416,7 +416,7 @@ functions are introduced in Chapter ref:sec-bellman. When the model of the
 environment is fully known, the learning problem is reduced to a planning
 problem (Chapter ref:sec-dp) in which optimal policies can be computed with
 iterative approaches. Model-free RL approaches can be applied when rewards and
-state transitions are unknown and the agents behavior has to be learned from
+state transitions are unknown, and the agent's behavior has to be learned from
 experience (Chapter ref:sec-td-learning). The last two chapter cover methods
 that solve the RL problem more efficiently, tackle new challenges and are widely
 used in practice and research.
