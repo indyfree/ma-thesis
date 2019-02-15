@@ -74,7 +74,8 @@
 # Start Content Page Numbers
 #+LATEX: \pagenumbering{arabic}
 
-* Introduction (10%)
+* Introduction
+# NOTE: 10%
 ** Research Motivation
 - cite:lopes11_integ_elect_vehic_elect_power_system
 # It is also expected that the amount of intermittent RES
@@ -89,9 +90,10 @@
 ** Research Question
 ** Relevance
 # #+LATEX: \clearpage
-* Related Literature (10%)
-# TODO: Introductory paragraph
 
+* Related Literature
+# NOTE: 10%
+# TODO: Introductory paragraph
 ** Smart Charging and Balancing the Electric Grid with EV Fleets
 # NOTE: Section General Problem and Intro of Smart Charging
 # NOTE: The physical reinforcement of the power grid is a costly and lengthy
@@ -385,7 +387,8 @@ challenges in smart grids.
 
 
 #+LATEX: \clearpage
-* Theoretical Background (10%)
+* Theoretical Background
+# NOTE: 10%
 ** Electricity Markets
 *** Balancing Market
 # cite:brandt17_evaluat_busin_model_vehic_grid_integ has a good section
@@ -816,7 +819,8 @@ environment, convergence and stability are a serious problem. /W-learning/
 cite:humphrys96_action_selec_method_using_reinf_learn is an multi-agent approach
 that aims to solve these difficulties.
 
-* Empirical Setting / Data (10%)
+* Empirical Setting
+# NOTE: 10%
 ** Carsharing Fleets of Electric Vehicles
 # Car2Go FourTwo assumptions:
 # https://www.mobilityhouse.com/de_de/elektroautos/smart/smart-eq-fortwo.html#smart-eq-fortwo-ladeinformationen
@@ -866,7 +870,8 @@ Stuttgart.
 #   - 100kw
 *** Intraday Continuous Spot Market
 
-* Model: FleetRL (20%)
+* Model: FleetRL
+# NOTE: 20%
 ** Information Assumptions
 # See: cite:mashhour11_biddin_strat_virtual_power_plant_1
 ** Mobility Demand & Clearing Price Prediction
@@ -878,7 +883,8 @@ Stuttgart.
 ** Dispatch Heuristic / Algorithm
 # - See cite:vandael15_reinf_learn_heuris_ev_fleet
 
-* Evaluation (30%)
+* Evaluation
+# NOTE: 30%
 ** Event-based Simulation
 ** Benchmark: Ad-hoc Strategies
 # - Decision Tree like models
@@ -887,13 +893,15 @@ Stuttgart.
 ** Sensitivity Analysis: Prediction Accuracy
 ** Sensitivity Analysis: Infrastructure Changes
 ** Sensitivity Analysis: Bidding Strategy
-* Discussion (5%)
+* Discussion
+# NOTE: 5%
 ** Generalizability
 ** Future Electricity Landscape
 ** Limitations
 # - See cite:vazquez-canteli19_reinf_learn_deman_respon conclusion for
 #   limitations in RL.
-* Conclusion (5%)
+* Conclusion
+# NOTE 5%
 ** Contribution
 # TODO: Compare to most simular studies.
 # cite:kahlen18_elect_vehic_virtual_power_plant_dilem,vandael15_reinf_learn_heuris_ev_fleet etc..
@@ -903,6 +911,3 @@ Stuttgart.
 #+LATEX: \clearpage
 bibliography:~/uni/ma-thesis/bibliography/references.bib
 bibliographystyle:apacite
-
-* Footnotes
-
