@@ -390,9 +390,46 @@ challenges in smart grids.
 * Theoretical Background
 # NOTE: 10%
 ** Electricity Markets
+On electricity markets actors participate in auctions to match the supply of
+electricity generation and the demand for electricity consumption. Participants
+place asks (sale offers) and bids (purchase orders). The price is determined by
+an auction mechanism, which can take different forms depending on the type of
+market. Germany, like many other countries, has a liberalized energy system in
+which the generation and distribution of electricity are decoupled. Multiple
+electricity markets exist in a liberalized energy system. They differ in the
+auction design and in their reaction time between the order contract and the
+delivery of electricity. Day-ahead markets and spot markets have a reaction time
+between a day and several hours, whereas in operating reserve markets the
+reaction time ranges from minutes to seconds. The auction mechanism design is
+essential for electric markets cite:kambil98_reeng_dutch_flower_auction.
+Electricity markets work according to the merit order principle; resources are
+considered in an ascending order of the energy price until the capacity demand
+is met. The clearing price is determined by the energy price, at the point where
+supply meets demand. Payment models differ in the markets: In contrast to
+day-ahead markets, where a uniform pricing schema is applied, in secondary
+reserve markets and intraday markets bidders get compensated by the price they
+bid (pay-as-bid principle).
+
+# TODO: Infrastructure constraints, not possible to offer EV batteries to the operating reserve market
+Carsharing fleets can offer the capacity of their EV batteries on multiple
+markets at the same time to make use of the different market properties. On
+operating reserve markets are prices usually more volatile and consequently more
+attractive for VPPs cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
+Operating reserve markets also bear a higher risk for the fleet: Commitments
+have to be made one week in advance when customer demands are still of
+uncertain. In order to not face penalties for unfulfilled commitments only a
+conservative amount of capacity can be offered to the market. On the other hand,
+spot markets allow participants to continuously trade electricity products up to
+fifteen minutes prior to delivery. At this point, it is possible to predict if
+an EV is likely going to be rented out with a high accuracy. This creates the
+possibility to trade the remaining available capacity with a low risk at the
+spot market.
+# TODO: Include market volume, etc.
+# TODO: New German Mischpreisverfahren.
+
 *** Balancing Market
-# cite:brandt17_evaluat_busin_model_vehic_grid_integ has a good section
-# explaining the markets.
+cite:brandt17_evaluat_busin_model_vehic_grid_integ
+# has a good section # explaining the markets.
 *** Spot Market
 ** Reinforcement Learning label:sec-reinforcement-learning
 The following chapter will give an overview of the most important Reinforcement
