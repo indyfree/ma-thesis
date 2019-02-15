@@ -277,6 +277,37 @@ order to buy (bid) and an order to sell (ask) is matched the trade will get
 executed. The order book is visible to all participants, hence it is known which
 unmatched orders exist at the time of interest.
 
+* Reinforcement Learning Elements
+**** Policy
+- Agent behavior at a given time
+- Mapping states to actions
+- Function or Lookup table
+- Sufficient to determine behavior
+- Policies may be stochastic, give probabilities for each action
+**** Reward signal
+- Goal of the RL problem
+- Numeric signal the environment sends to the agent
+- Agents objective is to maximize the reward signal on the long run
+- Reward signal primary reason to change the policy: Low reward following an
+  action of the policy may result in changing the policy to select another action
+- Rewards determine the immediate desirability of a state
+- Reward signals can be stochastic functions of the state and the actions
+**** Value function
+- Value of a state is the total amount of reward an agent can expect to
+  accumulate over the future, starting from that state
+- Values indicate the long-term desirability of states, taking future states and
+  their rewards into account.
+- We seek actions cause states of highest value, because these actions obtain
+  the greatest amount of reward in int long run.
+- Values must be estimated and re-estimated over the agents lifetime.
+- Efficiently estimating values is the most important component.
+**** Model of the environment
+- Model allows inferences to be made about how the environment will behave.
+  E.g., Given state and action the model predicts the next state and next reward.
+- Model-based methods are used for **Planning**: Deciding on a course of action by
+  considering possible future situations before they happen.
+ - **Control**: Model-free methods are simpler methods, what are explicitly trial-and-error learners
+
 * Literature Review
 
 ** Smart Charging and EV fleets
