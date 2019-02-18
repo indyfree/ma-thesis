@@ -129,7 +129,6 @@ possibility to trade the remaining available capacity with a low risk at the
 spot market. In the following, we will explain the market design of balancing
 markets and spot markets in more detail, since they are the markets we included
 in our research.
-# TODO: Include market volume, etc.
 #+CAPTION[Electricity Market Design]: \textbf{Adapt own figure!} Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
 [[./fig/electricity_markets.png]]
 
@@ -201,7 +200,25 @@ price $p_w$, instead of a market clearing price, this type of auction is called
 # section?
 # NOTE: Possible include example
 # NOTE: Mention New German Mischpreisverfahren.
+# NOTE: Possible include market volume, average prices, etc..
 *** Spot Market
+- cite:kiesel17_econom_analy_intrad_elect_prices
+- cite:karanfil17_role_contin_intrad_elect_market
+- cite:pape16_are_fundam_enoug
+# 1. Explain why spot/epex exists
+# 2. Explain different types of spot markets
+# 3. Focus on intraday continous market
+# 4. Explain general characteristics
+# 5. Explain auction procedure, with exact times
+Electricity products are 15-minute contracts, hourly contracts, and block
+contracts. The products can be traded up until 30 minutes before delivery (5
+minutes in the same control area). Participants can submit limit orders at any
+time during the trading window and equally change or withdraw the order at any
+time before the order is accepted. Limit orders are specified as quantity/price
+pairs. When an order to buy (bid) and an order to sell (ask) is matched the
+trade will get executed. The order book is visible to all participants, hence it
+is known which unmatched orders exist at the time of interest.
+
 ** Reinforcement Learning label:sec-reinforcement-learning
 The following chapter will give an overview of the most important Reinforcement
 Learning (RL) concepts and will introduce the corresponding mathematical
@@ -1011,22 +1028,14 @@ challenges in smart grids.
 # |---------------------+---------+------------+----------+------------+-------------+---------+--------------+---------------|
 # |---------------------+---------+------------+----------+------------+-------------+---------+--------------+---------------|
 # #+LATEX:}
-# *** Intraday Continuous Spot Market
+*** Intraday Continuous Spot Market
 
 # # TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
 # We choose to use the EPEX Spot Intraday Continuous market in this research. The
 # data have been provided by ProCom GmbH[fn:1] and encompass order books and
 # executed trades from 01.06.2016 until 01.01.2018. As displayed in Table
 # ref:spot-market-sample-data, trades can have a very short lead time before
-# delivery, which is beneficial for our proposed trading strategy. Electricity
-# products are 15-minute contracts, hourly contracts, and block contracts. The
-# products can be traded up until 30 minutes before delivery (5 minutes in the
-# same control area). Participants can submit limit orders at any time during the
-# trading window and equally change or withdraw the order at any time before the
-# order is accepted. Limit orders are specified as quantity/price pairs. When an
-# order to buy (bid) and an order to sell (ask) is matched the trade will get
-# executed. The order book is visible to all participants, hence it is known which
-# unmatched orders exist at the time of interest.
+# delivery, which is beneficial for our proposed trading strategy.
 
 * Model: FleetRL
 # NOTE: 20%

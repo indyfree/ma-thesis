@@ -1,4 +1,4 @@
-% Created 2019-02-18 Mon 16:23
+% Created 2019-02-18 Mon 17:38
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -18,10 +18,10 @@
 \usepackage{setspace}
 \usepackage{caption}
 \onehalfspacing
+\usepackage[official]{eurosym}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{format/notation}
-\usepackage[official]{eurosym}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
@@ -204,21 +204,21 @@ be real-valued vectors are written in bold and in lower case (even if random var
 \pagenumbering{arabic}
 
 \section{Introduction}
-\label{sec:org6713f95}
+\label{sec:org7e79b0d}
 \subsection{Research Motivation}
-\label{sec:org7f2df56}
+\label{sec:orgfa9e057}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org11a61d2}
+\label{sec:orgcb788bb}
 \subsection{Relevance}
-\label{sec:orge9f39e0}
+\label{sec:org21c9e5b}
 
 \section{Theoretical Background}
-\label{sec:org190790e}
+\label{sec:org433718b}
 \subsection{Electricity Markets}
-\label{sec:org38ed038}
+\label{sec:orgefcb96b}
 On electricity markets actors participate in auctions to match the supply of
 electricity generation and the demand for electricity consumption. Participants
 place asks (sale offers) and bids (purchase orders). The price is determined by
@@ -254,14 +254,14 @@ possibility to trade the remaining available capacity with a low risk at the
 spot market. In the following, we will explain the market design of balancing
 markets and spot markets in more detail, since they are the markets we included
 in our research.
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./fig/electricity_markets.png}
 \caption[Electricity Market Design]{\textbf{Adapt own figure!} Interaction between electricity markets in relation to capacity allocation \label{fig-electricity-markets}}
 \end{figure}
+
 \subsubsection{Balancing Market}
-\label{sec:org4f5bffc}
+\label{sec:orgbcdbbad}
 The balancing market is a tool to balance frequency deviations in the power
 grid. It offers auctions for primary control reserve, secondary control reserve
 as well as tertiary control reserve (minute reserve), which primarily differ in
@@ -313,18 +313,33 @@ energy in \(\text{\euro{}/MWh}\). The TSO determines the target quantity of ener
 to acquire per timeslot, it usually acquires much higher regulation capacity to
 minimize risks and activates the capacity on demand. The TSO accepts the bids
 based on the capacity price in a merit order. Providers, whose bids were
-accepted, instantly get compensated for the provided capacity: \(R_c = p_c \times P\).
-At the time regulation capacity is needed (usually a day or a week later), the
-TSO activates the capacity according to a merit order of the ascending \emph{working
-prices} \(p_w\). Hence, providers are also compensated according to the actual
-power they supplied: \(R_w = p_w \times P_a\), where \(P_a\) is the
-supplied power at the timeslot. Since, provider get paid according to their
-submitted price \(p_w\), this type of auction is a \emph{pay-as-bid} auction.
-
+accepted, instantly get compensated for the provided capacity: \(R_c = p_c \times
+P\). At the time regulation capacity is needed (usually a day or a week later),
+the TSO activates the capacity according to a merit order of the ascending
+\emph{working prices} \(p_w\). Hence, providers are also compensated according to the
+actual power they supplied: \(R_w = p_w \times P_a\), where \(P_a\) is the supplied
+power at the timeslot. Since provider get paid according to their submitted
+price \(p_w\), instead of a market clearing price, this type of auction is called
+\emph{pay-as-bid} auction.
 \subsubsection{Spot Market}
-\label{sec:org933fd29}
+\label{sec:org530f07b}
+\begin{itemize}
+\item \cite{kiesel17_econom_analy_intrad_elect_prices}
+\item \cite{karanfil17_role_contin_intrad_elect_market}
+\item \cite{pape16_are_fundam_enoug}
+\end{itemize}
+
+Electricity products are 15-minute contracts, hourly contracts, and block
+contracts. The products can be traded up until 30 minutes before delivery (5
+minutes in the same control area). Participants can submit limit orders at any
+time during the trading window and equally change or withdraw the order at any
+time before the order is accepted. Limit orders are specified as quantity/price
+pairs. When an order to buy (bid) and an order to sell (ask) is matched the
+trade will get executed. The order book is visible to all participants, hence it
+is known which unmatched orders exist at the time of interest.
+
 \subsection{Reinforcement Learning \label{sec-reinforcement-learning}}
-\label{sec:org3abc531}
+\label{sec:org8e1f4c6}
 The following chapter will give an overview of the most important Reinforcement
 Learning (RL) concepts and will introduce the corresponding mathematical
 formulations. If not noted otherwise, the notation, equations, and insights are
@@ -352,7 +367,7 @@ that solve the RL problem more efficiently, tackle new challenges and are widely
 used in practice and research.
 
 \subsubsection{Markov Decision Processes \label{sec-mdp}}
-\label{sec:org9492aa1}
+\label{sec:org5cd52cb}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -417,7 +432,7 @@ when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, th
 agent is "farsighted".
 
 \subsubsection{Policies and Value Functions \label{sec-policies}}
-\label{sec:org591c25c}
+\label{sec:org0ab31d2}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -459,7 +474,7 @@ has been known as \emph{Q-learning} \cite{watkins92_q_learn}, which is described
 Chapter \ref{sec-td-learning}.
 
 \subsubsection{Bellman Equations \label{sec-bellman}}
-\label{sec:orgb5064b8}
+\label{sec:orgb76b904}
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (\ref{eq-expected-return}), current values
 are related to expected values of successive states. This relationship is
@@ -501,7 +516,7 @@ experienced state transitions instead of expected transition probabilities. The
 most common methods will be explored in the following chapters.
 
 \subsubsection{Dynamic Programming  \label{sec-dp}}
-\label{sec:org1128075}
+\label{sec:org1468485}
 \emph{Dynamic Programming} (DP) is a method to compute optimal policies, the primary
 goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
@@ -555,7 +570,7 @@ algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
 
 \subsubsection{Temporal-Difference Learning \label{sec-td-learning}}
-\label{sec:org11275c4}
+\label{sec:org5790bab}
 The previous chapter dealt with solving a \emph{planning} problem, that is computing
 an optimal solution (i.e., an optimal policy \(\pi_*\)) of an MDP when a perfect
 model of the environment is known. In the following chapters, we will look at
@@ -657,7 +672,7 @@ drastically reduced. In this case, a \emph{function approximator} can replace th
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
 \subsubsection{Approximation Methods \label{sec-fa}}
-\label{sec:org2723a2e}
+\label{sec:orgc6b892d}
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
@@ -713,7 +728,7 @@ comprehensive review of deep learning methods.
 \end{figure}
 \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 \subsubsection{Further Topics}
-\label{sec:org3b2ca17}
+\label{sec:org1990e45}
 The previous chapters provided a detailed overview of the most important
 concepts and mathematical foundations in RL. In the research there are many more
 topics that were not covered here. \emph{Eligibility traces} offer a way to more
@@ -736,9 +751,9 @@ environment, convergence and stability are a serious problem. \emph{W-learning}
 that aims to solve these difficulties.
 
 \section{Related Literature}
-\label{sec:org1487f11}
+\label{sec:orgf964411}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orga047f45}
+\label{sec:org4d219ee}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -911,7 +926,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:orgdb1db5b}
+\label{sec:orgffa44e6}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -1022,56 +1037,64 @@ challenges in smart grids.
 
 \clearpage
 \section{Empirical Setting}
-\label{sec:org8720fcf}
+\label{sec:org62740f9}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org18acea3}
+\label{sec:org5496c02}
 
 \subsection{Electricity Markets Data}
-\label{sec:org891d446}
+\label{sec:orgaddc6c3}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org92264bf}
+\label{sec:org4cbcb82}
+\subsubsection{Intraday Continuous Spot Market}
+\label{sec:org6de8d00}
+
+We choose to use the EPEX Spot Intraday Continuous market in this research. The
+data have been provided by ProCom GmbH\footnote{\url{https://procom-energy.de/}} and encompass order books and
+executed trades from 01.06.2016 until 01.01.2018. As displayed in Table
+\ref{spot-market-sample-data}, trades can have a very short lead time before
+delivery, which is beneficial for our proposed trading strategy.
 
 \section{Model: FleetRL}
-\label{sec:org2ac79f7}
+\label{sec:orgd24cecd}
 \subsection{Information Assumptions}
-\label{sec:org96aa924}
+\label{sec:org94498d9}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:orgaa5cf36}
+\label{sec:org3139587}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org113d3df}
+\label{sec:org5fc8c08}
 \subsection{Bidding Strategy}
-\label{sec:org1b3cc6d}
+\label{sec:org4108dc7}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org0af33a1}
+\label{sec:orgb6f67e4}
 
 \section{Evaluation}
-\label{sec:org7284f3e}
+\label{sec:org8311092}
 \subsection{Event-based Simulation}
-\label{sec:orgdf878f1}
+\label{sec:orgdcf6e3c}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org36fb78c}
+\label{sec:org2769490}
 \subsection{FleetRL}
-\label{sec:org88bd58d}
+\label{sec:org5260eef}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org5b1881b}
+\label{sec:org565b01d}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org6d59b2d}
+\label{sec:orgbbecdd4}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org512e19a}
+\label{sec:org747b888}
 \section{Discussion}
-\label{sec:org05a89e7}
+\label{sec:org78a0f4b}
 \subsection{Generalizability}
-\label{sec:org6e8e70c}
+\label{sec:orgd808dd4}
 \subsection{Future Electricity Landscape}
-\label{sec:org6dac2b5}
+\label{sec:org86a9dbb}
 \subsection{Limitations}
-\label{sec:orgee51b09}
+\label{sec:org8abd7da}
 \section{Conclusion}
-\label{sec:org395562b}
+\label{sec:orgfdeb62a}
 \subsection{Contribution}
-\label{sec:org0122359}
+\label{sec:org0d4a504}
 \subsection{Future Research}
-\label{sec:org9392611}
+\label{sec:org27a42b5}
 
 
 \clearpage
