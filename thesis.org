@@ -133,8 +133,6 @@ in our research.
 #+CAPTION[Electricity Market Design]: \textbf{Adapt own figure!} Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
 [[./fig/electricity_markets.png]]
 
-# NOTE: EV battery can provide energy with almost no rampup time/costs -- very
-# suitable to provide balancing services.
 *** Balancing Market
 # NOTE: Consider changing heading to Operating reserve market / frequency
 The balancing market is a tool to balance frequency deviations in the power
@@ -195,14 +193,14 @@ P$. At the time regulation capacity is needed (usually a day or a week later),
 the TSO activates the capacity according to a merit order of the ascending
 /working prices/ $p_w$. Hence, providers are also compensated according to the
 actual power they supplied: $R_w = p_w \times P_a$, where $P_a$ is the supplied
-power at the timeslot. Since, provider get paid according to their submitted
-price $p_w$, instead of a market clearing price, this type of auction is a
+power at the timeslot. Since provider get paid according to their submitted
+price $p_w$, instead of a market clearing price, this type of auction is called
 /pay-as-bid/ auction.
-# NOTE: Mention pay as bid
-# - We estimate the critical prices, $p_c$ (not) and $p_w$
+# NOTE: Add more citations? brandt?
+# NOTE: Mention: Estimate the critical prices, $p_c$ (not) and $p_w$ - in data
+# section?
 # NOTE: Possible include example
 # NOTE: Mention New German Mischpreisverfahren.
-
 *** Spot Market
 ** Reinforcement Learning label:sec-reinforcement-learning
 The following chapter will give an overview of the most important Reinforcement
