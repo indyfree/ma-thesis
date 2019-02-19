@@ -152,7 +152,7 @@ the GCRM. The market conducts daily auctions for the three types of control
 reserve that were previously mentioned. This thesis focuses on the secondary
 operating reserve auction, in which participants must be able to supply or
 absorb a minimum of 1MW of power over a 4 hour interval with a reaction time of
-30 seconds.[fn:regelleistung] Since EV batteries can absorb energy almost
+30 seconds.[fn:1] Since EV batteries can absorb energy almost
 instantly, when they are connected to a charging station, they are suitable to
 provide such balancing services. Operating reserve providers have to be
 qualified by the TSO to participate in the market and are able to reliably
@@ -166,7 +166,7 @@ capacity.
 Up until 28^{th} July 2018, auctions were held weekly, with two different
 segments each week (peak hours/non-peak hours). Afterwards, the auction
 mechanism changed to /daily/ auctions of six four-hour segments of positive and
-negative control reserve.[fn:bundesnetzargentur] The shorter auction cycles
+negative control reserve.[fn:2] The shorter auction cycles
 facilitate the integration of renewable energy generators into the secondary
 control reserve market, as they are dependent on accurate (short-term) capacity
 forecasts.
@@ -1083,9 +1083,14 @@ bibliographystyle:apacite
 
 * Footnotes
 
-[fn:1] https://procom-energy.de/
-[fn:regelleistung] See https://regelleistung.net/, accessed on 15^{th} February
+[fn:1] See https://regelleistung.net/, accessed on 15^{th} February
 2019, for further information on the market design and historical data.
-[fn:bundesnetzargentur]
+
+[fn:2]
 https://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2017/28062017_Regelenergie.html,
 accessed 18^{th} February, 2019
+
+[fn:3]https://www.epexspot.com/en/press-media/press/details/press/Traded_volumes_soar_to_an_all-time_high_in_2018,
+accessed 19^{th} February, 2019
+
+[fn:4] https://procom-energy.de/
