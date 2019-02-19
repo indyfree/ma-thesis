@@ -114,6 +114,8 @@ contrast to day-ahead markets, where a uniform pricing schema is applied, in
 secondary reserve markets and intraday markets bidders get compensated by the
 price they bid (pay-as-bid principle).
 
+
+
 Carsharing fleets can offer the capacity of their EV batteries on multiple
 markets at the same time to make use of the different market properties. On
 operating reserve markets are prices usually more volatile and consequently more
@@ -274,7 +276,7 @@ $a\in\A$. In /finite/ MDPs, the random variables $\R_t$ and $S_t$ have
 well-defined probability density functions (PDF), which are solely dependent on
 the previous state and action. Consequently, it is possible to define ($\defeq$)
 the /dynamics/ of the MDP as following:
-\begin{equation} \label{eq-dynamics}
+\begin{equation}
     p(s',r|s,a) \defeq \Pr{S_t=s',R_t=r|S_{t-1}=s,A_t=a},
 \end{equation}
 for all $s',s\!\in\!\S$, $r\!\in\!\R$ and $a\!\in\!\A$. Note that each possible
@@ -284,7 +286,7 @@ state possesses the so-called /Markov property/. If not noted otherwise, the
 Markov property is assumed throughout the whole chapter. The dynamics function
 allows computing the /state-transition probabilities/, another important
 characteristic of an MDP, as following:
-\begin{equation} \label{eq-state-transition}
+\begin{equation}
     p(s'|s,a) \defeq \Pr{S_t\!=\!s'|S_{t-1}\!=\!s,A_t\!=\!a} = \sum_{r\in\R}{p(s', r|s, a)},
 \end{equation}
 for $s',s\!\in\!\S$, $r\!\in\!\R$ and $a\!\in\!\A$.
@@ -324,13 +326,13 @@ the agent's interaction with the environment.
 In RL, value functions of states and value functions of state-action pairs are
 used. The /state-value function of policy/ $\pi$ is denoted as $\vpi(s)$ and is
 defined as the expected return when starting in $s$ and following policy $\pi$:
-\begin{equation} \label{eq-state-value}
+\begin{equation}
     \vpi(s) \defeq \EE{\pi}{G_t|S_t\!=\!s}, \text{ for all } s\in\S
 \end{equation}
 The /action-value function of policy/ $\pi$ is denoted as $\qpi(s,a)$ and is
 defined as the expected return when starting in $s$, taking action $a$ and
 following policy $\pi$ afterwards:
-\begin{equation} \label{eq-action-value}
+\begin{equation}
     \qpi(s,a) \defeq \EE{\pi}{G_t|S_t\!=\!s, A_t\!=\!a}, \text{ for all } a\in\A, s\in\S
 \end{equation}
 The /optimal policy/ $\pi_*$ has a greater (or equal) expected return than all
@@ -510,7 +512,7 @@ policy $\pi$. The estimation can be done similar to TD prediction of state
 values (Eq. ref:eq-td-prediction). Instead of considering state transitions,
 state-action transitions are considered in this case. The update rule is
 constructed as follows:
-\begin{equation} \label{eq-sarsa}
+\begin{equation}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma Q(S_{t+1},A_{t+1}) - Q(S_t, A_t)\big]
 \end{equation}
 After every transition from a state $S_t$, an update operation using the events
@@ -525,7 +527,7 @@ pairs.
 A breakthrough in RL has been achieved when textcite:watkins92_q_learn developed
 the /off-policy/ TD control algorithm, called Q-learning. The update rule is
 defined as follows:
-\begin{equation} \label{eq-q-learning}
+\begin{equation}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma\max_a Q(S_{t+1},a) - Q(S_t, A_t)\big]
 \end{equation}
 Here, the estimated action-values $Q$ are updated towards the highest estimated
@@ -546,7 +548,7 @@ representation is computational infeasible and the speed of convergence is
 drastically reduced. In this case, a /function approximator/ can replace the
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
-*** Approximation Methods label:sec-fa
+*** Approximation Methods
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
