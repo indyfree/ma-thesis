@@ -8,7 +8,10 @@
 ** TODO Fix paragraph spacing
 
 [[file:~/uni/ma-thesis/thesis.org::*Theoretical%20Background%20(10%25)][Theoretical Background (10%)]]
-** TODO Concise Wording of regulation capacity, balancing power, frequency regulation...
+** TODO Concise Wording:
+- regulation capacity, balancing power, frequency regulation...
+- tender period, segment, interval, time period, tender/auction...
+- carsharing company/provider
 ** TODO Comment Literature Review
 Structure the whole section in a stricter way. I mean that the question I always
 asked myself why reading was: "so what?" What is you Ziel? As far as I
