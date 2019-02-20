@@ -1,4 +1,4 @@
-% Created 2019-02-20 Wed 12:31
+% Created 2019-02-20 Wed 14:45
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -131,16 +131,18 @@ Köln, den 01.05.2019
 \section*{List of Abbreviations} \markboth{LIST OF ABBREVIATIONS}{}
 \begin{acronym}[GCRM]
 	\acro{ANN}{Artificial Neural Network}
-	\acro{DSO}{Distribution System Operator}
 	\acro{DP}{Dynamic Programming}
+	\acro{DSO}{Distribution System Operator}
+	\acro{EPEX}{European Power Exchange}
 	\acro{EV}{Electric Vehicle}
-	\acro{GP}{Genetic Programming}
-	\acro{GPI}{Generalized Policy Iteration}
 	\acro{GCRM}{German Control Reserve Market}
+	\acro{GPI}{Generalized Policy Iteration}
+	\acro{GP}{Genetic Programming}
 	\acro{MAW}{Mean Asymmetric Weighted Objective Function}
 	\acro{MC}{Monte Carlo}
 	\acro{MDP}{Markov Decision Process}
 	\acro{PDF}{Probability Density Function}
+	\acro{RES}{Renewable Energy Sources}
 	\acro{RL}{Reinforcement Learning}
 	\acro{TD}{Temporal-Difference}
 	\acro{TSO}{Transmission System Operator}
@@ -204,21 +206,21 @@ be real-valued vectors are written in bold and in lower case (even if random var
 \pagenumbering{arabic}
 
 \section{Introduction}
-\label{sec:org39ccb22}
+\label{sec:org058ded9}
 \subsection{Research Motivation}
-\label{sec:org8b1ff38}
+\label{sec:org0b599f0}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org9c0b96f}
+\label{sec:org6e90d7d}
 \subsection{Relevance}
-\label{sec:orgb0dff75}
+\label{sec:org4d7d8fa}
 
 \section{Theoretical Background}
-\label{sec:orgf3ad76a}
+\label{sec:org38cd74e}
 \subsection{Electricity Markets}
-\label{sec:orgac1314a}
+\label{sec:orgc3ce6a9}
 On electricity markets actors participate in auctions to match the supply of
 electricity generation and the demand for electricity consumption. Participants
 place asks (sale offers) and bids (purchase orders). The price is determined by
@@ -261,7 +263,7 @@ in our research.
 \end{figure}
 
 \subsubsection{Balancing Market}
-\label{sec:org94d5ab6}
+\label{sec:org1ea0df9}
 The balancing market is a tool to balance frequency deviations in the power
 grid. It offers auctions for primary control reserve, secondary control reserve
 as well as tertiary control reserve (minute reserve), which primarily differ in
@@ -322,66 +324,59 @@ power at the timeslot. Since provider get paid according to their submitted
 price \(p_w\), instead of a market clearing price, this type of auction is called
 \emph{pay-as-bid} auction.
 \subsubsection{Spot Market}
-\label{sec:orgdce799b}
+\label{sec:orga370364}
 As mentioned in the previous chapter, the continuous equilibrium of electricity
 supply and demand is ensured through a sequence of interdependent wholesale
 markets (cited) \cite{pape16_are_fundam_enoug}. Next to the balancing market at
 the end of the sequence, mainly two different types of spot markets exists, the
 day-ahead market and the intraday market. In this research, we consider the
 European Power Exchange (EPEX Spot) as it is the largest electricity market in Europe,
-with a total trading volume of approximately 567TWh in 2018, \footnote{\url{https://www.epexspot.com/en/press-media/press/details/press/Traded\_volumes\_soar\_to\_an\_all-time\_high\_in\_2018},
-accessed 19\textsuperscript{th} February, 2019} but most
+with a total trading volume of approximately 567TWh in 2018\footnote{\url{https://www.epexspot.com/en/press-media/press/details/press/Traded\_volumes\_soar\_to\_an\_all-time\_high\_in\_2018},
+accessed 19\textsuperscript{th} February, 2019\label{orgc80eb6a}}, but most
 electronic spot markets in western economies work with similar market mechanisms.
 
 In Germany, the most important spot market is the day-ahead market with a
-trading volume of over 234TWh. Participants can place asks and bids for hourly
-contracts of the following day on the EPEX Spot until the market closes at 12pm
-on the day before delivery (Figure \ref{fig-electricity-markets}).
+trading volume of over 234TWh in 2018\textsuperscript{\ref{orgc80eb6a}}. Participants place asks and bids for
+hourly contracts of the following day on the \emph{EPEX Spot Day-ahead Auction}
+market until the market closes at 12pm on the day before delivery (Figure
+\ref{fig-electricity-markets}). The day-ahead market plays an important role for
+the integration of volatile renewable energy sources (RES) \cite{pape16_are_fundam_enoug}. Generators forecast
+the expected generation capacity for the next day and sell those quantities on
+the market \cite{karanfil17_role_contin_intrad_elect_market}. After the market closes, the
+participants have the opportunity to trade the difference between the day-ahead
+forecast and the more accurate intraday forecast on the intraday market
+\cite{kiesel17_econom_analy_intrad_elect_prices}. In this way, RES generators
+self-balance their portfolios, which is more cost effective than to rely on
+balancing services, where the TSO imposes high balancing costs on participants
+ex-ante \cite{pape16_are_fundam_enoug}.
 
-The day-ahead market plays an important role for the integration of RES, generators
-forecast the expected generation capacity for the next day and sell those
-quantities on the this market (cited) \cite{pape16_are_fundam_enoug}.
+On the \emph{EPEX Spot Intraday Continuous} market, electricity products can be traded
+up until 5 minutes before physical delivery. Hourly contracts, as well as
+15-minute and block contracts can be traded. In contrast to the day-ahead
+auction, the intraday market is a continuous order-driven market. Participants
+can submit limit orders at any time during the trading window and equally change
+or withdraw the order at any time before the order is accepted. Limit orders are
+specified as price-quantity. When an order to buy (bid) and an order to
+sell (ask) is matched, the trade immediately gets executed. The order book is
+visible to all participants, hence it is known which unmatched orders exist at
+the time of interest. With a market volume of 82TWh in 2018\textsuperscript{\ref{orgc80eb6a}}, the intraday market
+has considerable less volume than the day-ahead market. Despite that, it plays
+an important role for to the stability of the grid. All executed trades on the
+intraday market potentially reduce the activation of control reserve through the
+TSO.
 
-After the day-ahead market closure, the participants have the opportunity to
-trade the difference between the forecasted day-ahead capacities and the more
-accurate intraday forecasts on the \emph{intraday market}. This quantity called
-\emph{forecast error} is used by RES generators to self-balance their portfolios.
-Participating on the intraday market is more cost effective for participants
-than to rely on balancing services that have been described in the previous
-chapter, where balancing posts are imposed participants ex-ante
-\cite{pape16_are_fundam_enoug}. On the EPEX Intraday Continuous market different
-products can be traded up until 5 minutes before physical delivery. Hourly
-contracts, as well as 15-minute and block contracts can be traded. In contrast
-to the day-ahead auction, the intraday market is a continuous order-driven
-market. Participants can submit limit orders at any time during the trading
-window and equally change or withdraw the order at any time before the order is
-accepted. Limit orders are specified as quantity/price pairs. When an order to
-buy (bid) and an order to sell (ask) is matched the trade will immediately get
-executed. The order book is visible to all participants, hence it is known which
-unmatched orders exist at the time of interest. With a market volume of 82TWh in
-2018, the intraday-continuous market is of minor trading importance in Germany
-than the day-ahead market. Despite that, it is of major importance to the
-stability of the grid, executed trades on the intraday market potentially reduce
-activation of control reserve through the TSO.
-
-The continuous intraday market is attractive for Smart Charging EV fleets with
-uncertain mobility demand. Due to the very short time before delivery, EV fleet
+Purchasing electricity on the continuous intraday market is attractive EV fleets
+with uncertain mobility demand. Due to the short time before delivery, EV fleet
 operators can rely on highly accurate forecasts of available battery capacity to
 charge, before submitting an order to buy. In this way, they can reliably charge
 at a potentially cheaper price at the intraday market than the standard tariff.
 In an integrated bidding strategy, EV fleet operators can, similarly to RES
 generators, balance out forecast errors of available battery capacity on the
 intraday market. Bids that have been committed to other markets earlier (e.g.,
-to the secondary operating reserve market)  can be complemented with trades on
+to the secondary operating reserve market) can be complemented with trades on
 the intraday market.
-
-\begin{itemize}
-\item \cite{kiesel17_econom_analy_intrad_elect_prices}
-\item \cite{karanfil17_role_contin_intrad_elect_market}
-\item \cite{pape16_are_fundam_enoug}
-\end{itemize}
 \subsection{Reinforcement Learning \label{sec-reinforcement-learning}}
-\label{sec:org1f8e9da}
+\label{sec:orga32415a}
 The following chapter will give an overview of the most important Reinforcement
 Learning (RL) concepts and will introduce the corresponding mathematical
 formulations. If not noted otherwise, the notation, equations, and insights are
@@ -409,7 +404,7 @@ problem more efficiently, tackle new challenges and are widely used in practice
 and research.
 
 \subsubsection{Markov Decision Processes \label{sec-mdp}}
-\label{sec:org74ab5b7}
+\label{sec:org69dd435}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -474,7 +469,7 @@ when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, th
 agent is "farsighted".
 
 \subsubsection{Policies and Value Functions \label{sec-policies}}
-\label{sec:orge625bd8}
+\label{sec:orgd39ad8e}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -516,7 +511,7 @@ has been known as \emph{Q-learning} \cite{watkins92_q_learn}, which is described
 Chapter \ref{sec-td-learning}.
 
 \subsubsection{Bellman Equations \label{sec-bellman}}
-\label{sec:org50d53b4}
+\label{sec:org63d1643}
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (\ref{eq-expected-return}), current values
 are related to expected values of successive states. This relationship is
@@ -558,7 +553,7 @@ experienced state transitions instead of expected transition probabilities. The
 most common methods will be explored in the following chapters.
 
 \subsubsection{Dynamic Programming  \label{sec-dp}}
-\label{sec:org87cff04}
+\label{sec:org0f1ddac}
 \emph{Dynamic Programming} (DP) is a method to compute optimal policies, the primary
 goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
@@ -612,7 +607,7 @@ algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
 
 \subsubsection{Temporal-Difference Learning \label{sec-td-learning}}
-\label{sec:org6d4f577}
+\label{sec:orgd9601ef}
 The previous chapter dealt with solving a \emph{planning} problem, that is computing
 an optimal solution (i.e., an optimal policy \(\pi_*\)) of an MDP when a perfect
 model of the environment is known. In the following chapters, we will look at
@@ -714,7 +709,7 @@ drastically reduced. In this case, a \emph{function approximator} can replace th
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
 \subsubsection{Approximation Methods}
-\label{sec:orga1f4757}
+\label{sec:org3f2e341}
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
@@ -770,7 +765,7 @@ comprehensive review of deep learning methods.
 \end{figure}
 \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 \subsubsection{Further Topics}
-\label{sec:orgd937230}
+\label{sec:org555c80c}
 The previous chapters provided a detailed overview of the most important
 concepts and mathematical foundations in RL. In the research there are many more
 topics that were not covered here. \emph{Eligibility traces} offer a way to more
@@ -793,9 +788,9 @@ environment, convergence and stability are a serious problem. \emph{W-learning}
 that aims to solve these difficulties.
 
 \section{Related Literature}
-\label{sec:org3ecd145}
+\label{sec:org7ecec78}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orgea7cca4}
+\label{sec:org9107c42}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -968,7 +963,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org5aec896}
+\label{sec:org42016c1}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -1079,58 +1074,58 @@ challenges in smart grids.
 
 \clearpage
 \section{Empirical Setting}
-\label{sec:orge1a10dd}
+\label{sec:org3f6f623}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org11a52e4}
+\label{sec:org5160820}
 
 \subsection{Electricity Markets Data}
-\label{sec:org91d200f}
+\label{sec:orgf2df423}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org0b5e469}
+\label{sec:org850d803}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:org6eed8a0}
+\label{sec:orgaf20fe0}
 
 \section{Model: FleetRL}
-\label{sec:orgc23d2f0}
+\label{sec:org500ca7e}
 \subsection{Information Assumptions}
-\label{sec:org1f2a628}
+\label{sec:orgf3877d0}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org4767dc5}
+\label{sec:org5420a72}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org8cbe8a5}
+\label{sec:orgb4ea4a7}
 \subsection{Bidding Strategy}
-\label{sec:orgf286172}
+\label{sec:org7fe0f82}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org81f21dc}
+\label{sec:org5d73b6e}
 
 \section{Evaluation}
-\label{sec:org5b4ca8d}
+\label{sec:org8b4fc4e}
 \subsection{Event-based Simulation}
-\label{sec:org829f089}
+\label{sec:org0b74391}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org3aac77e}
+\label{sec:org61a919f}
 \subsection{FleetRL}
-\label{sec:org4b46fe0}
+\label{sec:org4f33474}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:orgdd9545c}
+\label{sec:org24b66e9}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org41f5bb2}
+\label{sec:org5e1b7d6}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org7592fc0}
+\label{sec:orgef4cfe9}
 \section{Discussion}
-\label{sec:org9e015fa}
+\label{sec:org7c5c733}
 \subsection{Generalizability}
-\label{sec:orgdc0bdb5}
+\label{sec:org21de67c}
 \subsection{Future Electricity Landscape}
-\label{sec:orgddce6e3}
+\label{sec:orgb259db1}
 \subsection{Limitations}
-\label{sec:org6caa63e}
+\label{sec:orgcc78e50}
 \section{Conclusion}
-\label{sec:org5861956}
+\label{sec:orgd4064c8}
 \subsection{Contribution}
-\label{sec:org8c7bd81}
+\label{sec:orgeea09af}
 \subsection{Future Research}
-\label{sec:org866cd06}
+\label{sec:org5348f97}
 
 
 \clearpage
