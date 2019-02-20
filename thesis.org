@@ -204,40 +204,50 @@ price $p_w$, instead of a market clearing price, this type of auction is called
 *** Spot Market
 As mentioned in the previous chapter, the continuous equilibrium of electricity
 supply and demand is ensured through a sequence of interdependent wholesale
-markets (cited) cite:pape16_are_fundam_enoug. Next to the previously mentioned
-balancing market at the end of the sequence, mainly two different types of spot
-markets exists, the day-ahead market and the intraday market. The European Power
-Exchange (EPEX Spot) is the largest electricity market in Europe, with a total
-trading volume of approximately 567 TWh in 2018.[fn:3] In Germany, the most
-important spot market is the day-ahead auction with a volume of over 234 TWh.
-The market closes at 12pm on the day before delivery, participants place asks
-and bids for hourly contracts of the following day. The clearing price is
-determined by this double auction, where supply meets demand, and all
-participants are uniformly compensated that clearing price. The day-ahead market
-plays an important role for the integration of RES, generators forecast the
-expected generation capacity for the next day and sell those quantities in the
-day-ahead market (cited) cite:pape16_are_fundam_enoug. After market closure, the
-participants have the opportunity to trade the difference between the forecasted
-day-ahead capacities and the more accurate intraday forecasts on the /intraday
-market/. This quantity called /forecast error/ is used by RES generators to
-self-balance their portfolios. Participating on the intraday market is more cost
-effective for participants than to rely on balancing services that have been
-described in the previous chapter, where balancing posts are imposed
-participants ex-ante cite:pape16_are_fundam_enoug. On the EPEX Intraday
-Continuous market different products can be traded up until 5 minutes before
-physical delivery. Hourly contracts, as well as 15-minute and block contracts
-can be traded. In contrast to the day-ahead auction, the intraday market is a
-continuous order-driven market. Participants can submit limit orders at any time
-during the trading window and equally change or withdraw the order at any time
-before the order is accepted. Limit orders are specified as quantity/price
-pairs. When an order to buy (bid) and an order to sell (ask) is matched the
-trade will immediately get executed. The order book is visible to all
-participants, hence it is known which unmatched orders exist at the time of
-interest. With a market volume of 82 TWh in 2018, the intraday-continous market
-is of minor trading importance in Germany than the day-ahead market. Despite
-that, it is of major importance to the stability of the grid, executed trades on
-the intraday market potentially reduce activation of control reserve through the
-TSO.
+markets (cited) cite:pape16_are_fundam_enoug. Next to the balancing market at
+the end of the sequence, mainly two different types of spot markets exists, the
+day-ahead market and the intraday market. In this research, we consider the
+European Power Exchange (EPEX Spot) as it is the largest electricity market in Europe,
+with a total trading volume of approximately 567TWh in 2018, [fn:3] but most
+electronic spot markets in western economies work with similar market mechanisms.
+
+In Germany, the most important spot market is the day-ahead market with a
+trading volume of over 234TWh. Participants can place asks and bids for hourly
+contracts of the following day on the EPEX Spot until the market closes at 12pm
+on the day before delivery (Figure ref:fig-electricity-markets).
+
+# NOTE: Leave out since not imporant for our strategy??
+On the day-ahead market, electricity is allocated by means of a sealed-bid double
+auction. Bids and asks are sorted according to an ascending/descending merit
+order of the submitted price respectively. At the point where supply quantities
+(asks) meets demand quantities (bids), the clearing price is determined. All
+participants are then uniformly compensated according to this price.
+
+The day-ahead market plays an important role for the integration of RES, generators
+forecast the expected generation capacity for the next day and sell those
+quantities on the this market (cited) cite:pape16_are_fundam_enoug.
+
+After the day-ahead market closure, the participants have the opportunity to
+trade the difference between the forecasted day-ahead capacities and the more
+accurate intraday forecasts on the /intraday market/. This quantity called
+/forecast error/ is used by RES generators to self-balance their portfolios.
+Participating on the intraday market is more cost effective for participants
+than to rely on balancing services that have been described in the previous
+chapter, where balancing posts are imposed participants ex-ante
+cite:pape16_are_fundam_enoug. On the EPEX Intraday Continuous market different
+products can be traded up until 5 minutes before physical delivery. Hourly
+contracts, as well as 15-minute and block contracts can be traded. In contrast
+to the day-ahead auction, the intraday market is a continuous order-driven
+market. Participants can submit limit orders at any time during the trading
+window and equally change or withdraw the order at any time before the order is
+accepted. Limit orders are specified as quantity/price pairs. When an order to
+buy (bid) and an order to sell (ask) is matched the trade will immediately get
+executed. The order book is visible to all participants, hence it is known which
+unmatched orders exist at the time of interest. With a market volume of 82TWh in
+2018, the intraday-continuous market is of minor trading importance in Germany
+than the day-ahead market. Despite that, it is of major importance to the
+stability of the grid, executed trades on the intraday market potentially reduce
+activation of control reserve through the TSO.
 
 The continuous intraday market is attractive for Smart Charging EV fleets with
 uncertain mobility demand. Due to the very short time before delivery, EV fleet
