@@ -216,13 +216,6 @@ trading volume of over 234TWh. Participants can place asks and bids for hourly
 contracts of the following day on the EPEX Spot until the market closes at 12pm
 on the day before delivery (Figure ref:fig-electricity-markets).
 
-# NOTE: Leave out since not imporant for our strategy??
-On the day-ahead market, electricity is allocated by means of a sealed-bid double
-auction. Bids and asks are sorted according to an ascending/descending merit
-order of the submitted price respectively. At the point where supply quantities
-(asks) meets demand quantities (bids), the clearing price is determined. All
-participants are then uniformly compensated according to this price.
-
 The day-ahead market plays an important role for the integration of RES, generators
 forecast the expected generation capacity for the next day and sell those
 quantities on the this market (cited) cite:pape16_are_fundam_enoug.
