@@ -114,8 +114,6 @@ contrast to day-ahead markets, where a uniform pricing schema is applied, in
 secondary reserve markets and intraday markets bidders get compensated by the
 price they bid (pay-as-bid principle).
 
-
-
 Carsharing fleets can offer the capacity of their EV batteries on multiple
 markets at the same time to make use of the different market properties. On
 operating reserve markets are prices usually more volatile and consequently more
@@ -204,25 +202,59 @@ price $p_w$, instead of a market clearing price, this type of auction is called
 # NOTE: Mention New German Mischpreisverfahren.
 # NOTE: Possible include market volume, average prices, etc..
 *** Spot Market
+As mentioned in the previous chapter, the continuous equilibrium of electricity
+supply and demand is ensured through a sequence of interdependent wholesale
+markets (cited) cite:pape16_are_fundam_enoug. Next to the previously mentioned
+balancing market at the end of the sequence, mainly two different types of spot
+markets exists, the day-ahead market and the intraday market. The European Power
+Exchange (EPEX Spot) is the largest electricity market in Europe, with a total
+trading volume of approximately 567 TWh in 2018.[fn:3] In Germany, the most
+important spot market is the day-ahead auction with a volume of over 234 TWh.
+The market closes at 12pm on the day before delivery, participants place asks
+and bids for hourly contracts of the following day. The clearing price is
+determined by this double auction, where supply meets demand, and all
+participants are uniformly compensated that clearing price. The day-ahead market
+plays an important role for the integration of RES, generators forecast the
+expected generation capacity for the next day and sell those quantities in the
+day-ahead market (cited) cite:pape16_are_fundam_enoug. After market closure, the
+participants have the opportunity to trade the difference between the forecasted
+day-ahead capacities and the more accurate intraday forecasts on the /intraday
+market/. This quantity called /forecast error/ is used by RES generators to
+self-balance their portfolios. Participating on the intraday market is more cost
+effective for participants than to rely on balancing services that have been
+described in the previous chapter, where balancing posts are imposed
+participants ex-ante cite:pape16_are_fundam_enoug. On the EPEX Intraday
+Continuous market different products can be traded up until 5 minutes before
+physical delivery. Hourly contracts, as well as 15-minute and block contracts
+can be traded. In contrast to the day-ahead auction, the intraday market is a
+continuous order-driven market. Participants can submit limit orders at any time
+during the trading window and equally change or withdraw the order at any time
+before the order is accepted. Limit orders are specified as quantity/price
+pairs. When an order to buy (bid) and an order to sell (ask) is matched the
+trade will immediately get executed. The order book is visible to all
+participants, hence it is known which unmatched orders exist at the time of
+interest. With a market volume of 82 TWh in 2018, the intraday-continous market
+is of minor trading importance in Germany than the day-ahead market. Despite
+that, it is of major importance to the stability of the grid, executed trades on
+the intraday market potentially reduce activation of control reserve through the
+TSO.
+
+The continuous intraday market is attractive for Smart Charging EV fleets with
+uncertain mobility demand. Due to the very short time before delivery, EV fleet
+operators can rely on highly accurate forecasts of available battery capacity to
+charge, before submitting an order to buy. In this way, they can reliably charge
+at a potentially cheaper price at the intraday market than the standard tariff.
+In an integrated bidding strategy, EV fleet operators can, similarly to RES
+generators, balance out forecast errors of available battery capacity on the
+intraday market. Bids that have been committed to other markets earlier (e.g.,
+to the secondary operating reserve market)  can be complemented with trades on
+the intraday market.
+
 - cite:kiesel17_econom_analy_intrad_elect_prices
 - cite:karanfil17_role_contin_intrad_elect_market
 - cite:pape16_are_fundam_enoug
-# 1. Explain why spot/epex exists
-# 2. Explain different types of spot markets
-# 3. Focus on intraday continous market
-# 4. Explain general characteristics
-# 5. Explain auction procedure, with exact times
-Electricity products are 15-minute contracts, hourly contracts, and block
-contracts. The products can be traded up until 30 minutes before delivery (5
-minutes in the same control area). Participants can submit limit orders at any
-time during the trading window and equally change or withdraw the order at any
-time before the order is accepted. Limit orders are specified as quantity/price
-pairs. When an order to buy (bid) and an order to sell (ask) is matched the
-trade will get executed. The order book is visible to all participants, hence it
-is known which unmatched orders exist at the time of interest.
-
-
-
+# TODO: Intraday mainly for balancing!!! Rephrase Intro+Lit Review to only provide
+# balancing i.e. sustainablility work?
 ** Reinforcement Learning label:sec-reinforcement-learning
 The following chapter will give an overview of the most important Reinforcement
 Learning (RL) concepts and will introduce the corresponding mathematical

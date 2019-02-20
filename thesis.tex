@@ -1,4 +1,4 @@
-% Created 2019-02-18 Mon 17:38
+% Created 2019-02-20 Wed 10:55
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -204,21 +204,21 @@ be real-valued vectors are written in bold and in lower case (even if random var
 \pagenumbering{arabic}
 
 \section{Introduction}
-\label{sec:org7e79b0d}
+\label{sec:org3123863}
 \subsection{Research Motivation}
-\label{sec:orgfa9e057}
+\label{sec:org92b764d}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:orgcb788bb}
+\label{sec:org275dace}
 \subsection{Relevance}
-\label{sec:org21c9e5b}
+\label{sec:org22375d3}
 
 \section{Theoretical Background}
-\label{sec:org433718b}
+\label{sec:orgd3015e4}
 \subsection{Electricity Markets}
-\label{sec:orgefcb96b}
+\label{sec:org27fc1ff}
 On electricity markets actors participate in auctions to match the supply of
 electricity generation and the demand for electricity consumption. Participants
 place asks (sale offers) and bids (purchase orders). The price is determined by
@@ -261,7 +261,7 @@ in our research.
 \end{figure}
 
 \subsubsection{Balancing Market}
-\label{sec:orgbcdbbad}
+\label{sec:org87f6777}
 The balancing market is a tool to balance frequency deviations in the power
 grid. It offers auctions for primary control reserve, secondary control reserve
 as well as tertiary control reserve (minute reserve), which primarily differ in
@@ -322,52 +322,94 @@ power at the timeslot. Since provider get paid according to their submitted
 price \(p_w\), instead of a market clearing price, this type of auction is called
 \emph{pay-as-bid} auction.
 \subsubsection{Spot Market}
-\label{sec:org530f07b}
+\label{sec:orgf851b6e}
+As mentioned in the previous chapter, the continuous equilibrium of electricity
+supply and demand is ensured through a sequence of interdependent wholesale
+markets (cited) \cite{pape16_are_fundam_enoug}. Next to the previously mentioned
+balancing market at the end of the sequence, mainly two different types of spot
+markets exists, the day-ahead market and the intraday market. The European Power
+Exchange (EPEX Spot) is the largest electricity market in Europe, with a total
+trading volume of approximately 567 TWh in 2018.\footnote{\url{https://www.epexspot.com/en/press-media/press/details/press/Traded\_volumes\_soar\_to\_an\_all-time\_high\_in\_2018},
+accessed 19\textsuperscript{th} February, 2019} In Germany, the most
+important spot market is the day-ahead auction with a volume of over 234 TWh.
+The market closes at 12pm on the day before delivery, participants place asks
+and bids for hourly contracts of the following day. The clearing price is
+determined by this double auction, where supply meets demand, and all
+participants are uniformly compensated that clearing price. The day-ahead market
+plays an important role for the integration of RES, generators forecast the
+expected generation capacity for the next day and sell those quantities in the
+day-ahead market (cited) \cite{pape16_are_fundam_enoug}. After market closure, the
+participants have the opportunity to trade the difference between the forecasted
+day-ahead capacities and the more accurate intraday forecasts on the \emph{intraday
+market}. This quantity called \emph{forecast error} is used by RES generators to
+self-balance their portfolios. Participating on the intraday market is more cost
+effective for participants than to rely on balancing services that have been
+described in the previous chapter, where balancing posts are imposed
+participants ex-ante \cite{pape16_are_fundam_enoug}. On the EPEX Intraday
+Continuous market different products can be traded up until 5 minutes before
+physical delivery. Hourly contracts, as well as 15-minute and block contracts
+can be traded. In contrast to the day-ahead auction, the intraday market is a
+continuous order-driven market. Participants can submit limit orders at any time
+during the trading window and equally change or withdraw the order at any time
+before the order is accepted. Limit orders are specified as quantity/price
+pairs. When an order to buy (bid) and an order to sell (ask) is matched the
+trade will immediately get executed. The order book is visible to all
+participants, hence it is known which unmatched orders exist at the time of
+interest. With a market volume of 82 TWh in 2018, the intraday-continous market
+is of minor trading importance in Germany than the day-ahead market. Despite
+that, it is of major importance to the stability of the grid, executed trades on
+the intraday market potentially reduce activation of control reserve through the
+TSO.
+
+The continuous intraday market is attractive for Smart Charging EV fleets with
+uncertain mobility demand. Due to the very short time before delivery, EV fleet
+operators can rely on highly accurate forecasts of available battery capacity to
+charge, before submitting an order to buy. In this way, they can reliably charge
+at a potentially cheaper price at the intraday market than the standard tariff.
+In an integrated bidding strategy, EV fleet operators can, similarly to RES
+generators, balance out forecast errors of available battery capacity on the
+intraday market. Bids that have been committed to other markets earlier (e.g.,
+to the secondary operating reserve market)  can be complemented with trades on
+the intraday market.
+
 \begin{itemize}
 \item \cite{kiesel17_econom_analy_intrad_elect_prices}
 \item \cite{karanfil17_role_contin_intrad_elect_market}
 \item \cite{pape16_are_fundam_enoug}
 \end{itemize}
 
-Electricity products are 15-minute contracts, hourly contracts, and block
-contracts. The products can be traded up until 30 minutes before delivery (5
-minutes in the same control area). Participants can submit limit orders at any
-time during the trading window and equally change or withdraw the order at any
-time before the order is accepted. Limit orders are specified as quantity/price
-pairs. When an order to buy (bid) and an order to sell (ask) is matched the
-trade will get executed. The order book is visible to all participants, hence it
-is known which unmatched orders exist at the time of interest.
+
 
 \subsection{Reinforcement Learning \label{sec-reinforcement-learning}}
-\label{sec:org8e1f4c6}
+\label{sec:org7733ba8}
 The following chapter will give an overview of the most important Reinforcement
 Learning (RL) concepts and will introduce the corresponding mathematical
 formulations. If not noted otherwise, the notation, equations, and insights are
 adopted from \cite{sutton18_reinf}, the de-facto reference book of RL research.
 
-RL is an agent-based machine learning algorithm in
-which the agent learns to perform an optimal set of actions through interaction
-with its environment. The agents objective is to maximize the rewards it receives
-based on the actions it takes. Immediate rewards have to be weighted against
-long-term cumulative returns that also on its future actions. The RL problem is
-formalized as Markov Decision Processes (MDPs) which will be introduced in
-Chapter \ref{sec-mdp}. A critical task of RL agents is to continuously
-estimate the value of the environments state. Values indicate the long-term
-desirability of a state, that is the total amount of reward the agent can expect
-to accumulate over the future, following a learned set of actions, called the
-policy. Policies and values are covered in Chapter \ref{sec-policies}, whereas the
-core mathematical foundations for evaluating policies and updating value
-functions are introduced in Chapter \ref{sec-bellman}. When the model of the
-environment is fully known, the learning problem is reduced to a planning
-problem (Chapter \ref{sec-dp}) in which optimal policies can be computed with
-iterative approaches. Model-free RL approaches can be applied when rewards and
-state transitions are unknown, and the agent's behavior has to be learned from
-experience (Chapter \ref{sec-td-learning}). The last two chapter cover methods
-that solve the RL problem more efficiently, tackle new challenges and are widely
-used in practice and research.
+RL is an agent-based machine learning algorithm in which the agent learns to
+perform an optimal set of actions through interaction with its environment. The
+agents objective is to maximize the rewards it receives based on the actions it
+takes. Immediate rewards have to be weighted against long-term cumulative
+returns that also on its future actions. The RL problem is formalized as Markov
+Decision Processes (MDPs) which will be introduced in Chapter \ref{sec-mdp}. A
+critical task of RL agents is to continuously estimate the value of the
+environments state. Values indicate the long-term desirability of a state, that
+is the total amount of reward the agent can expect to accumulate over the
+future, following a learned set of actions, called the policy. Policies and
+values are covered in Chapter \ref{sec-policies}, whereas the core mathematical
+foundations for evaluating policies and updating value functions are introduced
+in Chapter \ref{sec-bellman}. When the model of the environment is fully known,
+the learning problem is reduced to a planning problem (Chapter \ref{sec-dp}) in
+which optimal policies can be computed with iterative approaches. Model-free RL
+approaches can be applied when rewards and state transitions are unknown, and
+the agent's behavior has to be learned from experience (Chapter
+\ref{sec-td-learning}). The last two chapter cover methods that solve the RL
+problem more efficiently, tackle new challenges and are widely used in practice
+and research.
 
 \subsubsection{Markov Decision Processes \label{sec-mdp}}
-\label{sec:org5cd52cb}
+\label{sec:org6447e5d}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -398,7 +440,7 @@ and a reward \(r\in\R\) occurs, given the preceding state \(s\in\S\) and action
 well-defined probability density functions (PDF), which are solely dependent on
 the previous state and action. Consequently, it is possible to define (\(\defeq\))
 the \emph{dynamics} of the MDP as following:
-\begin{equation} \label{eq-dynamics}
+\begin{equation}
     p(s',r|s,a) \defeq \Pr{S_t=s',R_t=r|S_{t-1}=s,A_t=a},
 \end{equation}
 for all \(s',s\!\in\!\S\), \(r\!\in\!\R\) and \(a\!\in\!\A\). Note that each possible
@@ -408,7 +450,7 @@ state possesses the so-called \emph{Markov property}. If not noted otherwise, th
 Markov property is assumed throughout the whole chapter. The dynamics function
 allows computing the \emph{state-transition probabilities}, another important
 characteristic of an MDP, as following:
-\begin{equation} \label{eq-state-transition}
+\begin{equation}
     p(s'|s,a) \defeq \Pr{S_t\!=\!s'|S_{t-1}\!=\!s,A_t\!=\!a} = \sum_{r\in\R}{p(s', r|s, a)},
 \end{equation}
 for \(s',s\!\in\!\S\), \(r\!\in\!\R\) and \(a\!\in\!\A\).
@@ -432,7 +474,7 @@ when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, th
 agent is "farsighted".
 
 \subsubsection{Policies and Value Functions \label{sec-policies}}
-\label{sec:org0ab31d2}
+\label{sec:org15894cb}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -449,13 +491,13 @@ the agent's interaction with the environment.
 In RL, value functions of states and value functions of state-action pairs are
 used. The \emph{state-value function of policy} \(\pi\) is denoted as \(\vpi(s)\) and is
 defined as the expected return when starting in \(s\) and following policy \(\pi\):
-\begin{equation} \label{eq-state-value}
+\begin{equation}
     \vpi(s) \defeq \EE{\pi}{G_t|S_t\!=\!s}, \text{ for all } s\in\S
 \end{equation}
 The \emph{action-value function of policy} \(\pi\) is denoted as \(\qpi(s,a)\) and is
 defined as the expected return when starting in \(s\), taking action \(a\) and
 following policy \(\pi\) afterwards:
-\begin{equation} \label{eq-action-value}
+\begin{equation}
     \qpi(s,a) \defeq \EE{\pi}{G_t|S_t\!=\!s, A_t\!=\!a}, \text{ for all } a\in\A, s\in\S
 \end{equation}
 The \emph{optimal policy} \(\pi_*\) has a greater (or equal) expected return than all
@@ -474,7 +516,7 @@ has been known as \emph{Q-learning} \cite{watkins92_q_learn}, which is described
 Chapter \ref{sec-td-learning}.
 
 \subsubsection{Bellman Equations \label{sec-bellman}}
-\label{sec:orgb76b904}
+\label{sec:org6dd1a04}
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (\ref{eq-expected-return}), current values
 are related to expected values of successive states. This relationship is
@@ -516,7 +558,7 @@ experienced state transitions instead of expected transition probabilities. The
 most common methods will be explored in the following chapters.
 
 \subsubsection{Dynamic Programming  \label{sec-dp}}
-\label{sec:org1468485}
+\label{sec:orgcbb3b9f}
 \emph{Dynamic Programming} (DP) is a method to compute optimal policies, the primary
 goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
@@ -570,7 +612,7 @@ algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
 
 \subsubsection{Temporal-Difference Learning \label{sec-td-learning}}
-\label{sec:org5790bab}
+\label{sec:org34b5ff4}
 The previous chapter dealt with solving a \emph{planning} problem, that is computing
 an optimal solution (i.e., an optimal policy \(\pi_*\)) of an MDP when a perfect
 model of the environment is known. In the following chapters, we will look at
@@ -636,7 +678,7 @@ policy \(\pi\). The estimation can be done similar to TD prediction of state
 values (Eq. \ref{eq-td-prediction}). Instead of considering state transitions,
 state-action transitions are considered in this case. The update rule is
 constructed as follows:
-\begin{equation} \label{eq-sarsa}
+\begin{equation}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma Q(S_{t+1},A_{t+1}) - Q(S_t, A_t)\big]
 \end{equation}
 After every transition from a state \(S_t\), an update operation using the events
@@ -650,7 +692,7 @@ pairs.
 A breakthrough in RL has been achieved when \textcite{watkins92_q_learn} developed
 the \emph{off-policy} TD control algorithm, called Q-learning. The update rule is
 defined as follows:
-\begin{equation} \label{eq-q-learning}
+\begin{equation}
     Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma\max_a Q(S_{t+1},a) - Q(S_t, A_t)\big]
 \end{equation}
 Here, the estimated action-values \(Q\) are updated towards the highest estimated
@@ -671,8 +713,8 @@ representation is computational infeasible and the speed of convergence is
 drastically reduced. In this case, a \emph{function approximator} can replace the
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
-\subsubsection{Approximation Methods \label{sec-fa}}
-\label{sec:orgc6b892d}
+\subsubsection{Approximation Methods}
+\label{sec:orge80e896}
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
@@ -728,7 +770,7 @@ comprehensive review of deep learning methods.
 \end{figure}
 \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 \subsubsection{Further Topics}
-\label{sec:org1990e45}
+\label{sec:org22ca772}
 The previous chapters provided a detailed overview of the most important
 concepts and mathematical foundations in RL. In the research there are many more
 topics that were not covered here. \emph{Eligibility traces} offer a way to more
@@ -751,9 +793,9 @@ environment, convergence and stability are a serious problem. \emph{W-learning}
 that aims to solve these difficulties.
 
 \section{Related Literature}
-\label{sec:orgf964411}
+\label{sec:org2c377d6}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org4d219ee}
+\label{sec:orgc7d8e8c}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -926,7 +968,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:orgffa44e6}
+\label{sec:org0233791}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -1037,64 +1079,58 @@ challenges in smart grids.
 
 \clearpage
 \section{Empirical Setting}
-\label{sec:org62740f9}
+\label{sec:orgcf11a58}
 \subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org5496c02}
+\label{sec:orgd830782}
 
 \subsection{Electricity Markets Data}
-\label{sec:orgaddc6c3}
+\label{sec:org627681b}
 \subsubsection{Secondary Operating Reserve Market}
-\label{sec:org4cbcb82}
+\label{sec:org6ead837}
 \subsubsection{Intraday Continuous Spot Market}
-\label{sec:org6de8d00}
-
-We choose to use the EPEX Spot Intraday Continuous market in this research. The
-data have been provided by ProCom GmbH\footnote{\url{https://procom-energy.de/}} and encompass order books and
-executed trades from 01.06.2016 until 01.01.2018. As displayed in Table
-\ref{spot-market-sample-data}, trades can have a very short lead time before
-delivery, which is beneficial for our proposed trading strategy.
+\label{sec:org4fea488}
 
 \section{Model: FleetRL}
-\label{sec:orgd24cecd}
+\label{sec:org613f552}
 \subsection{Information Assumptions}
-\label{sec:org94498d9}
+\label{sec:org4b44f86}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:org3139587}
+\label{sec:org751d601}
 \subsection{Reinforcement Learning Approach}
-\label{sec:org5fc8c08}
+\label{sec:orge3c2cf6}
 \subsection{Bidding Strategy}
-\label{sec:org4108dc7}
+\label{sec:org6419b91}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:orgb6f67e4}
+\label{sec:orgcdd1eb6}
 
 \section{Evaluation}
-\label{sec:org8311092}
+\label{sec:org1f48b03}
 \subsection{Event-based Simulation}
-\label{sec:orgdcf6e3c}
+\label{sec:org7bde9bf}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org2769490}
+\label{sec:orgc632a4a}
 \subsection{FleetRL}
-\label{sec:org5260eef}
+\label{sec:org2ddbecd}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org565b01d}
+\label{sec:orgf8a7439}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:orgbbecdd4}
+\label{sec:org5225429}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org747b888}
+\label{sec:org83b1aed}
 \section{Discussion}
-\label{sec:org78a0f4b}
+\label{sec:org72c4acb}
 \subsection{Generalizability}
-\label{sec:orgd808dd4}
+\label{sec:orgb1c9fdd}
 \subsection{Future Electricity Landscape}
-\label{sec:org86a9dbb}
+\label{sec:orgc8c1507}
 \subsection{Limitations}
-\label{sec:org8abd7da}
+\label{sec:org49b806b}
 \section{Conclusion}
-\label{sec:orgfdeb62a}
+\label{sec:org864388a}
 \subsection{Contribution}
-\label{sec:org0d4a504}
+\label{sec:org44db0e7}
 \subsection{Future Research}
-\label{sec:org27a42b5}
+\label{sec:org58823be}
 
 
 \clearpage
