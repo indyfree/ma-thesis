@@ -130,7 +130,7 @@ possibility to trade the remaining available capacity with low risk at the spot
 market. In the following, we will explain the market design of balancing markets
 and spot markets in more detail, since they are the markets we included in our
 research.
-#+CAPTION[Electricity Market Design]: \textbf{Adapt own figure!} Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
+#+CAPTION[Electricity Market Design]: Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
 [[./fig/electricity_markets.png]]
 
 *** Balancing Market
