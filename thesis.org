@@ -94,41 +94,42 @@
 * Theoretical Background
 # NOTE: 10%
 ** Electricity Markets
-On electricity markets actors participate in auctions to match the supply of
+On electricity markets, actors participate in auctions to match the supply of
 electricity generation and the demand for electricity consumption. Participants
-place asks (sale offers) and bids (purchase orders). The price is determined by
-an auction mechanism, which can take different forms depending on the type of
-market. Germany, like many other countries, has a liberalized energy system in
-which the generation and distribution of electricity are decoupled. Multiple
-electricity markets exist in a liberalized energy system. They differ in the
-auction design and in their reaction time between the order contract and the
-delivery of electricity. Day-ahead markets and spot markets have a reaction time
-between a day and several hours, whereas in operating reserve markets the
+place asks (sale offers) and bids (purchase orders). The electricity price is
+determined by an auction mechanism, which can take different forms depending on
+the type of market. Germany, like many other countries, has a liberalized energy
+system in which the generation and distribution of electricity are decoupled.
+Multiple electricity markets exist in a liberalized energy system. They differ
+in the auction design and in their reaction time between the order contract and
+the delivery of electricity. Day-ahead markets and spot markets have a reaction
+time between a day and several hours, whereas in operating reserve markets the
 reaction time ranges from minutes to seconds. The auction mechanism design is
 essential for electricity markets cite:kambil98_reeng_dutch_flower_auction.
 Electricity markets work according to the merit order principle in which
-resources are considered in an ascending order of the energy price until the
+resources are considered in ascending order of the energy price until the
 capacity demand is met. The clearing price is determined by the energy price, at
 the point where supply meets demand. Payment models differ in the markets: In
 contrast to day-ahead markets, where a uniform pricing schema is applied, in
-secondary reserve markets and intraday markets bidders get compensated by the
+secondary reserve markets and intraday markets bidders, get compensated by the
 price they bid (pay-as-bid principle).
 
+# TODO: Describe week ahead or day ahead commitment of balancing market?
 Carsharing fleets can offer the capacity of their EV batteries on multiple
 markets at the same time to make use of the different market properties. On
-operating reserve markets are prices usually more volatile and consequently more
+operating reserve markets,prices are usually more volatile and consequently more
 attractive for VPPs cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
 Operating reserve markets also bear a higher risk for the fleet: Commitments
-have to be made one week in advance when customer demands are still of
-uncertain. In order to not face penalties for unfulfilled commitments only a
-conservative amount of capacity can be offered to the market. On the other hand,
-spot markets allow participants to continuously trade electricity products up to
-fifteen minutes prior to delivery. At this point, it is possible to predict if
-an EV is likely going to be rented out with a high accuracy. This creates the
-possibility to trade the remaining available capacity with a low risk at the
-spot market. In the following, we will explain the market design of balancing
-markets and spot markets in more detail, since they are the markets we included
-in our research.
+have to be made one week in advance when customer demands are still uncertain.
+In order to not face penalties for unfulfilled commitments only a conservative
+amount of capacity can be offered to the market. On the other hand, spot markets
+allow participants to continuously trade electricity products up to five minutes
+prior to delivery. At this point in time, it is possible to predict available
+battery capacity of the fleet with high accuracy. This certainty creates the
+possibility to trade the remaining available capacity with low risk at the spot
+market. In the following, we will explain the market design of balancing markets
+and spot markets in more detail, since they are the markets we included in our
+research.
 #+CAPTION[Electricity Market Design]: \textbf{Adapt own figure!} Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
 [[./fig/electricity_markets.png]]
 
@@ -147,54 +148,53 @@ since the market design is similar
 cite:brandt17_evaluat_busin_model_vehic_grid_integ. Transmission Systems
 Operators (TSO) procure their required control reserve via tender auctions at
 the GCRM. The market conducts daily auctions for the three types of control
-reserve that were previously mentioned. This thesis focuses on the secondary
-operating reserve auction, in which participants must be able to supply or
-absorb a minimum of 1MW of power over a 4 hour interval with a reaction time of
-30 seconds.[fn:1] Since EV batteries can absorb energy almost
-instantly, when they are connected to a charging station, they are suitable to
-provide such balancing services. Operating reserve providers have to be
-qualified by the TSO to participate in the market and are able to reliably
-provide the committed capacity. Although EV fleets are currently not qualified
-by the GCRM to be used as operating reserve, they could theoretically handle the
-minimum capacity requirements. Around 220 EVs would need to simultaneously
-charge at standard 4.6kW charging stations to provide 1MW of downward regulating
-capacity.
-# Fast chargers (22KW) would only need 50EVs, but batteries are depleted much
-# faster, hence SoC plays a larger role
+reserve. This thesis focuses on the secondary operating reserve auction, in
+which participants must be able to supply or absorb a minimum of 1MW of power
+over a 4-hour interval with a reaction time of 30 seconds.[fn:1] Since EV
+batteries can absorb energy almost instantly, when they are connected to a
+charging station, they are suitable to provide such balancing services.
+Operating reserve providers have to be qualified by the TSO to participate in
+the market and are able to reliably provide the committed capacity. Although EV
+fleets are currently not qualified by the GCRM to be used as operating reserve,
+they could theoretically handle the minimum capacity requirements. Around 220
+EVs would need to simultaneously charge at standard 4.6kW charging stations to
+provide 1MW of downward regulating capacity.
+# TODO: Citation for EVs not currently allows to provide operating reserve
+# NOTE: Add: Fast chargers (22KW) would only need 50EVs, but batteries are depleted much
+# faster, hence SoC plays a larger role?
 Up until 28^{th} July 2018, auctions were held weekly, with two different
 segments each week (peak hours/non-peak hours). Afterwards, the auction
 mechanism changed to /daily/ auctions of six four-hour segments of positive and
-negative control reserve.[fn:2] The shorter auction cycles
-facilitate the integration of renewable energy generators into the secondary
-control reserve market, as they are dependent on accurate (short-term) capacity
-forecasts.
+negative control reserve.[fn:2] Shorter auction cycles facilitate the
+integration of renewable energy generators into the secondary control reserve
+market, as they are dependent on accurate (short-term) capacity forecasts.
 # NOTE: Where to put changed market setup:
 # - Minimum requirements
 # - Different segments (2 weekly/ 6 daily)
 # NOTE: Not mentioned only V2G before. Reference Lit review for justification?
-Positive control reserve is supplied energy to the grid, which is required when
-the grid frequency falls below 50Hz. It can be provided by increasing
-electricity generation or by reducing load. On the contrary, negative control
-reserve is required when the grid frequency rises above 50Hz and can be provided
-by adding load or reducing electricity generation. Since we do not consider V2G
-in this thesis, the EV fleets in our model are only able provide /negative
-control reserve/, which we will refer to as /control reserve/ until the end of
-the thesis. Market participants submit bids in following form to the market:
-$(P, p_c, p_w)$, where $P$ is the amount of electrical power that can be
-supplied on demand in kW, $p_c$ is the capacity price for keeping the power
-available in $\text{\euro{}/MW}$ and $p_w$ is the working price for delivered
-energy in $\text{\euro{}/MWh}$. The TSO determines the target quantity of energy
-to acquire per timeslot, it usually acquires much higher regulation capacity to
-minimize risks and activates the capacity on demand. The TSO accepts the bids
-based on the capacity price in a merit order. Providers, whose bids were
-accepted, instantly get compensated for the provided capacity: $R_c = p_c \times
-P$. At the time regulation capacity is needed (usually a day or a week later),
-the TSO activates the capacity according to a merit order of the ascending
-/working prices/ $p_w$. Hence, providers are also compensated according to the
-actual power they supplied: $R_w = p_w \times P_a$, where $P_a$ is the supplied
-power at the timeslot. Since provider get paid according to their submitted
-price $p_w$, instead of a market clearing price, this type of auction is called
-/pay-as-bid/ auction.
+Positive control reserve is energy that is supplied to the grid, when the grid
+frequency falls below 50Hz. It can be provided by increasing the electricity
+generation or by reducing the grid load (i.e., electricity consumption). On the
+contrary, negative control reserve is required when the grid frequency rises
+above 50Hz and can be provided by adding grid load or reducing electricity
+generation. Since we do not consider V2G in this thesis, the EV fleets in our
+model are only able provide /negative control reserve/, which we will refer to
+as /control reserve/ until the end of the thesis. Market participants submit
+bids in the following form to the market: $(P, p_c, p_w)$, where $P$ is the
+amount of electrical power that can be supplied on demand in kW, $p_c$ is the
+capacity price for keeping the power available in $\text{\euro{}/MW}$ and $p_w$
+is the working price for delivered energy in $\text{\euro{}/MWh}$. The TSO
+determines the target quantity of energy to acquire per timeslot, it usually
+acquires much higher regulation capacity to minimize risks and activates the
+capacity on demand. The TSO accepts the bids based on the capacity price in a
+merit order. Providers, whose bids were accepted, instantly get compensated for
+the provided capacity: $R_c = p_c \times P$. At the time regulation capacity is
+needed, usually a day to a week later, the TSO activates the capacity according
+to a merit order of the ascending /working prices/ $p_w$. Hence, providers are
+also compensated according to the actual power they supplied: $R_w = p_w \times
+P_a$, where $P_a$ is the supplied power at the timeslot. Since provider get paid
+according to their submitted price $p_w$, instead of a market clearing price,
+this type of auction is called /pay-as-bid/ auction.
 # NOTE: Add more citations? brandt?
 # NOTE: Mention: Estimate the critical prices, $p_c$ (not) and $p_w$ - in data
 # section?
@@ -204,55 +204,55 @@ price $p_w$, instead of a market clearing price, this type of auction is called
 *** Spot Market
 # TODO: Intraday mainly for balancing!!! Rephrase Intro+Lit Review to only provide
 # balancing i.e. sustainablility work?
-As mentioned in the previous chapter, the continuous equilibrium of electricity
-supply and demand is ensured through a sequence of interdependent wholesale
-markets (cited) cite:pape16_are_fundam_enoug. Next to the balancing market at
-the end of the sequence, mainly two different types of spot markets exists, the
-day-ahead market and the intraday market. In this research, we consider the
-European Power Exchange (EPEX Spot) as it is the largest electricity market in Europe,
-with a total trading volume of approximately 567TWh in 2018[fn:3], but most
-electronic spot markets in western economies work with similar market mechanisms.
+As mentioned in the previous chapter, the equilibrium of electricity supply and
+demand is ensured through a sequence of interdependent wholesale markets (cited)
+cite:pape16_are_fundam_enoug. Next to the balancing market at the end of the
+sequence, mainly two different types of spot markets exist, the day-ahead
+market and the intraday market. In this research, we consider the European Power
+Exchange (EPEX Spot) as it is the largest electricity market in Europe, with a
+total trading volume of approximately 567TWh in 2018[fn:3], but most electronic
+spot markets in western economies work with similar market mechanisms.
 
 In Germany, the most important spot market is the day-ahead market with a
-trading volume of over 234TWh in 2018[fn:3]. Participants place asks and bids for
-hourly contracts of the following day on the /EPEX Spot Day-ahead Auction/
+trading volume of over 234TWh in 2018[fn:3]. Participants place asks and bids
+for hourly contracts of the following day on the /EPEX Spot Day-ahead Auction/
 market until the market closes at 12pm on the day before delivery (Figure
-ref:fig-electricity-markets). The day-ahead market plays an important role for
-the integration of volatile renewable energy sources (RES) cite:pape16_are_fundam_enoug. Generators forecast
-the expected generation capacity for the next day and sell those quantities on
-the market cite:karanfil17_role_contin_intrad_elect_market. After the market closes, the
+ref:fig-electricity-markets). The day-ahead market plays an essential role in
+integrating volatile renewable energy sources (RES) into the power system
+cite:pape16_are_fundam_enoug. Generators forecast the expected generation
+capacity for the next day and sell those quantities on the market
+cite:karanfil17_role_contin_intrad_elect_market. After the market closes, the
 participants have the opportunity to trade the difference between the day-ahead
 forecast and the more accurate intraday forecast on the intraday market
-cite:kiesel17_econom_analy_intrad_elect_prices. In this way, RES generators
-self-balance their portfolios, which is more cost effective than to rely on
-balancing services, where the TSO imposes high balancing costs on participants
-ex-ante cite:pape16_are_fundam_enoug.
+cite:kiesel17_econom_analy_intrad_elect_prices. In this way, RES generators can
+cost effectivly self-balance their portfolios, instead of relying on balancing
+services provided by the TSO, which imposes high imbalance costs on participants
+cite:pape16_are_fundam_enoug.
 
-On the /EPEX Spot Intraday Continuous/ market, electricity products can be traded
+On the /EPEX Spot Intraday Continuous/ market, electricity products are traded
 up until 5 minutes before physical delivery. Hourly contracts, as well as
-15-minute and block contracts can be traded. In contrast to the day-ahead
+15-minute and block contracts, can be traded. In contrast to the day-ahead
 auction, the intraday market is a continuous order-driven market. Participants
 can submit limit orders at any time during the trading window and equally change
 or withdraw the order at any time before the order is accepted. Limit orders are
-specified as price-quantity. When an order to buy (bid) and an order to
-sell (ask) is matched, the trade immediately gets executed. The order book is
-visible to all participants, hence it is known which unmatched orders exist at
-the time of interest. With a market volume of 82TWh in 2018[fn:3], the intraday market
-has considerable less volume than the day-ahead market. Despite that, it plays
-an important role for to the stability of the grid. All executed trades on the
-intraday market potentially reduce the activation of control reserve through the
-TSO.
+specified as price-quantity. When an order to buy (bid) matches an order to sell
+(ask), the trade immediately gets executed. The order book is visible to all
+participants, hence it is known which unmatched orders exist at the time of
+interest. The intraday market volume of 82TWh is considerably smaller than
+day-ahead market's volume. Despite that, the intraday market plays a vital role
+to the stability of the grid. All executed trades on the intraday market
+potentially reduce the activation of control reserve through the TSO.
 
-Purchasing electricity on the continuous intraday market is attractive EV fleets
-with uncertain mobility demand. Due to the short time before delivery, EV fleet
-operators can rely on highly accurate forecasts of available battery capacity to
-charge, before submitting an order to buy. In this way, they can reliably charge
-at a potentially cheaper price at the intraday market than the standard tariff.
-In an integrated bidding strategy, EV fleet operators can, similarly to RES
-generators, balance out forecast errors of available battery capacity on the
-intraday market. Bids that have been committed to other markets earlier (e.g.,
-to the secondary operating reserve market) can be complemented with trades on
-the intraday market.
+Purchasing electricity on the continuous intraday market is attractive for EV
+fleets with uncertain mobility demand. Due to the intradays market's short time
+before delivery, EV fleet operators can rely on highly accurate forecasts of
+available battery capacity to charge, before submitting an order to buy. In this
+way, they can reliably charge at a potentially lower price at the intraday
+market than the standard tariff. In an integrated bidding strategy, EV fleet
+operators can, similarly to RES generators, balance out forecast errors of
+available battery capacity on the intraday market. Trades on the intraday market
+can complement bids that have been committed to other markets earlier (e.g., to
+the secondary operating reserve market).
 ** Reinforcement Learning label:sec-reinforcement-learning
 The following chapter will give an overview of the most important Reinforcement
 Learning (RL) concepts and will introduce the corresponding mathematical
