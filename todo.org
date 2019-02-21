@@ -1,6 +1,7 @@
 #+TITLE: Thesis Todo
 
 * Inbox
+** TODO When webpage at source, put in bibtex not footnotes
 ** TODO Check page border spacing of Notation pages
 ** TODO First and last sentence of a paragraph should explain it well enough
 ** TODO Fix paragraph spacing
