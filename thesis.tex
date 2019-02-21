@@ -1,4 +1,4 @@
-% Created 2019-02-20 Wed 15:49
+% Created 2019-02-21 Thu 17:34
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, twoside, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -206,40 +206,40 @@ be real-valued vectors are written in bold and in lower case (even if random var
 \pagenumbering{arabic}
 
 \section{Introduction}
-\label{sec:orgf59497e}
+\label{sec:org0f48132}
 \subsection{Research Motivation}
-\label{sec:org89b3892}
+\label{sec:org4053eda}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org418583f}
+\label{sec:org753b1a2}
 \subsection{Relevance}
-\label{sec:orge188afe}
+\label{sec:org91500a7}
 
 \section{Theoretical Background}
-\label{sec:orgba14c0e}
+\label{sec:org8f9e98a}
 \subsection{Electricity Markets}
-\label{sec:org666b818}
+\label{sec:org6725869}
 On electricity markets, actors participate in auctions to match the supply of
 electricity generation and the demand for electricity consumption. Participants
 place asks (sale offers) and bids (purchase orders). The electricity price is
 determined by an auction mechanism, which can take different forms depending on
-the type of market. Germany, like many other countries, has a liberalized energy
-system in which the generation and distribution of electricity are decoupled.
-Multiple electricity markets exist in a liberalized energy system. They differ
-in the auction design and in their reaction time between the order contract and
-the delivery of electricity. Day-ahead markets and spot markets have a reaction
-time between a day and several hours, whereas in operating reserve markets the
-reaction time ranges from minutes to seconds. The auction mechanism design is
-essential for electricity markets \cite{kambil98_reeng_dutch_flower_auction}.
-Electricity markets work according to the merit order principle in which
-resources are considered in ascending order of the energy price until the
-capacity demand is met. The clearing price is determined by the energy price, at
-the point where supply meets demand. Payment models differ in the markets: In
-contrast to day-ahead markets, where a uniform pricing schema is applied, in
-secondary reserve markets and intraday markets bidders, get compensated by the
-price they bid (pay-as-bid principle).
+the type of market. Germany, like many other western countries, has a
+liberalized energy system in which the generation and distribution of
+electricity are decoupled. Multiple electricity markets exist in a liberalized
+energy system. They differ in the auction design and in their reaction time
+between the order contract and the delivery of electricity. Day-ahead markets
+and spot markets have a reaction time between a day and several hours, whereas
+in operating reserve markets the reaction time ranges from minutes to seconds.
+The auction mechanism design is essential for electricity markets
+\cite{kambil98_reeng_dutch_flower_auction}. Electricity markets work according to
+the merit order principle in which resources are considered in ascending order
+of the energy price until the capacity demand is met. The clearing price is
+determined by the energy price, at the point where supply meets demand. Payment
+models differ in the markets: In contrast to day-ahead markets, where a uniform
+pricing schema is applied, in secondary reserve markets and intraday markets
+bidders, get compensated by the price they bid (pay-as-bid principle).
 
 Carsharing fleets can offer the capacity of their EV batteries on multiple
 markets at the same time to make use of the different market properties. On
@@ -259,11 +259,11 @@ research.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./fig/electricity_markets.png}
-\caption[Electricity Market Design]{\textbf{Adapt own figure!} Interaction between electricity markets in relation to capacity allocation \label{fig-electricity-markets}}
+\caption[Electricity Market Design]{Interaction between electricity markets in relation to capacity allocation \label{fig-electricity-markets}}
 \end{figure}
 
-\subsubsection{Balancing Market}
-\label{sec:org4b21b32}
+\subsubsection{Balancing Market \label{sec-balancing-market}}
+\label{sec:org6ad99d5}
 The balancing market is a tool to balance frequency deviations in the power
 grid. It offers auctions for primary control reserve, secondary control reserve
 as well as tertiary control reserve (minute reserve), which primarily differ in
@@ -306,23 +306,23 @@ above 50Hz and can be provided by adding grid load or reducing electricity
 generation. Since we do not consider V2G in this thesis, the EV fleets in our
 model are only able provide \emph{negative control reserve}, which we will refer to
 as \emph{control reserve} until the end of the thesis. Market participants submit
-bids in the following form to the market: \((P, p_c, p_w)\), where \(P\) is the
+bids in the following form to the market: \((P, p_c, p_e)\), where \(P\) is the
 amount of electrical power that can be supplied on demand in kW, \(p_c\) is the
-capacity price for keeping the power available in \(\text{\euro{}/MW}\) and \(p_w\)
-is the working price for delivered energy in \(\text{\euro{}/MWh}\). The TSO
+capacity price for keeping the power available in \(\text{\euro{}/MW}\) and \(p_e\)
+is the energy price for delivered energy in \(\text{\euro{}/MWh}\). The TSO
 determines the target quantity of energy to acquire per timeslot, it usually
 acquires much higher regulation capacity to minimize risks and activates the
 capacity on demand. The TSO accepts the bids based on the capacity price in a
 merit order. Providers, whose bids were accepted, instantly get compensated for
 the provided capacity: \(R_c = p_c \times P\). At the time regulation capacity is
 needed, usually a day to a week later, the TSO activates the capacity according
-to a merit order of the ascending \emph{working prices} \(p_w\). Hence, providers are
-also compensated according to the actual power they supplied: \(R_w = p_w \times
+to a merit order of the ascending \emph{energy prices} \(p_e\). Hence, providers are
+also compensated according to the actual power they supplied: \(R_e = p_e \times
 P_a\), where \(P_a\) is the supplied power at the timeslot. Since provider get paid
-according to their submitted price \(p_w\), instead of a market clearing price,
+according to their submitted price \(p_e\), instead of a market clearing price,
 this type of auction is called \emph{pay-as-bid} auction.
 \subsubsection{Spot Market}
-\label{sec:orga85912a}
+\label{sec:org894a8a6}
 As mentioned in the previous chapter, the equilibrium of electricity supply and
 demand is ensured through a sequence of interdependent wholesale markets (cited)
 \cite{pape16_are_fundam_enoug}. Next to the balancing market at the end of the
@@ -330,11 +330,11 @@ sequence, mainly two different types of spot markets exist, the day-ahead
 market and the intraday market. In this research, we consider the European Power
 Exchange (EPEX Spot) as it is the largest electricity market in Europe, with a
 total trading volume of approximately 567TWh in 2018\footnote{\url{https://www.epexspot.com/en/press-media/press/details/press/Traded\_volumes\_soar\_to\_an\_all-time\_high\_in\_2018},
-accessed 19\textsuperscript{th} February, 2019\label{orgefbbd20}}, but most electronic
+accessed 19\textsuperscript{th} February, 2019\label{org0d45bc9}}, but most electronic
 spot markets in western economies work with similar market mechanisms.
 
 In Germany, the most important spot market is the day-ahead market with a
-trading volume of over 234TWh in 2018\textsuperscript{\ref{orgefbbd20}}. Participants place asks and bids
+trading volume of over 234TWh in 2018\textsuperscript{\ref{org0d45bc9}}. Participants place asks and bids
 for hourly contracts of the following day on the \emph{EPEX Spot Day-ahead Auction}
 market until the market closes at 12pm on the day before delivery (Figure
 \ref{fig-electricity-markets}). The day-ahead market plays an essential role in
@@ -374,7 +374,7 @@ available battery capacity on the intraday market. Trades on the intraday market
 can complement bids that have been committed to other markets earlier (e.g., to
 the secondary operating reserve market).
 \subsection{Reinforcement Learning \label{sec-reinforcement-learning}}
-\label{sec:org0fe5e70}
+\label{sec:orgc18d59b}
 The following chapter will give an overview of the most important Reinforcement
 Learning (RL) concepts and will introduce the corresponding mathematical
 formulations. If not noted otherwise, the notation, equations, and insights are
@@ -402,7 +402,7 @@ problem more efficiently, tackle new challenges and are widely used in practice
 and research.
 
 \subsubsection{Markov Decision Processes \label{sec-mdp}}
-\label{sec:org2cfe593}
+\label{sec:orgb70aa52}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -467,7 +467,7 @@ when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, th
 agent is "farsighted".
 
 \subsubsection{Policies and Value Functions \label{sec-policies}}
-\label{sec:org842ef5c}
+\label{sec:org913543d}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -509,7 +509,7 @@ has been known as \emph{Q-learning} \cite{watkins92_q_learn}, which is described
 Chapter \ref{sec-td-learning}.
 
 \subsubsection{Bellman Equations \label{sec-bellman}}
-\label{sec:orgc45906a}
+\label{sec:org49a4255}
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (\ref{eq-expected-return}), current values
 are related to expected values of successive states. This relationship is
@@ -551,7 +551,7 @@ experienced state transitions instead of expected transition probabilities. The
 most common methods will be explored in the following chapters.
 
 \subsubsection{Dynamic Programming  \label{sec-dp}}
-\label{sec:orgb1601be}
+\label{sec:orga0d739a}
 \emph{Dynamic Programming} (DP) is a method to compute optimal policies, the primary
 goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
@@ -605,7 +605,7 @@ algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
 
 \subsubsection{Temporal-Difference Learning \label{sec-td-learning}}
-\label{sec:org0f8849e}
+\label{sec:org9ec38af}
 The previous chapter dealt with solving a \emph{planning} problem, that is computing
 an optimal solution (i.e., an optimal policy \(\pi_*\)) of an MDP when a perfect
 model of the environment is known. In the following chapters, we will look at
@@ -707,7 +707,7 @@ drastically reduced. In this case, a \emph{function approximator} can replace th
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
 \subsubsection{Approximation Methods}
-\label{sec:org8042250}
+\label{sec:org880456d}
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
@@ -763,7 +763,7 @@ comprehensive review of deep learning methods.
 \end{figure}
 \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 \subsubsection{Further Topics}
-\label{sec:orgbe9b2ae}
+\label{sec:org1c03580}
 The previous chapters provided a detailed overview of the most important
 concepts and mathematical foundations in RL. In the research there are many more
 topics that were not covered here. \emph{Eligibility traces} offer a way to more
@@ -786,9 +786,9 @@ environment, convergence and stability are a serious problem. \emph{W-learning}
 that aims to solve these difficulties.
 
 \section{Related Literature}
-\label{sec:org7671f82}
+\label{sec:org2a2dc42}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org85b67c8}
+\label{sec:org6a1e9e2}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -961,7 +961,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org03a6997}
+\label{sec:org1e0eb5d}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -1068,62 +1068,175 @@ proposed intelligent agent. Given the ability to learn user behavior (e.g.,
 mobility demand) and the flexibility to adapt to the environment (e.g.,
 electricity prices), RL methods are a promising way of solving complex
 challenges in smart grids.
-
-
-\clearpage
 \section{Empirical Setting}
-\label{sec:org3c432ed}
-\subsection{Carsharing Fleets of Electric Vehicles}
-\label{sec:org70fe2b1}
+\label{sec:orgc7637ff}
+We chose to embed our research in the German carsharing and electricity market.
+Germany has a comparably high share of renewables in its energy mix and is
+pushing for an energy turnaround since 2010  (German: \emph{Energiewende})\footnote{Energy Concept for an Environmentally Sound, Reliable and Affordable energy \cite{economics10_energ_concep_envir_sound_reliab_affor}}. The
+high renewable energy content in the energy mix causes electricity prices to be
+more volatile, which makes Germany an attractive location for the use of VPPs.
 
-\subsection{Electricity Markets Data}
-\label{sec:orgd16d239}
-\subsubsection{Secondary Operating Reserve Market}
-\label{sec:org75cac84}
-\subsubsection{Intraday Continuous Spot Market}
-\label{sec:orga538035}
+We obtained real-world trip data from Daimlers carsharing service Car2Go\footnote{\url{https://www.car2go.com}}
+that operates a large EV fleet in Stuttgart.
+\begin{itemize}
+\item Large cities, electric mobility \footnote{\url{https://www.car2go.com/media/data/germany/microsite-press/files/car2go\_white-paper\_electric-mobility\_2018.pdf},
+accessed 21\textsuperscript{th} February 2019.}
+\item \cite{firnkorn15_free_float_elect_carsh_fleet_smart_cities}
+\end{itemize}
+
+and electricity market data from the European power exchange EPEX SPOT\footnote{\url{https://www.epexspot.com}}.
+Additionally, we collected data from the German electricity market operator
+regelleistung.net\footnote{\url{https://www.regelleistungen.net}}.
+
+
+\subsection{Electronic Vehicle Fleet Data}
+\label{sec:org75afe53}
+
+\subsection{Balancing Market Data}
+\label{sec:orga414e44}
+In this research, we use bidding data from the German secondary reserve market.
+The following chapter will give an overview the dataset and preprocessing steps
+that were taken. For a detailed description about the market design of balancing
+markets refer to Chapter \ref{sec-balancing-market}.
+
+The data can be freely obtained at the GCRM platform website
+(\url{https://regelleistung.net}). It encompasses weekly lists of anonymized bids
+between 01.06.2016 and 01.01.2018. The electricity product, the offered capacity
+\(P\) (MW), the capacity price \(p_c\) (\(\text{\euro{}/MW}\)) and the energy price
+\(p_e\) (\(\text{\euro{}/MWh}\)) of each bid is listed. Four different products are
+traded, which are a combination of positive control reserve (feed electricity
+into the grid) or negative control reserve (take electricity from the grid) and
+the provided time segment (peak or non-peak hours). Since negative prices are
+allowed on the secondary operating reserve market, the payment direction is
+included as well. Moreover, information about the amount of capacity that was
+accepted, i.e., either partially or fully, is listed. Bids, which were not
+accepted by the TSOs are not listed. An exemplary excerpt of the dataset is
+displayed in Table \ref{data-operating-reserve}.
+
+\begin{longtable}{c|ccccc}
+\caption[Secondary Operating Reserve Market Data]{List of Bids of the German Secondary Reserve Market for the tender period 04.12.2017 - 11.12.2017. \label{data-operating-reserve}}
+\\
+\hline
+\hline
+Product & Capacity Price & Energy Price & Payment & Offered & Accepted\\
+\hline
+\endfirsthead
+\multicolumn{6}{l}{Continued from previous page} \\
+\hline
+
+Product & Capacity Price & Energy Price & Payment & Offered & Accepted \\
+
+\hline
+\endhead
+\hline\multicolumn{6}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+NEG-HT & 0 & 1.1 & TSO to bidder & 5 & 5\\
+NEG-HT & 10.73 & 251 & TSO to bidder & 15 & 15\\
+NEG-HT & 200.3 & 564 & TSO to bidder & 22 & 22\\
+\ldots{} & \ldots{} & \ldots{} & \ldots{} & \ldots{} & \ldots{}\\
+NEG-NT & 0 & 21.9 & Bidder to TSO & 5 & 5\\
+NEG-NT & 0 & 22.4 & Bidder to TSO & 5 & 5\\
+\ldots{} & \ldots{} & \ldots{} & \ldots{} & \ldots{} & \ldots{}\\
+POS-NT & 696.6 & 1200 & TSO to bidder & 5 & 5\\
+POS-NT & 717.12 & 1210 & TSO to bidder & 10 & 7\\
+\hline
+\hline
+\end{longtable}
+
+In this study, we assume that bidding on 15-minute intervals in secondary
+operating reserve tenders will be possible in future energy markets. As
+mentioned in Chapter \ref{sec-balancing-market}, the market design of the GCRM
+secondary operating reserve tender was adjusted in 2017. Daily tenders with
+4-hour bidding intervals were introduced in favor of weekly tenders with only
+two time segments. This change represents the trend by the TSOs to change the
+market design in order to better include RES into the operating reserve markets
+\cite{agricola14_dena_ancil_servic_study}. Due to the volatility of renewable
+electricity generation, providers are naturally dependent on accurate short-term
+forecasts, which are only possible with short tender periods and fine-grained
+bidding intervals.
+
+In order to estimate the upper bound of profits that the EV fleet can earn by
+participating in the secondary operating reserve market, the critical prices
+\(\overline{p_c}\) and \(\overline{p_e}\) are determined for each auctioned
+interval. \textcite{brandt17_evaluat_busin_model_vehic_grid_integ} define
+\(\overline{p_c}\) as the capacity price of the bid that was just barely accepted,
+whereas \(\overline{p_e}\) is the highest energy price that was payed for
+activated control reserve during that interval. The dataset was augmented with
+data of \emph{activated} secondary control reserve in a 15-minute resolution.\footnote{The data of activated secondary control reserve is freely available at \url{https://regelleistung.net}.}
+For every 15-minute interval within the given tender period of one week, the
+activated control reserve in that interval was matched with the accepted bids in
+that tender period. At the point where supply, i.e., offered capacity of bids,
+met demand, i.e., activated control reserve, the critical price
+\(\overline{p_e}\) was determined.
+
+\emph{Example}: The \emph{assumed} critical prices for the secondary operating reserve
+tender interval of the 6\textsuperscript{th} December 2017 between 08:00 and 08:15 are obtained
+as follows: Three suppliers submitted a reserve capacity of 5MW, 15MW and 22MW
+respectively (See Table \ref{data-operating-reserve}). The critical capacity price
+\(\overline{p_c} = 200.3 \text{ \!\euro{}/MW}\) is determined by the capacity
+price of the last (third) accepted bid in that time segment. The TSO reported
+that 18MW of control reserve were activated between 08:00 and 08:15. Hence, the
+second bid determines the critical energy price \(\overline{p_e} = 251
+\text{\!\euro{}/MWh}\), as control reserve capacity gets activated according to
+ascending order of the submitted energy prices. In this example the second
+bidder would get compensated with:
+\begin{equation*}
+\begin{split}
+    R &= R_c + R_e \\
+    &=(10.73\text{\euro{}/MW}\times15\text{MW}) + (251 \text{\euro{}/MWh}\times13\text{MW}\times 0.25\text{h}) \\
+    &= 976.7\text{\euro{}}
+\end{split}
+\end{equation*}
+Note that the second bidder get compensated for 13MW instead of the submitted
+15MW, since in total only 18MW of control capacity get activated, which were
+partly fulfilled by the 5MW of the first bidder.
+
+\subsection{Spot Market Data\ldots{}}
+\label{sec:orge7b51c1}
 
 \section{Model: FleetRL}
-\label{sec:orgedf673d}
+\label{sec:org8d5cac4}
 \subsection{Information Assumptions}
-\label{sec:orgdd46349}
+\label{sec:org085b618}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:orga3213f4}
+\label{sec:orgbeb9094}
 \subsection{Reinforcement Learning Approach}
-\label{sec:orgf510e14}
+\label{sec:orgdb39f26}
 \subsection{Bidding Strategy}
-\label{sec:orgadb38b2}
+\label{sec:orge743b87}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org320a3dc}
+\label{sec:org382ff59}
 
 \section{Evaluation}
-\label{sec:orge2d805d}
+\label{sec:org5e570e8}
 \subsection{Event-based Simulation}
-\label{sec:org6d86e26}
+\label{sec:org98c656f}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:org98bb3f0}
+\label{sec:orgf1d2bf6}
 \subsection{FleetRL}
-\label{sec:org17c2773}
+\label{sec:org1b04484}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org014a007}
+\label{sec:org075d21f}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org743b479}
+\label{sec:org21128e0}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org35cda6c}
+\label{sec:orge6a1589}
 \section{Discussion}
-\label{sec:org479e24e}
+\label{sec:orgfe1ef3c}
 \subsection{Generalizability}
-\label{sec:org0cadd72}
+\label{sec:org81bd464}
 \subsection{Future Electricity Landscape}
-\label{sec:org363e741}
+\label{sec:org515d028}
 \subsection{Limitations}
-\label{sec:org84f662c}
+\label{sec:org91b8886}
 \section{Conclusion}
-\label{sec:orge772872}
+\label{sec:orgc7b9578}
 \subsection{Contribution}
-\label{sec:orgd89b43e}
+\label{sec:org3e6c62c}
 \subsection{Future Research}
-\label{sec:org5b00df2}
+\label{sec:org6499d73}
 
 
 \clearpage
