@@ -98,21 +98,21 @@ On electricity markets, actors participate in auctions to match the supply of
 electricity generation and the demand for electricity consumption. Participants
 place asks (sale offers) and bids (purchase orders). The electricity price is
 determined by an auction mechanism, which can take different forms depending on
-the type of market. Germany, like many other countries, has a liberalized energy
-system in which the generation and distribution of electricity are decoupled.
-Multiple electricity markets exist in a liberalized energy system. They differ
-in the auction design and in their reaction time between the order contract and
-the delivery of electricity. Day-ahead markets and spot markets have a reaction
-time between a day and several hours, whereas in operating reserve markets the
-reaction time ranges from minutes to seconds. The auction mechanism design is
-essential for electricity markets cite:kambil98_reeng_dutch_flower_auction.
-Electricity markets work according to the merit order principle in which
-resources are considered in ascending order of the energy price until the
-capacity demand is met. The clearing price is determined by the energy price, at
-the point where supply meets demand. Payment models differ in the markets: In
-contrast to day-ahead markets, where a uniform pricing schema is applied, in
-secondary reserve markets and intraday markets bidders, get compensated by the
-price they bid (pay-as-bid principle).
+the type of market. Germany, like many other western countries, has a
+liberalized energy system in which the generation and distribution of
+electricity are decoupled. Multiple electricity markets exist in a liberalized
+energy system. They differ in the auction design and in their reaction time
+between the order contract and the delivery of electricity. Day-ahead markets
+and spot markets have a reaction time between a day and several hours, whereas
+in operating reserve markets the reaction time ranges from minutes to seconds.
+The auction mechanism design is essential for electricity markets
+cite:kambil98_reeng_dutch_flower_auction. Electricity markets work according to
+the merit order principle in which resources are considered in ascending order
+of the energy price until the capacity demand is met. The clearing price is
+determined by the energy price, at the point where supply meets demand. Payment
+models differ in the markets: In contrast to day-ahead markets, where a uniform
+pricing schema is applied, in secondary reserve markets and intraday markets
+bidders, get compensated by the price they bid (pay-as-bid principle).
 
 # TODO: Describe week ahead or day ahead commitment of balancing market?
 Carsharing fleets can offer the capacity of their EV batteries on multiple
@@ -133,7 +133,7 @@ research.
 #+CAPTION[Electricity Market Design]: Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
 [[./fig/electricity_markets.png]]
 
-*** Balancing Market
+*** Balancing Market label:sec-balancing-market
 # NOTE: Consider changing heading to Operating reserve market / frequency
 The balancing market is a tool to balance frequency deviations in the power
 grid. It offers auctions for primary control reserve, secondary control reserve
@@ -180,26 +180,27 @@ above 50Hz and can be provided by adding grid load or reducing electricity
 generation. Since we do not consider V2G in this thesis, the EV fleets in our
 model are only able provide /negative control reserve/, which we will refer to
 as /control reserve/ until the end of the thesis. Market participants submit
-bids in the following form to the market: $(P, p_c, p_w)$, where $P$ is the
+bids in the following form to the market: $(P, p_c, p_e)$, where $P$ is the
 amount of electrical power that can be supplied on demand in kW, $p_c$ is the
-capacity price for keeping the power available in $\text{\euro{}/MW}$ and $p_w$
-is the working price for delivered energy in $\text{\euro{}/MWh}$. The TSO
+capacity price for keeping the power available in $\text{\euro{}/MW}$ and $p_e$
+is the energy price for delivered energy in $\text{\euro{}/MWh}$. The TSO
 determines the target quantity of energy to acquire per timeslot, it usually
 acquires much higher regulation capacity to minimize risks and activates the
 capacity on demand. The TSO accepts the bids based on the capacity price in a
 merit order. Providers, whose bids were accepted, instantly get compensated for
 the provided capacity: $R_c = p_c \times P$. At the time regulation capacity is
 needed, usually a day to a week later, the TSO activates the capacity according
-to a merit order of the ascending /working prices/ $p_w$. Hence, providers are
-also compensated according to the actual power they supplied: $R_w = p_w \times
+to a merit order of the ascending /energy prices/ $p_e$. Hence, providers are
+also compensated according to the actual power they supplied: $R_e = p_e \times
 P_a$, where $P_a$ is the supplied power at the timeslot. Since provider get paid
-according to their submitted price $p_w$, instead of a market clearing price,
+according to their submitted price $p_e$, instead of a market clearing price,
 this type of auction is called /pay-as-bid/ auction.
 # NOTE: Add more citations? brandt?
 # NOTE: Mention: Estimate the critical prices, $p_c$ (not) and $p_w$ - in data
 # section?
 # NOTE: Possible include example
 # NOTE: Mention New German Mischpreisverfahren.
+# NOTE: Market mechanism is a multi-unit, first-price, sealed-bid auction, which is settled on a ”pay-as-bid"
 # NOTE: Possible include market volume, average prices, etc..
 *** Spot Market
 # TODO: Intraday mainly for balancing!!! Rephrase Intro+Lit Review to only provide
@@ -949,7 +950,7 @@ electricity prices), RL methods are a promising way of solving complex
 challenges in smart grids.
 
 
-#+LATEX: \clearpage
+# #+LATEX: \clearpage
 * Empirical Setting
 # NOTE: 10%
 ** Carsharing Fleets of Electric Vehicles
@@ -997,40 +998,113 @@ challenges in smart grids.
 
 ** Electricity Markets Data
 *** Secondary Operating Reserve Market
-# - Relax 1 MW minimum bidding assumption
+# - Relax 1 MW minimum bidding assumption -- Controller section
 #   - 500kw
 #   - 100kw
 
-# In this research, we will use bidding data from the German secondary reserve
-# market between 01.06.2016 and 01.01.2018. The data contain weekly lists of
-# anonymized bids, where the electricity product, the offered capacity, the
-# capacity price and the energy price are listed. Four different products are
-# traded, which are a combination of positive control reserve (feed electricity
-# into the grid) or negative control reserve (take electricity from the grid) and
-# the provided time windows (peak or non-peak hours). Since negative prices are
-# allowed on the secondary operating reserve market, the payment direction is
-# included as well. Moreover, information about the amount of electricity which
-# got accepted, i.e. either partially or fully, is listed. Bids which were not
-# accepted are not listed. An excerpt of the data can be found in Table
-# ref:operating-reserve-data.
-# # TODO: Explain TSO?
-# #+CAPTION: List of Bids of the German Secondary Reserve Market label:operating-reserve-data
-# #+ATTR_LATEX: :environment longtable :align c|ccccc :placement [hp]
-# |---------+----------------+--------------+---------------+---------+----------|
-# |---------+----------------+--------------+---------------+---------+----------|
-# | Product | Capacity Price | Energy Price | Payment       | Offered | Accepted |
-# |---------+----------------+--------------+---------------+---------+----------|
-# | NEG-HT  |              0 |          1.1 | TSO to bidder |       5 |        5 |
-# | NEG-HT  |              0 |          251 | TSO to bidder |      15 |       15 |
-# | NEG-HT  |              0 |          564 | TSO to bidder |      22 |       22 |
-# | ...     |            ... |          ... | ...           |     ... |      ... |
-# | NEG-NT  |              0 |         21.9 | Bidder to TSO |       5 |        5 |
-# | NEG-NT  |              0 |         22.4 | Bidder to TSO |       5 |        5 |
-# | ...     |            ... |          ... | ...           |     ... |      ... |
-# | POS-NT  |          696.6 |         1200 | TSO to bidder |       5 |        5 |
-# | POS-NT  |         717.12 |         1210 | TSO to bidder |      10 |        7 |
-# |---------+----------------+--------------+---------------+---------+----------|
-# |---------+----------------+--------------+---------------+---------+----------|
+# TODO: Consistent wording: tender period = weekly, daily; segments, intervals, products, time windows
+In this research, we use bidding data from the German secondary reserve market.
+The following chapter will give an overview the dataset and preprocessing steps
+that were taken. For a detailed description about the market design of balancing
+markets refer to Chapter ref:sec-balancing-market.
+
+The data can be freely obtained at the GCRM platform website
+(https://regelleistung.net). It encompasses weekly lists of anonymized bids
+between 01.06.2016 and 01.01.2018. The electricity product, the offered capacity
+$P$ (MW), the capacity price $p_c$ ($\text{\euro{}/MW}$) and the energy price
+$p_e$ ($\text{\euro{}/MWh}$) of each bid is listed. Four different products are
+traded, which are a combination of positive control reserve (feed electricity
+into the grid) or negative control reserve (take electricity from the grid) and
+the provided time segment (peak or non-peak hours). Since negative prices are
+allowed on the secondary operating reserve market, the payment direction is
+included as well. Moreover, information about the amount of capacity that was
+accepted, i.e., either partially or fully, is listed. Bids, which were not
+accepted by the TSOs are not listed. An exemplary excerpt of the dataset is
+displayed in Table ref:data-operating-reserve.
+
+#+CAPTION[Secondary Operating Reserve Market Data]: List of Bids of the German Secondary Reserve Market for the tender period 04.12.2017 - 11.12.2017. label:data-operating-reserve
+#+ATTR_LATEX: :environment longtable :align c|ccccc :placement [hp]
+|---------+----------------+--------------+---------------+---------+----------|
+|---------+----------------+--------------+---------------+---------+----------|
+| Product | Capacity Price | Energy Price | Payment       | Offered | Accepted |
+|---------+----------------+--------------+---------------+---------+----------|
+| NEG-HT  |              0 |          1.1 | TSO to bidder |       5 |        5 |
+| NEG-HT  |          10.73 |          251 | TSO to bidder |      15 |       15 |
+| NEG-HT  |          200.3 |          564 | TSO to bidder |      22 |       22 |
+| ...     |            ... |          ... | ...           |     ... |      ... |
+| NEG-NT  |              0 |         21.9 | Bidder to TSO |       5 |        5 |
+| NEG-NT  |              0 |         22.4 | Bidder to TSO |       5 |        5 |
+| ...     |            ... |          ... | ...           |     ... |      ... |
+| POS-NT  |          696.6 |         1200 | TSO to bidder |       5 |        5 |
+| POS-NT  |         717.12 |         1210 | TSO to bidder |      10 |        7 |
+|---------+----------------+--------------+---------------+---------+----------|
+|---------+----------------+--------------+---------------+---------+----------|
+
+In this study, we assume that bidding on 15-minute intervals in secondary
+operating reserve tenders will be possible in future energy markets. As
+mentioned in Chapter ref:sec-balancing-market, the market design of the GCRM
+secondary operating reserve tender was adjusted in 2017. Daily tenders with
+4-hour bidding intervals were introduced in favor of weekly tenders with only
+two time segments. This change represents the trend by the TSOs to change the
+market design in order to better include RES into the operating reserve markets
+cite:agricola14_dena_ancil_servic_study. Due to the volatility of renewable
+electricity generation, providers are naturally dependent on accurate short-term
+forecasts, which are only possible with short tender periods and fine-grained
+bidding intervals.
+
+# NOTE: Mentioned Ascending order of bids
+# NOTE: Upper bound (citation)
+# NOTE: Move data sentence to top?
+In order to estimate the upper bound of profits that the EV fleet can earn by
+participating in the secondary operating reserve market, the critical prices
+$\overline{p_c}$ and $\overline{p_e}$ are determined for each auctioned
+interval. textcite:brandt17_evaluat_busin_model_vehic_grid_integ define
+$\overline{p_c}$ as the capacity price of the bid that was just barely accepted,
+whereas $\overline{p_e}$ is the highest energy price that was payed for
+activated control reserve during that interval. The dataset was augmented with
+data of /activated/ secondary control reserve in a 15-minute resolution.[fn:4]
+For every 15-minute interval within the given tender period of one week, the
+activated control reserve in that interval was matched with the accepted bids in
+that tender period. At the point where supply, i.e., offered capacity of bids,
+met demand, i.e., activated control reserve, the critical price
+$\overline{p_e}$ was determined.
+
+/Example/: The /assumed/ critical prices for the secondary operating reserve
+tender interval of the 6^{th} December 2017 between 08:00 and 08:15 are obtained
+as follows: Three suppliers submitted a reserve capacity of 5MW, 15MW and 22MW
+respectively (See Table ref:data-operating-reserve). The critical capacity price
+$\overline{p_c} = 200.3 \text{ \!\euro{}/MW}$ is determined by the capacity
+price of the last (third) accepted bid in that time segment. The TSO reported
+that 18MW of control reserve were activated between 08:00 and 08:15. Hence, the
+second bid determines the critical energy price $\overline{p_e} = 251
+\text{\!\euro{}/MWh}$, as control reserve capacity gets activated according to
+ascending order of the submitted energy prices. In this example the second
+bidder would get compensated with:
+\begin{equation*}
+\begin{split}
+    R &= R_c + R_e \\
+    &=(10.73\text{\euro{}/MW}\times15\text{MW}) + (251 \text{\euro{}/MWh}\times13\text{MW}\times 0.25\text{h}) \\
+    &= 976.7\text{\euro{}}
+\end{split}
+\end{equation*}
+Note that the second bidder get compensated for 13MW instead of the submitted
+15MW, since in total only 18MW of control capacity get activated, which were
+partly fulfilled by the 5MW of the first bidder.
+
+#+BEGIN_SRC python :exports none
+    return((10.73*15)+(251*13*0.25))
+#+END_SRC
+
+#+RESULTS:
+: 976.7
+*** Intraday Continuous Spot Market
+
+# # TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
+# We choose to use the EPEX Spot Intraday Continuous market in this research. The
+# data have been provided by ProCom GmbH[fn:1] and encompass order books and
+# executed trades from 01.06.2016 until 01.01.2018. As displayed in Table
+# ref:spot-market-sample-data, trades can have a very short lead time before
+# delivery, which is beneficial for our proposed trading strategy.
 
 # #+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
 # #+CAPTION: List of Trades of the EPEX Spot Intraday Continous Market label:spot-market-sample-data
@@ -1062,14 +1136,6 @@ challenges in smart grids.
 # |---------------------+---------+------------+----------+------------+-------------+---------+--------------+---------------|
 # |---------------------+---------+------------+----------+------------+-------------+---------+--------------+---------------|
 # #+LATEX:}
-*** Intraday Continuous Spot Market
-
-# # TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
-# We choose to use the EPEX Spot Intraday Continuous market in this research. The
-# data have been provided by ProCom GmbH[fn:1] and encompass order books and
-# executed trades from 01.06.2016 until 01.01.2018. As displayed in Table
-# ref:spot-market-sample-data, trades can have a very short lead time before
-# delivery, which is beneficial for our proposed trading strategy.
 
 * Model: FleetRL
 # NOTE: 20%
@@ -1125,4 +1191,6 @@ accessed 18^{th} February, 2019
 [fn:3]https://www.epexspot.com/en/press-media/press/details/press/Traded_volumes_soar_to_an_all-time_high_in_2018,
 accessed 19^{th} February, 2019
 
-[fn:4] https://procom-energy.de/
+[fn:4] The data of activated secondary control reserve is freely available at https://regelleistung.net.
+
+[fn:5] https://procom-energy.de/
