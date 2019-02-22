@@ -942,8 +942,8 @@ charging policy. The approach takes microgrid autonomy and electricity prices
 into special consideration.
 
 # TODO: Mention Stochastic Programming approaches
-# - cite:pandžic13_offer_model_virtual_power_plant
-# - cite:nguyen16_biddin
+# cite:pandzic13_offer_model_virtual_power_plant
+# cite:nguyen16_biddin
 It should be noted that advanced RL methods and techniques are not the only
 solutions for problems in the smart grid, often basic algorithms and heuristics
 provide satisfactory results cite:vazquez-canteli19_reinf_learn_deman_respon.
