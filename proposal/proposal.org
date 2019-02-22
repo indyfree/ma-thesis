@@ -119,6 +119,22 @@ regelleistung.net[fn:4].
 
 ** Carsharing Fleets of Electric Vehicles
 
+# We assume pre 2016 Smart Fortwo ED3:
+https://www.smart.com/en/en/index/smart-fortwo-electric-drive-453/technical-data.html
+
+# Technical details all models
+# https://www.mobilityhouse.com/de_de/elektroautos/smart/smart-eq-fortwo.html#smart-eq-fortwo-ladeinformationen
+
+# Car2Go deployed 2012 450 FourTwo < 2016
+# https://blog.mercedes-benz-passion.com/2012/10/car2go-startet-in-stuttgart-am-29-11-2012/
+
+# Car2Go deployed December 2013 50 more EVs of same type to arrivate at a fleet size of 500
+# http://www.carsharing-experten.de/blog/2013/12/14/car2go-erweitert-geschaeftsgebiet-im-raum-stuttgart.html
+
+# Car2Go replace July 2018 fleet with NewGen with 22kw chargers
+# https://blog.mercedes-benz-passion.com/2018/06/car2go-neue-smart-electric-drive-modelle-fuer-stuttgart/
+
+
 We think that the future of mobility will be electric, shared, smart and
 eventually autonomous. Carsharing companies are already contributing to the
 first two points by operating large fleets of electric vehicles. This research
