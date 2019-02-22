@@ -1010,28 +1010,29 @@ processing steps outlined.
 # of the interior and exterior are given, the relative state of charge and
 # information whether the EV is plugged into one of the 200 charging stations in
 # Stuttgart.
+# TODO: How many charging stations in Stuttgart? Whitepaper says 380
+#+CAPTION: Raw Car2Go Trip Data from Stuttgart label:car2go-sample-data
+#+ATTR_LATEX: :environment longtable :align l|ccccc
+|--------------+-------------+------------------+---------------------+-----------------|
+|--------------+-------------+------------------+---------------------+-----------------|
+| Number Plate | Latitude    | Longitude        | Street              |        Zip Code |
+|--------------+-------------+------------------+---------------------+-----------------|
+| S-GO2471     | 9.19121     | 48.68895         | Parkplatz Flughafen |           70692 |
+| S-GO2471     | 9.15922     | 48.78848         | Salzmannweg 3       |           70192 |
+| S-GO2471     | 9.17496     | 48.74928         | Felix-Dahn-Str.45   |           70597 |
+| S-GO2471     | 9.17496     | 48.74928         | Felix-Dahn-Str.45   |           70597 |
+| S-GO2471     | 9.17496     | 48.74928         | Felix-Dahn-Str.45   |           70597 |
+|--------------+-------------+------------------+---------------------+-----------------|
+| Number Plate | Engine Type | Timestamp        | Charging            | State of Charge |
+|--------------+-------------+------------------+---------------------+-----------------|
+| S-GO2471     | electric    | 22.12.2017 20:10 | no                  |              94 |
+| S-GO2471     | electric    | 24.12.2017 23:05 | no                  |              72 |
+| S-GO2471     | electric    | 26.12.2017 00:40 | yes                 |              81 |
+| S-GO2471     | electric    | 26.12.2017 00:45 | yes                 |              83 |
+| S-GO2471     | electric    | 26.12.2017 00:50 | yes                 |              84 |
+|--------------+-------------+------------------+---------------------+-----------------|
+|--------------+-------------+------------------+---------------------+-----------------|
 
-# #+CAPTION: Raw Car2Go Trip Data from Stuttgart label:car2go-sample-data
-# #+ATTR_LATEX: :environment longtable :align l|ccccc
-# |--------------+----------+-----------+---------------------+----------+-----------------|
-# |--------------+----------+-----------+---------------------+----------+-----------------|
-# | Number Plate | Latitude | Longitude | Street              | Zip Code | Engine Type     |
-# |--------------+----------+-----------+---------------------+----------+-----------------|
-# | S-GO2471     | 9.19121  | 48.68895  | Parkplatz Flughafen | 70692    | electric        |
-# | S-GO2471     | 9.15922  | 48.78848  | Salzmannweg 3       | 70192    | electric        |
-# | S-GO2471     | 9.17496  | 48.74928  | Felix-Dahn-Str.45   | 70597    | electric        |
-# | S-GO2471     | 9.17496  | 48.74928  | Felix-Dahn-Str.45   | 70597    | electric        |
-# | S-GO2471     | 9.17496  | 48.74928  | Felix-Dahn-Str.45   | 70597    | electric        |
-# |--------------+----------+-----------+---------------------+----------+-----------------|
-# | Number Plate | Interior | Exterior  | Timestamp           | Charging | State of Charge |
-# |--------------+----------+-----------+---------------------+----------+-----------------|
-# | S-GO2471     | good     | good      | 22.12.2017 20:10    | no       | 94              |
-# | S-GO2471     | good     | good      | 24.12.2017 23:05    | no       | 72              |
-# | S-GO2471     | good     | good      | 26.12.2017 00:40    | yes      | 81              |
-# | S-GO2471     | good     | good      | 26.12.2017 00:45    | yes      | 83              |
-# | S-GO2471     | good     | good      | 26.12.2017 00:50    | yes      | 84              |
-# |--------------+----------+-----------+---------------------+----------+-----------------|
-# |--------------+----------+-----------+---------------------+----------+-----------------|
 # *** Preprocessing Steps
 
 ** Balancing Market Data
