@@ -1113,7 +1113,7 @@ partly fulfilled by the 5MW of the first bidder.
 
 #+RESULTS:
 : 976.7
-** Spot Market Data...
+** Spot Market Data
 
 # # TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
 # We choose to use the EPEX Spot Intraday Continuous market in this research. The
