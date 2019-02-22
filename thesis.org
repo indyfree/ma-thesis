@@ -2,7 +2,7 @@
 #+AUTHOR:Tobias Richter
 
 # Formatting
-#+LATEX_CLASS_OPTIONS: [a4paper, twoside, 12pt]
+#+LATEX_CLASS_OPTIONS: [a4paper, 12pt]
 #+LATEX_HEADER: \usepackage[left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm, bindingoffset=1.5cm, head=15pt]{geometry}
 #+LATEX_HEADER: \usepackage{setspace}
 #+LATEX_HEADER: \usepackage{caption}
@@ -1046,6 +1046,8 @@ The following chapter will give an overview the dataset and preprocessing steps
 that were taken. For a detailed description about the market design of balancing
 markets refer to Chapter ref:sec-balancing-market.
 
+# TODO: Also ecompasses activated control reserve data, remove footnote from
+# next section
 The data encompasses weekly lists of anonymized bids between 01.06.2016 and
 01.01.2018. The electricity product, the offered capacity $P$ (MW), the capacity
 price $p_c$ ($\text{\euro{}/MW}$) and the energy price $p_e$
@@ -1099,7 +1101,7 @@ interval. textcite:brandt17_evaluat_busin_model_vehic_grid_integ define
 $\overline{p_c}$ as the capacity price of the bid that was just barely accepted,
 whereas $\overline{p_e}$ is the highest energy price that was payed for
 activated control reserve during that interval. The dataset was augmented with
-data of /activated/ secondary control reserve in a 15-minute resolution.[fn:9]
+data of /activated/ secondary control reserve in a 15-minute resolution.[fn:8]
 For every 15-minute interval within the given tender period of one week, the
 activated control reserve in that interval was matched with the accepted bids in
 that tender period. At the point where supply, i.e., offered capacity of bids,
@@ -1230,10 +1232,10 @@ accessed 19^{th} February, 2019
 [fn:6] https://www.car2go.com/media/data/germany/microsite-press/files/car2go_white-paper_electric-mobility_2018.pdf,
 accessed 21^{th} February 2019.
 
-[fn:7] https://www.epexspot.com
+[fn:7] https://procom-energy.de/
 
-[fn:8] https://www.regelleistungen.net
+[fn:8] The data of activated secondary control reserve is freely available at https://regelleistung.net.
 
-[fn:9] The data of activated secondary control reserve is freely available at https://regelleistung.net.
+[fn:9] https://www.epexspot.com
 
-[fn:10] https://procom-energy.de/
+[fn:10] https://www.regelleistungen.net

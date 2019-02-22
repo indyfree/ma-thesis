@@ -1,6 +1,6 @@
-% Created 2019-02-21 Thu 17:34
+% Created 2019-02-22 Fri 11:44
 % Intended LaTeX compiler: pdflatex
-\documentclass[a4paper, twoside, 12pt]{article}
+\documentclass[a4paper, 12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
@@ -206,21 +206,21 @@ be real-valued vectors are written in bold and in lower case (even if random var
 \pagenumbering{arabic}
 
 \section{Introduction}
-\label{sec:org0f48132}
+\label{sec:orgc156512}
 \subsection{Research Motivation}
-\label{sec:org4053eda}
+\label{sec:org141c0b0}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org753b1a2}
+\label{sec:org8bc7444}
 \subsection{Relevance}
-\label{sec:org91500a7}
+\label{sec:orgaf55f6f}
 
 \section{Theoretical Background}
-\label{sec:org8f9e98a}
+\label{sec:org8ea355f}
 \subsection{Electricity Markets}
-\label{sec:org6725869}
+\label{sec:orga220850}
 On electricity markets, actors participate in auctions to match the supply of
 electricity generation and the demand for electricity consumption. Participants
 place asks (sale offers) and bids (purchase orders). The electricity price is
@@ -241,7 +241,7 @@ models differ in the markets: In contrast to day-ahead markets, where a uniform
 pricing schema is applied, in secondary reserve markets and intraday markets
 bidders, get compensated by the price they bid (pay-as-bid principle).
 
-Carsharing fleets can offer the capacity of their EV batteries on multiple
+EV fleet operators can offer the capacity of their EV batteries on multiple
 markets at the same time to make use of the different market properties. On
 operating reserve markets,prices are usually more volatile and consequently more
 attractive for VPPs \cite{tomic07_using_fleet_elect_drive_vehic_grid_suppor}.
@@ -256,6 +256,7 @@ possibility to trade the remaining available capacity with low risk at the spot
 market. In the following, we will explain the market design of balancing markets
 and spot markets in more detail, since they are the markets we included in our
 research.
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./fig/electricity_markets.png}
@@ -263,7 +264,7 @@ research.
 \end{figure}
 
 \subsubsection{Balancing Market \label{sec-balancing-market}}
-\label{sec:org6ad99d5}
+\label{sec:orgb1916a3}
 The balancing market is a tool to balance frequency deviations in the power
 grid. It offers auctions for primary control reserve, secondary control reserve
 as well as tertiary control reserve (minute reserve), which primarily differ in
@@ -322,7 +323,7 @@ P_a\), where \(P_a\) is the supplied power at the timeslot. Since provider get p
 according to their submitted price \(p_e\), instead of a market clearing price,
 this type of auction is called \emph{pay-as-bid} auction.
 \subsubsection{Spot Market}
-\label{sec:org894a8a6}
+\label{sec:org1761bfd}
 As mentioned in the previous chapter, the equilibrium of electricity supply and
 demand is ensured through a sequence of interdependent wholesale markets (cited)
 \cite{pape16_are_fundam_enoug}. Next to the balancing market at the end of the
@@ -330,11 +331,11 @@ sequence, mainly two different types of spot markets exist, the day-ahead
 market and the intraday market. In this research, we consider the European Power
 Exchange (EPEX Spot) as it is the largest electricity market in Europe, with a
 total trading volume of approximately 567TWh in 2018\footnote{\url{https://www.epexspot.com/en/press-media/press/details/press/Traded\_volumes\_soar\_to\_an\_all-time\_high\_in\_2018},
-accessed 19\textsuperscript{th} February, 2019\label{org0d45bc9}}, but most electronic
+accessed 19\textsuperscript{th} February, 2019\label{org31966b1}}, but most electronic
 spot markets in western economies work with similar market mechanisms.
 
 In Germany, the most important spot market is the day-ahead market with a
-trading volume of over 234TWh in 2018\textsuperscript{\ref{org0d45bc9}}. Participants place asks and bids
+trading volume of over 234TWh in 2018\textsuperscript{\ref{org31966b1}}. Participants place asks and bids
 for hourly contracts of the following day on the \emph{EPEX Spot Day-ahead Auction}
 market until the market closes at 12pm on the day before delivery (Figure
 \ref{fig-electricity-markets}). The day-ahead market plays an essential role in
@@ -374,7 +375,7 @@ available battery capacity on the intraday market. Trades on the intraday market
 can complement bids that have been committed to other markets earlier (e.g., to
 the secondary operating reserve market).
 \subsection{Reinforcement Learning \label{sec-reinforcement-learning}}
-\label{sec:orgc18d59b}
+\label{sec:orgd3a69fd}
 The following chapter will give an overview of the most important Reinforcement
 Learning (RL) concepts and will introduce the corresponding mathematical
 formulations. If not noted otherwise, the notation, equations, and insights are
@@ -402,7 +403,7 @@ problem more efficiently, tackle new challenges and are widely used in practice
 and research.
 
 \subsubsection{Markov Decision Processes \label{sec-mdp}}
-\label{sec:orgb70aa52}
+\label{sec:orgeddf1d7}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -467,7 +468,7 @@ when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, th
 agent is "farsighted".
 
 \subsubsection{Policies and Value Functions \label{sec-policies}}
-\label{sec:org913543d}
+\label{sec:orgfbd9557}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -509,7 +510,7 @@ has been known as \emph{Q-learning} \cite{watkins92_q_learn}, which is described
 Chapter \ref{sec-td-learning}.
 
 \subsubsection{Bellman Equations \label{sec-bellman}}
-\label{sec:org49a4255}
+\label{sec:orgeb7e0e9}
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (\ref{eq-expected-return}), current values
 are related to expected values of successive states. This relationship is
@@ -551,7 +552,7 @@ experienced state transitions instead of expected transition probabilities. The
 most common methods will be explored in the following chapters.
 
 \subsubsection{Dynamic Programming  \label{sec-dp}}
-\label{sec:orga0d739a}
+\label{sec:org6f9f8de}
 \emph{Dynamic Programming} (DP) is a method to compute optimal policies, the primary
 goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
@@ -605,7 +606,7 @@ algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
 
 \subsubsection{Temporal-Difference Learning \label{sec-td-learning}}
-\label{sec:org9ec38af}
+\label{sec:orgcd95e57}
 The previous chapter dealt with solving a \emph{planning} problem, that is computing
 an optimal solution (i.e., an optimal policy \(\pi_*\)) of an MDP when a perfect
 model of the environment is known. In the following chapters, we will look at
@@ -707,7 +708,7 @@ drastically reduced. In this case, a \emph{function approximator} can replace th
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
 \subsubsection{Approximation Methods}
-\label{sec:org880456d}
+\label{sec:orgafa6612}
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
@@ -763,7 +764,7 @@ comprehensive review of deep learning methods.
 \end{figure}
 \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 \subsubsection{Further Topics}
-\label{sec:org1c03580}
+\label{sec:org179e031}
 The previous chapters provided a detailed overview of the most important
 concepts and mathematical foundations in RL. In the research there are many more
 topics that were not covered here. \emph{Eligibility traces} offer a way to more
@@ -786,9 +787,9 @@ environment, convergence and stability are a serious problem. \emph{W-learning}
 that aims to solve these difficulties.
 
 \section{Related Literature}
-\label{sec:org2a2dc42}
+\label{sec:org65919f4}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:org6a1e9e2}
+\label{sec:org4189aa0}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -961,7 +962,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org1e0eb5d}
+\label{sec:orge82032a}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -1005,7 +1006,6 @@ rent, when it is providing balancing capacity).
 control for continuous variables in their state and action space. In order to
 achieve fast convergence, they additionally optimized the \emph{temperature step}
 parameter of the Boltzmann exploration probability.
-
 
 \textcite{dusparic13_multi} proposed a multi-agent approach for residential demand
 response. The authors investigated a setting in which 9  EVs were connected to
@@ -1069,41 +1069,86 @@ mobility demand) and the flexibility to adapt to the environment (e.g.,
 electricity prices), RL methods are a promising way of solving complex
 challenges in smart grids.
 \section{Empirical Setting}
-\label{sec:orgc7637ff}
-We chose to embed our research in the German carsharing and electricity market.
+\label{sec:orge83bafa}
+This research is embedded in the German carsharing and electricity markets.
 Germany has a comparably high share of renewables in its energy mix and is
-pushing for an energy turnaround since 2010  (German: \emph{Energiewende})\footnote{Energy Concept for an Environmentally Sound, Reliable and Affordable energy \cite{economics10_energ_concep_envir_sound_reliab_affor}}. The
-high renewable energy content in the energy mix causes electricity prices to be
+pushing for an energy turnaround since 2010  (German: \emph{Energiewende})\footnote{Energy Concept for an Environmentally Sound, Reliable and Affordable energy \cite{economics10_energ_concep_envir_sound_reliab_affor}}.
+
+The high renewable energy content in the energy mix causes electricity prices to be
 more volatile, which makes Germany an attractive location for the use of VPPs.
 
-We obtained real-world trip data from Daimlers carsharing service Car2Go\footnote{\url{https://www.car2go.com}}
-that operates a large EV fleet in Stuttgart.
-\begin{itemize}
-\item Large cities, electric mobility \footnote{\url{https://www.car2go.com/media/data/germany/microsite-press/files/car2go\_white-paper\_electric-mobility\_2018.pdf},
+It has been argued that electric carsharing can simultaneously solve several
+traditional mobility and environmental problems and are an important element of
+future smart cities \cite{firnkorn15_free_float_elect_carsh_fleet_smart_cities}.
+Further, it is widely regarded that the future of mobility will be electric,
+shared, smart and eventually autonomous
+\cite{burns13_sustain_mobil,sterling18_three_revol}. Carsharing providers are
+already contributing to the first two points by operating large fleets of
+electric vehicles. This research addresses the third point: Using electric
+carsharing fleets to smartly participate in electricity markets. Carsharing
+providers, like Daimler and BMW, operate their carsharing fleets in a free-float
+model, which allows customers to pick up and drop vehicles at any place within
+the operating zone of the provider. Customers pay by the minute and are offered
+incentives to park the EVs at charging stations at the end of their trip.
+
+We obtained real-world trip data from Daimler's carsharing service Car2Go\footnote{\url{https://www.car2go.com}}
+that operates several large EV fleets in cities around the world.\footnote{\url{https://www.car2go.com/media/data/germany/microsite-press/files/car2go\_white-paper\_electric-mobility\_2018.pdf},
 accessed 21\textsuperscript{th} February 2019.}
-\item \cite{firnkorn15_free_float_elect_carsh_fleet_smart_cities}
-\end{itemize}
-
-and electricity market data from the European power exchange EPEX SPOT\footnote{\url{https://www.epexspot.com}}.
-Additionally, we collected data from the German electricity market operator
-regelleistung.net\footnote{\url{https://www.regelleistungen.net}}.
-
+Additionally, we collected freely available balancing market data from the GCRM
+platform website \url{https://regelleistung.net}. The data of the EPEX Spot market
+have kindly been provided by ProCom GmbH\footnote{\url{https://procom-energy.de/}} for research purposes. In the
+next chapters the different datasets are described, as well the most important
+processing steps outlined.
 
 \subsection{Electronic Vehicle Fleet Data}
-\label{sec:org75afe53}
+\label{sec:orgfbd7e75}
+\begin{longtable}{l|ccccc}
+\caption{Raw Car2Go Trip Data from Stuttgart \label{car2go-sample-data}}
+\\
+\hline
+\hline
+Number Plate & Latitude & Longitude & Street & Zip Code\\
+\hline
+\endfirsthead
+\multicolumn{5}{l}{Continued from previous page} \\
+\hline
+
+Number Plate & Latitude & Longitude & Street & Zip Code \\
+
+\hline
+\endhead
+\hline\multicolumn{5}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+S-GO2471 & 9.19121 & 48.68895 & Parkplatz Flughafen & 70692\\
+S-GO2471 & 9.15922 & 48.78848 & Salzmannweg 3 & 70192\\
+S-GO2471 & 9.17496 & 48.74928 & Felix-Dahn-Str.45 & 70597\\
+S-GO2471 & 9.17496 & 48.74928 & Felix-Dahn-Str.45 & 70597\\
+S-GO2471 & 9.17496 & 48.74928 & Felix-Dahn-Str.45 & 70597\\
+\hline
+Number Plate & Engine Type & Timestamp & Charging & State of Charge\\
+\hline
+S-GO2471 & electric & 22.12.2017 20:10 & no & 94\\
+S-GO2471 & electric & 24.12.2017 23:05 & no & 72\\
+S-GO2471 & electric & 26.12.2017 00:40 & yes & 81\\
+S-GO2471 & electric & 26.12.2017 00:45 & yes & 83\\
+S-GO2471 & electric & 26.12.2017 00:50 & yes & 84\\
+\hline
+\hline
+\end{longtable}
 
 \subsection{Balancing Market Data}
-\label{sec:orga414e44}
+\label{sec:org520019e}
 In this research, we use bidding data from the German secondary reserve market.
 The following chapter will give an overview the dataset and preprocessing steps
 that were taken. For a detailed description about the market design of balancing
 markets refer to Chapter \ref{sec-balancing-market}.
 
-The data can be freely obtained at the GCRM platform website
-(\url{https://regelleistung.net}). It encompasses weekly lists of anonymized bids
-between 01.06.2016 and 01.01.2018. The electricity product, the offered capacity
-\(P\) (MW), the capacity price \(p_c\) (\(\text{\euro{}/MW}\)) and the energy price
-\(p_e\) (\(\text{\euro{}/MWh}\)) of each bid is listed. Four different products are
+The data encompasses weekly lists of anonymized bids between 01.06.2016 and
+01.01.2018. The electricity product, the offered capacity \(P\) (MW), the capacity
+price \(p_c\) (\(\text{\euro{}/MW}\)) and the energy price \(p_e\)
+(\(\text{\euro{}/MWh}\)) of each bid is listed. Four different products are
 traded, which are a combination of positive control reserve (feed electricity
 into the grid) or negative control reserve (take electricity from the grid) and
 the provided time segment (peak or non-peak hours). Since negative prices are
@@ -1182,61 +1227,56 @@ second bid determines the critical energy price \(\overline{p_e} = 251
 \text{\!\euro{}/MWh}\), as control reserve capacity gets activated according to
 ascending order of the submitted energy prices. In this example the second
 bidder would get compensated with:
-\begin{equation*}
-\begin{split}
-    R &= R_c + R_e \\
-    &=(10.73\text{\euro{}/MW}\times15\text{MW}) + (251 \text{\euro{}/MWh}\times13\text{MW}\times 0.25\text{h}) \\
-    &= 976.7\text{\euro{}}
-\end{split}
-\end{equation*}
+\(R = R_c + R_e =(10.73\text{ \!\euro{}/MW}\times15\text{MW}) + (251 \text{
+\!\euro{}/MWh}\times13\text{MW}\times 0.25\text{h}) = 976.7\text{ \!\euro{}}\)
 Note that the second bidder get compensated for 13MW instead of the submitted
 15MW, since in total only 18MW of control capacity get activated, which were
 partly fulfilled by the 5MW of the first bidder.
 
-\subsection{Spot Market Data\ldots{}}
-\label{sec:orge7b51c1}
+\subsection{Spot Market Data}
+\label{sec:orgc0ad7f3}
 
 \section{Model: FleetRL}
-\label{sec:org8d5cac4}
+\label{sec:orgdcf96d2}
 \subsection{Information Assumptions}
-\label{sec:org085b618}
+\label{sec:org8c101c4}
 \subsection{Mobility Demand \& Clearing Price Prediction}
-\label{sec:orgbeb9094}
+\label{sec:org6d04d98}
 \subsection{Reinforcement Learning Approach}
-\label{sec:orgdb39f26}
+\label{sec:orgdc74c50}
 \subsection{Bidding Strategy}
-\label{sec:orge743b87}
+\label{sec:orga7f2d4a}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org382ff59}
+\label{sec:org76000d4}
 
 \section{Evaluation}
-\label{sec:org5e570e8}
+\label{sec:orga09776d}
 \subsection{Event-based Simulation}
-\label{sec:org98c656f}
+\label{sec:org60ea653}
 \subsection{Benchmark: Ad-hoc Strategies}
-\label{sec:orgf1d2bf6}
+\label{sec:orgeead7b1}
 \subsection{FleetRL}
-\label{sec:org1b04484}
+\label{sec:orgfdbe2e7}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org075d21f}
+\label{sec:orge53ab9c}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:org21128e0}
+\label{sec:org881da65}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:orge6a1589}
+\label{sec:org0e0f252}
 \section{Discussion}
-\label{sec:orgfe1ef3c}
+\label{sec:org17635e7}
 \subsection{Generalizability}
-\label{sec:org81bd464}
+\label{sec:org0f089c8}
 \subsection{Future Electricity Landscape}
-\label{sec:org515d028}
+\label{sec:orgc167dd4}
 \subsection{Limitations}
-\label{sec:org91b8886}
+\label{sec:org6d3fba1}
 \section{Conclusion}
-\label{sec:orgc7b9578}
+\label{sec:org0fd1c4c}
 \subsection{Contribution}
-\label{sec:org3e6c62c}
+\label{sec:orgbc71df3}
 \subsection{Future Research}
-\label{sec:org6499d73}
+\label{sec:org78677de}
 
 
 \clearpage
