@@ -1,6 +1,7 @@
 #+TITLE: Thesis Todo
 
 * Inbox
+** TODO Use abbreviations only after 3+ mentions?
 ** TODO Rephrase thesis to EV fleet only. Carsharing only one form, yet the most uncertain. Thus good example.
 ** TODO When webpage/pdf as source, put in bibtex not footnotes
 ** TODO Check page border spacing of Notation pages
