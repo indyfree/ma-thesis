@@ -93,6 +93,7 @@
 
 * Theoretical Background
 # NOTE: 10%
+# TODO: Introductary paragraph
 ** Electricity Markets
 On electricity markets, actors participate in auctions to match the supply of
 electricity generation and the demand for electricity consumption. Participants
@@ -130,6 +131,7 @@ possibility to trade the remaining available capacity with low risk at the spot
 market. In the following, we will explain the market design of balancing markets
 and spot markets in more detail, since they are the markets we included in our
 research.
+# TODO: Fix pointing arrows
 #+CAPTION[Electricity Market Design]: Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
 [[./fig/electricity_markets.png]]
 
@@ -883,7 +885,6 @@ textcite:vandael15_reinf_learn_heuris_ev_fleet used a /fitted Q Iteration/ to
 control for continuous variables in their state and action space. In order to
 achieve fast convergence, they additionally optimized the /temperature step/
 parameter of the Boltzmann exploration probability.
-
 
 # TODO: More paragraphs, order or summarize.
 # TODO: Make offline/online approaches clear.
