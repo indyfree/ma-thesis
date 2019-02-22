@@ -1116,13 +1116,8 @@ second bid determines the critical energy price $\overline{p_e} = 251
 \text{\!\euro{}/MWh}$, as control reserve capacity gets activated according to
 ascending order of the submitted energy prices. In this example the second
 bidder would get compensated with:
-\begin{equation*}
-\begin{split}
-    R &= R_c + R_e \\
-    &=(10.73\text{\euro{}/MW}\times15\text{MW}) + (251 \text{\euro{}/MWh}\times13\text{MW}\times 0.25\text{h}) \\
-    &= 976.7\text{\euro{}}
-\end{split}
-\end{equation*}
+$R = R_c + R_e =(10.73\text{ \!\euro{}/MW}\times15\text{MW}) + (251 \text{
+\!\euro{}/MWh}\times13\text{MW}\times 0.25\text{h}) = 976.7\text{ \!\euro{}}$
 Note that the second bidder get compensated for 13MW instead of the submitted
 15MW, since in total only 18MW of control capacity get activated, which were
 partly fulfilled by the 5MW of the first bidder.
