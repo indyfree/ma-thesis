@@ -115,7 +115,7 @@ pricing schema is applied, in secondary reserve markets and intraday markets
 bidders, get compensated by the price they bid (pay-as-bid principle).
 
 # TODO: Describe week ahead or day ahead commitment of balancing market?
-Carsharing fleets can offer the capacity of their EV batteries on multiple
+EV fleet operators can offer the capacity of their EV batteries on multiple
 markets at the same time to make use of the different market properties. On
 operating reserve markets,prices are usually more volatile and consequently more
 attractive for VPPs cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
@@ -954,26 +954,46 @@ challenges in smart grids.
 * Empirical Setting
 # NOTE: 10%
 # NOTE: Don't repeat stuff from first chapters
-We chose to embed our research in the German carsharing and electricity market.
+This research is embedded in the German carsharing and electricity markets.
 Germany has a comparably high share of renewables in its energy mix and is
-pushing for an energy turnaround since 2010  (German: /Energiewende/)[fn:4]. The
-high renewable energy content in the energy mix causes electricity prices to be
+pushing for an energy turnaround since 2010  (German: /Energiewende/)[fn:4].
+# TODO: Reformulate or cite
+The high renewable energy content in the energy mix causes electricity prices to be
 more volatile, which makes Germany an attractive location for the use of VPPs.
 
-We obtained real-world trip data from Daimlers carsharing service Car2Go[fn:5]
-that operates a large EV fleet in Stuttgart.
-- Large cities, electric mobility [fn:6]
-- cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities
+It has been argued that electric carsharing can simultaneously solve several
+traditional mobility and environmental problems and are an important element of
+future smart cities cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities.
+Further, it is widely regarded that the future of mobility will be electric,
+shared, smart and eventually autonomous
+cite:burns13_sustain_mobil,sterling18_three_revol. Carsharing providers are
+already contributing to the first two points by operating large fleets of
+electric vehicles. This research addresses the third point: Using electric
+carsharing fleets to smartly participate in electricity markets. Carsharing
+providers, like Daimler and BMW, operate their carsharing fleets in a free-float
+model, which allows customers to pick up and drop vehicles at any place within
+the operating zone of the provider. Customers pay by the minute and are offered
+incentives to park the EVs at charging stations at the end of their trip.
 
-and electricity market data from the European power exchange EPEX SPOT[fn:7].
-Additionally, we collected data from the German electricity market operator
-regelleistung.net[fn:8].
-
+# NOTE: Further description how data was collected? API, 5 minutes, etc..?
+We obtained real-world trip data from Daimler's carsharing service Car2Go[fn:5]
+that operates several large EV fleets in cities around the world.[fn:6]
+Additionally, we collected freely available balancing market data from the GCRM
+platform website https://regelleistung.net. The data of the EPEX Spot market
+have kindly been provided by ProCom GmbH[fn:7] for research purposes. In the
+next chapters the different datasets are described, as well the most important
+processing steps outlined.
 
 ** Electronic Vehicle Fleet Data
+# NOTE: Here only desription of data, no general blabla
+
+# Analyzing free-float trip data is substantially more difficult than fixed trip
+# data. Individual trips have to be reconstructed using the GPS data of the cars
+# and predicting the rental demand is a complex matter. Demand patterns differ
+# depending at which place and at what time the EVs are parked.
+
 # # Car2Go FourTwo assumptions:
 # # https://www.mobilityhouse.com/de_de/elektroautos/smart/smart-eq-fortwo.html#smart-eq-fortwo-ladeinformationen
-
 
 # # - 17.6 Kwh battery capacity
 # # - 140km reach with fully charged battery
@@ -1024,11 +1044,10 @@ The following chapter will give an overview the dataset and preprocessing steps
 that were taken. For a detailed description about the market design of balancing
 markets refer to Chapter ref:sec-balancing-market.
 
-The data can be freely obtained at the GCRM platform website
-(https://regelleistung.net). It encompasses weekly lists of anonymized bids
-between 01.06.2016 and 01.01.2018. The electricity product, the offered capacity
-$P$ (MW), the capacity price $p_c$ ($\text{\euro{}/MW}$) and the energy price
-$p_e$ ($\text{\euro{}/MWh}$) of each bid is listed. Four different products are
+The data encompasses weekly lists of anonymized bids between 01.06.2016 and
+01.01.2018. The electricity product, the offered capacity $P$ (MW), the capacity
+price $p_c$ ($\text{\euro{}/MW}$) and the energy price $p_e$
+($\text{\euro{}/MWh}$) of each bid is listed. Four different products are
 traded, which are a combination of positive control reserve (feed electricity
 into the grid) or negative control reserve (take electricity from the grid) and
 the provided time segment (peak or non-peak hours). Since negative prices are
