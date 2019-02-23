@@ -7,7 +7,7 @@
 #+LATEX_HEADER: \onehalfspacing
 #+OPTIONS: H:4
 
-#+CAPTION: Raw Car2Go Trip Data in Stuttgart label:data-car2go-raw
+#+CAPTION: Raw Car2Go Data in Stuttgart label:data-car2go-raw
 
 #+ATTR_LATEX: :float sideways :align c|ccccccc
 |--------------+------------------+----------+-----------+---------------------+----------+----------+---------|
