@@ -53,10 +53,10 @@
 |--------------+------+---------------------+--------------------+-----------------+---------------|
 
 # NOTE: Calculations for table fields
-#+BEGIN_SRC python :results output :exports none :var t1=-3 t2=-2 t3=-1 :var data=car2go-table
+#+BEGIN_SRC python :results output :exports none :var t1=-3 t2=-2 t3=-1 data=car2go-table
 
 EV_RANGE = 145
-CHARGE_POS = 3
+CHARGE_POS = 4
 
 def distance(trip_charge):
     return round((trip_charge / 100) * EV_RANGE, 2)
