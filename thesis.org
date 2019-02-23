@@ -1000,26 +1000,80 @@ and can reach a maximum driving distance of 145km according to the manufacturer.
 When equipped with an additional 22kW fast charger the charging time reduces to
 about an hour.
 
-As displayed in Table ref:data-car2go-raw, the data contain spatio-temporal
-attributes, such as timestamp, coordinates, and address of the EVs.
-Additionally, status attributes of the interior and exterior are given, the
-relative state of charge ($SoC$) and information whether the EV is plugged into
-one of the 380 charging stations in Stuttgart.
+In Table ref:data-car2go-raw the raw data is displayed, as we have obtained it
+by Car2Go. The dataset contains spatio-temporal attributes, such as timestamp,
+coordinates, and the address of the EVs at that point in time. Additionally,
+status attributes of the interior and exterior are given (not displayed), and
+most importantly the relative state of charge ($SoC$) and information whether
+the EV is plugged into one of the 380 charging stations in Stuttgart. Note that
+the data only contain EVs that are /available for rent/ in 5 minute intervals.
+EVs which are parked at a charging station are also not available until they
+have charged up approximately 70 SoC. Individual trips have to be reconstructed
+using the GPS data of the cars. Following preprocessing steps have been taken:
+
+1) Unused data columns were dropped
+   - ID: :: /Number plate/ is already a unique identifier for every EV.
+   - Address: :: Different addresses were given from same coordinates. /Latitude,
+        Longitude/ was used for locational data instead.
+   - Interior, Exterior: :: Status attributes were not used in the analysis of
+        this research. Although they could form interesting features for rental predictions.
+   - Enging Type: :: All EVs in Stuttgart are electric vehicles.
+2) The EV position coordinates were rounded to 4 decimals to reduce the GPS resolution to 10 meters.:
+
+   The GPS accuracy of private industry sensors is usually around 5 meters under
+   open sky and worse near buildings, bridges and trees[fn:8]. We identify trips
+   by changing GPS locations of the EV (See next point). To not falsely identify
+   trips, due to GPS measurement errors the resolution is reduced.
+   # TODO: Example above and numbers?
+3) Infer rental trips:
+
+   If the position, according to the coordinates, change between two datapoints
+   of the same EV, we infer that a customer rented the EV (cf. Table
+   ref:data-car2go-raw, 3^{rd} to 4^{rd} row). Note, that we assume that Car2Go
+   customer do not undertake trips that begin and end at the exact same
+   location.
+4) Infer charging stations:
+
+   The data shows that EVs are parked at GPS locations where charging stations
+   exist in reality, but they do not show up as /charging/ in the data. We
+   assume that EVs, which are parked at charging stations are also plugged in.
+   That is a valid assumption, since by German Law EVs have to be connected to a
+   charging station if they are parked at one, and otherwise will be removed.
+   Hence, the GPS location of EV is matched with GPS location of all charging
+   stations in the dataset.
+5) Clean data:
+   - Service Trips :: *999* Trips were removed that had a trip duration longer than the
+        maximum allowed rental time of two days. We assume that these trips were
+        /service trips/ undertaken by Car2Go. Since in most of the time the EVs
+        came back with a fully charged battery, the previous trip had to be
+        altered to end at a charging station.
+   - Incorrect charged EVs :: *number* EVs were removed that show incorrect
+        charging behavior. These EVs showed an increase of more than 20% SoC
+        between trips, while not being located at a charging station.
+
+#+BEGIN_SRC python :results output :exports none :var trips=145341 trips_gps=147313
+print("Number of cleaned trips with GPS rounding: %.d (%.2f%%)" % (trips_gps - trips, 1 - trips/trips_gps))
+#+END_SRC
+
+#+RESULTS:
+: Number of cleaned trips with GPS rounding: 1972 (0.01%)
+
+# Also for prediciton capacity has been calculated:
+
+
 
 # TODO: How many charging stations in Stuttgart? Whitepaper says 380 how much
 # does the data say?
 
 Analyzing free-float trip data is substantially more difficult than fixed trip
-data. Individual trips have to be reconstructed using the GPS data of the cars.
+data.
+
+# NOTE: Maybe put graph of how/when car2go is parked at charging w/ confidence intervals?
+# I.E. Figure 4.7 of cite:kahlen18_elect_vehic_virtual_power_plant_dilem
+
+
 
 #+INCLUDE: "~/uni/ma-thesis/template/car2go_tables.tex" export latex
-
-
-#+RESULTS:
-: 33.35 13.05 29.0
-
-and predicting the rental demand is a complex matter. Demand patterns differ
-depending at which place and at what time the EVs are parked.
 
 ** Balancing Market Data
 # - Relax 1 MW minimum bidding assumption -- Controller section
@@ -1087,7 +1141,7 @@ interval. textcite:brandt17_evaluat_busin_model_vehic_grid_integ define
 $\overline{p_c}$ as the capacity price of the bid that was just barely accepted,
 whereas $\overline{p_e}$ is the highest energy price that was payed for
 activated control reserve during that interval. The dataset was augmented with
-data of /activated/ secondary control reserve in a 15-minute resolution.[fn:8]
+data of /activated/ secondary control reserve in a 15-minute resolution.[fn:9]
 For every 15-minute interval within the given tender period of one week, the
 activated control reserve in that interval was matched with the accepted bids in
 that tender period. At the point where supply, i.e., offered capacity of bids,
@@ -1220,8 +1274,11 @@ accessed 21^{th} February 2019.
 
 [fn:7] https://procom-energy.de/
 
-[fn:8] The data of activated secondary control reserve is freely available at https://regelleistung.net.
+[fn:8] See https://www.gps.gov/systems/gps/performance/accuracy/, accessed
+23^{th} February 2019.
 
-[fn:9] https://www.epexspot.com
+[fn:9] The data of activated secondary control reserve is freely available at https://regelleistung.net.
 
 [fn:10] https://www.regelleistungen.net
+
+[fn:11] https://www.epexspot.com
