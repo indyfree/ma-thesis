@@ -19,7 +19,9 @@
 #+LATEX_HEADER: \usepackage[official]{eurosym}
 #+LATEX_HEADER: \usepackage{amsmath}
 #+LATEX_HEADER: \usepackage{amssymb}
-#+LATEX_HEADER: \usepackage{format/notation}
+
+# Custom Notatation commands
+#+LATEX_HEADER: \usepackage{notation/rl}
 
 # Headers setup
 #+LATEX_HEADER:\usepackage{fancyhdr}
