@@ -1,0 +1,49 @@
+\begin{sidewaystable}[htbp]
+    \caption{Raw Car2Go Trip Data in Stuttgart \label{data-car2go-raw}}
+    \centering
+    \begin{tabular}{l|ccccccc}
+      \hline
+      \hline
+      Number Plate & Timestamp & Latitude & Longitude & Street & Zip Code & Charging & State of Charge\\
+      \hline
+      S-GO2471 & 24.12.2017 20:00 & 9.19121 & 48.68895 & Parkplatz Flughafen & 70692 & no & 94\\
+      S-GO2471 & 24.12.2017 20:05 & 9.19121 & 48.68895 & Parkplatz Flughafen & 70692 & no & 94\\
+      S-GO2471 & 24.12.2017 20:10 & 9.19121 & 48.68895 & Parkplatz Flughafen & 70692 & no & 94\\
+      S-GO2471 & 24.12.2017 23:05 & 9.15922 & 48.78848 & Salzmannweg 3 & 70192 & no & 71\\
+      S-GO2471 & 24.12.2017 23:10 & 9.15922 & 48.78848 & Salzmannweg 3 & 70192 & no & 71\\
+      S-GO2471 & 25.12.2017 00:40 & 9.17496 & 48.74928 & Felix-Dahn-Str.45 & 70597 & yes & 62\\
+      S-GO2471 & 25.12.2017 00:45 & 9.17496 & 48.74928 & Felix-Dahn-Str.45 & 70597 & yes & 64\\
+      S-GO2471 & 25.12.2017 00:50 & 9.17496 & 48.74928 & Felix-Dahn-Str.45 & 70597 & yes & 66\\
+      S-GO2471 & 25.12.2017 03:25 & 9.2167 & 48.78742 & Friedenaustraße 25 & 70188 & no & 42\\
+      \hline
+      \hline
+    \end{tabular}
+
+    \bigskip\bigskip  % provide some separation between the two tables
+
+    \caption{Processed Car2Go Trip Data in Stuttgart \label{data-car2go-processed}}
+    \centering
+    \begin{tabular}{lc|ccccc}
+      \hline
+      \hline
+      Number Plate & Trip & Start Time & Start Address & Start Latitude & Start Longitude & Start SoC\\
+      \hline
+      S-GO2471 & 1 & 22.12.2017 20:10 & Parkplatz Flughafen, 70692, Stuttgart & 9.19121 & 48.68895 & 94\\
+      S-GO2471 & 2 & 24.12.2017 23:10 & Salzmannweg 3, 70192, Stuttgart & 9.15922 & 48.78848 & 71\\
+      S-GO2471 & 3 & 26.12.2017 00:50 & Felix-Dahn-Str.45, 70597, Stuttgart & 9.17496 & 48.74928 & 66\\
+      \hline
+      Number Plate & Trip & End Time & End Address & End Latitude & End Longitude & End SoC\\
+      \hline
+      S-GO2471 & 1 & 24.12.2017 23:05 & Salzmannweg 3, 70192, Stuttgart & 9.15922 & 48.78848 & 71\\
+      S-GO2471 & 2 & 24.12.2017 00:40 & Felix-Dahn-Str.45, 70597, Stuttgart & 9.17496 & 48.74928 & 62\\
+      S-GO2471 & 3 & 26.12.2017 03:25 & Friedenaustraße 25, 70188 Stuttgart & 9.2167 & 48.78742 & 42\\
+      \hline
+      Number Plate & Trip & Trip Duration [min] & Trip Charge [Soc] & Trip Distance [km] & End Charging & \\
+      \hline
+      S-GO2471 & 1 & 175 & 23 & 33.35 & no & \\
+      S-GO2471 & 2 & 90 & 9 & 13.05 & yes & \\
+      S-GO2471 & 3 & 155 & 20 & 29 & no & \\
+      \hline
+      \hline
+\end{tabular}
+\end{sidewaystable}

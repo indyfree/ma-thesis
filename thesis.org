@@ -1006,79 +1006,12 @@ one of the 380 charging stations in Stuttgart.
 
 # TODO: How many charging stations in Stuttgart? Whitepaper says 380 how much
 # does the data say?
-#+CAPTION: Raw Car2Go Trip Data in Stuttgart label:data-car2go-raw
-#+ATTR_LATEX: :environment longtable :align l|ccccc
-|--------------+----------+-----------+---------------------+----------+-----------------|
-|--------------+----------+-----------+---------------------+----------+-----------------|
-| Number Plate | Latitude | Longitude | Street              | Zip Code | Engine Type     |
-|--------------+----------+-----------+---------------------+----------+-----------------|
-| S-GO2471     | 9.19121  | 48.68895  | Parkplatz Flughafen | 70692    | electric        |
-| S-GO2471     | 9.15922  | 48.78848  | Salzmannweg 3       | 70192    | electric        |
-| S-GO2471     | 9.15922  | 48.78848  | Salzmannweg 3       | 70192    | electric        |
-| S-GO2471     | 9.17496  | 48.74928  | Felix-Dahn-Str.45   | 70597    | electric        |
-| S-GO2471     | 9.17496  | 48.74928  | Felix-Dahn-Str.45   | 70597    | electric        |
-| S-GO2471     | 9.17496  | 48.74928  | Felix-Dahn-Str.45   | 70597    | electric        |
-| S-GO2471     | 9.2167   | 48.78742  | Friedenaustraße 25  | 70188    | electric        |
-|--------------+----------+-----------+---------------------+----------+-----------------|
-| Number Plate | Interior | Exterior  | Timestamp           | Charging | State of Charge |
-|--------------+----------+-----------+---------------------+----------+-----------------|
-| S-GO2471     | good     | good      | 24.12.2017 20:10    | no       | 94              |
-| S-GO2471     | good     | good      | 24.12.2017 23:05    | no       | 71              |
-| S-GO2471     | good     | good      | 24.12.2017 23:10    | no       | 71              |
-| S-GO2471     | good     | good      | 25.12.2017 00:40    | yes      | 62              |
-| S-GO2471     | good     | good      | 25.12.2017 00:45    | yes      | 64              |
-| S-GO2471     | good     | good      | 25.12.2017 00:50    | yes      | 66              |
-| S-GO2471     | good     | good      | 25.12.2017 03:25    | no       | 42              |
-|--------------+----------+-----------+---------------------+----------+-----------------|
-|--------------+----------+-----------+---------------------+----------+-----------------|
-
-
 
 Analyzing free-float trip data is substantially more difficult than fixed trip
 data. Individual trips have to be reconstructed using the GPS data of the cars.
 
+#+INCLUDE: "~/uni/ma-thesis/template/car2go_tables.tex" export latex
 
-#+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
-#+CAPTION: Processed Car2Go Trip Data in Stuttgart label:data-car2go-processed
-#+ATTR_LATEX: :float sideways :align cc|ccccc :placement [hp]
-#+TBLNAME: car2go-table
-|--------------+------+---------------------+---------------------------------------+--------------------+-----------------+-----------|
-|--------------+------+---------------------+---------------------------------------+--------------------+-----------------+-----------|
-| Number Plate | Trip | Start Time          | Start Address                         |     Start Latitude | Start Longitude | Start SoC |
-|--------------+------+---------------------+---------------------------------------+--------------------+-----------------+-----------|
-| S-GO2471     |    1 | 22.12.2017 20:10    | Parkplatz Flughafen, 70692, Stuttgart |            9.19121 |        48.68895 |        94 |
-| S-GO2471     |    2 | 24.12.2017 23:10    | Salzmannweg 3, 70192, Stuttgart       |            9.15922 |        48.78848 |        71 |
-| S-GO2471     |    3 | 26.12.2017 00:50    | Felix-Dahn-Str.45, 70597, Stuttgart   |            9.17496 |        48.74928 |        66 |
-|--------------+------+---------------------+---------------------------------------+--------------------+-----------------+-----------|
-| Number Plate | Trip | End Time            | End Address                           |       End Latitude |   End Longitude |   End SoC |
-|--------------+------+---------------------+---------------------------------------+--------------------+-----------------+-----------|
-| S-GO2471     |    1 | 24.12.2017 23:05    | Salzmannweg 3, 70192, Stuttgart       |            9.15922 |        48.78848 |        71 |
-| S-GO2471     |    2 | 24.12.2017 00:40    | Felix-Dahn-Str.45, 70597, Stuttgart   |            9.17496 |        48.74928 |        62 |
-| S-GO2471     |    3 | 26.12.2017 03:25    | Friedenaustraße 25, 70188 Stuttgart   |             9.2167 |        48.78742 |        42 |
-|--------------+------+---------------------+---------------------------------------+--------------------+-----------------+-----------|
-| Number Plate | Trip | Trip Duration [min] | Trip Charge [Soc]                     | Trip Distance [km] |    End Charging |           |
-|--------------+------+---------------------+---------------------------------------+--------------------+-----------------+-----------|
-| S-GO2471     |    1 | 175                 | 23                                    |              33.35 |              no |           |
-| S-GO2471     |    2 | 90                  | 9                                     |              13.05 |             yes |           |
-| S-GO2471     |    3 | 155                 | 20                                    |                 29 |              no |           |
-|--------------+------+---------------------+---------------------------------------+--------------------+-----------------+-----------|
-|--------------+------+---------------------+---------------------------------------+--------------------+-----------------+-----------|
-#+LATEX: }
-
-#+BEGIN_SRC python :results output :exports none :var t1=-3 t2=-2 t3=-1 :var data=car2go-table
-
-EV_RANGE = 145
-CHARGE_POS = 3
-
-def distance(trip_charge):
-    return round((trip_charge / 100) * EV_RANGE, 2)
-
-
-d1 = distance(data[t1][CHARGE_POS])
-d2 = distance(data[t2][CHARGE_POS])
-d3 = distance(data[t3][CHARGE_POS])
-print(d1, d2, d3)
-#+END_SRC
 
 #+RESULTS:
 : 33.35 13.05 29.0
