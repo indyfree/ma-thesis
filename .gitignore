@@ -1,7 +1,7 @@
 ## Project specific
 proposal/proposal.tex
-util/tables.pdf
-util/tables.pdf
+util/*.pdf
+util/*.tex
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
