@@ -104,6 +104,47 @@ research:
 
    Combine the previous results by designing a bidding strategy and determine
    optimal auction prices, which take the different market designs into account.
+** Structure of the thesis
+
+# On the 2015 United Nations Climate Change Conference 196 countries have agreed
+# to pursue efforts to contain a global temperature rise to 1.5 \degree C.
+# According to the United Nations Intergovernmental Panel on Climate Change (IPCC)
+# failing to do so bears the key risks of increasing exposure to coastal flooding,
+# variable and extreme precipitation, inland flooding, frequency and intensity of
+# extreme heat, drought, rising ocean temperature, ocean acidification, loss of
+# arctic sea ice, and rising land temperatures \citep{IPCC14TS}. Earlier, in its
+# World Energy Investment Outlook 2014, the International Energy Agency has
+# estimated that over the next 20 years a cumulative investment of \$53 trillion
+# is required worldwide to limit the concentration of greenhouse gases in the
+# atmosphere to such an extent \citep{IEA14WOIO}. The majority of the
+# anthropogenic greenhouse gas emissions come from fossil fuels. Therefore, many
+# stakeholders and countries around the world already pursue concrete steps in
+# increasing the share of renewable energy sources. Private sector examples are
+# E.ON SE and RWE AG, two of the largest electric utilities, who announced to
+# divest their conventional energy generation branch \citep{eon14, RWE15}. A
+# public sector example is the European Union which requires member states to have
+# a 30\% renewable mix by 2030; to reach this goal, intermittent wind and solar
+# power, particularly, is being subsidized \citep{EPCEU09OJEU}. We find that even
+# under current conditions and the new market design, storage from EVs for
+# balancing purposes is economically sound in all three cities, but is mostly used
+# to absorb excess capacity. A sensitivity analysis reveals that decreasing
+# battery technology costs and increasing balancing needs due to renewable energy
+# sources amplifies this effect, and will make the VPP from EVs economically
+# attractive by 2030. By that time, if electric vehicle fleets were to provide 5\%
+# of all people with cars, all peaking power plants in the secondary operating
+# reserve market could be retired. By decreasing peak load, a critical cost factor
+# in the grid, our study shows how infrastructure investment requirements are
+# reduced.
+
+# In the following, the Background and Literature section gives an overview of the
+# relevant literature about sustainable energy markets and electric cars. Next,
+# the Model Description elaborates on the trading strategy of the FleetPower
+# information system and its three phases. Consequently, the data and the cases of
+# San Diego, Amsterdam, and Stuttgart are introduced in the Design Evaluation:
+# Evidence from a Real World Setting section. In Analysis and Discussion, we
+# explain our findings and conduct a sensitivity analysis. The Research
+# Contribution and Managerial Implications section puts our findings in
+# perspective. Conclusion and Future Work concludes our study.
 
 * Empirical Setting
 
