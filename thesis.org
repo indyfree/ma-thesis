@@ -25,6 +25,8 @@
 
 # Use informs lists
 #+LATEX_HEADER: \usepackage{template/informs}
+#+LATEX_HEADER: \let\enumerate\henumerate
+#+LATEX_HEADER: \let\itemize\hitemize
 
 # Headers setup
 #+LATEX_HEADER:\usepackage{fancyhdr}
@@ -963,97 +965,112 @@ challenges in smart grids.
 * Empirical Setting
 # NOTE: 10%
 # NOTE: Don't repeat stuff from first chapters
+# TODO: Reformulate or cite "high renewable content, causing suitable prices,
+# this suitable for VPPs" -- False
+# Suitable for VPPs to integrate RES providers on a larger scale
+# VPP citation?
 This research is embedded in the German carsharing and electricity markets.
-Germany has a comparably high share of renewables in its energy mix and is
-pushing for an energy turnaround since 2010  (German: /Energiewende/)[fn:4].
-# TODO: Reformulate or cite
-The high renewable energy content in the energy mix causes electricity prices to be
-more volatile, which makes Germany an attractive location for the use of VPPs.
+Germany is a suitable testbed, since it has a comparably high share of
+renewables in its energy mix and is pushing for an energy turnaround (German:
+/Energiewende/) since 2010 cite:bmu10_energ_concep_envir_sound_reliab_affor
+The high renewable energy content in the energy mix causes electricity prices to
+be volatile, which makes Germany an attractive location for the use of
+VPPs.
 
-It has been argued that electric carsharing can simultaneously solve several
-traditional mobility and environmental problems and are an important element of
-future smart cities cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities.
-Further, it is widely regarded that the future of mobility will be electric,
-shared, smart and eventually autonomous
-cite:burns13_sustain_mobil,sterling18_three_revol. Carsharing providers are
-already contributing to the first two points by operating large fleets of
-electric vehicles. This research addresses the third point: Using electric
-carsharing fleets to smartly participate in electricity markets. Carsharing
-providers, like Daimler and BMW, operate their carsharing fleets in a free-float
-model, which allows customers to pick up and drop vehicles at any place within
-the operating zone of the provider. Customers pay by the minute and are offered
-incentives to park the EVs at charging stations at the end of their trip.
+Germany is also home to the carsharing providers Car2Go[fn:4] and
+DriveNow[fn:5], which operate large EV fleets across the globe. It has been
+argued that electric carsharing can simultaneously solve several traditional
+mobility and environmental problems and are an important element of future smart
+cities cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Further, it is
+widely regarded that the future of mobility will be electric, shared, smart and
+eventually autonomous cite:burns13_sustain_mobil,sterling18_three_revol.
+Carsharing providers are already contributing to the first two points by
+operating large fleets of electric vehicles. This research addresses the third
+point: Using electric carsharing fleets to smartly participate in electricity
+markets. Carsharing providers, like Car2Go and DriveNow, operate their carsharing
+fleets in a free-float model, which allows customers to pick up and drop
+vehicles at any place within the operating zone of the provider. Customers pay
+by the minute and are offered incentives to park the EVs at charging stations at
+the end of their trip.
 
 # NOTE: Further description how data was collected? API, 5 minutes, etc..?
-We obtained real-world trip data from Daimler's carsharing service Car2Go[fn:5]
-that operates several large EV fleets in cities around the world.[fn:6]
+We obtained real-world trip data from Daimler's carsharing service Car2Go.
 Additionally, we collected freely available balancing market data from the GCRM
 platform website https://regelleistung.net. The data of the EPEX Spot market
-have kindly been provided by ProCom GmbH[fn:7] for research purposes. In the
+have kindly been provided by ProCom GmbH[fn:6] for research purposes. In the
 next chapters the different datasets are described, as well the most important
 processing steps outlined.
 
 ** Electronic Vehicle Fleet Data
 # NOTE: Here only desription of data, no general blabla
 # TODO: Exact number of EVs
-The dataset consists of trip data of around 500 Smart ED3 Fortwo vehicles in
+The dataset consists of GPS data of around 500 Smart ED3 Fortwo vehicles in
 Stuttgart. These subcompact cars are equipped with a 17.6kWh battery and a
 standard 3.3kW on-board charger. They fully charge in about six to seven hours
 and can reach a maximum driving distance of 145km according to the manufacturer.
 When equipped with an additional 22kW fast charger the charging time reduces to
 about an hour.
 
-In Table ref:data-car2go-raw the raw data is displayed, as we have obtained it
+# TODO: Exact number of charging stations, real or infered?
+In Table ref:table-car2go-raw the raw data is displayed, as we have obtained it
 by Car2Go. The dataset contains spatio-temporal attributes, such as timestamp,
-coordinates, and the address of the EVs at that point in time. Additionally,
-status attributes of the interior and exterior are given (not displayed), and
-most importantly the relative state of charge ($SoC$) and information whether
-the EV is plugged into one of the 380 charging stations in Stuttgart. Note that
-the data only contain EVs that are /available for rent/ in 5 minute intervals.
-EVs which are parked at a charging station are also not available until they
-have charged up approximately 70 SoC. Individual trips have to be reconstructed
-using the GPS data of the cars. Following preprocessing steps have been taken:
+coordinates, and the address of the EVs in 5 minute intervals. Additionally,
+status attributes of the interior and exterior are given (not displayed).
+Especially relevant for our research is the state of charge ($SoC$, in %) and
+information whether the EV is plugged into one of the 380 charging stations in
+Stuttgart. Note that the data only contain EVs that are /available for rent/,
+i.e., they are not currently rented out by a customer. EVs which are parked at a
+charging station are also not available until they have charged up approximately
+70 SoC. Individual trips have to be reconstructed using the GPS data of the
+cars. Following preprocessing steps have been taken to prepare the data for
+further analysis:
+# NOTE: Not worthy mentioning?
+1) Drop unused data columns
 
-1) Unused data columns were dropped
-   - ID: :: /Number plate/ is already a unique identifier for every EV.
-   - Address: :: Different addresses were given from same coordinates. /Latitude,
-        Longitude/ was used for locational data instead.
-   - Interior, Exterior: :: Status attributes were not used in the analysis of
-        this research. Although they could form interesting features for rental predictions.
-   - Enging Type: :: All EVs in Stuttgart are electric vehicles.
-2) The EV position coordinates were rounded to 4 decimals to reduce the GPS resolution to 10 meters.:
+   - /ID/: Number plate is already a unique identifier for every EV.
+   - /Address/: Different addresses were given from same coordinates. /Latitude,
+     Longitude/ was used for locational data instead.
+   - /Interior, Exterior/: Status attributes were not used in the analysis of
+     this research. Although they could form interesting features for rental
+     predictions.
+   - /Enging Type/: All EVs in Stuttgart are electric vehicles.
+2) Decrease GPS resolution to 10 meters
 
-   The GPS accuracy of private industry sensors is usually around 5 meters under
-   open sky and worse near buildings, bridges and trees[fn:8]. We identify trips
-   by changing GPS locations of the EV (See next point). To not falsely identify
-   trips, due to GPS measurement errors the resolution is reduced.
+   The GPS accuracy of private industry sensors is approximately 5 meters under
+   open sky, and worse near buildings, bridges and trees[fn:7]. Rental trips are
+   identified by changing GPS locations of the EV (See next point). To reduce
+   the number of false positives, due to GPS measurement errors, the resolution
+   is decreased.
    # TODO: Example above and numbers?
-3) Infer rental trips:
+3) Determine rental trips
 
-   If the position, according to the coordinates, change between two datapoints
-   of the same EV, we infer that a customer rented the EV (cf. Table
-   ref:data-car2go-raw, 3^{rd} to 4^{rd} row). Note, that we assume that Car2Go
-   customer do not undertake trips that begin and end at the exact same
-   location.
-4) Infer charging stations:
+   We infer that a customer rented a EV, if the position coordinates change
+   between two data points of the same EV (cf. Table ref:table-car2go-raw, 4^{th}
+   to 5^{th} row). Note that we assume that customer do not undertake trips,
+   which begin and end at the exact same location.
+4) Infer charging station
 
-   The data shows that EVs are parked at GPS locations where charging stations
-   exist in reality, but they do not show up as /charging/ in the data. We
-   assume that EVs, which are parked at charging stations are also plugged in.
-   That is a valid assumption, since by German Law EVs have to be connected to a
-   charging station if they are parked at one, and otherwise will be removed.
-   Hence, the GPS location of EV is matched with GPS location of all charging
-   stations in the dataset.
-5) Clean data:
-   - Service Trips :: *999* Trips were removed that had a trip duration longer than the
-        maximum allowed rental time of two days. We assume that these trips were
-        /service trips/ undertaken by Car2Go. Since in most of the time the EVs
-        came back with a fully charged battery, the previous trip had to be
-        altered to end at a charging station.
-   - Incorrect charged EVs :: *number* EVs were removed that show incorrect
-        charging behavior. These EVs showed an increase of more than 20% SoC
-        between trips, while not being located at a charging station.
+   The GPS location of EVs is matched with the GPS locations, where an EV has
+   been charged at least once in the dataset. We observed that the raw data do
+   not show EVs that are parked at charging stations, but are not plugged in.
+   This research assumes that all EVs, which are parked at charging stations are
+   also plugged in. That is a valid assumption, since in Germany cars are only
+   allowed to park at charging station if they are connected to it.
+5) Clean data
+   - /Service trips/: 999 rental trips were removed that had a trip duration
+     longer than the maximum allowed rental time of two days. We assume that
+     these trips were /service trips/ undertaken by Car2Go. When the EVs
+     returned with a higher SoC (e.g., they have been charged at the car repair
+     shop), the previous trip had to be altered to end at a charging station to
+     ensure charging consistency.
+   - /Incorrectly charged EVs/: 999 EVs were removed that show incorrect
+     charging behavior. The data of these EVs showed an increase of more than
+     20% SoC between trips or on trips, while not being located at a charging
+     station.
+Table ref:table-car2go-processed depicts the dataset after all processing steps.
 
+# TODO: Explain capacity prediction data?
+# TODO: Include real cleaned data and/or examples
 #+BEGIN_SRC python :results output :exports none :var trips=145341 trips_gps=147313
 print("Number of cleaned trips with GPS rounding: %.d (%.2f%%)" % (trips_gps - trips, 1 - trips/trips_gps))
 #+END_SRC
@@ -1061,21 +1078,8 @@ print("Number of cleaned trips with GPS rounding: %.d (%.2f%%)" % (trips_gps - t
 #+RESULTS:
 : Number of cleaned trips with GPS rounding: 1972 (0.01%)
 
-# Also for prediciton capacity has been calculated:
-
-
-
-# TODO: How many charging stations in Stuttgart? Whitepaper says 380 how much
-# does the data say?
-
-Analyzing free-float trip data is substantially more difficult than fixed trip
-data.
-
 # NOTE: Maybe put graph of how/when car2go is parked at charging w/ confidence intervals?
 # I.E. Figure 4.7 of cite:kahlen18_elect_vehic_virtual_power_plant_dilem
-
-
-
 #+INCLUDE: "~/uni/ma-thesis/template/car2go_tables.tex" export latex
 
 ** Balancing Market Data
@@ -1144,7 +1148,7 @@ interval. textcite:brandt17_evaluat_busin_model_vehic_grid_integ define
 $\overline{p_c}$ as the capacity price of the bid that was just barely accepted,
 whereas $\overline{p_e}$ is the highest energy price that was payed for
 activated control reserve during that interval. The dataset was augmented with
-data of /activated/ secondary control reserve in a 15-minute resolution.[fn:9]
+data of /activated/ secondary control reserve in a 15-minute resolution.[fn:8]
 For every 15-minute interval within the given tender period of one week, the
 activated control reserve in that interval was matched with the accepted bids in
 that tender period. At the point where supply, i.e., offered capacity of bids,
@@ -1258,7 +1262,7 @@ bibliographystyle:apacite
 
 * Footnotes
 
-[fn:1] See https://regelleistung.net/, accessed on 15^{th} February
+[fn:1] See https://regelleistung.net, accessed on 15^{th} February
 2019, for further information on the market design and historical data.
 
 [fn:2]
@@ -1268,20 +1272,17 @@ accessed 18^{th} February, 2019
 [fn:3]https://www.epexspot.com/en/press-media/press/details/press/Traded_volumes_soar_to_an_all-time_high_in_2018,
 accessed 19^{th} February, 2019
 
-[fn:4] Energy Concept for an Environmentally Sound, Reliable and Affordable energy cite:economics10_energ_concep_envir_sound_reliab_affor
+[fn:4] https://www.car2go.com
 
-[fn:5] https://www.car2go.com
+[fn:5] https://www.drive-now.com
 
-[fn:6] https://www.car2go.com/media/data/germany/microsite-press/files/car2go_white-paper_electric-mobility_2018.pdf,
-accessed 21^{th} February 2019.
+[fn:6] https://procom-energy.de
 
-[fn:7] https://procom-energy.de/
-
-[fn:8] See https://www.gps.gov/systems/gps/performance/accuracy/, accessed
+[fn:7] See https://www.gps.gov/systems/gps/performance/accuracy, accessed
 23^{th} February 2019.
 
-[fn:9] The data of activated secondary control reserve is freely available at https://regelleistung.net.
+[fn:8] The data of activated secondary control reserve is freely available at https://regelleistung.net.
 
-[fn:10] https://www.regelleistungen.net
+[fn:9] https://www.regelleistungen.net
 
-[fn:11] https://www.epexspot.com
+[fn:10] https://www.epexspot.com
