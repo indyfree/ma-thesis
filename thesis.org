@@ -23,6 +23,9 @@
 # Custom Notatation commands
 #+LATEX_HEADER: \usepackage{notation/rl}
 
+# Use informs lists
+#+LATEX_HEADER: \usepackage{template/informs}
+
 # Headers setup
 #+LATEX_HEADER:\usepackage{fancyhdr}
 #+LATEX_HEADER:\pagestyle{fancy}
