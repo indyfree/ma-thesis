@@ -226,7 +226,7 @@ spot markets in western economies work with similar market mechanisms.
 In Germany, the most important spot market is the day-ahead market with a
 trading volume of over 234TWh in 2018[fn:3]. Participants place asks and bids
 for hourly contracts of the following day on the /EPEX Spot Day-ahead Auction/
-market until the market closes at 12pm on the day before delivery (Figure
+market until the market closes at 12pm on the day before delivery (see Figure
 ref:fig-electricity-markets). The day-ahead market plays an essential role in
 integrating volatile renewable energy sources (RES) into the power system
 cite:pape16_are_fundam_enoug. Generators forecast the expected generation
@@ -1045,7 +1045,7 @@ further analysis:
 3) Determine rental trips
 
    We infer that a customer rented a EV, if the position coordinates change
-   between two data points of the same EV (cf. Table ref:table-car2go-raw, 4^{th}
+   between two data points of the same EV (see Table ref:table-car2go-raw, 4^{th}
    to 5^{th} row). Note that we assume that customer do not undertake trips,
    which begin and end at the exact same location.
 4) Infer charging station
@@ -1083,32 +1083,27 @@ print("Number of cleaned trips with GPS rounding: %.d (%.2f%%)" % (trips_gps - t
 #+INCLUDE: "~/uni/ma-thesis/template/car2go_tables.tex" export latex
 
 ** Balancing Market Data
-# - Relax 1 MW minimum bidding assumption -- Controller section
-#   - 500kw
-#   - 100kw
-
 # TODO: Consistent wording: tender period = weekly, daily; segments, intervals, products, time windows
-In this research, we use bidding data from the German secondary reserve market.
-The following chapter will give an overview the dataset and preprocessing steps
-that were taken. For a detailed description about the market design of balancing
-markets refer to Chapter ref:sec-balancing-market.
+In this research, we use market balancing data from the German secondary reserve
+market. The following chapter will give an overview of the dataset and
+preprocessing steps that were taken. The data encompasses weekly lists of
+anonymized bids between 01.06.2016 and 01.01.2018 and a dataset of activated
+control reserve in the same period. For a detailed description about the market
+design of balancing markets refer to Chapter ref:sec-balancing-market.
 
-# TODO: Also ecompasses activated control reserve data, remove footnote from
-# next section
-The data encompasses weekly lists of anonymized bids between 01.06.2016 and
-01.01.2018. The electricity product, the offered capacity $P$ (MW), the capacity
-price $p_c$ ($\text{\euro{}/MW}$) and the energy price $p_e$
-($\text{\euro{}/MWh}$) of each bid is listed. Four different products are
-traded, which are a combination of positive control reserve (feed electricity
-into the grid) or negative control reserve (take electricity from the grid) and
-the provided time segment (peak or non-peak hours). Since negative prices are
-allowed on the secondary operating reserve market, the payment direction is
-included as well. Moreover, information about the amount of capacity that was
-accepted, i.e., either partially or fully, is listed. Bids, which were not
-accepted by the TSOs are not listed. An exemplary excerpt of the dataset is
-displayed in Table ref:data-operating-reserve.
+The bidding data consists of the electricity product, the offered capacity $P$
+(MW), the capacity price $p_c$ ($\text{\euro{}/MW}$), and the energy price $p_e$
+($\text{\euro{}/MWh}$) of each bid. Four different products are traded, which
+are a combination of positive control reserve (feed electricity into the grid)
+or negative control reserve (take electricity from the grid) and the provided
+time segment (peak or non-peak hours). Since negative prices are allowed on the
+secondary operating reserve market, the payment direction is included as well.
+Moreover, information about the amount of capacity that was accepted, i.e.,
+either partially or fully, is listed. Bids, which were not accepted by the TSOs
+are not listed. An exemplary excerpt of the dataset is displayed in Table
+ref:data-operating-reserve.
 
-#+CAPTION[Secondary Operating Reserve Market Data]: List of Bids of the German Secondary Reserve Market for the tender period 04.12.2017 - 11.12.2017. label:data-operating-reserve
+#+CAPTION[Secondary Operating Reserve Market Data]: List of Bids of the German Secondary Reserve Market for the tender period 04.12.2017 - 11.12.2017. label:table-operating-reserve
 #+ATTR_LATEX: :environment longtable :align c|ccccc :placement [hp]
 |---------+----------------+--------------+---------------+---------+----------|
 |---------+----------------+--------------+---------------+---------+----------|
@@ -1147,18 +1142,16 @@ $\overline{p_c}$ and $\overline{p_e}$ are determined for each auctioned
 interval. textcite:brandt17_evaluat_busin_model_vehic_grid_integ define
 $\overline{p_c}$ as the capacity price of the bid that was just barely accepted,
 whereas $\overline{p_e}$ is the highest energy price that was payed for
-activated control reserve during that interval. The dataset was augmented with
-data of /activated/ secondary control reserve in a 15-minute resolution.[fn:8]
-For every 15-minute interval within the given tender period of one week, the
-activated control reserve in that interval was matched with the accepted bids in
-that tender period. At the point where supply, i.e., offered capacity of bids,
-met demand, i.e., activated control reserve, the critical price
-$\overline{p_e}$ was determined.
+activated control reserve during that interval. For every 15-minute interval
+within the given tender period of one week, the activated control reserve in
+that interval was matched with the accepted bids in that tender period. At the
+point where supply, i.e., offered capacity of bids, met demand, i.e., activated
+control reserve, the critical price $\overline{p_e}$ was determined.
 
-/Example/: The /assumed/ critical prices for the secondary operating reserve
+/Example/: The assumed critical prices for the secondary operating reserve
 tender interval of the 6^{th} December 2017 between 08:00 and 08:15 are obtained
 as follows: Three suppliers submitted a reserve capacity of 5MW, 15MW and 22MW
-respectively (See Table ref:data-operating-reserve). The critical capacity price
+respectively (see Table ref:table-operating-reserve). The critical capacity price
 $\overline{p_c} = 200.3 \text{ \!\euro{}/MW}$ is determined by the capacity
 price of the last (third) accepted bid in that time segment. The TSO reported
 that 18MW of control reserve were activated between 08:00 and 08:15. Hence, the
@@ -1228,8 +1221,17 @@ partly fulfilled by the 5MW of the first bidder.
 #   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
 ** Bidding Strategy
 # NOTE: Assume aggregator is a price taker
+
+
+
+
 ** Dispatch Heuristic / Algorithm
 # - See cite:vandael15_reinf_learn_heuris_ev_fleet
+
+
+# NOTE:- Relax 1 MW minimum bidding assumption
+#   - 500kw
+#   - 100kw
 
 * Evaluation
 # NOTE: 30%
