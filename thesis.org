@@ -381,10 +381,10 @@ The /optimal policy/ $\pi_*$ has a greater (or equal) expected return than all
 other policies.  The /optimal/ state-value function and /optimal/ action-value
 function are defined as follows:
 \begin{equation}
-    \vstar(s) \defeq \max_a \vpi(s), \text{ for all } s\in\S
+    \vstar(s) \defeq \max_{\pi} \vpi(s), \text{ for all } s\in\S
 \end{equation}
 \begin{equation}
-    \qstar(s,a) \defeq \max_a \qpi(s), \text{ for all } s\in\S, a\in\A
+    \qstar(s,a) \defeq \max_{\pi} \qpi(s,a), \text{ for all } s\in\S, a\in\A
 \end{equation}
 The /optimal/ action-value function describes the expected return when taking
 action $a$ in state $s$ following the optimal policy $\pi_*$ afterwards.
