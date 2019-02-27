@@ -211,7 +211,7 @@ this type of auction is called /pay-as-bid/ auction.
 # NOTE: Mention New German Mischpreisverfahren.
 # NOTE: Market mechanism is a multi-unit, first-price, sealed-bid auction, which is settled on a ”pay-as-bid"
 # NOTE: Possible include market volume, average prices, etc..
-*** Spot Market
+*** Spot Market label:sec-spot-market
 # TODO: Intraday mainly for balancing!!! Rephrase Intro+Lit Review to only provide
 # balancing i.e. sustainablility work?
 As mentioned in the previous chapter, the equilibrium of electricity supply and
@@ -1200,28 +1200,23 @@ On the spot market, electricity trades can have a very short lead time of up to
 characteristic is beneficial for our proposed trading strategy, since it allows
 the EV to procure electricity in almost real time. The controller can submit
 bids to the market, with accurate estimations of available charging capacity up
-to five minute-ahead .
-
-# TODO: Calculate critical price
-Similarly to the balancing market, the critical price $\overline{p_u}$ has to be
-determined for all trading intervals. $\overline{p_u}$ is defined as the lowest
-unit price of all executed trades $\cal{T}$ in that interval:
+to five minute-ahead. Similarly to the balancing market, the critical price
+$\overline{p_u}$ has to be determined for all intraday trading intervals.
+$\overline{p_u}$ is defined as the lowest unit price of all executed trades
+$\cal{T}$ in a bidding interval:
 \begin{equation*}
     \overline{p_u} \defeq \min_{t \in \cal{T}} p_u^t
 \end{equation*}
-
-Note that $\overline{p_u}$ is the upper bound, it is the optimal bidding price.
-cite:brandt17_evaluat_busin_model_vehic_grid_integ
-Since trades are executed
-immediately, when the unit price of an order to buy is equal or higher than the
-unit price of an order to sell,
-
-# TODO: Mention that we assume thats bids with $p_u$ >= $\overline{p_u}$ are
-# accepted. *Assuming* because trades get executed immediatly...
-
+Note that $\overline{p_u}$ is essentially the optimal bidding price, it provides
+on upper bound for the fleets profits when bidding on the intraday market. We
+assume that bids with  $p_u \geq \overline{p_u}$ will always get matched. In
+reality this is not always the case, since trades are executed immediately and
+it is not guaranteed that unmatched asks at $\overline{p_u}$ exist at the time
+of commitment. For a detailed description of the intraday continuous market see
+Chapter ref:sec-spot-market.
 
 #+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
-#+CAPTION: List of Trades of the EPEX Spot Intraday Continous Market label:table-spot-market
+#+CAPTION: List of Trades of the EPEX Spot Intraday Continuous Market label:table-spot-market
 #+ATTR_LATEX: :float sideways :align c|cccccccc :placement [hp]
 |---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
 |---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
@@ -1261,20 +1256,15 @@ unit price of an order to sell,
 #   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
 ** Bidding Strategy
 # NOTE: Assume aggregator is a price taker
-
-
-
-
 ** Dispatch Heuristic / Algorithm
 # - See cite:vandael15_reinf_learn_heuris_ev_fleet
-
 
 # NOTE:- Relax 1 MW minimum bidding assumption
 #   - 500kw
 #   - 100kw
 
 * Evaluation
-# NOTE: 30%
+# NOTE: 20%
 ** Event-based Simulation
 ** Benchmark: Ad-hoc Strategies
 # - Decision Tree like models
