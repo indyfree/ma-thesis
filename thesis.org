@@ -1083,25 +1083,27 @@ print("Number of cleaned trips with GPS rounding: %.d (%.2f%%)" % (trips_gps - t
 #+INCLUDE: "~/uni/ma-thesis/template/car2go_tables.tex" export latex
 
 ** Balancing Market Data
-# TODO: Consistent wording: tender period = weekly, daily; segments, intervals, products, time windows
+# TODO: Consistent wording: tender/auction tender period = weekly, daily;
+# segments, intervals, products, time windows
 In this research, we use market balancing data from the German secondary reserve
 market. The following chapter will give an overview of the dataset and
 preprocessing steps that were taken. The data encompasses weekly lists of
 anonymized bids between 01.06.2016 and 01.01.2018 and a dataset of activated
-control reserve in the same period. For a detailed description about the market
-design of balancing markets refer to Chapter ref:sec-balancing-market.
+control reserve in Germany during the same period. For a detailed description
+about the market design of balancing markets refer to Chapter
+ref:sec-balancing-market.
 
-The bidding data consists of the electricity product, the offered capacity $P$
-(MW), the capacity price $p_c$ ($\text{\euro{}/MW}$), and the energy price $p_e$
-($\text{\euro{}/MWh}$) of each bid. Four different products are traded, which
-are a combination of positive control reserve (feed electricity into the grid)
-or negative control reserve (take electricity from the grid) and the provided
-time segment (peak or non-peak hours). Since negative prices are allowed on the
-secondary operating reserve market, the payment direction is included as well.
-Moreover, information about the amount of capacity that was accepted, i.e.,
-either partially or fully, is listed. Bids, which were not accepted by the TSOs
-are not listed. An exemplary excerpt of the dataset is displayed in Table
-ref:data-operating-reserve.
+The bidding data consists of the traded electricity product, the offered
+capacity $P$ (MW), the capacity price $p_c$ ($\text{\euro{}/MW}$), and the
+energy price $p_e$ ($\text{\euro{}/MWh}$) of each bid. Four different products
+are traded, which are a combination of positive control reserve (feed
+electricity into the grid) or negative control reserve (take electricity from
+the grid) and the provided time segment (peak or non-peak hours). Since negative
+prices are allowed on the secondary operating reserve market, the payment
+direction is included as well. Moreover, information about the amount of
+capacity that was accepted, i.e., either partially or fully, is listed. Bids,
+which were not accepted by the TSOs are not listed. An exemplary excerpt of the
+dataset is displayed in Table ref:table-operating-reserve.
 
 #+CAPTION[Secondary Operating Reserve Market Data]: List of Bids of the German Secondary Reserve Market for the tender period 04.12.2017 - 11.12.2017. label:table-operating-reserve
 #+ATTR_LATEX: :environment longtable :align c|ccccc :placement [hp]
@@ -1122,7 +1124,7 @@ ref:data-operating-reserve.
 |---------+----------------+--------------+---------------+---------+----------|
 
 In this study, we assume that bidding on 15-minute intervals in secondary
-operating reserve tenders will be possible in future energy markets. As
+operating reserve auctions will be possible in future energy markets. As
 mentioned in Chapter ref:sec-balancing-market, the market design of the GCRM
 secondary operating reserve tender was adjusted in 2017. Daily tenders with
 4-hour bidding intervals were introduced in favor of weekly tenders with only
@@ -1134,36 +1136,38 @@ forecasts, which are only possible with short tender periods and fine-grained
 bidding intervals.
 
 # NOTE: Mentioned Ascending order of bids
-# NOTE: Upper bound (citation)
-# NOTE: Move data sentence to top?
+# TODO: Mention assumption that bids >== critical price get accepted
+# Here or in bidding strategy section?
 In order to estimate the upper bound of profits that the EV fleet can earn by
-participating in the secondary operating reserve market, the critical prices
-$\overline{p_c}$ and $\overline{p_e}$ are determined for each auctioned
-interval. textcite:brandt17_evaluat_busin_model_vehic_grid_integ define
-$\overline{p_c}$ as the capacity price of the bid that was just barely accepted,
-whereas $\overline{p_e}$ is the highest energy price that was payed for
-activated control reserve during that interval. For every 15-minute interval
-within the given tender period of one week, the activated control reserve in
-that interval was matched with the accepted bids in that tender period. At the
-point where supply, i.e., offered capacity of bids, met demand, i.e., activated
-control reserve, the critical price $\overline{p_e}$ was determined.
+participating in the secondary operating reserve market, the /critical prices/
+$\overline{p_c}$ and $\overline{p_e}$ were determined for each auctioned
+interval. Following textcite:brandt17_evaluat_busin_model_vehic_grid_integ, we
+define $\overline{p_c}$ as the capacity price of the bid that was just barely
+accepted, whereas $\overline{p_e}$ is the highest energy price that was payed
+for activated control reserve during that interval. For every
+15-minute interval within the given tender period of one week, the activated
+control reserve in that interval was matched with the accepted bids in that
+tender period. At the point where supply, i.e., offered capacity of bids, met
+demand, i.e., activated control reserve, the critical price $\overline{p_e}$ was
+determined.
 
 /Example/: The assumed critical prices for the secondary operating reserve
 tender interval of the 6^{th} December 2017 between 08:00 and 08:15 are obtained
 as follows: Three suppliers submitted a reserve capacity of 5MW, 15MW and 22MW
-respectively (see Table ref:table-operating-reserve). The critical capacity price
-$\overline{p_c} = 200.3 \text{ \!\euro{}/MW}$ is determined by the capacity
-price of the last (third) accepted bid in that time segment. The TSO reported
-that 18MW of control reserve were activated between 08:00 and 08:15. Hence, the
-second bid determines the critical energy price $\overline{p_e} = 251
-\text{\!\euro{}/MWh}$, as control reserve capacity gets activated according to
+respectively (see Table ref:table-operating-reserve). The critical capacity
+price $\overline{p_c} = 200.3 \text{ \!\euro{}/MW}$ is determined by the
+capacity price of the last (third) accepted bid in that time segment. The TSO
+reported that 18MW of control reserve were activated between 08:00 and 08:15.
+Hence, the second bid determines the critical energy price $\overline{p_e} = 251
+\text{ \!\euro{}/MWh}$, as control reserve capacity gets activated according to
 ascending order of the submitted energy prices. In this example the second
-bidder would get compensated with:
-$R = R_c + R_e =(10.73\text{ \!\euro{}/MW}\times15\text{MW}) + (251 \text{
-\!\euro{}/MWh}\times13\text{MW}\times 0.25\text{h}) = 976.7\text{ \!\euro{}}$
-Note that the second bidder get compensated for 13MW instead of the submitted
-15MW, since in total only 18MW of control capacity get activated, which were
-partly fulfilled by the 5MW of the first bidder.
+bidder would get compensated with: $R = R_c + R_e =(10.73
+\text{ \!\euro{}/MW}\times15\text{MW}) + (251
+\text{ \!\euro{}/MWh}\times13\text{MW}\times 0.25\text{h}) =
+976.7\text{ \!\euro{}}$. Note that the second bidder get compensated for
+providing 13MW for 15 minutes (0.25h), instead of the submitted 15MW, since in
+total only 18MW of control capacity was activated, which was partly fulfilled
+by the 5MW of the first bidder.
 
 #+BEGIN_SRC python :exports none
     return((10.73*15)+(251*13*0.25))
@@ -1172,44 +1176,80 @@ partly fulfilled by the 5MW of the first bidder.
 #+RESULTS:
 : 976.7
 ** Spot Market Data
+:LOGBOOK:
+CLOCK: [2019-02-27 Wed 12:12]--[2019-02-27 Wed 12:12] =>  0:00
+:END:
 
 # # TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
-# We choose to use the EPEX Spot Intraday Continuous market in this research. The
-# data have been provided by ProCom GmbH[fn:1] and encompass order books and
-# executed trades from 01.06.2016 until 01.01.2018. As displayed in Table
-# ref:spot-market-sample-data, trades can have a very short lead time before
-# delivery, which is beneficial for our proposed trading strategy.
 
-# #+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
-# #+CAPTION: List of Trades of the EPEX Spot Intraday Continous Market label:spot-market-sample-data
-# #+ATTR_LATEX: :float sideways :align c|cccccccc :placement [hp]
-# |---------------------+---------+------------+----------+------------+-------------+---------+--------------+---------------|
-# |---------------------+---------+------------+----------+------------+-------------+---------+--------------+---------------|
-# | Execution time      |      ID | Unit price | Quantity | Buyer area | Seller area | Product | Product time | Delivery date |
-# |---------------------+---------+------------+----------+------------+-------------+---------+--------------+---------------|
-# | 2017-12-04 06:54:55 | 8031392 |       5100 |     5500 | Amprion    | Amprion     | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:53:26 | 8031391 |       5900 |    10000 | TenneT     | TenneT      | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:53:26 | 8031390 |       5890 |    10000 | TenneT     | TenneT      | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:53:15 | 8031389 |       5230 |     7000 | 50Hertz    | 50Hertz     | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:53:13 | 8031386 |       5900 |      500 | TenneT     | TenneT      | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:53:13 | 8031387 |       5100 |     3600 | Amprion    | Amprion     | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:53:13 | 8031388 |       5200 |     1400 | Amprion    | Amprion     | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:53:02 | 8031385 |       5890 |    11000 | TenneT     | TenneT      | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:52:38 | 8031380 |       6000 |    10000 | Amprion    | Amprion     | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:52:38 | 8031381 |       5750 |     8000 | Amprion    | Amprion     | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:52:38 | 8031382 |       5800 |     2000 | Amprion    | Amprion     | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:52:38 | 8031383 |       5890 |     4000 | TenneT     | TenneT      | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:52:38 | 8031384 |       6000 |     4000 | Amprion    | Amprion     | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:52:27 | 8031379 |       5230 |     8000 | 50Hertz    | 50Hertz     | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:51:33 | 8031378 |       6600 |     5000 | TransnetBW | TransnetBW  | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:51:28 | 8031377 |       5400 |     8000 | Amprion    | Amprion     | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:51:24 | 8031376 |       5400 |     7000 | TenneT     | TenneT      | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:49:34 | 8031375 |       5100 |     4000 | TenneT     | TenneT      | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:49:26 | 8031374 |       5400 |     5000 | 50Hertz    | 50Hertz     | H       |        08-09 |    2017-12-04 |
-# | 2017-12-04 06:49:23 | 8031373 |       5510 |     8000 | 50Hertz    | 50Hertz     | H       |        08-09 |    2017-12-04 |
-# |---------------------+---------+------------+----------+------------+-------------+---------+--------------+---------------|
-# |---------------------+---------+------------+----------+------------+-------------+---------+--------------+---------------|
-# #+LATEX:}
+The data from the EPEX Spot Intraday Continuous encompass order books and
+executed trades from 01.06.2016 until 01.01.2018. The list of trades contain
+information on the unit price $p_u$ ($\text{\euro{}/MWh}$), the quantity $Q$
+(kW) and the traded product (hourly, quarterly or block). In this research, we
+focus on quarterly product times (15-minute intervals), as they provide the
+highest flexibility. Fleet controllers can promptly react to fluctuant
+electricity demand of the EV fleet by accurately adjusting the bid quantities.
+Future research could also consider other electricity products if lower prices
+justify decreased flexibility at that point in time. Additionally, the TSOs of
+the buyer and seller are listed in the dataset. They are only relevant if
+special conditions between TSO apply, e.g., when delivering electricity to other
+countries.
+
+On the spot market, electricity trades can have a very short lead time of up to
+5 minutes before delivery (see Table ref:table-spot-market). This market
+characteristic is beneficial for our proposed trading strategy, since it allows
+the EV to procure electricity in almost real time. The controller can submit
+bids to the market, with accurate estimations of available charging capacity up
+to five minute-ahead .
+
+# TODO: Calculate critical price
+Similarly to the balancing market, the critical price $\overline{p_u}$ has to be
+determined for all trading intervals. $\overline{p_u}$ is defined as the lowest
+unit price of all executed trades $\cal{T}$ in that interval:
+\begin{equation*}
+    \overline{p_u} \defeq \min_{t \in \cal{T}} p_u^t
+\end{equation*}
+
+Note that $\overline{p_u}$ is the upper bound, it is the optimal bidding price.
+cite:brandt17_evaluat_busin_model_vehic_grid_integ
+Since trades are executed
+immediately, when the unit price of an order to buy is equal or higher than the
+unit price of an order to sell,
+
+# TODO: Mention that we assume thats bids with $p_u$ >= $\overline{p_u}$ are
+# accepted. *Assuming* because trades get executed immediatly...
+
+
+#+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
+#+CAPTION: List of Trades of the EPEX Spot Intraday Continous Market label:table-spot-market
+#+ATTR_LATEX: :float sideways :align c|cccccccc :placement [hp]
+|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
+|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
+| Execution time      |      ID | Unit Price | Quantity | Buyer Area | Seller Area | Product | Product Time  | Delivery Date |
+|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
+| 2017-12-04 06:54:55 | 8031392 |      51.00 |     5500 | Amprion    | Amprion     | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:26 | 8031391 |      59.00 |    10000 | TenneT     | TenneT      | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:26 | 8031390 |      58.90 |    10000 | TenneT     | TenneT      | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:15 | 8031389 |      52.30 |     7000 | 50Hertz    | 50Hertz     | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:13 | 8031386 |      59.00 |      500 | TenneT     | TenneT      | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:13 | 8031387 |      51.00 |     3600 | Amprion    | Amprion     | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:13 | 8031388 |      52.00 |     1400 | Amprion    | Amprion     | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:02 | 8031385 |      58.90 |    11000 | TenneT     | TenneT      | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:38 | 8031380 |      60.00 |    10000 | Amprion    | Amprion     | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:38 | 8031381 |      57.50 |     8000 | Amprion    | Amprion     | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:38 | 8031382 |      58.00 |     2000 | Amprion    | Amprion     | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:38 | 8031383 |      58.90 |     4000 | TenneT     | TenneT      | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:38 | 8031384 |      60.00 |     4000 | Amprion    | Amprion     | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:27 | 8031379 |      52.30 |     8000 | 50Hertz    | 50Hertz     | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:51:33 | 8031378 |      66.00 |     5000 | TransnetBW | TransnetBW  | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:51:28 | 8031377 |      54.00 |     8000 | Amprion    | Amprion     | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:51:24 | 8031376 |      54.00 |     7000 | TenneT     | TenneT      | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:49:34 | 8031375 |      51.00 |     4000 | TenneT     | TenneT      | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:49:26 | 8031374 |      54.00 |     5000 | 50Hertz    | 50Hertz     | Q       | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:49:23 | 8031373 |      55.10 |     8000 | 50Hertz    | 50Hertz     | Q       | 07:15 - 07:30 |    2017-12-04 |
+|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
+|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
+#+LATEX:}
 
 * Model: FleetRL
 # NOTE: 20%
