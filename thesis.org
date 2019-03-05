@@ -899,21 +899,21 @@ The high renewable energy content in the energy mix causes electricity prices to
 be volatile, which makes Germany an attractive location for the use of
 VPPs.
 
-Germany is also home to the carsharing providers Car2Go[fn:4] and
-DriveNow[fn:5], which operate large EV fleets across the globe. It has been
-argued that electric carsharing can simultaneously solve several traditional
-mobility and environmental problems and are an important element of future smart
-cities cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Further, it is
-widely regarded that the future of mobility will be electric, shared, smart and
+Germany is home to the carsharing providers Car2Go[fn:4] and DriveNow[fn:5],
+which operate large EV fleets across the globe. It has been argued that electric
+carsharing can simultaneously solve several traditional mobility and
+environmental problems and are an important element of future smart cities
+cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Further, it is widely
+regarded that the future of mobility will be electric, shared, smart and
 eventually autonomous cite:burns13_sustain_mobil,sterling18_three_revol.
 Carsharing providers are already contributing to the first two points by
 operating large fleets of electric vehicles. This research addresses the third
 point: Using electric carsharing fleets to smartly participate in electricity
-markets. Carsharing providers, like Car2Go and DriveNow, operate their carsharing
-fleets in a free-float model, which allows customers to pick up and drop
-vehicles at any place within the operating zone of the provider. Customers pay
-by the minute and are offered incentives to park the EVs at charging stations at
-the end of their trip.
+markets. Carsharing providers, like Car2Go and DriveNow, operate their
+carsharing fleets in a free-float model, which allows customers to pick up and
+drop vehicles at any place within the operating zone of the provider. Customers
+pay by the minute and are offered incentives to park the EVs at charging
+stations at the end of their trip.
 
 # NOTE: Further description how data was collected? API, 5 minutes, etc..?
 We obtained real-world trip data from Daimler's carsharing service Car2Go.
@@ -926,7 +926,7 @@ processing steps outlined.
 ** Electronic Vehicle Fleet Data
 # NOTE: Here only desription of data, no general blabla
 # TODO: Exact number of EVs
-The dataset consists of GPS data of around 500 Smart ED3 Fortwo vehicles in
+The Car2Go dataset consists of GPS data of around 500 Smart ED3 Fortwo vehicles in
 Stuttgart. These subcompact cars are equipped with a 17.6kWh battery and a
 standard 3.3kW on-board charger. They fully charge in about six to seven hours
 and can reach a maximum driving distance of 145km according to the manufacturer.
@@ -944,8 +944,10 @@ Stuttgart. Note that the data only contain EVs that are /available for rent/,
 i.e., they are not currently rented out by a customer. EVs which are parked at a
 charging station are also not available until they have charged up approximately
 70 SoC. Individual trips have to be reconstructed using the GPS data of the
-cars. Following preprocessing steps have been taken to prepare the data for
-further analysis:
+cars. The following preprocessing steps have been taken to prepare the data for
+further analysis. Table ref:table-car2go-processed depicts the dataset after all
+processing steps.
+
 # NOTE: Not worthy mentioning?
 1) Drop unused data columns
 
@@ -955,13 +957,13 @@ further analysis:
    - /Interior, Exterior/: Status attributes were not used in the analysis of
      this research. Although they could form interesting features for rental
      predictions.
-   - /Enging Type/: All EVs in Stuttgart are electric vehicles.
+   - /Engine Type/: All EVs in Stuttgart are electric vehicles.
 2) Decrease GPS resolution to 10 meters
 
    The GPS accuracy of private industry sensors is approximately 5 meters under
    open sky, and worse near buildings, bridges and trees[fn:7]. Rental trips are
    identified by changing GPS locations of the EV (See next point). To reduce
-   the number of false positives, due to GPS measurement errors, the resolution
+   the number of false identified trips, due to GPS measurement errors, the resolution
    is decreased.
    # TODO: Example above and numbers?
 3) Determine rental trips
@@ -970,11 +972,11 @@ further analysis:
    between two data points of the same EV (see Table ref:table-car2go-raw, 4^{th}
    to 5^{th} row). Note that we assume that customer do not undertake trips,
    which begin and end at the exact same location.
-4) Infer charging station
+4) Infer charging stations
 
-   The GPS location of EVs is matched with the GPS locations, where an EV has
-   been charged at least once in the dataset. We observed that the raw data do
-   not show EVs that are parked at charging stations, but are not plugged in.
+   The GPS location of the EVs is matched with the GPS locations, where an EV
+   has been charged at least once in the dataset. We observed that the raw data
+   do not show EVs that are parked at charging stations, but are not plugged in.
    This research assumes that all EVs, which are parked at charging stations are
    also plugged in. That is a valid assumption, since in Germany cars are only
    allowed to park at charging station if they are connected to it.
@@ -989,7 +991,6 @@ further analysis:
      charging behavior. The data of these EVs showed an increase of more than
      20% SoC between trips or on trips, while not being located at a charging
      station.
-Table ref:table-car2go-processed depicts the dataset after all processing steps.
 
 # TODO: Explain capacity prediction data?
 # TODO: Include real cleaned data and/or examples
@@ -1172,6 +1173,7 @@ Chapter ref:sec-spot-market.
 # NOTE: 20%
 ** Information Assumptions
 # See: cite:mashhour11_biddin_strat_virtual_power_plant_1
+
 ** Mobility Demand & Clearing Price Prediction
 ** Reinforcement Learning Approach
 # - Multi-agent bidding approach, with learning complete bidding strategy?
