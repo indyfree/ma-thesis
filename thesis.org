@@ -99,9 +99,6 @@ mechanism changed to /daily/ auctions of six four-hour segments of positive and
 negative control reserve.[fn:2] Shorter auction cycles facilitate the
 integration of renewable energy generators into the secondary control reserve
 market, as they are dependent on accurate (short-term) capacity forecasts.
-# NOTE: Where to put changed market setup:
-# - Minimum requirements
-# - Different segments (2 weekly/ 6 daily)
 # NOTE: Not mentioned only V2G before. Reference Lit review for justification?
 Positive control reserve is energy that is supplied to the grid, when the grid
 frequency falls below 50Hz. It can be provided by increasing the electricity
@@ -639,6 +636,7 @@ markets, like frequency control and operating reserve markets, are attractive
 for smart charging.
 
 # NOTE: Section Explain and prove why leaving out V2G.
+# NOTE: Kahlen and Brand both balancing market, Brand never used V2G
 textcite:peterson10_econom_using_plug_in_hybrid investigated energy arbitrage
 profitability with V2G in the light of battery depreciation effects in the US.
 The results of their study indicate that large-scale use of EV batteries for
@@ -649,7 +647,7 @@ textcite:brandt17_evaluat_busin_model_vehic_grid_integ evaluated a business
 model for parking garage operators operating on the German frequency regulation
 market. When taking infrastructure costs and battery depreciation costs into
 account, they conclude that the proposed vehicle-grid integration is not
-profitable. Even with generous assumptions about EV adoption rates in Germany
+profitable. Even with idealized assumptions about EV adoption rates in Germany
 and altered auction mechanisms, the authors arrived at negative profits.
 textcite:kahlen17_fleet used EV fleets to offer balancing services to the grid.
 Evaluating the impact of V2G in their model, the authors conclude that V2G would
