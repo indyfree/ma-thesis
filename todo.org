@@ -15,6 +15,7 @@
 - tender period, segment, interval, time period, tender/auction...
 - carsharing company/provider
 - EV fleet, controller, operator...
+- Mobility demand, fleet capacity
 ** TODO Comment Literature Review
 Structure the whole section in a stricter way. I mean that the question I always
 asked myself why reading was: "so what?" What is you Ziel? As far as I
