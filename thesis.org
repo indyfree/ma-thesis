@@ -1188,15 +1188,18 @@ The following Chapter will introduce the proposed model of this research. In its
 essence, we propose a solution how EV fleet provider can utilize a portfolio of
 VPPs to profitably provide balancing services to the grid on multiple markets.
 The model makes use of a RL agent which learns an optimal bidding strategy by
-interacting with the electricity markets and EV fleet market. The control
-mechanism then dispatches and allocates available EVs to their VPPs to provide
-the balancing capacity. The chapter is structured as follows: First, the required
+interacting with the electricity markets and EV fleet demand. A control
+mechanism dispatches and allocates available EVs to their VPPs to provide the
+balancing capacity. The chapter is structured as follows: First, the required
 information assumptions are listed, and an overview of the control mechanism is
 given. Afterwards we will elude the RL approach and the associated bidding
 strategy to participate on the electricity markets. Finally the dispatch
 algorithm is shown.
 
+Nomenclature: Controller, EV Fleet Operator
+
 ** Information Assumptions
+# NOTE: Not own chapter?
 
 # FIXME: cited
 1) The controller can estimate the mobility demand of its EV fleet based on
@@ -1215,26 +1218,121 @@ algorithm is shown.
 
 Vandael: In this paper, we assume predictions of day-ahead prices
 are available, which is supported by well-advanced day-ahead
-price prediction methods [20]. Furthermore, we assume the
-aggregator is a price-taker. In case of limited size purchase
-orders, an aggregator will naturally have a price-taker position.
+price prediction methods [20].
 
 3) EV fleet charges at a fixed industry tariff otherwise
 4) Battery depreciation not considered
-** Decision Support Overview / Controller
+** Control Mechanism
+2 Phases:
+1) Decision Phase I: Day-ahead/Week-ahead
+1) Decision Phase II: Intraday
+2) Real-time / Allocation phase?
+
+Nomenclature:
+- Control periods?
+- Other figure, with timely bidding and control periods?
+
+Figure:
+- What about regular charging?
+- What about not enough SoC for trip?
+- Allocate costs/profits from charging/trip?
+
+Assume:
+- Operating reserve always gets activated.
+- Bid at $p_c = 0$
+- EVs charge at industry tariff, when not allocated to VPP
+- Bid always multiples of charging capacity, do not consider charging at
+  different speeds
+
+#+CAPTION[EV VPP Control Mechanism]: EV VPP Control Mechanism label:fig-control-mechanism
+#+ATTR_LATEX: :width 0.95\linewidth
+[[./fig/control_mechanism.png]]
+
+- Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
+  - Essential Information, determines Smart Charging quantities.
+  - Balance risks versus profits
+  - Need to have sufficient SoC to be able to rent out. Not enough SoC violates
+    customer mobility, and thus decreases profits
+  - Conflicting: Do not submit/charge too much: When no replacement for VPP is
+    available, we loose rental profits and also violate customer mobility
+  - Conflicting: Do not submit quantities we can not charge. Causes high
+    imbalance costs that have to be avoided at all times
+  - RL Agent!
+- Middle-grey: Determine bidding price label:sec-model-bidding-strategy
+
 ** (Mobility Demand & Clearing Price Prediction)
-** Reinforcement Learning Approach
+- Mobility demand prediction made on non-simulated real-world SoC (w/o smart charging)
+  - Provide difference levels & descriptive statistics?
+  - Already enough uncertainty or artificially add more?
+- Electricity prices:
+  - Artificially add uncertainty to prediction by distorting real-world data
+    according to Gaussian distribution
+  - Bayes - Philipp??
+** Reinforcement Learning Approach label:sec-model-rl
 # - Multi-agent bidding approach, with learning complete bidding strategy?
 #   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
 # - cite:vandael15_reinf_learn_heuris_ev_fleet
-** Bidding Strategy
-# NOTE: Assume aggregator is a price taker
+- Learn from very high negative imbalance cost reward
 
-# NOTE:- Relax 1 MW minimum bidding assumption
-#   - 500kw
-#   - 100kw
+
+- $A = (P, Q_{int})$
+** Bidding Strategy label:sec-model-bidding-strategy
+Assumptions:
+  - EV fleet is price taker, it is lacking the market share to influence prices
+    - $\rightarrow$ Use existing prices
+  - Relax minimum bidding assumption of 1MW to no limit. Sensitivity analysis
+    with 100kw and 500kw in evaluation
+  - Controller always bids at an optimal price.
+
+intraday:
+\begin{equation}
+\begin{split}
+    b_{int} &= (P_{int}, p_u) \\
+    p_u &= \min(\overline{p_u}, p_r) \\
+    P_{int} &= \pi(s)
+\end{split}
+\end{equation}
+
+balancing:
+\begin{equation}
+\begin{split}
+    b_{bal} &= (P_{bal}, p_c, p_w) \\
+    P_{bal} &= \pi(s) \\
+    p_c &= 0 \\
+    p_w &= \min(\overline{p_w}, p_r)
+\end{split}
+\end{equation}
+
+ - Optimal price
+ - Forecasted critical prices. Different accuracy levels?
+ - Use critical prices - threshold? Or
+ - Assume always the perfect bid: Upper-bound evaluation
+ - Compare with industry-tariff
+ - Figure about prices over the day? Compare
+ - What about balancing capacity prices? Future work?
+ - Mathematical formulation
+
+# FIXME: Citation brandt
+Furthermore, we assume the
+aggregator is a price-taker. In case of limited size purchase
+orders, an aggregator will naturally have a price-taker position.
+
+# FIXME: Citatation from kahlen
+The fleet controller offers bids and asks for every time interval. These offers
+contain both a quantity and a reservation price, which depends on the state of
+charge of the EV storage, as well as on the battery costs. However, the market
+may or may not accept these offers depending on the composition of the offer
+prices from the fleet owner and other market participants. The market auction
+mechanism ultimately decides when EVs will charge and discharge.
+
 ** Dispatch Heuristic / Algorithm
-- See cite:vandael15_reinf_learn_heuris_ev_fleet
+1) Lowest SoC
+2) Expected Departure time:
+   - Time difference avg. idle time based on zip code - actual idle time
+   - Time difference pred. idle time - actual idle time
+
+
+See cite:vandael15_reinf_learn_heuris_ev_fleet
 
 
 * Simulation Platform: EV Sim
@@ -1251,7 +1349,7 @@ orders, an aggregator will naturally have a price-taker position.
 ** FleetRL
 ** Sensitivity Analysis: Prediction Accuracy
 ** Sensitivity Analysis: Infrastructure Changes
-** Sensitivity Analysis: Bidding Strategy
+** Sensitivity Analysis: Bidding Strategyl
 * Discussion
 # NOTE: 5%
 ** Generalizability
