@@ -1169,25 +1169,75 @@ Chapter ref:sec-spot-market.
 
 * Model: FleetRL
 # NOTE: 20%
-** Information Assumptions
-# See: cite:mashhour11_biddin_strat_virtual_power_plant_1
+# NOTE: Mathematical formulations for Bidding Strategy
+# NOTE: Algorithm formulations for Algorithm
+# NOTE: Sequence Diagram as Overview
+# NOTE: States, Actions, Rewards for RL
+# NOTE: Bellman Equatino for RL?
+# NOTE: 2-State RL? 1. Only capacity, 2. Also prices?
+# NOTE: Formulate Problem of needing to learn capacity allocation
 
-** Mobility Demand & Clearing Price Prediction
+The following Chapter will introduce the proposed model of this research. In its
+essence, we propose a solution how EV fleet provider can utilize a portfolio of
+VPPs to profitably provide balancing services to the grid on multiple markets.
+The model makes use of a RL agent which learns an optimal bidding strategy by
+interacting with the electricity markets and EV fleet market. The control
+mechanism then dispatches and allocates available EVs to their VPPs to provide
+the balancing capacity. The chapter is structured as follows: First, the required
+information assumptions are listed, and an overview of the control mechanism is
+given. Afterwards we will elude the RL approach and the associated bidding
+strategy to participate on the electricity markets. Finally the dispatch
+algorithm is shown.
+
+** Information Assumptions
+
+# FIXME: cited
+1) The controller can estimate the mobility demand of its EV fleet based on
+   historical data. More specifically, it can forecast the amount of available
+   battery capacity to be used for the use of the VPP one day/week ahead.
+   cite:kahlen18_elect_vehic_virtual_power_plant_dilem,kahlen17_fleet
+   successfully showed this using a time-based sinusoidal model for a day-ahead
+   prediction and a random forest model for a week-ahead prediction.
+2) The controller can estimate the loads and prices of spot and balancing
+   markets based on historical data.
+   - cite:weron14_elect_price_forec
+   - cite:avci18_manag_elect_price_model_risk
+   - cite:brandt17_evaluat_busin_model_vehic_grid_integ,vandael15_reinf_learn_heuris_ev_fleet?
+   - cite:mashhour11_biddin_strat_virtual_power_plant_1
+   - Review: See proposal
+
+Vandael: In this paper, we assume predictions of day-ahead prices
+are available, which is supported by well-advanced day-ahead
+price prediction methods [20]. Furthermore, we assume the
+aggregator is a price-taker. In case of limited size purchase
+orders, an aggregator will naturally have a price-taker position.
+
+3) EV fleet charges at a fixed industry tariff otherwise
+4) Battery depreciation not considered
+** Decision Support Overview / Controller
+** (Mobility Demand & Clearing Price Prediction)
 ** Reinforcement Learning Approach
 # - Multi-agent bidding approach, with learning complete bidding strategy?
 #   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
+# - cite:vandael15_reinf_learn_heuris_ev_fleet
 ** Bidding Strategy
 # NOTE: Assume aggregator is a price taker
-** Dispatch Heuristic / Algorithm
-# - See cite:vandael15_reinf_learn_heuris_ev_fleet
 
 # NOTE:- Relax 1 MW minimum bidding assumption
 #   - 500kw
 #   - 100kw
+** Dispatch Heuristic / Algorithm
+- See cite:vandael15_reinf_learn_heuris_ev_fleet
 
-* Evaluation
-# NOTE: 20%
+
+* Simulation Platform: EV Sim
+# NOTE: 5%
 ** Event-based Simulation
+** Architecture / Components
+** Modular Expandability
+
+* Evaluation / Results
+# NOTE: 15%
 ** Benchmark: Ad-hoc Strategies
 # - Decision Tree like models
 # - Metric: Peak-to-average (PAR) ratio reduction.
