@@ -1228,8 +1228,15 @@ price prediction methods [20].
 1) Decision Phase II: Intraday
 2) Real-time / Allocation phase?
 
+$\Delta t$ = Length of Control period = 15 Minute
+
+$T(h)$ Mapping from market period $h$ to the set of control periods in market
+period $h$.
+
+$f_{heur}$ Heuristic function to dispatch power to EVs
+
 Nomenclature:
-- Control periods?
+- Control Periods $t$ vs Market Periods $h$
 - Other figure, with timely bidding and control periods?
 
 Figure:
@@ -1244,8 +1251,24 @@ Assume:
 - Bid always multiples of charging capacity, do not consider charging at
   different speeds
 
+Ideas:
+- What about imbalance costs that can be bough/sold from other market like in
+  cite:vandael15_reinf_learn_heuris_ev_fleet? $\lambda_h^+$: Less energy charged
+  than bought at electricity prices, EV Fleet controller gets refunded based on
+  a positive imbalance price $\lambda_h^+ < $p_u$. Because positive imbalance
+  prices are lower than charging prices, only partially refunded for excess
+  energy bought in electricity markets.
+
+- Cost function:
+  Sum over all charged market periods at intraday and balancing markets -
+  positive imbalance costs - foregone rentals
+
+- Mathematical notation for foregone rentals!
+
+
+
 #+CAPTION[EV VPP Control Mechanism]: EV VPP Control Mechanism label:fig-control-mechanism
-#+ATTR_LATEX: :width 0.95\linewidth
+#+ATTR_LATEX: :width 1\linewidth
 [[./fig/control_mechanism.png]]
 
 - Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
@@ -1258,12 +1281,14 @@ Assume:
   - Conflicting: Do not submit quantities we can not charge. Causes high
     imbalance costs that have to be avoided at all times
   - RL Agent!
-- Middle-grey: Determine bidding price label:sec-model-bidding-strategy
+- Middle-grey: Determine bidding price ref:sec-model-bidding-strategy
 
-** (Mobility Demand & Clearing Price Prediction)
-- Mobility demand prediction made on non-simulated real-world SoC (w/o smart charging)
+** (Fleet Capacity & Clearing Price Prediction)
+- Fleet capacity prediction made on non-simulated real-world SoC (w/o smart charging)
   - Provide difference levels & descriptive statistics?
   - Already enough uncertainty or artificially add more?
+  - Balancing forecasts needs more uncertainty than intraday, otherwise RL does
+    not make sense: Handle uncertainty.
 - Electricity prices:
   - Artificially add uncertainty to prediction by distorting real-world data
     according to Gaussian distribution
@@ -1274,8 +1299,9 @@ Assume:
 # - cite:vandael15_reinf_learn_heuris_ev_fleet
 - Learn from very high negative imbalance cost reward
 
-
-- $A = (P, Q_{int})$
+- $A = \{(P_{bal}, P_{int}), P_{bal}, P_{int} \in \Re \}$
+- $S = \{(\overline{p}_w^t, \overline{p}_u^t, Q_{fleet}^t), \overline{p}_w^t,
+  \overline{p}_u^t, Q_{fleet}^t \in \Re \}$
 ** Bidding Strategy label:sec-model-bidding-strategy
 Assumptions:
   - EV fleet is price taker, it is lacking the market share to influence prices
