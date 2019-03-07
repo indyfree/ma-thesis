@@ -1176,27 +1176,28 @@ Chapter ref:sec-spot-market.
 
 * Model: FleetRL
 # NOTE: 20%
-# NOTE: Mathematical formulations for Bidding Strategy
-# NOTE: Algorithm formulations for Algorithm
-# NOTE: Sequence Diagram as Overview
-# NOTE: States, Actions, Rewards for RL
-# NOTE: Bellman Equatino for RL?
-# NOTE: 2-State RL? 1. Only capacity, 2. Also prices?
-# NOTE: Formulate Problem of needing to learn capacity allocation
+# TODO: Mathematical formulations for Bidding Strategy
+# TODO: Algorithm formulations for Dispatch Algorithm
+# TODO: States, Actions, Rewards for RL
+# TODO: Bellman Equatino for RL?
+# TODO: 2 RL Problems? 1. Only capacity, 2. Also prices?
+# TODO: Formulate Problem of needing to learn capacity allocation
+# NOTE: What about uncertainty? Need to model, otherwise RL makes no sense
 
-The following Chapter will introduce the proposed model of this research. In its
+# NOTE: Need to reformulate Intro+Following to only balancing
+The following chapter will introduce the proposed model of this research. In its
 essence, we propose a solution how EV fleet provider can utilize a portfolio of
 VPPs to profitably provide balancing services to the grid on multiple markets.
 The model makes use of a RL agent which learns an optimal bidding strategy by
 interacting with the electricity markets and EV fleet demand. A control
-mechanism dispatches and allocates available EVs to their VPPs to provide the
-balancing capacity. The chapter is structured as follows: First, the required
-information assumptions are listed, and an overview of the control mechanism is
-given. Afterwards we will elude the RL approach and the associated bidding
-strategy to participate on the electricity markets. Finally the dispatch
-algorithm is shown.
-
-Nomenclature: Controller, EV Fleet Operator
+mechanism procures energy on electricity markets, allocates available EVs to
+VPPs and dispatches EVs to provide the balancing capacity. This chapter is
+structured as follows: First, the information assumptions are listed, and the
+general control mechanism is explained. Afterwards, the bidding strategy and
+the RL approach is described in detail. Finally the dispatch algorithm is
+presented. For the sake of simplicity and accuracy, we formulate the problem as
+controlled EV charging, where the EV fleet operator represents the controller,
+and providing negative balancing capacity results in charging the fleet.
 
 ** Information Assumptions
 # NOTE: Not own chapter?
