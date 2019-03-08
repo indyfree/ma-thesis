@@ -120,11 +120,10 @@ merit order. Providers, whose bids were accepted, instantly get compensated for
 the provided capacity: $R_c = p_c \times P^{bal}$. At the time regulation
 capacity is needed, usually a day to a week later, the TSO activates the
 capacity according to a merit order of the ascending /energy prices/ $p_e$.
-Hence, providers are also compensated according to the actual energy they
-supplied: $R_e = p_e \times E^{bal}_t$, where $E^{bal}_t$ is the supplied energy
-at the timeslot $t$. Since provider get paid according to their submitted price
-$p_e$, instead of a market clearing price, this type of auction is called
-/pay-as-bid/ auction.
+Hence, providers are also compensated according to the actual energy $E^{bal}$
+they supplied or consumed: $R_e = p_e \times E^{bal}$. Since provider get paid
+according to their submitted price $p_e$, instead of a market clearing price,
+this type of auction is called /pay-as-bid/ auction.
 # NOTE: Add more citations? brandt?
 # NOTE: Possible include example
 # NOTE: Mention New German Mischpreisverfahren.
