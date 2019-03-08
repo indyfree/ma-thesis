@@ -109,7 +109,7 @@ above 50Hz and can be provided by adding grid load or reducing electricity
 generation. Since we do not consider V2G in this thesis, the EV fleets in our
 model are only able provide /negative control reserve/, which we will refer to
 as /control reserve/ until the end of the thesis. Market participants submit
-bids in the following form to the market: $(P_{bal}, p_c, p_e)$, where $P_{bal}$
+bids in the following form to the market: $(P^{bal}, p_c, p_e)$, where $P^{bal}$
 is the amount of electrical power that can be supplied on demand in kW, $p_c$ is
 the capacity price for keeping the power available in $\text{\euro{}/MW}$ and
 $p_e$ is the energy price for delivered energy in $\text{\euro{}/MWh}$. The TSO
@@ -117,13 +117,14 @@ determines the target quantity of energy to acquire per timeslot, it usually
 acquires much higher regulation capacity to minimize risks and activates the
 capacity on demand. The TSO accepts the bids based on the capacity price in a
 merit order. Providers, whose bids were accepted, instantly get compensated for
-the provided capacity: $R_c = p_c \times P$. At the time regulation capacity is
-needed, usually a day to a week later, the TSO activates the capacity according
-to a merit order of the ascending /energy prices/ $p_e$. Hence, providers are
-also compensated according to the actual power they supplied: $R_e = p_e \times
-P_t$, where $P_t$ is the supplied power at the timeslot $t$. Since provider get
-paid according to their submitted price $p_e$, instead of a market clearing
-price, this type of auction is called /pay-as-bid/ auction.
+the provided capacity: $R_c = p_c \times P^{bal}$. At the time regulation
+capacity is needed, usually a day to a week later, the TSO activates the
+capacity according to a merit order of the ascending /energy prices/ $p_e$.
+Hence, providers are also compensated according to the actual energy they
+supplied: $R_e = p_e \times E^{bal}_t$, where $E^{bal}_t$ is the supplied energy
+at the timeslot $t$. Since provider get paid according to their submitted price
+$p_e$, instead of a market clearing price, this type of auction is called
+/pay-as-bid/ auction.
 # NOTE: Add more citations? brandt?
 # NOTE: Mention: Estimate the critical prices, $p_c$ (not) and $p_w$ - in data
 # section?
@@ -155,7 +156,7 @@ cite:karanfil17_role_contin_intrad_elect_market. After the market closes, the
 participants have the opportunity to trade the difference between the day-ahead
 forecast and the more accurate intraday forecast on the intraday market
 cite:kiesel17_econom_analy_intrad_elect_prices. In this way, RES generators can
-cost effectivly self-balance their portfolios, instead of relying on balancing
+cost effectively self-balance their portfolios, instead of relying on balancing
 services provided by the TSO, which imposes high imbalance costs on participants
 cite:pape16_are_fundam_enoug.
 
@@ -165,7 +166,7 @@ up until 5 minutes before physical delivery. Hourly contracts, as well as
 auction, the intraday market is a continuous order-driven market. Participants
 can submit limit orders at any time during the trading window and equally change
 or withdraw the order at any time before the order is accepted. Limit orders are
-specified as price-quantity pairs: $(P_{int}, p_u)$, where $P_{int}$ is the
+specified as price-quantity pairs: $(P^{int}, p_u)$, where $P^{int}$ is the
 traded amount of electrical power in kW and $p_u$ is the price for the delivered
 energy unit (hour/quarter/block) in $\text{\euro{}/MWh}$. When an order to buy
 (bid) matches an order to sell (ask), the trade immediately gets executed. The
