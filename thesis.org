@@ -1194,15 +1194,33 @@ and intelligently dispatches EVs to provide the charging capacity. This chapter
 is structured as follows: First, the information assumptions are listed, and the
 general control mechanism is explained. Afterwards, the bidding strategy and the
 RL approach are described in detail. Finally, the dispatch algorithm is
-presented. For the sake of conciseness and accuracy, we formulate the problem as
-/controlled EV charging/: The EV fleet operator represents the controller, which
-optimally charges the fleet by providing balancing capacity.
+presented.
 
-# TODO: Explain Control Periods, Market Periods
+# NOTE: Problem Description
+For the sake of conciseness and brevity, we formulate the problem as a
+/controlled EV charging/ problem. The EV fleet operator represents the
+controller, which aims to optimally charge the fleet by providing balancing
+capacity. First, the controller predicts the amount of energy it can charge in a
+given market period $h$. The length of the market period $\Delta h$ and the
+market closing time depend on the considered electricity markets. Second, the
+controller places bids on one or multiple markets to procure the predicted
+amount of energy. Lastly, at delivery time, the controller communicates with the
+EV fleet to control the charging. Online EV control periods $t$ are typically
+shorter then market periods. In our case, the market periods of the balancing
+market and intraday market are 15 minutes, while we consider EV control periods
+of 5 minutes. During the control phase, the controller has to take decisions
+about fulfilling its commitments to the markets or compromising customer
+mobility.
+
+
+# Profit maximizing: Charge anyways, but the more it can charge from markets the
+# more profit?
+
+# Minimize risk to be beeing able to fulfill commitments
 
 
 #+CAPTION[Table of Notation]: Table of Notation label:table-notation
-#+ATTR_LATEX: :environment longtable :align c|p{0.7\linewidth}|c :placement [hp]
+#+ATTR_LATEX: :environment longtable :align l|p{0.7\linewidth}|l :placement [hp]
 |-------------------------+---------------------------------------------------------------------------+----------------------|
 |-------------------------+---------------------------------------------------------------------------+----------------------|
 | Variable                | Description                                                               | Unit                 |
@@ -1253,8 +1271,8 @@ to be available to the controller:
    will get accepted. Hence the critical prices form an essential piece of
    information for the proposed bidding strategy. Electricity price forecasting
    is an  extensively studied research area, with well-advanced prediction
-   algorithms cite:weron14_elect_price_forec.
-Assuming available accurate forecasting information is common practice in the
+   algorithms cite:weron14_elect_price_forec,avci18_manag_elect_price_model_risk.
+Assuming available forecasting information is common practice in the
 VPP and EV fleet charging literature
 cite:brandt17_evaluat_busin_model_vehic_grid_integ,vandael15_reinf_learn_heuris_ev_fleet,mashhour11_biddin_strat_virtual_power_plant_1,tomic07_using_fleet_elect_drive_vehic_grid_suppor.
 
@@ -1288,6 +1306,16 @@ Assume:
 - Bid always multiples of charging capacity, do not consider charging at
   different speeds
 
+Mechanism: Only EVs with enough battery capacity left to charge the next control
+period are allocated to VPP.
+
+Other assumptions:
+1) Bids on balancing market always get accepted (Known critical capacity price $\overline{p_c}$
+2) EV fleet charges at a fixed industry tariff otherwise
+3) Balancing capacity is provided for a market period $h$. Within the market
+   period $h$, it is possible to provide the capacity with different EVs,
+   changing in control periods $t$. Customers arrive in $t$ intervals.
+
 Ideas:
 - What about imbalance costs that can be bough/sold from other market like in
   cite:vandael15_reinf_learn_heuris_ev_fleet? $\lambda_h^+$: Less energy charged
@@ -1301,8 +1329,6 @@ Ideas:
   positive imbalance costs - foregone rentals
 
 - Mathematical notation for foregone rentals!
-
-
 
 #+CAPTION[EV VPP Control Mechanism]: EV VPP Control Mechanism label:fig-control-mechanism
 #+ATTR_LATEX: :width 1\linewidth
@@ -1320,26 +1346,29 @@ Ideas:
   - RL Agent!
 - Middle-grey: Determine bidding price ref:sec-model-bidding-strategy
 
+*** Decision Phase I: Day-ahead/Week-ahead
+*** Decision Phase II: Intraday
+*** Real-time / Allocation phase?
+
+
 ** (Fleet Capacity & Clearing Price Prediction)
 - Fleet capacity prediction made on non-simulated real-world SoC (w/o smart charging)
   - Provide difference levels & descriptive statistics?
   - Already enough uncertainty or artificially add more?
   - Balancing forecasts needs more uncertainty than intraday, otherwise RL does
     not make sense: Handle uncertainty.
+  - Prediction:
+    - Predict for all c in h
+    - Q = min(q_c)
+
 - Electricity prices:
   - Artificially add uncertainty to prediction by distorting real-world data
     according to Gaussian distribution
-  - Bayes - Philipp??
-** Reinforcement Learning Approach label:sec-model-rl
-# - Multi-agent bidding approach, with learning complete bidding strategy?
-#   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
-# - cite:vandael15_reinf_learn_heuris_ev_fleet
-- Learn from very high negative imbalance cost reward
+  # NOTE: Then need to model that bid does not get accepted?
 
-- $A = \{(P_{bal}, P_{int}), P_{bal}, P_{int} \in \Re \}$
-- $S = \{(\overline{p}_w^t, \overline{p}_u^t, Q_{fleet}^t), \overline{p}_w^t,
-  \overline{p}_u^t, Q_{fleet}^t \in \Re \}$
 ** Bidding Strategy label:sec-model-bidding-strategy
+# NOTE: Word as profit-maximizing bidding strategy
+
 Assumptions:
   - EV fleet is price taker, it is lacking the market share to influence prices
     - $\rightarrow$ Use existing prices
@@ -1388,8 +1417,18 @@ may or may not accept these offers depending on the composition of the offer
 prices from the fleet owner and other market participants. The market auction
 mechanism ultimately decides when EVs will charge and discharge.
 
+** Reinforcement Learning Approach label:sec-model-rl
+# - Multi-agent bidding approach, with learning complete bidding strategy?
+#   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
+# - cite:vandael15_reinf_learn_heuris_ev_fleet
+- Learn from very high negative imbalance cost reward
+
+- $A = \{(P_{bal}, P_{int}), P_{bal}, P_{int} \in \Re \}$
+- $S = \{(\overline{p}_w^t, \overline{p}_u^t, Q_{fleet}^t), \overline{p}_w^t,
+  \overline{p}_u^t, Q_{fleet}^t \in \Re \}$
 ** Dispatch Heuristic / Algorithm
-1) Lowest SoC
+1) Lowest SoC - Does that make sense? All other EVs get charged regularly anyways.
+   - Maybe highest SoC, since we can allow charging to be disrupted
 2) Expected Departure time:
    - Time difference avg. idle time based on zip code - actual idle time
    - Time difference pred. idle time - actual idle time
@@ -1402,17 +1441,35 @@ See cite:vandael15_reinf_learn_heuris_ev_fleet
 # NOTE: 5%
 ** Event-based Simulation
 ** Architecture / Components
+#+CAPTION[Simulation Platform]: Simulation Platform label:fig-simulation-platform
+#+ATTR_LATEX: :width 1\linewidth
+[[./fig/simulation_platform.png]]
+
 ** Modular Expandability
 
 * Evaluation / Results
 # NOTE: 15%
-** Benchmark: Ad-hoc Strategies
-# - Decision Tree like models
-# - Metric: Peak-to-average (PAR) ratio reduction.
+# NOTE: Also include overview graphs, of charging, prices, available capacity,
+# car2go trips, etc..
+# NOTE: List Simulation params in a table: Car Capacity etc..
+** Benchmark: Ad-hoc Strategies vs FleetRL
+# NOTE: What about uncertainty?
+# NOTE: Security threshold like weighted capacity forecasts from Kahlen (MAW)
+- Only intraday, fixed security threshold
+- Only balancing, fixed security threshold
+- Balancing and intraday, fixed ratio, fixed security threshold
+- Balancing and intraday, fixed ratio, learned security threshold
+- Balancing and intraday, learned ratio, learned security threshold == learned capacities
+- Decision Tree like models
+- Metric: Peak-to-average (PAR) ratio reduction.
 ** FleetRL
 ** Sensitivity Analysis: Prediction Accuracy
+# NOTE: Prediction Accuracy of available EV capacity
+# NOTE: Balancing accuracy always lower than intraday! Otherwise no sense
+# NOTE: Do predict electricity prices?
 ** Sensitivity Analysis: Infrastructure Changes
-** Sensitivity Analysis: Bidding Strategyl
+** Sensitivity Analysis: Bidding Strategy
+# NOTE: ???
 * Discussion
 # NOTE: 5%
 ** Generalizability
