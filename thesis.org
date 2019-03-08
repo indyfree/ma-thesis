@@ -126,8 +126,6 @@ at the timeslot $t$. Since provider get paid according to their submitted price
 $p_e$, instead of a market clearing price, this type of auction is called
 /pay-as-bid/ auction.
 # NOTE: Add more citations? brandt?
-# NOTE: Mention: Estimate the critical prices, $p_c$ (not) and $p_w$ - in data
-# section?
 # NOTE: Possible include example
 # NOTE: Mention New German Mischpreisverfahren.
 # NOTE: Market mechanism is a multi-unit, first-price, sealed-bid auction, which is settled on a ”pay-as-bid"
@@ -591,6 +589,7 @@ environment, convergence and stability are a serious problem. /W-learning/
 cite:humphrys96_action_selec_method_using_reinf_learn is an multi-agent approach
 that aims to solve these difficulties.
 
+#+LATEX: \clearpage
 * Related Literature
 # NOTE: 10%
 # TODO: Introductory paragraph
@@ -888,8 +887,7 @@ mobility demand) and the flexibility to adapt to the environment (e.g.,
 electricity prices), RL methods are a promising way of solving complex
 challenges in smart grids.
 
-
-# #+LATEX: \clearpage
+#+LATEX: \clearpage
 * Empirical Setting
 # NOTE: 10%
 # NOTE: Don't repeat stuff from first chapters
@@ -1175,7 +1173,8 @@ Chapter ref:sec-spot-market.
 |---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
 #+LATEX:}
 
-* Model: FleetRL
+#+LATEX: \clearpage
+* Model
 # NOTE: 20%
 # TODO: Mathematical formulations for Bidding Strategy
 # TODO: Algorithm formulations for Dispatch Algorithm
