@@ -1206,45 +1206,45 @@ optimally charges the fleet by providing negative balancing capacity.
 |-------------------------+----------------------------------------------------------------+----------------------|
 | Variable                | Description                                                    | Unit                 |
 |-------------------------+----------------------------------------------------------------+----------------------|
-| $P^{bal}$               | Amount of power to offer on the balancing market               | kW                   |
+| $P^{bal}$               | Amount of power offered on the balancing market                | kW                   |
 | $E^{bal}_t$             | Amount of supplied energy to balancing market                  | MWh                  |
 | $p_c$                   | Capacity price                                                 | $\text{\euro{}/MW}$  |
-| $\overline p_c$         | Critical capacity price                                        | $\text{\euro{}/MW}$  |
 | $p_e$                   | Energy price                                                   | $\text{\euro{}/MWh}$ |
+| $\overline p_c$         | Critical capacity price                                        | $\text{\euro{}/MW}$  |
 | $\overline p_e$         | Critical energy price                                          | $\text{\euro{}/MW}$  |
 |-------------------------+----------------------------------------------------------------+----------------------|
 | $P^{intr}$              | Amount of power to trade on the intraday market                | kW                   |
 | $p_u$                   | Unit price                                                     | $\text{\euro{}/MWh}$ |
 | $\overline p_u$         | Critical unit price                                            | $\text{\euro{}/MW}$  |
 |-------------------------+----------------------------------------------------------------+----------------------|
+| $t$                     | Control period                                                 | -                    |
+| $h$                     | Market period                                                  | -                    |
+| $T$                     | Total number of control periods in day                         | -                    |
+| $H$                     | Total number of market periods in day                          | -                    |
+| $\Delta t$              | Length of control period                                       | minutes              |
+| $\Delta h$              | Length of market period                                        | minutes              |
+| $N_t$                   | Number of control periods in a market period                   | -                    |
+|-------------------------+----------------------------------------------------------------+----------------------|
 | $Q^{fleet}_t$           | Amount of available fleet charging capacity at time $t$        | kWh                  |
 | $P^{fleet}_t$           | Amount of available fleet charging power at time $t$           | kW                   |
 | $\widehat{P}^{fleet}_t$ | Predicted amount of available fleet charging power at time $t$ | kW                   |
 |-------------------------+----------------------------------------------------------------+----------------------|
-| $t$                     | Control period                                                 | -                    |
-| $\Delta t$              | Length of control period                                       | minutes              |
-| $T$                     | Total number of control periods in day                         | -                    |
-| $h$                     | Market period                                                  | -                    |
-| $\Delta t$              | Length of market period                                        | minutes              |
-| $H$                     | Total number of market periods in day                          | -                    |
-| $N_t$                   | Number of control periods in a market period                   | minutes              |
 |-------------------------+----------------------------------------------------------------+----------------------|
-|-------------------------+----------------------------------------------------------------+----------------------|
+
+
+- Explain Control Periods, Market Periods
 
 ** Required Information Assumptions
 In order to optimize the bidding strategy, the following information is assumed
 to be available to the controller:
 
-# NOTE: cite:avci18_manag_elect_price_model_risk ?
 1) The controller is able to forecast the mobility demand of the EV fleet at
    different time-horizons, based on historical data. More specifically, it can
-   estimate the amount of plugged-in EVs and consequently the charging capacity $Q_t$ of
-   the fleet at t. with increasing certainty, one week,
-   24 hours and 30 minutes ahead,
-
-Past research
-   presented successful mobility demand forecast algorithms in the context of
-   free-float carsharing
+   predict the amount of plugged-in EVs and consequently the fleet charging
+   power $P^{fleet}_t$ of the fleet at control period $t$. with increasing
+   certainty, one week, 24 hours and 30 minutes ahead. Past research presented
+   successful mobility demand forecast algorithms in the context of free-float
+   carsharing
    cite:kahlen18_elect_vehic_virtual_power_plant_dilem,kahlen17_fleet,wagner16_in_free_float.
 2) The controller is able to forecast electricity prices of spot and balancing
    markets based on historical data. More specifically, it can estimate the
