@@ -12,7 +12,8 @@
 [[file:~/uni/ma-thesis/thesis.org::*Theoretical%20Background%20(10%25)][Theoretical Background (10%)]]
 ** TODO Concise Wording:
 - regulation capacity, balancing power, frequency regulation...
-- tender period, segment, interval, time period, tender/auction...
+- tender period, segment, interval, time period, market period.
+- tender, auction, bid, trade
 - carsharing company/provider
 - EV fleet, controller, operator...
 - Mobility demand, fleet capacity
