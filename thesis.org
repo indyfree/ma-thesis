@@ -1211,38 +1211,38 @@ markets or with compromising customer mobility by denying rentals.
 
 #+CAPTION[Table of Notation]: Table of Notation label:table-notation
 #+ATTR_LATEX: :environment longtable :align l|p{0.7\linewidth}|l :placement [hp]
-|-------------------------+---------------------------------------------------------------------------+----------------------|
-|-------------------------+---------------------------------------------------------------------------+----------------------|
-| Variable                | Description                                                               | Unit                 |
-|-------------------------+---------------------------------------------------------------------------+----------------------|
-| $P^{bal}$               | Amount of power offered on the balancing market.                          | kW                   |
-| $p_c$                   | Capacity price.                                                           | $\text{\euro{}/MW}$  |
-| $p_e$                   | Energy price.                                                             | $\text{\euro{}/MWh}$ |
-| $\overline p_c$         | Critical capacity price.                                                  | $\text{\euro{}/MW}$  |
-| $\overline p_e$         | Critical energy price.                                                    | $\text{\euro{}/MW}$  |
-|-------------------------+---------------------------------------------------------------------------+----------------------|
-| $P^{intr}$              | Amount of power to trade on the intraday market.                          | kW                   |
-| $p_u$                   | Unit price.                                                               | $\text{\euro{}/MWh}$ |
-| $\overline p_u$         | Critical unit price.                                                      | $\text{\euro{}/MW}$  |
-|-------------------------+---------------------------------------------------------------------------+----------------------|
-| $t$                     | Control period.                                                           | -                    |
-| $h$                     | Market period.                                                            | -                    |
-| $T$                     | Total number of control periods in day.                                   | -                    |
-| $H$                     | Total number of market periods in day.                                    | -                    |
-| $\Delta t$              | Length of control period.                                                 | minutes              |
-| $\Delta h$              | Length of market period.                                                  | minutes              |
-| $N_t$                   | Number of control periods in a market period.                             | -                    |
-|-------------------------+---------------------------------------------------------------------------+----------------------|
-| $Q^{fleet}_t$           | Amount of available fleet charging capacity in control period $t$.        | kWh                  |
-| $P^{fleet}_t$           | Amount of available fleet charging power in control period $t$.           | kW                   |
-| $\widehat{P}^{fleet}_t$ | Predicted amount of available fleet charging power in control period $t$. | kW                   |
-|-------------------------+---------------------------------------------------------------------------+----------------------|
-| $E^{bal}_h$             | Amount of energy charged from balancing market in market period h.        | MWh                  |
-| $E^{intr}_h$            | Amount of energy charged from the intraday market in market period h.     | MWh                  |
-|-------------------------+---------------------------------------------------------------------------+----------------------|
-| $f^{heur}$              | Heuristic function to dispatch EVs to charging                            | -                    |
-|-------------------------+---------------------------------------------------------------------------+----------------------|
-|-------------------------+---------------------------------------------------------------------------+----------------------|
+|-------------+---------------------------------------------------------------------------+----------------------|
+|-------------+---------------------------------------------------------------------------+----------------------|
+| Variable    | Description                                                               | Unit                 |
+|-------------+---------------------------------------------------------------------------+----------------------|
+| $t$         | Control period.                                                           | -                    |
+| $h$         | Market period.                                                            | -                    |
+| $T$         | Total number of control periods in day.                                   | -                    |
+| $H$         | Total number of market periods in day.                                    | -                    |
+| $\Delta t$  | Length of control period.                                                 | minutes              |
+| $\Delta h$  | Length of market period.                                                  | minutes              |
+| $N_t$       | Number of control periods in a market period.                             | -                    |
+|-------------+---------------------------------------------------------------------------+----------------------|
+| $\Pb$       | Amount of power offered on the balancing market.                          | kW                   |
+| $p^c$       | Capacity price offered on the balancing market.                           | $\text{\euro{}/MW}$  |
+| $p^e$       | Energy price on the balancing market.                                     | $\text{\euro{}/MWh}$ |
+| $\ccp{h}$   | Critical capacity price in market period $h$.                             | $\text{\euro{}/MW}$  |
+| $\cep{h}$   | Critical energy price in market period $h$.                               | $\text{\euro{}/MWh}$ |
+|-------------+---------------------------------------------------------------------------+----------------------|
+| $\Pi$       | Amount of power offered on the intraday market.                           | kW                   |
+| $p^u$       | Unit price offered on the intraday market.                                | $\text{\euro{}/MWh}$ |
+| $\cup{h}$   | Critical unit price in market period $h$.                                 | $\text{\euro{}/MW}$  |
+|-------------+---------------------------------------------------------------------------+----------------------|
+| $\fQ{t}$    | Amount of available fleet charging capacity in control period $t$.        | kWh                  |
+| $\fP{t}$    | Amount of available fleet charging power in control period $t$.           | kW                   |
+| $\fPhat{t}$ | Predicted amount of available fleet charging power in control period $t$. | kW                   |
+|-------------+---------------------------------------------------------------------------+----------------------|
+| $\Eb{h}$    | Amount of energy charged from balancing market in market period h.        | MWh                  |
+| $\Ei{h}$    | Amount of energy charged from the intraday market in market period h.     | MWh                  |
+|-------------+---------------------------------------------------------------------------+----------------------|
+| $\fh$       | Heuristic function to dispatch EVs to charging                            | -                    |
+|-------------+---------------------------------------------------------------------------+----------------------|
+|-------------+---------------------------------------------------------------------------+----------------------|
 
 ** Required Information Assumptions
 In order to optimize the bidding strategy, the following information is assumed
