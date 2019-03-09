@@ -19,6 +19,7 @@
 
 # Custom Notatation commands
 #+LATEX_HEADER: \usepackage{notation/rl}
+#+LATEX_HEADER: \usepackage{notation/model}
 
 # Use informs lists
 #+LATEX_HEADER: \usepackage{template/informs}
