@@ -109,20 +109,20 @@ above 50Hz and can be provided by adding grid load or reducing electricity
 generation. Since we do not consider V2G in this thesis, the EV fleets in our
 model are only able provide /negative control reserve/, which we will refer to
 as /control reserve/ until the end of the thesis. Market participants submit
-bids in the following form to the market: $(P^{bal}, p_c, p_e)$, where $P^{bal}$
-is the amount of electrical power that can be supplied on demand in kW, $p_c$ is
+bids in the following form to the market: $(\Pb, \cp, \ep)$, where $\Pb$
+is the amount of electrical power that can be supplied on demand in kW, $\cp$ is
 the capacity price for keeping the power available in $\text{\euro{}/MW}$ and
-$p_e$ is the energy price for delivered energy in $\text{\euro{}/MWh}$. The TSO
+$\ep$ is the energy price for delivered energy in $\text{\euro{}/MWh}$. The TSO
 determines the target quantity of energy to acquire per timeslot, it usually
 acquires much higher regulation capacity to minimize risks and activates the
 capacity on demand. The TSO accepts the bids based on the capacity price in a
 merit order. Providers, whose bids were accepted, instantly get compensated for
-the provided capacity: $R_c = p_c \times P^{bal}$. At the time regulation
+the provided capacity: $R^c = \cp \times \Pb$. At the time regulation
 capacity is needed, usually a day to a week later, the TSO activates the
-capacity according to a merit order of the ascending /energy prices/ $p_e$.
-Hence, providers are also compensated according to the actual energy $E^{bal}$
-they supplied or consumed: $R_e = p_e \times E^{bal}$. Since provider get paid
-according to their submitted price $p_e$, instead of a market clearing price,
+capacity according to a merit order of the ascending /energy prices/ $\ep$.
+Hence, providers are also compensated according to the actual energy $\Eb{}$
+they supplied or consumed: $R^e = \ep \times \Eb{}$. Since provider get paid
+according to their submitted price $\ep$, instead of a market clearing price,
 this type of auction is called /pay-as-bid/ auction.
 # NOTE: Add more citations? brandt?
 # NOTE: Possible include example
@@ -163,8 +163,8 @@ up until 5 minutes before physical delivery. Hourly contracts, as well as
 auction, the intraday market is a continuous order-driven market. Participants
 can submit limit orders at any time during the trading window and equally change
 or withdraw the order at any time before the order is accepted. Limit orders are
-specified as price-quantity pairs: $(P^{int}, p_u)$, where $P^{int}$ is the
-traded amount of electrical power in kW and $p_u$ is the price for the delivered
+specified as price-quantity pairs: $(\Pi, \up)$, where $\Pi$ is the
+traded amount of electrical power in kW and $\up$ is the price for the delivered
 energy unit (hour/quarter/block) in $\text{\euro{}/MWh}$. When an order to buy
 (bid) matches an order to sell (ask), the trade immediately gets executed. The
 order book is visible to all participants, hence it is known which unmatched
@@ -1020,8 +1020,8 @@ about the market design of balancing markets refer to Chapter
 ref:sec-balancing-market.
 
 The bidding data consists of the traded electricity product, the offered
-capacity $P$ (MW), the capacity price $p_c$ ($\text{\euro{}/MW}$), and the
-energy price $p_e$ ($\text{\euro{}/MWh}$) of each bid. Four different products
+capacity $\Pb$ (MW), the capacity price $\cp$ ($\text{\euro{}/MW}$), and the
+energy price $\ep$ ($\text{\euro{}/MWh}$) of each bid. Four different products
 are traded, which are a combination of positive control reserve (feed
 electricity into the grid) or negative control reserve (take electricity from
 the grid) and the provided time segment (peak or non-peak hours). Since negative
@@ -1066,28 +1066,28 @@ bidding intervals.
 # Here or in bidding strategy section?
 In order to estimate the upper bound of profits that the EV fleet can earn by
 participating in the secondary operating reserve market, the /critical prices/
-$\overline{p_c}$ and $\overline{p_e}$ were determined for each auctioned
+$\ccp{}$ and $\cep{}$ were determined for each auctioned
 interval. Following textcite:brandt17_evaluat_busin_model_vehic_grid_integ, we
-define $\overline{p_c}$ as the capacity price of the bid that was just barely
-accepted, whereas $\overline{p_e}$ is the highest energy price that was payed
+define $\ccp{}$ as the capacity price of the bid that was just barely
+accepted, whereas $\cep{}$ is the highest energy price that was payed
 for activated control reserve during that interval. For every
 15-minute interval within the given tender period of one week, the activated
 control reserve in that interval was matched with the accepted bids in that
 tender period. At the point where supply, i.e., offered capacity of bids, met
-demand, i.e., activated control reserve, the critical price $\overline{p_e}$ was
+demand, i.e., activated control reserve, the critical price $\cep{}$ was
 determined.
 
 /Example/: The assumed critical prices for the secondary operating reserve
 tender interval of the 6^{th} December 2017 between 08:00 and 08:15 are obtained
 as follows: Three suppliers submitted a reserve capacity of 5MW, 15MW and 22MW
 respectively (see Table ref:table-operating-reserve). The critical capacity
-price $\overline{p_c} = 200.3 \text{ \!\euro{}/MW}$ is determined by the
+price $\ccp{} = 200.3 \text{ \!\euro{}/MW}$ is determined by the
 capacity price of the last (third) accepted bid in that time segment. The TSO
 reported that 18MW of control reserve were activated between 08:00 and 08:15.
-Hence, the second bid determines the critical energy price $\overline{p_e} = 251
+Hence, the second bid determines the critical energy price $\cep{} = 251
 \text{ \!\euro{}/MWh}$, as control reserve capacity gets activated according to
 ascending order of the submitted energy prices. In this example the second
-bidder would get compensated with: $R = R_c + R_e =(10.73
+bidder would get compensated with: $R = R^c + R^e =(10.73
 \text{ \!\euro{}/MW}\times15\text{MW}) + (251
 \text{ \!\euro{}/MWh}\times13\text{MW}\times 0.25\text{h}) =
 976.7\text{ \!\euro{}}$. Note that the second bidder get compensated for
@@ -1110,7 +1110,7 @@ CLOCK: [2019-02-27 Wed 12:12]--[2019-02-27 Wed 12:12] =>  0:00
 
 The data from the EPEX Spot Intraday Continuous encompass order books and
 executed trades from 01.06.2016 until 01.01.2018. The list of trades contain
-information on the unit price $p_u$ ($\text{\euro{}/MWh}$), the quantity $Q$
+information on the unit price $\up$ ($\text{\euro{}/MWh}$), the quantity $Q$
 (kW) and the traded product (hourly, quarterly or block). In this research, we
 focus on quarterly product times (15-minute intervals), as they provide the
 highest flexibility. Fleet controllers can promptly react to fluctuant
@@ -1127,17 +1127,17 @@ characteristic is beneficial for our proposed trading strategy, since it allows
 the EV to procure electricity in almost real time. The controller can submit
 bids to the market, with accurate estimations of available charging capacity up
 to five minute-ahead. Similarly to the balancing market, the critical price
-$\overline{p_u}$ has to be determined for all intraday trading intervals.
-$\overline{p_u}$ is defined as the lowest unit price of all executed trades
+$\cup{}$ has to be determined for all intraday trading intervals.
+$\cup{}$ is defined as the lowest unit price of all executed trades
 $\cal{T}$ in a bidding interval:
 \begin{equation*}
-    \overline{p_u} \defeq \min_{t \in \cal{T}} p_u^t
+    \cup{} \defeq \min_{t \in \cal{T}} p^u_t
 \end{equation*}
-Note that $\overline{p_u}$ is essentially the optimal bidding price, it provides
+Note that $\cup{}$ is essentially the optimal bidding price, it provides
 on upper bound for the fleets profits when bidding on the intraday market. We
-assume that bids with  $p_u \geq \overline{p_u}$ will always get matched. In
+assume that bids with  $p_u \geq \cup{}$ will always get matched. In
 reality this is not always the case, since trades are executed immediately and
-it is not guaranteed that unmatched asks at $\overline{p_u}$ exist at the time
+it is not guaranteed that unmatched asks at $\cup{}$ exist at the time
 of commitment. For a detailed description of the intraday continuous market see
 Chapter ref:sec-spot-market.
 
@@ -1224,13 +1224,13 @@ markets or with compromising customer mobility by denying rentals.
 | $N_t$       | Number of control periods in a market period.                             | -                    |
 |-------------+---------------------------------------------------------------------------+----------------------|
 | $\Pb$       | Amount of power offered on the balancing market.                          | kW                   |
-| $p^c$       | Capacity price offered on the balancing market.                           | $\text{\euro{}/MW}$  |
-| $p^e$       | Energy price on the balancing market.                                     | $\text{\euro{}/MWh}$ |
+| $\cp$       | Capacity price offered on the balancing market.                           | $\text{\euro{}/MW}$  |
+| $\ep$       | Energy price offered on the balancing market.                             | $\text{\euro{}/MWh}$ |
 | $\ccp{h}$   | Critical capacity price in market period $h$.                             | $\text{\euro{}/MW}$  |
 | $\cep{h}$   | Critical energy price in market period $h$.                               | $\text{\euro{}/MWh}$ |
 |-------------+---------------------------------------------------------------------------+----------------------|
 | $\Pi$       | Amount of power offered on the intraday market.                           | kW                   |
-| $p^u$       | Unit price offered on the intraday market.                                | $\text{\euro{}/MWh}$ |
+| $\up$       | Unit price offered on the intraday market.                                | $\text{\euro{}/MWh}$ |
 | $\cup{h}$   | Critical unit price in market period $h$.                                 | $\text{\euro{}/MW}$  |
 |-------------+---------------------------------------------------------------------------+----------------------|
 | $\fQ{t}$    | Amount of available fleet charging capacity in control period $t$.        | kWh                  |
@@ -1307,7 +1307,7 @@ Mechanism: Only EVs with enough battery capacity left to charge the next control
 period are allocated to VPP.
 
 Other assumptions:
-1) Bids on balancing market always get accepted (Known critical capacity price $\overline{p_c}$
+1) Bids on balancing market always get accepted (Known critical capacity price $\ccp{}$
 2) EV fleet charges at a fixed industry tariff otherwise
 3) Balancing capacity is provided for a market period $h$. Within the market
    period $h$, it is possible to provide the capacity with different EVs,
@@ -1317,7 +1317,7 @@ Ideas:
 - What about imbalance costs that can be bough/sold from other market like in
   cite:vandael15_reinf_learn_heuris_ev_fleet? $\lambda_h^+$: Less energy charged
   than bought at electricity prices, EV Fleet controller gets refunded based on
-  a positive imbalance price $\lambda_h^+ < $p_u$. Because positive imbalance
+  a positive imbalance price $\lambda_h^+ < $\up$. Because positive imbalance
   prices are lower than charging prices, only partially refunded for excess
   energy bought in electricity markets.
 
@@ -1380,7 +1380,7 @@ intraday:
 \begin{equation}
 \begin{split}
     b^{intr} &= (P^{intr}, p_u) \\
-    p_u &= \min(\overline{p_u}, p_r) \\
+    p_u &= \min(\cup{}, p_r) \\
     P^{intr} &= \pi(s)
 \end{split}
 \end{equation}
