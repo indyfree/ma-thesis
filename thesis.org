@@ -1364,7 +1364,10 @@ Ideas:
   # NOTE: Then need to model that bid does not get accepted?
 
 ** Bidding Strategy label:sec-model-bidding-strategy
+# TODO: Mathematical formulations for Bidding Strategy
 # NOTE: Word as profit-maximizing bidding strategy
+# NOTE: Add algorithm of integrated bidding strategy/control mechanism?
+# NOTE: Distinguish control mechanism from bidding strategy more clearly
 
 Assumptions:
   - EV fleet is price taker, it is lacking the market share to influence prices
@@ -1376,17 +1379,17 @@ Assumptions:
 intraday:
 \begin{equation}
 \begin{split}
-    b_{int} &= (P_{int}, p_u) \\
+    b^{intr} &= (P^{intr}, p_u) \\
     p_u &= \min(\overline{p_u}, p_r) \\
-    P_{int} &= \pi(s)
+    P^{intr} &= \pi(s)
 \end{split}
 \end{equation}
 
 balancing:
 \begin{equation}
 \begin{split}
-    b_{bal} &= (P_{bal}, p_c, p_w) \\
-    P_{bal} &= \pi(s) \\
+    b^{bal} &= (P^{bal}, p_c, p_w) \\
+    P^{bal} &= \pi(s) \\
     p_c &= 0 \\
     p_w &= \min(\overline{p_w}, p_r)
 \end{split}
@@ -1415,15 +1418,24 @@ prices from the fleet owner and other market participants. The market auction
 mechanism ultimately decides when EVs will charge and discharge.
 
 ** Reinforcement Learning Approach label:sec-model-rl
+# NOTE: RL Section before Bidding strategy?
+# NOTE: RL Learning only technical, everything else in bidding?
+# NOTE: Mention implementation details, training, graphics, tensorflow?
+# TODO: Cost function? Here in RL or in bidding?
 # - Multi-agent bidding approach, with learning complete bidding strategy?
+# TODO: States, Actions, Rewards for RL
+# TODO: Bellman Equation for RL?
+# TODO: 2 RL Problems? 1. Only capacity, 2. Also prices?
 #   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
 # - cite:vandael15_reinf_learn_heuris_ev_fleet
+- Cost function?
 - Learn from very high negative imbalance cost reward
 
 - $A = \{(P_{bal}, P_{int}), P_{bal}, P_{int} \in \Re \}$
 - $S = \{(\overline{p}_w^t, \overline{p}_u^t, Q_{fleet}^t), \overline{p}_w^t,
   \overline{p}_u^t, Q_{fleet}^t \in \Re \}$
 ** Dispatch Heuristic / Algorithm
+# TODO: Algorithm formulations for Dispatch Algorithm
 1) Lowest SoC - Does that make sense? All other EVs get charged regularly anyways.
    - Maybe highest SoC, since we can allow charging to be disrupted
 2) Expected Departure time:
@@ -1436,14 +1448,28 @@ See cite:vandael15_reinf_learn_heuris_ev_fleet
 
 * Simulation Platform: EV Sim
 # NOTE: 5%
+- Simulation Platform to allow evaluating the performance of intelligent agents
+  in smart charging/balancing the grid of EV fleets. Allows to test out bidding strategies
+  and control mechanisms in a realistic EV fleet setting.
 ** Event-based Simulation
+- Not only t+1
+- Event e.g. denying rental, charge/little charge/no-charge has effects for the
+  whole simulation
+- Simpy
+- Python
 ** Architecture / Components
 #+CAPTION[Simulation Platform]: Simulation Platform label:fig-simulation-platform
 #+ATTR_LATEX: :width 1\linewidth
 [[./fig/simulation_platform.png]]
 
 ** Modular Expandability
+- Plug-in different Market designs
+- Use different real-world data
+- Change Fleet parameters
+- Develop new strategy
+-
 
+#+LATEX: \clearpage
 * Evaluation / Results
 # NOTE: 15%
 # NOTE: Also include overview graphs, of charging, prices, available capacity,
