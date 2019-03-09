@@ -1175,13 +1175,8 @@ Chapter ref:sec-spot-market.
 #+LATEX: \clearpage
 * Model
 # NOTE: 20%
-# TODO: Mathematical formulations for Bidding Strategy
-# TODO: Algorithm formulations for Dispatch Algorithm
-# TODO: States, Actions, Rewards for RL
-# TODO: Bellman Equation for RL?
-# TODO: 2 RL Problems? 1. Only capacity, 2. Also prices?
 # TODO: Formulate Problem of needing to learn capacity allocation
-# NOTE: What about uncertainty? Need to model, otherwise RL makes no sense
+# NOTE: What about capacity prediction uncertainty? Need to model, otherwise RL makes no sense
 
 # NOTE: Need to reformulate Intro+Following to only balancing
 The following chapter will introduce the model of this research. In its essence,
@@ -1196,27 +1191,22 @@ general control mechanism is explained. Afterwards, the bidding strategy and the
 RL approach are described in detail. Finally, the dispatch algorithm is
 presented.
 
-# NOTE: Problem Description
-For the sake of conciseness and brevity, we formulate the problem as a
-/controlled EV charging/ problem. The EV fleet operator represents the
-controller, which aims to optimally charge the fleet by providing balancing
-capacity. First, the controller predicts the amount of energy it can charge in a
-given market period $h$. The length of the market period $\Delta h$ and the
-market closing time depend on the considered electricity markets. Second, the
-controller places bids on one or multiple markets to procure the predicted
-amount of energy. Lastly, at delivery time, the controller communicates with the
-EV fleet to control the charging. Online EV control periods $t$ are typically
-shorter then market periods. In our case, the market periods of the balancing
-market and intraday market are 15 minutes, while we consider EV control periods
-of 5 minutes. During the control phase, the controller has to take decisions
-about fulfilling its commitments to the markets or compromising customer
-mobility.
-
-
-# Profit maximizing: Charge anyways, but the more it can charge from markets the
-# more profit?
-
-# Minimize risk to be beeing able to fulfill commitments
+# NOTE: Section: Problem Description
+We formulate the problem as a /controlled EV charging/ problem. The EV fleet
+operator represents the /controller/, which aims to optimally charge the fleet
+by providing balancing capacity. First, the controller predicts the amount of
+energy it can charge in a given /market period/ $h$. The length of the market
+period $\Delta h$ and the market closing time depend on the considered
+electricity markets. Second, the controller places bids on one or multiple
+markets to procure the predicted amount of energy. Lastly, at electricity
+delivery time, the controller communicates with the EV fleet to control the
+charging. Online EV /control periods/ $t$ are typically shorter than market
+periods. In our case, the market periods of the considered markets are 15
+minutes long, while we consider EV control periods of 5 minutes. During each
+control period the controller has to take decisions about dispatching individual
+EVs for charging according to a heuristic function $f_{heur}$. In times of
+unforeseen rental demand, this decision implies trading off commitments to the
+markets or with compromising customer mobility by denying rentals.
 
 
 #+CAPTION[Table of Notation]: Table of Notation label:table-notation
@@ -1250,6 +1240,8 @@ mobility.
 | $E^{bal}_h$             | Amount of energy charged from balancing market in market period h.        | MWh                  |
 | $E^{intr}_h$            | Amount of energy charged from the intraday market in market period h.     | MWh                  |
 |-------------------------+---------------------------------------------------------------------------+----------------------|
+| $f^{heur}$              | Heuristic function to dispatch EVs to charging                            | -                    |
+|-------------------------+---------------------------------------------------------------------------+----------------------|
 |-------------------------+---------------------------------------------------------------------------+----------------------|
 
 ** Required Information Assumptions
@@ -1277,6 +1269,10 @@ VPP and EV fleet charging literature
 cite:brandt17_evaluat_busin_model_vehic_grid_integ,vandael15_reinf_learn_heuris_ev_fleet,mashhour11_biddin_strat_virtual_power_plant_1,tomic07_using_fleet_elect_drive_vehic_grid_suppor.
 
 ** Control Mechanism
+# NOTE: Profit maximizing: Charge anyways, but the more it can charge from markets the
+# more profit?
+# NOTE: Minimize risk to be beeing able to fulfill commitments
+
 # NOTE: Embed/Mention DSS? What about Smart Charging?
 The central control mechanism constitutes the core of this research. It can be
 seen as a decision support system that can be employed at a EV fleet operator to
@@ -1292,6 +1288,7 @@ $f_{heur}$ Heuristic function to dispatch power to EVs
 
 Nomenclature:
 - Control Periods $t$ vs Market Periods $h$
+- Use Notion of consumption plan?
 - Other figure, with timely bidding and control periods?
 
 Figure:
