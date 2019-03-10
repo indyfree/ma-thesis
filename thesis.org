@@ -1276,8 +1276,59 @@ cite:brandt17_evaluat_busin_model_vehic_grid_integ,vandael15_reinf_learn_heuris_
 # NOTE: Embed/Mention DSS? What about Smart Charging?
 The central control mechanism constitutes the core of this research. It can be
 seen as a decision support system that can be employed at a EV fleet operator to
-facilitate smart charging. The control mechanism is divided into three distinct
-decision phases. In the first phase the controller...
+facilitate smart charging its fleet. The control mechanism is divided into three
+distinct decision phases (see Figure ref:fig-control-mechanism).
+
+Decision Phase I:
+1) The controller predicts the available fleet charging power for market period
+   h $\fPhat{h}$ one week ahead.
+   \begin{equation}
+       \fPhat{h + (H \times 7)} = \min_{n \in \{1, .., N_t\}} \fPhat{t + (T \times 7) + n} \text{ ,}
+   \end{equation}
+   where $h$ and $t$ are the current market and control period, respectively. $T$ is the number of charging
+   periods in a day ($T$ =  288) and $H$ is the number of market periods in a day
+   ($H$ = 96).
+
+
+2) The controller predicts the clearing prices
+
+#+BEGIN_SRC python :results output :exports none :var h=15
+print("Number of control periods in a day: %d " % ((60 / h) * 24))
+#+END_SRC
+
+#+RESULTS:
+: Number of control periods in a day: 96
+
+#+BEGIN_SRC python :results output :exports none :var t=5
+print("Number of control periods in a day: %d " % ((60 / t) * 24))
+#+END_SRC
+
+#+RESULTS:
+: Number of control periods in a day: 288
+
+#+BEGIN_SRC python :results output :exports none :var h=15
+print("Number of market periods in a day: %d " % ((60 / h) * 24))
+#+END_SRC
+
+#+RESULTS:
+: Number of market periods in a day: 96
+
+
+
+- Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
+  - Essential Information, determines Smart Charging quantities.
+  - Balance risks versus profits
+  - Need to have sufficient SoC to be able to rent out. Not enough SoC violates
+    customer mobility, and thus decreases profits
+  - Conflicting: Do not submit/charge too much: When no replacement for VPP is
+    available, we loose rental profits and also violate customer mobility
+  - Conflicting: Do not submit quantities we can not charge. Causes high
+    imbalance costs that have to be avoided at all times
+  - RL Agent!
+- Middle-grey: Determine bidding price ref:sec-model-bidding-strategy
+
+
+
 
 $\Delta t$ = Length of Control period = 15 Minute
 
