@@ -1206,7 +1206,7 @@ minutes long, while we consider EV control periods of 5 minutes. During each
 control period the controller has to take decisions about dispatching individual
 EVs for charging according to a heuristic function $f_{heur}$. In times of
 unforeseen rental demand, this decision implies trading off commitments to the
-markets or with compromising customer mobility by denying rentals.
+markets with compromising customer mobility by denying rentals.
 
 
 #+CAPTION[Table of Notation]: Table of Notation label:table-notation
@@ -1250,11 +1250,11 @@ to be available to the controller:
 
 1) The controller is able to forecast the mobility demand of the EV fleet at
    different time-horizons, based on historical data. More specifically, it can
-   predict the amount of plugged-in EVs and consequently the fleet charging
-   power $P^{fleet}_t$ of the fleet at control period $t$. with increasing
-   certainty, one week, 24 hours and 30 minutes ahead. Past research presented
-   successful mobility demand forecast algorithms in the context of free-float
-   carsharing
+   predict the amount of plugged-in EVs and consequently the charging
+   power $P^{fleet}_t$ of the fleet at control period $t$. The prediction's
+   accuracy is increasing with shorter time horizons, from one week, 24 hours to
+   30 minutes ahead. Past research presented successful mobility demand forecast
+   algorithms in the context of free-float carsharing
    cite:kahlen18_elect_vehic_virtual_power_plant_dilem,kahlen17_fleet,wagner16_in_free_float.
 2) The controller is able to forecast electricity prices of spot and balancing
    markets based on historical data. More specifically, it can estimate the
@@ -1263,15 +1263,18 @@ to be available to the controller:
    will get accepted. Hence the critical prices form an essential piece of
    information for the proposed bidding strategy. Electricity price forecasting
    is an  extensively studied research area, with well-advanced prediction
-   algorithms cite:weron14_elect_price_forec,avci18_manag_elect_price_model_risk.
-Assuming available forecasting information is common practice in the
-VPP and EV fleet charging literature
+   algorithms
+   cite:weron14_elect_price_forec,avci18_manag_elect_price_model_risk.
+We are confident that taking the above assumptions is viable, assuming available
+forecasting information is common practice in the VPP and EV fleet charging
+literature
 cite:brandt17_evaluat_busin_model_vehic_grid_integ,vandael15_reinf_learn_heuris_ev_fleet,mashhour11_biddin_strat_virtual_power_plant_1,tomic07_using_fleet_elect_drive_vehic_grid_suppor.
 
 ** Control Mechanism
 # NOTE: Profit maximizing: Charge anyways, but the more it can charge from markets the
 # more profit?
 # NOTE: Minimize risk to be beeing able to fulfill commitments
+# TODO: Charging power or fleet capacity??
 
 # NOTE: Embed/Mention DSS? What about Smart Charging?
 The central control mechanism constitutes the core of this research. It can be
