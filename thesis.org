@@ -1292,16 +1292,6 @@ Decision Phase I:
    periods in a day ($T$ =  288) and $H$ is the number of market periods in a day
    ($H$ = 96).
 
-
-2) The controller predicts the clearing prices
-
-#+BEGIN_SRC python :results output :exports none :var h=15
-print("Number of control periods in a day: %d " % ((60 / h) * 24))
-#+END_SRC
-
-#+RESULTS:
-: Number of control periods in a day: 96
-
 #+BEGIN_SRC python :results output :exports none :var t=5
 print("Number of control periods in a day: %d " % ((60 / t) * 24))
 #+END_SRC
@@ -1315,23 +1305,19 @@ print("Number of market periods in a day: %d " % ((60 / h) * 24))
 
 #+RESULTS:
 : Number of market periods in a day: 96
+1) The controller predicts the clearing prices
 
-
-
-- Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
-  - Essential Information, determines Smart Charging quantities.
-  - Balance risks versus profits
-  - Need to have sufficient SoC to be able to rent out. Not enough SoC violates
-    customer mobility, and thus decreases profits
-  - Conflicting: Do not submit/charge too much: When no replacement for VPP is
-    available, we loose rental profits and also violate customer mobility
-  - Conflicting: Do not submit quantities we can not charge. Causes high
-    imbalance costs that have to be avoided at all times
-  - RL Agent!
-- Middle-grey: Determine bidding price ref:sec-model-bidding-strategy
-
-
-
+2) Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
+   - Essential Information, determines Smart Charging quantities.
+   - Balance risks versus profits
+   - Need to have sufficient SoC to be able to rent out. Not enough SoC violates
+     customer mobility, and thus decreases profits
+   - Conflicting: Do not submit/charge too much: When no replacement for VPP is
+     available, we loose rental profits and also violate customer mobility
+   - Conflicting: Do not submit quantities we can not charge. Causes high
+     imbalance costs that have to be avoided at all times
+   - RL Agent!
+3) Middle-grey: Determine bidding price ref:sec-model-bidding-strategy
 
 $\Delta t$ = Length of Control period = 15 Minute
 
@@ -1384,18 +1370,6 @@ Ideas:
 #+CAPTION[EV VPP Control Mechanism]: EV VPP Control Mechanism label:fig-control-mechanism
 #+ATTR_LATEX: :width 1\linewidth
 [[./fig/control_mechanism.png]]
-
-- Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
-  - Essential Information, determines Smart Charging quantities.
-  - Balance risks versus profits
-  - Need to have sufficient SoC to be able to rent out. Not enough SoC violates
-    customer mobility, and thus decreases profits
-  - Conflicting: Do not submit/charge too much: When no replacement for VPP is
-    available, we loose rental profits and also violate customer mobility
-  - Conflicting: Do not submit quantities we can not charge. Causes high
-    imbalance costs that have to be avoided at all times
-  - RL Agent!
-- Middle-grey: Determine bidding price ref:sec-model-bidding-strategy
 
 *** Decision Phase I: Day-ahead/Week-ahead
 *** Decision Phase II: Intraday

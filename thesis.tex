@@ -1,4 +1,4 @@
-% Created 2019-03-09 Sat 12:19
+% Created 2019-03-10 Sun 12:46
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -22,6 +22,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{notation/rl}
+\usepackage{notation/model}
 \usepackage{template/informs}
 \let\enumerate\henumerate
 \let\itemize\hitemize
@@ -208,21 +209,21 @@ be real-valued vectors are written in bold and in lower case (even if random var
 \pagenumbering{arabic}
 
 \section{Introduction}
-\label{sec:org4c2f020}
+\label{sec:orge015316}
 \subsection{Research Motivation}
-\label{sec:org6a7469b}
+\label{sec:org8825891}
 \begin{itemize}
 \item \cite{lopes11_integ_elect_vehic_elect_power_system}
 \end{itemize}
 \subsection{Research Question}
-\label{sec:org3e45381}
+\label{sec:org1dece2b}
 \subsection{Relevance}
-\label{sec:org9340162}
+\label{sec:orgee2bceb}
 
 \section{Theoretical Background}
-\label{sec:org6ab434c}
+\label{sec:orge3004d9}
 \subsection{Electricity Markets}
-\label{sec:org02a3cf6}
+\label{sec:org78fb346}
 On electricity markets, actors participate in auctions to match the supply of
 electricity generation and the demand for electricity consumption. Participants
 place asks (sale offers) and bids (purchase orders). The electricity price is
@@ -266,7 +267,7 @@ research.
 \end{figure}
 
 \subsubsection{Balancing Market \label{sec-balancing-market}}
-\label{sec:org0e9c89a}
+\label{sec:orgf9c7690}
 The balancing market is a tool to balance frequency deviations in the power
 grid. It offers auctions for primary control reserve, secondary control reserve
 as well as tertiary control reserve (minute reserve), which primarily differ in
@@ -309,23 +310,23 @@ above 50Hz and can be provided by adding grid load or reducing electricity
 generation. Since we do not consider V2G in this thesis, the EV fleets in our
 model are only able provide \emph{negative control reserve}, which we will refer to
 as \emph{control reserve} until the end of the thesis. Market participants submit
-bids in the following form to the market: \((P^{bal}, p_c, p_e)\), where \(P^{bal}\)
-is the amount of electrical power that can be supplied on demand in kW, \(p_c\) is
+bids in the following form to the market: \((\Pb{}, \cp{}, \ep)\), where \(\Pb{}\)
+is the amount of electrical power that can be supplied on demand in kW, \(\cp{}\) is
 the capacity price for keeping the power available in \(\text{\euro{}/MW}\) and
-\(p_e\) is the energy price for delivered energy in \(\text{\euro{}/MWh}\). The TSO
+\(\ep{}\) is the energy price for delivered energy in \(\text{\euro{}/MWh}\). The TSO
 determines the target quantity of energy to acquire per timeslot, it usually
 acquires much higher regulation capacity to minimize risks and activates the
 capacity on demand. The TSO accepts the bids based on the capacity price in a
 merit order. Providers, whose bids were accepted, instantly get compensated for
-the provided capacity: \(R_c = p_c \times P^{bal}\). At the time regulation
+the provided capacity: \(R^c = \cp{} \times \Pb{}\). At the time regulation
 capacity is needed, usually a day to a week later, the TSO activates the
-capacity according to a merit order of the ascending \emph{energy prices} \(p_e\).
-Hence, providers are also compensated according to the actual energy \(E^{bal}\)
-they supplied or consumed: \(R_e = p_e \times E^{bal}\). Since provider get paid
-according to their submitted price \(p_e\), instead of a market clearing price,
+capacity according to a merit order of the ascending \emph{energy prices} \(\ep{}\).
+Hence, providers are also compensated according to the actual energy \(\Eb{}\)
+they supplied or consumed: \(R^e = \ep \times \Eb{}\). Since provider get paid
+according to their submitted price \(\ep{}\), instead of a market clearing price,
 this type of auction is called \emph{pay-as-bid} auction.
 \subsubsection{Spot Market \label{sec-spot-market}}
-\label{sec:org4c79d0c}
+\label{sec:orgf6a30a6}
 As mentioned in the previous chapter, the equilibrium of electricity supply and
 demand is ensured through a sequence of interdependent wholesale markets (cited)
 \cite{pape16_are_fundam_enoug}. Next to the balancing market at the end of the
@@ -333,11 +334,11 @@ sequence, mainly two different types of spot markets exist, the day-ahead
 market and the intraday market. In this research, we consider the European Power
 Exchange (EPEX Spot) as it is the largest electricity market in Europe, with a
 total trading volume of approximately 567TWh in 2018\footnote{\url{https://www.epexspot.com/en/press-media/press/details/press/Traded\_volumes\_soar\_to\_an\_all-time\_high\_in\_2018},
-accessed 19\textsuperscript{th} February, 2019\label{org25c90f0}}, but most electronic
+accessed 19\textsuperscript{th} February, 2019\label{org8a3a337}}, but most electronic
 spot markets in western economies work with similar market mechanisms.
 
 In Germany, the most important spot market is the day-ahead market with a
-trading volume of over 234TWh in 2018\textsuperscript{\ref{org25c90f0}}. Participants place asks and bids
+trading volume of over 234TWh in 2018\textsuperscript{\ref{org8a3a337}}. Participants place asks and bids
 for hourly contracts of the following day on the \emph{EPEX Spot Day-ahead Auction}
 market until the market closes at 12pm on the day before delivery (see Figure
 \ref{fig-electricity-markets}). The day-ahead market plays an essential role in
@@ -358,8 +359,8 @@ up until 5 minutes before physical delivery. Hourly contracts, as well as
 auction, the intraday market is a continuous order-driven market. Participants
 can submit limit orders at any time during the trading window and equally change
 or withdraw the order at any time before the order is accepted. Limit orders are
-specified as price-quantity pairs: \((P^{int}, p_u)\), where \(P^{int}\) is the
-traded amount of electrical power in kW and \(p_u\) is the price for the delivered
+specified as price-quantity pairs: \((\Pi{}, \up{})\), where \(\Pi{}\) is the
+traded amount of electrical power in kW and \(\up{}\) is the price for the delivered
 energy unit (hour/quarter/block) in \(\text{\euro{}/MWh}\). When an order to buy
 (bid) matches an order to sell (ask), the trade immediately gets executed. The
 order book is visible to all participants, hence it is known which unmatched
@@ -380,7 +381,7 @@ available battery capacity on the intraday market. Trades on the intraday market
 can complement bids that have been committed to other markets earlier (e.g., to
 the secondary operating reserve market).
 \subsection{Reinforcement Learning \label{sec-reinforcement-learning}}
-\label{sec:org6f95d49}
+\label{sec:org492cb19}
 The following chapter will give an overview of the most important Reinforcement
 Learning (RL) concepts and will introduce the corresponding mathematical
 formulations. If not noted otherwise, the notation, equations, and insights are
@@ -408,7 +409,7 @@ problem more efficiently, tackle new challenges and are widely used in practice
 and research.
 
 \subsubsection{Markov Decision Processes \label{sec-mdp}}
-\label{sec:org18c7f4f}
+\label{sec:org03e1749}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -473,7 +474,7 @@ when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, th
 agent is "farsighted".
 
 \subsubsection{Policies and Value Functions \label{sec-policies}}
-\label{sec:orgb915efc}
+\label{sec:org8160ea3}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -515,7 +516,7 @@ has been known as \emph{Q-learning} \cite{watkins92_q_learn}, which is described
 Chapter \ref{sec-td-learning}.
 
 \subsubsection{Bellman Equations \label{sec-bellman}}
-\label{sec:org2d7327a}
+\label{sec:org7aa3c71}
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (\ref{eq-expected-return}), current values
 are related to expected values of successive states. This relationship is
@@ -557,7 +558,7 @@ experienced state transitions instead of expected transition probabilities. The
 most common methods will be explored in the following chapters.
 
 \subsubsection{Dynamic Programming  \label{sec-dp}}
-\label{sec:org0312043}
+\label{sec:org19c0681}
 \emph{Dynamic Programming} (DP) is a method to compute optimal policies, the primary
 goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
@@ -611,7 +612,7 @@ algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
 
 \subsubsection{Temporal-Difference Learning \label{sec-td-learning}}
-\label{sec:orga08dd25}
+\label{sec:orgbbac5b6}
 The previous chapter dealt with solving a \emph{planning} problem, that is computing
 an optimal solution (i.e., an optimal policy \(\pi_*\)) of an MDP when a perfect
 model of the environment is known. In the following chapters, we will look at
@@ -713,7 +714,7 @@ drastically reduced. In this case, a \emph{function approximator} can replace th
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
 \subsubsection{Approximation Methods}
-\label{sec:orge456252}
+\label{sec:org912f886}
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
@@ -769,7 +770,7 @@ comprehensive review of deep learning methods.
 \end{figure}
 \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 \subsubsection{Further Topics}
-\label{sec:org181f509}
+\label{sec:orgfa2b8d5}
 The previous chapters provided a detailed overview of the most important
 concepts and mathematical foundations in RL. In the research there are many more
 topics that were not covered here. \emph{Eligibility traces} offer a way to more
@@ -793,9 +794,9 @@ that aims to solve these difficulties.
 
 \clearpage
 \section{Related Literature}
-\label{sec:orgb0f8e74}
+\label{sec:orgebca269}
 \subsection{Smart Charging and Balancing the Electric Grid with EV Fleets}
-\label{sec:orgf63cdab}
+\label{sec:org8bc472a}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -968,7 +969,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning in Smart Grids}
-\label{sec:org1a83ded}
+\label{sec:org2d64ac4}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -1077,7 +1078,7 @@ challenges in smart grids.
 
 \clearpage
 \section{Empirical Setting}
-\label{sec:org74763cf}
+\label{sec:orgaea94fc}
 This research is embedded in the German carsharing and electricity markets.
 Germany is a suitable testbed, since it has a comparably high share of
 renewables in its energy mix and is pushing for an energy turnaround (German:
@@ -1110,7 +1111,7 @@ next chapters the different datasets are described, as well the most important
 processing steps outlined.
 
 \subsection{Electronic Vehicle Fleet Data}
-\label{sec:org0c128c4}
+\label{sec:org8811cdc}
 The Car2Go dataset consists of GPS data of around 500 Smart ED3 Fortwo vehicles in
 Stuttgart. These subcompact cars are equipped with a 17.6kWh battery and a
 standard 3.3kW on-board charger. They fully charge in about six to seven hours
@@ -1234,7 +1235,7 @@ station.
 \end{sidewaystable}
 
 \subsection{Balancing Market Data}
-\label{sec:orgffbaa76}
+\label{sec:org10cd6ab}
 In this research, we use market balancing data from the German secondary reserve
 market. The following chapter will give an overview of the dataset and
 preprocessing steps that were taken. The data encompasses weekly lists of
@@ -1244,8 +1245,8 @@ about the market design of balancing markets refer to Chapter
 \ref{sec-balancing-market}.
 
 The bidding data consists of the traded electricity product, the offered
-capacity \(P\) (MW), the capacity price \(p_c\) (\(\text{\euro{}/MW}\)), and the
-energy price \(p_e\) (\(\text{\euro{}/MWh}\)) of each bid. Four different products
+capacity \(\Pb{}\) (MW), the capacity price \(\cp{}\) (\(\text{\euro{}/MW}\)), and the
+energy price \(\ep{}\) (\(\text{\euro{}/MWh}\)) of each bid. Four different products
 are traded, which are a combination of positive control reserve (feed
 electricity into the grid) or negative control reserve (take electricity from
 the grid) and the provided time segment (peak or non-peak hours). Since negative
@@ -1301,28 +1302,28 @@ bidding intervals.
 
 In order to estimate the upper bound of profits that the EV fleet can earn by
 participating in the secondary operating reserve market, the \emph{critical prices}
-\(\overline{p_c}\) and \(\overline{p_e}\) were determined for each auctioned
+\(\ccp{}\) and \(\cep{}\) were determined for each auctioned
 interval. Following \textcite{brandt17_evaluat_busin_model_vehic_grid_integ}, we
-define \(\overline{p_c}\) as the capacity price of the bid that was just barely
-accepted, whereas \(\overline{p_e}\) is the highest energy price that was payed
+define \(\ccp{}\) as the capacity price of the bid that was just barely
+accepted, whereas \(\cep{}\) is the highest energy price that was payed
 for activated control reserve during that interval. For every
 15-minute interval within the given tender period of one week, the activated
 control reserve in that interval was matched with the accepted bids in that
 tender period. At the point where supply, i.e., offered capacity of bids, met
-demand, i.e., activated control reserve, the critical price \(\overline{p_e}\) was
+demand, i.e., activated control reserve, the critical price \(\cep{}\) was
 determined.
 
 \emph{Example}: The assumed critical prices for the secondary operating reserve
 tender interval of the 6\textsuperscript{th} December 2017 between 08:00 and 08:15 are obtained
 as follows: Three suppliers submitted a reserve capacity of 5MW, 15MW and 22MW
 respectively (see Table \ref{table-operating-reserve}). The critical capacity
-price \(\overline{p_c} = 200.3 \text{ \!\euro{}/MW}\) is determined by the
+price \(\ccp{} = 200.3 \text{ \!\euro{}/MW}\) is determined by the
 capacity price of the last (third) accepted bid in that time segment. The TSO
 reported that 18MW of control reserve were activated between 08:00 and 08:15.
-Hence, the second bid determines the critical energy price \(\overline{p_e} = 251
+Hence, the second bid determines the critical energy price \(\cep{} = 251
 \text{ \!\euro{}/MWh}\), as control reserve capacity gets activated according to
 ascending order of the submitted energy prices. In this example the second
-bidder would get compensated with: \(R = R_c + R_e =(10.73
+bidder would get compensated with: \(R = R^c + R^e =(10.73
 \text{ \!\euro{}/MW}\times15\text{MW}) + (251
 \text{ \!\euro{}/MWh}\times13\text{MW}\times 0.25\text{h}) =
 976.7\text{ \!\euro{}}\). Note that the second bidder get compensated for
@@ -1331,10 +1332,10 @@ total only 18MW of control capacity was activated, which was partly fulfilled
 by the 5MW of the first bidder.
 
 \subsection{Spot Market Data}
-\label{sec:orgeacdcf9}
+\label{sec:orgd7a2636}
 The data from the EPEX Spot Intraday Continuous encompass order books and
 executed trades from 01.06.2016 until 01.01.2018. The list of trades contain
-information on the unit price \(p_u\) (\(\text{\euro{}/MWh}\)), the quantity \(Q\)
+information on the unit price \(\up{}\) (\(\text{\euro{}/MWh}\)), the quantity \(Q\)
 (kW) and the traded product (hourly, quarterly or block). In this research, we
 focus on quarterly product times (15-minute intervals), as they provide the
 highest flexibility. Fleet controllers can promptly react to fluctuant
@@ -1351,17 +1352,17 @@ characteristic is beneficial for our proposed trading strategy, since it allows
 the EV to procure electricity in almost real time. The controller can submit
 bids to the market, with accurate estimations of available charging capacity up
 to five minute-ahead. Similarly to the balancing market, the critical price
-\(\overline{p_u}\) has to be determined for all intraday trading intervals.
-\(\overline{p_u}\) is defined as the lowest unit price of all executed trades
+\(\cup{}\) has to be determined for all intraday trading intervals.
+\(\cup{}\) is defined as the lowest unit price of all executed trades
 \(\cal{T}\) in a bidding interval:
 \begin{equation*}
-    \overline{p_u} \defeq \min_{t \in \cal{T}} p_u^t
+    \cup{} \defeq \min_{t \in \cal{T}} \up{t}
 \end{equation*}
-Note that \(\overline{p_u}\) is essentially the optimal bidding price, it provides
+Note that \(\cup{}\) is essentially the optimal bidding price, it provides
 on upper bound for the fleets profits when bidding on the intraday market. We
-assume that bids with  \(p_u \geq \overline{p_u}\) will always get matched. In
+assume that bids with  \(p_u \geq \cup{}\) will always get matched. In
 reality this is not always the case, since trades are executed immediately and
-it is not guaranteed that unmatched asks at \(\overline{p_u}\) exist at the time
+it is not guaranteed that unmatched asks at \(\cup{}\) exist at the time
 of commitment. For a detailed description of the intraday continuous market see
 Chapter \ref{sec-spot-market}.
 
@@ -1402,7 +1403,7 @@ Execution time & ID & Unit Price & Quantity & Buyer Area & Seller Area & Product
 
 \clearpage
 \section{Model}
-\label{sec:orgb957477}
+\label{sec:org2be97a8}
 The following chapter will introduce the model of this research. In its essence,
 we propose a solution for EV fleet providers to utilize a portfolio of VPPs to
 profitably provide balancing services to the grid on multiple markets. The model
@@ -1425,14 +1426,11 @@ markets to procure the predicted amount of energy. Lastly, at electricity
 delivery time, the controller communicates with the EV fleet to control the
 charging. Online EV \emph{control periods} \(t\) are typically shorter than market
 periods. In our case, the market periods of the considered markets are 15
-minutes long, while we consider EV control periods of 5 minutes.
-During each control period the controller takes decisions about dispatching
-individual EVs for charging according to a heuristic function \(f_{heur}\).
-
-
-In times of unforeseen rental demand, the
-controller has to take decisions about fulfilling its commitments to the markets
-or compromising customer mobility by denying rentals in each control period.
+minutes long, while we consider EV control periods of 5 minutes. During each
+control period the controller has to take decisions about dispatching individual
+EVs for charging according to a heuristic function \(f_{heur}\). In times of
+unforeseen rental demand, this decision implies trading off commitments to the
+markets with compromising customer mobility by denying rentals.
 
 
 \begin{longtable}{l|p{0.7\linewidth}|l}
@@ -1454,16 +1452,6 @@ Variable & Description & Unit \\
 \endfoot
 \endlastfoot
 \hline
-\(P^{bal}\) & Amount of power offered on the balancing market. & kW\\
-\(p_c\) & Capacity price. & \(\text{\euro{}/MW}\)\\
-\(p_e\) & Energy price. & \(\text{\euro{}/MWh}\)\\
-\(\overline p_c\) & Critical capacity price. & \(\text{\euro{}/MW}\)\\
-\(\overline p_e\) & Critical energy price. & \(\text{\euro{}/MW}\)\\
-\hline
-\(P^{intr}\) & Amount of power to trade on the intraday market. & kW\\
-\(p_u\) & Unit price. & \(\text{\euro{}/MWh}\)\\
-\(\overline p_u\) & Critical unit price. & \(\text{\euro{}/MW}\)\\
-\hline
 \(t\) & Control period. & -\\
 \(h\) & Market period. & -\\
 \(T\) & Total number of control periods in day. & -\\
@@ -1472,31 +1460,41 @@ Variable & Description & Unit \\
 \(\Delta h\) & Length of market period. & minutes\\
 \(N_t\) & Number of control periods in a market period. & -\\
 \hline
-\(Q^{fleet}_t\) & Amount of available fleet charging capacity in control period \(t\). & kWh\\
-\(P^{fleet}_t\) & Amount of available fleet charging power in control period \(t\). & kW\\
-\(\widehat{P}^{fleet}_t\) & Predicted amount of available fleet charging power in control period \(t\). & kW\\
+\(\Pb{h}\) & Amount of power offered on the balancing market. & kW\\
+\(\cp{h}\) & Capacity price offered on the balancing market. & \(\text{\euro{}/MW}\)\\
+\(\ep{h}\) & Energy price offered on the balancing market. & \(\text{\euro{}/MWh}\)\\
+\(\ccp{h}\) & Critical capacity price in market period \(h\). & \(\text{\euro{}/MW}\)\\
+\(\cep{h}\) & Critical energy price in market period \(h\). & \(\text{\euro{}/MWh}\)\\
 \hline
-\(E^{bal}_h\) & Amount of energy charged from balancing market in market period h. & MWh\\
-\(E^{intr}_h\) & Amount of energy charged from the intraday market in market period h. & MWh\\
+\(\Pi{h}\) & Amount of power offered on the intraday market. & kW\\
+\(\up{h}\) & Unit price offered on the intraday market. & \(\text{\euro{}/MWh}\)\\
+\(\cup{h}\) & Critical unit price in market period \(h\). & \(\text{\euro{}/MW}\)\\
 \hline
-\(f^{heur}\) & Heuristic function to dispatch EVs to charging & -\\
+\(\Eb{h}\) & Amount of energy charged from balancing market in market period h. & MWh\\
+\(\Ei{h}\) & Amount of energy charged from the intraday market in market period h. & MWh\\
+\hline
+\(\fQ{t}\) & Amount of available fleet charging capacity in control period \(t\). & kWh\\
+\(\fP{t}\) & Amount of available fleet charging power in control period \(t\). & kW\\
+\(\fPhat{t}\) & Predicted amount of available fleet charging power in control period \(t\). & kW\\
+\hline
+\(\fh\) & Heuristic function to dispatch EVs to charging & -\\
 \hline
 \hline
 \end{longtable}
 
 \subsection{Required Information Assumptions}
-\label{sec:orga629c77}
+\label{sec:orgc9ab4b0}
 In order to optimize the bidding strategy, the following information is assumed
 to be available to the controller:
 
 \begin{enumerate}
 \item The controller is able to forecast the mobility demand of the EV fleet at
 different time-horizons, based on historical data. More specifically, it can
-predict the amount of plugged-in EVs and consequently the fleet charging
-power \(P^{fleet}_t\) of the fleet at control period \(t\). with increasing
-certainty, one week, 24 hours and 30 minutes ahead. Past research presented
-successful mobility demand forecast algorithms in the context of free-float
-carsharing
+predict the amount of plugged-in EVs and consequently the charging
+power \(P^{fleet}_t\) of the fleet at control period \(t\). The prediction's
+accuracy is increasing with shorter time horizons, from one week, 24 hours to
+30 minutes ahead. Past research presented successful mobility demand forecast
+algorithms in the context of free-float carsharing
 \cite{kahlen18_elect_vehic_virtual_power_plant_dilem,kahlen17_fleet,wagner16_in_free_float}.
 \item The controller is able to forecast electricity prices of spot and balancing
 markets based on historical data. More specifically, it can estimate the
@@ -1505,18 +1503,54 @@ each market period with high accuracy. Bids equal or below the critical price
 will get accepted. Hence the critical prices form an essential piece of
 information for the proposed bidding strategy. Electricity price forecasting
 is an  extensively studied research area, with well-advanced prediction
-algorithms \cite{weron14_elect_price_forec,avci18_manag_elect_price_model_risk}.
+algorithms
+\cite{weron14_elect_price_forec,avci18_manag_elect_price_model_risk}.
 \end{enumerate}
-Assuming available forecasting information is common practice in the
-VPP and EV fleet charging literature
+We are confident that taking the above assumptions is viable, assuming available
+forecasting information is common practice in the VPP and EV fleet charging
+literature
 \cite{brandt17_evaluat_busin_model_vehic_grid_integ,vandael15_reinf_learn_heuris_ev_fleet,mashhour11_biddin_strat_virtual_power_plant_1,tomic07_using_fleet_elect_drive_vehic_grid_suppor}.
 
 \subsection{Control Mechanism}
-\label{sec:orga163a75}
+\label{sec:orge7a96fe}
 The central control mechanism constitutes the core of this research. It can be
 seen as a decision support system that can be employed at a EV fleet operator to
-facilitate smart charging. The control mechanism is divided into three distinct
-decision phases. In the first phase the controller\ldots{}
+facilitate smart charging its fleet. The control mechanism is divided into three
+distinct decision phases (see Figure \ref{fig-control-mechanism}).
+
+Decision Phase I:
+\begin{enumerate}
+\item The controller predicts the available fleet charging power for market period
+h \(\fPhat{h}\) one week ahead.
+\begin{equation}
+    \fPhat{h + (H \times 7)} = \min_{n \in \{1, .., N_t\}} \fPhat{t + (T \times 7) + n} \text{ ,}
+\end{equation}
+where \(h\) and \(t\) are the current market and control period, respectively. \(T\) is the number of charging
+periods in a day (\(T\) =  288) and \(H\) is the number of market periods in a day
+(\(H\) = 96).
+\end{enumerate}
+
+
+\begin{enumerate}
+\item The controller predicts the clearing prices
+
+\item Light-grey: Determine bidding quantity, Chapter \ref{sec-model-rl}
+\begin{itemize}
+\item Essential Information, determines Smart Charging quantities.
+\item Balance risks versus profits
+\item Need to have sufficient SoC to be able to rent out. Not enough SoC violates
+customer mobility, and thus decreases profits
+\item Conflicting: Do not submit/charge too much: When no replacement for VPP is
+available, we loose rental profits and also violate customer mobility
+\item Conflicting: Do not submit quantities we can not charge. Causes high
+imbalance costs that have to be avoided at all times
+\item RL Agent!
+\end{itemize}
+\item Middle-grey: Determine bidding price \ref{sec-model-bidding-strategy}
+\end{enumerate}
+
+
+
 
 \(\Delta t\) = Length of Control period = 15 Minute
 
@@ -1528,7 +1562,7 @@ period \(h\).
 Nomenclature:
 \begin{itemize}
 \item Control Periods \(t\) vs Market Periods \(h\)
-\item Use Notation of consumption plan?
+\item Use Notion of consumption plan?
 \item Other figure, with timely bidding and control periods?
 \end{itemize}
 
@@ -1553,7 +1587,7 @@ period are allocated to VPP.
 
 Other assumptions:
 \begin{enumerate}
-\item Bids on balancing market always get accepted (Known critical capacity price \(\overline{p_c}\)
+\item Bids on balancing market always get accepted (Known critical capacity price \(\ccp{}\)
 \item EV fleet charges at a fixed industry tariff otherwise
 \item Balancing capacity is provided for a market period \(h\). Within the market
 period \(h\), it is possible to provide the capacity with different EVs,
@@ -1565,7 +1599,7 @@ Ideas:
 \item What about imbalance costs that can be bough/sold from other market like in
 \cite{vandael15_reinf_learn_heuris_ev_fleet}? \(\lambda_h^+\): Less energy charged
 than bought at electricity prices, EV Fleet controller gets refunded based on
-a positive imbalance price \$\(\lambda\)\textsubscript{h}\^{}+ < \(p_u\). Because positive imbalance
+a positive imbalance price \$\(\lambda\)\textsubscript{h}\^{}+ < \(\up{}\). Because positive imbalance
 prices are lower than charging prices, only partially refunded for excess
 energy bought in electricity markets.
 
@@ -1582,32 +1616,16 @@ positive imbalance costs - foregone rentals
 \caption[EV VPP Control Mechanism]{EV VPP Control Mechanism \label{fig-control-mechanism}}
 \end{figure}
 
-\begin{itemize}
-\item Light-grey: Determine bidding quantity, Chapter \ref{sec-model-rl}
-\begin{itemize}
-\item Essential Information, determines Smart Charging quantities.
-\item Balance risks versus profits
-\item Need to have sufficient SoC to be able to rent out. Not enough SoC violates
-customer mobility, and thus decreases profits
-\item Conflicting: Do not submit/charge too much: When no replacement for VPP is
-available, we loose rental profits and also violate customer mobility
-\item Conflicting: Do not submit quantities we can not charge. Causes high
-imbalance costs that have to be avoided at all times
-\item RL Agent!
-\end{itemize}
-\item Middle-grey: Determine bidding price \ref{sec-model-bidding-strategy}
-\end{itemize}
-
 \subsubsection{Decision Phase I: Day-ahead/Week-ahead}
-\label{sec:orgc3e9f73}
+\label{sec:org71dbd8a}
 \subsubsection{Decision Phase II: Intraday}
-\label{sec:orgd9437bf}
+\label{sec:org68dc574}
 \subsubsection{Real-time / Allocation phase?}
-\label{sec:orgc1af625}
+\label{sec:org01e54fd}
 
 
 \subsection{(Fleet Capacity \& Clearing Price Prediction)}
-\label{sec:orgc77e123}
+\label{sec:orgeea0458}
 \begin{itemize}
 \item Fleet capacity prediction made on non-simulated real-world SoC (w/o smart charging)
 \begin{itemize}
@@ -1630,7 +1648,7 @@ according to Gaussian distribution
 \end{itemize}
 
 \subsection{Bidding Strategy \label{sec-model-bidding-strategy}}
-\label{sec:org1fad6de}
+\label{sec:org6ec1700}
 Assumptions:
 \begin{itemize}
 \item EV fleet is price taker, it is lacking the market share to influence prices
@@ -1646,7 +1664,7 @@ intraday:
 \begin{equation}
 \begin{split}
     b^{intr} &= (P^{intr}, p_u) \\
-    p_u &= \min(\overline{p_u}, p_r) \\
+    p_u &= \min(\cup{}, p_r) \\
     P^{intr} &= \pi(s)
 \end{split}
 \end{equation}
@@ -1684,7 +1702,7 @@ prices from the fleet owner and other market participants. The market auction
 mechanism ultimately decides when EVs will charge and discharge.
 
 \subsection{Reinforcement Learning Approach \label{sec-model-rl}}
-\label{sec:orgdac6e17}
+\label{sec:org1edeca5}
 \begin{itemize}
 \item Cost function?
 \item Learn from very high negative imbalance cost reward
@@ -1694,7 +1712,7 @@ mechanism ultimately decides when EVs will charge and discharge.
   \overline{p}_u^t, Q_{fleet}^t \in \Re \}\)
 \end{itemize}
 \subsection{Dispatch Heuristic / Algorithm}
-\label{sec:org5defd0e}
+\label{sec:org56e5c54}
 \begin{enumerate}
 \item Lowest SoC - Does that make sense? All other EVs get charged regularly anyways.
 \begin{itemize}
@@ -1712,14 +1730,14 @@ See \cite{vandael15_reinf_learn_heuris_ev_fleet}
 
 
 \section{Simulation Platform: EV Sim}
-\label{sec:orgede08a2}
+\label{sec:org1c8106b}
 \begin{itemize}
 \item Simulation Platform to allow evaluating the performance of intelligent agents
 in smart charging/balancing the grid of EV fleets. Allows to test out bidding strategies
 and control mechanisms in a realistic EV fleet setting.
 \end{itemize}
 \subsection{Event-based Simulation}
-\label{sec:org48e6506}
+\label{sec:org5741b61}
 \begin{itemize}
 \item Not only t+1
 \item Event e.g. denying rental, charge/little charge/no-charge has effects for the
@@ -1728,7 +1746,7 @@ whole simulation
 \item Python
 \end{itemize}
 \subsection{Architecture / Components}
-\label{sec:orgfd5aba5}
+\label{sec:orga423dd4}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\linewidth]{./fig/simulation_platform.png}
@@ -1736,7 +1754,7 @@ whole simulation
 \end{figure}
 
 \subsection{Modular Expandability}
-\label{sec:org5c043c0}
+\label{sec:orgc64d7c1}
 \begin{itemize}
 \item Plug-in different Market designs
 \item Use different real-world data
@@ -1747,9 +1765,9 @@ whole simulation
 
 \clearpage
 \section{Evaluation / Results}
-\label{sec:orgf06574d}
+\label{sec:org17ccd08}
 \subsection{Benchmark: Ad-hoc Strategies vs FleetRL}
-\label{sec:orgb041e37}
+\label{sec:org6ce3c26}
 \begin{itemize}
 \item Only intraday, fixed security threshold
 \item Only balancing, fixed security threshold
@@ -1760,27 +1778,27 @@ whole simulation
 \item Metric: Peak-to-average (PAR) ratio reduction.
 \end{itemize}
 \subsection{FleetRL}
-\label{sec:org4668062}
+\label{sec:orge1e1425}
 \subsection{Sensitivity Analysis: Prediction Accuracy}
-\label{sec:org778084f}
+\label{sec:orgf9b1f06}
 \subsection{Sensitivity Analysis: Infrastructure Changes}
-\label{sec:orgb30d3d2}
+\label{sec:orgf9bc3f5}
 \subsection{Sensitivity Analysis: Bidding Strategy}
-\label{sec:org3735298}
+\label{sec:org1b73ed0}
 \section{Discussion}
-\label{sec:orgd2dcaa1}
+\label{sec:orgb5d7ee6}
 \subsection{Generalizability}
-\label{sec:orgaac70e0}
+\label{sec:org0efa12b}
 \subsection{Future Electricity Landscape}
-\label{sec:orgcab0dd4}
+\label{sec:orgf2cd030}
 \subsection{Limitations}
-\label{sec:org9157345}
+\label{sec:orgaa38ec6}
 \section{Conclusion}
-\label{sec:org3967968}
+\label{sec:org9dcf298}
 \subsection{Contribution}
-\label{sec:org01308f0}
+\label{sec:org00f4891}
 \subsection{Future Research}
-\label{sec:org958231f}
+\label{sec:org703f436}
 
 
 \clearpage
