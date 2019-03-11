@@ -1516,6 +1516,7 @@ See cite:vandael15_reinf_learn_heuris_ev_fleet
 - Simulation Platform to allow evaluating the performance of intelligent agents
   in smart charging/balancing the grid of EV fleets. Allows to test out bidding strategies
   and control mechanisms in a realistic EV fleet setting.
+- Real life comparison graph: 10%.
 ** Event-based Simulation
 - Not only t+1
 - Event e.g. denying rental, charge/little charge/no-charge has effects for the
