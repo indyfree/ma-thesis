@@ -56,7 +56,7 @@
 #+LATEX_HEADER: \newcommand{\studentID}{558305}
 #+LATEX_HEADER: \newcommand{\thesistype}{Master Thesis}
 #+LATEX_HEADER: \newcommand{\supervisor}{Univ.-Prof. Dr. Wolfgang Ketter}
-#+LATEX_HEADER: \newcommand{\cosupervisor}{Karsten Schroer, Philipp Artur Kienscherf}
+#+LATEX_HEADER: \newcommand{\cosupervisor}{Karsten Schroer}
 
 # Titlepage & SOOA
 #+INCLUDE: "./template/titlepage.tex" export latex
