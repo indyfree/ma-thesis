@@ -109,7 +109,7 @@ above 50Hz and can be provided by adding grid load or reducing electricity
 generation. Since we do not consider V2G in this thesis, the EV fleets in our
 model are only able provide /negative control reserve/, which we will refer to
 as /control reserve/ until the end of the thesis. Market participants submit
-bids in the following form to the market: $(\Pb{}, \cp{}, \ep)$, where $\Pb{}$
+bids in the following form to the market: $(\Pb{}, \cp{}, \ep{})$, where $\Pb{}$
 is the amount of electrical power that can be supplied on demand in kW, $\cp{}$ is
 the capacity price for keeping the power available in $\text{\euro{}/MW}$ and
 $\ep{}$ is the energy price for delivered energy in $\text{\euro{}/MWh}$. The TSO
@@ -121,7 +121,7 @@ the provided capacity: $R^c = \cp{} \times \Pb{}$. At the time regulation
 capacity is needed, usually a day to a week later, the TSO activates the
 capacity according to a merit order of the ascending /energy prices/ $\ep{}$.
 Hence, providers are also compensated according to the actual energy $\Eb{}$
-they supplied or consumed: $R^e = \ep \times \Eb{}$. Since provider get paid
+they supplied or consumed: $R^e = \ep{} \times \Eb{}$. Since provider get paid
 according to their submitted price $\ep{}$, instead of a market clearing price,
 this type of auction is called /pay-as-bid/ auction.
 # NOTE: Add more citations? brandt?
