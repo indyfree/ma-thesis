@@ -1280,17 +1280,22 @@ cite:brandt17_evaluat_busin_model_vehic_grid_integ,vandael15_reinf_learn_heuris_
 The central control mechanism constitutes the core of this research. It can be
 seen as a decision support system that can be employed at a EV fleet operator to
 facilitate smart charging its fleet. The control mechanism is divided into three
-distinct decision phases (see Figure ref:fig-control-mechanism).
+distinct phases (see Figure ref:fig-control-mechanism).
 
-Decision Phase I:
-1) The controller predicts the available fleet charging power for market period
-   h $\fPhat{h}$ one week ahead.
-   \begin{equation}
-       \fPhat{h + (H \times 7)} = \min_{n \in \{1, .., N_t\}} \fPhat{t + (T \times 7) + n} \text{ ,}
-   \end{equation}
-   where $h$ and $t$ are the current market and control period, respectively. $T$ is the number of charging
-   periods in a day ($T$ =  288) and $H$ is the number of market periods in a day
-   ($H$ = 96).
+*** Decision Phase I: Week ahead
+In a first step, the controller predicts the available fleet charging power
+$\fP{}$ one week ahead. The fleet has to provide the charging capacity during
+the whole market period $h$. To minimize the risk of not being able to provide the
+committed capacity, and thus cause imbalance costs, the available fleet charging
+power in a market period is defined as the minimal available fleet charging
+power in the control periods that make up the market period ($N_t$).
+\begin{equation}
+    \fPhat{h + (H \times 7)} = \min_{n \in \{1, .., N_t\}} \fPhat{t + (T \times 7) + n} \text{ ,}
+\end{equation}
+where $h$ and $t$ are the current market and control period, respectively. $T$
+is the number of charging periods in a day ($T$ =  288) and $H$ is the number of
+market periods in a day ($H$ = 96).
+
 
 #+BEGIN_SRC python :results output :exports none :var t=5
 print("Number of control periods in a day: %d " % ((60 / t) * 24))
@@ -1305,7 +1310,40 @@ print("Number of market periods in a day: %d " % ((60 / h) * 24))
 
 #+RESULTS:
 : Number of market periods in a day: 96
-1) The controller predicts the clearing prices
+
+# TODO: What about negative prices/revenues?
+In a second step the controller predicts the critical prices $\ccp{}, \cep{},
+\cup{}$ for both markets one week ahead. The costs functions for charging from the
+balancing and market are defined as following:
+\begin{equation}
+\begin{split}
+    \Cb{h}(P) &\defeq  (P  \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
+    &= (P  \times \ccp{h}) + (P \times \Delta h \times \cep{h})
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+    \Ci{h}(P) &\defeq \Ei{h} \times \cup{h} \\
+    &= P \times \Delta h \times \cup{h}
+\end{split}
+\end{equation}
+
+When the expected costs for charging from the balancing market $\Cb{h + (H
+\times 7)}(\fPhat{h + (H \times 7)})$ are higher than the costs of charging from
+the intraday market $\Ci{h + (H \times 7)}(\fPhat{h + (H \times 7)})$ one
+week-ahead then directly go to Decision Phase II.
+
+
+
+
+# NOTE: Cost function
+# NOTE: Minimalize over all periods? As objective function
+\begin{equation}
+\begin{split}
+    \Cf{h} &= \Cb{h} + \Ci{h} + \sum_t^{N_t} \sum_i^{N_f} C^{rental}_{c, i}
+\end{split}
+\end{equation}
 
 2) Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
    - Essential Information, determines Smart Charging quantities.
@@ -1371,12 +1409,11 @@ Ideas:
 #+ATTR_LATEX: :width 1\linewidth
 [[./fig/control_mechanism.png]]
 
-*** Decision Phase I: Day-ahead/Week-ahead
-*** Decision Phase II: Intraday
-*** Real-time / Allocation phase?
+*** Decision Phase II: 30 Minutes ahead
+*** Dispatch Phase: Real-time
 
 
-** (Fleet Capacity & Clearing Price Prediction)
+** (Fleet Capacity & Critical Price Prediction)
 - Fleet capacity prediction made on non-simulated real-world SoC (w/o smart charging)
   - Provide difference levels & descriptive statistics?
   - Already enough uncertainty or artificially add more?
