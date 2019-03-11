@@ -1239,6 +1239,7 @@ to the markets with compromising customer mobility by denying rentals.
 | $\fP{t}$    | Amount of available fleet charging power in control period $t$.           | kW                   |
 | $\fPhat{t}$ | Predicted amount of available fleet charging power in control period $t$. | kW                   |
 |-------------+---------------------------------------------------------------------------+----------------------|
+| $p^{i}$     | Industry tariff                                                           | $\text{\euro{}/MW}$  |
 | $\fh$       | Heuristic function to dispatch EVs to charging                            | -                    |
 |-------------+---------------------------------------------------------------------------+----------------------|
 |-------------+---------------------------------------------------------------------------+----------------------|
