@@ -951,6 +951,7 @@ cars. The following preprocessing steps have been taken to prepare the data for
 further analysis. Table ref:table-car2go-processed depicts the dataset after all
 processing steps.
 
+# TODO: Include prices
 # NOTE: Not worthy mentioning?
 1) Drop unused data columns
 
@@ -975,6 +976,7 @@ processing steps.
    between two data points of the same EV (see Table ref:table-car2go-raw, 4^{th}
    to 5^{th} row). Note that we assume that customer do not undertake trips,
    which begin and end at the exact same location.
+   # NOTE: Not using it for analysis yet
 4) Infer charging stations
 
    The GPS location of the EVs is matched with the GPS locations, where an EV
@@ -1538,6 +1540,7 @@ See cite:vandael15_reinf_learn_heuris_ev_fleet
 #+LATEX: \clearpage
 * Evaluation / Results
 # NOTE: 15%
+# NOTE: What about infer charging stations?
 # NOTE: Also include overview graphs, of charging, prices, available capacity,
 # car2go trips, etc..
 # NOTE: List Simulation params in a table: Car Capacity etc..
