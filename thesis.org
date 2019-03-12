@@ -1068,11 +1068,11 @@ bidding intervals.
 # Here or in bidding strategy section?
 In order to estimate the upper bound of profits that the EV fleet can earn by
 participating in the secondary operating reserve market, the /critical prices/
-$\ccp{}$ and $\cep{}$ were determined for each auctioned
-interval. Following textcite:brandt17_evaluat_busin_model_vehic_grid_integ, we
-define $\ccp{}$ as the capacity price of the bid that was just barely
-accepted, whereas $\cep{}$ is the highest energy price that was payed
-for activated control reserve during that interval. For every
+$\ccp{}$ and $\cep{}$ were determined for each auctioned interval. Following
+textcite:brandt17_evaluat_busin_model_vehic_grid_integ, we define $\ccp{}$
+($\text{\euro{}/MW}$) as the capacity price of the bid that was just barely
+accepted, whereas $\cep{}$ ($\text{\euro{}/MWh}$) is the highest energy price
+that was payed for activated control reserve during that interval. For every
 15-minute interval within the given tender period of one week, the activated
 control reserve in that interval was matched with the accepted bids in that
 tender period. At the point where supply, i.e., offered capacity of bids, met
