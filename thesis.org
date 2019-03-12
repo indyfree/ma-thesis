@@ -239,7 +239,7 @@ and a reward $r\in\R$ occurs, given the preceding state $s\in\S$ and action
 $a\in\A$. In /finite/ MDPs, the random variables $\R_t$ and $S_t$ have
 well-defined probability density functions (PDF), which are solely dependent on
 the previous state and action. Consequently, it is possible to define ($\defeq$)
-the /dynamics/ of the MDP as following:
+the /dynamics/ of the MDP as follows:
 \begin{equation}
     p(s',r|s,a) \defeq \Pr{S_t=s',R_t=r|S_{t-1}=s,A_t=a},
 \end{equation}
@@ -249,7 +249,7 @@ $\S_{t-1}$. When a state includes all information of /all/ previous states, the
 state possesses the so-called /Markov property/. If not noted otherwise, the
 Markov property is assumed throughout the whole chapter. The dynamics function
 allows computing the /state-transition probabilities/, another important
-characteristic of an MDP, as following:
+characteristic of an MDP, as follows:
 \begin{equation}
     p(s'|s,a) \defeq \Pr{S_t\!=\!s'|S_{t-1}\!=\!s,A_t\!=\!a} = \sum_{r\in\R}{p(s', r|s, a)},
 \end{equation}
@@ -426,7 +426,7 @@ perform an update operation on $V(S_t)$. Because of the step-by-step nature of
 TD learning, it is categorized as /online learning/. Also note that TD methods
 perform update operations on value estimates based on other learned estimates, a
 procedure called /bootstrapping/. In simple TD prediction, the
-value estimates $V$ are updated as following:
+value estimates $V$ are updated as follows:
 \begin{equation} \label{eq-td-prediction}
     V(S_t) \leftarrow V(S_t) + \alpha\big[R_{t+1}+\gamma V(S_{t+1}) - V(S_t)\big],
 \end{equation}
