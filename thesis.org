@@ -1280,72 +1280,83 @@ seen as a decision support system that can be employed at a EV fleet operator to
 facilitate smart charging its fleet. The control mechanism is divided into three
 distinct phases (see Figure ref:fig-control-mechanism).
 
+#+CAPTION[EV VPP Control Mechanism]: EV VPP Control Mechanism label:fig-control-mechanism
+#+ATTR_LATEX: :width 1\linewidth
+[[./fig/control_mechanism.png]]
+
 *** Decision Phase I: Week ahead
-When a bid gets accepted, the fleet has to provide the committed charging
-capacity during the whole market period $h$. To minimize the risk of not being
-able to provide the committed capacity, and consequently causing imbalance
-costs, the available fleet charging power in a market period is defined as the
-minimal available fleet charging power in the control periods that make up the
-market period ($N_t$).
+# NOTE: Add timeline week ahead. Place bids week ahead for all following
+# market periods m.
+# TODO: Mention Market closure times in Background section?
+
+The first decision phase occurs just before the closing time of the balancing
+market, once every week (Wednesdays at 3pm at the GCRM). In this phase, the
+controller can place bids for every market period $h$ of the following week on
+the balancing market. When a bid gets accepted, the fleet has to provide the
+committed charging capacity during all control periods $t$ of the market period
+$h$.
+
+# TODO: Predicted not mentioned
+First, the controller has to predict the available fleet charging power $\fP{h +
+(H \times 7)}$ one week ahead, where $H$ is the number of market periods in a
+day. To minimize the risk of not being able to provide the committed capacity,
+and consequently causing imbalance costs, the predicted fleet charging power in
+a market period is defined as the minimal predicted fleet charging power in the
+control periods that make up the market period ($N_t$).
 \begin{equation}
     \fPhat{h} \defeq \min_{n \in \{1, .., N_t\}} \fPhat{t + n} \text{ ,}
 \end{equation}
 where $h$ is the market period of interest and $t$ its first control period.
-In a first step, the controller predicts the available fleet charging power
-$\fP{h + (H \times 7)}$ one week ahead, where $H$ is the number of market
-periods in a day ($H$ = 96).
 
-
-First, the controller predicts the available fleet charging power $\fP{h + (H
-\times 7)}$ one week ahead, where $H$ is the number of market periods in a day
-($H$ = 96).
-
-
-#+BEGIN_SRC python :results output :exports none :var h=15
-print("Number of market periods in a day: %d " % ((60 / h) * 24))
-#+END_SRC
-
-#+RESULTS:
-: Number of market periods in a day: 96
-
-In a second step, the controller has to decide from which market it should
-procure the desired amount of energy. Therefore, it compares the costs for
-charging from the respective markets.  As mentioned in the previous section, the
+Second, the controller has to decide from which market it should procure the
+desired amount of energy. Therefore, it compares the costs for charging from the
+balancing and intraday market.  As mentioned in the previous section, the
 critical prices $\ccp{}, \cep{}, \cup{}$ are assumed to be available for all
 market periods. The cost function for charging from the balancing market is
 defined as follows:
-\begin{equation}
+\begin{equation} \label{eq-cost-balancing}
 \begin{split}
     \Cb{h}(P) &\defeq  -(P  \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
     &= -(P  \times \ccp{h}) + (P \frac{\Delta h}{60} \times \cep{h}) \text{ ,}
 \end{split}
 \end{equation}
-where $P$ is the amount of power charged in kW. The first term corresponds to
-the compensation the controller retrieves for keeping the balancing capacity
-available, while the second term corresponds to the costs for charging the
-activated balancing energy $\Eb{h}$. Note that the critical energy price
-$\cep{}\!\in\!\Re$, can also take negative values, resulting in profits for the
-fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ cannot be
-negative, always resulting in profits for the fleet. The cost function for
-charging from the intraday market is defined similarly:
+where $P$ is the amount of power charged in kW. The first term of the equation
+corresponds to the compensation the controller retrieves for keeping the
+balancing capacity available, while the second term corresponds to the costs for
+charging the activated balancing energy $\Eb{h}$. Energy is the delivered power
+over time, hence $\Eb{h}$ can be substituted with the $P$ times the  market
+periods fraction of an hour $\frac{\Delta h}{60}$. Note that the critical energy
+price $\cep{}\!\in\!\Re$, can take negative values, resulting in profits for the
+fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ is always
+greater than zero and thus never results in costs for the fleet. The cost
+function for charging from the intraday market is defined similarly to Equation
+(ref:eq-cost-balancing):
 \begin{equation}
 \begin{split}
     \Ci{h}(P) &\defeq \Ei{h} \times \cup{h} \\
     &= P \frac{\Delta h}{60} \times \cup{h} \text{ ,}
 \end{split}
 \end{equation}
-where $P$ is the amount of power charged in kW. Again, $\cup{}\!\in\!\Re$ can
-take negative and positive values, depending on the market situation, resulting
-in either costs or profits for the fleet.
+Again, depending on the market situation $\cup{}\!\in\!\Re$ can be either
+negative or positive, resulting in costs or profits for the fleet.
 
 Finally, when the expected costs for charging from the balancing market one week
 ahead $\Cb{h + (H \times 7)}(\fPhat{h + (H \times 7)})$ are higher than the
 costs of charging from the intraday market at the same market period $\Ci{h + (H
 \times 7)}(\fPhat{h + (H \times 7)})$, the controller does not place bids in
-Decision Phase I.
+Decision Phase I and continues to Decision Phase II.
 
-
-
+# NOTE: New section/heading?
+Based on the expected available charging capacity one week ahead $\fPhat{h + (H
+\times 7)}$, the controller now needs to take a decision the amount of
+electricity it should submit to the balancing market. Determining the bidding
+quantity is a core piece of the control mechanism. The controller needs to
+balance the risks of a) Not committing enough and thus charging its fleet enough
+(really?) b) Committing more than it can deliver and thus either facing
+imbalance costs or compromising customer mobility with profits that can be made
+from charging at a cheaper price than industry tariff. Because $f\fPhat{}$ faces
+uncertainty with increasing time, the controller also has to weigh balancing vs
+intraday...
 
 1) Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
    - Essential Information, determines Smart Charging quantities.
@@ -1359,7 +1370,6 @@ Decision Phase I.
    - RL Agent!
 2) Middle-grey: Determine bidding price ref:sec-model-bidding-strategy
 
-$\Delta t$ = Length of Control period = 15 Minute
 
 $T(h)$ Mapping from market period $h$ to the set of control periods in market
 period $h$.
@@ -1401,9 +1411,6 @@ Ideas:
 
 - Mathematical notation for foregone rentals!
 
-#+CAPTION[EV VPP Control Mechanism]: EV VPP Control Mechanism label:fig-control-mechanism
-#+ATTR_LATEX: :width 1\linewidth
-[[./fig/control_mechanism.png]]
 
 *** Decision Phase II: 30 Minutes ahead
 *** Dispatch Phase: Real-time
