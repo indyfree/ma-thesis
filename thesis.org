@@ -1300,12 +1300,10 @@ $\fP{h + (H \times 7)}$ one week ahead, where $H$ is the number of market
 periods in a day ($H$ = 96).
 
 
-#+BEGIN_SRC python :results output :exports none :var t=5
-print("Number of control periods in a day: %d " % ((60 / t) * 24))
-#+END_SRC
+First, the controller predicts the available fleet charging power $\fP{h + (H
+\times 7)}$ one week ahead, where $H$ is the number of market periods in a day
+($H$ = 96).
 
-#+RESULTS:
-: Number of control periods in a day: 288
 
 #+BEGIN_SRC python :results output :exports none :var h=15
 print("Number of market periods in a day: %d " % ((60 / h) * 24))

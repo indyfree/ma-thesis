@@ -1,0 +1,6 @@
+#+BEGIN_SRC python :results output :exports none :var t=5
+print("Number of control periods in a day: %d " % ((60 / t) * 24))
+#+END_SRC
+
+#+RESULTS:
+: Number of control periods in a day: 288
