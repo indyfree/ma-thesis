@@ -1555,6 +1555,8 @@ See cite:vandael15_reinf_learn_heuris_ev_fleet
 # NOTE: Also include overview graphs, of charging, prices, available capacity,
 # car2go trips, etc..
 # NOTE: List Simulation params in a table: Car Capacity etc..
+# NOTE: Make decision outcome results table over one-year period like kahlen
+# NOTE: Include EUR/MWh provided!
 ** Benchmark: Ad-hoc Strategies vs FleetRL
 # NOTE: What about uncertainty?
 # NOTE: Security threshold like weighted capacity forecasts from Kahlen (MAW)
