@@ -4,3 +4,10 @@ print("Number of control periods in a day: %d " % ((60 / t) * 24))
 
 #+RESULTS:
 : Number of control periods in a day: 288
+
+#+BEGIN_SRC python :results output :exports none :var h=15
+print("Number of market periods in a day: %d " % ((60 / h) * 24))
+#+END_SRC
+
+#+RESULTS:
+: Number of market periods in a day: 96
