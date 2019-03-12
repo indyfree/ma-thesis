@@ -1104,10 +1104,6 @@ by the 5MW of the first bidder.
 #+RESULTS:
 : 976.7
 ** Spot Market Data
-:LOGBOOK:
-CLOCK: [2019-02-27 Wed 12:12]--[2019-02-27 Wed 12:12] =>  0:00
-:END:
-
 # # TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
 
 The data from the EPEX Spot Intraday Continuous encompass order books and
