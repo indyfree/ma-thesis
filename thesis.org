@@ -1175,7 +1175,7 @@ Chapter ref:sec-spot-market.
 #+LATEX:}
 
 #+LATEX: \clearpage
-* Model
+* Model: FleetRL
 # NOTE: 20%
 # TODO: Formulate Problem of needing to learn capacity allocation
 # NOTE: What about capacity prediction uncertainty? Need to model, otherwise RL makes no sense
@@ -1285,18 +1285,19 @@ facilitate smart charging its fleet. The control mechanism is divided into three
 distinct phases (see Figure ref:fig-control-mechanism).
 
 *** Decision Phase I: Week ahead
-In a first step, the controller predicts the available fleet charging power
-$\fP{}$ one week ahead. The fleet has to provide the charging capacity during
-the whole market period $h$. To minimize the risk of not being able to provide the
-committed capacity, and thus cause imbalance costs, the available fleet charging
-power in a market period is defined as the minimal available fleet charging
-power in the control periods that make up the market period ($N_t$).
+When a bid gets accepted, the fleet has to provide the committed charging
+capacity during the whole market period $h$. To minimize the risk of not being
+able to provide the committed capacity, and consequently causing imbalance
+costs, the available fleet charging power in a market period is defined as the
+minimal available fleet charging power in the control periods that make up the
+market period ($N_t$).
 \begin{equation}
-    \fPhat{h + (H \times 7)} = \min_{n \in \{1, .., N_t\}} \fPhat{t + (T \times 7) + n} \text{ ,}
+    \fPhat{h} \defeq \min_{n \in \{1, .., N_t\}} \fPhat{t + n} \text{ ,}
 \end{equation}
-where $h$ and $t$ are the current market and control period, respectively. $T$
-is the number of charging periods in a day ($T$ =  288) and $H$ is the number of
-market periods in a day ($H$ = 96).
+where $h$ is the market period of interest and $t$ its first control period.
+In a first step, the controller predicts the available fleet charging power
+$\fP{h + (H \times 7)}$ one week ahead, where $H$ is the number of market
+periods in a day ($H$ = 96).
 
 
 #+BEGIN_SRC python :results output :exports none :var t=5
@@ -1313,41 +1314,46 @@ print("Number of market periods in a day: %d " % ((60 / h) * 24))
 #+RESULTS:
 : Number of market periods in a day: 96
 
-# TODO: What about negative prices/revenues?
-In a second step the controller predicts the critical prices $\ccp{}, \cep{},
-\cup{}$ for both markets one week ahead. The costs functions for charging from the
-balancing and market are defined as following:
+In a second step, the controller has to decide from which market it should
+procure the desired amount of energy. Therefore, it compares the costs for
+charging from the respective markets.  As mentioned in the previous section, the
+critical prices $\ccp{}, \cep{}, \cup{}$ are assumed to be available for all
+market periods. The cost function for charging from the balancing market is
+defined as follows:
 \begin{equation}
 \begin{split}
-    \Cb{h}(P) &\defeq  (P  \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
-    &= (P  \times \ccp{h}) + (P \times \Delta h \times \cep{h})
+    \Cb{h}(P) &\defeq  -(P  \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
+    &= -(P  \times \ccp{h}) + (P \frac{\Delta h}{60} \times \cep{h}) \text{ ,}
 \end{split}
 \end{equation}
-
+where $P$ is the amount of power charged in kW. The first term corresponds to
+the compensation the controller retrieves for keeping the balancing capacity
+available, while the second term corresponds to the costs for charging the
+activated balancing energy $\Eb{h}$. Note that the critical energy price
+$\cep{}\!\in\!\Re$, can also take negative values, resulting in profits for the
+fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ cannot be
+negative, always resulting in profits for the fleet. The cost function for
+charging from the intraday market is defined similarly:
 \begin{equation}
 \begin{split}
     \Ci{h}(P) &\defeq \Ei{h} \times \cup{h} \\
-    &= P \times \Delta h \times \cup{h}
+    &= P \frac{\Delta h}{60} \times \cup{h} \text{ ,}
 \end{split}
 \end{equation}
+where $P$ is the amount of power charged in kW. Again, $\cup{}\!\in\!\Re$ can
+take negative and positive values, depending on the market situation, resulting
+in either costs or profits for the fleet.
 
-When the expected costs for charging from the balancing market $\Cb{h + (H
-\times 7)}(\fPhat{h + (H \times 7)})$ are higher than the costs of charging from
-the intraday market $\Ci{h + (H \times 7)}(\fPhat{h + (H \times 7)})$ one
-week-ahead then directly go to Decision Phase II.
+Finally, when the expected costs for charging from the balancing market one week
+ahead $\Cb{h + (H \times 7)}(\fPhat{h + (H \times 7)})$ are higher than the
+costs of charging from the intraday market at the same market period $\Ci{h + (H
+\times 7)}(\fPhat{h + (H \times 7)})$, the controller does not place bids in
+Decision Phase I.
 
 
 
 
-# NOTE: Cost function
-# NOTE: Minimalize over all periods? As objective function
-\begin{equation}
-\begin{split}
-    \Cf{h} &= \Cb{h} + \Ci{h} + \sum_t^{N_t} \sum_i^{N_f} C^{rental}_{c, i}
-\end{split}
-\end{equation}
-
-2) Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
+1) Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
    - Essential Information, determines Smart Charging quantities.
    - Balance risks versus profits
    - Need to have sufficient SoC to be able to rent out. Not enough SoC violates
@@ -1357,24 +1363,21 @@ week-ahead then directly go to Decision Phase II.
    - Conflicting: Do not submit quantities we can not charge. Causes high
      imbalance costs that have to be avoided at all times
    - RL Agent!
-3) Middle-grey: Determine bidding price ref:sec-model-bidding-strategy
+2) Middle-grey: Determine bidding price ref:sec-model-bidding-strategy
 
 $\Delta t$ = Length of Control period = 15 Minute
 
 $T(h)$ Mapping from market period $h$ to the set of control periods in market
 period $h$.
 
-$f_{heur}$ Heuristic function to dispatch power to EVs
-
 Nomenclature:
-- Control Periods $t$ vs Market Periods $h$
 - Use Notion of consumption plan?
-- Other figure, with timely bidding and control periods?
 
 Figure:
 - What about regular charging?
 - What about not enough SoC for trip?
 - Allocate costs/profits from charging/trip?
+- Other figure, with timely bidding and control periods?
 
 Assume:
 - Operating reserve always gets activated.
@@ -1383,8 +1386,9 @@ Assume:
 - Bid always multiples of charging capacity, do not consider charging at
   different speeds
 
-Mechanism: Only EVs with enough battery capacity left to charge the next control
-period are allocated to VPP.
+Mechanism:
+- Only EVs with enough battery capacity left to charge the next control period
+  are allocated to VPP.
 
 Other assumptions:
 1) Bids on balancing market always get accepted (Known critical capacity price $\ccp{}$
@@ -1401,10 +1405,6 @@ Ideas:
   prices are lower than charging prices, only partially refunded for excess
   energy bought in electricity markets.
 
-- Cost function:
-  Sum over all charged market periods at intraday and balancing markets -
-  positive imbalance costs - foregone rentals
-
 - Mathematical notation for foregone rentals!
 
 #+CAPTION[EV VPP Control Mechanism]: EV VPP Control Mechanism label:fig-control-mechanism
@@ -1413,6 +1413,8 @@ Ideas:
 
 *** Decision Phase II: 30 Minutes ahead
 *** Dispatch Phase: Real-time
+
+- $f_{heur}$ Heuristic function to dispatch power to EVs
 
 
 ** (Fleet Capacity & Critical Price Prediction)
@@ -1496,6 +1498,14 @@ mechanism ultimately decides when EVs will charge and discharge.
 #   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
 # - cite:vandael15_reinf_learn_heuris_ev_fleet
 - Cost function?
+
+# NOTE: Cost function
+# NOTE: Minimalize over all periods? As objective function
+# NOTE: What about imbalance costs $\lambda^+$
+\begin{equation}
+    \Cf{h} \defeq \Cb{h} + \Ci{h} + \sum_t^{N_t} \sum_i^{N_f} C^{rental}_{c, i}
+\end{equation}
+
 - Learn from very high negative imbalance cost reward
 
 - $A = \{(P_{bal}, P_{int}), P_{bal}, P_{int} \in \Re \}$
@@ -1513,7 +1523,7 @@ mechanism ultimately decides when EVs will charge and discharge.
 See cite:vandael15_reinf_learn_heuris_ev_fleet
 
 
-* Simulation Platform: EV Sim
+* Simulation Platform: FleetSim
 # NOTE: 5%
 - Simulation Platform to allow evaluating the performance of intelligent agents
   in smart charging/balancing the grid of EV fleets. Allows to test out bidding strategies
