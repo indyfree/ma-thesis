@@ -1195,7 +1195,7 @@ operator represents the /controller/, which aims to optimally charge the fleet
 by providing balancing capacity. First, the controller predicts the amount of
 energy it can charge in a given /market period/ $h$. The length of the market
 period $\Delta h$ and the market closing time depend on the considered
-electricity markets. Second, the controller places bids on one or multiple
+electricity market. Second, the controller places bids on one or multiple
 markets to procure the predicted amount of energy. Lastly, at electricity
 delivery time, the controller communicates with the EV fleet to control the
 charging in real-time. Online EV /control periods/ $t$ are typically shorter
@@ -1204,7 +1204,7 @@ are 15 minutes long, while we consider EV control periods of 5 minutes. During
 each control period, the controller has to take decisions about dispatching
 individual EVs for charging according to a heuristic function $f_{heur}$. In
 times of unforeseen rental demand, this decision implies trading off commitments
-to the markets with compromising customer mobility by denying rentals.
+to the markets with compromising customer mobility by refusing customer rentals.
 
 #+CAPTION[Table of Notation]: Table of Notation label:table-notation
 #+ATTR_LATEX: :environment longtable :align l|p{0.7\linewidth}|l :placement [hp]
@@ -1247,7 +1247,7 @@ In order to optimize the controller's bidding strategy, the following
 information is assumed to be available:
 
 1) The controller is able to forecast the mobility demand of the EV fleet at
-   different time-horizons, based on historical data. More specifically, it can
+   different time-horizons based on historical data. More specifically, it can
    predict the amount of plugged-in EVs and consequently the charging
    power $P^{fleet}_t$ of the fleet at control period $t$. The prediction's
    accuracy is increasing with shorter time horizons, from one week, 24 hours to
@@ -1290,11 +1290,12 @@ distinct phases (see Figure ref:fig-control-mechanism).
 # TODO: Mention Market closure times in Background section?
 
 The first decision phase occurs just before the closing time of the balancing
-market, once every week (Wednesdays at 3pm at the GCRM). In this phase, the
+market, once every week (e.g., Wednesdays at 3pm at the GCRM). In this phase, the
 controller can place bids for every market period $h$ of the following week on
 the balancing market. When a bid gets accepted, the fleet has to provide the
 committed charging capacity during all control periods $t$ of the market period
-$h$.
+$h$. In order to optimally place bids on the balancing market the controller has
+to take the following steps:
 
 # TODO: Predicted not mentioned
 First, the controller has to predict the available fleet charging power $\fP{h +
@@ -1326,9 +1327,9 @@ balancing capacity available, while the second term corresponds to the costs for
 charging the activated balancing energy $\Eb{h}$. Energy is the delivered power
 over time, hence $\Eb{h}$ can be substituted with the $P$ times the  market
 periods fraction of an hour $\frac{\Delta h}{60}$. Note that the critical energy
-price $\cep{}\!\in\!\Re$, can take negative values, resulting in profits for the
-fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ is always
-greater than zero and thus never results in costs for the fleet. The cost
+price $\cep{}\!\in\!\Re$, can also take negative values, resulting in profits
+for the fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ is
+always greater than zero and thus never results in costs for the fleet. The cost
 function for charging from the intraday market is defined similarly to Equation
 (ref:eq-cost-balancing):
 \begin{equation}
