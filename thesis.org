@@ -1228,7 +1228,7 @@ to the markets with compromising customer mobility by denying rentals.
 |-------------+---------------------------------------------------------------------------+----------------------|
 | $\Pi{h}$    | Amount of power offered on the intraday market.                           | kW                   |
 | $\up{h}$    | Unit price offered on the intraday market.                                | $\text{\euro{}/MWh}$ |
-| $\cup{h}$   | Critical unit price in market period $h$.                                 | $\text{\euro{}/MW}$  |
+| $\cup{h}$   | Critical unit price in market period $h$.                                 | $\text{\euro{}/MWh}$ |
 |-------------+---------------------------------------------------------------------------+----------------------|
 | $\Eb{h}$    | Amount of energy charged from balancing market in market period h.        | MWh                  |
 | $\Ei{h}$    | Amount of energy charged from the intraday market in market period h.     | MWh                  |
