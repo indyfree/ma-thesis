@@ -1177,6 +1177,7 @@ Chapter ref:sec-spot-market.
 # NOTE: 20%
 # TODO: Formulate Problem of needing to learn capacity allocation
 # NOTE: What about capacity prediction uncertainty? Need to model, otherwise RL makes no sense
+# NOTE: Mention VPP more clearly?
 
 # NOTE: Need to reformulate Intro+Following to only balancing
 The following chapter will introduce the model of this research. In its essence,
@@ -1192,21 +1193,22 @@ bidding strategy and the RL approach are described in detail. Finally, the
 dispatch algorithm is presented.
 
 # NOTE: Section: Problem Description
+# Add: profits that can be made from charging at a cheaper price than industry tariff.
 We formulate the problem as a /controlled EV charging/ problem. The EV fleet
-operator represents the /controller/, which aims to optimally charge the fleet
-by providing balancing capacity. First, the controller predicts the amount of
-energy it can charge in a given /market period/ $h$. The length of the market
-period $\Delta h$ and the market closing time depend on the considered
-electricity market. Second, the controller places bids on one or multiple
-markets to procure the predicted amount of energy. Lastly, at electricity
-delivery time, the controller communicates with the EV fleet to control the
-charging in real-time. Online EV /control periods/ $t$ are typically shorter
-than market periods. In our case, the market periods of the considered markets
-are 15 minutes long, while we consider EV control periods of 5 minutes. During
-each control period, the controller has to take decisions about dispatching
-individual EVs for charging according to a heuristic function $f_{heur}$. In
-times of unforeseen rental demand, this decision implies trading off commitments
-to the markets with compromising customer mobility by refusing customer rentals.
+operator represents the /controller/, which aims to charge the fleet at minimal
+costs. First, the controller predicts the amount of energy it can charge in a
+given /market period/ $h$. The length of the market period $\Delta h$ and the
+market closing time depend on the considered electricity market. Second, the
+controller places bids on one or multiple markets to procure the predicted
+amount of energy. Lastly, at electricity delivery time, the controller
+communicates with the EV fleet to control the charging in real-time. Online EV
+/control periods/ $t$ are typically shorter than market periods. In our case,
+the market periods of the considered markets are 15 minutes long, while we
+consider EV control periods of 5 minutes. During each control period, the
+controller has to take decisions about dispatching individual EVs for charging
+according to a heuristic function $f_{heur}$. In times of unforeseen rental
+demand, this decision implies trading off commitments to the markets with
+compromising customer mobility by refusing customer rentals.
 
 #+CAPTION[Table of Notation]: Table of Notation label:table-notation
 #+ATTR_LATEX: :environment longtable :align l|p{0.7\linewidth}|l :placement [hp]
@@ -1294,17 +1296,20 @@ The first decision phase occurs just before the closing time of the balancing
 market, once every week (e.g., Wednesdays at 3pm at the GCRM). In this phase, the
 controller can place bids for every market period $h$ of the following week on
 the balancing market. When a bid gets accepted, the fleet has to provide the
-committed charging capacity during all control periods $t$ of the market period
+committed balancing capacity during all control periods $t$ of the market period
 $h$. In order to optimally place bids on the balancing market the controller has
 to take the following steps:
 
 # TODO: Predicted not mentioned
-First, the controller has to predict the available fleet charging power $\fP{h +
-(H \times 7)}$ one week ahead, where $H$ is the number of market periods in a
-day. To minimize the risk of not being able to provide the committed capacity,
-and consequently causing imbalance costs, the predicted fleet charging power in
-a market period is defined as the minimal predicted fleet charging power in the
-control periods that make up the market period ($N_t$).
+First, the controller has to predict the available fleet charging power
+$\fPhat{h + (H \times 7)}$ one week ahead, where $H$ is the number of market
+periods in a day. The actual available fleet charging power $\fP{t}$ is given by
+the number of EVs that are connected to a charging station, with enough battery
+capacity to charge the next control period $t\!+\!1$. To minimize the risk of not
+being able to provide the committed capacity, and consequently causing imbalance
+costs, the predicted fleet charging power in a market period is defined as the
+minimal predicted fleet charging power of all control periods in a market period
+($N_t$).
 \begin{equation}
     \fPhat{h} \defeq \min_{n \in \{1, .., N_t\}} \fPhat{t + n} \text{ ,}
 \end{equation}
