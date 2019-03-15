@@ -1222,20 +1222,19 @@ to the markets with compromising customer mobility by refusing customer rentals.
 | $\Delta h$  | Length of market period.                                                  | minutes              |
 | $N_t$       | Number of control periods in a market period.                             | -                    |
 |-------------+---------------------------------------------------------------------------+----------------------|
-| $\Pb{h}$    | Amount of power offered on the balancing market.                          | kW                   |
+| $\Pb{h}$    | Amount of balancing power offered on the balancing market.                | kW                   |
 | $\cp{h}$    | Capacity price offered on the balancing market.                           | $\text{\euro{}/MW}$  |
 | $\ep{h}$    | Energy price offered on the balancing market.                             | $\text{\euro{}/MWh}$ |
 | $\ccp{h}$   | Critical capacity price in market period $h$.                             | $\text{\euro{}/MW}$  |
 | $\cep{h}$   | Critical energy price in market period $h$.                               | $\text{\euro{}/MWh}$ |
 |-------------+---------------------------------------------------------------------------+----------------------|
-| $\Pi{h}$    | Amount of power offered on the intraday market.                           | kW                   |
+| $\Pi{h}$    | Amount of power offered for the unit on the intraday market.              | kW                   |
 | $\up{h}$    | Unit price offered on the intraday market.                                | $\text{\euro{}/MWh}$ |
 | $\cup{h}$   | Critical unit price in market period $h$.                                 | $\text{\euro{}/MWh}$ |
 |-------------+---------------------------------------------------------------------------+----------------------|
 | $\Eb{h}$    | Amount of energy charged from balancing market in market period h.        | MWh                  |
 | $\Ei{h}$    | Amount of energy charged from the intraday market in market period h.     | MWh                  |
 |-------------+---------------------------------------------------------------------------+----------------------|
-| $\fQ{t}$    | Amount of available fleet charging capacity in control period $t$.        | kWh                  |
 | $\fP{t}$    | Amount of available fleet charging power in control period $t$.           | kW                   |
 | $\fPhat{t}$ | Predicted amount of available fleet charging power in control period $t$. | kW                   |
 |-------------+---------------------------------------------------------------------------+----------------------|
