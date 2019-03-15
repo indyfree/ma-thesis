@@ -1327,15 +1327,15 @@ defined as follows:
     &= -(P  \times \ccp{h}) + (P \frac{\Delta h}{60}10^{-3} \times \cep{h}) \text{ ,}
 \end{split}
 \end{equation}
-where $P$ is the amount of power charged in kW. The first term of the equation
-corresponds to the compensation the controller retrieves for keeping the
-balancing capacity available, while the second term corresponds to the costs for
-charging the activated balancing energy $\Eb{h}$. Energy is the delivered power
-over time, hence $\Eb{h}$ can be substituted with the $P$ times the  market
-periods fraction of an hour $\frac{\Delta h}{60}$. Note that the critical energy
-price $\cep{}\!\in\!\Re$, can also take negative values, resulting in profits
-for the fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ is
-always greater than zero and thus never results in costs for the fleet. The cost
+where $P$ is the amount of offered balancing power in kW. The first term of the
+equation corresponds to the compensation the controller retrieves for keeping
+the balancing capacity available, while the second term corresponds to the costs
+for charging the activated balancing energy $\Eb{h}$. Energy is power over time,
+hence $\Eb{h}$ can be substituted with the $P$ times the market periods fraction
+of an hour $\frac{\Delta h}{60}$. Note that the critical energy price
+$\cep{}\!\in\!\Re$, can also take negative values, resulting in profits for the
+fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ is always
+greater than zero and therefore never results in costs for the fleet. The cost
 function for charging from the intraday market is defined similarly to Equation
 (ref:eq-cost-balancing):
 \begin{equation}
@@ -1347,33 +1347,46 @@ function for charging from the intraday market is defined similarly to Equation
 Again, depending on the market situation, $\cup{}\!\in\!\Re$ can be either
 negative or positive, resulting in costs or profits for the fleet. Contrarily to
 the balancing market, on the intraday market the fleet does not get compensated
-for keeping the charging power available. When the costs for charging from the
-balancing market one week ahead $\Cb{h + (H \times 7)}(\fPhat{h + (H \times
-7)})$ are higher than the costs of charging from the intraday market at the same
-market period $\Ci{h + (H \times 7)}(\fPhat{h + (H \times 7)})$, the controller
-does not place bids on the balancing market and continues to Decision Phase II.
+for keeping charging power available, only for the actual energy charged. When
+the costs for charging from the balancing market one week ahead $\Cb{h + (H
+\times 7)}(\fPhat{h + (H \times 7)})$ are higher than the costs of charging from
+the intraday market at the same market period $\Ci{h + (H \times 7)}(\fPhat{h +
+(H \times 7)})$, the controller does not place bids on the balancing market and
+continues to Decision Phase II.
 
 # NOTE: New section/heading?
-Third, the controller has to take a decision on the amount of charging power
-it should submit to the balancing market. Determining the bidding quantity is a
-central piece of the controlled charging problem. The controller needs to
-balance the risks of
+In a third step, the controller has to take a decision on the amount of
+balancing power it should submit to the balancing market. Determining the
+bidding quantity is a central piece of the controlled charging problem. The
+controller needs to balance the risks of 1) Not procuring enough energy from the
+market to charge the fleet and 2) Procuring more energy that it can charge. In
+this case the fleet is facing costs of compromising customer mobility or worse,
+imbalance costs from the markets. Renting out EVs is much more profitable than
+using EVs as a VPP to participate on the electricity markets. Refusing customer
+rentals, in order to fulfill market commitments, induces opportunity costs of
+foregone rentals $C^{rental}$ for the fleet. Imbalance costs occur in the worst
+case, when the fleet can not charge the committed amount energy at all, even with
+denying rentals.
 
-1) Not committing enough power to the market and thus not charging the fleet enough
-2) Committing more power that it can deliver and thus facing costs
-   - Opportunity cost of compromising customer mobility. Renting EVs is more
-     profitable than using the EV for VPP activities. Refunsing customer rentals
-
-by foregone rentals, when trips are refused for the sake
-     of VPP
-    -
-imbalance costs or compromising customer mobility with profits that can be made
-from charging at a cheaper price than industry tariff. Because $f\fPhat{}$ faces
-uncertainty with increasing time, the controller also has to weigh balancing vs
-intraday...
+Because the predicted charging power $\fPhat{}$ faces more uncertainty with an
+increased time horizon, commitments to the balancing market one week-ahead bare
+more risks than procuring on the intraday market 30 minutes ahead.
 
 \begin{equation}
-\Pb{h} = \fPhat{h} - \lambda_{h}
+  \Pb{h}=
+  \begin{cases}
+    0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Eb{h} \times p^{i}\\
+    0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Ci{h}(\fPhat{h})\\
+    \fPhat{h}\!-\!\lb{h}, & \text{otherwise}
+  \end{cases}
+\end{equation}
+
+\begin{equation}
+  \Pi{h}=
+  \begin{cases}
+    0, & \text{if}\ \Ci{h}(\fPhat{h}) \geq \Ei{h} \times p^{i}\\
+    \fPhat{h}\!-\!\Pb{h}\!-\!\li{h}, & \text{otherwise}
+  \end{cases}
 \end{equation}
 
 1) Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
@@ -1381,8 +1394,7 @@ intraday...
    - Balance risks versus profits
    - Need to have sufficient SoC to be able to rent out. Not enough SoC violates
      customer mobility, and thus decreases profits
-   - Conflicting: Do not submit/charge too much: When no replacement for VPP is
-     available, we loose rental profits and also violate customer mobility
+   - Conflicting: Do not submit/charge too much:
    - Conflicting: Do not submit quantities we can not charge. Causes high
      imbalance costs that have to be avoided at all times
    - RL Agent!
@@ -1427,12 +1439,11 @@ Ideas:
   prices are lower than charging prices, only partially refunded for excess
   energy bought in electricity markets.
 
-- Mathematical notation for foregone rentals!
-
 
 *** Decision Phase II: 30 Minutes ahead
 *** Dispatch Phase: Real-time
-
+# When no replacement for VPP is available, we loose rental profits and also
+# violate customer mobility
 - $f_{heur}$ Heuristic function to dispatch power to EVs
 
 
