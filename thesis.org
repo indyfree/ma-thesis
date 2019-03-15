@@ -184,8 +184,8 @@ fleets with uncertain mobility demand. Due to the intradays market's short time
 before delivery, EV fleet operators can rely on highly accurate forecasts of
 available battery capacity to charge, before submitting an order to buy. In this
 way, they can reliably charge at a potentially lower price at the intraday
-market than the standard tariff. In an integrated bidding strategy, EV fleet
-operators can, similarly to RES generators, balance out forecast errors of
+market than the regular industry tariff. In an integrated bidding strategy, EV
+fleet operators can, similarly to RES generators, balance out forecast errors of
 available battery capacity on the intraday market. Trades on the intraday market
 can complement bids that have been committed to other markets earlier (e.g., to
 the secondary operating reserve market).
