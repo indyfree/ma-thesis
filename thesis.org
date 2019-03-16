@@ -1247,26 +1247,27 @@ compromising customer mobility by refusing customer rentals.
 |-------------+---------------------------------------------------------------------------+----------------------|
 |-------------+---------------------------------------------------------------------------+----------------------|
 
-** Required Information Assumptions
+** Required Information Assumptions label:sec-model-assumptions
 In order to optimize the controller's bidding strategy, the following
 information is assumed to be available:
 
 1) The controller is able to forecast the mobility demand of the EV fleet at
    different time-horizons based on historical data. More specifically, it can
-   predict the amount of plugged-in EVs and consequently the charging
-   power $P^{fleet}_t$ of the fleet at control period $t$. The prediction's
-   accuracy is increasing with shorter time horizons, from one week, 24 hours to
-   30 minutes ahead. Past research presented successful mobility demand forecast
-   algorithms in the context of free-float carsharing
+   predict the amount of plugged-in EVs and consequently the charging power
+   $P^{fleet}_t$ of the fleet at control period $t$. The prediction's accuracy
+   is increasing with shorter time horizons, from uncertain predictions one week
+   ahead to very accurate predictions 30 minutes ahead. Past research presented
+   successful mobility demand forecast algorithms in the context of free-float
+   carsharing
    cite:kahlen18_elect_vehic_virtual_power_plant_dilem,kahlen17_fleet,wagner16_in_free_float.
 2) The controller is able to forecast electricity prices of spot and balancing
    markets based on historical data. More specifically, it can estimate the
    critical prices $\ccp{h}$, $\cep{h}$, and $\cup{h}$ for each market period
    with perfect accuracy. The critical prices form an essential piece of
    information for the proposed bidding strategy; bids equal or below the
-   critical price result in successful procurement. Electricity price
-   forecasting is an  extensively studied research area, with well-advanced
-   prediction algorithms
+   critical price will get accepted and result in successful electricity
+   procurement. Electricity price forecasting is an  extensively studied
+   research area, with well-advanced prediction algorithms
    cite:weron14_elect_price_forec,avci18_manag_elect_price_model_risk.
 We are confident that taking the above assumptions is viable, assuming available
 forecasting information is common practice in the VPP and EV fleet charging
@@ -1289,10 +1290,17 @@ distinct phases (see Figure ref:fig-control-mechanism).
 #+ATTR_LATEX: :width 1\linewidth
 [[./fig/control_mechanism.png]]
 
-*** Decision Phase I: Week ahead
+# TODO: Figure:
+# - What about regular charging?
+# - What about not enough SoC for trip?
+# - Allocate costs/profits from charging/trip?
+# - Other figure, with timely bidding and control periods?
+
+*** Decision Phase
 # NOTE: Add timeline week ahead. Place bids week ahead for all following
 # market periods m.
 # TODO: Mention Market closure times in Background section?
+# NOTE: Intro two decision phases
 
 The first decision phase occurs just before the closing time of the balancing
 market, once every week (e.g., Wednesdays at 3pm at the GCRM). In this phase, the
@@ -1319,10 +1327,10 @@ where $h$ is the market period of interest and $t$ its first control period.
 
 Second, the controller has to decide from which market it should procure the
 desired amount of energy. Therefore, it compares the costs for charging from the
-balancing and intraday market.  As mentioned in the previous section, the
-critical prices $\ccp{}, \cep{}, \cup{}$ are assumed to be available for all
-market periods. The cost function for charging from the balancing market is
-defined as follows:
+balancing and intraday market.  As mentioned in the Chapter
+ref:sec-model-assumptions, the critical prices $\ccp{}, \cep{}, \cup{}$ are
+assumed to be available for all market periods. The cost function for charging
+from the balancing market is defined as follows:
 \begin{equation} \label{eq-cost-balancing}
 \begin{split}
     \Cb{h}(P) &\defeq  -(P  \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
@@ -1336,8 +1344,8 @@ for charging the activated balancing energy $\Eb{h}$. Energy is power over time,
 hence $\Eb{h}$ can be substituted with the $P$ times the market periods fraction
 of an hour $\frac{\Delta h}{60}$. Note that the critical energy price
 $\cep{}\!\in\!\Re$, can also take negative values, resulting in profits for the
-fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ is always
-greater than zero and therefore never results in costs for the fleet. The cost
+fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ is can not take
+negative values and therefore never results in costs for the fleet. The cost
 function for charging from the intraday market is defined similarly to Equation
 (ref:eq-cost-balancing):
 \begin{equation}
@@ -1433,17 +1441,7 @@ Other assumptions:
    period $h$, it is possible to provide the capacity with different EVs,
    changing in control periods $t$. Customers arrive in $t$ intervals.
 
-Ideas:
-- What about imbalance costs that can be bough/sold from other market like in
-  cite:vandael15_reinf_learn_heuris_ev_fleet? $\lambda_h^+$: Less energy charged
-  than bought at electricity prices, EV Fleet controller gets refunded based on
-  a positive imbalance price $\lambda_h^+ < $\up{}$. Because positive imbalance
-  prices are lower than charging prices, only partially refunded for excess
-  energy bought in electricity markets.
-
-
-*** Decision Phase II: 30 Minutes ahead
-*** Dispatch Phase: Real-time
+*** Dispatch Phase
 # When no replacement for VPP is available, we loose rental profits and also
 # violate customer mobility
 - $f_{heur}$ Heuristic function to dispatch power to EVs
