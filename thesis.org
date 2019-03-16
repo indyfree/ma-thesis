@@ -1357,71 +1357,105 @@ function for charging from the intraday market is defined similarly to Equation
 Again, depending on the market situation, $\cup{}\!\in\!\Re$ can be either
 negative or positive, resulting in costs or profits for the fleet. Contrarily to
 the balancing market, on the intraday market the fleet does not get compensated
-for keeping charging power available, only for the actual energy charged. When
-the costs for charging from the balancing market one week ahead $\Cb{h + (H
-\times 7)}(\fPhat{h + (H \times 7)})$ are higher than the costs of charging from
-the intraday market at the same market period $\Ci{h + (H \times 7)}(\fPhat{h +
-(H \times 7)})$, the controller does not place bids on the balancing market and
-continues to Decision Phase II.
+for keeping the charging power available; only the charged energy affects the
+costs. If the costs for charging from the balancing market one week ahead
+$\Cb{h + (H \times 7)}(\fPhat{h + (H \times 7)})$ are higher than the costs of
+charging from the intraday market at the same market period $\Ci{h + (H \times
+7)}(\fPhat{h + (H \times 7)})$, the controller does not place bids on the
+balancing market.
 
 # NOTE: New section/heading?
 In a third step, the controller has to take a decision on the amount of
-balancing power it should submit to the balancing market. Determining the
-bidding quantity is a central piece of the controlled charging problem. The
-controller needs to balance the risks of 1) Not procuring enough energy from the
-market to charge the fleet and 2) Procuring more energy that it can charge. In
-this case the fleet is facing costs of compromising customer mobility or worse,
-imbalance costs from the markets. Renting out EVs is much more profitable than
-using EVs as a VPP to participate on the electricity markets. Refusing customer
-rentals, in order to fulfill market commitments, induces opportunity costs of
-foregone rentals $C^{rental}$ for the fleet. Imbalance costs occur in the worst
-case, when the fleet can not charge the committed amount energy at all, even with
-denying rentals.
+balancing power it should bid on the balancing market. Determining the bidding
+quantity is a central piece of the controlled charging problem. The controller
+needs to balance the risks of (a) not procuring enough energy from the market to
+charge the fleet, and (b) procuring more energy that it can charge. In the
+latter case the fleet is facing costs of compromising customer mobility, or
+worse, high imbalance costs from the markets. Renting out EVs is much more
+profitable than using EVs as a VPP to participate on the electricity markets.
+Refusing customer rentals, in order to fulfill market commitments, induces
+opportunity costs of lost rentals $\rho$ on the fleet. Imbalance costs $\Phi$
+occur, when the fleet can not charge the committed amount energy at all, even
+with denying rentals. The controller faces additional risks by bidding on the
+balancing market, as the predictions of available charging power include more
+uncertainty one week ahead than on the intraday market, 30 minutes ahead. To
+account for the mentioned risks, we introduce a /risk factor/ $\lambda \in
+\Re_{0 \leq \lambda \leq 1}$, where $\lambda = 0$ indicates no risk, and
+$\lambda = 1$ a high risk.
 
-Because the predicted charging power $\fPhat{}$ faces more uncertainty with an
-increased time horizon, commitments to the balancing market one week-ahead bare
-more risks than procuring on the intraday market 30 minutes ahead.
-
+The controller determines the bidding quantity $\Pb{h}$ by discounting the
+predicted available fleet charging power $\fPhat{h}$ with the possible risk
+$\lambda_{h}$ of occurring imbalance or opportunity costs.
 \begin{equation}
   \Pb{h}=
   \begin{cases}
     0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Eb{h} \times p^{i}\\
     0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Ci{h}(\fPhat{h})\\
-    \fPhat{h}\!-\!\lb{h}, & \text{otherwise}
+    \fPhat{h} \times (1\!-\!\lb{h}), & \text{otherwise}
   \end{cases}
 \end{equation}
+where $h$ is the market period of interest one week ahead. If the controller can
+charge cheaper from the intraday market or with the regular industry tariff
+$p^{i}$, it does not place a bid. Otherwise, the controller submits $\Pb{h}$ to
+the market.
+# TODO: Bids always get accepted & activated on Balancing market, mention prices?
 
+The second decision phase occurs 30 minutes before the physical electricity
+delivery on the intraday market. In this phase, the controller places bids
+for the market period $h+30$.
+# TODO: Generalilzation, lead time, trades always get matched, prices?
+
+The bidding quantity for the intraday market $\Pi{h}$ depends on the previously
+committed charging power $\Pb{h}$ and the predicted charging power $\fPhat{h}$
+30 minutes ahead:
 \begin{equation}
   \Pi{h}=
   \begin{cases}
     0, & \text{if}\ \Ci{h}(\fPhat{h}) \geq \Ei{h} \times p^{i}\\
-    \fPhat{h}\!-\!\Pb{h}\!-\!\li{h}, & \text{otherwise}
+    (\fPhat{h}\!-\!\Pb{h}) \times (1\!-\!\li{h}), & \text{otherwise}
   \end{cases}
 \end{equation}
+Note that any amount of electricity that the controller procured from the
+balancing market, does not need to bought from intraday market for the same
+market period. Because the predicted charging power $\fPhat{h}$ is expected to
+be  more accurate 30 minutes ahead, the controller is able to correct "bidding
+errors" it made in the first decision phase.
 
-1) Light-grey: Determine bidding quantity, Chapter ref:sec-model-rl
-   - Essential Information, determines Smart Charging quantities.
-   - Balance risks versus profits
-   - Need to have sufficient SoC to be able to rent out. Not enough SoC violates
-     customer mobility, and thus decreases profits
-   - Conflicting: Do not submit/charge too much:
-   - Conflicting: Do not submit quantities we can not charge. Causes high
-     imbalance costs that have to be avoided at all times
-   - RL Agent!
-2) Middle-grey: Determine bidding price ref:sec-model-bidding-strategy
+The controllers goal is to choose the risk factors $\lb{h}$, $\li{h}$ for every
+market period, that minimize the cost of charging, while avoiding the risks of
+lost rentals or imbalance costs.
 
+# TODO: What values can \theta_{\lambda} take?
+# TODO: Cost functions or not, make depended on lambda??
+\begin{equation}
+    \Cf{}(\theta_{\lambda}) \defeq \sum^{N_h}_h \bigg[ \Cb{h} + \Ci{h} + \Phi_{h}
+    + \sum_t^{N_t} \sum_i^{N_f} \rho_{t, i} \bigg] \text{ ,}
+\end{equation}
+where \theta_{\lambda} is the set of all risk factors $\lb{h}$, $\li{h}$ for all
+considered market periods $N_h$.
+
+\begin{equation}
+\begin{aligned}
+    & \underset{\theta_{\lambda}}{\text{minimize}}
+    && \Cf{}(\theta_{\lambda}) \\
+    & \text{subject to}
+    && 0 \leq \lb{h} \leq 1, \; \forall \lb{h} \in  \theta_{\lambda}\\
+    &&& 0 \leq \li{h} \leq 1, \; \forall \li{h} \in  \theta_{\lambda}\\
+\end{aligned}
+\end{equation}
+
+
+#    & & \text{for} \lb{h}, \li{h} \in \theta_{\lambda}, \; h = 1, \ldots, N_h.
+
+
+Choosing a optimal $\lambda$ for each market is a difficult task, which we solve by using a RL learning approach,
+explained in Chapter ref:sec-model-rl.
+
+
+/Example:/ Given, $\Cb{h}$, $\Ci{h}$, p^i
 
 $T(h)$ Mapping from market period $h$ to the set of control periods in market
 period $h$.
-
-Nomenclature:
-- Use Notion of consumption plan?
-
-Figure:
-- What about regular charging?
-- What about not enough SoC for trip?
-- Allocate costs/profits from charging/trip?
-- Other figure, with timely bidding and control periods?
 
 Assume:
 - Operating reserve always gets activated.
