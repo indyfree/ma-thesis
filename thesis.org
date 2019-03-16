@@ -357,7 +357,7 @@ based prediction model, to penalize committing an EV to VPP when it would have
 been rented out otherwise. Because of the two issues mentioned above,
 textcite:kahlen18_elect_vehic_virtual_power_plant_dilem could only make very
 conservative estimations and commitments of overall available trading capacity,
-resulting in a high amount of foregone profits. This effect is especially
+resulting in a high amount of missed profits. This effect is especially
 prominent when participating in the secondary operating reserve market, since
 commitments have to be made one week in advance when mobility demands are still
 uncertain. textcite:kahlen17_fleet stated that in 42% to 80% of the cases, EVs
@@ -1223,6 +1223,7 @@ compromising customer mobility by refusing customer rentals.
 | $\Delta t$  | Length of control period.                                                 | minutes              |
 | $\Delta h$  | Length of market period.                                                  | minutes              |
 | $N_t$       | Number of control periods in a market period.                             | -                    |
+| $N_h$       | Total number of market periods.                                           | -                    |
 |-------------+---------------------------------------------------------------------------+----------------------|
 | $\Pb{h}$    | Amount of balancing power offered on the balancing market.                | kW                   |
 | $\cp{h}$    | Capacity price offered on the balancing market.                           | $\text{\euro{}/MW}$  |
@@ -1240,6 +1241,7 @@ compromising customer mobility by refusing customer rentals.
 | $\fP{t}$    | Amount of available fleet charging power in control period $t$.           | kW                   |
 | $\fPhat{t}$ | Predicted amount of available fleet charging power in control period $t$. | kW                   |
 |-------------+---------------------------------------------------------------------------+----------------------|
+| $N_i$       | Total number of EVs in the fleet.                                         | -                    |
 | $p^{i}$     | Industry tariff                                                           | $\text{\euro{}/MW}$  |
 | $\fh$       | Heuristic function to dispatch EVs to charging                            | -                    |
 |-------------+---------------------------------------------------------------------------+----------------------|
