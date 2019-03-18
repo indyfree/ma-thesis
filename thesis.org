@@ -1421,6 +1421,56 @@ market period. Because the predicted charging power $\fPhat{h}$ is expected to
 be  more accurate 30 minutes ahead, the controller is able to correct "bidding
 errors" it made in the first decision phase.
 
+/Example:/ At the 9^{th} of August 2017, the controller enters the first
+decision phase. The controller wants to procure electricity for the market
+period $h$, the 16^{th} August 2017 3:00-3:15pm. Therefore, it predicts that at
+that point in time, approximately 280 EVs are connected to a charging station,
+resulting in 1000kW available fleet charging power ($\fPhat{h}$ = 1000kW).
+Given the critical prices $\ccp{h}$ = 5$\emw$, $\cep{h}$ = -10$\emwh$, $\cup{h}$
+= 10$\emwh$ for that market period, it evaluates its cheapest charging option
+for the market period of interest. The flat industry electricity tariff is
+assumed to be $p_i$ = 0.15$\ekwh$. The costs for charging the fleet from the
+balancing market $\Cb{h}(1000)$ = -7.5$\eur$ are less than charging from the
+intraday market $\Ci{h}(1000)$ = 2.5$\eur$ or charging at the industry tariff:
+1000kW $\times \frac{\Delta h}{60} \times 0.15\ekwh$ = 37.5$\eur$. In this
+example, the fleet even gets compensated for charging from the balancing market.
+
+The controller further evaluated a possible risk  of $\lb{h} = 0.2$, hence it
+places a bid $b^{bal}_{h}$ = (5,-10,800) on the balancing market.
+
+
+#+BEGIN_SRC python :exports none :var h=15
+def bal_cost(p_c, p_e, P):
+    return(-(p_c * P * 0.001) + (p_e * P * (h/60) * 0.001))
+
+return(bal_cost(5, -10, 1000))
+#+END_SRC
+
+#+RESULTS:
+: -2.5
+
+
+#+BEGIN_SRC python :exports none :var h=15
+def bal_cost(p_u, P):
+    return((p_u * P * (h/60) * 0.001))
+
+return(bal_cost(10, 1000))
+#+END_SRC
+
+#+RESULTS:
+: 2.5
+
+#+BEGIN_SRC python :exports none :var h=15
+def industry_costs(p_i, P):
+    return((p_i * P * (h/60)) / 100)
+
+return(industry_costs(15, 1000))
+#+END_SRC
+
+#+RESULTS:
+: 37.5
+
+
 The controllers goal is to choose the risk factors $\lb{h}$, $\li{h}$ for every
 market period, that minimize the cost of charging, while avoiding the risks of
 lost rentals or imbalance costs.
