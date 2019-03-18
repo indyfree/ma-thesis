@@ -1333,8 +1333,8 @@ assumed to be available for all market periods. The cost function for charging
 from the balancing market is defined as follows:
 \begin{equation} \label{eq-cost-balancing}
 \begin{split}
-    \Cb{h}(P) &\defeq  -(P  \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
-    &= -(P  \times \ccp{h}) + (P \frac{\Delta h}{60}10^{-3} \times \cep{h}) \text{ ,}
+    \Cb{h}(P) &\defeq  -(P \times 10^{-3} \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
+    &= -(P \times 10^{-3} \times \ccp{h}) + (P \frac{\Delta h}{60}10^{-3} \times \cep{h}) \text{ ,}
 \end{split}
 \end{equation}
 where $P$ is the amount of offered balancing power in kW. The first term of the
