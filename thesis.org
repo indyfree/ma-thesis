@@ -1623,6 +1623,11 @@ See cite:vandael15_reinf_learn_heuris_ev_fleet
 # NOTE: List Simulation params in a table: Car Capacity etc..
 # NOTE: Make decision outcome results table over one-year period like kahlen
 # NOTE: Include EUR/MWh provided!
+** Simulation Settings
+- BMWi. (n.d.). Prices of electricity for the industry in Germany from 2008 to
+  2017 (in euro cents per kilowatt hour). In Statista - The Statistics Portal.
+  Retrieved March 18, 2019, from
+  https://www.statista.com/statistics/595803/electricity-industry-price-germany/.
 ** FleetRL
 ** Sensitivity Analysis: Prediction Accuracy
 # NOTE: Prediction Accuracy of available EV capacity
