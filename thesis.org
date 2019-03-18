@@ -1421,22 +1421,69 @@ market period. Because the predicted charging power $\fPhat{h}$ is expected to
 be  more accurate 30 minutes ahead, the controller is able to correct "bidding
 errors" it made in the first decision phase.
 
-/Example:/ At the 9^{th} of August 2017, the controller enters the first
-decision phase. The controller wants to procure electricity for the market
-period $h$, the 16^{th} August 2017 3:00-3:15pm. Therefore, it predicts that at
-that point in time, approximately 280 EVs are connected to a charging station,
-resulting in 1000kW available fleet charging power ($\fPhat{h}$ = 1000kW).
-Given the critical prices $\ccp{h}$ = 5$\emw$, $\cep{h}$ = -10$\emwh$, $\cup{h}$
-= 10$\emwh$ for that market period, it evaluates its cheapest charging option
-for the market period of interest. The flat industry electricity tariff is
-assumed to be $p_i$ = 0.15$\ekwh$. The costs for charging the fleet from the
-balancing market $\Cb{h}(1000)$ = -7.5$\eur$ are less than charging from the
-intraday market $\Ci{h}(1000)$ = 2.5$\eur$ or charging at the industry tariff:
-1000kW $\times \frac{\Delta h}{60} \times 0.15\ekwh$ = 37.5$\eur$. In this
-example, the fleet even gets compensated for charging from the balancing market.
+The controllers goal is to choose the risk factors $\lb{h}$, $\li{h}$ for every
+market period, that minimize the cost of charging, while avoiding the risks of
+lost rentals or imbalance costs. The total fleet costs are defined as follows:
+# TODO: What values can \theta_{\lambda} take?
+# TODO: Cost *functions* or not, make depended on lambda??
+# TODO: = or \defeq?
+\begin{equation}
+    \Cf{}(\theta_{\lambda}) \defeq \sum^{N_h}_h
+    \bigg[ \Cb{h}(\Pb{h}) + \Ci{h}(\Pi{h}) + \beta_{h}
+    + \sum_t^{N_t} \sum_i^{N_f} \rho_{t, i} \bigg] \text{ ,}
+\end{equation}
+where \theta_{\lambda} is the set of all risk factors $\lb{h}$, $\li{h}$ for all
+considered market periods $N_h$. The opportunity costs of denying a rental of EV
+$i$ in control period $t$ is denoted with $\rho_{t, i}$. The costs for charging
+$\Cb{h}$, $\Ci{h}$ are dependent on committed charging power $\Pb{h}, \Pi{h}$.
+The charging power is dependent on the chosen risk factors $\lb{h}$, $\li{h}$
+that are omitted here for convenience of notation. In summary the problem can be
+formulated as minimizing the total costs of the fleet, by choosing the optimal
+set of parameters $\theta_{\lambda}$ in all market periods $h \in \cal H$.
+\begin{equation}
+\begin{aligned}
+    & \underset{\theta_{\lambda}}{\text{minimize}}
+    && \Cf{}(\theta_{\lambda}) \\
+    & \text{subject to}
+    && 0 \leq \lb{h} \leq 1, \; \forall \lb{h} \in  \theta_{\lambda}\\
+    &&& 0 \leq \li{h} \leq 1, \; \forall \li{h} \in  \theta_{\lambda}\\
+\end{aligned}
+\end{equation}
+Solving this optimization problem with regular methods is a difficult task,
+when we do not assume complete information of available charging power and
+market prices. We chose to solve the problem, by using a RL learning approach
+that is explained in Chapter ref:sec-model-rl.
+# NOTE: Similar to cite:vandael15_reinf_learn_heuris_ev_fleet
 
-The controller further evaluated a possible risk  of $\lb{h} = 0.2$, hence it
-places a bid $b^{bal}_{h}$ = (5,-10,800) on the balancing market.
+/Example:/ At 3pm on the 9^{th} of August 2017, the controller enters its first
+decision phase for procuring electricity one week ahead, the market period $h$ =
+/16.08.2017-15:00/. First, it predicts that at that point in time, 250 EVs are
+connected to a charging station, resulting in 900kW available fleet charging
+power ($\fPhat{h}$ = 900kW), when assuming a charging power of 3.6kW. Given the
+critical prices $\ccp{h}$ = 5$\emw$, $\cep{h}$ = -10$\emwh$, and $\cup{h}$ =
+10$\emwh$ for that market period, the controller now evaluates the cheapest
+charging option. The flat industry electricity tariff is assumed to be $p_i$ =
+0.15$\ekwh$. The costs for charging $\fPhat{h}$ from the balancing market
+$\Cb{h}(900)$ = -6.25$\eur$ are less than charging from the intraday market
+$\Ci{h}(900)$ = 2.25$\eur$ or charging at the industry tariff: 900kW $\times
+\frac{\Delta h}{60} \times 0.15\ekwh$ = 33.75$\eur$. In this example, the fleet
+will even get compensated for charging from the balancing market. Second, the
+controller has to determine the bidding quantity, therefore it evaluated a
+possible risk  $\lb{h} = 0.3$, of bidding on the balancing market, and sets the
+bidding quantity to $\Pb{h} = \fPhat{h} \times (1 - \lb{h})$ = 900 $\times$ 0.7
+= 630kW. When assuming that bids at the critical price, will always get
+accepted, the controller procures 630kW from the balancing market and updates
+its account with $\Cb{h}(630)$ = -4.725$\eur$.
+
+One week later, at 2:30pm on the 16^{th} of August 2017, the controller enters
+its second decision phase. Again, it predicts the available fleet charging power
+$\fPhat{h}$ = 810kW, for the same market period /16.08.2017-15:00/, this time
+with a higher accuracy, due to the short time horizon of 30 minutes. By trading
+at the intraday market, the controller can now make use of all the available EVs
+with a low risk of procuring more energy than it can charge. At this point in
+time, the controller determines a very low remaining risk of $\li{h} = 0.05$,
+and sets the bidding quantity to $\Pi{h}$ = (810 - 630) $\times$ (1 - 0.05) =
+171kW.
 
 
 #+BEGIN_SRC python :exports none :var h=15
