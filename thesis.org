@@ -1270,8 +1270,8 @@ information is assumed to be available:
    cite:weron14_elect_price_forec,avci18_manag_elect_price_model_risk.
 We are confident that taking the above assumptions is viable, assuming available
 forecasting information is common practice in the VPP and EV fleet charging
-literature
-cite:brandt17_evaluat_busin_model_vehic_grid_integ,vandael15_reinf_learn_heuris_ev_fleet,mashhour11_biddin_strat_virtual_power_plant_1,tomic07_using_fleet_elect_drive_vehic_grid_suppor.
+literature, see e.g.:
+textcite:brandt17_evaluat_busin_model_vehic_grid_integ,vandael15_reinf_learn_heuris_ev_fleet,mashhour11_biddin_strat_virtual_power_plant_1,tomic07_using_fleet_elect_drive_vehic_grid_suppor,pandzic13_offer_model_virtual_power_plant.
 
 ** Control Mechanism
 # NOTE: Profit maximizing: Charge anyways, but the more it can charge from markets the
