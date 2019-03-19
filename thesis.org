@@ -1179,7 +1179,7 @@ Chapter ref:sec-spot-market.
 
 # NOTE: Need to reformulate Intro+Following to only balancing
 The following chapter will introduce the model of this research. In its essence,
-we propose a solution for EV fleet providers to utilize a portfolio of VPPs to
+we propose a solution for EV fleet providers to utilize a VPP portfolio to
 profitably provide balancing services to the grid on multiple markets. A control
 mechanism procures energy from electricity markets, allocates available EVs to
 VPPs, and intelligently dispatches EVs to charge the acquired amount of energy.
