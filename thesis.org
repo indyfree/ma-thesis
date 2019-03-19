@@ -1304,31 +1304,34 @@ distinct phases (see Figure ref:fig-control-mechanism).
 The first decision phase occurs just before the closing time of the balancing
 market, once every week (e.g., Wednesdays at 3pm at the GCRM). In this phase, the
 controller can place bids for every market period $h$ of the following week on
-the balancing market. When a bid gets accepted, the fleet has to provide the
-committed balancing capacity during all control periods $t$ of the market period
-$h$. In order to optimally place bids on the balancing market the controller has
-to take the following steps:
+the balancing market.
+
+
+# NOTE: Mention here that we assume to be accepted/activated for balancing market?
+# NOTE: Mention here that we bid with the critical prices?
+When a bid gets accepted, the fleet has to charge with the committed charging
+power during all control periods $t$ of the market period $h$. In order to
+optimally place bids on the electricity markets the controller has to take the
+following steps:
 
 # TODO: Predicted not mentioned
 First, the controller has to predict the available fleet charging power
 $\fPhat{h + (H \times 7)}$ one week ahead, where $H$ is the number of market
 periods in a day. The actual available fleet charging power $\fP{t}$ is given by
-the number of EVs that are connected to a charging station, with enough battery
-capacity to charge the next control period $t\!+\!1$. To minimize the risk of not
-being able to provide the committed capacity, and consequently causing imbalance
-costs, the predicted fleet charging power in a market period is defined as the
-minimal predicted fleet charging power of all control periods in a market period
-($N_t$).
+the number of EVs that are connected to a charging station, with enough free
+battery capacity to charge the next control period $t\!+\!1$. To minimize the
+risk of not being able to provide the committed capacity during the whole market
+period, and consequently causing imbalance costs, the predicted fleet charging
+power in a market period is defined as the minimal predicted fleet charging
+power of all control periods in a market period ($T$).
 \begin{equation}
-    \fPhat{h} \defeq \min_{n \in \{1, .., N_t\}} \fPhat{t + n} \text{ ,}
+    \fPhat{h} \defeq \min_{n \in \{1, .., T\}} \fPhat{t + n} \text{ ,}
 \end{equation}
 where $h$ is the market period of interest and $t$ its first control period.
 
 Second, the controller has to decide from which market it should procure the
 desired amount of energy. Therefore, it compares the costs for charging from the
-balancing and intraday market.  As mentioned in the Chapter
-ref:sec-model-assumptions, the critical prices $\ccp{}, \cep{}, \cup{}$ are
-assumed to be available for all market periods. The cost function for charging
+balancing and the intraday market. The cost function for charging
 from the balancing market is defined as follows:
 \begin{equation} \label{eq-cost-balancing}
 \begin{split}
@@ -1341,12 +1344,14 @@ equation corresponds to the compensation the controller retrieves for keeping
 the balancing capacity available, while the second term corresponds to the costs
 for charging the activated balancing energy $\Eb{h}$. Energy is power over time,
 hence $\Eb{h}$ can be substituted with the $P$ times the market periods fraction
-of an hour $\frac{\Delta h}{60}$. Note that the critical energy price
-$\cep{}\!\in\!\Re$, can also take negative values, resulting in profits for the
-fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ is can not take
-negative values and therefore never results in costs for the fleet. The cost
-function for charging from the intraday market is defined similarly to Equation
-(ref:eq-cost-balancing):
+of an hour $\frac{\Delta h}{60}$. As mentioned in the Chapter
+ref:sec-model-assumptions, the critical prices $\ccp{}, \cep{}, \cup{}$ are
+assumed to be available for all market periods. Note that the critical energy
+price $\cep{}\!\in\!\Re$, can also take negative values, resulting in profits
+for the fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ can not
+take negative values and therefore never results in costs for the fleet. The
+cost function for charging from the intraday market is defined similarly to
+Equation (ref:eq-cost-balancing):
 \begin{equation}
 \begin{split}
     \Ci{h}(P) &\defeq \Ei{h} \times \cup{h} \\
@@ -1367,24 +1372,24 @@ balancing market.
 In a third step, the controller has to take a decision on the amount of
 balancing power it should bid on the balancing market. Determining the bidding
 quantity is a central piece of the controlled charging problem. The controller
-needs to balance the risks of (a) not procuring enough energy from the market to
-charge the fleet, and (b) procuring more energy that it can charge. In the
-latter case the fleet is facing costs of compromising customer mobility, or
-worse, high imbalance costs from the markets. Renting out EVs is much more
+needs to balance the risks of (a) procuring enough energy from the market to
+sufficiently charge the fleet, and (b) procuring more energy that it can charge.
+In the latter case the fleet is facing costs of compromising customer mobility,
+or worse, high imbalance costs from the markets. Renting out EVs is much more
 profitable than using EVs as a VPP to participate on the electricity markets.
 Refusing customer rentals, in order to fulfill market commitments, induces
-opportunity costs of lost rentals $\rho$ on the fleet. Imbalance costs $\Phi$
+opportunity costs of lost rentals $\rho$ on the fleet. Imbalance costs $\beta$
 occur, when the fleet can not charge the committed amount energy at all, even
-with denying rentals. The controller faces additional risks by bidding on the
-balancing market, as the predictions of available charging power include more
-uncertainty one week ahead than on the intraday market, 30 minutes ahead. To
-account for the mentioned risks, we introduce a /risk factor/ $\lambda \in
-\Re_{0 \leq \lambda \leq 1}$, where $\lambda = 0$ indicates no risk, and
-$\lambda = 1$ a high risk.
+with refusing rentals. The controller faces additional risks by bidding one week
+ahead on the balancing market, as the predictions of available charging power
+are more uncertain than 30 minutes ahead on the intraday market. To account for
+the mentioned risks, we introduce a /risk factor/ $\lambda \in \Re_{0 \leq
+\lambda \leq 1}$, where $\lambda = 0$ indicates no risk, and $\lambda = 1$
+indicates a high risk.
 
 The controller determines the bidding quantity $\Pb{h}$ by discounting the
 predicted available fleet charging power $\fPhat{h}$ with the possible risk
-$\lambda_{h}$ of occurring imbalance or opportunity costs.
+$\lambda_{h}$ of occurring imbalance or opportunity costs:
 \begin{equation}
   \Pb{h}=
   \begin{cases}
@@ -1394,31 +1399,32 @@ $\lambda_{h}$ of occurring imbalance or opportunity costs.
   \end{cases}
 \end{equation}
 where $h$ is the market period of interest one week ahead. If the controller can
-charge cheaper from the intraday market or with the regular industry tariff
-$p^{i}$, it does not place a bid. Otherwise, the controller submits $\Pb{h}$ to
-the market.
+charge cheaper from the intraday market, it does not place a bid. If the
+controller can charge cheaper with the regular industry tariff $p^{i}$, it does
+not place a bid either. In all other cases, the controller submits $\Pb{h}$ to the
+market.
 # TODO: Bids always get accepted & activated on Balancing market, mention prices?
 
+# TODO: Generalilzation, lead time, trades always get matched on intraday, prices?
 The second decision phase occurs 30 minutes before the physical electricity
-delivery on the intraday market. In this phase, the controller places bids
-for the market period $h+30$.
-# TODO: Generalilzation, lead time, trades always get matched, prices?
-
-The bidding quantity for the intraday market $\Pi{h}$ depends on the previously
-committed charging power $\Pb{h}$ and the predicted charging power $\fPhat{h}$
-30 minutes ahead:
+delivery on the intraday market. In this phase, the controller places bids for
+the market period $h+30$. The bidding quantity for the intraday market $\Pi{h}$
+depends on the previously committed charging power $\Pb{h}$ and the predicted
+charging power $\fPhat{h}$, 30 minutes ahead:
 \begin{equation}
   \Pi{h}=
   \begin{cases}
-    0, & \text{if}\ \Ci{h}(\fPhat{h}) \geq \Ei{h} \times p^{i}\\
+    0, & \text{if}\ \Ci{h}(\fPhat{h}\!-\!\Pb{h}) \geq \Ei{h} \times p^{i}\\
     (\fPhat{h}\!-\!\Pb{h}) \times (1\!-\!\li{h}), & \text{otherwise}
   \end{cases}
 \end{equation}
-Note that any amount of electricity that the controller procured from the
-balancing market, does not need to bought from intraday market for the same
-market period. Because the predicted charging power $\fPhat{h}$ is expected to
-be  more accurate 30 minutes ahead, the controller is able to correct "bidding
-errors" it made in the first decision phase.
+where $h$ is the market period of interest 30 minutes ahead. Note that any
+amount of electricity that the controller procured from the balancing market,
+does not need to bought from intraday market for the same market period. Because
+the predicted charging power $\fPhat{h}$ is expected to be  more accurate 30
+minutes ahead than one week ahead, the controller is able to correct bidding
+errors it made in the first decision phase, and almost fully utilize the EV
+fleet.
 
 The controllers goal is to choose the risk factors $\lb{h}$, $\li{h}$ for every
 market period, that minimize the cost of charging, while avoiding the risks of
@@ -1429,16 +1435,16 @@ lost rentals or imbalance costs. The total fleet costs are defined as follows:
 \begin{equation}
     \Cf{}(\theta_{\lambda}) \defeq \sum^{N_h}_h
     \bigg[ \Cb{h}(\Pb{h}) + \Ci{h}(\Pi{h}) + \beta_{h}
-    + \sum_t^{N_t} \sum_i^{N_f} \rho_{t, i} \bigg] \text{ ,}
+    + \sum_t^{T} \sum_i^{N_i} \rho_{t, i} \bigg] \text{ ,}
 \end{equation}
-where \theta_{\lambda} is the set of all risk factors $\lb{h}$, $\li{h}$ for all
-considered market periods $N_h$. The opportunity costs of denying a rental of EV
-$i$ in control period $t$ is denoted with $\rho_{t, i}$. The costs for charging
-$\Cb{h}$, $\Ci{h}$ are dependent on committed charging power $\Pb{h}, \Pi{h}$.
-The charging power is dependent on the chosen risk factors $\lb{h}$, $\li{h}$
-that are omitted here for convenience of notation. In summary the problem can be
-formulated as minimizing the total costs of the fleet, by choosing the optimal
-set of parameters $\theta_{\lambda}$ in all market periods $h \in \cal H$.
+where $\theta_{\lambda}\!\in\!\Re_{0 \leq \lambda \leq 1}^{2 \times N_h}$ is the
+matrix of the risk factors $\lb{h}$, $\li{h}$ for all considered market periods
+$N_h$. The opportunity costs of denying the rental of EV $i$ in control period
+$t$ is denoted with $\rho_{t, i}$. The costs for charging $\Cb{h}(\Pb{h})$,
+$\Ci{h}(\Pi{h})$ are clearly dependent on the chosen risk factors $\lb{h}$,
+$\li{h}$, which is omitted here for convenience of notation. In summary, the
+problem can be formulated as minimizing the total costs of the fleet, by
+choosing the optimal set of risk factors $\theta_{\lambda}$:
 \begin{equation}
 \begin{aligned}
     & \underset{\theta_{\lambda}}{\text{minimize}}
@@ -1484,159 +1490,77 @@ time, the controller determines a very low remaining risk of $\li{h} = 0.05$,
 and sets the bidding quantity to $\Pi{h}$ = (810 - 630) $\times$ (1 - 0.05) =
 171kW.
 
-
 #+BEGIN_SRC python :exports none :var h=15
 def bal_cost(p_c, p_e, P):
     return(-(p_c * P * 0.001) + (p_e * P * (h/60) * 0.001))
 
-return(bal_cost(5, -10, 1000))
+return(bal_cost(5, -10, 630))
 #+END_SRC
 
 #+RESULTS:
-: -2.5
+: -4.725
 
 
 #+BEGIN_SRC python :exports none :var h=15
 def bal_cost(p_u, P):
     return((p_u * P * (h/60) * 0.001))
 
-return(bal_cost(10, 1000))
+return(bal_cost(10, 900))
 #+END_SRC
 
 #+RESULTS:
-: 2.5
+: 2.25
 
 #+BEGIN_SRC python :exports none :var h=15
 def industry_costs(p_i, P):
     return((p_i * P * (h/60)) / 100)
 
-return(industry_costs(15, 1000))
+return(industry_costs(15, 900))
 #+END_SRC
 
 #+RESULTS:
-: 37.5
+: 33.75
 
 
-The controllers goal is to choose the risk factors $\lb{h}$, $\li{h}$ for every
-market period, that minimize the cost of charging, while avoiding the risks of
-lost rentals or imbalance costs.
+# Assume:
+# - Bid maximum capacity price?
+# - What about balancing capacity prices? Future work?
+# - Bid always multiples of charging capacity, do not consider charging at
+#   different speeds
 
-# TODO: What values can \theta_{\lambda} take?
-# TODO: Cost functions or not, make depended on lambda??
-\begin{equation}
-    \Cf{}(\theta_{\lambda}) \defeq \sum^{N_h}_h \bigg[ \Cb{h} + \Ci{h} + \Phi_{h}
-    + \sum_t^{N_t} \sum_i^{N_f} \rho_{t, i} \bigg] \text{ ,}
-\end{equation}
-where \theta_{\lambda} is the set of all risk factors $\lb{h}$, $\li{h}$ for all
-considered market periods $N_h$.
-
-\begin{equation}
-\begin{aligned}
-    & \underset{\theta_{\lambda}}{\text{minimize}}
-    && \Cf{}(\theta_{\lambda}) \\
-    & \text{subject to}
-    && 0 \leq \lb{h} \leq 1, \; \forall \lb{h} \in  \theta_{\lambda}\\
-    &&& 0 \leq \li{h} \leq 1, \; \forall \li{h} \in  \theta_{\lambda}\\
-\end{aligned}
-\end{equation}
+# Other assumptions:
+# 1) Bids on balancing market always get accepted (Known critical capacity price $\ccp{}$
+# - Operating reserve always gets activated.
+# 2) EV fleet charges at a fixed industry tariff otherwise
+# 3) Balancing capacity is provided for a market period $h$. Within the market
+#    period $h$, it is possible to provide the capacity with different EVs,
+#    changing in control periods $t$. Customers arrive in $t$ intervals.
 
 
-#    & & \text{for} \lb{h}, \li{h} \in \theta_{\lambda}, \; h = 1, \ldots, N_h.
-
-
-Choosing a optimal $\lambda$ for each market is a difficult task, which we solve by using a RL learning approach,
-explained in Chapter ref:sec-model-rl.
-
-
-/Example:/ Given, $\Cb{h}$, $\Ci{h}$, p^i
-
-$T(h)$ Mapping from market period $h$ to the set of control periods in market
-period $h$.
-
-Assume:
-- Operating reserve always gets activated.
-- Bid at $p_c = 0$
-- EVs charge at industry tariff, when not allocated to VPP
-- Bid always multiples of charging capacity, do not consider charging at
-  different speeds
-
-Mechanism:
-- Only EVs with enough battery capacity left to charge the next control period
-  are allocated to VPP.
-
-Other assumptions:
-1) Bids on balancing market always get accepted (Known critical capacity price $\ccp{}$
-2) EV fleet charges at a fixed industry tariff otherwise
-3) Balancing capacity is provided for a market period $h$. Within the market
-   period $h$, it is possible to provide the capacity with different EVs,
-   changing in control periods $t$. Customers arrive in $t$ intervals.
+# - Fleet capacity prediction made on non-simulated real-world SoC (w/o smart charging)?
+# - Fleet capacity predictions with simulated data?
+#   - Provide difference levels & descriptive statistics?
 
 *** Dispatch Phase
-# When no replacement for VPP is available, we loose rental profits and also
-# violate customer mobility
+# When no replacement for VPP is available, we loose rental profits by violating customer mobility
 - $f_{heur}$ Heuristic function to dispatch power to EVs
 
 
-** (Fleet Capacity & Critical Price Prediction)
-- Fleet capacity prediction made on non-simulated real-world SoC (w/o smart charging)
-  - Provide difference levels & descriptive statistics?
-  - Already enough uncertainty or artificially add more?
-  - Balancing forecasts needs more uncertainty than intraday, otherwise RL does
-    not make sense: Handle uncertainty.
-  - Prediction:
-    - Predict for all c in h
-    - Q = min(q_c)
-
-- Electricity prices:
-  - Artificially add uncertainty to prediction by distorting real-world data
-    according to Gaussian distribution
-  # NOTE: Then need to model that bid does not get accepted?
-
 ** Bidding Strategy label:sec-model-bidding-strategy
-# TODO: Mathematical formulations for Bidding Strategy
 # NOTE: Word as profit-maximizing bidding strategy
-# NOTE: Add algorithm of integrated bidding strategy/control mechanism?
-# NOTE: Distinguish control mechanism from bidding strategy more clearly
 
 Assumptions:
   - EV fleet is price taker, it is lacking the market share to influence prices
-    - $\rightarrow$ Use existing prices
+    - $\rightarrow$ Use existing prices, w/o simulating influence of bids.
   - Relax minimum bidding assumption of 1MW to no limit. Sensitivity analysis
     with 100kw and 500kw in evaluation
   - Controller always bids at an optimal price.
-
-intraday:
-\begin{equation}
-\begin{split}
-    b^{intr} &= (P^{intr}, p_u) \\
-    p_u &= \min(\cup{}, p_r) \\
-    P^{intr} &= \pi(s)
-\end{split}
-\end{equation}
-
-balancing:
-\begin{equation}
-\begin{split}
-    b^{bal} &= (P^{bal}, p_c, p_w) \\
-    P^{bal} &= \pi(s) \\
-    p_c &= 0 \\
-    p_w &= \min(\overline{p_w}, p_r)
-\end{split}
-\end{equation}
-
- - Optimal price
- - Forecasted critical prices. Different accuracy levels?
- - Use critical prices - threshold? Or
- - Assume always the perfect bid: Upper-bound evaluation
- - Compare with industry-tariff
- - Figure about prices over the day? Compare
- - What about balancing capacity prices? Future work?
- - Mathematical formulation
+  - Assume always the perfect bid: Upper-bound evaluation, with critical prices
+  - Figure about prices developments over the day? Compare balancing & intraday?
 
 # FIXME: Citation brandt
-Furthermore, we assume the
-aggregator is a price-taker. In case of limited size purchase
-orders, an aggregator will naturally have a price-taker position.
+Furthermore, we assume the aggregator is a price-taker. In case of limited size
+purchase orders, an aggregator will naturally have a price-taker position.
 
 # FIXME: Citatation from kahlen
 The fleet controller offers bids and asks for every time interval. These offers
@@ -1655,7 +1579,7 @@ mechanism ultimately decides when EVs will charge and discharge.
 # TODO: States, Actions, Rewards for RL
 # TODO: Bellman Equation for RL?
 # TODO: 2 RL Problems? 1. Only capacity, 2. Also prices?
-#   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learn_trans_learn
+#   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learTrans_learn
 # - cite:vandael15_reinf_learn_heuris_ev_fleet
 - Cost function?
 
@@ -1663,7 +1587,7 @@ mechanism ultimately decides when EVs will charge and discharge.
 # NOTE: Minimalize over all periods? As objective function
 # NOTE: What about imbalance costs $\lambda^+$
 \begin{equation}
-    \Cf{h} \defeq \Cb{h} + \Ci{h} + \sum_t^{N_t} \sum_i^{N_f} C^{rental}_{c, i}
+    \Cf{h} \defeq \Cb{h} + \Ci{h} + \sum_t^{T} \sum_i^{N_f} C^{rental}_{c, i}
 \end{equation}
 
 - Learn from very high negative imbalance cost reward
@@ -1725,6 +1649,7 @@ See cite:vandael15_reinf_learn_heuris_ev_fleet
   Retrieved March 18, 2019, from
   https://www.statista.com/statistics/595803/electricity-industry-price-germany/.
 ** FleetRL
+
 ** Sensitivity Analysis: Prediction Accuracy
 # NOTE: Prediction Accuracy of available EV capacity
 # NOTE: Balancing accuracy always lower than intraday! Otherwise no sense
