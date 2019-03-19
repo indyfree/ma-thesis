@@ -116,8 +116,8 @@ model are only able provide /negative control reserve/, which we will refer to
 as /control reserve/ until the end of the thesis. Market participants submit
 bids in the following form to the market: $(\Pb{}, \cp{}, \ep{})$, where $\Pb{}$
 is the amount of electrical power that can be supplied on demand in kW, $\cp{}$ is
-the capacity price for keeping the power available in $\text{\euro{}/MW}$ and
-$\ep{}$ is the energy price for delivered energy in $\text{\euro{}/MWh}$. The TSO
+the capacity price for keeping the power available in $\emw$ and
+$\ep{}$ is the energy price for delivered energy in $\emwh$. The TSO
 determines the target quantity of energy to acquire per timeslot, it usually
 acquires much higher regulation capacity to minimize risks and activates the
 capacity on demand. The TSO accepts the bids based on the capacity price in a
@@ -170,7 +170,7 @@ can submit limit orders at any time during the trading window and equally change
 or withdraw the order at any time before the order is accepted. Limit orders are
 specified as price-quantity pairs: $(\Pi{}, \up{})$, where $\Pi{}$ is the
 traded amount of electrical power in kW and $\up{}$ is the price for the delivered
-energy unit (hour/quarter/block) in $\text{\euro{}/MWh}$. When an order to buy
+energy unit (hour/quarter/block) in $\emwh$. When an order to buy
 (bid) matches an order to sell (ask), the trade immediately gets executed. The
 order book is visible to all participants, hence it is known which unmatched
 orders exist at the time of interest. The intraday market has a trading volume
@@ -1024,8 +1024,8 @@ about the market design of balancing markets refer to Chapter
 ref:sec-balancing-market.
 
 The bidding data consists of the traded electricity product, the offered
-capacity $\Pb{}$ (MW), the capacity price $\cp{}$ ($\text{\euro{}/MW}$), and the
-energy price $\ep{}$ ($\text{\euro{}/MWh}$) of each bid. Four different products
+capacity $\Pb{}$ (MW), the capacity price $\cp{}$ ($\emw$), and the
+energy price $\ep{}$ ($\emwh$) of each bid. Four different products
 are traded, which are a combination of positive control reserve (feed
 electricity into the grid) or negative control reserve (take electricity from
 the grid) and the provided time segment (peak or non-peak hours). Since negative
@@ -1072,8 +1072,8 @@ In order to estimate the upper bound of profits that the EV fleet can earn by
 participating in the secondary operating reserve market, the /critical prices/
 $\ccp{}$ and $\cep{}$ were determined for each auctioned interval. Following
 textcite:brandt17_evaluat_busin_model_vehic_grid_integ, we define $\ccp{}$
-($\text{\euro{}/MW}$) as the capacity price of the bid that was just barely
-accepted, whereas $\cep{}$ ($\text{\euro{}/MWh}$) is the highest energy price
+($\emw$) as the capacity price of the bid that was just barely
+accepted, whereas $\cep{}$ ($\emwh$) is the highest energy price
 that was payed for activated control reserve during that interval. For every
 15-minute interval within the given tender period of one week, the activated
 control reserve in that interval was matched with the accepted bids in that
@@ -1085,19 +1085,17 @@ determined.
 tender interval of the 6^{th} December 2017 between 08:00 and 08:15 are obtained
 as follows: Three suppliers submitted a reserve capacity of 5MW, 15MW and 22MW
 respectively (see Table ref:table-operating-reserve). The critical capacity
-price $\ccp{} = 200.3 \text{ \!\euro{}/MW}$ is determined by the
-capacity price of the last (third) accepted bid in that time segment. The TSO
-reported that 18MW of control reserve were activated between 08:00 and 08:15.
-Hence, the second bid determines the critical energy price $\cep{} = 251
-\text{ \!\euro{}/MWh}$, as control reserve capacity gets activated according to
-ascending order of the submitted energy prices. In this example the second
-bidder would get compensated with: $R = R^c + R^e =(10.73
-\text{ \!\euro{}/MW}\times15\text{MW}) + (251
-\text{ \!\euro{}/MWh}\times13\text{MW}\times 0.25\text{h}) =
-976.7\text{ \!\euro{}}$. Note that the second bidder get compensated for
-providing 13MW for 15 minutes (0.25h), instead of the submitted 15MW, since in
-total only 18MW of control capacity was activated, which was partly fulfilled
-by the 5MW of the first bidder.
+price $\ccp{}\!=\!200.3\emw$ is determined by the capacity price of the last
+(third) accepted bid in that time segment. The TSO reported that 18MW of control
+reserve were activated between 08:00 and 08:15. Hence, the second bid determines
+the critical energy price $\cep{}\!=\!251\emwh$, as control reserve capacity
+gets activated according to ascending order of the submitted energy prices. In
+this example the second bidder would get compensated with:
+$R\!=\!R^c + R^e\!=\!(10.73\emw\!\times\!15\mw) +
+(251\emwh\!\times13\mw\!\times\!0.25\text{h})\!=\! 976.7\eur$. Note that
+the second bidder get compensated for providing 13MW for 15 minutes (0.25h),
+instead of the submitted 15MW, since in total only 18MW of control capacity was
+activated, which was partly fulfilled by the 5MW of the first bidder.
 
 #+BEGIN_SRC python :exports none
     return((10.73*15)+(251*13*0.25))
@@ -1110,7 +1108,7 @@ by the 5MW of the first bidder.
 
 The data from the EPEX Spot Intraday Continuous encompass order books and
 executed trades from 01.06.2016 until 01.01.2018. The list of trades contain
-information on the unit price $\up{}$ ($\text{\euro{}/MWh}$), the quantity (kW)
+information on the unit price $\up{}$ ($\emwh$), the quantity (kW)
 and the traded product (hourly, quarterly or block). In this research, we focus
 on quarterly product times (15-minute intervals), as they provide the highest
 flexibility. Fleet controllers can promptly react to fluctuant electricity
@@ -1212,39 +1210,39 @@ compromising customer mobility by refusing customer rentals.
 
 #+CAPTION[Table of Notation]: Table of Notation label:table-notation
 #+ATTR_LATEX: :environment longtable :align l|p{0.7\linewidth}|l :placement [hp]
-|-------------+---------------------------------------------------------------------------+-----------------------|
-|-------------+---------------------------------------------------------------------------+-----------------------|
-| Variable    | Description                                                               | Unit                  |
-|-------------+---------------------------------------------------------------------------+-----------------------|
-| $t$         | Control period.                                                           | -                     |
-| $h$         | Market period.                                                            | -                     |
-| $T$         | Number of control periods in a market period.                             | -                     |
-| $H$         | Number of market periods in day.                                          | -                     |
-| $N_h$       | Total number of market periods.                                           | -                     |
-| $\Delta t$  | Length of control period.                                                 | minutes               |
-| $\Delta h$  | Length of market period.                                                  | minutes               |
-|-------------+---------------------------------------------------------------------------+-----------------------|
-| $\Pb{h}$    | Amount of balancing power offered on the balancing market.                | kW                    |
-| $\cp{h}$    | Capacity price offered on the balancing market.                           | $\text{\euro{}/MW}$   |
-| $\ep{h}$    | Energy price offered on the balancing market.                             | $\text{\euro{}/MWh}$  |
-| $\ccp{h}$   | Critical capacity price in market period $h$.                             | $\text{\euro{}/MW}$   |
-| $\cep{h}$   | Critical energy price in market period $h$.                               | $\text{\euro{}/MWh}$  |
-|-------------+---------------------------------------------------------------------------+-----------------------|
-| $\Pi{h}$    | Amount of power offered for the unit on the intraday market.              | kW                    |
-| $\up{h}$    | Unit price offered on the intraday market.                                | $\text{\euro{}/MWh}$  |
-| $\cup{h}$   | Critical unit price in market period $h$.                                 | $\text{\euro{}/MWh}$  |
-|-------------+---------------------------------------------------------------------------+-----------------------|
-| $\Eb{h}$    | Amount of energy charged from balancing market in market period h.        | MWh                   |
-| $\Ei{h}$    | Amount of energy charged from the intraday market in market period h.     | MWh                   |
-|-------------+---------------------------------------------------------------------------+-----------------------|
-| $\fP{t}$    | Amount of available fleet charging power in control period $t$.           | kW                    |
-| $\fPhat{t}$ | Predicted amount of available fleet charging power in control period $t$. | kW                    |
-|-------------+---------------------------------------------------------------------------+-----------------------|
-| $N_i$       | Total number of EVs in the fleet.                                         | -                     |
-| $p^{i}$     | Industry tariff                                                           | $\text{\euro{}c/kWh}$ |
-| $\fh$       | Heuristic function to dispatch EVs to charging                            | -                     |
-|-------------+---------------------------------------------------------------------------+-----------------------|
-|-------------+---------------------------------------------------------------------------+-----------------------|
+|-------------+---------------------------------------------------------------------------+---------|
+|-------------+---------------------------------------------------------------------------+---------|
+| Variable    | Description                                                               | Unit    |
+|-------------+---------------------------------------------------------------------------+---------|
+| $t$         | Control period.                                                           | -       |
+| $h$         | Market period.                                                            | -       |
+| $T$         | Number of control periods in a market period.                             | -       |
+| $H$         | Number of market periods in day.                                          | -       |
+| $N_h$       | Total number of market periods.                                           | -       |
+| $\Delta t$  | Length of control period.                                                 | minutes |
+| $\Delta h$  | Length of market period.                                                  | minutes |
+|-------------+---------------------------------------------------------------------------+---------|
+| $\Pb{h}$    | Amount of balancing power offered on the balancing market.                | kW      |
+| $\cp{h}$    | Capacity price offered on the balancing market.                           | $\emw$  |
+| $\ep{h}$    | Energy price offered on the balancing market.                             | $\emwh$ |
+| $\ccp{h}$   | Critical capacity price in market period $h$.                             | $\emw$  |
+| $\cep{h}$   | Critical energy price in market period $h$.                               | $\emwh$ |
+|-------------+---------------------------------------------------------------------------+---------|
+| $\Pi{h}$    | Amount of power offered for the unit on the intraday market.              | kW      |
+| $\up{h}$    | Unit price offered on the intraday market.                                | $\emwh$ |
+| $\cup{h}$   | Critical unit price in market period $h$.                                 | $\emwh$ |
+|-------------+---------------------------------------------------------------------------+---------|
+| $\Eb{h}$    | Amount of energy charged from balancing market in market period h.        | MWh     |
+| $\Ei{h}$    | Amount of energy charged from the intraday market in market period h.     | MWh     |
+|-------------+---------------------------------------------------------------------------+---------|
+| $\fP{t}$    | Amount of available fleet charging power in control period $t$.           | kW      |
+| $\fPhat{t}$ | Predicted amount of available fleet charging power in control period $t$. | kW      |
+|-------------+---------------------------------------------------------------------------+---------|
+| $N_i$       | Total number of EVs in the fleet.                                         | -       |
+| $p^{i}$     | Industry tariff                                                           | $\ekwh$ |
+| $\fh$       | Heuristic function to dispatch EVs to charging                            | -       |
+|-------------+---------------------------------------------------------------------------+---------|
+|-------------+---------------------------------------------------------------------------+---------|
 
 ** Required Information Assumptions label:sec-model-assumptions
 In order to optimize the controller's bidding strategy, the following
@@ -1305,7 +1303,6 @@ The first decision phase occurs just before the closing time of the balancing
 market, once every week (e.g., Wednesdays at 3pm at the GCRM). In this phase, the
 controller can place bids for every market period $h$ of the following week on
 the balancing market.
-
 
 # NOTE: Mention here that we assume to be accepted/activated for balancing market?
 # NOTE: Mention here that we bid with the critical prices?
@@ -1467,13 +1464,14 @@ Chapter ref:sec-model-rl.
 decision phase for procuring electricity one week ahead, the market period $h$ =
 /16.08.2017-15:00/. It predicts that at that point in time, 250 EVs are
 connected to a charging station, resulting in 900kW available fleet charging
-power ($\fPhat{h}\!=\!900\kw$), given the charging power of 3.6kW per EV. Assuming
-the available critical prices $\ccp{h}\!=\!5\emw$, $\cep{h}\!=\!-10\emwh$, and
-$\cup{h}\!=\!10\emwh$ for that market period, the controller now evaluates the
-cheapest charging option. The flat industry electricity tariff is assumed to be
-$p_i\!=\!0.15\ekwh$. The costs for charging $\fPhat{h}$ from the balancing
-market $\Cb{h}(900)\!=\!-6.25\eur$ are less than charging from the intraday
-market $\Ci{h}(900)\!=\!2.25\eur$ or charging at the industry tariff
+power ($\fPhat{h}\!=\!900\kw$), given the charging power of 3.6kW per EV.
+Assuming the available critical prices $\ccp{h}\!=\!5\emw$,
+$\cep{h}\!=\!-10\emwh$, and $\cup{h}\!=\!10\emwh$ for that market period, the
+controller now evaluates the cheapest charging option. The flat industry
+electricity tariff is assumed to be $p_i\!=\!0.15\ekwh$. The costs for charging
+with the maximal amount of power $\fPhat{h}$ from the balancing market
+$\Cb{h}(900)\!=\!-6.25\eur$ are less than charging from the intraday market
+$\Ci{h}(900)\!=\!2.25\eur$ or charging at the industry tariff
 ($33.75\eur\!=\!900kW\!\times\!\frac{\Delta h}{60}\!\times\!0.15\ekwh$). In this
 example, by choosing the cheapest option, the fleet will even make profits by
 charging from the balancing market. In the next step, the controller has to
@@ -1483,7 +1481,7 @@ quantity to
 $\Pb{h}\!=\!\fPhat{h}\!\times\!(1\!-\!\lb{h})\!=\!900\!\times0.7\!=\!630\kw$.
 When assuming that bids at the critical price, will always get accepted, the
 controller procures 630kW from the balancing market and updates its account with
-$\Cb{h}(630)\!=\!-4.725\!\eur$.
+$\Cb{h}(630)\!=\!-4.725\eur$.
 
 One week later, at 2:30pm on the 16^{th} of August 2017, the controller enters
 its second decision phase. Again, it predicts the available fleet charging power
@@ -1545,34 +1543,32 @@ return(industry_costs(15, 900))
 # - Fleet capacity predictions with simulated data?
 #   - Provide difference levels & descriptive statistics?
 
+
+# NOTE: Word as profit-maximizing bidding strategy
+# Assumptions:
+#   - EV fleet is price taker, it is lacking the market share to influence prices
+#     - $\rightarrow$ Use existing prices, w/o simulating influence of bids.
+#   - Relax minimum bidding assumption of 1MW to no limit. Sensitivity analysis
+#     with 100kw and 500kw in evaluation
+#   - Controller always bids at an optimal price.
+#   - Assume always the perfect bid: Upper-bound evaluation, with critical prices
+#   - Figure about prices developments over the day? Compare balancing & intraday?
+
+# # FIXME: Citation brandt
+# Furthermore, we assume the aggregator is a price-taker. In case of limited size
+# purchase orders, an aggregator will naturally have a price-taker position.
+
+# # FIXME: Citatation from kahlen
+# The fleet controller offers bids and asks for every time interval. These offers
+# contain both a quantity and a reservation price, which depends on the state of
+# charge of the EV storage, as well as on the battery costs. However, the market
+# may or may not accept these offers depending on the composition of the offer
+# prices from the fleet owner and other market participants. The market auction
+# mechanism ultimately decides when EVs will charge and discharge.
 *** Dispatch Phase
 # When no replacement for VPP is available, we loose rental profits by violating customer mobility
 - $f_{heur}$ Heuristic function to dispatch power to EVs
 
-
-** Bidding Strategy label:sec-model-bidding-strategy
-# NOTE: Word as profit-maximizing bidding strategy
-
-Assumptions:
-  - EV fleet is price taker, it is lacking the market share to influence prices
-    - $\rightarrow$ Use existing prices, w/o simulating influence of bids.
-  - Relax minimum bidding assumption of 1MW to no limit. Sensitivity analysis
-    with 100kw and 500kw in evaluation
-  - Controller always bids at an optimal price.
-  - Assume always the perfect bid: Upper-bound evaluation, with critical prices
-  - Figure about prices developments over the day? Compare balancing & intraday?
-
-# FIXME: Citation brandt
-Furthermore, we assume the aggregator is a price-taker. In case of limited size
-purchase orders, an aggregator will naturally have a price-taker position.
-
-# FIXME: Citatation from kahlen
-The fleet controller offers bids and asks for every time interval. These offers
-contain both a quantity and a reservation price, which depends on the state of
-charge of the EV storage, as well as on the battery costs. However, the market
-may or may not accept these offers depending on the composition of the offer
-prices from the fleet owner and other market participants. The market auction
-mechanism ultimately decides when EVs will charge and discharge.
 
 ** Reinforcement Learning Approach label:sec-model-rl
 # NOTE: RL Section before Bidding strategy?
