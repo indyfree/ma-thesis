@@ -1332,8 +1332,8 @@ balancing and the intraday market. The cost function for charging
 from the balancing market is defined as follows:
 \begin{equation} \label{eq-cost-balancing}
 \begin{split}
-    \Cb{h}(P) &\defeq  -(P \times 10^{-3} \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
-    &= -(P \times 10^{-3} \times \ccp{h}) + (P \frac{\Delta h}{60}10^{-3} \times \cep{h}) \text{ ,}
+    \Cb{h}(P) &\defeq  -(P\!\times\!10^{-3} \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
+    &= -(P\!\times\!10^{-3} \times \ccp{h}) + (P \frac{\Delta h}{60}10^{-3} \times \cep{h}) \text{ ,}
 \end{split}
 \end{equation}
 where $P$ is the amount of offered balancing power in kW. The first term of the
@@ -1426,8 +1426,6 @@ fleet.
 The controllers goal is to choose the risk factors $\lb{h}$, $\li{h}$ for every
 market period, that minimize the cost of charging, while avoiding the risks of
 lost rentals or imbalance costs. The total fleet costs are defined as follows:
-# TODO: What values can \theta_{\lambda} take?
-# TODO: Cost *functions* or not, make depended on lambda??
 # TODO: = or \defeq?
 \begin{equation}
     \Cf{}(\theta_{\lambda}) \defeq \sum^{N_h}_h
@@ -1457,11 +1455,18 @@ available charging power and future electricity market prices is not always
 available. Since one goal of this research is to develop a model that can be
 applied to previously unknown settings and learn from uncertain environments, we
 chose to solve the problem, by using a RL learning approach that is explained in
-Chapter ref:sec-model-rl.
+detail in Chapter ref:sec-model-rl.
 # NOTE: Similar to cite:vandael15_reinf_learn_heuris_ev_fleet
 
-/Example:/ At 3pm on the 9^{th} of August 2017, the controller enters its first
-decision phase for procuring electricity one week ahead, the market period $h$ =
+*** Dispatch Phase
+# When no replacement for VPP is available, we loose rental profits by violating customer mobility
+- $f_{heur}$ Heuristic function to dispatch power to EVs
+- NOTE: Similar to cite:vandael15_reinf_learn_heuris_ev_fleet
+
+
+*** Example
+At 3pm on the 9^{th} of August 2017, the controller enters its first decision
+phase for procuring electricity one week ahead, the market period $h$ =
 /16.08.2017-15:00/. It predicts that at that point in time, 250 EVs are
 connected to a charging station, resulting in 900kW available fleet charging
 power ($\fPhat{h}\!=\!900\kw$), given the charging power of 3.6kW per EV.
@@ -1475,22 +1480,34 @@ $\Ci{h}(900)\!=\!2.25\eur$ or charging at the industry tariff
 ($33.75\eur\!=\!900kW\!\times\!\frac{\Delta h}{60}\!\times\!0.15\ekwh$). In this
 example, by choosing the cheapest option, the fleet will even make profits by
 charging from the balancing market. In the next step, the controller has to
-determine the bidding quantity. Therefore it evaluated a possible risk
-$\lb{h}\!=\!0.3$, of bidding on the balancing market, and sets the bidding
-quantity to
+determine the bidding quantity.
+
+Therefore, it employs a RL agent, which determines the risk of bidding on the
+balancing market at $\lb{h}\!=\!0.3$. Consequently, the controller sets the
+bidding quantity to
 $\Pb{h}\!=\!\fPhat{h}\!\times\!(1\!-\!\lb{h})\!=\!900\!\times0.7\!=\!630\kw$.
 When assuming that bids at the critical price, will always get accepted, the
 controller procures 630kW from the balancing market and updates its account with
 $\Cb{h}(630)\!=\!-4.725\eur$.
 
 One week later, at 2:30pm on the 16^{th} of August 2017, the controller enters
-its second decision phase. Again, it predicts the available fleet charging power
+its second decision phase. It predicts the available fleet charging power
 $\fPhat{h}\!=\!810\kw$, for the same market period /16.08.2017-15:00/, this time
-with a higher accuracy, due to the short time horizon of 30 minutes. By trading
-at the intraday market, the controller can now make use of all the available EVs
-with a low risk of procuring more energy than it can charge. At this point in
-time, the controller determines a very low remaining risk of $\li{h}\!=\!0.05$,
-and sets the bidding quantity to $\Pi{h}\!=\!(810\!-\!630)\!\times\!(1\!-\!0.05)\!=\!171\kw$.
+with a very high accuracy, due to the short time horizon of 30 minutes. By
+trading at the intraday market, the controller can now make use of all the
+available EVs with a low risk of procuring more energy than it can maximally
+charge. At this point in time, the RL agent determines a low remaining risk of
+$\li{h}\!=\!0.05$, and sets the bidding quantity to
+$\Pi{h}\!=\!(810\!-\!630)\!\times\!(1\!-\!0.05)\!=\!171\kw$. Hence, the
+controller procures 171kW from the intraday market and updates its account with
+$\Ci{h}(171)\!=\!0.4275\eur$. At electricity delivery time, 16^{th} of August
+2017 at 3:00pm, the controller assigns 223 of 255 available EVs to the VPP to
+provide the committed 801kW charging power for the market period time $\Delta h$
+of 15 minutes. During that time, three customers want to rent out EVs, which
+are allocated to the VPP. The first two rentals can be substituted with other
+available EVs, but the third rental has be to refused, since no other EV is
+idle and connected to a charging station to provide the committed energy. The
+controller has to account for the opportunity costs of the lost rental $\rho$.
 
 #+BEGIN_SRC python :exports none :var h=15
 def bal_cost(p_c, p_e, P):
@@ -1504,14 +1521,14 @@ return(bal_cost(5, -10, 630))
 
 
 #+BEGIN_SRC python :exports none :var h=15
-def bal_cost(p_u, P):
+def intraday_cost(p_u, P):
     return((p_u * P * (h/60) * 0.001))
 
-return(bal_cost(10, 900))
+return(intraday_cost(10, 171))
 #+END_SRC
 
 #+RESULTS:
-: 2.25
+: 0.4275
 
 #+BEGIN_SRC python :exports none :var h=15
 def industry_costs(p_i, P):
@@ -1522,6 +1539,25 @@ return(industry_costs(15, 900))
 
 #+RESULTS:
 : 33.75
+
+#+BEGIN_SRC python :exports none
+def pi(l):
+    kw = (810 - 630) * (1 - l)
+    return kw
+
+return(pi(0.05))
+#+END_SRC
+
+#+RESULTS:
+: 171.0
+
+#+BEGIN_SRC python :exports none :var h=15
+kw = 630  + 171
+return(kw)
+#+END_SRC
+
+#+RESULTS:
+: 801
 
 
 # Assume:
@@ -1565,11 +1601,6 @@ return(industry_costs(15, 900))
 # may or may not accept these offers depending on the composition of the offer
 # prices from the fleet owner and other market participants. The market auction
 # mechanism ultimately decides when EVs will charge and discharge.
-*** Dispatch Phase
-# When no replacement for VPP is available, we loose rental profits by violating customer mobility
-- $f_{heur}$ Heuristic function to dispatch power to EVs
-
-
 ** Reinforcement Learning Approach label:sec-model-rl
 # NOTE: RL Section before Bidding strategy?
 # NOTE: RL Learning only technical, everything else in bidding?
