@@ -1219,8 +1219,8 @@ compromising customer mobility by refusing customer rentals.
 | $T$         | Number of control periods in a market period.                             | -       |
 | $H$         | Number of market periods in day.                                          | -       |
 | $N_h$       | Total number of market periods.                                           | -       |
-| $\Delta t$  | Length of control period.                                                 | minutes |
-| $\Delta h$  | Length of market period.                                                  | minutes |
+| $\Delta t$  | Length of control period.                                                 | hours   |
+| $\Delta h$  | Length of market period.                                                  | hours   |
 |-------------+---------------------------------------------------------------------------+---------|
 | $\Pb{h}$    | Amount of balancing power offered on the balancing market.                | kW      |
 | $\cp{h}$    | Capacity price offered on the balancing market.                           | $\emw$  |
@@ -1333,26 +1333,26 @@ from the balancing market is defined as follows:
 \begin{equation} \label{eq-cost-balancing}
 \begin{split}
     \Cb{h}(P) &\defeq  -(P\!\times\!10^{-3} \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
-    &= -(P\!\times\!10^{-3} \times \ccp{h}) + (P \frac{\Delta h}{60}10^{-3} \times \cep{h}) \text{ ,}
+    &= -(P\!\times\!10^{-3} \times \ccp{h}) + (P \frac{\Delta h}{10^{3}} \times \cep{h}) \text{ ,}
 \end{split}
 \end{equation}
 where $P$ is the amount of offered balancing power in kW. The first term of the
 equation corresponds to the compensation the controller retrieves for keeping
 the balancing capacity available, while the second term corresponds to the costs
 for charging the activated balancing energy $\Eb{h}$. Energy is power over time,
-hence $\Eb{h}$ can be substituted with the $P$ times the market periods fraction
-of an hour $\frac{\Delta h}{60}$. As mentioned in the Chapter
-ref:sec-model-assumptions, the critical prices $\ccp{}, \cep{}, \cup{}$ are
-assumed to be available for all market periods. Note that the critical energy
-price $\cep{}\!\in\!\Re$, can also take negative values, resulting in profits
-for the fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$ can not
-take negative values and therefore never results in costs for the fleet. The
-cost function for charging from the intraday market is defined similarly to
+hence $\Eb{h}$ can be substituted with $P$ times the market periods length
+$\Delta{h}$, divided by the unit conversion from kW to MW. As mentioned in the
+Chapter ref:sec-model-assumptions, the critical prices $\ccp{}, \cep{}, \cup{}$
+are assumed to be available for all market periods. Note that the critical
+energy price $\cep{}\!\in\!\Re$, can also take negative values, resulting in
+profits for the fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$
+can not take negative values and therefore never results in costs for the fleet.
+The cost function for charging from the intraday market is defined similarly to
 Equation (ref:eq-cost-balancing):
 \begin{equation}
 \begin{split}
     \Ci{h}(P) &\defeq \Ei{h} \times \cup{h} \\
-    &= P \frac{\Delta h}{60}10^{-3}\times \cup{h} \text{ ,}
+    &= P \frac{\Delta h}{10^{3}}\times \cup{h}
 \end{split}
 \end{equation}
 Again, depending on the market situation, $\cup{}\!\in\!\Re$ can be either
