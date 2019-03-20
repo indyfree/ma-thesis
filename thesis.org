@@ -1201,10 +1201,10 @@ communicates with the EV fleet to control the charging in real-time. Online EV
 /control periods/ $t$ are typically shorter than market periods. In our case,
 the market periods of the considered markets are 15 minutes long, while we
 consider EV control periods of 5 minutes. During each control period, the
-controller has to take decisions about dispatching individual EVs for charging
-according to a heuristic function $f_{heur}$. In times of unforeseen rental
-demand, this decision implies trading off commitments to the markets with
-compromising customer mobility by refusing customer rentals.
+controller has to take decisions which individual EVs it should dispatch to
+charge the procured amount of electricity. In times of unforeseen rental demand,
+this decision implies trading off commitments to the markets with compromising
+customer mobility by refusing customer rentals.
 
 #+CAPTION[Table of Notation]: Table of Notation label:table-notation
 #+ATTR_LATEX: :environment longtable :align l|p{0.7\linewidth}|l :placement [hp]
@@ -1238,7 +1238,6 @@ compromising customer mobility by refusing customer rentals.
 |-------------+---------------------------------------------------------------------------+---------|
 | $N_i$       | Total number of EVs in the fleet.                                         | -       |
 | $p^{i}$     | Industry tariff                                                           | $\ekwh$ |
-| $\fh$       | Heuristic function to dispatch EVs to charging                            | -       |
 |-------------+---------------------------------------------------------------------------+---------|
 |-------------+---------------------------------------------------------------------------+---------|
 
