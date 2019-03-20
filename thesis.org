@@ -1382,28 +1382,36 @@ charging from the intraday market at the same market period $\Ci{h + (H \times
 7)}(\fPhat{h + (H \times 7)})$, the controller does not place bids on the
 balancing market.
 
-# NOTE: New section/heading?
-In a third step, the controller has to take a decision on the amount of
-balancing power it should bid on the balancing market. Determining the bidding
-quantity is a central piece of the controlled charging problem. The controller
-needs to balance the risks of (a) procuring enough energy from the market to
-sufficiently charge the fleet, and (b) procuring more energy that it can charge.
-In the latter case the fleet is facing costs of compromising customer mobility,
-or worse, high imbalance costs from the markets. Renting out EVs is much more
-profitable than using EVs as a VPP to participate on the electricity markets.
-Refusing customer rentals, in order to fulfill market commitments, induces
-opportunity costs of lost rentals $\rho$ on the fleet. Imbalance costs $\beta$
-occur, when the fleet can not charge the committed amount energy at all, even
-with refusing rentals. The controller faces additional risks by bidding one week
-ahead on the balancing market, as the predictions of available charging power
-are more uncertain than 30 minutes ahead on the intraday market. To account for
-the mentioned risks, we introduce a /risk factor/ $\lambda \in \Re_{0 \leq
-\lambda \leq 1}$, where $\lambda = 0$ indicates no risk, and $\lambda = 1$
-indicates a high risk.
+*** Determine the Bidding Quantity
+In a third step, the controller has to take a decision on the amount of energy
+it should procure from the markets. Determining the bidding quantity is a
+central piece of the controlled charging problem. The bidding quantity
+determines the profits that can be made, by charging at a cheaper market price
+than the flat industry tariff. In order to maximize its profits, the controller
+aims to procure as much electricity as possible from the markets. In order to
+optimally place bids on the electricity markets, it needs to balance the risk of
+(a) procuring more energy that it can maximally charge and (b) not procuring
+enough energy from the market to sufficiently charge the fleet.
 
-The controller determines the bidding quantity $\Pb{h}$ by discounting the
-predicted available fleet charging power $\fPhat{h}$ with the possible risk
-$\lambda_{h}$ of occurring imbalance or opportunity costs:
+In the first case (a), the fleet is facing costs of compromising customer
+mobility, or worse, high imbalance penalties from the markets. Renting out EVs
+is considerably more profitable than using EVs as a VPP to participate on the
+electricity markets. Refusing customer rentals, in order to fulfill market
+commitments, induces opportunity costs of lost rentals $\rho$ on the fleet.
+Imbalance costs $\beta$ occur, when the fleet can not charge the committed
+amount energy at all, even with refusing rentals. In the second case (b), the
+fleet also faces opportunity costs of lost rentals when individual EVs do now
+have enough SoC for planned trips of arriving customers.
+
+The controller faces additional risks by bidding one week ahead on the balancing
+market, than only 30 minutes ahead on the intraday market, as the predictions of
+available charging power are more uncertain with the larger time horizon. To
+account for all the mentioned risks, we introduce a /risk factor/ $\lambda \in
+\Re_{0 \leq \lambda \leq 1}$, where $\lambda = 0$ indicates no risk, and
+$\lambda = 1$ indicates a high risk. The controller determines the bidding
+quantity $\Pb{h}$ by discounting the predicted available fleet charging power
+$\fPhat{h}$ with the possible risk $\lambda_{h}$ of occurring imbalance or
+opportunity costs:
 \begin{equation}
   \Pb{h}=
   \begin{cases}
@@ -1413,18 +1421,14 @@ $\lambda_{h}$ of occurring imbalance or opportunity costs:
   \end{cases}
 \end{equation}
 where $h$ is the market period of interest one week ahead. If the controller can
-charge cheaper from the intraday market, it does not place a bid. If the
-controller can charge cheaper with the regular industry tariff $p^{i}$, it does
-not place a bid either. In all other cases, the controller submits $\Pb{h}$ to the
-market.
-# TODO: Bids always get accepted & activated on Balancing market, mention prices?
+buy electricity at the intraday market at a lower price, it does not place a bid
+at the balancing market. If the controller can charge cheaper at the regular
+industry tariff $p^{i}$, it does not place a bid either. In all other cases, the
+controller submits $\Pb{h}$ to the market.
 
-# TODO: Generalilzation, lead time, trades always get matched on intraday, prices?
-The second decision phase occurs 30 minutes before the physical electricity
-delivery on the intraday market. In this phase, the controller places bids for
-the market period $h+30$. The bidding quantity for the intraday market $\Pi{h}$
-depends on the previously committed charging power $\Pb{h}$ and the predicted
-charging power $\fPhat{h}$, 30 minutes ahead:
+The bidding quantity for the intraday market $\Pi{h}$ depends on the previously
+committed charging power $\Pb{h}$ and the predicted charging power $\fPhat{h}$,
+30 minutes ahead:
 \begin{equation}
   \Pi{h}=
   \begin{cases}
@@ -1437,7 +1441,7 @@ amount of electricity that the controller procured from the balancing market,
 does not need to bought from intraday market for the same market period. Because
 the predicted charging power $\fPhat{h}$ is expected to be  more accurate 30
 minutes ahead than one week ahead, the controller is able to correct bidding
-errors it made in the first decision phase, and almost fully utilize the EV
+errors it made in the first decision phase, and optimally charge the whole EV
 fleet.
 
 The controllers goal is to choose the risk factors $\lb{h}$, $\li{h}$ for every
