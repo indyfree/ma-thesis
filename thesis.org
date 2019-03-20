@@ -1278,8 +1278,27 @@ textcite:brandt17_evaluat_busin_model_vehic_grid_integ,vandael15_reinf_learn_heu
 # NOTE: Embed/Mention DSS? What about Smart Charging?
 The central control mechanism constitutes the core of this research. It can be
 seen as a decision support system that can be employed at a EV fleet operator to
-facilitate smart charging its fleet. The control mechanism is divided into three
-distinct phases (see Figure ref:fig-control-mechanism).
+facilitate smart charging its fleet. Figure ref:fig-control-mechanism depicts
+the control mechanism, which is divided into three distinct phases:
+
+# TODO:Other figure, with phase timeline?
+The first phase, /Bidding Phase I/, occurs just before the closing time of the
+balancing market, once every week (e.g., Wednesdays at 3pm at the GCRM). In this
+phase, the controller can place bids for every market period $h$ of the
+following week on the balancing market. The second phase, /Bidding Phase II/,
+occurs every market period of $\Delta{h}\!=\!15$ minutes. At this point, the
+controller has the opportunity to place bids for the market period 30 minutes
+ahead. By submitting bids 30 minutes ahead of time, the controller assures that
+the bid will be matched until the lead time of the market (e.g, 5 minutes on the
+EPEX Spot Intraday Continuous). The third phase, /Dispatch Phase/, occurs in
+almost real time, every control period of $\Delta{t}\!=\!5$ minutes. In this
+phase the controller has to dispatch available EVs to charge the procured
+electricity from the markets. This phase involves allocating individual EVs to
+the VPP and eventually refusing customer rentals to assure that all commitments
+can be fulfilled.
+
+The following chapters will highlight the important parts of the various phases
+and provide detailed explanation and mathematical formulations.
 
 #+CAPTION[EV VPP Control Mechanism]: EV VPP Control Mechanism label:fig-control-mechanism
 #+ATTR_LATEX: :width 1\linewidth
