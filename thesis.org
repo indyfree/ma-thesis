@@ -1183,10 +1183,10 @@ mechanism procures energy from electricity markets, allocates available EVs to
 VPPs, and intelligently dispatches EVs to charge the acquired amount of energy.
 The model uses a RL agent that learns an optimal bidding strategy by interacting
 with the electricity markets and reacts to changing rental demand of the EV
-fleet. This chapter is structured as follows: First, the information assumptions
-are listed, and the general control mechanism is explained. Afterwards, the
-bidding strategy and the RL approach are described in detail. Finally, the
-dispatch algorithm is presented.
+fleet. This chapter is structured as follows: The information assumptions are
+listed first, the control mechanism is explained next, and finally the RL
+approach is described in detail. For a table of notation refer to Table
+ref:table-notation.
 
 # NOTE: Section: Problem Description
 We formulate the problem as a /controlled EV charging/ problem. The EV fleet
@@ -1206,11 +1206,12 @@ procured amount of electricity. In times of unforeseen rental demand, this
 decision implies trading off commitments to the markets with compromising
 customer mobility by refusing customer rentals.
 
+
 #+CAPTION[Table of Notation]: Table of Notation label:table-notation
 #+ATTR_LATEX: :environment longtable :align l|p{0.7\linewidth}|l :placement [hp]
 |---------------------------+---------------------------------------------------------------------------+---------|
 |---------------------------+---------------------------------------------------------------------------+---------|
-| Variable                  | Description                                                               | Unit    |
+| Symbol                    | Description                                                               | Unit    |
 |---------------------------+---------------------------------------------------------------------------+---------|
 | $t$                       | Control period.                                                           | -       |
 | $h$                       | Market period.                                                            | -       |
@@ -1306,7 +1307,7 @@ The following chapters will highlight the important parts of the various phases
 and provide detailed explanation and mathematical formulations.
 
 #+CAPTION[EV VPP Control Mechanism]: EV VPP Control Mechanism label:fig-control-mechanism
-#+ATTR_LATEX: :width 1\linewidth
+#+ATTR_LATEX: :width 1\linewidth :placement [p]
 [[./fig/control_mechanism.png]]
 
 # TODO: Figure:
