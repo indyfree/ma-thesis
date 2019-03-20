@@ -1173,8 +1173,6 @@ Chapter ref:sec-spot-market.
 #+LATEX: \clearpage
 * Model: FleetRL
 # NOTE: 20%
-# TODO: Formulate Problem of needing to learn capacity allocation
-# NOTE: What about capacity prediction uncertainty? Need to model, otherwise RL makes no sense
 # NOTE: Mention VPP more clearly?
 
 # NOTE: Need to reformulate Intro+Following to only balancing
@@ -1453,17 +1451,15 @@ Solving this optimization problem with common methods like stochastic
 programming is a difficult task, when we assume that complete information of
 available charging power and future electricity market prices is not always
 available. Since one goal of this research is to develop a model that can be
-applied to previously unknown settings and learn from uncertain environments, we
-chose to solve the problem, by using a RL learning approach that is explained in
-detail in Chapter ref:sec-model-rl.
+applied to previously unknown settings and learn from uncertain environments,
+like mobility and electricity markets, we chose to solve the problem with a RL
+learning approach that is explained in detail in Chapter ref:sec-model-rl.
 # NOTE: Similar to cite:vandael15_reinf_learn_heuris_ev_fleet
 
 *** Dispatch Phase
 # When no replacement for VPP is available, we loose rental profits by violating customer mobility
-- $f_{heur}$ Heuristic function to dispatch power to EVs
-- NOTE: Similar to cite:vandael15_reinf_learn_heuris_ev_fleet
-
-
+# We assume that we can provide the commited energy by different EVs across the
+# market period
 *** Example
 At 3pm on the 9^{th} of August 2017, the controller enters its first decision
 phase for procuring electricity one week ahead, the market period $h$ =
@@ -1560,6 +1556,11 @@ return(kw)
 : 801
 
 
+# TODO: Do we really need Dispatch Algorithm, if remaining EVs get charged
+# regulary?
+# --> NO. Only if multiple rentals arrive at the same time and we have to refuse
+# some, we could choose to refuse the rentals where EV has LOW SoC, so they get charged
+
 # Assume:
 # - Bid maximum capacity price?
 # - What about balancing capacity prices? Future work?
@@ -1626,16 +1627,6 @@ return(kw)
 - $A = \{(P_{bal}, P_{int}), P_{bal}, P_{int} \in \Re \}$
 - $S = \{(\overline{p}_w^t, \overline{p}_u^t, Q_{fleet}^t), \overline{p}_w^t,
   \overline{p}_u^t, Q_{fleet}^t \in \Re \}$
-** Dispatch Heuristic / Algorithm
-# TODO: Algorithm formulations for Dispatch Algorithm
-1) Lowest SoC - Does that make sense? All other EVs get charged regularly anyways.
-   - Maybe highest SoC, since we can allow charging to be disrupted
-2) Expected Departure time:
-   - Time difference avg. idle time based on zip code - actual idle time
-   - Time difference pred. idle time - actual idle time
-
-
-See cite:vandael15_reinf_learn_heuris_ev_fleet
 
 
 * Simulation Platform: FleetSim
