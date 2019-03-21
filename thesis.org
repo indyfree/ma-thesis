@@ -87,11 +87,12 @@ customer mobility by refusing customer rentals.
 | $\Cf{}(\theta_{\lambda})$ | Cost function for the fleets total costs over all market periods $h$.     | $\eur$  |
 |---------------------------+---------------------------------------------------------------------------+---------|
 | $i$                       | Electric Vehicle                                                          | -       |
-| $\F$                      | Set of all EVs in the Fleet                                               | -       |
+| $\c$                      | Dummy variable if EV is connected to a charging station.                  | 0/1     |
+| $\omega_{i}$              | Amount of electricity stored in EV.                                       | $\kwh$  |
+| $\Omega$                  | Maximum battery capacity of EV.                                           | $\kwh$  |
+| $\delta$                  | Charging power of EV at the charging station.                             | $\kw$   |
+| $\F$                      | Set of all EVs in the fleet                                               | -       |
 | $\nF$                     | Total number of EVs in the fleet.                                         | -       |
-| $\omega_{i}$              | Amount of electricity stored in EV $i$.                                   | $\kwh$  |
-| $\Omega$                  | Maximum battery capacity of EVs.                                          | $\kwh$  |
-| $\delta$                  | Charging power of EVs at the charging station.                            | $\kw$   |
 |---------------------------+---------------------------------------------------------------------------+---------|
 
 ** Required Information Assumptions label:sec-model-assumptions
@@ -198,7 +199,7 @@ charging electricity from the balancing market and the intraday market. The cost
 function for charging electricity from the balancing market is defined as follows:
 \begin{equation} \label{eq-cost-balancing}
 \begin{split}
-    \Cb{h}(P) &\defeq  -(P\!\times\!10^{-3} \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
+    \Cb{h}(P) &\defeq -(P\!\times\!10^{-3} \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
     &= -(P\!\times\!10^{-3} \times \ccp{h}) + (P \frac{\Delta h}{10^{3}} \times \cep{h}) \text{ ,}
 \end{split}
 \end{equation}
@@ -264,7 +265,7 @@ opportunity costs:
 \begin{equation} \label{eq-model-pb}
   \Pb{h}=
   \begin{cases}
-    0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Eb{h} \times p^{i}\\
+    0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Eb{h}10^3 \times p^{i}\\
     0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Ci{h}(\fPhat{h})\\
     \fPhat{h} \times (1\!-\!\lb{h}), & \text{otherwise}
   \end{cases}
@@ -281,14 +282,14 @@ committed charging power $\Pb{h}$ and the predicted charging power $\fPhat{h}$,
 \begin{equation} \label{eq-model-pi}
   \Pi{h}=
   \begin{cases}
-    0, & \text{if}\ \Ci{h}(\fPhat{h}\!-\!\Pb{h}) \geq \Ei{h} \times p^{i}\\
+    0, & \text{if}\ \Ci{h}(\fPhat{h}\!-\!\Pb{h}) \geq \Ei{h}10^3 \times p^{i}\\
     (\fPhat{h}\!-\!\Pb{h}) \times (1\!-\!\li{h}), & \text{otherwise}
   \end{cases}
 \end{equation}
 where $h$ is the market period of interest 30 minutes ahead. Note that any
 amount of electricity that the controller procured from the balancing market,
 does not need to be bought from intraday market for the same market period.
-Because the predicted charging power $\fPhat{h}$ is expected to be more
+Since the predicted charging power $\fPhat{h}$ is expected to be more
 accurate 30 minutes ahead than one week ahead, the controller is able to correct
 bidding errors it made in the first decision phase, and optimally charge the
 whole EV fleet.
