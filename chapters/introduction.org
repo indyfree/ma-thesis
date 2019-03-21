@@ -1,0 +1,45 @@
+* Introduction
+# NOTE: 10%
+** Research Motivation
+- cite:lopes11_integ_elect_vehic_elect_power_system
+# It is also expected that the amount of intermittent RES
+# that can be safely integrated into the electric power system
+# may increase due to EV storage capacity [11]. Given the
+# uncontrollability of these energy sources, since they only
+# produce energy when the primary renewable resource is
+# available, EV capability to store energy and inject it later
+# into the system will avoid spillage of clean energy,
+# resulting in the decreased usage of the conventional fossil
+# fuel units and expensive generators during peak hours.
+** Research Question
+** Relevance
+# #+LATEX: \clearpage
+
+* Footnotes
+
+[fn:1] See https://regelleistung.net, accessed on 15^{th} February
+2019, for further information on the market design and historical data.
+
+[fn:2]
+https://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2017/28062017_Regelenergie.html,
+accessed 18^{th} February, 2019
+
+[fn:3]https://www.epexspot.com/en/press-media/press/details/press/Traded_volumes_soar_to_an_all-time_high_in_2018,
+accessed 19^{th} February, 2019
+
+[fn:4] https://www.car2go.com
+
+[fn:5] https://www.drive-now.com
+
+[fn:6] https://procom-energy.de
+
+[fn:7] See https://www.gps.gov/systems/gps/performance/accuracy, accessed
+23^{th} February 2019.
+
+[fn:8] The data of activated secondary control reserve is freely available at https://regelleistung.net.
+
+[fn:9] https://www.regelleistungen.net
+
+[fn:10] https://www.epexspot.com
+
+#  LocalWords:  explaina

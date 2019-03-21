@@ -1,0 +1,898 @@
+* Background
+# NOTE: 30%
+# TODO: Introductary paragraph
+# TODO: Tell a story!
+** Smart Electricity Markets
+On electricity markets, actors participate in auctions to match the supply of
+electricity generation and the demand for electricity consumption. Participants
+place asks (sale offers) and bids (purchase orders). The electricity price is
+determined by an auction mechanism, which can take different forms depending on
+the type of market. Germany, like many other western countries, has a
+liberalized energy system in which the generation and distribution of
+electricity are decoupled. Multiple electricity markets exist in a liberalized
+energy system. They differ in the auction design and in their reaction time
+between the order contract and the delivery of electricity. Day-ahead markets
+and spot markets have a reaction time between a day and several hours, whereas
+in operating reserve markets the reaction time ranges from minutes to seconds.
+The auction mechanism design is essential for electricity markets
+cite:kambil98_reeng_dutch_flower_auction. Electricity markets work according to
+the merit order principle in which resources are considered in ascending order
+of the energy price until the capacity demand is met. The clearing price is
+determined by the energy price, at the point where supply meets demand. Payment
+models differ in the markets: In contrast to day-ahead markets, where a uniform
+pricing schema is applied, in secondary reserve markets and intraday markets
+bidders, get compensated by the price they bid (pay-as-bid principle).
+
+# TODO: Paragraph: Smart Electricity Markets, Distributed, Decentralized, Renewables, VPP, EVs = RES
+# TODO: Smart Electricity Markets with EV fleet control
+# cite:kempton05_vehic_to_grid_power_implem,mwasilu14_elect_vehic_smart_grid_inter
+
+# TODO: Describe week ahead or day ahead commitment of balancing market?
+EV fleet operators can offer the capacity of their EV batteries on multiple
+markets at the same time to make use of the different market properties. On
+operating reserve markets,prices are usually more volatile and consequently more
+attractive for VPPs cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
+Operating reserve markets also bear a higher risk for the fleet: Commitments
+have to be made one week in advance when customer demands are still uncertain.
+In order to not face penalties for unfulfilled commitments only a conservative
+amount of capacity can be offered to the market. On the other hand, spot markets
+allow participants to continuously trade electricity products up to five minutes
+prior to delivery. At this point in time, it is possible to predict available
+battery capacity of the fleet with high accuracy. This certainty creates the
+possibility to trade the remaining available capacity with low risk at the spot
+market. In the following, we will explain the market design of balancing markets
+and spot markets in more detail, since they are the markets we included in our
+research.
+# TODO: Fix pointing arrows
+#+CAPTION[Electricity Market Design]: Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
+#+ATTR_LATEX: :width 0.95\linewidth
+[[./fig/electricity_markets.png]]
+** Electricity Market Theory:
+*** Balancing Market label:sec-balancing-market
+# NOTE: Consider changing heading to Operating reserve market / frequency
+The balancing market is a tool to balance frequency deviations in the power
+grid. It offers auctions for primary control reserve, secondary control reserve
+as well as tertiary control reserve (minute reserve), which primarily differ in
+the required ramp-up times of the participants. As depicted in Figure
+ref:fig-electricity-markets, the balancing market can be seen as the last link
+in a chain of electricity markets cite:veen16_elect_balan_market. In this study,
+we will look at the German Control Reserve Market (GCRM), one of the largest
+frequency regulation markets in the world. However, the presented concepts can
+be easily transferred to other balancing markets in unbundled energy systems,
+since the market design is similar
+cite:brandt17_evaluat_busin_model_vehic_grid_integ. Transmission Systems
+Operators (TSO) procure their required control reserve via tender auctions at
+the GCRM. The market conducts daily auctions for the three types of control
+reserve. This thesis focuses on the secondary operating reserve auction, in
+which participants must be able to supply or absorb a minimum of 1MW of power
+over a 4-hour interval with a reaction time of 30 seconds.[fn:1] Since EV
+batteries can absorb energy almost instantly, when they are connected to a
+charging station, they are suitable to provide such balancing services.
+Operating reserve providers have to be qualified by the TSO to participate in
+the market and are able to reliably provide the committed capacity. Although EV
+fleets are currently not qualified by the GCRM to be used as operating reserve,
+they could theoretically handle the minimum capacity requirements. Around 220
+EVs would need to simultaneously charge at standard 4.6kW charging stations to
+provide 1MW of downward regulating capacity.
+# TODO: Citation for EVs not currently allows to provide operating reserve
+# NOTE: Add: Fast chargers (22KW) would only need 50EVs, but batteries are depleted much
+# faster, hence SoC plays a larger role?
+Up until 28^{th} July 2018, auctions were held weekly, with two different
+segments each week (peak hours/non-peak hours). Afterwards, the auction
+mechanism changed to /daily/ auctions of six four-hour segments of positive and
+negative control reserve.[fn:2] Shorter auction cycles facilitate the
+integration of renewable energy generators into the secondary control reserve
+market, as they are dependent on accurate (short-term) capacity forecasts.
+# NOTE: Not mentioned only V2G before. Reference Lit review for justification?
+Positive control reserve is energy that is supplied to the grid, when the grid
+frequency falls below 50Hz. It can be provided by increasing the electricity
+generation or by reducing the grid load (i.e., electricity consumption). On the
+contrary, negative control reserve is required when the grid frequency rises
+above 50Hz and can be provided by adding grid load or reducing electricity
+generation. Since we do not consider V2G in this thesis, the EV fleets in our
+model are only able provide /negative control reserve/, which we will refer to
+as /control reserve/ until the end of the thesis. Market participants submit
+bids in the following form to the market: $(\Pb{}, \cp{}, \ep{})$, where $\Pb{}$
+is the amount of electrical power that can be supplied on demand in kW, $\cp{}$ is
+the capacity price for keeping the power available in $\emw$ and
+$\ep{}$ is the energy price for delivered energy in $\emwh$. The TSO
+determines the target quantity of energy to acquire per timeslot, it usually
+acquires much higher regulation capacity to minimize risks and activates the
+capacity on demand. The TSO accepts the bids based on the capacity price in a
+merit order. Providers, whose bids were accepted, instantly get compensated for
+the provided capacity: $R^c = \cp{} \times \Pb{}$. At the time regulation
+capacity is needed, usually a day to a week later, the TSO activates the
+capacity according to a merit order of the ascending /energy prices/ $\ep{}$.
+Hence, providers are also compensated according to the actual energy $\Eb{}$
+they supplied or consumed: $R^e = \ep{} \times \Eb{}$. Since provider get paid
+according to their submitted price $\ep{}$, instead of a market clearing price,
+this type of auction is called /pay-as-bid/ auction.
+# NOTE: Add more citations? brandt?
+# NOTE: Possible include example
+# NOTE: Mention New German Mischpreisverfahren.
+# NOTE: Market mechanism is a multi-unit, first-price, sealed-bid auction, which is settled on a ”pay-as-bid"
+# NOTE: Possible include market volume, average prices, etc..
+*** Spot Market label:sec-spot-market
+# TODO: Intraday mainly for balancing!!! Rephrase Intro+Lit Review to only provide
+# balancing i.e. sustainablility work?
+As mentioned in the previous chapter, the equilibrium of electricity supply and
+demand is ensured through a sequence of interdependent wholesale markets (cited)
+cite:pape16_are_fundam_enoug. Next to the balancing market at the end of the
+sequence, mainly two different types of spot markets exist, the day-ahead
+market and the intraday market. In this research, we consider the European Power
+Exchange (EPEX Spot) as it is the largest electricity market in Europe, with a
+total trading volume of approximately 567TWh in 2018[fn:3], but most electronic
+spot markets in western economies work with similar market mechanisms.
+
+In Germany, the most important spot market is the day-ahead market with a
+trading volume of over 234TWh in 2018[fn:3]. Participants place asks and bids
+for hourly contracts of the following day on the /EPEX Spot Day-ahead Auction/
+market until the market closes at 12pm on the day before delivery (see Figure
+ref:fig-electricity-markets). The day-ahead market plays an essential role in
+integrating volatile renewable energy sources (RES) into the power system
+cite:pape16_are_fundam_enoug. Generators forecast the expected generation
+capacity for the next day and sell those quantities on the market
+cite:karanfil17_role_contin_intrad_elect_market. After the market closes, the
+participants have the opportunity to trade the difference between the day-ahead
+forecast and the more accurate intraday forecast on the intraday market
+cite:kiesel17_econom_analy_intrad_elect_prices. In this way, RES generators can
+cost effectively self-balance their portfolios, instead of relying on balancing
+services provided by the TSO, which imposes high imbalance costs on participants
+cite:pape16_are_fundam_enoug.
+
+On the /EPEX Spot Intraday Continuous/ market, electricity products are traded
+up until 5 minutes before physical delivery. Hourly contracts, as well as
+15-minute and block contracts, can be traded. In contrast to the day-ahead
+auction, the intraday market is a continuous order-driven market. Participants
+can submit limit orders at any time during the trading window and equally change
+or withdraw the order at any time before the order is accepted. Limit orders are
+specified as price-quantity pairs: $(\Pi{}, \up{})$, where $\Pi{}$ is the
+traded amount of electrical power in kW and $\up{}$ is the price for the delivered
+energy unit (hour/quarter/block) in $\emwh$. When an order to buy
+(bid) matches an order to sell (ask), the trade immediately gets executed. The
+order book is visible to all participants, hence it is known which unmatched
+orders exist at the time of interest. The intraday market has a trading volume
+of 82TWh, which is considerably smaller than day-ahead market's volume. Despite
+that, the intraday market plays a vital role to the stability of the grid. All
+executed trades on the intraday market potentially reduce the activation of
+control reserve through the TSO.
+
+Purchasing electricity on the continuous intraday market is attractive for EV
+fleets with uncertain mobility demand. Due to the intradays market's short time
+before delivery, EV fleet operators can rely on highly accurate forecasts of
+available battery capacity to charge, before submitting an order to buy. In this
+way, they can reliably charge at a potentially lower price at the intraday
+market than the regular industry tariff. In an integrated bidding strategy, EV
+fleet operators can, similarly to RES generators, balance out forecast errors of
+available battery capacity on the intraday market. Trades on the intraday market
+can complement bids that have been committed to other markets earlier (e.g., to
+the secondary operating reserve market).
+** EV Fleet Control in the Smart Grid
+# Former Section: Smart Charging and Balancing the Electric Grid with EV Fleets
+# NOTE: Section General Problem and Intro of Smart Charging
+# NOTE: The physical reinforcement of the power grid is a costly and lengthy
+# undertaking.
+# https://www.netzentwicklungsplan.de/de/besonderheiten-des-nep-2030-2019
+The increasing penetration of EVs has a substantial effect on electricity
+consumption patterns. During charging periods, power flows and grid losses
+increase considerably and challenge the grid. Operators have to reinforce the
+grid to ensure that transformers and substations do not overload
+cite:sioshansi12_impac_elect_tarif_plug_in,lopes11_integ_elect_vehic_elect_power_system.
+Loading multiple EVs in the same neighborhood, or worse, whole EV fleets at
+once, stress the grid. In these cases, even brown- or blackouts can occur.
+cite:kim12_carbit. Despite these challenges, it is possible to support the
+physical reinforcement by adopting smart charging strategies. In smart charging,
+EVs get charged when the grid is less congested to ensure grid stability. Smart
+charging reduces peaks in electricity demand, called /Peak Cutting/, and
+complement the grid in times of low demand, called /Valley Filling/. Smart
+charging has been researched thoroughly in the IS literature, in the following
+we will outline some of the most important contributions.
+
+
+# NOTE: Section Smart charging examples and studies
+textcite:valogianni14_effec_manag_elect_vehic_storag found that using
+intelligent agents to schedule EV charging substantially reshapes the energy
+demand and reduces peak demand without violating individual household
+preferences. Moreover, they showed that the proposed smart charging behavior
+reduces average energy prices and thus benefit households economically. In
+another study, textcite:kara15_estim_benef_elect_vehic_smart investigated the
+effect of smart charging on public charging stations in California. Controlling
+for arrival and departure times, the authors presented beneficial results for
+the distribution system operator (DSO) and the owners of EVs. Their approach
+resulted in a price reduction in energy bills and a peak load reduction. An
+extension of the smart charging concept is Vehicle-to-Grid (V2G). When equipped
+with V2G devices, EVs can discharge their batteries back into the grid. Existing
+research has focused on this technology in respect to grid stabilization effects
+and arbitrage possibilities. For instance,
+textcite:schill11_elect_vehic_imper_elect_market showed that the usage of EVs
+can decrease average consumer electricity prices. Excess EV battery capacity can
+be used to charge in off-peak hours and discharge in peak hours, when the prices
+are higher. These arbitrage possibilities reverse welfare effects of generators
+and increase the overall welfare and consumer surplus.
+textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor found that the
+arbitrage opportunities are especially prominent when a high variability in
+electricity prices on the target electricity market exists. The authors stated
+that short intervals between the contract of sale and the physical delivery of
+electricity increase arbitrage benefits. Consequently, ancillary service
+markets, like frequency control and operating reserve markets, are attractive
+for smart charging.
+
+# NOTE: Section Explain and prove why leaving out V2G.
+# NOTE: Kahlen and Brand both balancing market, Brand never used V2G
+textcite:peterson10_econom_using_plug_in_hybrid investigated energy arbitrage
+profitability with V2G in the light of battery depreciation effects in the US.
+The results of their study indicate that large-scale use of EV batteries for
+grid storage does not yield enough monetary benefits to incentivize EV owners to
+participate in V2G activities. Considering battery depreciation cost, the
+authors arrived at an annual profit of only 6\dollar - 72\dollar per EV.
+textcite:brandt17_evaluat_busin_model_vehic_grid_integ evaluated a business
+model for parking garage operators operating on the German frequency regulation
+market. When taking infrastructure costs and battery depreciation costs into
+account, they conclude that the proposed vehicle-grid integration is not
+profitable. Even with idealized assumptions about EV adoption rates in Germany
+and altered auction mechanisms, the authors arrived at negative profits.
+textcite:kahlen17_fleet used EV fleets to offer balancing services to the grid.
+Evaluating the impact of V2G in their model, the authors conclude that V2G would
+only be profitable if reserve power prices were twice as high. Considering the
+results from the studies mentioned above, our research does not include V2G,
+since only marginal profits are expected.
+
+# NOTE: Section Trading strategies on multiple markets, battery depreciation
+In order to maximize profits, it is essential for market participants to develop
+successful bidding strategies. Several authors have investigated bidding
+strategies to jointly participate in multiple markets
+cite:mashhour11_biddin_strat_virtual_power_plant_2,he16_optim_biddin_strat_batter_storag.
+textcite:mashhour11_biddin_strat_virtual_power_plant_2 used stationary battery
+storage to participate in the spinning reserve market and the day-ahead market
+at the same time. The authors developed a non-equilibrium model, which solves
+the presented mixed-integer program with Genetic Programming (GP). Contrarily,
+we use a model-free RL agent that learns an optimal policy (i.e., a trading
+strategy) from actions it takes in the environment (i.e., bidding on electricity
+markets). Using a model-free approach is especially beneficial for us, since
+additional unknown variables and constraints (i.e., customer mobility demand)
+complicate the formulation of a mathematical model.
+# TODO: Revise above paragraph, more clarity and concise
+textcite:he16_optim_biddin_strat_batter_storag conducted similar research to
+textcite:mashhour11_biddin_strat_virtual_power_plant_2. The authors additionally
+incorporated battery life cycle in their profit maximization model, which proved
+to be a decisive factor. In contrast to the authors, we jointly participated in
+the secondary operating reserve and spot market with the /non-stationary/
+storage of EV batteries. Because shared EVs have to satisfy mobility demand,
+they have to be charged in any case, which allows us to safely exclude battery
+depreciation from our model. Further, we chose the intraday market over the
+day-ahead market, as it has the lowest reaction time among the spot markets, and
+thus potentially offers higher profits
+cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
+
+# NOTE: Section Intelligent Agents within Smart Charging and VPPs
+Previous studies often assume that car owners or households can directly trade
+on electricity markets. In reality, this is not possible due to the minimum
+capacity requirements of the markets, requirements that single EVs do not meet.
+For example, the German Control Reserve Market (GCRM) has a minimum trading
+capacity of 1MW to 5MW, depending on the specific market. In order to reach the
+minimum capacity, over 200 EVs would need to be connected to the grid via a
+standard 4.6kW charging station at the same time. textcite:ketter13_power_tac
+introduced the notion of electricity brokers, aggregators that act on behalf of
+a group of individuals or households to participate in electricity markets.
+textcite:brandt17_evaluat_busin_model_vehic_grid_integ and
+textcite:kahlen14_balan_with_elect_vehic successfully showed that electricity
+brokers can overcome the capacity issues by aggregating EV batteries. In
+addition to electricity brokers, we apply the concept of Virtual Power Plants
+(VPPs). VPPs are flexible portfolios of distributed energy resources, which are
+presented with a single load profile to the system operator, making them
+eligible for market participation and ancillary service provisioning
+cite:pudjianto07_virtual_power_plant_system_integ. Hence, VPPs allow providing
+regulation capacity to the market without knowing which exact sources provide
+the promised capacity until the delivery time cite:kahlen17_fleet. This concept
+is specially useful when dealing with EV fleets: VPPs enable carsharing
+providers to issue bids and asks based on an estimate of available fleet
+capacity, without knowing beforehand which exact EVs will provide the capacity
+at the time of delivery. Based on the battery charge and the availability of
+EVs, an intelligent agent decides in real-time which vehicles provide the
+capacity.
+# NOTE: Section Carsharing and EV fleets
+Centrally managed EV fleets make it possible for carsharing providers to use the
+presented concepts as a viable business extension. Free float carsharing is a
+popular concept that allows cars to be picked up and parked everywhere, and the
+customers are billed is by the minute. Free float carsharing offers flexibility
+to its users, saves resources, and reduces carbon emissions
+cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Most previous studies
+concerned with the usage of EVs for electricity trading, assumed that trips are
+fixed and known in advance, e.g., in
+textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. The free float
+concept adds uncertainty and nondeterministic behavior, which make predictions
+about future rentals a complex issue.
+# NOTE: Section Kahlen in more detail and what we'll do differently
+textcite:kahlen17_fleet showed that it is possible to use free float carsharing
+fleets as VPPs to profitably offer balancing services to the grid. In their
+study, the authors compared cases from three different cities across Europe and
+the US. They used an event-based simulation, bootstrapped with real-world
+carsharing and secondary operating reserve market data from the respective
+cities. A central dilemma within their research was to decide whether an EV
+should be committed to a VPP or free for rent. Since rental profits are
+considerably higher than profits from electricity trading, it is crucial not to
+allocate an EV to a VPP when it could have been rented out otherwise. To deal
+with the asymmetric payoff, citeauthor:kahlen17_fleet used stratified sampling
+in their classifier. This method gives rental misclassifications higher weights,
+reducing the likelihood of EVs to participate in VPP activities. The authors
+used a Random Forest regression model to predict the available balancing
+capacity on an aggregated fleet level. Only at the delivery time, the agent
+decides which individual EVs provide the regulation capacity. This heuristic is
+based on the likelihood that the vehicle is rented out and on its expected
+rental benefits.
+
+In a similar study, the authors showed that carsharing companies can participate
+in day-ahead markets for arbitrage purposes
+cite:kahlen18_elect_vehic_virtual_power_plant_dilem. In the paper, the authors
+used a sinusoidal time-series model to predict the available trading capacity.
+Another central problem for carsharing providers is that committed trades, which
+can not be fulfilled, result in substantial penalties from the system operator
+or electricity exchange. In other words, fleet operators have to avoid buying
+any amount of electricity, which they can't be sure to charge with available EVs
+at the delivery time. To address this issue, the authors developed a mean
+asymmetric weighted (MAW) objective function. They used it for their time-series
+based prediction model, to penalize committing an EV to VPP when it would have
+been rented out otherwise. Because of the two issues mentioned above,
+textcite:kahlen18_elect_vehic_virtual_power_plant_dilem could only make very
+conservative estimations and commitments of overall available trading capacity,
+resulting in a high amount of missed profits. This effect is especially
+prominent when participating in the secondary operating reserve market, since
+commitments have to be made one week in advance when mobility demands are still
+uncertain. textcite:kahlen17_fleet stated that in 42% to 80% of the cases, EVs
+are /not/ committed to a VPP when it would have been profitable to do so.
+# NOTE: Section Short summary what we will do
+# TODO: Rework
+This thesis proposes a solution in which the EV fleet participates in the
+balancing market and intraday market simultaneously. With this approach, we
+align the potentially higher profits on the balancing markets, with more
+accurate capacity predictions for intraday markets
+cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. This research followed
+textcite:kahlen17_fleet, who proposed to work on a combination of multiple
+markets in the future.
+
+** Reinforcement Learning Controlled EV Charging
+
+Previous research shows that intelligent agents equipped with Reinforcement
+Learning (RL) methods can successfully take action in the smart grid. The
+following chapter outlines different research approaches of RL in the domain of
+smart grids. For a more thorough description, mathematical formulations and
+common issues, of RL refer to Chapter ref:sec-reinforcement-learning.
+
+textcite:reddy11_learn_behav_multip_auton_agent,reddy11_strat used autonomous
+broker agents to buy and sell electricity from DER on a proposed /Tariff
+Market/. The agents use Markov Decision Processes (MDPs) and RL to learn pricing
+strategies to profitably participate in the Tariff Market. To control for a
+large number of possible states in the domain, the authors used /Q-Learning/
+with derived state space features. Based on descriptive statistics, they defined
+derived price and market participant features. By engaging with its environment,
+the agent learns an optional sequence of actions (policy) based on the state of
+the agent. textcite:peters13_reinf_learn_approac_to_auton built on that work and
+further enhanced the method by using function approximation. Function
+approximation allows to efficiently learn strategies over large state spaces, by
+deriving a function that describes the states instead of defining discrete
+states. By using this technique, the agent can adapt to arbitrary economic
+signals from its environment, resulting in better performance than previous
+approaches. Moreover, the authors applied feature selection and regularization
+methods to explore the agent's adaption to the environment. These methods are
+particularly beneficial in smart markets because market design, structures, and
+conditions might change in the future. Hence, intelligent agents should be able
+to adapt to it cite:peters13_reinf_learn_approac_to_auton.
+
+textcite:vandael15_reinf_learn_heuris_ev_fleet facilitated learned EV fleet
+charging behavior to optimally purchase electricity on the day-ahead market.
+Similarly to textcite:kahlen18_elect_vehic_virtual_power_plant_dilem, the
+problem is framed from the viewpoint of an aggregator that tries to define a
+cost-effective day-ahead charging plan in the absence of knowing EV charging
+parameters, such as departure time. A crucial point of the study is weighting
+low charging prices against costs that have to be paid when an excessive or
+insufficient amount of electricity is bought from the market (imbalance costs).
+Contrarily, textcite:kahlen18_elect_vehic_virtual_power_plant_dilem did not
+consider imbalance cost in their model and avoid them by sacrificing customer
+mobility in order to balance the market (i.e., not showing the EV available for
+rent, when it is providing balancing capacity).
+textcite:vandael15_reinf_learn_heuris_ev_fleet used a /fitted Q Iteration/ to
+control for continuous variables in their state and action space. In order to
+achieve fast convergence, they additionally optimized the /temperature step/
+parameter of the Boltzmann exploration probability.
+
+# TODO: More paragraphs, order or summarize.
+# TODO: Make offline/online approaches clear.
+textcite:dusparic13_multi proposed a multi-agent approach for residential demand
+response. The authors investigated a setting in which 9  EVs were connected to
+the same transformer. The RL agents learned to charge at minimal costs, without
+overloading the transformer. textcite:dusparic13_multi utilized /W-Learning/ to
+simultaneously learn multiple policies (i.e., objectives such as ensuring
+minimum battery charged or ensuring charging at low costs).
+textcite:taylor14_accel_learn_trans_learn extended this research by employing
+Transfer Learning and /Distributed W-Learning/ to achieve communication between
+the learning processes of the agents in a multi-objective, multi-agent setting.
+textcite:dauer13_market_based_ev_charg_coord proposed a market-based EV fleet
+charging solution. The authors introduced a double-auction call market where
+agents trade the available transformer capacity, complying with the minimum
+required State of Charge (SoC). The participating EV agents autonomously learn
+their bidding strategy with standard /Q-Learning/ and discrete state and action
+spaces.
+
+textcite:di13_elect_vehic presented a multi-agent solution to minimize charging
+costs of EVs, a solution that requires neither prior knowledge of electricity
+prices nor future price predictions. Similar to
+textcite:dauer13_market_based_ev_charg_coord, the authors employed standard
+/Q-Learning/ and the \epsilon-greedy approach for action selection.
+textcite:vaya14_optim also proposed a multi-agent approach, in which the
+individual EVs are agents that actively place bids in the spot market. Again,
+the agents use /Q-Learning/, with an \epsilon-greedy policy to learn their
+optimal bidding strategy. The latter relies on the agents willingness-to-pay
+which depends on the urgency to charge. State variables, such as SoC, time of
+departure and price development on the market, determine the urgency to charge.
+The authors compared this approach with a centralized aggregator-based approach
+that they developed in another paper cite:vaya15_optim_biddin_strat_plug_in.
+Compared to the centralized approach, in which the aggregator manages charging
+and places bids for the whole fleet, the multi-agent approach causes slightly
+higher costs but solves scalability and privacy problems.
+
+textcite:shi11_real consider a V2G control problem, while assuming real-time
+pricing. The authors proposed an online learning algorithm which they modeled as
+a discrete-time MDP and solved through /Q-Learning/. The algorithm controls the
+V2G actions of the EV and can react to real-time price signals of the market. In
+this single-agent approach, the action space compromises only charging,
+discharging and regulation actions. The limited action spaces makes it
+relatively easy to learn an optimal policy.
+textcite:chis16_reinf_learn_based_plug_in looked at reducing the costs of
+charging for a single EV using known day-ahead prices and predicted next-day
+prices. A Bayesian ANN was employed for prediction and /fitted Q-Learning/ was
+used to learn daily charging levels. In their research, the authors used
+function approximation and batch reinforcement learning, an offline, model-free
+learning method. textcite:ko18_mobil_aware_vehic_to_grid proposed a centralized
+controller for managing V2G activities in multiple microgrids. The proposed
+method considers mobility and electricity demands of microgrids, as well as SoC
+of the EVs. The authors formulated a MDP with discrete state and action spaces
+and use standard /Q-Learning/ with \epsilon-greedy policy to derive an optimal
+charging policy. The approach takes microgrid autonomy and electricity prices
+into special consideration.
+
+# TODO: Mention Stochastic Programming approaches
+cite:pandzic13_offer_model_virtual_power_plant
+cite:nguyen16_biddin
+It should be noted that advanced RL methods and techniques are not the only
+solutions for problems in the smart grid, often basic algorithms and heuristics
+provide satisfactory results cite:vazquez-canteli19_reinf_learn_deman_respon.
+Despite that, our paper considers RL as an optimal fit for the design of our
+proposed intelligent agent. Given the ability to learn user behavior (e.g.,
+mobility demand) and the flexibility to adapt to the environment (e.g.,
+electricity prices), RL methods are a promising way of solving complex
+challenges in smart grids.
+
+** Reinforcement Learning Theory label:sec-reinforcement-learning
+The following chapter will give an overview of the most important Reinforcement
+Learning (RL) concepts and will introduce the corresponding mathematical
+formulations. If not noted otherwise, the notation, equations, and insights are
+adopted from cite:sutton18_reinf, the de-facto reference book of RL research.
+
+RL is an agent-based machine learning algorithm in which the agent learns to
+perform an optimal set of actions through interaction with its environment. The
+agents objective is to maximize the rewards it receives based on the actions it
+takes. Immediate rewards have to be weighted against long-term cumulative
+returns that also on its future actions. The RL problem is formalized as Markov
+Decision Processes (MDPs) which will be introduced in Chapter ref:sec-mdp. A
+critical task of RL agents is to continuously estimate the value of the
+environments state. Values indicate the long-term desirability of a state, that
+is the total amount of reward the agent can expect to accumulate over the
+future, following a learned set of actions, called the policy. Policies and
+values are covered in Chapter ref:sec-policies, whereas the core mathematical
+foundations for evaluating policies and updating value functions are introduced
+in Chapter ref:sec-bellman. When the model of the environment is fully known,
+the learning problem is reduced to a planning problem (Chapter ref:sec-dp) in
+which optimal policies can be computed with iterative approaches. Model-free RL
+approaches can be applied when rewards and state transitions are unknown, and
+the agent's behavior has to be learned from experience (Chapter
+ref:sec-td-learning). The last two chapter cover methods that solve the RL
+problem more efficiently, tackle new challenges and are widely used in practice
+and research.
+
+*** Markov Decision Processes label:sec-mdp
+Markov Decision Processes (MDPs) are a classical formulation of sequential
+decision making and an idealized mathematical formulation of the RL problem. MDPs
+allow to derive exact theoretical statements about the learning problem and
+possible solutions. Figure
+ref:agent-environment-interaction depicts the /agent-environment interaction/.
+#+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf \protect\footnotemark label:agent-environment-interaction
+#+ATTR_LATEX: :width 0.95\linewidth
+[[./fig/mdp_interaction.png]]
+#+LATEX: \footnotetext{\textbf{Figure 3.1} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
+
+In RL the agent and the environment continuously interact with each other. The
+agent takes actions that influence the environment, which in return presents
+rewards to the agent. The agent's goal is to maximize rewards over time, trough
+an optimal choice of actions. In each discrete timestep $t\!=\!0,1,2,...,T$ the
+RL agent interacts with the environment, which is perceived by the agent as a
+representation, called /state/, $S_t \in \S$. Based on the state, the agents
+selects an /action/, $A_t\in\A$, and receives a numerical /reward/ signal,
+$R_{t+1}\in\R\subset\Re$, in the next timestep. Actions influence immediate
+rewards and successive states, and consequently also influence future rewards.
+The agent has to continuously make a trade-off between immediate rewards and
+delayed rewards to achieve its long-term goal.
+
+The /dynamics/ of a MDP are defined by the probability that a state $s'\in \S$
+and a reward $r\in\R$ occurs, given the preceding state $s\in\S$ and action
+$a\in\A$. In /finite/ MDPs, the random variables $\R_t$ and $S_t$ have
+well-defined probability density functions (PDF), which are solely dependent on
+the previous state and action. Consequently, it is possible to define ($\defeq$)
+the /dynamics/ of the MDP as follows:
+\begin{equation}
+    p(s',r|s,a) \defeq \Pr{S_t=s',R_t=r|S_{t-1}=s,A_t=a},
+\end{equation}
+for all $s',s\!\in\!\S$, $r\!\in\!\R$ and $a\!\in\!\A$. Note that each possible
+value of the state $\S_t$ depends only on the immediately preceding state
+$\S_{t-1}$. When a state includes all information of /all/ previous states, the
+state possesses the so-called /Markov property/. If not noted otherwise, the
+Markov property is assumed throughout the whole chapter. The dynamics function
+allows computing the /state-transition probabilities/, another important
+characteristic of an MDP, as follows:
+\begin{equation}
+    p(s'|s,a) \defeq \Pr{S_t\!=\!s'|S_{t-1}\!=\!s,A_t\!=\!a} = \sum_{r\in\R}{p(s', r|s, a)},
+\end{equation}
+for $s',s\!\in\!\S$, $r\!\in\!\R$ and $a\!\in\!\A$.
+
+The use of a /reward signal/ $R_t$ to formalize the agent's goal is a unique
+characteristic of RL. Each timestep the agent receives the rewards as a scalar
+value $\R_t\in\Re$. The sole purpose of the RL agent is to maximize the
+long-term cumulative reward (as opposed to the immediate reward). The long-term
+cumulative reward can also be expressed as the /expected return/ $G_t$:
+\begin{equation} \label{eq-expected-return}
+\begin{split}
+    G_t &\defeq R_{t+1} + \gamma R_{t+2} + \gamma R_{t+3} + \cdots \\
+    &= \sum_{k=0}^{\infty}{\gamma^k R_{t+k+1}} \\
+    &= R_{t+1} + \gamma G_{t+1},
+\end{split}
+\end{equation}
+where $\gamma$, $0\leq\gamma\leq 1$, is the /discount rate/ parameter. The
+discount rate determines how "myopic" the agent is. If $\gamma$ approaches 0,
+the agent is more concerned with maximizing immediate rewards. On the contrary,
+when $\gamma\!=\! 1$, the agent takes future rewards strongly into account, the
+agent is "farsighted".
+
+*** Policies and Value Functions label:sec-policies
+An essential task of almost every RL agent is estimating /value functions/.
+These functions describe how "good" it is to be in a given state, or how "good"
+it is to perform an action in a given state. More formally, they take a state
+$s$ or a state-action pair $s,a$ as input and give the expected return $G_t$ as
+output. The expected return is dependent on the actions the agent will take in
+the future. Consequently, value functions are formulated with respect to a
+/policy/ \pi. A policy is a mapping of states to actions; it describes the
+probability that an agent performs a certain action, based on the current state.
+More formally, the policy is defined as
+$\pi(a|s)\defeq\Pr{A_t\!=\!a|S_t\!=\!s}$, a PDF of all $a\!\in\!\A$ for each
+$s\!\in\!\S$. RL approaches mainly differ in how the policy is updated, based on
+the agent's interaction with the environment.
+
+In RL, value functions of states and value functions of state-action pairs are
+used. The /state-value function of policy/ $\pi$ is denoted as $\vpi(s)$ and is
+defined as the expected return when starting in $s$ and following policy $\pi$:
+\begin{equation}
+    \vpi(s) \defeq \EE{\pi}{G_t|S_t\!=\!s}, \text{ for all } s\in\S
+\end{equation}
+The /action-value function of policy/ $\pi$ is denoted as $\qpi(s,a)$ and is
+defined as the expected return when starting in $s$, taking action $a$ and
+following policy $\pi$ afterwards:
+\begin{equation}
+    \qpi(s,a) \defeq \EE{\pi}{G_t|S_t\!=\!s, A_t\!=\!a}, \text{ for all } a\in\A, s\in\S
+\end{equation}
+The /optimal policy/ $\pi_*$ has a greater (or equal) expected return than all
+other policies. The /optimal/ state-value function and /optimal/ action-value
+function are defined as follows:
+\begin{equation}
+    \vstar(s) \defeq \max_{\pi} \vpi(s), \text{ for all } s\in\S
+\end{equation}
+\begin{equation}
+    \qstar(s,a) \defeq \max_{\pi} \qpi(s,a), \text{ for all } s\in\S, a\in\A
+\end{equation}
+The /optimal/ action-value function describes the expected return when taking
+action $a$ in state $s$ following the optimal policy $\pi_*$ afterwards.
+Estimating $\qstar$ to obtain an optimal policy is a substantial part of RL and
+has been known as /Q-learning/ cite:watkins92_q_learn, which is described in
+Chapter ref:sec-td-learning.
+
+*** Bellman Equations label:sec-bellman
+A central characteristic of value functions is the recursive relationship
+between the values. Similar to Equation (ref:eq-expected-return), current values
+are related to expected values of successive states. This relationship is
+heavily used in RL and has been formulated as /Bellman equations/
+cite:bellman57_dynam_progr. The Bellman equation for $\vpi(s)$ is defined as
+follows:
+\begin{equation} \label{eq-bellman}
+\begin{split}
+    \vpi(s) &\defeq \EE{\pi}{G_t|S_t=s} \\
+    &= \EE{\pi}{R_{t+1}+\gamma G_{t+1}|S_t\!=\!s} \\
+    &= \sum_{a}{\pi(a|s)}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vpi(s')\bigg],
+\end{split}
+\end{equation}
+where $a\!\in\!\A$, $s,s'\!\in\!\S$, $r\!\in\!\R$.
+In other words, the value of a state equals the immediate reward plus the
+expected value of all possible successor states, weighted by their probability
+of occurring. $\vpi(s)$ is the only solution to its Bellman equation. The
+Bellman equation of the optimal value function $v_*$ is called the /Bellman
+optimality equation/:
+\begin{equation} \label{eq-bellman-optimality}
+\begin{split}
+    \vstar(s) &= \max_{a\in\A(s)}q_{\pi_*}(s,a) \\
+    &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma G_{t+1}|S_t\!=\!s, A_t\!=a} \\
+    &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma \vstar(S_{t+1})|S_t\!=\!s, A_t\!=a} \\
+    &= \max_{a}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vstar(s')\bigg]
+\end{split}
+\end{equation}
+where $a\!\in\!\A$, $s,s'\!\in\!\S$, $r\!\in\!\R$. In other words, the value of
+a state under an optimal policy equals the expected return for the best action
+from that state. Note that the Bellman optimality equation does not refer to a
+specific policy, it has a unique solution independent from one. It can be seen
+as an equation system, which can be solved when the dynamics of the environment
+$p$ are known. Similar Bellman equations to Equations (ref:eq-bellman) and
+(ref:eq-bellman-optimality) can also be formed for $\qpi(s,a)$ and
+$\qstar(s,a)$. Bellman equations form the basis for computing and approximating
+value functions and were an important milestone in RL history. Most RL methods
+are /approximately/ solving the Bellman optimality equation, by using
+experienced state transitions instead of expected transition probabilities. The
+most common methods will be explored in the following chapters.
+
+*** Dynamic Programming label:sec-dp
+# NOTE: Intro Tabular Methods?
+# NOTE: Section Dynamic Programming: Policy Iteration, Value Iteration
+/Dynamic Programming/ (DP) is a method to compute optimal policies, the primary
+goal of every RL method. DP makes use of value functions to facilitate the
+search for good policies. Once an optimal value function, (i.e., one that
+satisfies the Bellman optimality equation) is found, optimal policies can be
+easily obtained. Despite the limited utility of DP in real-world settings, it
+provides the theoretical foundation for all other RL methods. In fact, all of
+the RL methods try to achieve the same goal, but without the assumption of a
+perfect model of the environment and less computational effort. Because DP assumes
+full knowledge of the environment, it is known as /planning/, in which optimal
+solutions are /computed/. In /control/ problems (Chapter ref:sec-td-learning),
+optimal solutions are /learned/ from an unknown environment.
+
+The two most popular DP algorithms that compute optimal policies are called
+/policy iteration/ and /value iteration/. These methods perform "sweeps" through
+the whole state set and update the estimated value of each state via an
+/expected update/ operation. In policy iteration, a value function for a given
+policy $\vpi$ needs to be computed first, a step called /policy evaluation/. A
+sequence of approximated value functions $\{v_k\}$ are updated using the Bellman
+equation for $\vpi$ (Eq. ref:eq-bellman) until convergence to $\vpi$ is
+achieved. After computing the value function for a given policy, it is possible
+to modify the policy and see if the value $\vpi(s)$ for a given state increases
+(/policy improvement/). A way of doing this, is evaluating the action-value
+function $\qpi(s,a)$ by /greedily/ taking the best short-term action $a\!\in\!A$
+at a given timestep. Alternating between these two steps monotonically improves
+the policies and the value functions until they converge to the optimum. This
+algorithm is called /policy iteration/:
+\begin{equation}
+    \pi_0 \xrightarrow{\text{ E }} v_{\pi_0} \xrightarrow{\text{ I }}
+    \pi_1 \xrightarrow{\text{ E }} v_{\pi_1} \xrightarrow{\text{ I }}
+    \pi_2 \xrightarrow{\text{ E }} \hdots \xrightarrow{\text{ I }}
+    \pi_* \xrightarrow{\text{ E }} \vstar,
+\end{equation}
+where $\xrightarrow{\text{ E }}$ denotes a policy evaluation step,
+$\xrightarrow{\text{ I }}$ denotes a policy improvement step. $\pi_*$ and
+$\vstar$ are the optimal policy and optimal value function, respectively. Note
+that in each iteration of the policy iteration algorithm, a policy evaluation
+has to be performed, which requires multiple sweeps through the state space. In
+/value iteration/, the policy evaluation step is stopped after one sweep. In
+this case, the two previous steps can be combined into one single update step:
+\begin{equation}
+\begin{split}
+    v_{k+1}(s) &\defeq \max_a \EE{}{R_{t+1}+\gamma \vstar(S_{t+1})|S_t\!=\!s, A_t\!=a} \\
+    &= \max_{a}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma v_k(s')\bigg],
+\end{split}
+\end{equation}
+where $a\!\in\!\A$, $s,s'\!\in\!\S$, $r\!\in\!\R$. It can be shown, that for any
+given $v_0$, the sequence ${v_k}$ converges to the optimal value function
+${\vstar}$. In value iteration, the Bellman optimality equation
+(ref:eq-bellman-optimality) is simply turned into an update rule. Both of the
+algorithms can be effectively used to compute optimal values and value function
+in finite MDPs with a perfect model of the environment.
+
+*** Temporal-Difference Learning label:sec-td-learning
+The previous chapter dealt with solving a /planning/ problem, that is computing
+an optimal solution (i.e., an optimal policy $\pi_*$) of an MDP when a perfect
+model of the environment is known. In the following chapters, we will look at
+/model-free/ prediction and /model-free/ control. As opposed to planning,
+model-free methods learn from experience and require no prior knowledge of the
+environment. Remarkably, these methods can still achieve optimal behavior.
+
+# NOTE: Section: Model-free TD Prediction
+The /TD prediction problem/ is concerned with estimating state-values $\vpi$
+using past experiences of following a given policy $\pi$. TD methods update an
+estimate $V$ of $\vpi$ in every timestep. At time $t\!+\!1$ they immediately
+perform an update operation on $V(S_t)$. Because of the step-by-step nature of
+TD learning, it is categorized as /online learning/. Also note that TD methods
+perform update operations on value estimates based on other learned estimates, a
+procedure called /bootstrapping/. In simple TD prediction, the
+value estimates $V$ are updated as follows:
+\begin{equation} \label{eq-td-prediction}
+    V(S_t) \leftarrow V(S_t) + \alpha\big[R_{t+1}+\gamma V(S_{t+1}) - V(S_t)\big],
+\end{equation}
+where \alpha is a constant /step-size/ parameter and \gamma is the
+/discount rate/. Here, the update of the state-value is performed using the
+observed reward $R_{t+1}$ and the estimated value $V(S_{t+1})$.
+
+When a model is not available, it is useful to estimate /action-values/, instead
+of /state-values/. If the environment is completely known, it is possible for
+the agent to look one step ahead and select the best action. Without that
+knowledge, the value of each action in a given state needs to be estimated. The
+latter constitutes a problem, since not every /state-action/ pair will be
+visited when the agent follows a deterministic policy. A deterministic policy
+$\pi(a|s)$ returns exactly one action given the current state, hence the agent
+will only observe returns for one of the actions. In order to evaluate the value
+function for all /state-action/ pairs $\qpi$, continuous /exploration/ needs to
+be ensured. In other words, the agent has to explore state-action pairs which
+are seemingly disadvantageous given the current policy. This dilemma is also
+known as the /exploration-exploitation/ trade-off. One way to achieve exploration
+is using /stochastic/ policies for the action selection. Stochastic policies
+have a non-zero probability of selecting each action in each state. A typical
+stochastic policy is the /\epsilon-greedy policy/, which selects the action with
+the highest estimated value, except for a probability \epsilon, it selects an
+action at random.
+#+CAPTION[On-policy control with Sarsa]: On-policy control with Sarsa cite:sutton18_reinf. \protect\footnotemark label:fig-sarsa
+#+ATTR_LATEX: :width 0.95\linewidth
+[[./fig/on-policy.png]]
+#+LATEX: \footnotetext{The in-text figure of \textbf{Chapter 5.3} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
+
+There are two approaches to make use of stochastic policies to ensure all
+actions are chosen infinitely often. On-policy methods improve the (stochastic)
+decision policy, by continually estimating $\qpi$ in regard to $\pi$, while
+simultaneously driving $\pi$ towards $\qpi$, e.g., with a \epsilon-greedy action
+selection. Figure ref:fig-sarsa depicts this learning process. Off-policy
+methods improve the deterministic decision policy, by using a second stochastic
+policy to generate behavior. The first policy is becoming the optimal policy by
+evaluating the exploratory behavior of the second policy. Off-policy approaches
+are considered more powerful than on-policy approaches and have a variety of
+additional use cases. On the other side, they often have a higher variance and
+take more time to converge to an optimum.
+# NOTE: Mention that prediction is the main difference?
+
+# NOTE: Section: Sarsa: On-policy TD Control
+A popular on-policy TD control method is Sarsa, developed by
+textcite:rummery94_q. In the prediction step, the action-value function
+$\qpi(s,a)$ of all actions and states has to be estimated for the current
+policy $\pi$. The estimation can be done similar to TD prediction of state
+values (Eq. ref:eq-td-prediction). Instead of considering state transitions,
+state-action transitions are considered in this case. The update rule is
+constructed as follows:
+\begin{equation}
+    Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma Q(S_{t+1},A_{t+1}) - Q(S_t, A_t)\big]
+\end{equation}
+After every transition from a state $S_t$, an update operation using the events
+$(S_t, A_t, R_{t+1}, S_{t+1}, A_{t+1})$ is performed. This quintuple also
+constituted the name Sarsa. The on-policy control step of the algorithm is
+straightforward, and uses a \epsilon-greedy policy improvement, as described in
+the previous paragraph. It has been shown that Sarsa converges to the optimal
+policy $\pi_*$ under the assumption of infinite visits to all state-action
+pairs.
+
+# NOTE: Section: Q-learning: Off-policy TD Control
+A breakthrough in RL has been achieved when textcite:watkins92_q_learn developed
+the /off-policy/ TD control algorithm, called Q-learning. The update rule is
+defined as follows:
+\begin{equation}
+    Q(S_t, A_t) \leftarrow Q(S_t,A_t) + \alpha\big[R_{t+1}+\gamma\max_a Q(S_{t+1},a) - Q(S_t, A_t)\big]
+\end{equation}
+Here, the estimated action-values $Q$ are updated towards the highest estimated
+action-value of the next time step. In this way, $Q$ directly approximates the
+optimal action-value function $q_*$, independently of the policy the agent
+follows. Due to this simplification, Q-learning is a widely used model-free
+method, and its convergence can be proved easily.
+
+
+This chapter covered the most important RL methods. They work online, learn from
+experience, and can be easily applied to real-world problems with low
+computational effort. Moreover, the mathematical complexity of the presented
+approaches is limited, and they can be easily implemented into computer
+programs. Temporal-Difference learning is a /tabular/ method, in which Q-values
+are stored and updated in a lookup table. If the state and action spaces are
+continuous or the number of states and actions is very large, a table
+representation is computational infeasible and the speed of convergence is
+drastically reduced. In this case, a /function approximator/ can replace the
+lookup table. The next chapter will briefly cover function approximation, as
+well as other advancements in RL.
+*** Approximation Methods
+Up to this point, only tabular RL methods have been covered, which form the
+theoretical foundation of RL in general. But in many real-world use cases, the
+state space is enormous and it is improbable to find an optimal value function
+with tabular methods. Not only is it a problem to store such a large table in
+the memory, but also would it take an almost infinite amount of time to fill
+every entry with meaningful results. Contrarily, /function approximation/ tries
+to find a function that approximates the optimal value function as closely as
+possible, with limited computational resources. The experience with a small
+subset of visited states is generalized to approximate values of the whole state
+set. Function approximation has been widely studied in supervised machine
+learning: Gradient methods, as well as linear and non-linear models have shown
+good results for RL.
+
+The approximated value of a state $s$ is denoted as the parameterized
+functional form $\hat v(s,\w)\!\approx\!\vpi(s)$, given a weight vector
+$\w\!\in\!\Re^d$. Function approximation methods are approximating $\vpi$ by
+learning (i.e., adjusting) the weight vector $\w$ from the experience of following
+the policy $\pi$. By assumption, the dimensionality $d$ of $\w$ is much lower than
+the number of states, which is the reason for the desired generalization effect:
+Adjusting one weight affects the values of many states. However, optimizing
+an estimate for one state negatively affects the accuracy of the estimates for
+other states. This effect motivates the specification of a state distribution
+$\mu(s)$, which represents the importance of the prediction error for each state.
+In on-policy prediction, $\mu(s)$ is often selected to be proportion of time spend
+in each state $s$. The prediction error of a state is defined as the squared
+difference between the predicted (i.e., approximated) value $\hat v(s,\w)$ and
+the true value $\vpi(s)$. Consequently, the objective function of the supervised
+learning problem can be defined as the /Mean Squared Value Error/ $\MSVEm$,
+which weights the prediction error with the state distribution $\mu(s)$:
+\begin{equation}
+    \MSVEm(\w) \defeq \sum_{s\in\S}{\mu(s)\bigg[\vpi(s)-\hat v(s,\w)\bigg]^2}, \text{ where } \w\in\Re^d
+\end{equation}
+Minimizing $\MSVEm$ in respect to $\hat v$ will yield a value function, which
+facilitates finding a better policy --- the primary goal of RL. Remember that $\hat v$
+can take any form of a linear or non-linear function of the state $s$.
+
+In practice, deep artificial neural networks networks (ANNs) have shown great
+success as function approximators, which coined the term /Deep Reinforcement
+Learning/
+cite:mnih15_human_level_contr_throug_deep_reinf_learn,silver16_master_game_go_with_deep.
+A simple feedforward ANN can be found in Figure ref:fig-ann. ANNs have the
+advantage that they can theoretically approximate any continuous function by
+adjusting the connection weights of the network $\w\in\Re^{d\times d}$
+cite:cybenko89_approx_by_super_sigmoid_funct. Advancements in the field of /Deep
+Learning/ facilitated remarkable performance improvements in RL applications.
+Despite that, the RL theory is mostly limited to tabular and linear
+approximation methods. Refer to textcite:bengio09_learn_deep_archit_ai for a
+comprehensive review of deep learning methods.
+#+CAPTION[Artificial Neural Network]: A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes cite:sutton18_reinf. \protect\footnotemark label:fig-ann
+#+ATTR_LATEX: :width 0.95\linewidth
+[[./fig/ann.png]]
+#+LATEX: \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
+*** Further Topics
+The previous chapters provided a detailed overview of the most important
+concepts and mathematical foundations in RL. In the research there are many more
+topics that were not covered here. /Eligibility traces/ offer a way to more
+general learning and faster convergence rates. Almost any TD method can be
+extended to use eligibility traces, a popular methods is called Watkins's Q($\lambda$)
+cite:watkins89_learn_from_delay_rewar. /Fitted-Q Iteration/ cite:ernst03_iterat
+combined Q-learning and fitted value iteration with batch-mode RL. In
+batch-mode the whole dataset is available offline, contrary to online RL where
+the data is acquired by the agent's action in its the environment.
+/Actor-critic/ methods cite:sutton84_tempor_credit_assig_reinf_learn directly
+learn a parameterized policy instead of action-values, which inherently allow
+continuous state spaces and learning appropriate levels of exploration.
+Simultaneously to learning the policy, they approximate a state-value function,
+which serves as a "critic" to the learned policy, the "actor". In the current
+theory most RL models are single-agent models. For certain real-world
+applications multi-agent RL algorithms are necessary to coordinate interaction
+between the agents. When multiple learning agents interact with a non-stationary
+environment, convergence and stability are a serious problem. /W-learning/
+cite:humphrys96_action_selec_method_using_reinf_learn is an multi-agent approach
+that aims to solve these difficulties.
+
+#+LATEX: \clearpage
+
+* Footnotes
+
+[fn:1] See https://regelleistung.net, accessed on 15^{th} February
+2019, for further information on the market design and historical data.
+
+[fn:2]
+https://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2017/28062017_Regelenergie.html,
+accessed 18^{th} February, 2019
+
+[fn:3]https://www.epexspot.com/en/press-media/press/details/press/Traded_volumes_soar_to_an_all-time_high_in_2018,
+accessed 19^{th} February, 2019
+
+[fn:4] https://www.epexspot.com
+
+#  LocalWords:  explaina
+
+[fn:5] https://www.regelleistungen.net
+
+[fn:6] The data of activated secondary control reserve is freely available at https://regelleistung.net.
+
+[fn:7] See https://www.gps.gov/systems/gps/performance/accuracy, accessed
+23^{th} February 2019.
+
+[fn:8] https://procom-energy.de
+
+[fn:9] https://www.drive-now.com
+
+[fn:10] https://www.car2go.com
