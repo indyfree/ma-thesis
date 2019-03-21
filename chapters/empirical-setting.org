@@ -83,7 +83,7 @@ processing steps.
    # TODO: Example above and numbers?
 3) Determine rental trips
 
-   We infer that a customer rented a EV, if the position coordinates change
+   We infer that a customer rented an EV, if the position coordinates change
    between two data points of the same EV (see Table ref:table-car2go-raw, 4^{th}
    to 5^{th} row). Note that we assume that customer do not undertake trips,
    which begin and end at the exact same location.
