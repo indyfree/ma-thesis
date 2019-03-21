@@ -62,8 +62,8 @@ cars. The following preprocessing steps have been taken to prepare the data for
 further analysis. Table ref:table-car2go-processed depicts the dataset after all
 processing steps.
 
-# TODO: Include prices
-# NOTE: Not worthy mentioning?
+# TODO: Include prices --> lost rental profits $\oc$.
+# NOTE: Not worthy mentioning unused data cols?
 1) Drop unused data columns
 
    - /ID/: Number plate is already a unique identifier for every EV.
