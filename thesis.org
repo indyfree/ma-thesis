@@ -87,6 +87,9 @@ customer mobility by refusing customer rentals.
 | $\theta_{\lambda}$        | Set of risk factors for all market periods $h\!\in\!\{1,...,N_h\}$.       | -       |
 | $\Cf{}(\theta_{\lambda})$ | Cost function for the fleets total costs over all market periods $h$.     | $\eur$  |
 |---------------------------+---------------------------------------------------------------------------+---------|
+| $\omega_{i}$              | Amount of electricity stored in EV $i$.                                   | $\kwh$  |
+| $\Omega$                  | Maximum battery capacity of EVs.                                          | $\kwh$  |
+| $\delta$                  | Charging power of EVs at the charging station.                            | $\kw$   |
 |---------------------------+---------------------------------------------------------------------------+---------|
 
 ** Required Information Assumptions label:sec-model-assumptions
