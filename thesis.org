@@ -78,7 +78,7 @@ customer mobility by refusing customer rentals.
 |---------------------------+---------------------------------------------------------------------------+---------|
 | $\Cb{h}(P)$               | Cost function for procuring electricity from the balancing market.        | $\eur$  |
 | $\Ci{h}(P)$               | Cost function for procuring electricity from the intraday market.         | $\eur$  |
-| $\ec$                     | Opportunity costs of lost rental of EV $i$ in control period $t$.         | $\eur$  |
+| $\oc$                     | Opportunity costs of lost rental of EV $i$ in control period $t$.         | $\eur$  |
 | $\beta_h$                 | Imbalance costs in market period $h$.                                     | $\eur$  |
 |---------------------------+---------------------------------------------------------------------------+---------|
 | $\lb{h}$                  | Balancing market risk factor.                                             | -       |
@@ -295,17 +295,18 @@ whole EV fleet.
 
 *** Evaluating the Bidding Risk
 The controllers goal is to choose the risk factors $\lb{h}$, $\li{h}$ for every
-market period, that minimize the cost of charging, while avoiding the risks of
-lost rentals or imbalance costs. The total fleet costs are defined as follows:
+market period $h$, that minimize the cost of charging, while avoiding the risks
+of lost rental profits $\oc$ or imbalance costs $\beta_h$. The total
+fleet costs are defined as follows:
 # TODO: "=" or \defeq?
 \begin{equation}
     \Cf{}(\theta_{\lambda}) \defeq \sum^{N_h}_h
     \bigg[ \Cb{h}(\Pb{h}) + \Ci{h}(\Pi{h}) + \beta_{h}
-    + \sum_t^{T} \sum_i^{\nF} \rho_{t, i} \bigg] \text{ ,}
+    + \sum_t^{T} \sum_i^{\nF} \oc \bigg] \text{ ,}
 \end{equation}
 where $\theta_{\lambda}\!\in\!\Re_{0 \leq \lambda \leq 1}^{2 \times N_h}$ is the
 matrix of the risk factors $\lb{h}$, $\li{h}$ for all considered market periods
-$N_h$. $\F$ denotes the set of EVs $i$ in the fleet and $\nF$ the fleet size.
+$N_h$. $\F$ denotes the set of all EVs $i$ in the fleet and $\nF$ the fleet size.
 The costs for charging $\Cb{h}(\Pb{h})$, $\Ci{h}(\Pi{h})$ are clearly dependent
 on the chosen risk factors $\lb{h}$, $\li{h}$ (see Eq. ref:eq-model-pb, Eq.
 ref:eq-model-pi; dependence omitted in notation). In summary, the problem can be
@@ -328,10 +329,29 @@ previously unknown settings and learn from uncertain environments, as mobility
 and electricity markets, we chose to solve the problem with a RL learning
 approach that is explained in detail in Chapter ref:sec-model-rl.
 
-*** Dispatching EVs to Charge
-# When no replacement for VPP is available, we loose rental profits by violating customer mobility
-# We assume that we can provide the commited energy by different EVs across the
-# market period
+*** Dispatching Electronic Vehicle Charging
+In the last step, at electricity delivery time, the EVs have to be assigned to
+the VPP and be /dispatched/ to charge. Therefore the controller first needs to
+detect how many EVs are eligible to be used as VPP. EVs are eligible if they (a)
+are connected to a charging station ($\c$), and (b) have enough free battery
+storage available ($\Omega\!-\!\omega_{i}$) to charge the next control period.
+Hence, the VPP is defined as:
+\begin{equation}
+    VPP \defeq \{i\;|\;i\in\F \vee \c = 1 \vee \Omega\!-\!\omega_{i}\!\geq\!\gamma\Delta{t}\} \text{ ,}
+\end{equation}
+where $\gamma\Delta{t}$ (kWh) denotes the amount of energy that can be charged
+with the charging speed of $\gamma$ (kW) in control period $t$.
+
+
+Remember, that the fleet has to provide the committed charging power
+$\Pb{h}\!+\!\Pi{h}$ across all control periods $t$ of the market period $h$,
+independent of which individual EVs are actually charging the electricity. This
+fact allows the controller to dynamically dispatch EVs every control period and
+react to unforeseen rentals. If a customer want to rent out an EV that is
+assigned to the VPP, the controller only has to refuse the rental, if no other
+EV is available to charge instead. When no replacement EV is available, the
+controller as to account for lost rental profits $\oc$.
+
 *** Example
 At 3pm on the 9^{th} of August 2017, the controller enters the first bidding
 phase for procuring electricity one week ahead, the market period $h$ =
