@@ -73,8 +73,8 @@
 #+LATEX: \clearpage
 
 # Abbreviation & Notation
-#+INCLUDE: "~/uni/ma-thesis/abbreviations.tex" export latex
-#+INCLUDE: "~/uni/ma-thesis/notation.tex" export latex
+#+INCLUDE: "./template/abbreviations.tex" export latex
+#+INCLUDE: "./template/notation.tex" export latex
 
 # Start Content Page Numbers
 #+LATEX: \pagenumbering{arabic}
