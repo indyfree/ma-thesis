@@ -46,7 +46,7 @@ research.
 # TODO: Fix pointing arrows
 #+CAPTION[Electricity Market Design]: Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
 #+ATTR_LATEX: :width 0.95\linewidth
-[[./fig/electricity_markets.png]]
+[[../fig/electricity_markets.png]]
 ** Electricity Market Theory:
 *** Balancing Market label:sec-balancing-market
 # NOTE: Consider changing heading to Operating reserve market / frequency
@@ -451,8 +451,8 @@ charging policy. The approach takes microgrid autonomy and electricity prices
 into special consideration.
 
 # TODO: Mention Stochastic Programming approaches
-cite:pandzic13_offer_model_virtual_power_plant
-cite:nguyen16_biddin
+# cite:pandzic13_offer_model_virtual_power_plant
+# cite:nguyen16_biddin
 It should be noted that advanced RL methods and techniques are not the only
 solutions for problems in the smart grid, often basic algorithms and heuristics
 provide satisfactory results cite:vazquez-canteli19_reinf_learn_deman_respon.
@@ -497,7 +497,7 @@ possible solutions. Figure
 ref:agent-environment-interaction depicts the /agent-environment interaction/.
 #+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf \protect\footnotemark label:agent-environment-interaction
 #+ATTR_LATEX: :width 0.95\linewidth
-[[./fig/mdp_interaction.png]]
+[[../fig/mdp_interaction.png]]
 #+LATEX: \footnotetext{\textbf{Figure 3.1} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 
 In RL the agent and the environment continuously interact with each other. The
@@ -731,7 +731,7 @@ the highest estimated value, except for a probability \epsilon, it selects an
 action at random.
 #+CAPTION[On-policy control with Sarsa]: On-policy control with Sarsa cite:sutton18_reinf. \protect\footnotemark label:fig-sarsa
 #+ATTR_LATEX: :width 0.95\linewidth
-[[./fig/on-policy.png]]
+[[../fig/on-policy.png]]
 #+LATEX: \footnotetext{The in-text figure of \textbf{Chapter 5.3} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 
 There are two approaches to make use of stochastic policies to ensure all
@@ -842,7 +842,7 @@ approximation methods. Refer to textcite:bengio09_learn_deep_archit_ai for a
 comprehensive review of deep learning methods.
 #+CAPTION[Artificial Neural Network]: A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes cite:sutton18_reinf. \protect\footnotemark label:fig-ann
 #+ATTR_LATEX: :width 0.95\linewidth
-[[./fig/ann.png]]
+[[../fig/ann.png]]
 #+LATEX: \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 *** Further Topics
 The previous chapters provided a detailed overview of the most important
