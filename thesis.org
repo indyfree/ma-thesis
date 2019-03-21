@@ -56,7 +56,6 @@ customer mobility by refusing customer rentals.
 | $T$                       | Number of control periods in a market period.                             | -       |
 | $H$                       | Number of market periods in day.                                          | -       |
 | $N_h$                     | Total number of market periods.                                           | -       |
-| $N_i$                     | Total number of EVs in the fleet.                                         | -       |
 | $\Delta t$                | Length of control period.                                                 | hours   |
 | $\Delta h$                | Length of market period.                                                  | hours   |
 |---------------------------+---------------------------------------------------------------------------+---------|
@@ -87,6 +86,9 @@ customer mobility by refusing customer rentals.
 | $\theta_{\lambda}$        | Set of risk factors for all market periods $h\!\in\!\{1,...,N_h\}$.       | -       |
 | $\Cf{}(\theta_{\lambda})$ | Cost function for the fleets total costs over all market periods $h$.     | $\eur$  |
 |---------------------------+---------------------------------------------------------------------------+---------|
+| $i$                       | Electric Vehicle                                                          | -       |
+| $\F$                      | Set of all EVs in the Fleet                                               | -       |
+| $\nF$                     | Total number of EVs in the fleet.                                         | -       |
 | $\omega_{i}$              | Amount of electricity stored in EV $i$.                                   | $\kwh$  |
 | $\Omega$                  | Maximum battery capacity of EVs.                                          | $\kwh$  |
 | $\delta$                  | Charging power of EVs at the charging station.                            | $\kw$   |
@@ -299,17 +301,16 @@ lost rentals or imbalance costs. The total fleet costs are defined as follows:
 \begin{equation}
     \Cf{}(\theta_{\lambda}) \defeq \sum^{N_h}_h
     \bigg[ \Cb{h}(\Pb{h}) + \Ci{h}(\Pi{h}) + \beta_{h}
-    + \sum_t^{T} \sum_i^{N_i} \rho_{t, i} \bigg] \text{ ,}
+    + \sum_t^{T} \sum_i^{\nF} \rho_{t, i} \bigg] \text{ ,}
 \end{equation}
 where $\theta_{\lambda}\!\in\!\Re_{0 \leq \lambda \leq 1}^{2 \times N_h}$ is the
 matrix of the risk factors $\lb{h}$, $\li{h}$ for all considered market periods
-$N_h$. The opportunity costs of denying the rental of EV $i$ in control period
-$t$ is denoted with $\rho_{t, i}$. The costs for charging $\Cb{h}(\Pb{h})$,
-$\Ci{h}(\Pi{h})$ are clearly dependent on the chosen risk factors $\lb{h}$,
-$\li{h}$ (see Eq. ref:eq-model-pb, Eq. ref:eq-model-pi; dependence omitted in
-notation). In summary, the problem can be formulated as minimizing the total
-costs of the fleet, by choosing the optimal set of risk factors
-$\theta_{\lambda}$:
+$N_h$. $\F$ denotes the set of EVs $i$ in the fleet and $\nF$ the fleet size.
+The costs for charging $\Cb{h}(\Pb{h})$, $\Ci{h}(\Pi{h})$ are clearly dependent
+on the chosen risk factors $\lb{h}$, $\li{h}$ (see Eq. ref:eq-model-pb, Eq.
+ref:eq-model-pi; dependence omitted in notation). In summary, the problem can be
+formulated as minimizing the total costs of the fleet, by choosing the optimal
+set of risk factors $\theta_{\lambda}$:
 \begin{equation}
 \begin{aligned}
     & \underset{\theta_{\lambda}}{\text{minimize}}
