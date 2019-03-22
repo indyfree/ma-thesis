@@ -614,7 +614,7 @@ Bellman equation of the optimal value function $v_*$ is called the /Bellman
 optimality equation/:
 \begin{equation} \label{eq-bellman-optimality}
 \begin{split}
-    \vstar(s) &= \max_{a\in\A(s)}q_{\pi_*}(s,a) \\
+    \vstar(s) &\defeq \max_{a\in\A(s)}q_{\pi_*}(s,a) \\
     &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma G_{t+1}|S_t\!=\!s, A_t\!=a} \\
     &= \max_{a}\EE{\pi_*}{R_{t+1}+\gamma \vstar(S_{t+1})|S_t\!=\!s, A_t\!=a} \\
     &= \max_{a}\sum_{s',r}{p(s',r|s,a)}\bigg[r+\gamma\vstar(s')\bigg]
