@@ -85,8 +85,9 @@ customer mobility by refusing customer rentals.
 | $\li{h}$                  | Intraday market risk factor.                                              | -       |
 | $\theta_{\lambda}$        | Set of risk factors for all market periods $h\!\in\!\{1,...,N_h\}$.       | -       |
 | $\Cf{}(\theta_{\lambda})$ | Cost function for the fleets total costs over all market periods $h$.     | $\eur$  |
+| $\Cf{h}$                  | Total accumulated fleet costs at market period $h$.                       | $\eur$  |
 |---------------------------+---------------------------------------------------------------------------+---------|
-| $i$                       | Electric Vehicle                                                          | -       |
+| $i$                       | Electric Vehicle.                                                         | -       |
 | $\c$                      | Dummy variable if EV is connected to a charging station.                  | 0/1     |
 | $\omega_{i}$              | Amount of electricity stored in EV.                                       | $\kwh$  |
 | $\Omega$                  | Maximum battery capacity of EV.                                           | $\kwh$  |
@@ -132,17 +133,17 @@ control the charging its fleet. Figure ref:fig-control-mechanism depicts the
 control mechanism, which is divided into three distinct phases:
 
 # TODO:Other figure, with phase timeline?
-The first phase, /Bidding Phase I/, occurs just before the closing time of the
-balancing market, once every week (e.g., Wednesdays at 3pm at the GCRM). In this
-phase, the controller can place bids for every market period $h$ of the
+The first phase, /Bidding Phase I/, takes place just before the closing time of
+the balancing market, once every week (e.g., Wednesdays at 3pm at the GCRM). In
+this phase, the controller can place bids for every market period $h$ of the
 following week on the balancing market. The second phase, /Bidding Phase II/,
-occurs every market period of $\Delta{h}\!=\!15$ minutes. At this point, the
-controller has the opportunity to place bids for the market period 30 minutes
-ahead. By submitting bids 30 minutes ahead of time, the controller assures that
-the bid will be matched until the lead time of the market (e.g, 5 minutes on the
-EPEX Spot Intraday Continuous). The third phase, /Dispatch Phase/, occurs in
-almost real time, every control period of $\Delta{t}\!=\!5$ minutes. In this
-phase the controller has to dispatch available EVs to charge the procured
+takes places in every market period of $\Delta{h}\!=\!15$ minutes. At this
+point, the controller has the opportunity to place bids for the market period 30
+minutes ahead. By submitting bids 30 minutes ahead of time, the controller
+assures that the bid will be matched until the lead time of the market (e.g, 5
+minutes on the EPEX Spot Intraday Continuous). The third phase, /Dispatch
+Phase/, takes places in every control period of $\Delta{t}\!=\!5$ minutes. In
+this phase the controller has to dispatch available EVs to charge the procured
 electricity from the markets. This phase involves allocating individual EVs to
 the VPP and eventually refusing customer rentals to assure that all commitments
 can be fulfilled.
@@ -260,7 +261,7 @@ horizon. To account for all the mentioned risks, we introduce a /risk factor/
 $\lambda \in \Re_{0 \leq \lambda \leq 1}$, where $\lambda = 0$ indicates no
 risk, and $\lambda = 1$ indicates a high risk. The controller determines the
 bidding quantity $\Pb{h}$ by discounting the predicted available fleet charging
-power $\fPhat{h}$ with the possible risk $\lambda_{h}$ of occurring imbalance or
+power $\fPhat{h}$ with the possible risk $\lambda_{h}$ of imbalance or
 opportunity costs:
 \begin{equation} \label{eq-model-pb}
   \Pb{h}=
