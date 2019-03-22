@@ -227,11 +227,11 @@ Again, depending on the market situation, $\cup{}\!\in\!\Re$ can be either
 negative or positive, resulting in costs or profits for the fleet. Contrarily to
 the balancing market, on the intraday market the fleet does not get compensated
 for keeping the charging power available; only the charged energy affects the
-costs. If the costs for charging from the balancing market one week ahead
-$\Cb{h + (H \times 7)}(\fPhat{h + (H \times 7)})$ are higher than the costs of
-charging from the intraday market at the same market period $\Ci{h + (H \times
-7)}(\fPhat{h + (H \times 7)})$, the controller does not place bids on the
-balancing market.
+costs. If the costs for charging from the balancing market 7 days ahead
+$\Cb{h+(7\!\times\!H)}(\fPhat{h+(7\!\times\!H)})$ are higher than the costs of
+charging from the intraday market at the same market period $\Ci{h +
+(7\!\times\!H)}(\fPhat{h+(7\!\times\!H)})$, the controller does not place bids
+on the balancing market.
 
 *** Determining the Bidding Quantity
 In a third step, the controller has to take a decision on the amount of energy
@@ -264,7 +264,7 @@ bidding quantity $\Pb{h}$ by discounting the predicted available fleet charging
 power $\fPhat{h}$ with the possible risk $\lambda_{h}$ of imbalance or
 opportunity costs:
 \begin{equation} \label{eq-model-pb}
-  \Pb{h}=
+  \Pb{h} \defeq
   \begin{cases}
     0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Eb{h}10^3 \times p^{i}\\
     0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Ci{h}(\fPhat{h})\\
