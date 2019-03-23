@@ -281,7 +281,7 @@ The bidding quantity for the intraday market $\Pi{h}$ depends on the previously
 committed charging power $\Pb{h}$ and the newly predicted charging power
 $\fPhat{h}$:
 \begin{equation} \label{eq-model-pi}
-  \Pi{h}=
+  \Pi{h} \defeq
   \begin{cases}
     0, & \text{if}\ \Ci{h}(\fPhat{h}\!-\!\Pb{h}) \geq \Ei{h}10^3 \times p^{i}\\
     (\fPhat{h}\!-\!\Pb{h}) \times (1\!-\!\li{h}), & \text{otherwise}
@@ -327,8 +327,7 @@ The controllers central goal is to choose the risk factors $\lb{h}$, $\li{h}$
 for every market period $h$, that minimize the cost of charging, while avoiding
 the risks of lost rental profits $\oc$ or imbalance costs $\beta_h$. The total
 fleet costs are defined as follows:
-# TODO: "=" or \defeq?
-\begin{equation}
+\begin{equation} \label{eq-model-fleetcosts}
     \Cf{}(\theta_{\lambda}) \defeq \sum^{N_h}_h
     \bigg[ \Cb{h}(\Pb{h}) + \Ci{h}(\Pi{h}) + \beta_{h}
     + \sum_t^{T} \sum_i^{\nF} \oc \bigg] \text{ ,}
@@ -504,31 +503,113 @@ return(kw)
 # prices from the fleet owner and other market participants. The market auction
 # mechanism ultimately decides when EVs will charge and discharge.
 ** Reinforcement Learning Approach label:sec-model-rl
-# NOTE: RL Section before Bidding strategy?
-# NOTE: RL Learning only technical, everything else in bidding?
-# NOTE: Mention implementation details, training, graphics, tensorflow?
-# TODO: Cost function? Here in RL or in bidding?
-# - Multi-agent bidding approach, with learning complete bidding strategy?
-# TODO: States, Actions, Rewards for RL
-# TODO: Bellman Equation for RL?
-# TODO: 2 RL Problems? 1. Only capacity, 2. Also prices?
-#   cite:dauer13_market_based_ev_charg_coord,taylor14_accel_learTrans_learn
-# - cite:vandael15_reinf_learn_heuris_ev_fleet
-- Cost function?
+# NOTE: RL Learning only technical, everything else in before? - Yes
+In the following chapter the developed RL approach is outlined. First, the we
+define the previously explained charging problem as a MDP, second, the used
+learning algorithm is explained, and third, we give implementation and training
+details.
 
-# NOTE: Cost function
-# NOTE: Minimalize over all periods? As objective function
-# NOTE: What about imbalance costs $\lambda^+$
+Remember that the goal of the controlled charging problem is to choose a set of
+risk factors $\theta_{\lambda}$ that minimize the fleets total costs across all
+market periods. The controllers can influencing the charging costs, by setting
+the risk factors $\li{}$, $\lb{}$, which determine the bidding quantities $\Pb{}$,
+$\Pi{}$. The controller has the possibility to submit bids to the markets every
+market period $h$. Hence, the RL agent has to take an action (i.e., determining
+the risk factors) every timestep of $t = h$.
+
+The agent does so, by learning a policy $\pi(a|s)$ that maps every state
+$s\in\S$ to an action $a\in\A$. After the training period, the agent takes
+action $a$ whenever it observes a state $S_t \in \S$.
+
+*** Markov Decision Process Definition
+
+
+- $a \in A$
+
+- Both bidding risk dependent on how many EVs available at that point in time
+- Both bidding risk dependent on daytime in hours at that point in time
+- Intraday Bidding risk dependent on how many EVs are available now
+
+
 \begin{equation}
-    \Cf{h} \defeq \Cb{h} + \Ci{h} + \sum_t^{T} \sum_i^{N_f} C^{rental}_{c, i}
+    \vpphat{t} \defeq \left\lceil\frac{\fPhat{t}}{\gamma}\right\rceil
 \end{equation}
 
-- Learn from very high negative imbalance cost reward
+The state space is modeled with the dimensions 1) Predicted charging power
+week-ahead, 2) time of the day of market period $h$. The risk of bidding on the
+markets is expected to be
 
-- $A = \{(P_{bal}, P_{int}), P_{bal}, P_{int} \in \Re \}$
-- $S = \{(\overline{p}_w^t, \overline{p}_u^t, Q_{fleet}^t), \overline{p}_w^t,
-  \overline{p}_u^t, Q_{fleet}^t \in \Re \}$
+\begin{equation}
+    \S \defeq \left\{h(t), |VPP|_t, \vpphat{t+2}, \vpphat{t+(7\!\times\!H)}\right\}
+\end{equation}
+where:
+- $h(t)$ is the current daytime in hours, with discrete values in the range
+  $\big[0,\;23\big] \in \Ne$.
+- $|VPP|_t$ is the current VPP size, with discrete values in the range
+  $\big[0,\;|\F|\big] \in \Ne$.
+- $\vpphat{t+2}$ is the predicted VPP size 30 minutes ahead, with discrete values in the range
+  $\big[0,\;|\F|\big] \in \Ne$.
+- $\vpphat{t+(7\!\times\!H)}$ is the predicted VPP size 7 days ahead, with discrete
+  values in the range $\big[0,\;|\F|\big] \in \Ne$.
 
+Results in $|\F|^3\!\times\!24 = 3\!\times\!10^9$ states.
+
+
+# - $\fPhat{h+2}$ is the predicted amount of available charging power 30 minutes
+#   ahead, with discrete values in the range $\left[0,\;|\F|\!\times\!\gamma\right]$
+#   of 0.1kW increments.
+# - $\fPhat{h+(7\!\times\!H)}$ is the predicted amount of available charging power
+#   one week ahead, with discrete values in the range
+#   $\big[0,\;|\F|\!\times\!\gamma\big]$ of 0.1kW increments.
+
+- See cite:reddy11_strat for State/Action notation
+
+Controller takes an action every
+\begin{equation}
+    \A \defeq \{\lb{t}, \li{t}\}
+\end{equation}
+where:
+- $\lb{t}$ is the risk factor for bidding on the balancing market, with discrete
+  values in the range $\big[0,1\big]$ in 0.1 increments.
+- $\li{t}$ is the risk factor for bidding on the intraday market, with discrete
+  values in the range $\big[0,1\big]$ in 0.1 increments.
+
+Results in $10^2 = 100$ actions.
+
+
+# NOTE: Reward structure, possibilities
+We define the reward function as the costs that occurred in the last timestep (see Eq. ref:eq-model-fleetcosts).
+- If the RL agents chose risk factors that....
+- Prof
+\begin{equation}
+    R = \Cf{t} - \Cf{t-1} \text{ ,}
+\end{equation}
+where $\Cf{t}$ are the total accumulated fleet costs until market period $t$.
+
+*** Learning Algorithm
+- cite:dauer13_market_based_ev_charg_coord,
+- cite:di13_elect_vehic
+- cite:vaya14_optim
+- cite:vandael15_reinf_learn_heuris_ev_fleet
+- Cost function?
+
+- Deep double Q learning
+  cite:hasselt16_deep_reinf_learn_doubl_q_learn
+  - Image: cite:wang15_duelin_networ_archit_deep_reinf_learn
+  - double q learning combined with deep q learning:
+  - off-policy approach
+*** Implementation and Training
+- Software:
+  - Python 3.6
+  - Lib: Keras-RL - Tensorflow abstraction / Pytorch?
+  - Implementation Link
+- Hardware: Google Colab
+  - GPU: Nvidia Tesla K80 , 2880 x 2 CUDA cores, 12GB GDDR5 VRAM
+  - CPU: Intel(R) Xeon(R) CPU @ 2.30GHz (1 core, 2 threads), 45MB Cache
+  - RAM: ~12.6 GB Available
+- Training:
+  - Time
+  - Hyperparameters? - In results or here?
 
 * Simulation Platform: FleetSim
 # NOTE: 5%
