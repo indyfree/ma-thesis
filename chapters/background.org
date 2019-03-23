@@ -514,7 +514,7 @@ delayed rewards to achieve its long-term goal.
 
 The /dynamics/ of a MDP are defined by the probability that a state $s'\in \S$
 and a reward $r\in\R$ occurs, given the preceding state $s\in\S$ and action
-$a\in\A$. In /finite/ MDPs, the random variables $\R_t$ and $S_t$ have
+$a\in\A$. In /finite/ MDPs, the random variables $R_t$ and $S_t$ have
 well-defined probability density functions (PDF), which are solely dependent on
 the previous state and action. Consequently, it is possible to define ($\defeq$)
 the /dynamics/ of the MDP as follows:
