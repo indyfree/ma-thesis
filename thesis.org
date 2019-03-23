@@ -509,15 +509,11 @@ details.
 Remember that the goal of the controlled charging problem is to choose a set of
 risk factors $\theta_{\lambda}$ that minimize the fleets total costs across all
 market periods. The controllers can influencing the charging costs, by setting
-the risk factors $\li{}$, $\lb{}$, which determine the bidding quantities $\Pb{}$,
-$\Pi{}$. The controller has the possibility to submit bids to the markets every
-market period $h$. Hence, the RL agent has to take an action (i.e., determining
-the risk factors) every timestep of $t = h$.
-
-The agent does so, by learning a policy $\pi(a|s)$ that maps every state
-$s\in\S$ to an action $a\in\A$. After the training period, the agent takes
-action $a$ whenever it observes a state $S_t \in \S$.
-
+the risk factors $\li{h}$, $\lb{h}$, which determine the bidding quantities
+$\Pb{h}$, $\Pi{h}$ to submit to the markets each market period $h$. The RL agent
+decides on the risk factors (i.e., takes an action) based on the observed state
+$S_t \in \S$ every timestep $t\!=\!h$. It does so, by learning a policy $\pi(a|s)$ that
+maps every state $s\in\S$ to an action $a\in\A$.
 *** Markov Decision Process Definition
 
 
