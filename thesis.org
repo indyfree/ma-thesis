@@ -632,8 +632,7 @@ where $\Cf{t}$ are the total accumulated fleet costs until market period $t$.
 - Change Fleet parameters
 - Develop new strategy
 -
-
-#+LATEX: \clearpage
+# #+LATEX: \clearpage
 * Results
 # NOTE: 15%
 # NOTE: What about infer charging stations?
@@ -641,35 +640,53 @@ where $\Cf{t}$ are the total accumulated fleet costs until market period $t$.
 # - Run strategy with no/less regular charging
 # NOTE: Also include overview graphs, of charging, prices, available capacity,
 # car2go trips, etc..
+# NOTE: Include overview graphs of different RL methods over time
 # NOTE: List Simulation params in a table: Car Capacity etc..
 # NOTE: Make decision outcome results table over one-year period like kahlen
 # NOTE: Include EUR/MWh provided!
 ** Simulation Settings
+# NOTE: Include Graph of electricity prices
+- Results heavily dependent on industry charging price, since on average the
+  balancing prices are 50% cheaper, and intraday 30% cheaper.
 - BMWi. (n.d.). Prices of electricity for the industry in Germany from 2008 to
   2017 (in euro cents per kilowatt hour). In Statista - The Statistics Portal.
   Retrieved March 18, 2019, from
   https://www.statista.com/statistics/595803/electricity-industry-price-germany/.
 ** FleetRL
-
-** Sensitivity Analysis: Prediction Accuracy
+- long-delayed rewards make RL hard (!?)
+** Sensitivity Analysis
 # NOTE: Prediction Accuracy of available EV capacity
 # NOTE: Balancing accuracy always lower than intraday! Otherwise no sense
 # NOTE: Do predict electricity prices?
-** Sensitivity Analysis: Infrastructure Changes
-** Sensitivity Analysis: Bidding Strategy
-# NOTE: ???
+- Prediction Accuracy
+# NOTE: Fastchargers
+# NOTE: Car batteries
+- Charging infrastructure
 * Conclusion
-# NOTE 10%
+# NOTE 5%
 ** Contribution
-# TODO: Compare to most simular studies.
-# cite:kahlen18_elect_vehic_virtual_power_plant_dilem,vandael15_reinf_learn_heuris_ev_fleet etc..
+- Compare to most simular studies:
+cite:kahlen18_elect_vehic_virtual_power_plant_dilem,vandael15_reinf_learn_heuris_ev_fleet etc..
+- Business model for EV fleet owners with better results than previous studies
+- Environmental impact by providing balancing power
+- Decision Support System for controlled EV charging from multiple markets
+- RL Algorithm that is designed to work in previously unknown environments and
+  thus suited to deploy in real life settings of all kinds of EV fleets in all
+  kinds of cities. E.g. scooters also?
+- Event-based Simulation Platform to evaluate bidding strategies and RL agents,
+  facilitate research
 
 ** Limitations
-# - See cite:vazquez-canteli19_reinf_learn_deman_respon conclusion for
-#   limitations in RL.
-# - Market Design
+- Model:
+  - Bidding Mechanism: one week ahead, always accepted
+  - Policy & Regulation: EVs not allowed to provide balancing power, minimum
+    bidding quantities 1MW.
+  - Markets: Fleet is a price-taker, what about larger fleets? Simulate market influence
+- RL: See cite:vazquez-canteli19_reinf_learn_deman_respon conclusion for
+  limitations.
 ** Future Research
-
+- Model: Current market design, i.e. daily w/ 4h slots. German "Mischpreisverfahren"
+- RL: Long-delayed rewards, different reward structure, memory based
 
 #+LATEX: \clearpage
 bibliography:~/uni/ma-thesis/bibliography/references.bib
@@ -702,4 +719,3 @@ accessed 19^{th} February, 2019
 
 [fn:10] https://www.epexspot.com
 
-#  LocalWords:  explaina
