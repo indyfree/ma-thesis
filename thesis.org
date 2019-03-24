@@ -300,7 +300,7 @@ are eligible if they (a) are connected to a charging station ($\c$), and (b)
 have enough free battery storage available ($\Omega\!-\!\omega_{i}$) to charge
 the next control period. Hence, the VPP is defined as:
 \begin{equation}
-    VPP \defeq \{i\;|\;i\in\F \vee \c = 1 \vee \Omega\!-\!\omega_{i}\!\geq\!\gamma\Delta{t}\} \text{ ,}
+    V\!P\!P \defeq \{i\;|\;i\in\F \vee \c = 1 \vee \Omega\!-\!\omega_{i}\!\geq\!\gamma\Delta{t}\} \text{ ,}
 \end{equation}
 where $\gamma\Delta{t}$ (kWh) denotes the amount of energy that can be charged
 with the charging speed of $\gamma$ (kW) in control period $t$.
@@ -533,7 +533,7 @@ week-ahead, 2) time of the day of market period $h$. The risk of bidding on the
 markets is expected to be
 
 \begin{equation}
-    \S \defeq \left\{h(t), |VPP|_t, \vpphat{t+2}, \vpphat{t+(7\!\times\!H)}\right\}
+    \S \defeq \left\{h(t), \vpp{t}, \vpphat{t+2}, \vpphat{t+(7\!\times\!H)}\right\}
 \end{equation}
 where:
 - $h(t)$ is the current daytime in hours, with discrete values in the range
