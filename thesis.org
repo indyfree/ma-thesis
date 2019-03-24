@@ -303,7 +303,10 @@ the next control period. Hence, the VPP is defined as:
     V\!P\!P \defeq \{i\;|\;i\in\F \vee \c = 1 \vee \Omega\!-\!\omega_{i}\!\geq\!\gamma\Delta{t}\} \text{ ,}
 \end{equation}
 where $\gamma\Delta{t}$ (kWh) denotes the amount of energy that can be charged
-with the charging speed of $\gamma$ (kW) in control period $t$.
+with the charging speed of $\gamma$ (kW) in control period $t$. $\gamma$ is
+limited by either the EVs build-in charger, or the charging power of the
+connected charging station. In this model we assume $\gamma$ is equal for all
+considered EVs and charging stations.
 
 # TODO: How do we known $\oc$?
 Remember that the fleet has to provide the committed charging power
