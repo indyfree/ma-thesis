@@ -504,29 +504,36 @@ return(kw)
 # mechanism ultimately decides when EVs will charge and discharge.
 ** Reinforcement Learning Approach label:sec-model-rl
 # NOTE: RL Learning only technical, everything else in before? - Yes
-In the following chapter the developed RL approach is outlined. First, the we
-define the previously explained charging problem as a MDP, second, the used
-learning algorithm is explained, and third, we give implementation and training
-details.
+In the following chapter the developed RL approach is outlined. First, we define
+the charging problem as a MDP, second, the used learning algorithm is explained,
+and third, implementation and training details are given.
 
 Remember that the goal of the controlled charging problem is to choose a set of
 risk factors $\theta_{\lambda}$ that minimize the fleets total costs across all
-market periods. The controllers can influencing the charging costs, by setting
-the risk factors $\li{h}$, $\lb{h}$, which determine the bidding quantities
-$\Pb{h}$, $\Pi{h}$ to submit to the markets each market period $h$. The RL agent
-decides on the risk factors (i.e., takes an action) based on the observed state
-$S_t \in \S$ every timestep $t\!=\!h$. It does so, by learning a policy $\pi(a|s)$ that
-maps every state $s\in\S$ to an action $a\in\A$.
+market periods. The controller is able to influence the charging costs, by
+setting the risk factors $\li{h}$, $\lb{h}$, which determine the bidding
+quantities $\Pb{h}$, $\Pi{h}$ to submit to the markets each market period $h$.
+The RL agent decides on the risk factors (i.e., takes an action) based on the
+observed state $S_t \in \S$ every timestep $t\!=\!h$. It does so, by learning a
+policy $\pi(a|s)$ that maps every state $s\in\S$ to an action $a\in\A$.
 *** Markov Decision Process Definition
 
+The state space is compromised of the observed information of the environment
+the agent can use to decide on the action it is going to take. The bidding risk
+is intuitively dependent on the hour of the day of the considered market period.
+During the daytime, more customer activity is expected, resulting in an
+increased uncertainty of the available charging power. Additionally the bidding
+risk is dependent on the current and predicted amount of charging power. (Why?)
+The more available charging power the higher the chance that any
+"over-commitment" can be substituted by the rest of the VPP.
 
-- $a \in A$
 
-- Both bidding risk dependent on how many EVs available at that point in time
-- Both bidding risk dependent on daytime in hours at that point in time
-- Intraday Bidding risk dependent on how many EVs are available now
-
-
+When considering the current and the predicted amounts of available charging
+power, $\fP{t}$, $\fPhat{t+2}$, $\fPhat{t+(7\!\times\!H)}$ we arrive at a very
+high dimensionality of states that compromises the feasibility of the RL problem.
+We address the state explosion problem by defining $\vpphat{}$ as the necessary
+amount of available EVs to provide the predicted charging power $\fPhat{}$ in time
+period $t$:
 \begin{equation}
     \vpphat{t} \defeq \left\lceil\frac{\fPhat{t}}{\gamma}\right\rceil
 \end{equation}
