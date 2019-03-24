@@ -317,7 +317,7 @@ react to unforeseen rental demand. If a customer want to rent out an EV that is
 assigned to the VPP, the controller only has to refuse the rental, if no other
 EV is available to charge instead. When no replacement EV is available, the
 controller has to account for lost rental profits $\oc$. If the VPPs total
-amount of available charging power $|VPP|\!\times\!\gamma$ is not sufficient to
+amount of available charging power $\vpp{t}\!\times\!\gamma$ is not sufficient to
 provide the total market commitments $\Pb{h}\!+\!\Pi{h}$, the fleet gets charged
 imbalance costs $\beta_{h}$. Otherwise all the committed energy can be charged
 by the VPP.
