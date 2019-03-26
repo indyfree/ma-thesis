@@ -22,9 +22,9 @@
 #+LATEX_HEADER: \usepackage{notation/model}
 
 # Use informs lists
-#+LATEX_HEADER: \usepackage{template/informs}
-#+LATEX_HEADER: \let\enumerate\henumerate
-#+LATEX_HEADER: \let\itemize\hitemize
+# #+LATEX_HEADER: \usepackage{template/informs}
+# #+LATEX_HEADER: \let\enumerate\henumerate
+# #+LATEX_HEADER: \let\itemize\hitemize
 
 # Headers setup
 #+LATEX_HEADER:\usepackage{fancyhdr}
