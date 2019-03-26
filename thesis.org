@@ -601,29 +601,25 @@ costs and lost rental costs, the agents get positive or negative rewards based
 on the actions it took. Since the result of
 
 *** Learning Algorithm
-- cite:dauer13_market_based_ev_charg_coord,
-- cite:di13_elect_vehic
-- cite:vaya14_optim
-- cite:vandael15_reinf_learn_heuris_ev_fleet
-- Cost function?
-
 - Deep double Q learning
   cite:hasselt16_deep_reinf_learn_doubl_q_learn
   - Image: cite:wang15_duelin_networ_archit_deep_reinf_learn
   - double q learning combined with deep q learning:
   - off-policy approach
-*** Implementation and Training
-- Software:
-  - Python 3.6
-  - Lib: Keras-RL - Tensorflow abstraction / Pytorch?
-  - Implementation Link
-- Hardware: Google Colab
-  - GPU: Nvidia Tesla K80 , 2880 x 2 CUDA cores, 12GB GDDR5 VRAM
-  - CPU: Intel(R) Xeon(R) CPU @ 2.30GHz (1 core, 2 threads), 45MB Cache
-  - RAM: ~12.6 GB Available
-- Training:
-  - Time
-  - Hyperparameters? - In results or here?
+
+The RL agent was written in Python 3.6, and used the library Keras
+(https://keras.io/). Keras is "a high-level neural networks API, [...] capable
+of running on top of TensorFlow [...] with a focus on enabling fast
+experimentation".
+
+- OpenAi Gym?
+  - Hardware: Google Colab
+    - GPU: Nvidia Tesla K80 , 2880 x 2 CUDA cores, 12GB GDDR5 VRAM
+    - CPU: Intel(R) Xeon(R) CPU @ 2.30GHz (1 core, 2 threads), 45MB Cache
+    - RAM: ~12.6 GB Available
+  - Training:
+    - Time
+    - Hyperparameters? - In results or here?
 
 * Simulation Platform: FleetSim
 # NOTE: 5%
@@ -671,6 +667,8 @@ on the actions it took. Since the result of
   https://www.statista.com/statistics/595803/electricity-industry-price-germany/.
 ** FleetRL
 - long-delayed rewards make RL hard (!?)
+- Compare RL Algos eg. Q-learning vs DDQN --> deep learning makes difference in
+  practice for complex system
 ** Sensitivity Analysis
 # NOTE: Prediction Accuracy of available EV capacity
 # NOTE: Balancing accuracy always lower than intraday! Otherwise no sense
