@@ -515,11 +515,11 @@ setting the risk factors $\li{h}$, $\lb{h}$, which determine the bidding
 quantities $\Pb{h}$, $\Pi{h}$ that the controller submits to the balancing and
 intraday market.
 
-Bids are submitted every market period $h$, thus the /timestep/ (also called
-iteration) of the RL problem is set to $h$. The RL agent decides on the risk
-factors (i.e., takes an action) based on the observed state $S_h \in \S$ every
-timestep $h$. It does so, by learning a policy $\pi(a|s)$ that maps every state
-$s\in\S$ to an action $a\in\A$.
+The RL agent decides on the risk factors (i.e., takes an action) based on the
+observed state $\S$ every timestep. Bids are submitted every market period $h$,
+thus the /timestep/ (also called iteration) of the RL problem is set to $h$. The
+RL agent learns the optimal set of risk factors, by estimating a policy
+$\pi(a|s)$ that maps every state $s\in\S$ to an action $a\in\A$.
 *** Markov Decision Process Definition
 
 MDPs are defined by the state space $\S$, the action space $\A$, a set of reward
