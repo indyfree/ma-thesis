@@ -505,21 +505,20 @@ return(kw)
 ** Reinforcement Learning Approach label:sec-model-rl
 # NOTE: RL Learning only technical, everything else in before? - Yes
 In the following chapter the developed RL approach is outlined. First, we define
-the charging problem as a MDP, second, the developed learning algorithm is
-explained, and third, implementation and training details are given.
+the charging problem as a MDP, and second, the developed learning algorithm is
+explained.
 
 Remember that the goal of the controlled charging problem is to choose a set of
 risk factors $\theta_{\lambda}$ that minimize the fleets total costs across all
 market periods. The controller is able to influence the charging costs, by
 setting the risk factors $\li{h}$, $\lb{h}$, which determine the bidding
 quantities $\Pb{h}$, $\Pi{h}$ that the controller submits to the balancing and
-intraday market.
-
-The RL agent decides on the risk factors (i.e., takes an action) based on the
-observed state $\S$ every timestep. Bids are submitted every market period $h$,
-thus the /timestep/ (also called iteration) of the RL problem is set to $h$. The
-RL agent learns the optimal set of risk factors, by estimating a policy
-$\pi(a|s)$ that maps every state $s\in\S$ to an action $a\in\A$.
+intraday market. The RL agent decides on the risk factors (i.e., takes an
+action) based on the observed state $\S$ every timestep. Bids are submitted
+every market period $h$, thus the /timestep/ (also called iteration) of the RL
+problem is set to $h$, with a length of $\Delta{h}$. The RL agent learns the
+optimal set of risk factors, by estimating a policy $\pi(a|s)$ that maps every
+state $s\in\S$ to an action $a\in\A$.
 *** Markov Decision Process Definition
 
 MDPs are defined by the state space $\S$, the action space $\A$, a set of reward
@@ -527,28 +526,29 @@ signals $\R$ and the state-transition probabilities $p(s'|a,s)$. When
 $p(s'|a,s)$ is unknown, as it is in our case, it is possible to use a
 /model-free/ approach (see Chapter ref:sec-td-learning).
 
-The state space compromises the observed information of the environment the
-agent uses to decide on the action it is going to take. The bidding risk is
-naturally dependent on the hour of the day of the considered market period. For
-example, the increased customer activity during rush hour results in increased
-uncertainty of the available charging power. Additionally, the current and
-estimated (future) size of the VPP ($\vpp{}$) can influences the bidding risk.
-Large VPPs benefit from the /risk-pooling/ effect cite:kahlen17_fleet.
-Intuitively that means, that larger VPPs have an increased probability that
-"lost" charging power, due to unforeseen rentals, can be substituted by the rest
-of the VPP.
+The state space compromises the observed information the agent uses to decide on
+the action it is going to take. We observed the following factors that are
+associated with the bidding risk:
+1) The bidding period's time of the day
 
-Since forecasts of available charging power are already available, we define
-$\vpphat{h}$ as the as the necessary amount of EVs to provide the predicted
-charging power $\fPhat{}$ in time period $h$:
+   Times of volatile customer activity (e.g., rush hour), increase uncertainty
+   of the amount of available EVs. Bidding for these periods involves more risk
+   of not being able to fulfill market commitments.
+2) The current and estimated future size of the VPP
+
+   Large VPPs benefit from the /risk-pooling/ effect cite:kahlen17_fleet:
+   Intuitively, larger VPPs have an increased probability that "lost" charging
+   power, due to unforeseen rentals, can be substituted by the rest of the VPP.
+   Hence, we expect that VPP's size is negatively correlated with the
+   associated bidding risk.
+Since forecasts of available charging power are already available, we define the
+predicted size of a VPP $\vpphat{h}$ as the as the necessary amount of EVs to
+provide the predicted charging power $\fPhat{}$ in time period $h$:
 \begin{equation}
     \vpphat{h} \defeq \left\lceil\frac{\fPhat{h}}{\gamma}\right\rceil \text{ ,}
 \end{equation}
-where $\gamma$ is the charging power per EV.
-
-# FIXME: cited reddy
-The state space is the set defined by all valid values of the elements of the
-following tuple:
+where $\gamma$ is the charging power per EV. The state space is then defined as
+the set of all valid values of the elements of the following tuple:
 \begin{equation}
     \S \defeq \left\langle t(h), \vpp{h}, \vpphat{h+2}, \vpphat{h+(7\!\times\!H)}\right\rangle
 \end{equation}
@@ -571,6 +571,7 @@ return(24 * math.pow(500,3))
 #+RESULTS:
 : 3000000000.0
 
+# TODO: More action explanation
 The action space is constituted by all valid values of the risk factors
 $\lb{h},\li{h}$ constitute the action space:
 \begin{equation}
@@ -581,9 +582,11 @@ where:
   with discrete values in the range $\big[0,1\big]$ in 0.05 increments.
 - $\li{h}$ is the risk factor for bidding on the intraday market 30 minutes
   ahead, with discrete values in the range $\big[0,1\big]$ in 0.05 increments.
-The action space encompasses $4\!\times\!10^2 = 400$ actions. The state space
+The action space encompasses $20^2 = 400$ actions. The state space
 and action space were consciously discretized to facilitate faster convergence
-rates. (Cite? More info?)
+rates of the RL agent. Continuous spaces are theoretically possible with
+current RL algorithms, but they are computationally more complex and require
+function approximation methods to converge cite:sutton18_reinf.
 
 # NOTE: Reward structure, possibilities
 # NOTE: Notation: Set or Signal?
@@ -593,6 +596,9 @@ timestep (see Eq. ref:eq-model-fleetcosts).
     R_h = \Cf{h} - \Cf{h-1} \text{ ,}
 \end{equation}
 where $\Cf{h}$ are the total accumulated fleet costs until market period $t$.
+Depending on the risk factors, which determine bidding quantities, imbalance
+costs and lost rental costs, the agents get positive or negative rewards based
+on the actions it took. Since the result of
 
 *** Learning Algorithm
 - cite:dauer13_market_based_ev_charg_coord,
