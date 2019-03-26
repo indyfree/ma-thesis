@@ -601,13 +601,36 @@ costs and lost rental costs, the agents get positive or negative rewards based
 on the actions it took. Since the result of
 
 *** Learning Algorithm
-- Deep double Q learning
-  cite:hasselt16_deep_reinf_learn_doubl_q_learn
-  - Image: cite:wang15_duelin_networ_archit_deep_reinf_learn
-  - double q learning combined with deep q learning:
-  - off-policy approach
+We propose to solve the RL problem layed out in the previous chapter with the
+Double Deep Q-Network (DDQN) algorithm
+cite:hasselt16_deep_reinf_learn_doubl_q_learn. DDQN is a state-of-the-art
+model-free RL algorithm, that combines the popular Deep Q-Network (DQN)
+algorithm, originally proposed by
+textcite:mnih15_human_level_contr_throug_deep_reinf_learn with Double Q-Learning
+cite:hasselt16_deep_reinf_learn_doubl_q_learn. DDQN have shown to reduce DQN's
+overoptimistic action-values, resulting in more stable and reliable learning
+results. Combined with a dueling network architecture, proposed by
+textcite:wang15_duelin_networ_archit_deep_reinf_learn, this approach outperforms
+existing approaches for deep RL. The dueling network architecture, leads to
+faster convergence rates in control problems with large action spaces than a
+traditional single stream approach. This is especially beneficial for our
+proposed controlled fleet charging problem, as the action space, with 400
+possible actions, is comparably large in comparison to classical control
+problems.
 
-The RL agent was written in Python 3.6, and used the library Keras
+The dueling architecture (see Figure ref:fig-model-dueling, bottom) has consists two
+streams to separately estimate the state-value and the action advantages.
+- Shared features?
+- ...
+
+
+- Used NN architecture?
+
+#+CAPTION[DDQN Dueling Network Architecture]: The DDQN dueling network architecture cite:wang15_duelin_networ_archit_deep_reinf_learn label:fig-model-dueling
+#+ATTR_LATEX: :width 0.95\linewidth
+[[./fig/ddqn.pdf]]
+
+The RL agent was implemented in Python 3.6, and used the library Keras
 (https://keras.io/). Keras is "a high-level neural networks API, [...] capable
 of running on top of TensorFlow [...] with a focus on enabling fast
 experimentation".
