@@ -296,11 +296,11 @@ whole EV fleet.
 In the last step, at electricity delivery time, the EVs have to be assigned to
 the VPP and be /dispatched/ to charge. Therefore the controller first needs to
 detect how many EVs are eligible to be used as VPP per control period $t$. EVs
-are eligible if they (a) are connected to a charging station ($\c$), and (b)
+are eligible if they (a) are connected to a charging station ($\c$ = 1), and (b)
 have enough free battery storage available ($\Omega\!-\!\omega_{i}$) to charge
 the next control period. Hence, the VPP is defined as:
 \begin{equation}
-    V\!P\!P \defeq \{i\;|\;i\in\F \vee \c = 1 \vee \Omega\!-\!\omega_{i}\!\geq\!\gamma\Delta{t}\} \text{ ,}
+    V\!P\!P \defeq \{i\in\F \;|\; \c = 1 \vee \Omega\!-\!\omega_{i}\!\geq\!\gamma\Delta{t}\} \text{ ,}
 \end{equation}
 where $\gamma\Delta{t}$ (kWh) denotes the amount of energy that can be charged
 with the charging speed of $\gamma$ (kW) in control period $t$. $\gamma$ is
@@ -505,19 +505,21 @@ return(kw)
 ** Reinforcement Learning Approach label:sec-model-rl
 # NOTE: RL Learning only technical, everything else in before? - Yes
 In the following chapter the developed RL approach is outlined. First, we define
-the charging problem as a MDP, second, the used learning algorithm is explained,
-and third, implementation and training details are given.
+the charging problem as a MDP, second, the developed learning algorithm is
+explained, and third, implementation and training details are given.
 
 Remember that the goal of the controlled charging problem is to choose a set of
 risk factors $\theta_{\lambda}$ that minimize the fleets total costs across all
 market periods. The controller is able to influence the charging costs, by
 setting the risk factors $\li{h}$, $\lb{h}$, which determine the bidding
 quantities $\Pb{h}$, $\Pi{h}$ that the controller submits to the balancing and
-intraday market. The RL agent decides on the risk factors (i.e., takes an
-action) based on the observed state $S_t \in \S$ every timestep $t$. Since the
-controller can submit bid every market period $h$, $t$ is chosen to be $h$.
-The agent decides on the risk factors, by learning a policy $\pi(a|s)$ that maps
-every state $s\in\S$ to an action $a\in\A$.
+intraday market.
+
+Bids are submitted every market period $h$, thus the /timestep/ (also called
+iteration) of the RL problem is set to $h$. The RL agent decides on the risk
+factors (i.e., takes an action) based on the observed state $S_h \in \S$ every
+timestep $h$. It does so, by learning a policy $\pi(a|s)$ that maps every state
+$s\in\S$ to an action $a\in\A$.
 *** Markov Decision Process Definition
 
 MDPs are defined by the state space $\S$, the action space $\A$, a set of reward
@@ -537,10 +539,10 @@ Intuitively that means, that larger VPPs have an increased probability that
 of the VPP.
 
 Since forecasts of available charging power are already available, we define
-$\vpphat{t}$ as the as the necessary amount of EVs to provide the predicted
-charging power $\fPhat{}$ in time period $t$:
+$\vpphat{h}$ as the as the necessary amount of EVs to provide the predicted
+charging power $\fPhat{}$ in time period $h$:
 \begin{equation}
-    \vpphat{t} \defeq \left\lceil\frac{\fPhat{t}}{\gamma}\right\rceil \text{ ,}
+    \vpphat{h} \defeq \left\lceil\frac{\fPhat{h}}{\gamma}\right\rceil \text{ ,}
 \end{equation}
 where $\gamma$ is the charging power per EV.
 
@@ -548,16 +550,16 @@ where $\gamma$ is the charging power per EV.
 The state space is the set defined by all valid values of the elements of the
 following tuple:
 \begin{equation}
-    \S \defeq \left\langle h(t), \vpp{t}, \vpphat{t+2}, \vpphat{t+(7\!\times\!H)}\right\rangle
+    \S \defeq \left\langle t(h), \vpp{h}, \vpphat{h+2}, \vpphat{h+(7\!\times\!H)}\right\rangle
 \end{equation}
 where:
-- $h(t)$ is the current daytime in hours, with discrete values in the range
+- $t(h)$ is the current daytime in hours, with discrete values in the range
   $\big[0,\;23\big] \in \Ne$.
 - $|VPP|_t$ is the current VPP size, with discrete values in the range
   $\big[0,\;|\F|\big] \in \Ne$.
-- $\vpphat{t+2}$ is the predicted VPP size 30 minutes ahead, with discrete values in the range
+- $\vpphat{h+2}$ is the predicted VPP size 30 minutes ahead, with discrete values in the range
   $\big[0,\;|\F|\big] \in \Ne$.
-- $\vpphat{t+(7\!\times\!H)}$ is the predicted VPP size 7 days ahead, with discrete
+- $\vpphat{h+(7\!\times\!H)}$ is the predicted VPP size 7 days ahead, with discrete
   values in the range $\big[0,\;|\F|\big] \in \Ne$.
 The state space encompasses $|\F|^3\!\times\!24$ states. Assuming a fleet size of
 500 EVs that are $3\!\times\!10^9$ states.
@@ -570,27 +572,27 @@ return(24 * math.pow(500,3))
 : 3000000000.0
 
 The action space is constituted by all valid values of the risk factors
-$\lb{t},\li{t}$ constitute the action space:
+$\lb{h},\li{h}$ constitute the action space:
 \begin{equation}
-    \A \defeq \left\{\lb{t},\li{t} \in \Re_{0 \leq \lambda \leq 1} \right\}
+    \A \defeq \left\{\lb{h},\li{h} \in \Re_{0 \leq \lambda \leq 1} \right\}
 \end{equation}
 where:
-- $\lb{t}$ is the risk factor for bidding on the balancing market 7 days ahead,
+- $\lb{h}$ is the risk factor for bidding on the balancing market 7 days ahead,
   with discrete values in the range $\big[0,1\big]$ in 0.05 increments.
-- $\li{t}$ is the risk factor for bidding on the intraday market 30 minutes
+- $\li{h}$ is the risk factor for bidding on the intraday market 30 minutes
   ahead, with discrete values in the range $\big[0,1\big]$ in 0.05 increments.
 The action space encompasses $4\!\times\!10^2 = 400$ actions. The state space
-and action space were consciously discretized to facilitate fast convergence
+and action space were consciously discretized to facilitate faster convergence
 rates. (Cite? More info?)
 
 # NOTE: Reward structure, possibilities
-We define the reward function as the costs that occurred in the last timestep (see Eq. ref:eq-model-fleetcosts).
-- If the RL agents chose risk factors that....
-- Prof
+# NOTE: Notation: Set or Signal?
+We define the reward signal as the total fleet costs that occurred in the last
+timestep (see Eq. ref:eq-model-fleetcosts).
 \begin{equation}
-    R = \Cf{t} - \Cf{t-1} \text{ ,}
+    R_h = \Cf{h} - \Cf{h-1} \text{ ,}
 \end{equation}
-where $\Cf{t}$ are the total accumulated fleet costs until market period $t$.
+where $\Cf{h}$ are the total accumulated fleet costs until market period $t$.
 
 *** Learning Algorithm
 - cite:dauer13_market_based_ev_charg_coord,
