@@ -90,7 +90,6 @@ customer mobility by refusing customer rentals.
 | $\Omega$                  | Maximum battery capacity of EV.                                           | $\kwh$  |
 | $\delta$                  | Charging power of EV at the charging station.                             | $\kw$   |
 | $\F$                      | Set of all EVs in the fleet                                               | -       |
-| $\nF$                     | Total number of EVs in the fleet.                                         | -       |
 |---------------------------+---------------------------------------------------------------------------+---------|
 
 ** Required Information Assumptions label:sec-model-assumptions
@@ -330,11 +329,11 @@ fleet costs are defined as follows:
 \begin{equation} \label{eq-model-fleetcosts}
     \Cf{}(\theta_{\lambda}) \defeq \sum^{N_h}_h
     \bigg[ \Cb{h}(\Pb{h}) + \Ci{h}(\Pi{h}) + \beta_{h}
-    + \sum_t^{T} \sum_i^{\nF} \oc \bigg] \text{ ,}
+    + \sum_t^{T} \sum_i^{|\F|} \oc \bigg] \text{ ,}
 \end{equation}
 where $\theta_{\lambda}\!\in\!\Re_{0 \leq \lambda \leq 1}^{2 \times N_h}$ is the
 matrix of the risk factors $\lb{h}$, $\li{h}$ for all considered market periods
-$N_h$. $\F$ denotes the set of all EVs $i$ in the fleet and $\nF$ the fleet
+$N_h$. $\F$ denotes the set of all EVs $i$ in the fleet and $|\F|$ the fleet
 size. The costs for charging $\Cb{h}(\Pb{h})$, $\Ci{h}(\Pi{h})$ are clearly
 dependent on the chosen risk factors $\lb{h}$, $\li{h}$ (see Eq.
 ref:eq-model-pb, Eq. ref:eq-model-pi). In summary, the problem can be formulated
