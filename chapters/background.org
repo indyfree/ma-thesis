@@ -472,22 +472,22 @@ RL is an agent-based machine learning algorithm in which the agent learns to
 perform an optimal set of actions through interaction with its environment. The
 agents objective is to maximize the rewards it receives based on the actions it
 takes. Immediate rewards have to be weighted against long-term cumulative
-returns that also on its future actions. The RL problem is formalized as Markov
-Decision Processes (MDPs) which will be introduced in Chapter ref:sec-mdp. A
-critical task of RL agents is to continuously estimate the value of the
-environments state. Values indicate the long-term desirability of a state, that
-is the total amount of reward the agent can expect to accumulate over the
-future, following a learned set of actions, called the policy. Policies and
-values are covered in Chapter ref:sec-policies, whereas the core mathematical
-foundations for evaluating policies and updating value functions are introduced
-in Chapter ref:sec-bellman. When the model of the environment is fully known,
-the learning problem is reduced to a planning problem (Chapter ref:sec-dp) in
-which optimal policies can be computed with iterative approaches. Model-free RL
-approaches can be applied when rewards and state transitions are unknown, and
-the agent's behavior has to be learned from experience (Chapter
-ref:sec-td-learning). The last two chapter cover methods that solve the RL
-problem more efficiently, tackle new challenges and are widely used in practice
-and research.
+returns that also depend on the agent's future actions. The RL problem is
+formalized as Markov Decision Processes (MDPs) which will be introduced in
+Chapter ref:sec-mdp. A critical task of RL agents is to continuously estimate
+the value of the environment's state. Values indicate the long-term desirability
+of a state, that is the total amount of reward the agent can expect to
+accumulate over the future, following a learned set of actions, called the
+policy. Policies and values are covered in Chapter ref:sec-policies, whereas the
+core mathematical foundations for evaluating policies and updating value
+functions are introduced in Chapter ref:sec-bellman. When the model of the
+environment is fully known, the learning problem is reduced to a planning
+problem (Chapter ref:sec-dp) in which optimal policies can be computed with
+iterative approaches. Model-free RL approaches can be applied when rewards and
+state transitions are unknown, and the agent's behavior has to be learned from
+experience (Chapter ref:sec-td-learning). The last two chapter cover methods
+that solve the RL problem more efficiently, tackle new challenges and are widely
+used in practice and research.
 
 *** Markov Decision Processes label:sec-mdp
 Markov Decision Processes (MDPs) are a classical formulation of sequential
