@@ -23,7 +23,7 @@
 ** Architecture / Components
 #+CAPTION[FleetSim Architecture]: Architecture of FleetSim label:fig-fleetsim
 #+ATTR_LATEX: :width 1\linewidth
-[[./fig/simulation_platform.png]]
+# [[./fig/simulation_platform.png]]
 
 ** Modular Expandability
 - Plug-in different Market designs
@@ -95,3 +95,8 @@ bibliographystyle:apacite
 
 * Footnotes
 
+[fn:1] https://www.keras.io
+
+[fn:2] https://github.com/keras-rl/keras-rl
+
+[fn:3] https://colab.research.google.com
