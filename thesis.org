@@ -43,7 +43,7 @@ customer mobility by refusing customer rentals.
 
 
 #+CAPTION[Table of Notation]: Table of Notation label:table-notation
-#+ATTR_LATEX: :environment longtable :align l|p{0.7\linewidth}|l :placement [hp]
+#+ATTR_LATEX: :environment longtable :align p{0.11\linewidth}|p{0.75\linewidth}|c :placement [hp]
 |---------------------------+---------------------------------------------------------------------------+---------|
 |---------------------------+---------------------------------------------------------------------------+---------|
 | Symbol                    | Description                                                               | Unit    |
