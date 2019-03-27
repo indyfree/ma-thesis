@@ -1,0 +1,19 @@
+\def\hitemize{%
+  \ifnum \@itemdepth >\thr@@\@toodeep\else
+    \advance\@itemdepth\@ne
+    \edef\@itemitem{labelitem\romannumeral\the\@itemdepth}%
+    \expandafter
+    \list
+      \csname\@itemitem\endcsname
+      {\HitemizeListParams}%
+  \fi}
+
+\def\HitemizeListParams{%
+\leftmargin\z@ \parsep\z@ \itemsep\z@ \parskip\z@ \topsep\z@ \partopsep\z@ \labelsep0.5em \labelwidth\z@
+\ifnum \@itemdepth=1 \leftmargin 1em \itemindent-0.5em
+\else \ifnum \@itemdepth=2 \leftmargin1.15em \itemindent-0.65em
+\else \ifnum \@itemdepth=3 \leftmargin1em \itemindent -0.5em
+\else \leftmargin1em \itemindent-0.5em \fi\fi\fi
+\def\makelabel##1{{##1}}}
+
+\let\endhitemize =\endlist
