@@ -160,21 +160,21 @@ and provide detailed explanation and mathematical formulations.
 
 *** Fleet Charging Power Prediction
 In a first step, the controller has to predict the available fleet charging
-power $\fPhat{h}$ for all market periods $h$ of the next week. The actual
-available fleet charging power $\fP{t}$ in a control period $t$ is given by the
-number of EVs that are connected to a charging station, with enough free battery
-capacity to charge the next control period $t\!+\!1$. As mentioned in the
-Chapter ref:sec-model-assumptions, the controller is able to predict the
-available fleet charging power $\fPhat{t}$ for all control periods $t$ with
-different levels of accuracy dependent on the time horizon of $t$.
+power for all market periods $h$ of the next week. The actual available fleet
+charging power $\fP{t}$ in a control period $t$ is given by the number of EVs
+that are connected to a charging station, with enough free battery capacity to
+charge the next control period $t\!+\!1$. As mentioned in the Chapter
+ref:sec-model-assumptions, the controller is able to predict the available fleet
+charging power $\fPhat{t}$ for all control periods $t$ with different levels of
+accuracy dependent on the time horizon of $t$.
 
 When the controller procures electricity from the markets, the fleet has to
-charge with the committed charging power during all $T$ control periods of the
-market period $h$.
-To minimize the risk of not being able to charge the committed amount of energy
-during the whole market period, and consequently causing imbalance costs, the
-predicted fleet charging power in a market period is defined as the minimal
-predicted fleet charging power of all $T$ control periods in a market period.
+charge with the committed charging power during all control periods of the
+market period $h$. To minimize the risk of not being able to charge the
+committed amount of energy during the whole market period, and consequently
+causing imbalance costs, the predicted fleet charging power in a market period
+is defined as the minimal predicted fleet charging power of all $T$ control
+periods in a market period.
 \begin{equation}
     \fPhat{h} \defeq \min_{n \in \{1, .., T\}} \fPhat{t + n} \text{ ,}
 \end{equation}
@@ -494,22 +494,19 @@ return(kw)
 # prices from the fleet owner and other market participants. The market auction
 # mechanism ultimately decides when EVs will charge and discharge.
 ** Reinforcement Learning Approach label:sec-model-rl
-# NOTE: RL Learning only technical, everything else in before? - Yes
 In the following chapter the developed RL approach is outlined. First, we define
 the charging problem as a MDP, and second, the used learning algorithm is
-explained.
-
-Remember that the goal of the controlled charging problem is to choose a set of
-risk factors $\theta_{\lambda}$ that minimize the fleets total costs across all
-market periods. The controller is able to influence the charging costs, by
-setting the risk factors $\li{h}$, $\lb{h}$, which determine the bidding
-quantities $\Pb{h}$, $\Pi{h}$ that the controller submits to the balancing and
-intraday market. The RL agent decides on the risk factors (i.e., takes an
-action) based on the observed state $\S$ every timestep. Bids are submitted
-every market period $h$, thus the /timestep/ (also called iteration) of the RL
-problem is set to $h$, with a length of $\Delta{h}$. The optimal set of risk
-factors are learned by the RL agent through estimating a policy $\pi(a|s)$ that
-maps every state $s\in\S$ to an action $a\in\A$.
+explained. Remember that the goal of the controlled charging problem is to
+choose a set of risk factors $\theta_{\lambda}$ that minimize the fleets total
+costs across all market periods. The controller is able to influence the
+charging costs, by setting the risk factors $\lb{h}$, $\li{h}$, which determine
+the bidding quantities $\Pb{h}$, $\Pi{h}$ that the controller submits to the
+balancing and intraday market. The RL agent decides on the risk factors (i.e.,
+takes an action) based on the observed state $\S$ every /timestep/. Bids are
+submitted every market period $h$, thus the timestep (also called iteration) is
+also set to $h$, with a length of $\Delta{h}$. The optimal set of risk factors
+are learned by the RL agent through estimating a policy $\pi(a|s)$ that maps
+every state $s\in\S$ to an action $a\in\A$.
 *** Markov Decision Process Definition
 
 MDPs are defined by the state space $\S$, the action space $\A$, a set of reward
@@ -530,7 +527,7 @@ bidding risk:
    Large VPPs benefit from the /risk-pooling/ effect cite:kahlen17_fleet.
    Intuitively that means, larger VPPs are exposed to smaller risks: They have
    an increased probability that "lost" charging power, due to unforeseen
-   rentals, can be substituted by the other EVs of the VPP.
+   rentals, can be substituted by the EVs of the VPP.
 Since forecasts of available charging power are already available, we define the
 predicted VPP size $\vpphat{h}$ as the as the necessary amount of EVs to
 provide the predicted charging power $\fPhat{}$ in time period $h$:
@@ -552,7 +549,7 @@ where:
 - $\vpphat{h+(7\!\times\!H)}$ is the predicted VPP size 7 days ahead, with discrete
   values in the range $\big[0,\;|\F|\big] \in \Ne$.
 The state space encompasses $|\F|^3\!\times\!24$ states. Assuming a fleet size
-$|\F|$ of 500 EVs that are $3\!\times\!10^9$ states.
+$|\F|$ of 500 EVs, the state space consists of $3\!\times\!10^9$ different states.
 #+BEGIN_SRC python :exports none
 import math
 return(24 * math.pow(500,3))
@@ -560,9 +557,10 @@ return(24 * math.pow(500,3))
 
 #+RESULTS:
 : 3000000000.0
-The agent's action is choosing the risk that is associated with bidding on the
-electricity markets each market period $h$. Hence, the action space is
-constituted by all valid values of the risk factors $\lb{h},\li{h}$:
+The agent takes actions by determining the risk that is associated with bidding
+on the electricity markets at each market period $h$. Hence, the action space is
+constituted by all combinations of valid values of the risk factors
+$\lb{h},\li{h}$:
 \begin{equation}
     \A \defeq \left\{\lb{h},\li{h} \in \Re_{0 \leq \lambda \leq 1} \right\} \text{ ,}
 \end{equation}
@@ -572,28 +570,30 @@ where:
 - $\li{h}$ is the risk factor for bidding on the intraday market 30 minutes
   ahead, with discrete values in the range $\big[0,1\big]$ in 0.05 increments.
 The action space encompasses $20^2 = 400$ actions. The state space and action
-space were consciously discretized to facilitate faster convergence rates of the
-learning process. Convergence with continuous spaces is theoretically feasible
-with current function approximation methods, but is computational more complex
-cite:sutton18_reinf.
+space were consciously discretized, to achieve faster learning rates.
+Convergence in continuous spaces is theoretically possible, but computationally
+more complex cite:sutton18_reinf. In order to facilitate faster learning in
+real-world settings, where long training periods are not desirable, we chose to
+not pursue this direction.
 
 # NOTE: Reward structure, possibilities
-The reward signal is defined as the total fleet costs that occurred in the last
+The reward signal is defined as the fleet costs that occurred in the last
 timestep:
 \begin{equation}
     R_{h+1} = \Cf{h} - \Cf{h-1} \text{ ,}
 \end{equation}
 where $\Cf{h}$ are the total accumulated fleet costs until the market period
-$t$. The agent's actions determine the bidding quantities, which lead to profits
-from charging cheaper than the industry tariff, and possibly cause imbalance or
-lost rental costs. See \eqref{eq-model-fleetcosts} for a formulation the cost
-function. The occurred costs associated with the action are presented to the
-agent in the form of a positive or a negative reward signal. The particular
-challenge in the proposed RL problem is the significantly delayed reward.
-Choosing an action $a$ in timestep $h$ will have an effect on the reward 672
-timesteps ($7 \text{ days}\!\times\!24\text{ hours}\!\times\!4\text{ market
-periods of 15 minutes}$) later, due to the week ahead commitments on the
-balancing market.
+$h$. For a complete formulation the cost function, see
+\eqref{eq-model-fleetcosts}. The agent's actions directly determine the occurred
+costs or profits, and are presented to the agent in form of a positive or
+negative reward signal. The particular challenge in the proposed RL problem is
+the significantly /delayed reward/. Choosing a risk factor in timestep $h$
+determines the reward up to 672 timesteps later (7 days, with 15-minute
+timesteps), when the week-ahead committed electricity to the balancing market
+has to be charged.
+
+
+# due to the week-ahead commitments on the balancing market.
 
 #+BEGIN_SRC python :exports none
 return(7 * 24 * 4)
