@@ -641,14 +641,14 @@ ReLU activation functions, and a linear output layer with two nodes (number of
 actions). Further, a \epsilon-greedy policy with a linear decreasing exploration
 rate was used. The RL agent was implemented with the neural networks API
 Keras[fn:1][fn:2], which runs on top of TensorFlow, the de-facto standard for
-robust and scalable ML in industry and research cite:abadi16_tensor. We used
-Google Colaboratory[fn:3] to train and evaluate the agent. This shared research
-environment provides free access to computing resources that are optimized for
-training ML models. More specifically, it provides a NVIDIA Tesla K80 GPU, with
-2880 $\times$ 2 CUDA cores and 12GB GDDR5 VRAM . Additionally it is equipped
-with a Intel(R) Xeon(R) CPU @ 2.30GHz (1 core, 2 threads), and over 12GB
-available memory. Google Colaboratory can be used for 12 hours of consecutive
-training, before loosing its state.
+robust and scalable machine learning in industry and research
+cite:abadi16_tensor. We used Google Colaboratory[fn:3] to train and evaluate the
+agent. This shared research environment provides free access to computing
+resources that are optimized for training machine learning models. More
+specifically, it provides a NVIDIA Tesla K80 GPU, with 2880 $\times$ 2 CUDA
+cores and 12GB GDDR5 VRAM . Additionally it is equipped with a Intel(R) Xeon(R)
+CPU @ 2.30GHz (1 core, 2 threads), and over 12GB available memory. Google
+Colaboratory can be used up to 12 hours of consecutive training.
 
 #+LATEX: \clearpage
 
