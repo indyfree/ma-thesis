@@ -1,6 +1,7 @@
 #+TITLE: Thesis Todo
 
 * Inbox
+** TODO Mobility demand/Rental demand? Generalize? Somebody notices?
 ** TODO Add determine prices/distance at data section
 ** TODO Put notation in RL chapter if only abbr, otherwise also use electricity/price abbr as p,soc,...
 ** TODO Use abbreviations only after 3+ mentions?
