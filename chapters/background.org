@@ -791,7 +791,7 @@ representation is computational infeasible and the speed of convergence is
 drastically reduced. In this case, a /function approximator/ can replace the
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
-*** Approximation Methods
+*** Approximation Methods label:sec-rl-fa
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
