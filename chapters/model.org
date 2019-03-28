@@ -605,24 +605,30 @@ return(7 * 24 * 4)
 *** Learning Algorithm
 This research proposes to solve the layed out RL problem,  with the Double Deep
 Q-Network (DDQN) algorithm, presented by
-textcite:hasselt16_deep_reinf_learn_doubl_q_learn. DDQN is a state-of-the-art
-model-free RL approach, that combines the popular Deep Q-Network (DQN),
-originally proposed by textcite:mnih15_human_level_contr_throug_deep_reinf_learn
-with Double Q-Learning cite:hasselt10_doubl_q. DDQN have shown to reduce DQN's
-overoptimistic estimates of action-values, resulting in more stable and reliable
-learning results. Combined with a dueling network architecture, proposed by
+textcite:hasselt16_deep_reinf_learn_doubl_q_learn. DDQN is a state-of-the-art,
+online, model-free RL approach that uses a deep neural network as function
+approximator to estimate optimal Q-values (see Chapter ref:sec-rl-fa for a
+explanation of function approximation methods). It combines the groundbreaking
+Deep Q-Network (DQN), originally proposed by
+textcite:mnih15_human_level_contr_throug_deep_reinf_learn with Double Q-Learning
+cite:hasselt10_doubl_q. DDQN have shown to reduce overoptimistic action-value
+estimates of the DQN algorithm, resulting in more stable and reliable learning
+results. Combined with the /dueling network/ architecture, proposed by
 textcite:wang15_duelin_networ_archit_deep_reinf_learn, this approach outperforms
-existing approaches for deep RL. Dueling networks, lead to faster convergence
-rates in control problems with large action spaces than a traditional single
-stream approach. This is especially beneficial for our proposed RL problem, as
-the action space, with 400 possible actions, is comparably large in comparison
-to classical control problems. The dueling architecture consists of two streams
-to separately estimate the state-value and the action advantages, which are
-later combined into Q-values (see Figure ref:fig-model-dueling, single (top) vs.
-duel architecture). The separated streams allow to learn which states are
-valuable without having to learn each state-action interaction individually. A
-general state-value is learned that can be shared across many different actions,
-leading to faster convergence cite:wang15_duelin_networ_archit_deep_reinf_learn.
+existing approaches for deep RL. Dueling networks lead to faster convergence
+rates in control problems with large action spaces than traditional single
+stream approaches. This is especially beneficial for our proposed RL problem, as
+the defined action space (400 possible actions) is comparably large in
+comparison to classical control problems. In Figure ref:fig-model-dueling, the
+single stream approach (top) versus the dueling architecture (bottom) is
+depicted. The dueling architecture consists of a neural network in any shape
+with two streams that separately estimate the state-value and the action
+advantages. These estimates are later combined into Q-values (green module in
+Figure ref:fig-model-dueling). The separated streams allow to learn which states
+are valuable without having to learn each state-action interaction individually.
+A general state-value is learned that can be shared across many different
+actions, leading to faster convergence
+cite:wang15_duelin_networ_archit_deep_reinf_learn.
 
 #+CAPTION[Dueling DDQN Architecture]: The dueling DDQN architecture cite:wang15_duelin_networ_archit_deep_reinf_learn label:fig-model-dueling
 #+ATTR_LATEX: :width 0.95\linewidth :placement [h]
@@ -632,19 +638,17 @@ Our agent uses the dueling DDQN algorithm with a standard neural network
 architecture, similar to the one depicted in Figure ref:fig-ann. It consist of
 four input nodes (number of states), three fully-connected hidden layers with
 ReLU activation functions, and a linear output layer with two nodes (number of
-actions).
-- Epsilon or Boltzman Policy?
-The RL agent was implemented with the neural networks API Keras[fn:1][fn:2],
-which runs on top of TensorFlow, the de-facto standard for robust and scalable
-ML in industry and research cite:abadi16_tensor. We used Google
-Colaboratory[fn:3] to train and evaluate the
-agent. This shared research environment provides free access to Nvidia Tesla K80
-GPU, with 2880 $\times$ 2 CUDA cores and 12GB GDDR5 VRAM for 12 hours
-consecutive usage. Additionally it is equipped with a Intel(R) Xeon(R) CPU @
-2.30GHz (1 core, 2 threads), with 45MB cache, and over 12GB available memory.
-
- - Hyperparameters? - In results or here?
- - Training time/timesteps - Results or here?
+actions). Further, a \epsilon-greedy policy with a linear decreasing exploration
+rate was used. The RL agent was implemented with the neural networks API
+Keras[fn:1][fn:2], which runs on top of TensorFlow, the de-facto standard for
+robust and scalable ML in industry and research cite:abadi16_tensor. We used
+Google Colaboratory[fn:3] to train and evaluate the agent. This shared research
+environment provides free access to computing resources that are optimized for
+training ML models. More specifically, it provides a NVIDIA Tesla K80 GPU, with
+2880 $\times$ 2 CUDA cores and 12GB GDDR5 VRAM . Additionally it is equipped
+with a Intel(R) Xeon(R) CPU @ 2.30GHz (1 core, 2 threads), and over 12GB
+available memory. Google Colaboratory can be used for 12 hours of consecutive
+training, before loosing its state.
 
 #+LATEX: \clearpage
 
