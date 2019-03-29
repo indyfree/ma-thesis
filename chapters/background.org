@@ -641,10 +641,10 @@ goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
 satisfies the Bellman optimality equation) is found, optimal policies can be
 easily obtained. Despite the limited utility of DP in real-world settings, it
-provides the theoretical foundation for all other RL methods. In fact, all of
-the RL methods try to achieve the same goal, but without the assumption of a
-perfect model of the environment and less computational effort. Because DP assumes
-full knowledge of the environment, it is known as /planning/, in which optimal
+provides the theoretical foundation for all RL methods. In fact, all of the RL
+methods try to achieve the same goal, but without the assumption of a perfect
+model of the environment and less computational effort. Because DP assumes full
+knowledge of the environment, it is known as /planning/, in which optimal
 solutions are /computed/. In /control/ problems (Chapter ref:sec-td-learning),
 optimal solutions are /learned/ from an unknown environment.
 
