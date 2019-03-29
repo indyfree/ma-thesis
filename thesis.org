@@ -55,6 +55,7 @@
 - long-delayed rewards make RL hard (!?)
 - Compare RL Algos eg. Q-learning vs DDQN --> deep learning makes difference in
   practice for complex system
+- How much could have been used as VPP optimally/perfect information? Similar matrix to Kahlen, or even plot?
 ** Sensitivity Analysis
 # NOTE: Prediction Accuracy of available EV capacity
 # NOTE: Balancing accuracy always lower than intraday! Otherwise no sense
