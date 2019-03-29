@@ -495,18 +495,18 @@ return(kw)
 # mechanism ultimately decides when EVs will charge and discharge.
 ** Reinforcement Learning Approach label:sec-model-rl
 In the following chapter the developed RL approach is outlined. First, we define
-the charging problem as a MDP, and second, the used learning algorithm is
-explained. Remember that the goal of the controlled charging problem is to
-choose a set of risk factors $\theta_{\lambda}$ that minimize the fleets total
-costs across all market periods. The controller is able to influence the
-charging costs, by setting the risk factors $\lb{h}$, $\li{h}$, which determine
-the bidding quantities $\Pb{h}$, $\Pi{h}$ that the controller submits to the
-balancing and intraday market. The RL agent decides on the risk factors (i.e.,
-takes an action) based on the observed state $\S$ every /timestep/. Bids are
-submitted every market period $h$, thus the timestep (also called iteration) is
-also set to $h$, with a length of $\Delta{h}$. The optimal set of risk factors
-are learned by the RL agent through estimating a policy $\pi(a|s)$ that maps
-every state $s\in\S$ to an action $a\in\A$.
+the charging problem as a MDP, and second, the learning algorithm is explained.
+Remember that the goal of the controlled charging problem is to choose a set of
+risk factors $\theta_{\lambda}$ that minimize the fleets total costs across all
+market periods. The controller is able to influence the costs, by setting the
+risk factors $\lb{h}$, $\li{h}$. The risk factors influence the bidding
+quantities $\Pb{h}$, $\Pi{h}$ that the controller submits to the balancing and
+intraday market, which in the end determine the fleet costs. The RL agent
+decides on the risk factors (i.e., takes an action) based on the observed state
+$\S$ every /timestep/. The timestep (denoted $t$ in the RL literature) is
+set to $h$, since the controller submits bids in each market period $h$.
+The optimal set of risk factors is learned by the RL agent through estimating a
+policy $\pi(a|s)$ that maps every state $s\in\S$ to an action $a\in\A$.
 *** Markov Decision Process Definition
 
 MDPs are defined by the state space $\S$, the action space $\A$, a set of reward
