@@ -1,4 +1,4 @@
-* Model: FleetRL
+* Model
 # NOTE: 20%
 # NOTE: Mention VPP more clearly?
 
@@ -91,7 +91,7 @@ The following information is assumed to be available:
 1) The controller is able to forecast the mobility demand of the EV fleet at
    different time-horizons based on historical data. More specifically, it can
    predict the amount of plugged-in EVs and consequently the available charging
-   power $P^{fleet}_t$ of the fleet at control period $t$. The prediction's
+   power $P^{fleet}_t$ of the fleet at control period $t$. The prediction
    accuracy is increasing with shorter time horizons, from uncertain predictions
    one week ahead to very accurate predictions 30 minutes ahead. Past research
    presented successful mobility demand forecast algorithms in the context of
@@ -139,7 +139,7 @@ can be fulfilled.
 The following chapters will highlight the important parts of the various phases
 and provide detailed explanation and mathematical formulations.
 
-#+CAPTION[FleetRL Control Mechanism]: FleetRL Control Mechanism label:fig-control-mechanism
+#+CAPTION[Control Mechanism]: Control Mechanism label:fig-control-mechanism
 #+ATTR_LATEX: :width 1.05\linewidth :placement [p]
 [[../fig/control_mechanism.png]]
 
