@@ -8,12 +8,12 @@ we propose a solution for EV fleet providers to utilize a VPP portfolio to
 profitably provide balancing services to the grid on multiple markets. A control
 mechanism procures energy from electricity markets, allocates available EVs to
 VPPs, and intelligently dispatches EVs to charge the acquired amount of energy.
-The model uses a RL agent that learns an optimal bidding strategy by interacting
-with the electricity markets and reacts to changing rental demand of the EV
-fleet. This chapter is structured as follows: The information assumptions are
-listed first, the control mechanism is explained next, and finally the RL
-approach is described in detail. A table of the used notation in this
-chapter can be found in Table ref:table-notation.
+The model employs a RL agent that learns an optimal bidding strategy by
+interacting with the electricity markets and reacts to changing rental demand of
+the EV fleet. This chapter is structured as follows: The information assumptions
+are listed first, the control mechanism is explained next, and finally, the RL
+approach is described in detail. The used notation in this chapter can be found
+in Table ref:table-notation.
 
 # NOTE: Section: Problem Description
 We formulate the problem as a /controlled EV charging/ problem. The EV fleet
