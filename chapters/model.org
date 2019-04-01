@@ -49,18 +49,12 @@ customer mobility by refusing customer rentals.
 | $\Delta h$                | Length of market period.                                                  | hours   |
 |---------------------------+---------------------------------------------------------------------------+---------|
 | $\Pb{h}$                  | Amount of balancing power offered on the balancing market.                | kW      |
-| $\cp{h}$                  | Capacity price offered on the balancing market.                           | $\emw$  |
-| $\ep{h}$                  | Energy price offered on the balancing market.                             | $\emwh$ |
 | $\ccp{h}$                 | Critical capacity price in market period $h$.                             | $\emw$  |
 | $\cep{h}$                 | Critical energy price in market period $h$.                               | $\emwh$ |
-|---------------------------+---------------------------------------------------------------------------+---------|
 | $\Pi{h}$                  | Amount of power offered for the unit on the intraday market.              | kW      |
-| $\up{h}$                  | Unit price offered on the intraday market.                                | $\emwh$ |
 | $\cup{h}$                 | Critical unit price in market period $h$.                                 | $\emwh$ |
-|---------------------------+---------------------------------------------------------------------------+---------|
 | $\Eb{h}$                  | Amount of energy charged from balancing market in market period h.        | MWh     |
 | $\Ei{h}$                  | Amount of energy charged from the intraday market in market period h.     | MWh     |
-| $p^{i}$                   | Industry tariff                                                           | $\ekwh$ |
 |---------------------------+---------------------------------------------------------------------------+---------|
 | $\fP{t}$                  | Amount of available fleet charging power in control period $t$.           | kW      |
 | $\fPhat{t}$               | Predicted amount of available fleet charging power in control period $t$. | kW      |
@@ -70,21 +64,22 @@ customer mobility by refusing customer rentals.
 | $\oc$                     | Opportunity costs of lost rental of EV $i$ in control period $t$.         | $\eur$  |
 | $\beta_h$                 | Imbalance costs in market period $h$.                                     | $\eur$  |
 |---------------------------+---------------------------------------------------------------------------+---------|
-| $\lb{h}$                  | Balancing market risk factor.                                             | -       |
-| $\li{h}$                  | Intraday market risk factor.                                              | -       |
+| $\lb{h}$                  | Balancing market risk factor.                                             | $[0,1]$ |
+| $\li{h}$                  | Intraday market risk factor.                                              | $[0,1]$ |
 | $\theta_{\lambda}$        | Set of risk factors for all market periods $h\!\in\!\{1,...,N_h\}$.       | -       |
 | $\Cf{}(\theta_{\lambda})$ | Cost function for the fleets total costs over all market periods $h$.     | $\eur$  |
 | $\Cf{h}$                  | Total accumulated fleet costs until market period $h$.                    | $\eur$  |
 |---------------------------+---------------------------------------------------------------------------+---------|
 | $i$                       | Electric Vehicle.                                                         | -       |
+| $\F$                      | Set of all EVs in the fleet                                               | -       |
 | $\c$                      | Dummy variable if EV is connected to a charging station.                  | 0/1     |
 | $\omega_{i}$              | Amount of electricity stored in EV.                                       | $\kwh$  |
 | $\Omega$                  | Maximum battery capacity of EV.                                           | $\kwh$  |
 | $\delta$                  | Charging power of EV at the charging station.                             | $\kw$   |
-| $\F$                      | Set of all EVs in the fleet                                               | -       |
+| $p^{ind}$                 | Industry tariff                                                           | $\ekwh$ |
 |---------------------------+---------------------------------------------------------------------------+---------|
 
-** Required Information Assumptions label:sec-model-assumptions
+** Assumptions label:sec-model-assumptions
 The following information is assumed to be available:
 
 # TODO: Mobility demand --> Charging power
@@ -254,7 +249,7 @@ opportunity costs:
 \begin{equation} \label{eq-model-pb}
   \Pb{h} \defeq
   \begin{cases}
-    0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Eb{h}10^3 \times p^{i}\\
+    0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Eb{h}10^3 \times p^{ind}\\
     0, & \text{if}\ \Cb{h}(\fPhat{h}) \geq \Ci{h}(\fPhat{h})\\
     \fPhat{h} \times (1\!-\!\lb{h}), & \text{otherwise}
   \end{cases}
@@ -262,7 +257,7 @@ opportunity costs:
 where $h$ is the market period of interest one week ahead. If the controller can
 buy electricity at the intraday market at a lower price, it does not place a bid
 at the balancing market. If the controller can charge cheaper at the regular
-industry tariff $p^{i}$, it does not place a bid either. In all other cases, the
+industry tariff $p^{ind}$, it does not place a bid either. In all other cases, the
 controller submits $\Pb{h}$ to the market.
 
 The bidding quantity for the intraday market $\Pi{h}$ depends on the previously
@@ -271,7 +266,7 @@ $\fPhat{h}$:
 \begin{equation} \label{eq-model-pi}
   \Pi{h} \defeq
   \begin{cases}
-    0, & \text{if}\ \Ci{h}(\fPhat{h}\!-\!\Pb{h}) \geq \Ei{h}10^3 \times p^{i}\\
+    0, & \text{if}\ \Ci{h}(\fPhat{h}\!-\!\Pb{h}) \geq \Ei{h}10^3 \times p^{ind}\\
     (\fPhat{h}\!-\!\Pb{h}) \times (1\!-\!\li{h}), & \text{otherwise}
   \end{cases}
 \end{equation}
