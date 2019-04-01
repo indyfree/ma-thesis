@@ -639,13 +639,13 @@ network/ architecture, proposed by
 textcite:wang15_duelin_networ_archit_deep_reinf_learn, this approach outperforms
 existing deep RL methods. Dueling networks lead to faster convergence rates in
 control problems with large action spaces than traditional single stream
-approaches. This is especially beneficial for our proposed RL problem, as the
-defined action space (400 possible actions) is comparably large in comparison to
-classical control problems. In Figure ref:fig-model-dueling, the conventional
-single stream approach (top) versus the dueling architecture (bottom) is
-depicted. The dueling architecture consists of a neural network of any shape
-with two streams that separately estimate the state-value and the action
-advantages. These estimates are later combined into Q-values (Figure
+approaches. This property is especially beneficial for our proposed RL problem,
+as the defined action space (400 possible actions) is comparably large in
+comparison to classical control problems. In Figure ref:fig-model-dueling, the
+conventional single stream approach (top) versus the dueling architecture
+(bottom) is depicted. The dueling architecture consists of a neural network of
+any shape with two streams that separately estimate the state-value and the
+action advantages. These estimates are later combined into Q-values (see Figure
 ref:fig-model-dueling, green layer):
 \begin{equation}
     Q(s,a) = V(s) + \left(A(s,a) - \frac{1}{|\A|} \sum_{a'} A(s,a')\right) \text{ ,}
