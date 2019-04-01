@@ -652,8 +652,8 @@ ref:fig-model-dueling, green layer):
 \end{equation}
 where $V$ and $A$ are estimates of the value function and action advantages
 respectively, represented by the two different streams in the network. By
-subtracting the mean action advantages, identifiability ($V$ and $A$ can be
-recovered, given $Q$) and stability of the optimization is ensured. The
+subtracting the mean action advantages (last term), identifiability ($V$ and $A$
+can be recovered, given $Q$) and stability of the optimization is ensured. The
 separated streams allow to learn which states are valuable without having to
 learn each state-action interaction individually. Like this, a general
 state-value is learned that can be shared across many different actions, leading
