@@ -114,9 +114,9 @@ textcite:vandael15_reinf_learn_heuris_ev_fleet,mashhour11_biddin_strat_virtual_p
 *** Market Assumptions
 1) Balancing market
 
-   The controller is able to submit bids for single 15-minute market periods 7
-   days ahead. Since the critical capacity and energy prices are available
-   (previous paragraph), the controller submits bids in the form
+   The controller is able to submit bids of any quantity for single 15-minute
+   market periods 7 days ahead. Since the critical capacity and energy prices
+   are available (previous paragraph), the controller submits bids in the form
    $bid\!=\!(\Pb{},\ccp{},\cep{})$. Submitting a bid with the critical capacity
    price ensures that the bid will always get accepted by the TSOs. Submitting
    the bid with the critical energy price ensures that the balancing power will
@@ -136,17 +136,20 @@ In essence, we are assuming that the controller always submits the optimal bid
 at the right time. In other words, every bid leads to the successful procurement
 of the desired amount of electricity. This assumption provides an upper bound
 for the fleet profits from trading EV battery storage on the electricity
-markets. Similar assumptions have been made by
-textcite:brandt17_evaluat_busin_model_vehic_grid_integ. In fact, the upper bound
-is only influenced by the accuracy of the electricity price forecasting
-algorithm, a research area that well exceeds the scope of this work.
+markets. However, the upper bound is only influenced by the accuracy of the
+electricity price forecasting algorithm, a research area that well exceeds the
+scope of this work. Furthermore, we assume that the controller is a price-taker.
+Due to the limited size of its bids, it is lacking the market share to influence
+prices on the markets. Similar assumptions have been made by
+textcite:brandt17_evaluat_busin_model_vehic_grid_integ and
+textcite:vandael15_reinf_learn_heuris_ev_fleet.
 ** Control Mechanism
 # TODO: Charging power or fleet capacity??
 
 # NOTE: Embed/Mention DSS? What about Smart Charging?
-The central control mechanism constitutes the core of this research. It can be
-seen as a decision support system that can be deployed at a EV fleet operator to
-control the charging its fleet. Figure ref:fig-control-mechanism depicts the
+The control mechanism constitutes the core of this research. It can be seen as a
+decision support system that can be deployed at an EV fleet operator to centrally
+control the charging of its fleet. Figure ref:fig-control-mechanism depicts the
 control mechanism, which is divided into three distinct phases:
 
 # TODO:Other figure, with phase timeline?
@@ -156,14 +159,14 @@ this phase, the controller can place bids for every market period $h$ of the
 following week on the balancing market. The second phase, /Bidding Phase II/,
 takes places in every market period of $\Delta{h}\!=\!15$ minutes. At this
 point, the controller has the opportunity to place bids to the intraday market
-for the market period 30 minutes ahead. The third
-phase, /Dispatch Phase/, takes places in every control period of
-$\Delta{t}\!=\!5$ minutes. In this phase the controller has to dispatch
-available EVs to charge the procured electricity from the markets. This phase
-involves allocating individual EVs to the VPP and eventually refusing customer
-rentals to assure that all commitments can be fulfilled.
+for the market period 30 minutes ahead. The third phase, /Dispatch Phase/, takes
+places in every control period of $\Delta{t}\!=\!5$ minutes. In this phase the
+controller has to dispatch available EVs to charge the procured electricity from
+the markets. The phase involves allocating individual EVs to the VPP and
+potentially refusing customer rentals to assure that all market commitments can
+be fulfilled.
 
-The following chapters will highlight the important parts of the various phases
+The following chapters will highlight the important parts of the three phases
 and provide detailed explanation and mathematical formulations.
 
 #+CAPTION[Control Mechanism]: Control Mechanism label:fig-control-mechanism
@@ -186,32 +189,37 @@ and provide detailed explanation and mathematical formulations.
 # NOTE: Mention here that we bid with the critical prices?
 
 *** Fleet Charging Power Prediction
+
+# for all market periods of the next week.
 In a first step, the controller has to predict the available fleet charging
-power for all market periods $h$ of the next week. The actual available fleet
-charging power $\fP{t}$ in a control period $t$ is given by the number of EVs
-that are connected to a charging station, with enough free battery capacity to
-charge the next control period $t\!+\!1$. As mentioned in the Chapter
-ref:sec-model-assumptions, the controller is able to predict the available fleet
-charging power $\fPhat{t}$ for all control periods $t$ with different levels of
-accuracy dependent on the time horizon of $t$.
+power for the market period of interest (see\circled{A} in Figure
+ref:fig-control-mechanism). The actual available fleet charging power $\fP{t}$
+in a control period $t$ is given by the number of EVs that are connected to a
+charging station, with enough free battery capacity to charge the next control
+period $t\!+\!1$.
 
 When the controller procures electricity from the markets, the fleet has to
 charge with the committed charging power during all control periods of the
-market period $h$. To minimize the risk of not being able to charge the
-committed amount of energy during the whole market period, and consequently
-causing imbalance costs, the predicted fleet charging power in a market period
-is defined as the minimal predicted fleet charging power of all $T$ control
-periods in a market period.
+market period $h$, otherwise imbalance costs occur. To minimize the risk of not
+being able to charge the committed amount of energy during the whole market
+period, the predicted fleet charging power in a market period is defined as the
+minimal predicted fleet charging power of all control periods in that market
+period:
 \begin{equation}
     \fPhat{h} \defeq \min_{n \in \{1, .., T\}} \fPhat{t + n} \text{ ,}
 \end{equation}
-where $h$ is the market period of interest and $t$ its first control period.
+where $h$ is the market period of interest, $t$ its first control period and $T$
+the number of control periods in a market period.
+
+
 
 *** Market Decision
 In a second step, the controller has to decide from which market it should
-procure the desired amount of energy. Therefore, it compares the costs for
-charging electricity from the balancing market and the intraday market. The cost
-function for charging electricity from the balancing market is defined as follows:
+procure the desired amount of energy (see\circled{B} in Figure
+ref:fig-control-mechanism). Therefore, it compares the costs for charging
+electricity from the balancing market with the costs for charging from the
+intraday market. The cost function for procuring electricity from the balancing
+market is defined as follows:
 \begin{equation} \label{eq-cost-balancing}
 \begin{split}
     \Cb{h}(P) &\defeq -(P\!\times\!10^{-3} \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
@@ -223,61 +231,61 @@ equation corresponds to the compensation the controller retrieves for keeping
 the balancing capacity available, while the second term corresponds to the costs
 for charging the activated balancing energy $\Eb{h}$ (MWh). Energy is power over
 time, hence $\Eb{h}$ can be substituted with $P$ times the market periods length
-$\Delta{h}$, divided by the unit conversion from kW to MW. As mentioned in the
-Chapter ref:sec-model-assumptions, the critical prices $\ccp{}, \cep{}, \cup{}$
-are assumed to be available for all market periods. Note that the critical
-energy price $\cep{}\!\in\!\Re$, can also take negative values, resulting in
-profits for the fleet, while the critical capacity price $\ccp{}\!\in\! \Re^+_0$
-can not take negative values and therefore always results in profits for the
-fleet.
+$\Delta{h}$, divided by the unit conversion term from kW to MW. Note that the
+critical energy price $\cep{}\!\in\!\Re$, can also take negative values,
+resulting in profits for the fleet, while the critical capacity price
+$\ccp{}\!\in\! \Re^+_0$ is never negative and therefore never results in
+costs for the fleet.
 
-The cost function for charging from the intraday market is defined similarly:
+The cost function for charging from the intraday market is defined similarly to
+\eqref{eq-cost-balancing}:
 \begin{equation}
 \begin{split}
     \Ci{h}(P) &\defeq \Ei{h} \times \cup{h} \\
     &= P \frac{\Delta h}{10^{3}}\times \cup{h}
 \end{split}
 \end{equation}
-Again, depending on the market situation, $\cup{}\!\in\!\Re$ can be either
+Again, depending on the market situation, $\cup{}\!\in\!\Re$ can either be
 negative or positive, resulting in costs or profits for the fleet. Contrarily to
 the balancing market, on the intraday market the fleet does not get compensated
 for keeping the charging power available; only the charged energy affects the
 costs. If the costs for charging from the balancing market 7 days ahead
 $\Cb{h+(7\!\times\!H)}(\fPhat{h+(7\!\times\!H)})$ are higher than the costs of
 charging from the intraday market at the same market period $\Ci{h +
-(7\!\times\!H)}(\fPhat{h+(7\!\times\!H)})$, the controller does not place bids
-on the balancing market.
+(7\!\times\!H)}(\fPhat{h+(7\!\times\!H)})$, the controller does not procure
+electricity from the balancing market.
 
 *** Determining the Bidding Quantity
 In a third step, the controller has to take a decision on the amount of energy
-it should procure from the markets. Determining the bidding quantity is a
-central piece of the controlled charging problem. The bidding quantity
-determines the profits that can be made, by charging at a cheaper market price
-than the flat industry tariff. In order to maximize its profits, the controller
-aims to procure as much electricity as possible from the markets. In order to
-optimally place bids on the electricity markets, it needs to balance the risk of
-(a) procuring more energy that it can maximally charge and (b) not procuring
-enough energy from the market to sufficiently charge the fleet.
+it should procure from the markets (see\circled{C} in Figure
+ref:fig-control-mechanism). Determining the bidding quantity is the core
+challenge of the controlled charging problem. The bidding quantity determines
+the profits that can be made, by charging at a cheaper market price than the
+flat industry tariff. On one hand, the controller aims to maximize its profits
+by procuring as much electricity as possible from the markets. On the other
+hand, it needs to balance the risk of (a) procuring more energy that it can
+maximally charge and (b) not procuring enough energy from the market to
+sufficiently charge the fleet.
 
-In the first case (a), the fleet is facing costs of compromising customer
-mobility, or worse, high imbalance penalties from the markets. Renting out EVs
-is considerably more profitable than using EVs as a VPP to participate on the
-electricity markets. Refusing customer rentals, in order to fulfill market
-commitments, induces opportunity costs of lost rentals $\rho$ on the fleet.
-Imbalance costs $\beta$ occur, when the fleet can not charge the committed
-amount energy at all, even with refusing rentals. In the second case (b), the
-fleet also faces opportunity costs of lost rentals when individual EVs do now
-have enough SoC for planned trips of arriving customers.
+In case (a), the fleet is facing costs of compromising customer mobility, or
+worse, high imbalance penalties from the markets. Renting out EVs is
+considerably more profitable than using their batteries as a VPP. Refusing
+customer rentals, in order to fulfill market commitments, induces opportunity
+costs of lost rentals $\rho$ on the fleet. Imbalance costs $\beta$ occur, when
+the fleet can not charge the committed amount energy at all, even with refusing
+rentals. In case (b), the fleet also faces opportunity costs of lost rentals
+when individual EVs do not have enough SoC for planned trips of arriving
+customers.
 
 The controller faces additional risks by bidding one week ahead on the balancing
-market, in contrast to only 30 minutes ahead on the intraday market, as the
-predictions of available charging power are more uncertain with the larger time
-horizon. To account for all the mentioned risks, we introduce a /risk factor/
-$\lambda \in \Re_{0 \leq \lambda \leq 1}$, where $\lambda\!=\!0$ indicates no
-risk, and $\lambda\!=\!1$ indicates a high risk. The controller determines the
-bidding quantity $\Pb{h}$ by discounting the predicted available fleet charging
-power $\fPhat{h}$ with the possible risk $\lambda_{h}$ of imbalance or
-opportunity costs:
+market, in contrast to only 30 minutes ahead on the intraday market: Predictions
+of available charging power are more uncertain with the larger time horizon. To
+account for all mentioned risks, we introduce a /risk factor/ $\lambda \in
+\Re_{0 \leq \lambda \leq 1}$, where $\lambda\!=\!0$ indicates no risk, and
+$\lambda\!=\!1$ indicates a high risk. The controller determines the bidding
+quantity $\Pb{h}$ by discounting the predicted available fleet charging power
+$\fPhat{h}$ with the possible risk $\lambda_{h}$ of imbalance or opportunity
+costs:
 \begin{equation} \label{eq-model-pb}
   \Pb{h} \defeq
   \begin{cases}
@@ -303,20 +311,22 @@ $\fPhat{h}$:
   \end{cases}
 \end{equation}
 where $h$ is the market period of interest 30 minutes ahead. Note that any
-amount of electricity that the controller procured from the balancing market,
-does not need to be bought from intraday market for the same market period.
-Since the predicted charging power $\fPhat{h}$ is expected to be more
+amount of electricity that the controller procured from the balancing market
+$\Pb{h}$, does not need to be bought from intraday market for the same market
+period. Since the predicted charging power $\fPhat{h}$ is expected to be more
 accurate 30 minutes ahead than one week ahead, the controller is able to correct
 bidding errors it made in the first decision phase, and optimally charge the
 whole EV fleet.
 
 *** Dispatching Electronic Vehicle Charging
+# TODO: Explain $\Omega\!-\!\omega_{i}$
 In the last step, at electricity delivery time, the EVs have to be assigned to
-the VPP and be /dispatched/ to charge. Therefore the controller first needs to
-detect how many EVs are eligible to be used as VPP per control period $t$. EVs
-are eligible if they (a) are connected to a charging station ($\c$ = 1), and (b)
-have enough free battery storage available ($\Omega\!-\!\omega_{i}$) to charge
-the next control period. Hence, the VPP is defined as:
+the VPP and be /dispatched/ to charge (see\circled{D} in Figure
+ref:fig-control-mechanism). Therefore the controller needs to detect how many
+EVs are eligible to be used as VPP in the control period $t$. An EV $i$ is
+eligible if (a) it is connected to a charging station ($\c$ = 1), and (b) it has
+enough free battery storage available ($\Omega\!-\!\omega_{i}$) to charge the
+next control period. Hence, the VPP is defined as:
 \begin{equation}
     V\!P\!P \defeq \{i\in\F \;|\; \c = 1 \vee \Omega\!-\!\omega_{i}\!\geq\!\gamma\Delta{t}\} \text{ ,}
 \end{equation}
@@ -324,14 +334,32 @@ where $\gamma\Delta{t}$ (kWh) denotes the amount of energy that can be charged
 with the charging speed of $\gamma$ (kW) in control period $t$. $\gamma$ is
 limited by either the EVs build-in charger, or the charging power of the
 connected charging station. In this model we assume $\gamma$ is equal for all
-considered EVs and charging stations.
+considered EVs and charging stations. /Example:/ Assuming a charging power of
+$\gamma\!=\!3.3\kw$, an EV battery capacity of $\Omega\!=\!17.6\kwh$, and
+control periods of 5 minutes, the amount of energy charged in one control period
+is $3.3\kw\!\times\frac{5}{60}\text{h}\!=\!0.275\kwh$. Hence, the maximal
+battery capacity to be eligible for VPP use is $17.6-\!0.275\!=\!17.325\kwh$.
+
+#+BEGIN_SRC python :exports none
+return(3.3 * (5/60))
+#+END_SRC
+
+#+RESULTS:
+: 0.27499999999999997
+
+#+BEGIN_SRC python :exports none
+return(17.6 - 0.275)
+#+END_SRC
+
+#+RESULTS:
+: 17.325000000000003
 
 # TODO: How do we known $\oc$?
-Remember that the fleet has to provide the committed charging power
+Remember that the fleet has to provide the total committed charging power
 $\Pb{h}\!+\!\Pi{h}$ across all control periods $t$ of the market period $h$,
 independent of which individual EVs are actually charging the electricity. This
 fact allows the controller to dynamically dispatch EVs every control period and
-react to unforeseen rental demand. If a customer want to rent out an EV that is
+react to unforeseen rental demand. If a customer wants to rent out an EV that is
 assigned to the VPP, the controller only has to refuse the rental, if no other
 EV is available to charge instead. When no replacement EV is available, the
 controller has to account for lost rental profits $\oc$. If the VPPs total
@@ -341,7 +369,7 @@ imbalance costs $\beta_{h}$. Otherwise all the committed energy can be charged
 by the VPP.
 
 *** Evaluating the Bidding Risk
-The controllers central goal is to choose the risk factors $\lb{h}$, $\li{h}$
+The controllers main goal is to choose the risk factors $\lb{h}$, $\li{h}$
 for every market period $h$, that minimize the cost of charging, while avoiding
 the risks of lost rental profits $\oc$ or imbalance costs $\beta_h$. The total
 fleet costs are defined as follows:
@@ -354,10 +382,10 @@ where $\theta_{\lambda}\!\in\!\Re_{0 \leq \lambda \leq 1}^{2 \times N_h}$ is the
 matrix of the risk factors $\lb{h}$, $\li{h}$ for all considered market periods
 $N_h$. $\F$ denotes the set of all EVs $i$ in the fleet and $|\F|$ the fleet
 size. The costs for charging $\Cb{h}(\Pb{h})$, $\Ci{h}(\Pi{h})$ are clearly
-dependent on the chosen risk factors $\lb{h}$, $\li{h}$ (see Eq.
-ref:eq-model-pb, Eq. ref:eq-model-pi). In summary, the problem can be formulated
-as minimizing the total costs of the fleet, by choosing the optimal set of risk
-factors $\theta_{\lambda}$:
+dependent on the chosen risk factors $\lb{h}$, $\li{h}$ (see
+\eqref{eq-model-pb} and \eqref{eq-model-pi}). In summary, the problem can be
+formulated as minimizing the total costs of the fleet, by choosing the optimal
+set of risk factors $\theta_{\lambda}$:
 \begin{equation}
 \begin{aligned}
     & \underset{\theta_{\lambda}}{\text{minimize}}
@@ -372,56 +400,53 @@ programming is a difficult task, assuming that complete information of available
 charging power and future electricity market prices is not always available.
 Since one goal of this research is to develop a model that can be applied to
 previously unknown settings and learn from uncertain environments, as mobility
-and electricity markets, we chose to solve the problem with a RL learning
-approach that is explained in detail in Chapter ref:sec-model-rl.
+and electricity markets, we chose to solve the problem with a RL approach that
+is explained in detail in Chapter ref:sec-model-rl.
 
 *** Example
 At 3pm on the 9^{th} of August 2017, the controller enters the first bidding
-phase for procuring electricity one week ahead, the market period $h$ =
-/16.08.2017 15:00-15:15/. It predicts that at that point in time 250 EVs are connected
-to a charging station, resulting in 900kW available fleet charging power
-($\fPhat{h}\!=\!900\kw$), given the charging power of 3.6kW per EV. Assuming the
-available critical prices $\ccp{h}\!=\!5\emw$, $\cep{h}\!=\!-10\emwh$, and
-$\cup{h}\!=\!10\emwh$ for that market period, the controller now evaluates the
-cheapest charging option. The flat industry electricity tariff is assumed to be
-$p_i\!=\!0.15\ekwh$. The costs for charging with the maximal amount of power
+phase for the market period $h$ = /16.08.2017 15:00-15:15/. It predicts that at
+that point in time 250 EVs are connected to a charging station, resulting in
+900kW available fleet charging power ($\fPhat{h}\!=\!900\kw$), given the
+charging power of 3.6kW per EV. Assuming the available critical prices are
+$\ccp{h}\!=\!5\emw$, $\cep{h}\!=\!-10\emwh$, and $\cup{h}\!=\!10\emwh$ in that
+market period, the controller now evaluates the cheapest charging option. The
+flat industry electricity tariff is assumed to be $p^{ind}\!=\!0.15\ekwh$. The
+costs for charging with the maximal predicted amount of available power
 $\fPhat{h}$ from the balancing market ($\Cb{h}(900\kw)\!=\!-6.25\eur$) are less
 than charging from the intraday market ($\Ci{h}(900\kw)\!=\!2.25\eur$) or
 charging at the industry tariff
 ($900\kw\!\times\!0.25\text{h}\!\times\!0.15\ekwh\!=\!33.75\eur$). In this
-example, by choosing the cheapest option, the balancing market, the fleet
-operator will even get compensated for charging its fleet.
+example, the fleet operator will even get compensated for charging its fleet, by
+choosing the balancing market.
 
-# TODO: Really mention assumption of accepted prices again?
 In the next step, the controller has to submit bids to the balancing market. The
 RL agent determined that the risk of bidding on the balancing market is
 $\lb{h}\!=\!0.3$. Consequently, the controller sets the bidding quantity to
-$\Pb{h}\!=\!\fPhat{h}\!\times\!(1\!-\!\lb{h})\!=\!900\kw\!\times0.7\!=\!630\kw$ and
-submits a bid to the market. Since we are assuming that bids at the critical
-price, will always get accepted, the controller procures 630kW from the
-balancing market and updates its account with $\Cb{h}(630\kw)\!=\!-4.725\eur$.
+$\Pb{h}\!=\!\fPhat{h}\!\times\!(1\!-\!\lb{h})\!=\!900\kw\!\times0.7\!=\!630\kw$
+and submits a bid to the market and updates its account with
+$\Cb{h}(630\kw)\!=\!-4.725\eur$.
 
-One week later, at 2:30pm on the 16^{th} of August 2017, the controller enters
-the second bidding phase. With a time horizon of 30 minutes, it predicts less
-available fleet charging power of $\fPhat{h}\!=\!810\kw$ for the same market
+One week later, 30 minutes before electricity delivery time, the controller
+enters the second bidding phase. Due to the short time horizon, it predicts with
+high accuracy that only $\fPhat{h}\!=\!810\kw$ is available for the same market
 period /16.08.2017-15:00/. By trading at the intraday market, the controller can
 now charge the remaining available EVs with a low risk of procuring more energy
 than it can maximally charge. At this point in time, the RL agent determines a
 remaining risk of $\li{h}\!=\!0.05$, and sets the bidding quantity to
-$\Pi{h}\!=\!(810\kw\!-\!630\kw)\!\times\!(1\!-\!0.05)\!=\!171\kw$. Hence, the
+$\Pi{h}\!=\!(810\kw\!-\!630\kw)\!\times\!(1\!-\!0.05)\!=\!171\kw$. The
 controller procures 171kW from the intraday market and updates its account with
 $\Ci{h}(171\kw)\!=\!0.4275\eur$.
 
 At electricity delivery time, the 16^{th} of August 2017 at 3:00pm, the
 controller detects 255 available EVs; EVs which are connected to a charging
 station and have enough battery capacity left to be charged in the next control
-period. It assigns 223 EVs to provide the committed 801kW charging power for the
-market period time $\Delta h$ of 15 minutes. During that time, three customers
-want to rent out EVs that are allocated to the VPP. The first two rentals are
-accepted, because two other EVs are available to charge instead. The third
-rental has be to refused, since no EV is remaining as substitution. The
-controller has to account for the opportunity costs of the lost rental
-$\oc$.
+period. It assigns 223 EVs to provide the total committed 801kW charging power
+for the market period time $\Delta h$ of 15 minutes. During that time, three
+customers want to rent out EVs that are allocated to the VPP. The first two
+rentals are accepted because two other EVs are available to charge instead. The
+third rental has be to refused, since no EV is remaining as substitution. The
+controller has to account for the opportunity costs of the lost rental $\oc$.
 
 #+BEGIN_SRC python :exports none :var h=15
 def bal_cost(p_c, p_e, P):
@@ -474,52 +499,18 @@ return(kw)
 : 801
 
 
-# TODO: Do we really need Dispatch Algorithm, if remaining EVs get charged
-# regulary?
-# --> NO. Only if multiple rentals arrive at the same time and we have to refuse
-# some, we could choose to refuse the rentals where EV has LOW SoC, so they get charged
-
 # Assume:
 # - Bid maximum capacity price?
 # - What about balancing capacity prices? Future work?
-# - Bid always multiples of charging capacity, do not consider charging at
-#   different speeds
 
 # Other assumptions:
-# 1) Bids on balancing market always get accepted (Known critical capacity price $\ccp{}$
-# - Operating reserve always gets activated.
 # 2) EV fleet charges at a fixed industry tariff otherwise
-# 3) Balancing capacity is provided for a market period $h$. Within the market
-#    period $h$, it is possible to provide the capacity with different EVs,
-#    changing in control periods $t$. Customers arrive in $t$ intervals.
-
 
 # - Fleet capacity prediction made on non-simulated real-world SoC (w/o smart charging)?
 # - Fleet capacity predictions with simulated data?
 #   - Provide difference levels & descriptive statistics?
 
 
-# NOTE: Word as profit-maximizing bidding strategy
-# Assumptions:
-#   - EV fleet is price taker, it is lacking the market share to influence prices
-#     - $\rightarrow$ Use existing prices, w/o simulating influence of bids.
-#   - Relax minimum bidding assumption of 1MW to no limit. Sensitivity analysis
-#     with 100kw and 500kw in evaluation
-#   - Controller always bids at an optimal price.
-#   - Assume always the perfect bid: Upper-bound evaluation, with critical prices
-#   - Figure about prices developments over the day? Compare balancing & intraday?
-
-# # FIXME: Citation brandt
-# Furthermore, we assume the aggregator is a price-taker. In case of limited size
-# purchase orders, an aggregator will naturally have a price-taker position.
-
-# # FIXME: Citatation from kahlen
-# The fleet controller offers bids and asks for every time interval. These offers
-# contain both a quantity and a reservation price, which depends on the state of
-# charge of the EV storage, as well as on the battery costs. However, the market
-# may or may not accept these offers depending on the composition of the offer
-# prices from the fleet owner and other market participants. The market auction
-# mechanism ultimately decides when EVs will charge and discharge.
 ** Reinforcement Learning Approach label:sec-model-rl
 In the following chapter the developed RL approach is outlined. First, we define
 the charging problem as a MDP, and second, the learning algorithm is explained.
