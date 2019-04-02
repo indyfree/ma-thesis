@@ -213,8 +213,10 @@ activated, which was partly fulfilled by the 5MW of the first bidder.
 #+RESULTS:
 : 976.7
 ** Spot Market Data label:sec-data-intraday
-# # TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
-# TODO: Mention product = units!
+# TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
+# TODO: Mention product == units!
+# TODO: Figure about prices developments over the day? Compare balancing & intraday?
+# Compare with EV availability
 
 The data from the EPEX Spot Intraday Continuous encompass order books and
 executed trades from 01.06.2016 until 01.01.2018. The list of trades contain

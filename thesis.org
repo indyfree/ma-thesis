@@ -2,8 +2,8 @@
 #+AUTHOR:Tobias Richter
 
 #+INCLUDE: "./header.org"
-#+INCLUDE: "./chapters/introduction.org"
-#+INCLUDE: "./chapters/background.org"
+# #+INCLUDE: "./chapters/introduction.org"
+# #+INCLUDE: "./chapters/background.org"
 #+INCLUDE: "./chapters/empirical-setting.org"
 #+INCLUDE: "./chapters/model.org"
 
@@ -11,8 +11,8 @@
 # NOTE: 5%
 # NOTE: Cite Ketter PowerTac (and Competitive Benchmarking)
 - Simulation Platform to allow evaluating the performance of intelligent agents
-  in smart charging/balancing the grid of EV fleets. Allows to test out bidding strategies
-  and control mechanisms in a realistic EV fleet setting.
+  in smart charging/balancing the grid of EV fleets. Allows to test out bidding
+  strategies and control mechanisms in a realistic EV fleet setting.
 - Real life comparison graph: 10%.
 ** Event-based Simulation
 - Not only t+1
@@ -64,6 +64,10 @@
 # NOTE: Fastchargers
 # NOTE: Car batteries
 - Charging infrastructure
+# NOTE: Relax minimum bidding assumption of 1MW to no limit.
+# Sensitivity analysis with 100kw and 500kw in evaluation
+- Minimal bidding quantities
+
 * Conclusion
 # NOTE 5%
 ** Contribution
@@ -79,6 +83,13 @@ cite:kahlen18_elect_vehic_virtual_power_plant_dilem,vandael15_reinf_learn_heuris
   facilitate research
 
 ** Limitations
+# # NOTE: Citatation from kahlen
+# The fleet controller offers bids and asks for every time interval. These offers
+# contain both a quantity and a reservation price, which depends on the state of
+# charge of the EV storage, as well as on the battery costs. However, the market
+# may or may not accept these offers depending on the composition of the offer
+# prices from the fleet owner and other market participants. The market auction
+# mechanism ultimately decides when EVs will charge and discharge.
 - Model:
   - Bidding Mechanism: one week ahead, always accepted
   - Policy & Regulation: EVs not allowed to provide balancing power, minimum
