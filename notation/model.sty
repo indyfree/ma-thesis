@@ -1,3 +1,5 @@
+\usepackage{tikz}
+
 \def\cp#1{p^c_{#1}}
 \def\ep#1{p^e_{#1}}
 \def\up#1{p^u_{#1}}
@@ -52,3 +54,8 @@
 
 % Number sets
 \def\Ne{\mathbb{N}}
+
+\DeclareRobustCommand\circled[1]{
+  \tikz[baseline=(X.base)]
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+
