@@ -624,7 +624,7 @@ fleet costs, which we aim to minimize:
     R_{h+1} = \Cf{h} - \Cf{h-1} \text{ ,}
 \end{equation}
 where $\Cf{h}$ are the total accumulated fleet costs until the market period
-$h$. For a complete formulation the cost function see
+$h$. For a complete formulation of the cost function see
 \eqref{eq-model-fleetcosts}. The agent's actions directly determine the occurred
 costs or profits, and are presented to the agent in form of a positive or
 negative reward signal. The particular challenge in the proposed RL problem is
