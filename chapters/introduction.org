@@ -1,7 +1,69 @@
 * Introduction
 # NOTE: 10%
+# TODO: Mention Portfolio Optimization
+# TODO: Summarize (1. Data) (2. Model) (3. Results) (4. Contribution) shortly(!)
+# 1. Motivation
+# 2. Model
+# 3. Data
+# 4. Results
+# 5. Contrib
+
 ** Research Motivation
-- cite:lopes11_integ_elect_vehic_elect_power_system
+# 1. Motivation
+The global climate change is one of the most substantial challenges of our time.
+Carbon emissions need to be reduced and the shift to sustainable energy sources
+is inevitable. But the adaption of renewable energy is a complex matter: Solar
+and wind energy is intermittent and hard to integrate into the electrical power
+grid. Sustainable electricity production is dependent on the weather conditions,
+under- and oversupplies can occur and are destabilizing the grid. Virtual Power
+Plants (VPP) play an important role in stabilizing the grid
+cite:pudjianto07_virtual_power_plant_system_integ. VPPs aggregate distributed
+power sources to consume and produce electricity when it is needed. At the same
+time, carsharing companies operate large, centrally managed fleets of Electric
+Vehicles (EV) in major cities around the world. These EV fleets can be turned
+into VPPs by using their batteries as combined electricity storage (RES?). In
+this way, EV fleets can offer balancing services to the power grid or trade
+electricity on the open markets for arbitrage purposes. Carsharing companies can
+charge the fleet (buy electricity) and discharge the fleet (sell electricity)
+when market conditions are favorable.
+
+# 2. Problem
+However, renting out EVs to customers is considerably more lucrative than using
+their batteries for trading electricity
+cite:kahlen18_elect_vehic_virtual_power_plant_dilem. By making EVs available to
+be used as a VPP, carsharing companies compromise customer mobility and
+potentially the profitability of the fleet. Knowing how many EVs will be
+available for VPP usage in a future point of time is critical for a successful
+trading strategy. Accurate forecasts of rental demand help carsharing operators
+to determine the amount of electricity that they can trade on the market. EV
+fleet operators can also participate on multiple electricity markets
+simultaneously. They can take advantage of distinctive market properties, like
+auction mechanisms and lead times, to optimize their bidding strategy and reduce
+risks. Still the ultimate risk remains that the fleet made commitments to the
+markets it cannot fulfill due to unforeseen rental demand at the time of
+electricity delivery.
+
+# 2. Solution:  Model, Data, Results
+# TODO: Citation needed
+# consisting of operating reserve VPPs and spot market VPPs,
+
+
+We state that participating in the balancing market and intraday market at the
+same time can mitigate risks and increase profits of the fleet. In this
+research, we propose a portfolio optimizing strategy, in which the best
+composition of the VPP portfolio is dynamically learned using a /Reinforcement
+Learning/ (RL) approach. A RL agent can adapt to changing rental demands and
+market conditions. It learns from historical data, the observed environment and
+realized profits to adjust its trading strategy dynamically. The following tasks
+are performed by the agent in real-time: 1) /Allocation of plugged in EVs to an
+idle or a VPP state/, 2) /Learn the optimal VPP portfolio composition/ and 3)
+/Place bids and asks on corresponding electricity markets with an integrated
+trading strategy/.
+
+We show that..
+
+cite:lopes11_integ_elect_vehic_elect_power_system
+
 # It is also expected that the amount of intermittent RES
 # that can be safely integrated into the electric power system
 # may increase due to EV storage capacity [11]. Given the
@@ -12,126 +74,70 @@
 # resulting in the decreased usage of the conventional fossil
 # fuel units and expensive generators during peak hours.
 
-The global climate change is one biggest challenges of our time. Carbon
-emissions need to be reduced and the shift to sustainable energy sources is
-inevitable. But the integration of renewables into the electricity grid proves
-to be difficult: Solar and wind energy is intermittent and hard to integrate
-into the power grid. Sustainable electricity production is dependent on the
-weather; under- and oversupplies occur and can destabilize the grid. Virtual
-Power Plants (VPP) play an important role in stabilizing the grid. VPPs
-aggregate distributed power sources to consume and produce electricity when it
-is needed. Carsharing companies operate large, centrally managed fleets of
-Electric Vehicles (EV) in major cities around the world. These EV fleets can be
-turned into VPPs, using their batteries as combined electricity storage. In this
-way, EV fleets can offer balancing services to the power grid or trade
-electricity on the open markets for arbitrage purposes. Carsharing companies can
-charge the fleet (buy electricity) and discharge the fleet (sell electricity)
-when market conditions are favorable. By making EVs available to be used as a
-VPP, carsharing companies compromise customer mobility and the profitability of
-the fleet. Renting out an EV to a customer is considerably more lucrative than
-using it for trading electricity. Knowing how many EVs will most likely be
-rented out in a future point of time is essential for a successful trading
-strategy. By obtaining an accurate forecasts of available battery capacity,
-carsharing companies can determine the capacity to trade on the market. It is
-also possible for fleet owners to trade on multiple electricity markets
-simultaneously. EV fleets can make use of differences in the market properties,
-different lead times to delivery and price elasticity can be favorable for the
-trading strategy.
 
 
-# TODO: Citation needed
-We state, that participating in operating reserve markets and spot markets at
-the same time can mitigate risks and increase profits. In this research, we
-propose a portfolio optimizing strategy, in which the best composition of the
-VPP portfolio, consisting of operating reserve VPPs and spot market VPPs, will
-be dynamically learned using a /Reinforcement Learning/ (RL) approach. An
-intelligent agent using RL can adapt to changing electricity price levels and
-customer demands. The agent learns from historical data, its current environment
-and realized profits to adjust its trading strategy dynamically. The following
-tasks have to be performed by the agent in real-time: 1) /Allocation of plugged
-in EVs to an idle or a VPP state/, 2) /Learn the optimal VPP portfolio
-composition/ and 3) /Place bids and asks on corresponding electricity markets
-with an integrated trading strategy/.
+** Research Questions
 
-** Research Question
+Drawing upon the research motivation, this research aims to answer the following research questions:
 
-Drawing upon the research motivation, the following research questions are
-derived. They build upon another and will be sequentially addressed during this
-research:
+1. /Can EV fleet operators create VPP portfolios to trade electricity on the
+   balancing market and intraday market simultanously?/ /How does an integrated
+   bidding strategy look like, which considers this case?/
 
-1. /What are spatio-temporal customer demand patterns of carsharing EVs?/
+2. /Can a reinforcement learning agent optimize VPP portfolios by dynamically
+   learning the risks that are associated with bidding on the individual/
+   /electricity markets?/
 
-   Knowing customer demand patterns results in an accurate forecast of how much
-   available battery capacity an EV fleet will have at any point in the future.
-
-2. /What is the optimal allocation ratio of the available capacity between operating
-  reserve market VPPs and spot market VPPs?/
-
-   Dynamically learning the optimal share of capacity to trade on the respective
-   markets will maximize profits while reducing the risk of foregone customer
-   profits.
-
-3. /How does an integrated bidding strategy look like, which considers trading
-   electricity on the secondary operating reserve market and the continuous
-   intraday market simultaneously?/
-
-   Combine the previous results by designing a bidding strategy and determine
-   optimal auction prices, which take the different market designs into account.
 ** Relevance
-From a scientific perspective, this research is relevant to the stream of
+From a scientific perspective, this thesis is relevant to the stream of
 agent-based decision making in smart markets
-textcite:bichler10_desig_smart_market,peters13_reinf_learn_approac_to_auton. We
-will contribute to the body of Design Science in Information Systems
-textcite:hevner04_desig_scien_infor_system_resear and draw upon work, which has
-been done in a multitude of research areas: Virtual Power Plants in smart
-electricity markets textcite:pudjianto07_virtual_power_plant_system_integ,
-carsharing as a new way of sustainable mobility and advanced machine learning
-(ML) and AI methods for forecasting and prediction. We build on research that
-has been carried out by textcite:kahlen18_elect_vehic_virtual_power_plant_dilem
-and textcite:kahlen17_fleet. In their papers, the authors concentrate on
-participating in one type of electricity market at a time. As proposed by
-citeauthor:kahlen18_elect_vehic_virtual_power_plant_dilem, we will take this
-research further and use EV VPPs to act on multiple types of electricity markets
-simultaneously. Moreover, we aim to use more sophisticated machine learning
-methods (i.e. Reinforcement Learning, Neural Networks, Ensemble Learning) to
-carry out accurate forecasts of rental demand and dynamically learn optimal VPP
-portfolio compositions. textcite:he16_optim_biddin_strat_batter_storag and
-textcite:mashhour11_biddin_strat_virtual_power_plant_2,mashhour11_biddin_strat_virtual_power_plant_1
-conducted research on optimal bidding strategies for using VPPs to jointly bid
-on multiple markets. The authors use stationary storage to participate in
-day-ahead and spinning-reserve markets. Contrarily, we aim to use non-stationary
-storage (i.e. EV batteries) to participate in the continuous intraday market and
-the secondary reserve market.
+cite:bichler10_desig_smart_market,peters13_reinf_learn_approac_to_auton. It
+contributes to the body of Design Science in Information Systems
+cite:hevner04_desig_scien_infor_system_resear and draw upon work, which has been
+done in a multitude of research areas: Virtual Power Plants in smart electricity
+markets cite:pudjianto07_virtual_power_plant_system_integ, fleet management of
+(electric) carsharing as a new way of sustainable mobility
+cite:brandt17_evaluat_busin_model_vehic_grid_integ,wagner16_in_free_float, and
+advanced RL techniques for the smart grid
+cite:vazquez-canteli19_reinf_learn_deman_respon. We specifically build on
+research that has been carried out by
+textcite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem. In their
+papers, the authors concentrate on trading electricity on one market at a time.
+As proposed by the authors, we will take this research further and use a VPP of
+EVs to participate on multiple types of electricity markets simultaneously. In
+this way we create a VPP portfolio that offers EVs batteries as storage option
+to the markets with an integrated bidding strategy.
 
-From a business perspective, this research is relevant to carsharing companies
-operating an EV fleet, such as Car2Go or DriveNow. We will show how these
+From a business perspective, this thesis is relevant to carsharing companies
+that operating EV fleets, such as Car2Go or DriveNow. We will show how these
 companies can increase their profits, using idle EVs as VPPs to trade
 electricity on multiple markets simultaneously. We propose the use of a decision
-support system (DSS), which allocates idle EVs to different types of VPPs or to
-be available for rent. Further, the DSS will determine optimal capacity-price
-pairs to place ask and bid on the individual electricity markets. Using an
-event-based simulation we will estimate the profitability increase, when
-implementing the proposed methods. This will be done using real-world data from
-German electricity markets and trip data from a German carsharing provider.
+support system (DSS), which allocates idle EVs to be used as VPP or to be
+available for rent. Further, the DSS will determine optimal capacity-price pairs
+to place bids on the individual electricity markets. Using an event-based
+simulation platform, we will estimate the profitability of the proposed methods.
+This will be done using real-world data from German electricity markets and trip
+data from a German carsharing provider.
 
-# TODO: Explain what curtailment means. Explain merit order, low marginal costs
-This research also contributes to the overall welfare of society. First, VPPs of
+# TODO: Rewrite. Poor structure
+# cite:lopes11_integ_elect_vehic_elect_power_system
+This thesis also contributes to the overall welfare of society. First, VPPs of
 EVs provide extra balancing services to the power grid. The VPPs can consume
 excess electricity almost instantly and stabilize the power grid. When
 integrating more intermittent renewable electricity sources into the grid in the
 future, such balancing services will become indispensable. Second, a reduction
 of electricity prices for the end-consumer is expected. Integrating VPPs into
-the power grid increases the efficiency of the whole system and hence will
-lower prices. textcite:kahlen18_elect_vehic_virtual_power_plant_dilem show
-results, where electricity prices decrease up to 3.4% on the wholesale market.
-We anticipate similar or even better results in our research. Third, VPPs can
-lead to a decrease in CO_2 emissions. With an increasing share of renewable
-energy production, the supply of sustainable electricity can excess the total
-electricity demand at times of good weather conditions. The VPPs can consume
-this electricity by charging the EV fleet and the sustainable energy production
-does not need to be curtailed. The EV fleet can feed the electricity back into
-the grid when there is more demand than sustainable electricity production. This
-mechanism increases the utilization of renewable electricity generation and
+the power grid increases the efficiency of the whole system and hence will lower
+prices. textcite:kahlen18_elect_vehic_virtual_power_plant_dilem show results,
+where electricity prices decrease up to 3.4% on the wholesale market. We
+anticipate similar results in our research. Third, VPPs can lead to a decrease
+in CO_2 emissions. With an increasing share of renewable energy production, the
+supply of sustainable electricity can excess the total electricity demand at
+times of good weather conditions. The VPPs can consume this electricity by
+charging the EV fleet and the sustainable energy production does not need to be
+curtailed. EV fleets equipped with special vehicle-to-grid (V2G) devices can
+feed the electricity back into the grid when there is more demand than supply.
+This mechanism increases the utilization of renewable electricity generation and
 reduces the total CO_2 emissions.
-# #+LATEX: \clearpage
 
+#+LATEX: \clearpage
