@@ -293,9 +293,9 @@ capacity.
 # NOTE: Section Carsharing and EV fleets
 Centrally managed EV fleets make it possible for carsharing providers to use the
 presented concepts as a viable business extension. Free float carsharing is a
-popular concept that allows cars to be picked up and parked everywhere, and the
-customers are billed is by the minute. Free float carsharing offers flexibility
-to its users, saves resources, and reduces carbon emissions
+popular mobility concept that allows cars to be picked up and parked everywhere,
+and the customers are billed is by the minute. Free float carsharing offers
+flexibility to its users, saves resources, and reduces carbon emissions
 cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Most previous studies
 concerned with the usage of EVs for electricity trading, assumed that trips are
 fixed and known in advance, e.g., in

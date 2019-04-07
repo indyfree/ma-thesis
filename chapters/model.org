@@ -260,7 +260,7 @@ In a third step, the controller has to take a decision on the amount of energy
 it should procure from the markets (see\circled{C} in Figure
 ref:fig-control-mechanism). Determining the bidding quantity is the core
 challenge of the controlled charging problem. The bidding quantity determines
-the profits that can be made, by charging at a cheaper market price than the
+the profits that can be made by charging at a cheaper market price than the
 flat industry tariff. On one hand, the controller aims to maximize its profits
 by procuring as much electricity as possible from the markets. On the other
 hand, it needs to balance the risk of (a) procuring more energy that it can
