@@ -17,6 +17,9 @@
 #+LATEX_HEADER: \usepackage{amsmath}
 #+LATEX_HEADER: \usepackage{amssymb}
 
+# Tables
+#+LATEX_HEADER: \usepackage{makecell}
+
 # Custom Notatation commands
 #+LATEX_HEADER: \usepackage{notation/rl}
 #+LATEX_HEADER: \usepackage{notation/model}
