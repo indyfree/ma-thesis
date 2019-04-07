@@ -5,7 +5,7 @@
 # #+INCLUDE: "./chapters/introduction.org"
 # #+INCLUDE: "./chapters/background.org"
 #+INCLUDE: "./chapters/empirical-setting.org"
-#+INCLUDE: "./chapters/model.org"
+# #+INCLUDE: "./chapters/model.org"
 
 * Simulation Platform: FleetSim
 # NOTE: 5%
@@ -23,7 +23,7 @@
 ** Architecture / Components
 #+CAPTION[FleetSim Architecture]: Architecture of FleetSim label:fig-fleetsim
 #+ATTR_LATEX: :width 1\linewidth
-# [[./fig/simulation_platform.png]]
+[[./fig/simulation_platform.png]]
 
 ** Modular Expandability
 - Plug-in different Market designs
@@ -31,7 +31,7 @@
 - Change Fleet parameters
 - Develop new strategy
 -
-# #+LATEX: \clearpage
+#+LATEX: \clearpage
 * Results
 # NOTE: 15%
 # NOTE: What about infer charging stations?
@@ -42,31 +42,120 @@
 # NOTE: Include overview graphs of different RL methods over time
 # NOTE: List Simulation params in a table: Car Capacity etc..
 # NOTE: Make decision outcome results table over one-year period like kahlen
-# NOTE: Include EUR/MWh provided!
-** Simulation Settings
-# NOTE: Include Graph of electricity prices
+# NOTE: Include EUR & MWh charged energy!
+** Simulation Environment
+
+  #+CAPTION[Simulation Parameters]: Simulation Parameters
+  #+ATTR_LATEX: :environment longtable :align l|cc :placement [hp]
+  |----------------------------+----------------------------+-----------|
+  |----------------------------+----------------------------+-----------|
+  | Parameter                  | Value                      | Notation  |
+  |----------------------------+----------------------------+-----------|
+  | EV battery capacity        | 16.7 $\kwh$                | $\Omega$  |
+  | EV charging power          | 3.6 $\kw$                  | $\gamma$  |
+  | EV range                   | 160 km                     |           |
+  | Industry electricity price | 0.15[fn:1] $\ekwh$         | $p^{ind}$ |
+  | Car2Go Rental Tariff       | 0.15[fn:1] $\eur$ / minute |           |
+  |----------------------------+----------------------------+-----------|
+  |----------------------------+----------------------------+-----------|
+
+- No extra Car2Go fees after 50km, etc..?
+
+  #+CAPTION[Simulation Statistics]: Simulation Statistics
+  #+ATTR_LATEX: :environment longtable :align l|c :placement [hp]
+  |----------------------------------------+-----------------------------|
+  |----------------------------------------+-----------------------------|
+  | Statistic                              | Value                       |
+  |----------------------------------------+-----------------------------|
+  | Fleet size                             | 508                         |
+  | Number charging stations               | [trips.pkl]                 |
+  | EVs available (min, *avg*, max, *std*) | 165, *389.64*, 496, *49.18* |
+  | EVs charging (min, *avg*, max, *std*)  | 34, *61.23*, 290, *61.11*   |
+  | VPP EVs (min, *avg*, max, *std*)       | 0, *13.84*, 94, *9.01*      |
+  |----------------------------------------+-----------------------------|
+  |----------------------------------------+-----------------------------|
+
+- Footnote: Run with Data from ... till ...
+
+
+  # NOTE: Include Graph of electricity prices
 - Results heavily dependent on industry charging price, since on average the
   balancing prices are 50% cheaper, and intraday 30% cheaper.
-- BMWi. (n.d.). Prices of electricity for the industry in Germany from 2008 to
-  2017 (in euro cents per kilowatt hour). In Statista - The Statistics Portal.
-  Retrieved March 18, 2019, from
-  https://www.statista.com/statistics/595803/electricity-industry-price-germany/.
-** FleetRL
+
+
+#+CAPTION[Fleet Utilzation]: Daily fleet utilization (average, standard deviation) from June 6, 2016 to January 1, 2018. The blue error band is illustrating the large volatility in the amount of EVs that get parked at a charging station. The share of EVs that can be used as VPP is on average only 2.9%. Most of the EVs are either not connected to a charging station or are already fully charged.
+#+ATTR_LATEX: :width 1\linewidth
+[[./fig/fleet-utilization.png]]
+
+
+** Fleet Profits 1. RQ
+- 1. RQ: Monthly gross profit increase with benchmark strategy: Bar-Plot? (integrated naive
+  strategy)
+- Show profits by charging / loss according to lost rentals? Table
+- Error Matrix? Predicted available EVs vs actually available --> Fixed by
+  simulation! No result
+- Decision outcomes: VPP, rental, available, MWh traded in each markets, (MWh
+  charged regularly)
+
+- Risk averse agent vs. Risk seeking agent/strategy?
+
+# #+LATEX: \renewcommand\theadalign{bc}
+# #+LATEX: \renewcommand\theadfont{\bfseries}
+# #+LATEX: \renewcommand\theadgape{\Gape[2pt]}
+# #+LATEX: \renewcommand\cellgape{\Gape[2pt]}
+
+
+#+CAPTION[Bidding strategy outcomes]: Comparison of outcomes of naive bidding strategies over a 1.5 year period label:table-profits
+#+ATTR_LATEX: :float sideways :align p{0.25\linewidth}|cccccc :placement [hp]
+|------------------------------------------------------------------------------------------------+------------------+-----------+----------+------------+-------+-----------|
+|------------------------------------------------------------------------------------------------+------------------+-----------+----------+------------+-------+-----------|
+| Metric                                                                                         | Regular charging | Balancing | Intraday | Integrated | Risky | Benchmark |
+|------------------------------------------------------------------------------------------------+------------------+-----------+----------+------------+-------+-----------|
+| round(100 round(Energy bought(MWh) / (Energy bought(MWh) + Energy charged regularly(MWh)), 2)) |                0 |        39 |       47 |        100 |   100 |        91 |
+| Energy bought (MWh)                                                                            |                0 |       803 |      985 |          1 |     1 |      1884 |
+| Energy charged regularly (MWh)                                                                 |             2081 |      1278 |     1096 |          0 |     0 |       197 |
+| Lost rental profits (\eur)                                                                     |                0 |         0 |        0 |          0 |       |         0 |
+| No. Lost rentals                                                                               |                0 |         0 |        0 |          0 |       |         0 |
+| Imbalances (MWh)                                                                               |                0 |         0 |        0 |          0 |       |         0 |
+| Average electricity price ($\ekwh$)                                                            |             0.15 |         - |        - |          - |     - |         - |
+| Gross profit increase (1000\eur)                                                               |               56 |           |          |            |       |      97.6 |
+|------------------------------------------------------------------------------------------------+------------------+-----------+----------+------------+-------+-----------|
+|------------------------------------------------------------------------------------------------+------------------+-----------+----------+------------+-------+-----------|
+#+TBLFM: @2=round(100*round(@3/(@3+@4),2))
+# ::@10=100* round((@9/17707.85),4)
+
+\thead{Integrated \\ (risk seeking)}
+\thead{Benchmark \\ (full information)}
+
+** RL Learning 2. RQ
+# NOTE: What about confidence intervals - Mean?
 - long-delayed rewards make RL hard (!?)
+- positive reward from buying immediatly vs negative rewards up to 7 days.
 - Compare RL Algos eg. Q-learning vs DDQN --> deep learning makes difference in
-  practice for complex system
-- How much could have been used as VPP optimally/perfect information? Similar matrix to Kahlen, or even plot?
+  practice for complex system. Reward per timestep or Profits
+  - https://github.com/dennybritz/reinforcement-learning/blob/master/TD/Q-Learning%20Solution.ipynb
+  - https://gist.github.com/vihar/dcb1272a04b98ce3fdb2c109af7eaa21#file-q-learning-py
+- Accumulative/Single reward over time. With learning, without learning(real-world)?
+- Costs of charging RL vs optimal benchmark (full information, no uncertainty)
+  vs. regular charging
+
+- Prob distribution of optimal actions for the fleet during weekdays. cite:vaya14_optim
+
 ** Sensitivity Analysis
 # NOTE: Prediction Accuracy of available EV capacity
 # NOTE: Balancing accuracy always lower than intraday! Otherwise no sense
 # NOTE: Do predict electricity prices?
-- Prediction Accuracy
-# NOTE: Fastchargers
-# NOTE: Car batteries
-- Charging infrastructure
-# NOTE: Relax minimum bidding assumption of 1MW to no limit.
-# Sensitivity analysis with 100kw and 500kw in evaluation
-- Minimal bidding quantities
+*** Prediction Accuracy
+- Compare profits of (50%, 60%, 70%, 80%, 90%, 100%)
+
+*** Charging infrastructure
+- Fastchargers (22kw)
+- Car batteries
+- More Charging Stations (infer charging stations)
+
+*** Bidding Mechanism
+# NOTE: Relaxed minimum bidding assumption of 1MW to no limit.
+- Minimal bidding quantities (100kw, 500kw, 1MW)
 
 * Conclusion
 # NOTE 5%
@@ -107,8 +196,14 @@ bibliographystyle:apacite
 
 * Footnotes
 
-[fn:1] https://www.keras.io
+[fn:1] Average industry electricity price for 2017 BMWi. (n.d.). Prices of
+electricity for the industry in Germany from 2008 to 2017 (in euro cents per
+kilowatt hour). In Statista - The Statistics Portal. Retrieved March 18, 2019,
+from
+https://www.statista.com/statistics/595803/electricity-industry-price-germany/.
 
-[fn:2] https://github.com/keras-rl/keras-rl
+[fn:2] https://colab.research.google.com
 
-[fn:3] https://colab.research.google.com
+[fn:3] https://github.com/keras-rl/keras-rl
+
+[fn:4] https://www.keras.io
