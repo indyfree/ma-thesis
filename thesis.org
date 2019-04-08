@@ -4,7 +4,7 @@
 #+INCLUDE: "./header.org"
 # #+INCLUDE: "./chapters/introduction.org"
 # #+INCLUDE: "./chapters/background.org"
-#+INCLUDE: "./chapters/empirical-setting.org"
+# #+INCLUDE: "./chapters/empirical-setting.org"
 # #+INCLUDE: "./chapters/model.org"
 
 * Simulation Platform: FleetSim
@@ -77,8 +77,6 @@
 
 - Footnote: Run with Data from ... till ...
 
-
-  # NOTE: Include Graph of electricity prices
 - Results heavily dependent on industry charging price, since on average the
   balancing prices are 50% cheaper, and intraday 30% cheaper.
 
@@ -91,41 +89,35 @@
 ** Fleet Profits 1. RQ
 - 1. RQ: Monthly gross profit increase with benchmark strategy: Bar-Plot? (integrated naive
   strategy)
-- Show profits by charging / loss according to lost rentals? Table
 - Error Matrix? Predicted available EVs vs actually available --> Fixed by
   simulation! No result
-- Decision outcomes: VPP, rental, available, MWh traded in each markets, (MWh
-  charged regularly)
 
-- Risk averse agent vs. Risk seeking agent/strategy?
-
-# #+LATEX: \renewcommand\theadalign{bc}
-# #+LATEX: \renewcommand\theadfont{\bfseries}
-# #+LATEX: \renewcommand\theadgape{\Gape[2pt]}
-# #+LATEX: \renewcommand\cellgape{\Gape[2pt]}
-
-
-#+CAPTION[Bidding strategy outcomes]: Comparison of outcomes of naive bidding strategies over a 1.5 year period label:table-profits
+#+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
+#+CAPTION[Bidding strategy outcomes]: Outcomes of naive bidding strategies over a 1.5 year period label:table-profits
 #+ATTR_LATEX: :float sideways :align p{0.25\linewidth}|cccccc :placement [hp]
-|------------------------------------------------------------------------------------------------+------------------+-----------+----------+------------+-------+-----------|
-|------------------------------------------------------------------------------------------------+------------------+-----------+----------+------------+-------+-----------|
-| Metric                                                                                         | Regular charging | Balancing | Intraday | Integrated | Risky | Benchmark |
-|------------------------------------------------------------------------------------------------+------------------+-----------+----------+------------+-------+-----------|
-| round(100 round(Energy bought(MWh) / (Energy bought(MWh) + Energy charged regularly(MWh)), 2)) |                0 |        39 |       47 |        100 |   100 |        91 |
-| Energy bought (MWh)                                                                            |                0 |       803 |      985 |          1 |     1 |      1884 |
-| Energy charged regularly (MWh)                                                                 |             2081 |      1278 |     1096 |          0 |     0 |       197 |
-| Lost rental profits (\eur)                                                                     |                0 |         0 |        0 |          0 |       |         0 |
-| No. Lost rentals                                                                               |                0 |         0 |        0 |          0 |       |         0 |
-| Imbalances (MWh)                                                                               |                0 |         0 |        0 |          0 |       |         0 |
-| Average electricity price ($\ekwh$)                                                            |             0.15 |         - |        - |          - |     - |         - |
-| Gross profit increase (1000\eur)                                                               |               56 |           |          |            |       |      97.6 |
-|------------------------------------------------------------------------------------------------+------------------+-----------+----------+------------+-------+-----------|
-|------------------------------------------------------------------------------------------------+------------------+-----------+----------+------------+-------+-----------|
-#+TBLFM: @2=round(100*round(@3/(@3+@4),2))
+|                                     | \thead{Regular\\charging} | \thead{Balancing\\(risk averse)} | \thead{Intraday\\(risk averse)} | \thead{Integrated\\(risk averse)} | \thead{Integrated\\(risk seeking)} | \thead{Integrated\\(benchmark)} |
+|-------------------------------------+---------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+---------------------------------|
+|-------------------------------------+---------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+---------------------------------|
+| VPP Utilization (%)                 |                         0 |                               39 |                              47 |                                62 |                                 81 |                              91 |
+| Energy bought (MWh)                 |                         0 |                              803 |                             985 |                              1292 |                               1681 |                            1884 |
+| Energy charged regularly (MWh)      |                      2081 |                             1278 |                            1096 |                               789 |                                400 |                             197 |
+| Lost rental profits (1000 \eur)     |                         0 |                                0 |                               0 |                                 0 |                              15.47 |                               0 |
+| No. Lost rentals                    |                         0 |                                0 |                               0 |                                 0 |                               1237 |                               0 |
+| Imbalances (MWh)                    |                         0 |                                0 |                               0 |                                 0 |              \textcolor{red}{1.01} |                               0 |
+| Average electricity price ($\ekwh$) |                      0.15 |                                - |                               - |                                 - |                                  - |                               - |
+| Gross profit increase (1000 \eur)   |                         0 |                            43.62 |                           45.08 |                           *67.04* |                            *72.51* |                           99.13 |
+|-------------------------------------+---------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+---------------------------------|
+|-------------------------------------+---------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+---------------------------------|
+# #+TBLFM: @2=round(100*round(@3/(@3+@4),2))
 # ::@10=100* round((@9/17707.85),4)
+#+LATEX:}
 
-\thead{Integrated \\ (risk seeking)}
-\thead{Benchmark \\ (full information)}
+#+BEGIN_SRC python :exports none
+return(87.98 - 15.47)
+#+END_SRC
+
+#+RESULTS:
+: 72.51
 
 ** RL Learning 2. RQ
 # NOTE: What about confidence intervals - Mean?

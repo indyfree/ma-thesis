@@ -19,6 +19,12 @@
 
 # Tables
 #+LATEX_HEADER: \usepackage{makecell}
+#+LATEX_HEADER: \renewcommand\theadalign{cc}
+#+LATEX_HEADER: \renewcommand\theadfont{\bfseries}
+#+LATEX_HEADER: \renewcommand\theadgape{\Gape[2pt]}
+
+# Styling
+#+LATEX_HEADER: \usepackage{xcolor}
 
 # Custom Notatation commands
 #+LATEX_HEADER: \usepackage{notation/rl}
