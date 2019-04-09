@@ -81,9 +81,9 @@ Drawing upon the research motivation, this research aims to answer the following
    on the balancing market and intraday market simultanously?/ /How does an
    integrated bidding strategy look like, which considers this case?/
 
-2. /Can a reinforcement learning agent optimize VPP portfolios by dynamically
-   learning the risks that are associated with bidding on the individual/
-   /electricity markets?/
+2. /Can a reinforcement learning agent optimize VPP portfolios by learning the
+   risks that are associated with bidding on the individual/ /electricity
+   markets?/
 
 ** Relevance
 From a scientific perspective, this thesis is relevant to the stream of
