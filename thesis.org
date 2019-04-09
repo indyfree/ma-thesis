@@ -2,9 +2,9 @@
 #+AUTHOR:Tobias Richter
 
 #+INCLUDE: "./header.org"
-#+INCLUDE: "./chapters/introduction.org"
-#+INCLUDE: "./chapters/background.org"
-#+INCLUDE: "./chapters/empirical-setting.org"
+# #+INCLUDE: "./chapters/introduction.org"
+# #+INCLUDE: "./chapters/background.org"
+# #+INCLUDE: "./chapters/empirical-setting.org"
 #+INCLUDE: "./chapters/model.org"
 
 * Results
@@ -143,47 +143,56 @@ the intraday market 30 minutes ahead. We defined following types of strategies:
    advance and places the perfect bids on the markets, while still accounting
    for the prediction uncertainty. On other words, it charges the maximal amount
    of electricity from the markets without having to deny rentals or causing
-   imbalances. This reference strategy is the optimal solution to the problem
-   and serves as an upper bound.
+   imbalances. This reference strategy is the optimal solution to the problem.
 
 # NOTE: Mention numbers?
-In Table ref:table-profits, the simulation outcomes of all tested strategies are
-listed. We can see that the /Integrated (risk-averse)/ strategy performs better
-than its single market counterparts. As expected, the controller is able to
-better utilize the VPP by buying more electricity from the markets. It is able
-to capitalize on the most favorable market conditions and generate more profits,
-by charging cheaper than the industry price. We can observe that the average
-electricity price paid for charging is lower than on single markets.
+In Table ref:table-profits, the simulation results of all tested strategies are
+listed. We can see that the /Integrated (risk-averse)/ strategy outperforms its
+single market counterparts. As expected, the controller is able to better
+utilize the VPP by buying more electricity from the markets. It is able to
+capitalize on the most favorable market conditions and generate on average
+49%-54% more profits than the single market strategies. With the integrated
+strategy the fleet pays on average $0.10 \ekwh$ less than other risk averse
+strategies.
 
 A controller with an /Integrated (risk-seeking)/ strategy, is even more
-profitable, despite having to account for lost rental profits. Nevertheless, the
-controller caused imbalances (highlighted red) which lead to high (unknown)
-market penalties or even exclusion from bidding activities. Therefore,
-imbalances need to be avoided, regardless of potential profits. We expect from
-the proposed RL agent that it learns a bidding strategy, which avoids imbalances
-while maximizing profits at the same time.
+profitable, despite having to account for lost rental profits. On the other
+side, the controller caused imbalances (highlighted red) which lead to high
+(unknown) market penalties or even exclusion from bidding activities. Therefore,
+imbalances need to be avoided, regardless of potential profits. We expect that
+the proposed RL agent learns a bidding strategy, which avoids imbalances while
+increasing profits, with an upper bound of the benchmark strategy /Integrated
+(full information)/.
 
+# TODO: Explain VPP Utilization?
+# TODO: Risk-seeking should be lower, here: profits from buying energy, which
+# could be charged from imbalances or lost rentals are still included.
 #+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
-#+LATEX: \renewcommand\thempfootnote{\arabic{mpfootnote}}
-#+CAPTION[Bidding strategy outcomes]: Outcomes of naive bidding strategies over a 1.5 year period. Integrated bidding strategies outperform bidding on single markets. label:table-profits
+#+CAPTION[Bidding strategy outcomes]: Outcomes of naive bidding strategies over a 1.5 year period. Integrated bidding strategies outperform single market strategies. label:table-profits
 #+ATTR_LATEX: :float sideways :align l|cccccc :placement [hp]
 |                                     | \thead{Balancing\\(risk-averse)} | \thead{Intraday\\(risk-averse)} | \thead{Integrated\\(risk-averse)} | \thead{Integrated\\(risk-seeking)} | \thead{Integrated\\(full information)} |
 |-------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
 |-------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
-| VPP utilization (%)                 |                               39 |                              47 |                                62 |                                 81 |                                     74 |
-| Energy bought (MWh)                 |                              803 |                             985 |                              1292 |                               1681 |                                   1537 |
-| Energy charged regularly (MWh)      |                             1278 |                            1096 |                               789 |                                400 |                                    544 |
+| VPP utilization (%)                 |                               39 |                              47 |                                62 |                                 81 |                                     71 |
+| Energy bought (MWh)                 |                              803 |                             985 |                              1292 |                               1681 |                                   1473 |
+| Energy charged regularly (MWh)      |                             1278 |                            1096 |                               789 |                                400 |                                    608 |
 | Lost rental profits (1000 \eur)     |                                0 |                               0 |                                 0 |                              15.47 |                                      0 |
 | No. Lost rentals                    |                                0 |                               0 |                                 0 |                               1237 |                                      0 |
 | Imbalances (MWh)                    |                                0 |                               0 |                                 0 |              \textcolor{red}{1.01} |                                      0 |
 | Average electricity price ($\ekwh$) |                                - |                               - |                                 - |                                  - |                                      - |
-| Gross profit increase (1000 \eur)   |                            43.62 |                           45.08 |                           *67.04* |                            *72.51* |                                  80.02 |
+| Gross profit increase (1000 \eur)   |                            43.62 |                           45.08 |                           *67.04* |                            *72.51* |                                  77.36 |
 |-------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
 |-------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
 # #+TBLFM: @2=round(100*round(@3/(@3+@4),2))
 # ::@10=100* round((@9/17707.85),4)
 #+LATEX:}
 
+#+BEGIN_SRC python :exports none
+return(67.04 / 45.08)
+#+END_SRC
+
+#+RESULTS:
+: 1.4871339840283941
 
 #+BEGIN_SRC python :exports none
 return(87.98 - 15.47)
@@ -195,56 +204,63 @@ return(87.98 - 15.47)
 ** Reinforcement Learning Portfolio Optimization
 # NOTE: What about confidence intervals - Mean?
 
-In order to avoid
+Research Question 2 investigates whether a RL agent can optimize the integrated
+bidding strategy by dynamically adjusting the bidding quantities. The bidding
+quantities $\Pb{}, \Pi{}$ are based on the evaluated risk associated with
+bidding on the individual electricity markets. In Chapter ref:sec-model-rl, we
+proposed a RL approach that learns the risk factors $\lb{}$, $\li{}$ based on
+its observed environment and received reward signals.
 
-
-- long-delayed rewards make RL hard (!?)
-- positive reward from buying immediately vs negative rewards up to 7 days.
-- Compare RL Algos eg. Q-learning vs DDQN --> deep learning makes difference in
-  practice for complex system. Reward per timestep or Profits
-  - https://github.com/dennybritz/reinforcement-learning/blob/master/TD/Q-Learning%20Solution.ipynb
-  - https://gist.github.com/vihar/dcb1272a04b98ce3fdb2c109af7eaa21#file-q-learning-py
-- Accumulative/Single reward over time. With learning, without learning(real-world)?
-- Costs of charging RL vs optimal benchmark (full information, no uncertainty)
-  vs. regular charging
-- Assign artificially high imbalance costs
-
-- Prob distribution of optimal actions for the fleet during weekdays. cite:vaya14_optim
-
-
-- Graph: Cost evolution of the RL portfolio optimization approach benchmarked
-  against naive strategies (w/ error band)
-
-
-In summary, all four experiments show that our approach is
-able to learn a cost-effective day-ahead schedule under varying
-circumstances, without using any a priori information about
-the EVs.
-
-
-- 1. Graph: Learning over iterations (DQN vs Q-Learning)
-- 2. Graph cumulative (charging) profits over 1 simulation run, w/ learned RL agent (over
-  how many iterations?)
+To let the agent learn to always avoid imbalances, we set the imbalance costs
+$\beta$ to the imbalance (MW) times an artificially high value of 10000 $\emwh$.
+Whenever the agents causes imbalances, it will receive a highly negative reward
+signal, leading to low estimated Q-values in that timestep.
 
 # NOTE: Present hyperparameters for RL approach
-- cite:chis16_reinf_learn_based_plug_in
+# - cite:chis16_reinf_learn_based_plug_in
 Table III presents the values of all parameters of the fitted Q-iteration
 algorithm used for solving the proposed PEV charging problem. These values were
 found experimentally for the PEV charging problem at hand. L1 norm was used for
 the calculation of the kernel function. The speed of convergence may also be
 used as a criterion for
 
-Graph: Cumulative charging costs over simulation run (days)
-Fig. 4. Comparison of charging costs between the proposed novel charging
-strategy and other three charging strategies. The average cost values and the
-variance intervals of the methods are presented. The proposed novel method
-reduces the costs of charging by roughly 50% when compared with the
-conventional charging method and by roughly 10% when compared with a
-daily optimal charging strategy. To reach the global optimal solution the cost
 
+*** Results:
+1) Profits
+   - Graph: Cost evolution of the RL portfolio optimization approach benchmarked
+     against naive strategies (w/ error band)
+   - Graph cumulative (charging) profits over 1 simulation run, w/ learned RL agent (over
+     how many iterations?)
+   - Regular charging comparison? (VPP share is too low?)
+   - Graph: Cumulative charging costs over simulation run (days)
+     Fig. 4. Comparison of charging costs between the proposed novel charging
+     strategy and other three charging strategies. The average cost values and the
+     variance intervals of the methods are presented. The proposed novel method
+     reduces the costs of charging by roughly 50% when compared with the
+     conventional charging method and by roughly 10% when compared with a
+     daily optimal charging strategy. To reach the global optimal solution the cost
+     would need to be reduced by X% further.
 
-- What actions? What risk were choosen on average?
+2) Learning
+   - Graph: Learning over iterations (DQN vs Q-Learning)
+   - Compare RL Algos eg. Q-learning vs DDQN  Reward per timestep or Profits
+   - \rightarrow deep learning makes difference in practice for complex system.
+   # - https://github.com/dennybritz/reinforcement-learning/blob/master/TD/Q-Learning%20Solution.ipynb
+   # - https://gist.github.com/vihar/dcb1272a04b98ce3fdb2c109af7eaa21#file-q-learning-py
 
+3) Actions
+   - Prob distribution of optimal actions for the fleet during weekdays. cite:vaya14_optim
+   - What actions/risk were chosen on average?
+
+*** Problems:
+- long-delayed rewards make RL hard (!?)
+- positive reward from buying immediately vs negative rewards up to 7 days.
+
+*** Summary:
+- In summary, all four experiments show that our approach is
+  able to learn a cost-effective day-ahead schedule under varying
+  circumstances, without using any a priori information about
+  the EVs.
 
 ** Sensitivity Analysis
 # NOTE: Prediction Accuracy of available EV capacity
