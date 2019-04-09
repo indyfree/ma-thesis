@@ -37,12 +37,13 @@ have kindly been provided by ProCom GmbH[fn:3] for research purposes. In the
 next chapters the different datasets are described, as well the most important
 processing steps outlined.
 
-** Electronic Vehicle Fleet Data
+** Electronic Vehicle Fleet Data label:sec-data-car2go
 # NOTE: Here only desription of data, no general blabla
+# NOTE: Mention number of charging stations. Data: 1858
 # TODO: Exact number of EVs
-The Car2Go dataset consists of GPS data of around 500 Smart ED3 Fortwo vehicles in
-Stuttgart. These subcompact cars are equipped with a 17.6kWh battery and a
-standard 3.3kW on-board charger. They fully charge in about six to seven hours
+The Car2Go dataset consists of GPS data of around 500 Smart ED3 Fortwo vehicles
+in Stuttgart. These subcompact cars are equipped with a 17.6kWh battery and a
+standard 3.6kW on-board charger. They fully charge in about six to seven hours
 and can reach a maximum driving distance of 145km according to the manufacturer.
 When equipped with an additional 22kW fast charger the charging time reduces to
 about an hour.

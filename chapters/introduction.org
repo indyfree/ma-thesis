@@ -47,7 +47,6 @@ electricity delivery.
 # TODO: Citation needed
 # consisting of operating reserve VPPs and spot market VPPs,
 
-
 We state that participating in the balancing market and intraday market at the
 same time can mitigate risks and increase profits of the fleet. In this
 research, we propose a portfolio optimizing strategy, in which the best
@@ -74,15 +73,13 @@ cite:lopes11_integ_elect_vehic_elect_power_system
 # resulting in the decreased usage of the conventional fossil
 # fuel units and expensive generators during peak hours.
 
-
-
 ** Research Questions
 
 Drawing upon the research motivation, this research aims to answer the following research questions:
 
-1. /Can EV fleet operators create VPP portfolios to trade electricity on the
-   balancing market and intraday market simultanously?/ /How does an integrated
-   bidding strategy look like, which considers this case?/
+1. /Can EV fleet operators create VPP portfolios to profitably trade electricity
+   on the balancing market and intraday market simultanously?/ /How does an
+   integrated bidding strategy look like, which considers this case?/
 
 2. /Can a reinforcement learning agent optimize VPP portfolios by dynamically
    learning the risks that are associated with bidding on the individual/

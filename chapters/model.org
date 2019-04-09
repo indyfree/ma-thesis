@@ -143,7 +143,7 @@ Due to the limited size of its bids, it is lacking the market share to influence
 prices on the markets. Similar assumptions have been made by
 textcite:brandt17_evaluat_busin_model_vehic_grid_integ and
 textcite:vandael15_reinf_learn_heuris_ev_fleet.
-** Control Mechanism
+** Control Mechanism label:sec-model-mechanism
 # TODO: Charging power or fleet capacity??
 
 # NOTE: Embed/Mention DSS? What about Smart Charging?
@@ -694,10 +694,10 @@ industry and research cite:abadi16_tensor. Further, we used the shared research
 environment Google Colaboratory[fn:3] to train and evaluate the agent. It offers
 free access to computing resources that are optimized for training machine
 learning models. More specifically, it provides a NVIDIA Tesla K80 GPU, with
-2880 $\times$ 2 CUDA cores and 12GB GDDR5 VRAM . Additionally, the environment
-is equipped with a Intel(R) Xeon(R) CPU @ 2.30GHz (1 core, 2 threads), and over
-12GB available memory. Google Colaboratory can be used up to 12 hours of
-consecutive training.
+2880 $\times$ 2 CUDA cores and 12GB GDDR5 VRAM. Additionally, the environment is
+equipped with a Intel(R) Xeon(R) CPU @ 2.30GHz (1 core, 2 threads), and 12GB
+available memory. Google Colaboratory can be used up to 12 hours of consecutive
+training.
 
 #+LATEX: \clearpage
 
