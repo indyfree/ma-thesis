@@ -36,39 +36,40 @@ FleetSim facilitates easy sensitivity analyses, adaption to future market
 designs, and integration of novel data sets through its modular architecture and
 expandable design (see Figure ref:fig-fleetsim). We consider FleetSim as a
 research platform for sustainable and smart mobility similar to PowerTac
-cite:ketter16_multiagent_comp_gaming. It builds on SimPy[fn:2], a process-based
-discrete-event simulation framework. FleetSim is available open source[fn:1] and
+cite:ketter16_multiagent_comp_gaming. It builds on SimPy[fn:1], a process-based
+discrete-event simulation framework. FleetSim is available open source[fn:2] and
 can be readily installed as a Python package.
 
 #+CAPTION[FleetSim Architecture]: Architecture of FleetSim label:fig-fleetsim
 #+ATTR_LATEX: :width 1\linewidth :placement [hp]
 [[./fig/simulation_platform.png]]
 
-In order to simplify comparability and focus real-world applicability of the
-analysis, we set the same parameters for all simulation runs (see Table
-ref:table-sim-params). They are corresponding to the real Car2Go specifications,
-also described in Chapter ref:sec-data-car2go. Further, we fixed the unknown
+In order to simplify comparability and focus to real-world applicability of the
+analysis, we set the same parameters for all conducted experiments (see Table
+ref:table-sim-params). They are corresponding to the real Car2Go specifications
+described in Chapter ref:sec-data-car2go. Further, we fixed the unknown
 prediction accuracy of the fleets available charging power $\fPhat{}$ to an
-estimate of modern forecast algorithms performance. Later, the sensitivity and
-robustness of the results based on the accuracy will be tested.
+estimate of modern forecast algorithms performance. The impact of the
+predictions uncertainty on the results will later be determined in a sensitivity
+analysis.
 
 #+CAPTION[Simulation Parameters]: Simulation Parameters label:table-sim-params
 #+ATTR_LATEX: :environment longtable :align l|cc :placement [hp]
-|----------------------------------------------+--------------------------------------|
-|----------------------------------------------+--------------------------------------|
-| Parameter                                    | Value                                |
-|----------------------------------------------+--------------------------------------|
-| EV battery capacity ($\Omega$)               | 17.6 $\kwh$                          |
-| EV charging power   ($\gamma$)               | 3.6 $\kw$                            |
-| EV range                                     | 145 km                               |
-| Industry electricity price  ($p^{ind}$)      | 0.15[fn:2] $\ekwh$                   |
-| EV rental tariff                             | 0.24[fn:3] $\frac{\eur}{\text{min}}$ |
-| EV long distance fee ($>\text{200 km}$)      | 0.29[fn:3] $\frac{\eur}{\text{km}}$  |
-|----------------------------------------------+--------------------------------------|
-| Prediction accuracy $\fPhat{}$ week ahead    | 70%                                  |
-| Prediction accuracy $\fPhat{}$ 30 min ahead  | 90%                                  |
-|----------------------------------------------+--------------------------------------|
-|----------------------------------------------+--------------------------------------|
+|---------------------------------------------+--------------------------------------|
+|---------------------------------------------+--------------------------------------|
+| Parameter                                   | Value                                |
+|---------------------------------------------+--------------------------------------|
+| EV battery capacity ($\Omega$)              | 17.6 $\kwh$                          |
+| EV charging power   ($\gamma$)              | 3.6 $\kw$                            |
+| EV range                                    | 145 km                               |
+| Industry electricity price  ($p^{ind}$)     | 0.15[fn:3] $\ekwh$                   |
+| EV rental tariff                            | 0.24[fn:4] $\frac{\eur}{\text{min}}$ |
+| EV long distance fee ($>\text{200 km}$)     | 0.29[fn:4] $\frac{\eur}{\text{km}}$  |
+|---------------------------------------------+--------------------------------------|
+| Prediction accuracy $\fPhat{}$ week ahead   | 70%                                  |
+| Prediction accuracy $\fPhat{}$ 30 min ahead | 90%                                  |
+|---------------------------------------------+--------------------------------------|
+|---------------------------------------------+--------------------------------------|
 
 ** Integrated Bidding Strategy
 # NOTE: Additional bar-plot with monthly increasing profits?
@@ -322,10 +323,13 @@ bibliographystyle:apacite
 
 * Footnotes
 
-[fn:1] https://github.com/indyfree/fleetsim
+[fn:1] https://pypi.org/project/simpy/
 
-[fn:2] https://pypi.org/project/simpy/
+[fn:2] https://github.com/indyfree/fleetsim
 
-[fn:3] Rental fees according to the Car2Go pricing scheme. See
+[fn:3] Average prices of electricity for the industry with an annual consumption
+of 500 MWh - 2000 MWh in Germany 2017 cite:bmwi.19_prices_german.
+
+[fn:4] Rental fees according to the Car2Go pricing scheme. See
 https://www.car2go.com/media/data/germany/legal-documents/de-de-pricing-information.pdf,
 accessed 15^th March 2019.
