@@ -2,30 +2,30 @@
 #+AUTHOR:Tobias Richter
 
 #+INCLUDE: "./header.org"
-# #+INCLUDE: "./chapters/introduction.org"
-# #+INCLUDE: "./chapters/background.org"
-# #+INCLUDE: "./chapters/empirical-setting.org"
+#+INCLUDE: "./chapters/introduction.org"
+#+INCLUDE: "./chapters/background.org"
+#+INCLUDE: "./chapters/empirical-setting.org"
 #+INCLUDE: "./chapters/model.org"
 
 * Results
 # NOTE: 15%
 
 The following chapter will cover the main results of this research. First, the
-simulation environment is presented. Second, the economic sustainability of an
-integrated bidding strategy is investigated. Third, the RL approach that aims to
-optimize the VPP portfolio is evaluated. In the last section, we will perform
-sensitivity analyses on the limiting algorithmic factor, the prediction
+simulation environment is presented. Second, we examine the economic
+sustainability of an integrated bidding strategy. Third, the RL approach that
+aims to optimize the VPP portfolio is evaluated. In the last section, we will
+perform sensitivity analyses on the limiting algorithmic factor, the prediction
 accuracy, and a limiting physical factor, the charging infrastructure.
 
 ** Simulation Environment
 # NOTE: V2G?
 As part of this research, we developed an event-based simulation platform called
-/FleetSim/. On the platform, intelligent agents can centrally control the
-charging of an EV fleet in a realistic setting. FleetSim allows researchers to
-test out different smart charging and bidding strategies, based on real-world
-data. The agents (i.e., fleet controllers) are responsible to sufficiently
-charge their vehicles to satisfy real mobility demand. At the same time, they
-can create VPP of EVs, provide balancing services to the grid, and take part in
+/FleetSim/. The platform allows researchers to develop and test out different
+smart charging and bidding strategies in realistic environment based on
+real-world data. In FleetSim, intelligent agents (called controllers) centrally
+control the charging of an EV fleet, they are responsible to sufficiently charge
+their vehicles to satisfy real mobility demand. At the same time, the agents can
+create VPP of EVs, provide balancing services to the grid, and take part in
 electricity trading. Trips are simulated on an individual level, for example,
 not charging an individual EV at a particular point in time, can cause a whole
 series of lost rentals, due to an insufficient amount of battery for the next
@@ -73,21 +73,25 @@ analysis.
 
 ** Integrated Bidding Strategy
 # NOTE: Additional bar-plot with monthly increasing profits?
-In Research Question 1, we investigate whether a fleet operator can use a VPP
-portfolio of EVs to profitably bid on multiple electricity markets. In Chapter
+Research Question 1 examines whether a fleet operator can use a VPP portfolio of
+EVs to profitably bid on multiple electricity markets. In Chapter
 ref:sec-model-mechanism, we proposed a central control mechanism that charges
-the fleet with an integrated bidding strategy, which we will evaluate in the
-following section.
+the fleet with an integrated bidding strategy. The following section evaluates
+the results of the control mechanism in the simulation environment.
 
-Table ref:table-sim-stats shows a statistic about the fleet utilization in a
-simulation run, with data from June 1, 2016 to January 1, 2018. It can be
-observed that (a) the volatility of EVs parked at a charging station is
-remarkably high (large standard deviation), and (b) the fraction of EVs that can
-be utilized for VPP activities is diminishing low (3.55%). It is apparent that a
-high uncertainty and the low share of EVs that can possibly generate profits are
-challenging the economic sustainability of our proposed model.
+Table ref:table-sim-stats shows the descriptive statistics of the fleet
+utilization during a simulation run, with data from June 1, 2016 to January
+1, 2018. It can be observed that (a) the volatility of EVs parked at a charging
+station is remarkably high (large standard deviation), and (b) the fraction of
+EVs that can be utilized for VPP activities is diminishing low (3.55%). It is
+apparent that a high uncertainty and the low share of EVs that can possibly
+generate profits are challenging the economic sustainability of our proposed
+model. Figure ref:fig-fleet-utilization shows that despite a changing rental
+behavior throughout the day (e.g., rush hour peaks between 7:00-9:00 and
+17:00-19:00), the amount of EVs that can utilized for VPP activities is
+comparably stable throughout the day.
 
-#+CAPTION[Fleet Utilzation]: Daily fleet utilization (average, standard deviation) from June 1, 2016 to January 1, 2018. The blue error band is illustrating the large volatility in the amount of EVs that get parked at a charging station. The share of EVs that can be used as VPP is on average only 3.55% of the fleet's size. Most of the EVs are either not connected to a charging station or are already fully charged.
+#+CAPTION[Fleet Utilzation]: Daily fleet utilization (average, standard deviation) from June 1, 2016 to January 1, 2018. The blue error band is illustrating the large volatility in the amount of EVs that get parked at a charging station. The share of EVs that can be used as VPP is on average only 3.55% of the fleet's size. Most of the EVs are either not connected to a charging station or are already fully charged. label:fig-fleet-utilization
 #+ATTR_LATEX: :width 1\linewidth :placement [h]
 [[./fig/fleet-utilization.png]]
 
@@ -110,12 +114,12 @@ return(round((13.84 / 389.64),4) * 100)
 |---------------------------------+----------------------------|
 |---------------------------------+----------------------------|
 
-In order to evaluate the proposed strategy, we defined several "naive" bidding
-strategy to compare the performance against other strategies. The strategies are
-naive in that sense, that they are assuming a fixed risk associated with bidding
+In order to evaluate the developed model, we defined several "naive" bidding
+strategy to benchmark the performance of the novel strategy. The strategies are
+naive in that sense that they are assuming a fixed risk associated with bidding
 at a specific electricity market. As opposed to the developed RL agent (next
 chapter), they do not take information of their environment into account and
-adjust the bidding quantities dynamically. Instead the controller discounts the
+adjust the bidding quantities dynamically. Instead, the controller discounts the
 predicted amount of with a fixed risk factor $\lambda$ (c.f.,
 \eqref{eq-model-pb} and \eqref{eq-model-pi}). Naturally, the controller
 estimates a higher risk for bidding on the balancing market week ahead than on
@@ -127,11 +131,11 @@ the intraday market 30 minutes ahead. We defined following types of strategies:
    bids for conservative amounts of electricity on the markets. The risk averse
    strategies /Balancing/ and /Intraday/ are comparable to similar strategies
    developed by
-   cite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem.
+   textcite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem.
 
 2) Risk-seeking ($\lb{}\!=\!0.2$, $\li{}\!=\!0.0$)
 
-   The controller aims to maximize it's profits, by trading as much electricity
+   The controller aims to maximize it's profits by trading as much electricity
    on the markets as possible. It strives to fully utilize the VPP and allocate
    a high percentage of available EVS to charge from the markets. Due to the
    rental uncertainty and a low estimated risk, the controller is prone to
@@ -140,30 +144,30 @@ the intraday market 30 minutes ahead. We defined following types of strategies:
 
 3) Full information
 
-   The benchmark strategy, where the controller knows the bidding risks in
-   advance and places the perfect bids on the markets, while still accounting
-   for the prediction uncertainty. On other words, it charges the maximal amount
-   of electricity from the markets without having to deny rentals or causing
-   imbalances. This reference strategy is the optimal solution to the problem.
+   The optimal strategy to solve the problem. The controller knows the bidding
+   risks in advance and places the perfect bids on the markets, while still
+   accounting for the prediction uncertainty. On other words, it charges the
+   maximal amount of electricity from the markets without having to deny rentals
+   or causing imbalances.
 
 # NOTE: Mention numbers?
 In Table ref:table-profits, the simulation results of all tested strategies are
-listed. We can see that the /Integrated (risk-averse)/ strategy outperforms its
-single market counterparts. As expected, the controller is able to better
-utilize the VPP by buying more electricity from the markets. It is able to
-capitalize on the most favorable market conditions and generate on average
-49%-54% more profits than the single market strategies. With the integrated
-strategy the fleet pays on average $0.10 \ekwh$ less than other risk averse
-strategies.
+listed. The developed integrated strategies outperform their single market
+counterparts. As expected, the controller better utilizes the VPP by buying more
+electricity from the markets. It is able to capitalize on the most favorable
+market conditions and generate on average 49%-54% more profits than the single
+market strategies.
 
-A controller with an /Integrated (risk-seeking)/ strategy, is even more
-profitable, despite having to account for lost rental profits. On the other
-side, the controller caused imbalances (highlighted red) which lead to high
-(unknown) market penalties or even exclusion from bidding activities. Therefore,
-imbalances need to be avoided, regardless of potential profits. We expect that
-the proposed RL agent learns a bidding strategy, which avoids imbalances while
-increasing profits, with an upper bound of the benchmark strategy /Integrated
-(full information)/.
+A controller bidding according to the /Integrated (risk-averse)/ strategy, pays
+on average $0.10 \ekwh$ less than other risk averse strategies. A controller
+with an /Integrated (risk-seeking)/ strategy, is even more profitable, despite
+having to account for lost rental profits. On the other side, the controller
+caused imbalances (highlighted red) which lead to high (unknown) market
+penalties or even exclusion from bidding activities. Therefore, imbalances need
+to be avoided, regardless of potential profits. We expect that the proposed RL
+agent learns a bidding strategy, which avoids imbalances while increasing
+profits, with an upper bound of the optimal strategy /Integrated (full
+information)/.
 
 # TODO: Explain VPP Utilization?
 # TODO: Risk-seeking should be lower, here: profits from buying energy, which
@@ -209,22 +213,20 @@ Research Question 2 investigates whether a RL agent can optimize the integrated
 bidding strategy by dynamically adjusting the bidding quantities. The bidding
 quantities $\Pb{}, \Pi{}$ are based on the evaluated risk associated with
 bidding on the individual electricity markets. In Chapter ref:sec-model-rl, we
-proposed a RL approach that learns the risk factors $\lb{}$, $\li{}$ based on
-its observed environment and received reward signals.
+introduced a RL approach that learns the risk factors $\lb{}$, $\li{}$ based on
+its observed environment and received reward signals. Table
+ref:table-results-param presents the hyperparameters and their values the
+duelling network DDQN algorithm used for solving the controlled charging problem
+under uncertainty. The values were determined manually through experimentation
+to achieve the best results. The speed of convergence was also used as a
+criterion since the Google Colaboratory environment, which was used for
+conducting the experiments, only allows up to 12 hours of computing time.
 
-To let the agent learn to always avoid imbalances, we set the imbalance costs
-$\beta$ to the imbalance (MW) times an artificially high value of 10000 $\emwh$.
-Whenever the agents causes imbalances, it will receive a highly negative reward
-signal, leading to low estimated Q-values in that timestep.
-
-# NOTE: Present hyperparameters for RL approach
-# - cite:chis16_reinf_learn_based_plug_in
-Table III presents the values of all parameters of the fitted Q-iteration
-algorithm used for solving the proposed PEV charging problem. These values were
-found experimentally for the PEV charging problem at hand. L1 norm was used for
-the calculation of the kernel function. The speed of convergence may also be
-used as a criterion for
-
+Further, the imbalance costs $\beta$ were set to an artificially high value of
+10000 $\emwh$ to let the agent learn to always avoid imbalances. Whenever the
+agents takes an action that causes imbalances, it will receive a highly negative
+reward signal, leading to low estimated values of that chosen action in a
+specific state.
 
 *** Results:
 1) Profits
@@ -286,7 +288,7 @@ used as a criterion for
 * Conclusion
 # NOTE 5%
 ** Contribution
-- Compare to most simular studies:
+- Compare to most similar studies:
 cite:kahlen18_elect_vehic_virtual_power_plant_dilem,vandael15_reinf_learn_heuris_ev_fleet etc..
 - Business model for EV fleet owners with better results than previous studies
 - Environmental impact by providing balancing power
@@ -323,7 +325,7 @@ bibliographystyle:apacite
 
 * Footnotes
 
-[fn:1] https://pypi.org/project/simpy/
+[fn:1] \url{https://pypi.org/project/simpy/
 
 [fn:2] https://github.com/indyfree/fleetsim
 
