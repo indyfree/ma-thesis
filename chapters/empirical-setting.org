@@ -38,7 +38,7 @@ next chapters the different datasets are described, as well the most important
 processing steps outlined.
 
 ** Electronic Vehicle Fleet Data label:sec-data-car2go
-# NOTE: Here only desription of data, no general blabla
+# NOTE: Here only description of data, no general blabla
 # NOTE: Mention number of charging stations. Data: 1858
 # TODO: Exact number of EVs
 The Car2Go dataset consists of GPS data of around 500 Smart ED3 Fortwo vehicles
@@ -87,7 +87,8 @@ processing steps.
    We infer that a customer rented an EV, if the position coordinates change
    between two data points of the same EV (see Table ref:table-car2go-raw, 4^{th}
    to 5^{th} row). Note that we assume that customer do not undertake trips,
-   which begin and end at the exact same location.
+   which begin and end at the exact same location. In total 1.246.040 trips were
+   determined.
    # NOTE: Not using it for analysis yet
 4) Infer charging stations
 
@@ -98,28 +99,35 @@ processing steps.
    also plugged in. That is a valid assumption, since in Germany cars are only
    allowed to park at charging station if they are connected to it.
 5) Clean data
-   - /Service trips/: 999 rental trips were removed that had a trip duration
+   - /Service trips/: 3308 rental trips were removed that had a trip duration
      longer than the maximum allowed rental time of two days. We assume that
      these trips were /service trips/ undertaken by Car2Go. When the EVs
      returned with a higher SoC (e.g., they have been charged at the car repair
      shop), the previous trip had to be altered to end at a charging station to
      ensure charging consistency.
-   - /Incorrectly charged EVs/: 999 EVs were removed that show incorrect
+   - /Incorrectly charged EVs/: 52 EVs were removed that show incorrect
      charging behavior. The data of these EVs showed an increase of more than
      20% SoC between trips or on trips, while not being located at a charging
      station.
 
-# TODO: Explain capacity prediction data?
-# TODO: Include real cleaned data and/or examples
+
+# INFO    Determining trips of 560 cars...
+# INFO    Found 1.246.040 trips, 197.496 ended at a charging station.
+# INFO    Infering trip prices...
+# INFO    Cleaning trips...
+# INFO    Removed 46 EVs that had faulty charging behaviour.
+# INFO    Changed 1786 trips, previous to service trips, to end at a charging station.
+# INFO    Removed 3308 trips that were longer than 2 days.
 #+BEGIN_SRC python :results output :exports none :var trips=145341 trips_gps=147313
-print("Number of cleaned trips with GPS rounding: %.d (%.2f%%)" % (trips_gps - trips, 1 - trips/trips_gps))
+print("Number of cleaned trips:{:n}".format((1246040 - 3308)))
 #+END_SRC
 
 #+RESULTS:
-: Number of cleaned trips with GPS rounding: 1972 (0.01%)
+: Number of cleaned trips:1242732
 
-# NOTE: Maybe put graph of how/when car2go is parked at charging w/ confidence intervals?
-# I.E. Figure 4.7 of cite:kahlen18_elect_vehic_virtual_power_plant_dilem
+# NOTE: Graph of car2go parking and charging w/ confidence intervals?
+#       Already in results
+
 #+INCLUDE: "~/uni/ma-thesis/template/car2go_tables.tex" export latex
 
 ** Balancing Market Data label:sec-data-balancing
@@ -220,26 +228,30 @@ activated, which was partly fulfilled by the 5MW of the first bidder.
 # Compare with EV availability
 
 The data from the EPEX Spot Intraday Continuous encompass order books and
-executed trades from 01.06.2016 until 01.01.2018. The list of trades contain
-information on the unit price $\up{}$ ($\emwh$), the quantity (kW)
-and the traded product (hourly, quarterly or block). In this research, we focus
-on quarterly product times (15-minute intervals), as they provide the highest
-flexibility. Fleet controllers can promptly react to fluctuant electricity
-demand of the EV fleet by accurately adjusting the bid quantities. Future
-research could also consider other electricity products if lower prices justify
-decreased flexibility at that point in time. Additionally, the TSOs of the buyer
-and seller are listed in the dataset. They are only relevant if special
-conditions between TSO apply, e.g., when delivering electricity to other
-countries.
+executed trades from 01.06.2016 until 01.01.2018. An extract of the data can be
+found in Appendix ref:app-a. The list of trades contains information on the unit
+price $\up{}$ ($\emwh$), the quantity (kW) and the traded product (hourly,
+quarterly or block). In this research, we focus on quarterly product times
+(15-minute intervals), as they provide the highest flexibility. Fleet
+controllers can promptly react to fluctuant electricity demand of the EV fleet
+by accurately adjusting the bid quantities. Future research could also consider
+other electricity products if lower prices justify decreased flexibility at that
+point in time. Additionally, the TSOs of the buyer and seller are listed in the
+dataset. They are only relevant if special conditions between TSO apply, for
+example when delivering electricity to other countries.
+
+#+CAPTION[Critical electricity prices]: Daily critical electricity market prices (average, standard deviation) from June 6, 2016 to January 1, 2018. Highly volatile prices, e.g., between 12:00 and 14:00, illustrate the benefits of an integrated trading strategy, which considers trading on both markets depending on the market conditions.
+#+ATTR_LATEX: :width 1\linewidth :placement [hp]
+[[../fig/critical-prices.png]]
 
 On the spot market, electricity trades can have a very short lead time of up to
-5 minutes before delivery (see Table ref:table-spot-market). This market
-characteristic is beneficial for our proposed trading strategy, since it allows
-the EV to procure electricity in almost real time. The controller can submit
-bids to the market, with accurate estimations of available charging capacity up
-to five minutes ahead. Similarly to the balancing market, the critical price
-$\cup{}$ has to be determined for all intraday trading intervals. The critical
-unit price $\cup{}$ is defined as the lowest price of all executed trades.
+5 minutes before delivery. This market characteristic is beneficial for our
+proposed trading strategy, since it allows the EV to procure electricity in
+almost real time. The controller can submit bids to the market, with accurate
+estimations of available charging capacity up to five minutes ahead. Similarly
+to the balancing market, the critical price $\cup{}$ has to be determined for
+all intraday trading intervals. The critical unit price $\cup{}$ is defined as
+the lowest price of all executed trades.
 \begin{equation*}
     \cup{} \defeq \min_{t \in \cal{T}} \up{t} \text{ ,}
 \end{equation*}
