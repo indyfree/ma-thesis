@@ -228,6 +228,7 @@ agents takes an action that causes imbalances, it will receive a highly negative
 reward signal, leading to low estimated values of that chosen action in a
 specific state.
 
+
 *** Results:
 1) Profits
    - Graph: Cost evolution of the RL portfolio optimization approach benchmarked
@@ -288,19 +289,66 @@ specific state.
 * Conclusion
 # NOTE 5%
 ** Contribution
-- Compare to most similar studies:
-cite:kahlen18_elect_vehic_virtual_power_plant_dilem,vandael15_reinf_learn_heuris_ev_fleet etc..
-- Business model for EV fleet owners with better results than previous studies
-- Environmental impact by providing balancing power
-- Decision Support System for controlled EV charging from multiple markets
-- RL Algorithm that is designed to work in previously unknown environments and
-  thus suited to deploy in real life settings of all kinds of EV fleets in all
-  kinds of cities. E.g. scooters also?
-- Online learning algorithm (difference? -- real data?)
-- Event-based Simulation Platform to evaluate bidding strategies and RL agents,
-  facilitate research
+
+1. Problem setting
+   - Balancing power is needed to integrate renewable into the grid
+   - Balancing power can be supplied a) via the balancing market by the TSOs and
+     b) via the open intraday market (citation, why that is balancing too)
+   - EV fleets can provide (negative) balancing power with the batteries of
+     their vehicles
+   - Problem) For a sustainable business model EV fleet operators need to
+     balance providing their main offering customer mobility versus
+   - Problem: a) Customer mobility vs VPP b) over-commitments to the markets
+
+2. What we have done
+   - Decision Support System for controlled EV charging from multiple markets,
+
+   - Evaluated based on real world carsharing fleet data from Car2go in the
+     period from June 2017 to January 2018 . (Car2Go *very*
+     uncertain rental demand!)
+   - Business model for EV fleet owners with better results than previous studies
+   - Environmental impact by providing balancing power
+   - Developed event-based simulation platform to evaluate bidding strategies and RL agents,
+     facilitate research based on real world data(!)
+   - Developed Control mechanism (DSS) that "Under uncertainty"
+   - Developed a RL Agent that
+     - designed to work in previously unknown
+       environments and thus
+     - suited to deploy in real life settings of all kinds
+       of EV fleets in all kinds of cities. E.g. scooters also (not tested, but expected)
+
+3. What we have shown (include key numbers)
+   - 1. RQ
+     - Integrated improves existing approaches
+     - Mitigate risk & improve profits through exploitation of different market setups
+   - 2. RQ
+     - RL Algorithm that
+     - Online learning algorithm (difference? -- real data?)
+     - RL can learn to dynamically adjust bidding quantities by learning risk
+       associated with bidding on each market. (What are the risks?)
+     - RL Architecture matters
+     - Charging infrastructure & Advancement in battery technology/charging
+        technology matters
+
+4. Compare to other studies
+   - Fleet Charging
+     - No uncertainty
+     - Only one market
+     - No sensitivity on accuracy prediction (We found very important)
+   - RL
+   - Other approaches (VPP, stochastic)
+        cite:kahlen18_elect_vehic_virtual_power_plant_dilem
+        cite:vandael15_reinf_learn_heuris_ev_fleet
+
+5. Discuss results?
+   - Policy
+   - Investment
+   - V2G?
+   - Market Setup
+
 
 ** Limitations
+# We don't take market dynamics into account
 # # NOTE: Citatation from kahlen
 # The fleet controller offers bids and asks for every time interval. These offers
 # contain both a quantity and a reservation price, which depends on the state of

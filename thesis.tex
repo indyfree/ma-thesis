@@ -1,4 +1,4 @@
-% Created 2019-04-10 Wed 12:02
+% Created 2019-04-11 Thu 15:37
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper, 12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -214,9 +214,9 @@ be real-valued vectors are written in bold and in lower case (even if random var
 
 \pagenumbering{arabic}
 \section{Introduction}
-\label{sec:org0998290}
+\label{sec:org959fcc1}
 \subsection{Research Motivation}
-\label{sec:org90c0fa1}
+\label{sec:org07c48e9}
 The global climate change is one of the most substantial challenges of our time.
 Carbon emissions need to be reduced and the shift to sustainable energy sources
 is inevitable. But the adaption of renewable energy is a complex matter: Solar
@@ -266,7 +266,7 @@ We show that..
 \cite{lopes11_integ_elect_vehic_elect_power_system}
 
 \subsection{Research Questions}
-\label{sec:org84b1b08}
+\label{sec:org98c710e}
 
 Drawing upon the research motivation, this research aims to answer the following research questions:
 
@@ -281,7 +281,7 @@ markets?}
 \end{enumerate}
 
 \subsection{Relevance}
-\label{sec:org28aab35}
+\label{sec:orge27318e}
 From a scientific perspective, this thesis is relevant to the stream of
 agent-based decision making in smart markets
 \cite{bichler10_desig_smart_market,peters13_reinf_learn_approac_to_auton}. It
@@ -333,9 +333,9 @@ reduces the total CO\textsubscript{2} emissions.
 
 \clearpage
 \section{Background}
-\label{sec:orgdc6943c}
+\label{sec:orgd48c62b}
 \subsection{Smart Electricity Markets}
-\label{sec:org72c8bb3}
+\label{sec:org87cb4e5}
 On electricity markets, actors participate in auctions to match the supply of
 electricity generation and the demand for electricity consumption. Participants
 place asks (sale offers) and bids (purchase orders). The electricity price is
@@ -378,9 +378,9 @@ research.
 \caption[Electricity Market Design]{Interaction between electricity markets in relation to capacity allocation \label{fig-electricity-markets}}
 \end{figure}
 \subsection{Electricity Market Theory:}
-\label{sec:org8a2c251}
+\label{sec:org2cd4142}
 \subsubsection{Balancing Market \label{sec-balancing-market}}
-\label{sec:orgbe4b543}
+\label{sec:orgbba1d67}
 The balancing market is a tool to balance frequency deviations in the power
 grid. It offers auctions for primary control reserve, secondary control reserve
 as well as tertiary control reserve (minute reserve), which primarily differ in
@@ -439,7 +439,7 @@ they supplied or consumed: \(R^e = \ep{} \times \Eb{}\). Since provider get paid
 according to their submitted price \(\ep{}\), instead of a market clearing price,
 this type of auction is called \emph{pay-as-bid} auction.
 \subsubsection{Spot Market \label{sec-spot-market}}
-\label{sec:org628d280}
+\label{sec:org1e1aa2c}
 As mentioned in the previous chapter, the equilibrium of electricity supply and
 demand is ensured through a sequence of interdependent wholesale markets (cited)
 \cite{pape16_are_fundam_enoug}. Next to the balancing market at the end of the
@@ -447,11 +447,11 @@ sequence, mainly two different types of spot markets exist, the day-ahead
 market and the intraday market. In this research, we consider the European Power
 Exchange (EPEX Spot) as it is the largest electricity market in Europe, with a
 total trading volume of approximately 567TWh in 2018\footnote{\url{https://www.epexspot.com/en/press-media/press/details/press/Traded\_volumes\_soar\_to\_an\_all-time\_high\_in\_2018},
-accessed 19\textsuperscript{th} February, 2019\label{org833db04}}, but most electronic
+accessed 19\textsuperscript{th} February, 2019\label{org6078f4a}}, but most electronic
 spot markets in western economies work with similar market mechanisms.
 
 In Germany, the most important spot market is the day-ahead market with a
-trading volume of over 234TWh in 2018\textsuperscript{\ref{org833db04}}. Participants place asks and bids
+trading volume of over 234TWh in 2018\textsuperscript{\ref{org6078f4a}}. Participants place asks and bids
 for hourly contracts of the following day on the \emph{EPEX Spot Day-ahead Auction}
 market until the market closes at 12pm on the day before delivery (see Figure
 \ref{fig-electricity-markets}). The day-ahead market plays an essential role in
@@ -494,7 +494,7 @@ available battery capacity on the intraday market. Trades on the intraday market
 can complement bids that have been committed to other markets earlier (e.g., to
 the secondary operating reserve market).
 \subsection{EV Fleet Control in the Smart Grid}
-\label{sec:orgca26d89}
+\label{sec:org3e801d1}
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
@@ -667,7 +667,7 @@ accurate capacity predictions for intraday markets
 markets in the future.
 
 \subsection{Reinforcement Learning Controlled EV Charging}
-\label{sec:org4c23e09}
+\label{sec:orged07d8a}
 
 Previous research shows that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -775,7 +775,7 @@ electricity prices), RL methods are a promising way of solving complex
 challenges in smart grids.
 
 \subsection{Reinforcement Learning Theory \label{sec-reinforcement-learning}}
-\label{sec:orgc09f4f4}
+\label{sec:orgae29c97}
 The following chapter will give an overview of the most important Reinforcement
 Learning (RL) concepts and will introduce the corresponding mathematical
 formulations. If not noted otherwise, the notation, equations, and insights are
@@ -803,7 +803,7 @@ that solve the RL problem more efficiently, tackle new challenges and are widely
 used in practice and research.
 
 \subsubsection{Markov Decision Processes \label{sec-mdp}}
-\label{sec:org8e7cf60}
+\label{sec:orgbeebb91}
 Markov Decision Processes (MDPs) are a classical formulation of sequential
 decision making and an idealized mathematical formulation of the RL problem. MDPs
 allow to derive exact theoretical statements about the learning problem and
@@ -868,7 +868,7 @@ when \(\gamma\!=\! 1\), the agent takes future rewards strongly into account, th
 agent is "farsighted".
 
 \subsubsection{Policies and Value Functions \label{sec-policies}}
-\label{sec:org7f34007}
+\label{sec:org6327687}
 An essential task of almost every RL agent is estimating \emph{value functions}.
 These functions describe how "good" it is to be in a given state, or how "good"
 it is to perform an action in a given state. More formally, they take a state
@@ -910,7 +910,7 @@ has been known as \emph{Q-learning} \cite{watkins92_q_learn}, which is described
 Chapter \ref{sec-td-learning}.
 
 \subsubsection{Bellman Equations \label{sec-bellman}}
-\label{sec:org86b99e4}
+\label{sec:org2b81309}
 A central characteristic of value functions is the recursive relationship
 between the values. Similar to Equation (\ref{eq-expected-return}), current values
 are related to expected values of successive states. This relationship is
@@ -952,7 +952,7 @@ experienced state transitions instead of expected transition probabilities. The
 most common methods will be explored in the following chapters.
 
 \subsubsection{Dynamic Programming \label{sec-dp}}
-\label{sec:orgfa20b4f}
+\label{sec:org278a267}
 \emph{Dynamic Programming} (DP) is a method to compute optimal policies, the primary
 goal of every RL method. DP makes use of value functions to facilitate the
 search for good policies. Once an optimal value function, (i.e., one that
@@ -1006,7 +1006,7 @@ algorithms can be effectively used to compute optimal values and value function
 in finite MDPs with a perfect model of the environment.
 
 \subsubsection{Temporal-Difference Learning \label{sec-td-learning}}
-\label{sec:org86bc242}
+\label{sec:org8c4c887}
 The previous chapter dealt with solving a \emph{planning} problem, that is computing
 an optimal solution (i.e., an optimal policy \(\pi_*\)) of an MDP when a perfect
 model of the environment is known. In the following chapters, we will look at
@@ -1108,7 +1108,7 @@ drastically reduced. In this case, a \emph{function approximator} can replace th
 lookup table. The next chapter will briefly cover function approximation, as
 well as other advancements in RL.
 \subsubsection{Approximation Methods \label{sec-rl-fa}}
-\label{sec:orge9a95fe}
+\label{sec:orgd6f8039}
 Up to this point, only tabular RL methods have been covered, which form the
 theoretical foundation of RL in general. But in many real-world use cases, the
 state space is enormous and it is improbable to find an optimal value function
@@ -1164,7 +1164,7 @@ comprehensive review of deep learning methods.
 \end{figure}
 \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 \subsubsection{Further Topics}
-\label{sec:org52f30df}
+\label{sec:org96737bb}
 The previous chapters provided a detailed overview of the most important
 concepts and mathematical foundations in RL. In the research there are many more
 topics that were not covered here. \emph{Eligibility traces} offer a way to more
@@ -1189,7 +1189,7 @@ that aims to solve these difficulties.
 \clearpage
 
 \section{Empirical Setting}
-\label{sec:orgf685afa}
+\label{sec:orgc3fd176}
 This research is embedded in the German carsharing and electricity markets.
 Germany is a suitable testbed, since it has a comparably high share of
 renewables in its energy mix and is pushing for an energy turnaround (German:
@@ -1222,7 +1222,7 @@ next chapters the different datasets are described, as well the most important
 processing steps outlined.
 
 \subsection{Electronic Vehicle Fleet Data \label{sec-data-car2go}}
-\label{sec:org771b342}
+\label{sec:orgf9853cc}
 The Car2Go dataset consists of GPS data of around 500 Smart ED3 Fortwo vehicles
 in Stuttgart. These subcompact cars are equipped with a 17.6kWh battery and a
 standard 3.6kW on-board charger. They fully charge in about six to seven hours
@@ -1347,7 +1347,7 @@ station.
 \end{sidewaystable}
 
 \subsection{Balancing Market Data \label{sec-data-balancing}}
-\label{sec:orgc5a57a3}
+\label{sec:org239b793}
 In this research, we use market balancing data from the German secondary reserve
 market. The following chapter will give an overview of the dataset and
 preprocessing steps that were taken. The data encompasses weekly lists of
@@ -1442,7 +1442,7 @@ instead of the submitted 15MW, since in total only 18MW of control capacity was
 activated, which was partly fulfilled by the 5MW of the first bidder.
 
 \subsection{Spot Market Data \label{sec-data-intraday}}
-\label{sec:org3edc42e}
+\label{sec:org52790dc}
 The data from the EPEX Spot Intraday Continuous encompass order books and
 executed trades from 01.06.2016 until 01.01.2018. The list of trades contain
 information on the unit price \(\up{}\) (\(\emwh\)), the quantity (kW)
@@ -1474,53 +1474,17 @@ unit price \(\cup{}\) is defined as the lowest price of all executed trades.
     \cup{} \defeq \min_{t \in \cal{T}} \up{t} \text{ ,}
 \end{equation*}
 where \(\cal{T}\) is the set of all trades in a bidding interval. \emph{Example:} The
-critical unit price of the trades in Table \ref{table-spot-market} is \(\cup{}
-\!=\!51.00 \emwh\) (trades 8031392, 8031387 and 8031375). All buyers that submitted
-bids with a price higher than the critical unit price, successfully procured
-electricity. Hence, accurate forecasts of the critical price allow to optimize the
-bidding behavior. For a detailed description of the intraday continuous market
-see Chapter \ref{sec-spot-market}.
-
-
-{\captionsetup[table]{aboveskip=0.5cm}
-\begin{sidewaystable}[hp]
-\caption{List of Trades of the EPEX Spot Intraday Continuous Market \label{table-spot-market}}
-\centering
-\begin{tabular}{c|cccccccc}
-\hline
-\hline
-Execution time & ID & Unit Price & Quantity & Buyer Area & Seller Area & Product & Product Time & Delivery Date\\
-\hline
-2017-12-04 06:54:55 & 8031392 & 51.00 & 5500 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:53:26 & 8031391 & 59.00 & 10000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:53:26 & 8031390 & 58.90 & 10000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:53:15 & 8031389 & 52.30 & 7000 & 50Hertz & 50Hertz & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:53:13 & 8031386 & 59.00 & 500 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:53:13 & 8031387 & 51.00 & 3600 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:53:13 & 8031388 & 52.00 & 1400 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:53:02 & 8031385 & 58.90 & 11000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:52:38 & 8031380 & 60.00 & 10000 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:52:38 & 8031381 & 57.50 & 8000 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:52:38 & 8031382 & 58.00 & 2000 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:52:38 & 8031383 & 58.90 & 4000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:52:38 & 8031384 & 60.00 & 4000 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:52:27 & 8031379 & 52.30 & 8000 & 50Hertz & 50Hertz & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:51:33 & 8031378 & 66.00 & 5000 & TransnetBW & TransnetBW & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:51:28 & 8031377 & 54.00 & 8000 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:51:24 & 8031376 & 54.00 & 7000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:49:34 & 8031375 & 51.00 & 4000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:49:26 & 8031374 & 54.00 & 5000 & 50Hertz & 50Hertz & Quarter & 07:15 - 07:30 & 2017-12-04\\
-2017-12-04 06:49:23 & 8031373 & 55.10 & 8000 & 50Hertz & 50Hertz & Quarter & 07:15 - 07:30 & 2017-12-04\\
-\hline
-\hline
-\end{tabular}
-\end{sidewaystable}
-}
+critical unit price of the trades listed in Appendix \ref{app-a} is \(\cup{}
+\!=\!51.00 \emwh\) (trades 8031392, 8031387 and 8031375). All buyers that
+submitted bids with a price higher than the critical unit price, successfully
+procured electricity. Hence, accurate forecasts of the critical price allow to
+optimize the bidding behavior. For a detailed description of the intraday
+continuous market see Chapter \ref{sec-spot-market}.
 
 \clearpage
 
 \section{Model}
-\label{sec:orga2ead60}
+\label{sec:org110aa5f}
 The following chapter will introduce the model of this research. In its essence,
 we propose a solution for EV fleet providers to utilize a VPP portfolio to
 profitably provide balancing services to the grid on multiple markets. A control
@@ -1611,12 +1575,12 @@ Symbol & Description & Unit \\
 \end{longtable}
 
 \subsection{Assumptions \label{sec-model-assumptions}}
-\label{sec:orge450343}
+\label{sec:org6138e6a}
 
 In order to evaluate and operationalize our model, the following assumptions
 about the available information and the electricity market mechanism are taken:
 \subsubsection{Information Assumptions}
-\label{sec:org306671b}
+\label{sec:orga589f65}
 
 \begin{enumerate}
 \item Mobility demand
@@ -1647,7 +1611,7 @@ literature, for example
 \textcite{vandael15_reinf_learn_heuris_ev_fleet,mashhour11_biddin_strat_virtual_power_plant_1,tomic07_using_fleet_elect_drive_vehic_grid_suppor,pandzic13_offer_model_virtual_power_plant}.
 
 \subsubsection{Market Assumptions}
-\label{sec:orgbe894fd}
+\label{sec:orgae303d3}
 \begin{enumerate}
 \item Balancing market
 
@@ -1682,7 +1646,7 @@ prices on the markets. Similar assumptions have been made by
 \textcite{brandt17_evaluat_busin_model_vehic_grid_integ} and
 \textcite{vandael15_reinf_learn_heuris_ev_fleet}.
 \subsection{Control Mechanism \label{sec-model-mechanism}}
-\label{sec:org00dedda}
+\label{sec:org220d3f5}
 The control mechanism constitutes the core of this research. It can be seen as a
 decision support system that can be deployed at an EV fleet operator to centrally
 control the charging of its fleet. Figure \ref{fig-control-mechanism} depicts the
@@ -1711,7 +1675,7 @@ and provide detailed explanation and mathematical formulations.
 \end{figure}
 
 \subsubsection{Fleet Charging Power Prediction}
-\label{sec:orgc4c4735}
+\label{sec:orge7e87b4}
 
 In a first step, the controller has to predict the available fleet charging
 power for the market period of interest (see\circled{A} in Figure
@@ -1736,7 +1700,7 @@ the number of control periods in a market period.
 
 
 \subsubsection{Market Decision}
-\label{sec:orga1ef4eb}
+\label{sec:orgd56cba3}
 In a second step, the controller has to decide from which market it should
 procure the desired amount of energy (see\circled{B} in Figure
 \ref{fig-control-mechanism}). Therefore, it compares the costs for charging
@@ -1779,7 +1743,7 @@ charging from the intraday market at the same market period \(\Ci{h +
 electricity from the balancing market.
 
 \subsubsection{Determining the Bidding Quantity}
-\label{sec:orgd9522dc}
+\label{sec:org76a4b9e}
 In a third step, the controller has to take a decision on the amount of energy
 it should procure from the markets (see\circled{C} in Figure
 \ref{fig-control-mechanism}). Determining the bidding quantity is the core
@@ -1843,7 +1807,7 @@ bidding errors it made in the first decision phase, and optimally charge the
 whole EV fleet.
 
 \subsubsection{Dispatching Electronic Vehicle Charging}
-\label{sec:org2d60699}
+\label{sec:orgb77865b}
 In the last step, at electricity delivery time, the EVs have to be assigned to
 the VPP and be \emph{dispatched} to charge (see\circled{D} in Figure
 \ref{fig-control-mechanism}). Therefore the controller needs to detect how many
@@ -1878,7 +1842,7 @@ imbalance costs \(\beta_{h}\). Otherwise all the committed energy can be charged
 by the VPP.
 
 \subsubsection{Evaluating the Bidding Risk}
-\label{sec:org6110d57}
+\label{sec:orgfd56cda}
 The controllers main goal is to choose the risk factors \(\lb{h}\), \(\li{h}\)
 for every market period \(h\), that minimize the cost of charging, while avoiding
 the risks of lost rental profits \(\oc\) or imbalance costs \(\beta_h\). The total
@@ -1914,7 +1878,7 @@ and electricity markets, we chose to solve the problem with a RL approach that
 is explained in detail in Chapter \ref{sec-model-rl}.
 
 \subsubsection{Example}
-\label{sec:org7a6015f}
+\label{sec:org91363e3}
 At 3pm on the 9\textsuperscript{th} of August 2017, the controller enters the first bidding
 phase for the market period \(h\) = \emph{16.08.2017 15:00-15:15}. It predicts that at
 that point in time 250 EVs are connected to a charging station, resulting in
@@ -1961,7 +1925,7 @@ controller has to account for the opportunity costs of the lost rental \(\oc\).
 
 
 \subsection{Reinforcement Learning Approach \label{sec-model-rl}}
-\label{sec:org8816eb0}
+\label{sec:org5bae574}
 In the following chapter the developed RL approach is outlined. First, we define
 the charging problem as a MDP, and second, the learning algorithm is explained.
 Remember that the goal of the controlled charging problem is to choose a set of
@@ -1976,7 +1940,7 @@ literature). The optimal set of risk factors is learned by the RL agent through
 estimating a policy \(\pi(a|s)\) that maps every state \(s\in\S\) to an action
 \(a\in\A\).
 \subsubsection{Markov Decision Process Definition}
-\label{sec:org667b95e}
+\label{sec:org8a9217b}
 
 MDPs are defined by the state space \(\S\), the action space \(\A\), a set of reward
 signals \(\R\) and the state-transition probabilities \(p(s'|a,s)\). When
@@ -2068,7 +2032,7 @@ determines the reward up to 672 time steps later (7 days, with 15-minute time
 steps), when the electricity from the balancing market has to be charged.
 
 \subsubsection{Learning Algorithm}
-\label{sec:org8542211}
+\label{sec:org88caf3c}
 This research proposes to solve the presented RL problem,  with the Double Deep
 Q-Network algorithm (DDQN), developed by
 \textcite{hasselt16_deep_reinf_learn_doubl_q_learn}. DDQN is a state-of-the-art,
@@ -2134,7 +2098,7 @@ training.
 \clearpage
 
 \section{Results}
-\label{sec:orga35d0aa}
+\label{sec:orgd024782}
 The following chapter will cover the main results of this research. First, the
 simulation environment is presented. Second, we examine the economic
 sustainability of an integrated bidding strategy. Third, the RL approach that
@@ -2143,7 +2107,7 @@ perform sensitivity analyses on the limiting algorithmic factor, the prediction
 accuracy, and a limiting physical factor, the charging infrastructure.
 
 \subsection{Simulation Environment}
-\label{sec:org2d03fe9}
+\label{sec:org03ed7e8}
 As part of this research, we developed an event-based simulation platform called
 \emph{FleetSim}. The platform allows researchers to develop and test out different
 smart charging and bidding strategies in realistic environment based on
@@ -2161,7 +2125,7 @@ FleetSim facilitates easy sensitivity analyses, adaption to future market
 designs, and integration of novel data sets through its modular architecture and
 expandable design (see Figure \ref{fig-fleetsim}). We consider FleetSim as a
 research platform for sustainable and smart mobility similar to PowerTac
-\cite{ketter16_multiagent_comp_gaming}. It builds on SimPy\footnote{\url\{\url{https://pypi.org/project/simpy/}}, a process-based
+\cite{ketter16_multiagent_comp_gaming}. It builds on SimPy\footnote{\url{https://pypi.org/project/simpy/}}, a process-based
 discrete-event simulation framework. FleetSim is available open source\footnote{\url{https://github.com/indyfree/fleetsim}} and
 can be readily installed as a Python package.
 
@@ -2180,7 +2144,7 @@ estimate of modern forecast algorithms performance. The impact of the
 predictions uncertainty on the results will later be determined in a sensitivity
 analysis.
 
-\begin{longtable}{l|cc}
+\begin{longtable}{lr}
 \caption[Simulation Parameters]{Simulation Parameters \label{table-sim-params}}
 \\
 \hline
@@ -2204,20 +2168,20 @@ EV charging power   (\(\gamma\)) & 3.6 \(\kw\)\\
 EV range & 145 km\\
 Industry electricity price  (\(p^{ind}\)) & 0.15\footnotemark \(\ekwh\)\\
 EV rental tariff & 0.24\footnotemark \(\frac{\eur}{\text{min}}\)\\
-EV long distance fee (\(>\text{200 km}\)) & 0.29\textsuperscript{\ref{orgdfeed26}} \(\frac{\eur}{\text{km}}\)\\
+EV long distance fee (\(>\text{200 km}\)) & 0.29\textsuperscript{\ref{orgb3c1713}} \(\frac{\eur}{\text{km}}\)\\
 \hline
 Prediction accuracy \(\fPhat{}\) week ahead & 70\%\\
 Prediction accuracy \(\fPhat{}\) 30 min ahead & 90\%\\
 \hline
 \hline
 \end{longtable}
-\footnotetext[13]{\label{org618d35c}Average prices of electricity for the industry with an annual consumption
-of 500 MWh - 2000 MWh in Germany 2017 \cite{bmwi.19_prices_german}.}\footnotetext[14]{\label{orgdfeed26}Rental fees according to the Car2Go pricing scheme. See
+\footnotetext[13]{\label{orgd607433}Average prices of electricity for the industry with an annual consumption
+of 500 MWh - 2000 MWh in Germany 2017 \cite{bmwi.19_prices_german}.}\footnotetext[14]{\label{orgb3c1713}Rental fees according to the Car2Go pricing scheme. See
 \url{https://www.car2go.com/media/data/germany/legal-documents/de-de-pricing-information.pdf},
 accessed 15\textsuperscript{th} March 2019.}
 
 \subsection{Integrated Bidding Strategy}
-\label{sec:orga65ef2d}
+\label{sec:org94e33cd}
 Research Question 1 examines whether a fleet operator can use a VPP portfolio of
 EVs to profitably bid on multiple electricity markets. In Chapter
 \ref{sec-model-mechanism}, we proposed a central control mechanism that charges
@@ -2242,7 +2206,7 @@ comparably stable throughout the day.
 \caption[Fleet Utilzation]{Daily fleet utilization (average, standard deviation) from June 1, 2016 to January 1, 2018. The blue error band is illustrating the large volatility in the amount of EVs that get parked at a charging station. The share of EVs that can be used as VPP is on average only 3.55\% of the fleet's size. Most of the EVs are either not connected to a charging station or are already fully charged. \label{fig-fleet-utilization}}
 \end{figure}
 
-\begin{longtable}{l|c}
+\begin{longtable}{lr}
 \caption[Fleet Statistics]{Fleet Statistics. \label{table-sim-stats}}
 \\
 \hline
@@ -2349,19 +2313,19 @@ Gross profit increase (1000 \eur) & 43.62 & 45.08 & \textbf{67.04} & \textbf{72.
 }
 
 \subsection{Reinforcement Learning Portfolio Optimization}
-\label{sec:org74ec928}
+\label{sec:orgf22cad6}
 Research Question 2 investigates whether a RL agent can optimize the integrated
 bidding strategy by dynamically adjusting the bidding quantities. The bidding
 quantities \(\Pb{}, \Pi{}\) are based on the evaluated risk associated with
 bidding on the individual electricity markets. In Chapter \ref{sec-model-rl}, we
 introduced a RL approach that learns the risk factors \(\lb{}\), \(\li{}\) based on
-its observed environment and received reward signals. Table
-\ref{table-results-param} presents the hyperparameters and their values the
-duelling network DDQN algorithm used for solving the controlled charging problem
-under uncertainty. The values were determined manually through experimentation
-to achieve the best results. The speed of convergence was also used as a
-criterion since the Google Colaboratory environment, which was used for
-conducting the experiments, only allows up to 12 hours of computing time.
+its observed environment and received reward signals. The Appendix \ref{app-b}
+presents the hyperparameters and their values the duelling network DDQN
+algorithm used for solving the controlled charging problem under uncertainty.
+The values were determined manually through experimentation to achieve the best
+results. The speed of convergence was also used as a criterion since the Google
+Colaboratory environment, which was used for conducting the experiments, only
+allows up to 12 hours of computing time.
 
 Further, the imbalance costs \(\beta\) were set to an artificially high value of
 10000 \(\emwh\) to let the agent learn to always avoid imbalances. Whenever the
@@ -2369,8 +2333,9 @@ agents takes an action that causes imbalances, it will receive a highly negative
 reward signal, leading to low estimated values of that chosen action in a
 specific state.
 
+
 \subsubsection{Results:}
-\label{sec:orgcc00f43}
+\label{sec:org4d7b4b6}
 \begin{enumerate}
 \item Profits
 \begin{itemize}
@@ -2404,14 +2369,14 @@ would need to be reduced by X\% further.
 \end{enumerate}
 
 \subsubsection{Problems:}
-\label{sec:org1fe056e}
+\label{sec:orga62189d}
 \begin{itemize}
 \item long-delayed rewards make RL hard (!?)
 \item positive reward from buying immediately vs negative rewards up to 7 days.
 \end{itemize}
 
 \subsubsection{Summary:}
-\label{sec:org54c40fa}
+\label{sec:org7d80451}
 \begin{itemize}
 \item In summary, all four experiments show that our approach is
 able to learn a cost-effective day-ahead schedule under varying
@@ -2420,15 +2385,15 @@ the EVs.
 \end{itemize}
 
 \subsection{Sensitivity Analysis}
-\label{sec:orgd83190b}
+\label{sec:orgc214a44}
 \subsubsection{Prediction Accuracy}
-\label{sec:orgc12aab1}
+\label{sec:orgbb6dc09}
 \begin{itemize}
 \item Compare profits of (50\%, 60\%, 70\%, 80\%, 90\%, 100\%)
 \end{itemize}
 
 \subsubsection{Charging infrastructure}
-\label{sec:org4c17338}
+\label{sec:orgd9a9525}
 \begin{itemize}
 \item Fastchargers (22kw)
 \item Car batteries
@@ -2436,33 +2401,95 @@ the EVs.
 \end{itemize}
 
 \subsubsection{Bidding Mechanism}
-\label{sec:orgba4cadb}
+\label{sec:orgdb02ef9}
 \begin{itemize}
 \item Minimal bidding quantities (100kw, 500kw, 1MW)
 \end{itemize}
 
 \section{Conclusion}
-\label{sec:org0851117}
+\label{sec:org5b12b47}
 \subsection{Contribution}
-\label{sec:orgaf26a55}
+\label{sec:org7f169aa}
+
+\begin{enumerate}
+\item Problem setting
 \begin{itemize}
-\item Compare to most similar studies:
-\end{itemize}
-\cite{kahlen18_elect_vehic_virtual_power_plant_dilem,vandael15_reinf_learn_heuris_ev_fleet} etc..
-\begin{itemize}
-\item Business model for EV fleet owners with better results than previous studies
-\item Environmental impact by providing balancing power
-\item Decision Support System for controlled EV charging from multiple markets
-\item RL Algorithm that is designed to work in previously unknown environments and
-thus suited to deploy in real life settings of all kinds of EV fleets in all
-kinds of cities. E.g. scooters also?
-\item Online learning algorithm (difference? -- real data?)
-\item Event-based Simulation Platform to evaluate bidding strategies and RL agents,
-facilitate research
+\item Balancing power is needed to integrate renewable into the grid
+\item Balancing power can be supplied a) via the balancing market by the TSOs and
+b) via the open intraday market (citation, why that is balancing too)
+\item EV fleets can provide (negative) balancing power with the batteries of
+their vehicles
+\item Problem) For a sustainable business model EV fleet operators need to
+balance providing their main offering customer mobility versus
+\item Problem: a) Customer mobility vs VPP b) over-commitments to the markets
 \end{itemize}
 
+\item What we have done
+\begin{itemize}
+\item Decision Support System for controlled EV charging from multiple markets,
+
+\item Evaluated based on real world carsharing fleet data from Car2go in the
+period from June 2017 to January 2018 . (Car2Go \textbf{very}
+uncertain rental demand!)
+\item Business model for EV fleet owners with better results than previous studies
+\item Environmental impact by providing balancing power
+\item Developed event-based simulation platform to evaluate bidding strategies and RL agents,
+facilitate research based on real world data(!)
+\item Developed Control mechanism (DSS) that "Under uncertainty"
+\item Developed a RL Agent that
+\begin{itemize}
+\item designed to work in previously unknown
+environments and thus
+\item suited to deploy in real life settings of all kinds
+of EV fleets in all kinds of cities. E.g. scooters also (not tested, but expected)
+\end{itemize}
+\end{itemize}
+
+\item What we have shown (include key numbers)
+\begin{itemize}
+\item 1. RQ
+\begin{itemize}
+\item Integrated improves existing approaches
+\item Mitigate risk \& improve profits through exploitation of different market setups
+\end{itemize}
+\item 2. RQ
+\begin{itemize}
+\item RL Algorithm that
+\item Online learning algorithm (difference? -- real data?)
+\item RL can learn to dynamically adjust bidding quantities by learning risk
+associated with bidding on each market. (What are the risks?)
+\item RL Architecture matters
+\item Charging infrastructure \& Advancement in battery technology/charging
+technology matters
+\end{itemize}
+\end{itemize}
+
+\item Compare to other studies
+\begin{itemize}
+\item Fleet Charging
+\begin{itemize}
+\item No uncertainty
+\item Only one market
+\item No sensitivity on accuracy prediction (We found very important)
+\end{itemize}
+\item RL
+\item Other approaches (VPP, stochastic)
+\cite{kahlen18_elect_vehic_virtual_power_plant_dilem}
+\cite{vandael15_reinf_learn_heuris_ev_fleet}
+\end{itemize}
+
+\item Discuss results?
+\begin{itemize}
+\item Policy
+\item Investment
+\item V2G?
+\item Market Setup
+\end{itemize}
+\end{enumerate}
+
+
 \subsection{Limitations}
-\label{sec:org8b95201}
+\label{sec:org5e9be75}
 \begin{itemize}
 \item Model:
 \begin{itemize}
@@ -2470,16 +2497,114 @@ facilitate research
 \item Policy \& Regulation: EVs not allowed to provide balancing power, minimum
 bidding quantities 1MW.
 \item Markets: Fleet is a price-taker, what about larger fleets? Simulate market influence
+\item Deny rentals only in the same market period (More deny, less imbalance)
 \end{itemize}
 \item RL: See \cite{vazquez-canteli19_reinf_learn_deman_respon} conclusion for
 limitations.
 \end{itemize}
 \subsection{Future Research}
-\label{sec:orgd952bee}
+\label{sec:org93bec99}
+
 \begin{itemize}
-\item Model: Current market design, i.e. daily w/ 4h slots. German "Mischpreisverfahren"
-\item RL: Long-delayed rewards, different reward structure, memory based
+\item Model:
+\begin{itemize}
+\item Investigate modern/current market design, that changed their bidding
+mechanisms to to better integrate renewable energy generators.
+\begin{itemize}
+\item Daily/Day-ahead tenders with 4 hour market periods.
 \end{itemize}
+
+Mischpreisverfahren
+
+i.e. daily w/ 4h slots. German "Mischpreisverfahren"
+\end{itemize}
+\item RL: Long-delayed rewards, different reward structure, memory based
+\item Prediction Algorithms improvement, reference to sensitivity analysis
+\end{itemize}
+
+\clearpage
+\appendix
+\section{Appendix \label{app-a}}
+\label{sec:orgb16ea29}
+\renewcommand\thetable{\thesection.\arabic{table}}
+\setcounter{table}{0}
+
+{\captionsetup[table]{aboveskip=0.5cm}
+\begin{sidewaystable}[hp]
+\caption{List of Trades of the EPEX Spot Intraday Continuous Market \label{table-spot-market}}
+\centering
+\begin{tabular}{c|cccccccc}
+\hline
+\hline
+Execution time & ID & Unit Price & Quantity & Buyer Area & Seller Area & Product & Product Time & Delivery Date\\
+\hline
+2017-12-04 06:54:55 & 8031392 & 51.00 & 5500 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:53:26 & 8031391 & 59.00 & 10000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:53:26 & 8031390 & 58.90 & 10000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:53:15 & 8031389 & 52.30 & 7000 & 50Hertz & 50Hertz & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:53:13 & 8031386 & 59.00 & 500 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:53:13 & 8031387 & 51.00 & 3600 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:53:13 & 8031388 & 52.00 & 1400 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:53:02 & 8031385 & 58.90 & 11000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:52:38 & 8031380 & 60.00 & 10000 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:52:38 & 8031381 & 57.50 & 8000 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:52:38 & 8031382 & 58.00 & 2000 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:52:38 & 8031383 & 58.90 & 4000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:52:38 & 8031384 & 60.00 & 4000 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:52:27 & 8031379 & 52.30 & 8000 & 50Hertz & 50Hertz & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:51:33 & 8031378 & 66.00 & 5000 & TransnetBW & TransnetBW & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:51:28 & 8031377 & 54.00 & 8000 & Amprion & Amprion & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:51:24 & 8031376 & 54.00 & 7000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:49:34 & 8031375 & 51.00 & 4000 & TenneT & TenneT & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:49:26 & 8031374 & 54.00 & 5000 & 50Hertz & 50Hertz & Quarter & 07:15 - 07:30 & 2017-12-04\\
+2017-12-04 06:49:23 & 8031373 & 55.10 & 8000 & 50Hertz & 50Hertz & Quarter & 07:15 - 07:30 & 2017-12-04\\
+\hline
+\hline
+\end{tabular}
+\end{sidewaystable}
+}
+\clearpage
+
+\section{Appendix \label{app-b}}
+\label{sec:org0b46f8c}
+\setcounter{table}{0}
+
+\begin{longtable}{lr}
+\caption[Hyperparameters for the dueling network DDQN algorithm]{Hyperparameters for the dueling network DDQN algorithm. \label{table-results-params}}
+\\
+\hline
+\hline
+Hyperparameter & Value\\
+\hline
+\endfirsthead
+\multicolumn{2}{l}{Continued from previous page} \\
+\hline
+
+Hyperparameter & Value \\
+
+\hline
+\endhead
+\hline\multicolumn{2}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+Target network update interval & 10 000\\
+Optimizer & Adam \cite{kingma14_adam}\\
+Batch size & 32\\
+Learning rate & 10\textsuperscript{-4}\\
+Replay buffer size & 40\textsuperscript{6}\\
+Warm-up steps & 50 000\\
+Training steps & 10\textsuperscript{6}\\
+Discount factor \(\gamma\) & 0.99\\
+Reward normalization & r \(\in\) [-1, 1]\\
+Gradient clipping & Gradient in [-1, 1] for output layer\\
+Network architecture & [TODO]\\
+\hline
+\(\epsilon\)-greedy annealing & Linear over 10\textsuperscript{6} steps\\
+\(\epsilon\)-greedy minimum value & 0.1\\
+\hline
+\hline
+\end{longtable}
 
 \clearpage
 \bibliography{bibliography/references}
