@@ -54,13 +54,13 @@ by Car2Go. The dataset contains spatio-temporal attributes, such as timestamp,
 coordinates, and the address of the EVs in 5 minute intervals. Additionally,
 status attributes of the interior and exterior are given (not displayed).
 Especially relevant for our research is the state of charge ($SoC$, in %) and
-information whether the EV is plugged into one of the 380 charging stations in
-Stuttgart. Note that the data only contain EVs that are /available for rent/,
-i.e., they are not currently rented out by a customer. EVs which are parked at a
-charging station are also not available until they have charged up approximately
-70 SoC. Individual trips have to be reconstructed using the GPS data of the
-cars. The following preprocessing steps have been taken to prepare the data for
-further analysis. Table ref:table-car2go-processed depicts the dataset after all
+information whether the EV is plugged into a charging station. Note that the
+data only contain EVs that are /available for rent/, i.e., they are not
+currently rented out by a customer. EVs which are parked at a charging station
+are also not available until they have charged up approximately 70 SoC.
+Individual trips have to be reconstructed using the GPS data of the cars. The
+following preprocessing steps have been taken to prepare the data for further
+analysis. Table ref:table-car2go-processed depicts the dataset after all
 processing steps.
 
 # TODO: Include prices --> lost rental profits $\oc$.
@@ -90,15 +90,7 @@ processing steps.
    which begin and end at the exact same location. In total 1.246.040 trips were
    determined.
    # NOTE: Not using it for analysis yet
-4) Infer charging stations
-
-   The GPS location of the EVs is matched with the GPS locations, where an EV
-   has been charged at least once in the dataset. We observed that the raw data
-   do not show EVs that are parked at charging stations, but are not plugged in.
-   This research assumes that all EVs, which are parked at charging stations are
-   also plugged in. That is a valid assumption, since in Germany cars are only
-   allowed to park at charging station if they are connected to it.
-5) Clean data
+4) Clean data
    - /Service trips/: 3308 rental trips were removed that had a trip duration
      longer than the maximum allowed rental time of two days. We assume that
      these trips were /service trips/ undertaken by Car2Go. When the EVs
