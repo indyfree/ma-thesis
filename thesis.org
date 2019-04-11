@@ -54,7 +54,7 @@ predictions uncertainty on the results will later be determined in a sensitivity
 analysis.
 
 #+CAPTION[Simulation Parameters]: Simulation Parameters label:table-sim-params
-#+ATTR_LATEX: :environment longtable :align l|cc :placement [hp]
+#+ATTR_LATEX: :environment longtable :align lr :placement [hp]
 |---------------------------------------------+--------------------------------------|
 |---------------------------------------------+--------------------------------------|
 | Parameter                                   | Value                                |
@@ -102,7 +102,7 @@ return(round((13.84 / 389.64),4) * 100)
 #+RESULTS:
 : 3.55
 #+CAPTION[Fleet Statistics]: Fleet Statistics. label:table-sim-stats
-#+ATTR_LATEX: :environment longtable :align l|c :placement [hp]
+#+ATTR_LATEX: :environment longtable :align lr :placement [hp]
 |---------------------------------+----------------------------|
 |---------------------------------+----------------------------|
 | Statistic                       | Value                      |
@@ -214,13 +214,13 @@ bidding strategy by dynamically adjusting the bidding quantities. The bidding
 quantities $\Pb{}, \Pi{}$ are based on the evaluated risk associated with
 bidding on the individual electricity markets. In Chapter ref:sec-model-rl, we
 introduced a RL approach that learns the risk factors $\lb{}$, $\li{}$ based on
-its observed environment and received reward signals. Table
-ref:table-results-param presents the hyperparameters and their values the
-duelling network DDQN algorithm used for solving the controlled charging problem
-under uncertainty. The values were determined manually through experimentation
-to achieve the best results. The speed of convergence was also used as a
-criterion since the Google Colaboratory environment, which was used for
-conducting the experiments, only allows up to 12 hours of computing time.
+its observed environment and received reward signals. The Appendix ref:app-b
+presents the hyperparameters and their values the duelling network DDQN
+algorithm used for solving the controlled charging problem under uncertainty.
+The values were determined manually through experimentation to achieve the best
+results. The speed of convergence was also used as a criterion since the Google
+Colaboratory environment, which was used for conducting the experiments, only
+allows up to 12 hours of computing time.
 
 Further, the imbalance costs $\beta$ were set to an artificially high value of
 10000 $\emwh$ to let the agent learn to always avoid imbalances. Whenever the
@@ -308,24 +308,98 @@ cite:kahlen18_elect_vehic_virtual_power_plant_dilem,vandael15_reinf_learn_heuris
 # may or may not accept these offers depending on the composition of the offer
 # prices from the fleet owner and other market participants. The market auction
 # mechanism ultimately decides when EVs will charge and discharge.
+
 - Model:
   - Bidding Mechanism: one week ahead, always accepted
   - Policy & Regulation: EVs not allowed to provide balancing power, minimum
     bidding quantities 1MW.
   - Markets: Fleet is a price-taker, what about larger fleets? Simulate market influence
+  - Deny rentals only in the same market period (More deny, less imbalance)
 - RL: See cite:vazquez-canteli19_reinf_learn_deman_respon conclusion for
   limitations.
 ** Future Research
-- Model: Current market design, i.e. daily w/ 4h slots. German "Mischpreisverfahren"
+
+- Model:
+    - Investigate modern/current market design, that changed their bidding
+      mechanisms to to better integrate renewable energy generators.
+      - Daily/Day-ahead tenders with 4 hour market periods.
+
+      Mischpreisverfahren
+
+       i.e. daily w/ 4h slots. German "Mischpreisverfahren"
 - RL: Long-delayed rewards, different reward structure, memory based
+- Prediction Algorithms improvement, reference to sensitivity analysis
+
+#+LATEX: \clearpage
+#+LATEX: \appendix
+* Appendix label:app-a
+#+LATEX: \renewcommand\thetable{\thesection.\arabic{table}}
+#+LATEX: \setcounter{table}{0}
+
+#+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
+#+CAPTION: List of Trades of the EPEX Spot Intraday Continuous Market label:table-spot-market
+#+ATTR_LATEX: :float sideways :align c|cccccccc :placement [hp]
+|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
+|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
+| Execution time      |      ID | Unit Price | Quantity | Buyer Area | Seller Area | Product | Product Time  | Delivery Date |
+|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
+| 2017-12-04 06:54:55 | 8031392 |      51.00 |     5500 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:26 | 8031391 |      59.00 |    10000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:26 | 8031390 |      58.90 |    10000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:15 | 8031389 |      52.30 |     7000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:13 | 8031386 |      59.00 |      500 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:13 | 8031387 |      51.00 |     3600 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:13 | 8031388 |      52.00 |     1400 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:53:02 | 8031385 |      58.90 |    11000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:38 | 8031380 |      60.00 |    10000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:38 | 8031381 |      57.50 |     8000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:38 | 8031382 |      58.00 |     2000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:38 | 8031383 |      58.90 |     4000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:38 | 8031384 |      60.00 |     4000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:52:27 | 8031379 |      52.30 |     8000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:51:33 | 8031378 |      66.00 |     5000 | TransnetBW | TransnetBW  | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:51:28 | 8031377 |      54.00 |     8000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:51:24 | 8031376 |      54.00 |     7000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:49:34 | 8031375 |      51.00 |     4000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:49:26 | 8031374 |      54.00 |     5000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+| 2017-12-04 06:49:23 | 8031373 |      55.10 |     8000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
+|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
+|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
+#+LATEX:}
+#+LATEX: \clearpage
+
+* Appendix label:app-b
+#+LATEX: \setcounter{table}{0}
+
+#+CAPTION[Hyperparameters for the dueling network DDQN algorithm]: Hyperparameters for the dueling network DDQN algorithm. label:table-results-params
+#+ATTR_LATEX: :environment longtable :align lr :placement [hp]
+|--------------------------------+--------------------------------------|
+|--------------------------------+--------------------------------------|
+| Hyperparameter                 | Value                                |
+|--------------------------------+--------------------------------------|
+| Target network update interval | 10 000                               |
+| Optimizer                      | Adam cite:kingma14_adam              |
+| Batch size                     | 32                                   |
+| Learning rate                  | 10^{-4}                              |
+| Replay buffer size             | 40^6                                 |
+| Warm-up steps                  | 50 000                               |
+| Training steps                 | 10^6                                 |
+| Discount factor $\gamma$       | 0.99                                 |
+| Reward normalization           | r $\in$ [-1, 1]                      |
+| Gradient clipping              | Gradient in [-1, 1] for output layer |
+| Network architecture           | [TODO]                               |
+|--------------------------------+--------------------------------------|
+| \epsilon-greedy annealing      | Linear over 10^6 steps               |
+| \epsilon-greedy minimum value  | 0.1                                  |
+|--------------------------------+--------------------------------------|
+|--------------------------------+--------------------------------------|
 
 #+LATEX: \clearpage
 bibliography:~/uni/ma-thesis/bibliography/references.bib
 bibliographystyle:apacite
-
 * Footnotes
 
-[fn:1] \url{https://pypi.org/project/simpy/
+[fn:1] https://pypi.org/project/simpy/
 
 [fn:2] https://github.com/indyfree/fleetsim
 

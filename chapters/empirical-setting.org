@@ -244,46 +244,15 @@ unit price $\cup{}$ is defined as the lowest price of all executed trades.
     \cup{} \defeq \min_{t \in \cal{T}} \up{t} \text{ ,}
 \end{equation*}
 where $\cal{T}$ is the set of all trades in a bidding interval. /Example:/ The
-critical unit price of the trades in Table ref:table-spot-market is $\cup{}
-\!=\!51.00 \emwh$ (trades 8031392, 8031387 and 8031375). All buyers that submitted
-bids with a price higher than the critical unit price, successfully procured
-electricity. Hence, accurate forecasts of the critical price allow to optimize the
-bidding behavior. For a detailed description of the intraday continuous market
-see Chapter ref:sec-spot-market.
+critical unit price of the trades listed in Appendix ref:app-a is $\cup{}
+\!=\!51.00 \emwh$ (trades 8031392, 8031387 and 8031375). All buyers that
+submitted bids with a price higher than the critical unit price, successfully
+procured electricity. Hence, accurate forecasts of the critical price allow to
+optimize the bidding behavior. For a detailed description of the intraday
+continuous market see Chapter ref:sec-spot-market.
 
 # TODO: Example?
 # TODO: 1-2 sentences
-
-#+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
-#+CAPTION: List of Trades of the EPEX Spot Intraday Continuous Market label:table-spot-market
-#+ATTR_LATEX: :float sideways :align c|cccccccc :placement [hp]
-|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
-|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
-| Execution time      |      ID | Unit Price | Quantity | Buyer Area | Seller Area | Product | Product Time  | Delivery Date |
-|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
-| 2017-12-04 06:54:55 | 8031392 |      51.00 |     5500 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:26 | 8031391 |      59.00 |    10000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:26 | 8031390 |      58.90 |    10000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:15 | 8031389 |      52.30 |     7000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:13 | 8031386 |      59.00 |      500 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:13 | 8031387 |      51.00 |     3600 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:13 | 8031388 |      52.00 |     1400 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:02 | 8031385 |      58.90 |    11000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:38 | 8031380 |      60.00 |    10000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:38 | 8031381 |      57.50 |     8000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:38 | 8031382 |      58.00 |     2000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:38 | 8031383 |      58.90 |     4000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:38 | 8031384 |      60.00 |     4000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:27 | 8031379 |      52.30 |     8000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:51:33 | 8031378 |      66.00 |     5000 | TransnetBW | TransnetBW  | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:51:28 | 8031377 |      54.00 |     8000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:51:24 | 8031376 |      54.00 |     7000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:49:34 | 8031375 |      51.00 |     4000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:49:26 | 8031374 |      54.00 |     5000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:49:23 | 8031373 |      55.10 |     8000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
-|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
-#+LATEX:}
 
 #+LATEX: \clearpage
 
