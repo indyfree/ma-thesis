@@ -29,6 +29,7 @@ structure of 2.1 and 2.2.
 Should you maybe provide more definition? In my guidelines, the literature
 review is also the Teil in which I should have defined all the terms/concepts
 that I used later on.
+** TODO Include NN architecture
 ** TODO Format
 *** Units with space
 *** Consitent Date formatting
