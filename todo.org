@@ -33,3 +33,4 @@ that I used later on.
 ** TODO Format
 *** Units with space
 *** Consitent Date formatting
+** TODO Rental profits --> rental revenue / trip price?
