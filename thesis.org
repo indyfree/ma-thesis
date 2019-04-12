@@ -114,60 +114,61 @@ return(round((13.84 / 389.64),4) * 100)
 |---------------------------------+----------------------------|
 |---------------------------------+----------------------------|
 
-In order to evaluate the developed model, we defined several "naive" bidding
-strategy to benchmark the performance of the novel strategy. The strategies are
-naive in that sense that they are assuming a fixed risk associated with bidding
-at a specific electricity market. As opposed to the developed RL agent (next
-chapter), they do not take information of their environment into account and
-adjust the bidding quantities dynamically. Instead, the controller discounts the
-predicted amount of with a fixed risk factor $\lambda$ (c.f.,
-\eqref{eq-model-pb} and \eqref{eq-model-pi}). Naturally, the controller
-estimates a higher risk for bidding on the balancing market week ahead than on
-the intraday market 30 minutes ahead. We defined following types of strategies:
+We defined several "naive" bidding strategies to evaluate and benchmark the
+performance of our developed model. The strategies are naive in that sense that
+they are assuming a fixed risk associated with bidding at a specific electricity
+market. As opposed to the developed RL agent, they do not take information of
+their environment into account and adjust the bidding quantities dynamically.
+Instead, the controller discounts the predicted amount of available charging
+power with a fixed risk factor $\lambda$ (see \eqref{eq-model-pb} and
+\eqref{eq-model-pi}). Naturally, the controller estimates a higher risk for
+bidding on the balancing market week ahead than on the intraday market 30
+minutes ahead. We defined following types of strategies:
 1) Risk-averse ($\lb{}\!=\!0.5$, $\li{}\!=\!0.3$)
 
    The controller avoids denying rentals and causing imbalances at all costs. In
    order to not commit more charging power that it can provide, it places only
-   bids for conservative amounts of electricity on the markets. The risk averse
+   bids for conservative amounts of electricity on the markets. The risk-averse
    strategies /Balancing/ and /Intraday/ are comparable to similar strategies
    developed by
    textcite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem.
 
 2) Risk-seeking ($\lb{}\!=\!0.2$, $\li{}\!=\!0.0$)
 
-   The controller aims to maximize it's profits by trading as much electricity
-   on the markets as possible. It strives to fully utilize the VPP and allocate
-   a high percentage of available EVS to charge from the markets. Due to the
+   The controller aims to maximize its profits by trading as much electricity on
+   the markets as possible. It strives to fully utilize the VPP and allocate a
+   high percentage of available EVS to charge from the markets. Due to the
    rental uncertainty and a low estimated risk, the controller is prone to
    offering more charging power to the markets that it can provide. This may
    lead to lost rental costs or even imbalances.
 
 3) Full information
 
-   The optimal strategy to solve the problem. The controller knows the bidding
-   risks in advance and places the perfect bids on the markets, while still
-   accounting for the prediction uncertainty. On other words, it charges the
-   maximal amount of electricity from the markets without having to deny rentals
-   or causing imbalances.
+   The optimal strategy to solve the controlled charging problem. The controller
+   knows the bidding risks in advance and places the perfect bids on the
+   markets. In other words, it charges the maximal amount of electricity from
+   the markets without having to deny rentals or causing imbalances due to
+   prediction uncertainties.
 
 # NOTE: Mention numbers?
 In Table ref:table-profits, the simulation results of all tested strategies are
-listed. The developed integrated strategies outperform their single market
-counterparts. As expected, the controller better utilizes the VPP by buying more
-electricity from the markets. It is able to capitalize on the most favorable
-market conditions and generate on average 49%-54% more profits than the single
+listed. As expected, the developed integrated bidding strategies outperform
+their single market counterparts. The controller is able to capitalize on the
+most favorable market conditions and better utilizes the VPP by buying more
+electricity from the markets than charging the EVs regularly. The integrated
+strategies are resulting in 49%-54% more profits for the fleet than the single
 market strategies.
 
 A controller bidding according to the /Integrated (risk-averse)/ strategy, pays
-on average $0.10 \ekwh$ less than other risk averse strategies. A controller
+on average $0.10 \ekwh$ less than other risk-averse strategies. A controller
 with an /Integrated (risk-seeking)/ strategy, is even more profitable, despite
 having to account for lost rental profits. On the other side, the controller
 caused imbalances (highlighted red) which lead to high (unknown) market
-penalties or even exclusion from bidding activities. Therefore, imbalances need
-to be avoided, regardless of potential profits. We expect that the proposed RL
-agent learns a bidding strategy, which avoids imbalances while increasing
-profits, with an upper bound of the optimal strategy /Integrated (full
-information)/.
+penalties or even exclusion from bidding activities. For this reason, imbalances
+need to be avoided, regardless of potential profits from a higher VPP
+utilization. We expect that the proposed RL agent learns a bidding strategy,
+which avoids imbalances while increasing profits at the same time. The upper
+bound of the optimal strategy /Integrated (full information)/.
 
 # TODO: Explain VPP Utilization?
 # TODO: Risk-seeking should be lower, here: profits from buying energy, which
@@ -214,13 +215,12 @@ bidding strategy by dynamically adjusting the bidding quantities. The bidding
 quantities $\Pb{}, \Pi{}$ are based on the evaluated risk associated with
 bidding on the individual electricity markets. In Chapter ref:sec-model-rl, we
 introduced a RL approach that learns the risk factors $\lb{}$, $\li{}$ based on
-its observed environment and received reward signals. The Appendix ref:app-b
-presents the hyperparameters and their values the duelling network DDQN
-algorithm used for solving the controlled charging problem under uncertainty.
-The values were determined manually through experimentation to achieve the best
-results. The speed of convergence was also used as a criterion since the Google
-Colaboratory environment, which was used for conducting the experiments, only
-allows up to 12 hours of computing time.
+its observed environment and received reward signals. In Appendix ref:app-b, the
+hyperparameters are presented which we used to train the dueling DDQN algorithm
+and solving the controlled charging problem under uncertainty. The values were
+determined manually through experimentation for the best results. The speed of
+convergence was also used as a criterion, since the training environment, Google
+Colaboratory, only allows up to 12 hours of computing time.
 
 Further, the imbalance costs $\beta$ were set to an artificially high value of
 10000 $\emwh$ to let the agent learn to always avoid imbalances. Whenever the
@@ -228,6 +228,9 @@ agents takes an action that causes imbalances, it will receive a highly negative
 reward signal, leading to low estimated values of that chosen action in a
 specific state.
 
+#+CAPTION[Fleet Profits]: Accumulated gross profit increase and charged electricity over time. The developed RL algorithm learned to optimized the presented integrated bidding strategy while still avoiding imbalances. label:fig-rl-profits
+#+ATTR_LATEX: :width 1\linewidth :placement [h]
+[[./fig/rl-results.png]]
 
 *** Results:
 1) Profits
@@ -247,7 +250,7 @@ specific state.
 
 2) Learning
    - Graph: Learning over iterations (DQN vs Q-Learning)
-   - Compare RL Algos eg. Q-learning vs DDQN  Reward per timestep or Profits
+   - Compare RL Algos eg. Q-learning vs DDQN Reward per timestep or Profits
    - \rightarrow deep learning makes difference in practice for complex system.
    # - https://github.com/dennybritz/reinforcement-learning/blob/master/TD/Q-Learning%20Solution.ipynb
    # - https://gist.github.com/vihar/dcb1272a04b98ce3fdb2c109af7eaa21#file-q-learning-py
@@ -259,6 +262,8 @@ specific state.
 *** Problems:
 - long-delayed rewards make RL hard (!?)
 - positive reward from buying immediately vs negative rewards up to 7 days.
+- Imbalance costs need to bet set manually, episodic vs continuous env. Stop
+  when encountering imbalance costs.
 
 *** Summary:
 - In summary, all four experiments show that our approach is
@@ -341,6 +346,7 @@ specific state.
         cite:vandael15_reinf_learn_heuris_ev_fleet
 
 5. Discuss results?
+   - Gross profits small - Mention before?
    - Policy
    - Investment
    - V2G?
@@ -365,6 +371,7 @@ specific state.
   - Deny rentals only in the same market period (More deny, less imbalance)
 - RL: See cite:vazquez-canteli19_reinf_learn_deman_respon conclusion for
   limitations.
+  - Training time in real time. Generalization to other cities?
 ** Future Research
 
 - Model:
