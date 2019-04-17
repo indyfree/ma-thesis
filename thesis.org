@@ -219,51 +219,69 @@ its observed environment and received reward signals. In Appendix ref:app-b, the
 hyperparameters are presented which we used to train the dueling DDQN algorithm
 and solving the controlled charging problem under uncertainty. The values were
 determined manually through experimentation for the best results. The speed of
-convergence was also used as a criterion, since the training environment, Google
-Colaboratory, only allows up to 12 hours of computing time.
+convergence was also used as a criterion, since the training environment Google
+Colaboratory only allows up to 12 hours of computing time.
 
-Further, the imbalance costs $\beta$ were set to an artificially high value of
-10000 $\emwh$ to let the agent learn to always avoid imbalances. Whenever the
-agents takes an action that causes imbalances, it will receive a highly negative
-reward signal, leading to low estimated values of that chosen action in a
-specific state.
+Further, the imbalance costs $\beta$ were set to an artificially high value to
+let the agent learn to always avoid imbalances. Whenever the agents takes an
+action that causes imbalances, it will receive a highly negative reward signal,
+leading to low estimated values of that chosen action in a specific state.
 
-#+CAPTION[Fleet Profits]: Accumulated gross profit increase and charged electricity over time. The developed RL algorithm learned to optimized the presented integrated bidding strategy while still avoiding imbalances. label:fig-rl-profits
+#+CAPTION[Comparison of gross profit results]: Comparison of gross profits and traded electricity between the proposed optimized integrated strategy and the other three naive charging strategies. The RL algorithm improves the achieved gross profit increase of the integrated bidding strategy on average by 16% and accomplishes nearly optimal results when compared to the benchmark strategy. label:fig-rl-profits
 #+ATTR_LATEX: :width 1\linewidth :placement [h]
 [[./fig/rl-results.png]]
 
-*** Results:
-1) Profits
-   - Graph: Cost evolution of the RL portfolio optimization approach benchmarked
-     against naive strategies (w/ error band)
-   - Graph cumulative (charging) profits over 1 simulation run, w/ learned RL agent (over
-     how many iterations?)
-   - Regular charging comparison? (VPP share is too low?)
-   - Graph: Cumulative charging costs over simulation run (days)
-     Fig. 4. Comparison of charging costs between the proposed novel charging
-     strategy and other three charging strategies. The average cost values and the
-     variance intervals of the methods are presented. The proposed novel method
-     reduces the costs of charging by roughly 50% when compared with the
-     conventional charging method and by roughly 10% when compared with a
-     daily optimal charging strategy. To reach the global optimal solution the cost
-     would need to be reduced by X% further.
+In Figure ref:fig-rl-profits, the performance of the optimized integrated
+bidding strategy is presented. The proposed RL algorithm increases the gross
+profits of the fleet on average (n=5) by approximately 72-75% when compared with
+the naive single market strategies and by roughly approximately 16% when
+compared with the naive integrated strategy. To reach the optimal solution the
+profits would need to be increased by 1.5% further. Similarly, the RL algorithm
+increases the amount of electricity that the fleet charges from the electricity
+markets while avoiding imbalance by buying electricity that it can not charge.
 
-2) Learning
-   - Graph: Learning over iterations (DQN vs Q-Learning)
-   - Compare RL Algos eg. Q-learning vs DDQN Reward per timestep or Profits
-   - \rightarrow deep learning makes difference in practice for complex system.
-   # - https://github.com/dennybritz/reinforcement-learning/blob/master/TD/Q-Learning%20Solution.ipynb
-   # - https://gist.github.com/vihar/dcb1272a04b98ce3fdb2c109af7eaa21#file-q-learning-py
+In another experiment, we evaluated the performance of the proposed RL algorithm
+in comparison to other RL algorithms with a simpler architecture. In particular,
+we were interested what impact modern advances in deep RL have on the ability to
+quickly learn to improve the agents policy, while still achieving good results
+after the whole training period. This question is especially relevant for the
+case, when no prior training for the fleet controller is possible and the agent
+has to quickly learn to avoid to commit more charging power to the markets that
+it can charge. Therefore, we removed the notion of imbalance costs and changed
+the simulation setup to instantly stop the training episode when imbalances
+occur. In this way, the agents learns to maximize its reward while circumventing
+imbalances. The agent achieves a higher reward the longer it trades electricity
+on the markets without committing to charge more electricity than it can. We
+compared DQN cite:mnih15_human_level_contr_throug_deep_reinf_learn with Double
+DQN cite:hasselt16_deep_reinf_learn_doubl_q_learn with and without the dueling
+architecture cite:wang15_duelin_networ_archit_deep_reinf_learn. In Figure
+ref:fig-rl-learning, the average (n=5) learning performances of the different RL
+approaches are displayed.
 
-3) Actions
-   - Prob distribution of optimal actions for the fleet during weekdays. cite:vaya14_optim
-   - What actions/risk were chosen on average?
+#+CAPTION[Comparison of RL algorithm learning performance]: Comparison of the learning performance between the proposed RL algorithm and the other three simpler algorithms, averaged over 5 training attempts. Each training period is performed on 1.5 years of real world data. The dueling DDQN algorithm (dark blue line) learns faster, and achieves better and more robust results than prior algorithms. label:fig-rl-learning
+#+ATTR_LATEX: :width 1\linewidth :placement [h]
+[[./fig/rl-learning.png]]
 
-*** Problems:
-- long-delayed rewards make RL hard (!?)
-- positive reward from buying immediately vs negative rewards up to 7 days.
-- Imbalance costs need to bet set manually, episodic vs continuous env. Stop
-  when encountering imbalance costs.
+The experiment shows that the dueling DDQN algorithm learns the fastest and
+shows a large increase in mean reward per action after roughly 60 episodes
+(about 227 days of real-world time) of training. The dueling DDQN algorithm
+shows the largest reward increase and highest reward per action after the whole
+training period, which makes it the best algorithm to solve the charging
+problem. Despite that it still has a larger mean absolute error than the DDQN
+algorithm, indicating that it is more likely to cause imbalances with the
+dueling architecture than without. None of the algorithms determined a policy
+that never caused imbalances after 1.5 years of real-world training time (about
+30 minutes of simulation time). In other words, without prior training with
+existing data the RL agent would need more than one and a half years to learn to
+avoid imbalances. A possible explanation is the problem of learning from long
+delayed rewards, first discussed by textcite:watkins89_learn_from_delay_rewar.
+Long delayed rewards increase the difficulty of RL problems, since the agent
+needs to connect occurring decision outcomes to specific actions way back in the
+past. In the case of the presented controlled fleet charging problem, this
+effect is especially pronounced because the negative reward signal (caused
+imbalances) can occur up to 672 timesteps (one week) after the agent decided on
+the bidding quantity, whereas the positive reward signal (procured cheap
+electricity) occurs immediately.
 
 *** Summary:
 - In summary, all four experiments show that our approach is
