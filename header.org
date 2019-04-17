@@ -54,6 +54,7 @@
 #+LATEX_HEADER: \usepackage[nohyperlinks]{acronym}
 
 # Footnotes
+#+LATEX_HEADER: \usepackage[bottom]{footmisc}
 #+LATEX_HEADER: \interfootnotelinepenalty=10000
 
 # No Title & No TOC from org-mode

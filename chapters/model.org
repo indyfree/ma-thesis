@@ -691,15 +691,9 @@ exploration rate was used. The RL agent was implemented with the neural networks
 API Keras[fn:1][fn:2], which is a high-level abstraction layer of TensorFlow.
 TensorFlow is the de-facto standard for robust and scalable machine learning in
 industry and research cite:abadi16_tensor. Further, we used the shared research
-environment Google Colaboratory[fn:3] to train and evaluate the agent. It offers
+environment Google Colaboratory to train and evaluate the agent. It offers
 free access to computing resources that are optimized for training machine
-learning models. More specifically, it provides a NVIDIA Tesla K80 GPU, with
-2880 $\times$ 2 CUDA cores and 12GB GDDR5 VRAM. Additionally, the environment is
-equipped with a Intel(R) Xeon(R) CPU @ 2.30GHz (1 core, 2 threads), and 12GB
-available memory. Google Colaboratory can be used up to 12 hours of consecutive
-training.
-
-#+LATEX: \clearpage
+learning models.[fn:3]
 
 * Footnotes
 
@@ -707,4 +701,10 @@ training.
 
 [fn:2] https://github.com/keras-rl/keras-rl
 
-[fn:3] https://colab.research.google.com
+[fn:3] Google Colaboratory (https://colab.research.google.com) provides a NVIDIA Tesla K80 GPU, with
+2880 $\times$ 2 CUDA cores and 12GB GDDR5 VRAM. Additionally, the environment is
+equipped with a Intel(R) Xeon(R) CPU @ 2.30GHz (1 core, 2 threads), and 12GB
+available memory. Google Colaboratory can be used up to 12 hours of consecutive
+training time.
+
+#+LATEX: \clearpage
