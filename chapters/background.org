@@ -46,7 +46,7 @@ research.
 # TODO: Fix pointing arrows
 #+CAPTION[Electricity Market Design]: Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
 #+ATTR_LATEX: :width 0.95\linewidth
-[[../fig/electricity_markets.png]]
+[[../fig/electricity-markets.png]]
 ** Electricity Market Theory:
 *** Balancing Market label:sec-balancing-market
 # NOTE: Consider changing heading to Operating reserve market / frequency
@@ -497,7 +497,7 @@ possible solutions. Figure
 ref:agent-environment-interaction depicts the /agent-environment interaction/.
 #+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf \protect\footnotemark label:agent-environment-interaction
 #+ATTR_LATEX: :width 0.95\linewidth
-[[../fig/mdp_interaction.png]]
+[[../fig/mdp-interaction.png]]
 #+LATEX: \footnotetext{\textbf{Figure 3.1} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 
 In RL the agent and the environment continuously interact with each other. The

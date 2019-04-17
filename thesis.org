@@ -42,7 +42,7 @@ can be readily installed as a Python package.
 
 #+CAPTION[FleetSim Architecture]: Architecture of FleetSim label:fig-fleetsim
 #+ATTR_LATEX: :width 1\linewidth :placement [hp]
-[[./fig/simulation_platform.png]]
+[[./fig/simulation-platform.png]]
 
 In order to simplify comparability and focus to real-world applicability of the
 analysis, we set the same parameters for all conducted experiments (see Table

@@ -171,7 +171,7 @@ and provide detailed explanation and mathematical formulations.
 
 #+CAPTION[Control Mechanism]: Control Mechanism label:fig-control-mechanism
 #+ATTR_LATEX: :width 1.05\linewidth :placement [p]
-[[../fig/control_mechanism.png]]
+[[../fig/control-mechanism.png]]
 
 # TODO: Figure:
 # - What about regular charging?
