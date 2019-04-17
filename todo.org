@@ -1,25 +1,37 @@
 #+TITLE: Thesis Todo
 
 * Inbox
-** TODO Mobility demand/Rental demand? Generalize? Somebody notices?
-** TODO Add determine prices/distance at data section
-** TODO Put notation in RL chapter if only abbr, otherwise also use electricity/price abbr as p,soc,...
-** TODO Use abbreviations only after 3+ mentions?
-** TODO Rephrase thesis to EV fleet only. Carsharing only one form, yet the most uncertain. Thus good example.
-** TODO When webpage/pdf as source, put in bibtex not footnotes
-** TODO Check page border spacing of Notation pages
-** TODO First and last sentence of a paragraph should explain it well enough
-** TODO Fix paragraph spacing
-** TODO Concise Wording:
-- regulation capacity, balancing power, frequency regulation...
-- tender period, segment, interval, time period, market period.
-- tender, auction, bid, trade
-- carsharing company/provider
-- EV fleet, controller, operator...
-- Mobility demand, fleet capacity
-- Smart charging/ balancing the grid? Common theme!
-- the data/data set/datasets, data plural or singular? (See twitter)
-** TODO Comment Literature Review
+** Content
+*** TODO Include NN architecture (Keras source code?)
+** Wording (stay concise!):
+*** TODO regulation capacity, balancing power, frequency regulation...
+*** TODO tender period, segment, interval, time period, market period.
+*** TODO tender, auction, bid, trade
+*** TODO carsharing company/provider
+*** TODO EV fleet, controller, operator...
+*** TODO Mobility demand, fleet capacity
+*** TODO Smart charging/ balancing the grid? Common theme!
+*** TODO the data/data set/datasets, data plural or singular? (See twitter)
+*** TODO Rental profits --> rental revenue / trip price?
+*** TODO Rephrase thesis to EV fleet only. Carsharing only one form, yet the most uncertain. Thus good example.
+*** TODO Mobility demand/Rental demand? Generalize? Somebody notices?
+** Format
+*** TODO Units with space
+*** TODO Consistent Date formatting
+*** TODO Footnotes numbering with tables
+*** TODO Check page border spacing of Notation pages
+*** TODO Fix paragraph spacing
+*** TODO Use abbreviations only after 3+ mentions?
+*** TODO Put notation in RL chapter if only abbr, otherwise also use electricity/price abbr as p,soc,...
+** Structure:
+*** TODO Bullet-point contributions at end of introduction
+
+[[file:~/uni/ma-thesis/chapters/introduction.org::#%20TODO:%20Bullet-point%20contributions][Relevance]]
+*** TODO First and last sentence of a paragraph should explain it well enough
+** Citations:
+*** TODO When webpage with pdf as source, put in bibtex not footnotes
+** Review
+*** Comment Literature Review (Ilaria)
 Structure the whole section in a stricter way. I mean that the question I always
 asked myself why reading was: "so what?" What is you Ziel? As far as I
 understand, you wanna motivate you methodology by showing what previous
@@ -29,8 +41,4 @@ structure of 2.1 and 2.2.
 Should you maybe provide more definition? In my guidelines, the literature
 review is also the Teil in which I should have defined all the terms/concepts
 that I used later on.
-** TODO Include NN architecture
-** TODO Format
-*** Units with space
-*** Consitent Date formatting
-** TODO Rental profits --> rental revenue / trip price?
+** DONE Add determine prices/distance at data section
