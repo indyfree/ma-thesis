@@ -54,7 +54,7 @@ predictions uncertainty on the results will later be determined in a sensitivity
 analysis.
 
 #+CAPTION[Simulation Parameters]: Simulation Parameters label:table-sim-params
-#+ATTR_LATEX: :environment longtable :align lr :placement [hp]
+#+ATTR_LATEX: :align lr :placement [hp]
 |---------------------------------------------+--------------------------------------|
 |---------------------------------------------+--------------------------------------|
 | Parameter                                   | Value                                |
@@ -102,7 +102,7 @@ return(round((13.84 / 389.64),4) * 100)
 #+RESULTS:
 : 3.55
 #+CAPTION[Fleet Statistics]: Fleet Statistics. label:table-sim-stats
-#+ATTR_LATEX: :environment longtable :align lr :placement [hp]
+#+ATTR_LATEX: :align lr :placement [hp]
 |---------------------------------+----------------------------|
 |---------------------------------+----------------------------|
 | Statistic                       | Value                      |
