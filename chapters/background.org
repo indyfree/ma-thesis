@@ -777,8 +777,7 @@ Here, the estimated action-values $Q$ are updated towards the highest estimated
 action-value of the next time step. In this way, $Q$ directly approximates the
 optimal action-value function $q_*$, independently of the policy the agent
 follows. Due to this simplification, Q-learning is a widely used model-free
-method, and its convergence can be proved easily.
-
+method, and its convergence can be proved easily cite:watkins89_learn_from_delay_rewary.
 
 This chapter covered the most important RL methods. They work online, learn from
 experience, and can be easily applied to real-world problems with low
