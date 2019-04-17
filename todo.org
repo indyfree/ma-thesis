@@ -2,7 +2,10 @@
 
 * Inbox
 ** Content
-*** TODO Include NN architecture (Keras source code?)
+*** TODO Include NN architecture to Appendix (Keras source code?)
+*** TODO Move Car2Go data preprocessing to Appendix
+*** TODO Background Neural Network Figure smaller and with inputs + outputs
+*** TODO Revise Background Literature Section and make story!
 ** Wording (stay concise!):
 *** TODO regulation capacity, balancing power, frequency regulation...
 *** TODO tender period, segment, interval, time period, market period.
