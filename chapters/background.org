@@ -2,6 +2,17 @@
 # NOTE: 30%
 # TODO: Introductary paragraph
 # TODO: Tell a story!
+
+# NOTE: Kahlen
+# This section describes relevant research and explains the general setting of
+# balancing renewable energy sources with EV fleets. In particular, we will
+# describe the research that has been done on charging EV fleets with variable
+# prices to save cost. Consequently, we position our research within the
+# literature on EVs and the vehicle-2-grid context of selling electricity back to
+# the grid. Next, we introduce the methodological back- ground and make a
+# comparison with the related topic of caching. Finally, we describe the
+# functioning of the electricity wholesale market.
+
 ** Smart Electricity Markets
 On electricity markets, actors participate in auctions to match the supply of
 electricity generation and the demand for electricity consumption. Participants
@@ -777,7 +788,7 @@ Here, the estimated action-values $Q$ are updated towards the highest estimated
 action-value of the next time step. In this way, $Q$ directly approximates the
 optimal action-value function $q_*$, independently of the policy the agent
 follows. Due to this simplification, Q-learning is a widely used model-free
-method, and its convergence can be proved easily cite:watkins89_learn_from_delay_rewary.
+method, and its convergence can be proved easily cite:watkins89_learn_from_delay_rewar.
 
 This chapter covered the most important RL methods. They work online, learn from
 experience, and can be easily applied to real-world problems with low
@@ -831,18 +842,20 @@ In practice, deep artificial neural networks networks (ANNs) have shown great
 success as function approximators, which coined the term /Deep Reinforcement
 Learning/
 cite:mnih15_human_level_contr_throug_deep_reinf_learn,silver16_master_game_go_with_deep.
-A simple feedforward ANN can be found in Figure ref:fig-ann. ANNs have the
-advantage that they can theoretically approximate any continuous function by
-adjusting the connection weights of the network $\w\in\Re^{d\times d}$
+A simplified ANN that approximates the action-value function $\qpi(s,a)$ can be
+found in Figure ref:fig-ann. In this example, the network estimates Q-values of
+the combination of four states and two actions. ANNs have the advantage that
+they can theoretically approximate any continuous function by adjusting the
+connection weights of the network $\w\in\Re^{d\times d}$
 cite:cybenko89_approx_by_super_sigmoid_funct. Advancements in the field of /Deep
 Learning/ facilitated remarkable performance improvements in RL applications.
 Despite that, the RL theory is mostly limited to tabular and linear
 approximation methods. Refer to textcite:bengio09_learn_deep_archit_ai for a
 comprehensive review of deep learning methods.
-#+CAPTION[Artificial Neural Network]: A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes cite:sutton18_reinf. \protect\footnotemark label:fig-ann
-#+ATTR_LATEX: :width 0.95\linewidth
+#+CAPTION[Artificial Neural Network]: A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes. When approximating the action-value function $\qpi(s,a)$ the number of input nodes equals the size of the state space and the number of output nodes the size of the action space. The learned connection weights $\w$ on the arrows between the layers are ommitted in this figure. \protect\footnotemark label:fig-ann
+#+ATTR_LATEX: :width 0.7\linewidth
 [[../fig/ann.png]]
-#+LATEX: \footnotetext{\textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
+#+LATEX: \footnotetext{Adapted from \textbf{Figure 9.14} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
 *** Further Topics
 The previous chapters provided a detailed overview of the most important
 concepts and mathematical foundations in RL. In the research there are many more
