@@ -6,6 +6,7 @@
 *** TODO Move Car2Go data preprocessing to Appendix
 *** TODO Background Neural Network Figure smaller and with inputs + outputs
 *** TODO Revise Background Literature Section and make story!
+*** TODO Lit Review Philipp VPP optimization paper
 ** Wording (stay concise!):
 *** TODO regulation capacity, balancing power, frequency regulation...
 *** TODO tender period, segment, interval, time period, market period.
