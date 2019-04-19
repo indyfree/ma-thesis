@@ -15,7 +15,7 @@ Carbon emissions need to be reduced and the shift to sustainable energy sources
 is inevitable. But the adaption of renewable energy is a complex matter: Solar
 and wind energy is intermittent and hard to integrate into the electrical power
 grid. Sustainable electricity production is dependent on the weather conditions,
-under- and oversupplies can occur and are destabilizing the grid. Virtual Power
+under- and oversupplies occur and are destabilizing the grid. Virtual Power
 Plants (VPP) play an important role in stabilizing the grid
 cite:pudjianto07_virtual_power_plant_system_integ. VPPs aggregate distributed
 power sources to consume and produce electricity when it is needed. At the same
