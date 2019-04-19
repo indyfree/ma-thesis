@@ -127,10 +127,10 @@ this type of auction is called /pay-as-bid/ auction.
 # TODO: Intraday mainly for balancing!!! Rephrase Intro+Lit Review to only provide
 # balancing i.e. sustainablility work?
 As mentioned in the previous chapter, the equilibrium of electricity supply and
-demand is ensured through a sequence of interdependent wholesale markets (cited)
+demand is ensured through a sequence of interdependent wholesale markets
 cite:pape16_are_fundam_enoug. Next to the balancing market at the end of the
-sequence, mainly two different types of spot markets exist, the day-ahead
-market and the intraday market. In this research, we consider the European Power
+sequence, mainly two different types of spot markets exist, the day-ahead market
+and the intraday market. In this research, we consider the European Power
 Exchange (EPEX Spot) as it is the largest electricity market in Europe, with a
 total trading volume of approximately 567TWh in 2018[fn:3], but most electronic
 spot markets in western economies work with similar market mechanisms.
