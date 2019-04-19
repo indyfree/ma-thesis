@@ -58,7 +58,7 @@ research.
 #+CAPTION[Electricity Market Design]: Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
 #+ATTR_LATEX: :width 0.95\linewidth
 [[../fig/electricity-markets.png]]
-** Electricity Market Theory:
+** Electricity Market Theory
 *** Balancing Market label:sec-balancing-market
 # NOTE: Consider changing heading to Operating reserve market / frequency
 The balancing market is a tool to balance frequency deviations in the power
