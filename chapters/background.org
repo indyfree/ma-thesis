@@ -41,7 +41,7 @@ bidders, get compensated by the price they bid (pay-as-bid principle).
 # TODO: Describe week ahead or day ahead commitment of balancing market?
 EV fleet operators can offer the capacity of their EV batteries on multiple
 markets at the same time to make use of the different market properties. On
-operating reserve markets,prices are usually more volatile and consequently more
+operating reserve markets, prices are usually more volatile and consequently more
 attractive for VPPs cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
 Operating reserve markets also bear a higher risk for the fleet: Commitments
 have to be made one week in advance when customer demands are still uncertain.
