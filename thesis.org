@@ -318,6 +318,32 @@ with bidding on the markets.
 
 * Conclusion
 # NOTE 5%
+To integrate volatile renewable energy sources into the electricity system,
+balancing power is needed to ensure grid stability. Balancing power can be
+provided by VPPs that generate or consume electricity within a short period of
+time and offer these services on the electricity markets. (VPP citation?) EV
+fleet operators can utilize idle vehicles to form VPPs and offer the available
+EV battery capacity as balancing power. The fleet can offer its balancing
+services directly via tender auctions on the balancing market or via continuous
+trades on the intraday market, where participants procure or sell energy to
+self-balance their portfolios cite:pape16_are_fundam_enoug. Both markets have
+complementary benefits in terms of price levels and lead times between bid and
+delivery which motivates the fleets participation on both markets.
+
+However, EVs can only be used in a VPP portfolio if they are connected to a
+charging station and have enough battery capacity available to charge the
+committed quantities of electricity. This uncertainty makes it difficult for the
+fleet controller to estimate the size of the VPP and calculate the optimal
+bidding quantities. If the fleet operator commits too much electricity, it faces
+high imbalance penalties from the markets, if it can not charge the committed
+amount. If the fleet controller commits conservative amounts of electricity it
+looses potential profits from charging cheaper than the regular industry price.
+For a sustainable business model fleet operators also need to balance VPP
+activities with their main offering, customer mobility. Turning away customer
+rentals in order to fulfill market commitments results in opportunity costs of
+lost rentals that are way higher than charging profits.
+
+# NOTE Mention risks? Mention portfolio optimization?
 ** Contribution
 
 1. Problem setting
