@@ -303,105 +303,147 @@ with bidding on the markets.
 
 # NOTE: Results heavily dependent on industry charging price, since on average
 # the balancing prices are 50% cheaper, and intraday 30% cheaper. Perform a run?
+The uncertainty of the available fleet charging power forecast plays an
+important role in determining the optimal bidding quantity. If the fleet
+controller is certain about the number of connected EVs that it can use for VPP
+activities in the future, it can aggressively trade the available charging power
+on the markets, without having to worry to turn away customers or facing risk of
+not being able to charge to committed amount. Since our model assumes
+
 
 *** Prediction Accuracy
 - Compare profits of (50%, 60%, 70%, 80%, 90%, 100%)
 
 *** Charging infrastructure
 - Fastchargers (22kw)
+- Tesla (Bigger battery, big charger)
 - Car batteries
 - More Charging Stations (infer charging stations)
 
-*** Bidding Mechanism
-# NOTE: Relaxed minimum bidding assumption of 1MW to no limit.
-- Minimal bidding quantities (100kw, 500kw, 1MW)
+#+LATEX: \clearpage
 
 * Conclusion
 # NOTE 5%
-To integrate volatile renewable energy sources into the electricity system,
-balancing power is needed to ensure grid stability. Balancing power can be
-provided by VPPs that generate or consume electricity within a short period of
-time and offer these services on the electricity markets. (VPP citation?) EV
-fleet operators can utilize idle vehicles to form VPPs and offer the available
-EV battery capacity as balancing power. The fleet can offer its balancing
-services directly via tender auctions on the balancing market or via continuous
-trades on the intraday market, where participants procure or sell energy to
-self-balance their portfolios cite:pape16_are_fundam_enoug. Both markets have
-complementary benefits in terms of price levels and lead times between bid and
-delivery which motivates the fleets participation on both markets.
+# NOTE Sec: Setting
+Integrating volatile renewable energy sources into the electricity system
+imposes challenges on the electricity grid. In order to ensure grid stability
+and avoid blackouts, balancing power is needed to match electricity supply and
+demand. Balancing power can be provided by VPPs that generate or consume energy
+within a short period of time and offer these services on the electricity
+markets cite:pudjianto07_virtual_power_plant_system_integ. EV fleet operators
+can utilize idle vehicles to form VPPs and offer available EV battery capacity
+as balancing power. The fleet can offer balancing services directly via tender
+auctions on the balancing market or via continuous trades on the intraday
+market, where participants procure or sell energy to self-balance their
+portfolios cite:pape16_are_fundam_enoug. Both markets have complementary
+properties in terms of their price level and lead time, which motivates the
+creation of a VPP portfolio to profitably participate in both markets and extend
+the business model if the fleet.
 
-However, EVs can only be used in a VPP portfolio if they are connected to a
-charging station and have enough battery capacity available to charge the
-committed quantities of electricity. This uncertainty makes it difficult for the
-fleet controller to estimate the size of the VPP and calculate the optimal
-bidding quantities. If the fleet operator commits too much electricity, it faces
-high imbalance penalties from the markets, if it can not charge the committed
-amount. If the fleet controller commits conservative amounts of electricity it
-looses potential profits from charging cheaper than the regular industry price.
-For a sustainable business model fleet operators also need to balance VPP
-activities with their main offering, customer mobility. Turning away customer
-rentals in order to fulfill market commitments results in opportunity costs of
-lost rentals that are way higher than charging profits.
+# NOTE Sec: Problem
+# NOTE Mention risks? Mention portfolio (optimization)?
+However, there are certain risks associated  with this business model extension.
+EVs can only be allocated to the VPP portfolio if they are connected to a
+charging station and have sufficient free battery capacity available. This
+uncertainty makes it difficult for fleet operators to estimate the size of the
+VPP and calculate the optimal bidding quantities. Moreover, if fleet operators
+offer more balancing power than they can provide, they face high imbalance
+penalties from the markets. For a sustainable business model fleet operators
+also need to balance VPP activities with their primary offering, customer
+mobility. Denying customer rentals to ensure that the fleet can fulfill the
+market commitments, results in opportunity costs of lost rentals that compromise
+the profitability of the fleet.
 
-# NOTE Mention risks? Mention portfolio optimization?
+In the following chapter, we will summarize the conducted research of this
+thesis to solve the aforementioned challenges. Furthermore, the contribution of
+this work is outlined and the main results are presented and discussed. Finally,
+we list specific limitations of this study and give insights on further areas of
+research.
 ** Contribution
+# NOTE Sec: What we have done
+#     1. Model (Control mechanism)
+#     2. Simulation Platform
+#     3. Integrated bidding strategy
+#     4. RL Agent that optimizes strategy by determining risk
+The core contributions of this thesis are the following: First, we
+conceptualized a DSS for controlled EV charging under uncertainty. The DSS
+constitutes the core of a business model extension for fleet operators to manage
+a VPP portfolio of EV batteries. A controlled charging problem has been
+mathematically formulated and a control mechanism introduced that solves the
+proposed problem. Second, we developed an event-based simulation platform that
+facilitates fleet management research based on real-world data. We evaluated
+various baseline bidding strategies within the simulation platform and tested
+out the behavior of intelligent agents in the context of controlled EV charging.
+Third, we proposed a novel integrated bidding strategy that offers balancing
+services of a VPP portfolio to multiple electricity markets simultaneously.
+Instead of submitting only conservative amounts of battery capacity to a single
+market, like previous studies
+cite:kahlen18_elect_vehic_virtual_power_plant_dilem,kahlen17_fleet did, our
+proposed strategy aims to maximize profits by aggressively procuring electricity
+from the multiple markets without causing imbalances.
+Forth, we proposed the usage of a RL Agent that learns to optimize the VPP
+portfolio. The agent dynamically determines the risks of bidding on the markets,
+depending available and predicted fleet information. Therefore a MDP has been
+defined and designed to work in previously unknown environments and uncertain
+conditions. We designed the RL agent with the focus on real-world applicability,
+generalizability and fast convergence rates. We expect the proposed approach to
+work with a variety of different EVs (e.g., electronic bikes) and
+independent of the fleets geographical location.
 
-1. Problem setting
-   - Balancing power is needed to integrate renewable into the grid
-   - Balancing power can be supplied a) via the balancing market by the TSOs and
-     b) via the open intraday market (citation, why that is balancing too)
-   - EV fleets can provide (negative) balancing power with the batteries of
-     their vehicles
-   - Problem) For a sustainable business model EV fleet operators need to
-     balance providing their main offering customer mobility versus
-   - Problem: a) Customer mobility vs VPP b) over-commitments to the markets
+# - not limited to the training data set
 
-2. What we have done
-   - Decision Support System for controlled EV charging from multiple markets,
+# - obtained better results than similar studies in the
+# field. (how much and which?)
 
-   - Evaluated based on real world carsharing fleet data from Car2go in the
-     period from June 2017 to January 2018 . (Car2Go *very*
-     uncertain rental demand!)
-   - Business model for EV fleet owners with better results than previous studies
-   - Environmental impact by providing balancing power
-   - Developed event-based simulation platform to evaluate bidding strategies and RL agents,
-     facilitate research based on real world data(!)
-   - Developed Control mechanism (DSS) that "Under uncertainty"
-   - Developed a RL Agent that
-     - designed to work in previously unknown
-       environments and thus
-     - suited to deploy in real life settings of all kinds
-       of EV fleets in all kinds of cities. E.g. scooters also (not tested, but expected)
+# TODO: Double check numbers!
+We evaluated the proposed method with real-world carsharing data from Car2go in
+Stuttgart and German electricity market data from June 2017 till January 2018.
+The results show that our approach would increase the gross profits of the EV
+fleet by roughly 78 000 $\eur$ over the 1.5 year period. Free float carsharing
 
-3. What we have shown (include key numbers)
-   - 1. RQ
-     - Integrated improves existing approaches
-     - Mitigate risk & improve profits through exploitation of different market setups
-   - 2. RQ
-     - RL Algorithm that
-     - Online learning algorithm (difference? -- real data?)
-     - RL can learn to dynamically adjust bidding quantities by learning risk
-       associated with bidding on each market. (What are the risks?)
-     - RL Architecture matters
-     - Charging infrastructure & Advancement in battery technology/charging
-        technology matters
+At the same time the VPP activities have an environmental impact by reducing
+CO_2 through more efficient use of renewables.
 
-4. Compare to other studies
-   - Fleet Charging
-     - No uncertainty
-     - Only one market
-     - No sensitivity on accuracy prediction (We found very important)
-   - RL
-   - Other approaches (VPP, stochastic)
-        cite:kahlen18_elect_vehic_virtual_power_plant_dilem
-        cite:vandael15_reinf_learn_heuris_ev_fleet
+# Insights:
+# - RL works good
+# - Prediction is important
 
-5. Discuss results?
-   - Gross profits small - Mention before?
-   - Policy
-   - Investment
-   - V2G?
-   - Market Setup
+# NOTE Sec: What we have found
+- What we have shown/found (include key numbers)
+  - 1. RQ
+    - Integrated improves existing approaches
+    - Mitigate risk & improve profits through exploitation of different market setups
+  - 2. RQ
+    - RL Algorithm that
+    - Online learning algorithm (difference? -- real data?)
+    - RL can learn to dynamically adjust bidding quantities by learning risk
+      associated with bidding on each market. (What are the risks?)
+    - RL Architecture/Advancements matters
+    - RL takes a long time to learn
+    - Charging infrastructure & Advancement in battery technology/charging
+       technology matters
+
+# NOTE Sec: Discuss !
+Discuss:
+- In free float carsharing, mobility demand patterns are extremely uncertain.
+  $\rightarrow$ lower bound.
+
+- Compare to other studies!
+  - Fleet Charging
+    - No uncertainty
+    - Only one market
+    - No sensitivity on accuracy prediction (We found very important)
+  - RL
+  - Other approaches (VPP, stochastic)
+       cite:kahlen18_elect_vehic_virtual_power_plant_dilem (no imbalance costs!)
+       cite:vandael15_reinf_learn_heuris_ev_fleet
+
+- Discuss results?
+  - Gross profits small - Mention before?
+  - Policy
+  - Investment
+  - V2G?
+  - Market Setup
 
 
 ** Limitations
