@@ -46,6 +46,9 @@ and can reach a maximum driving distance of 145km according to the manufacturer.
 When equipped with an additional 22kW fast charger the charging time reduces to
 about an hour.
 
+# TODO: Include trip prices
+#+INCLUDE: "~/uni/ma-thesis/template/car2go_tables.tex" export latex
+
 # TODO: Exact number of charging stations, real or infered?
 In Table ref:table-car2go-raw the raw data is displayed, as we have obtained it
 by Car2Go. The dataset contains spatio-temporal attributes, such as timestamp,
@@ -55,57 +58,15 @@ Especially relevant for our research is the state of charge ($SoC$, in %) and
 information whether the EV is plugged into a charging station. Note that the
 data only contain EVs that are /available for rent/, i.e., they are not
 currently rented out by a customer. EVs which are parked at a charging station
-are also not available until they have charged up approximately 70 SoC.
-Individual trips have to be reconstructed using the GPS data of the cars. The
-following preprocessing steps have been taken to prepare the data for further
-analysis. The Table ref:table-car2go-processed depicts the dataset after all
-processing steps.
-
-1) Determine rental trips
-
-   Rental trips were inferred based on changing GPS coordinates between two data
-   points of the same EV (see Table ref:table-car2go-raw, 4^{th} to 5^{th} row).
-   Since the GPS accuracy of industry sensors is approximately 5 meters under
-   open sky, and worse near buildings, bridges, and trees[fn:4], measurement
-   errors occur. To reduce the number of falsely identified trips we used a
-   decreased resolution of a 10-meter radius. Note that we hereby assume that
-   customers do not undertake trips, which begin and end at the same location.
-   In total, 1.246.040 customer rentals were determined.
-
-2) Determine trip distances
-
-   The trip distances were inferred based on the difference in SoC level before
-   and after the rental and the average energy consumption per kilometer.
-   Although the real distance that can be covered with a certain amount of
-   energy depends on driving style and traffic situation, we are confident that
-   the deviation will be small, since all trips take place within the same urban
-   space.
-
-3) Determine rental profits
-
-   The rental profits were inferred based on the trip duration and the estimated
-   trip distance. Car2Go has a minutely pricing scheme with an additional long
-   distance fee that applies when the customer drives more than a specified
-   range. The rental profits form an important piece of information for our
-   model since they determine the opportunity cost $\rho$ the fleet controller
-   has to account for if it denies the rental in favor of VPP activities.
-
-4) Clean data
-   - /Service trips/: 3308 rental trips were removed that had a trip duration
-     longer than the maximum allowed rental time of two days. We assume that
-     these trips were /service trips/ undertaken by Car2Go. When the EVs
-     returned with a higher SoC (e.g., they have been charged at the car repair
-     shop), the previous trip had to be altered to end at a charging station to
-     ensure charging consistency.
-   - /Incorrectly charged EVs/: 52 EVs were removed that showed incorrect
-     charging behavior. These EVs reported a battery level increase of more than 20%
-     between trips or during trips, while not being located at a charging station.
+are also not available until they have charged up to approximately 70% SoC. For
+further analysis, individual trips had to be reconstructed using the GPS data of
+the cars, moreover we inferred trip distances and trips prices based on Car2Go
+specifications. See Appendix ref:app-data-processing for a detailed listing of
+the executed preprocessing steps.
 
 # NOTE: Graph of car2go parking and charging w/ confidence intervals?
 #       Already in results
 
-# TODO: Include trip prices
-#+INCLUDE: "~/uni/ma-thesis/template/car2go_tables.tex" export latex
 
 ** Balancing Market Data label:sec-data-balancing
 # TODO: Consistent wording: tender/auction tender period = weekly, daily;
@@ -206,10 +167,10 @@ activated, which was partly fulfilled by the 5MW of the first bidder.
 
 The data from the EPEX Spot Intraday Continuous encompass order books and
 executed trades from 01.06.2016 until 01.01.2018. An extract of the data can be
-found in Appendix ref:app-a. The list of trades contains information on the unit
-price $\up{}$ ($\emwh$), the quantity (kW) and the traded product (hourly,
-quarterly or block). In this research, we focus on quarterly product times
-(15-minute intervals), as they provide the highest flexibility. Fleet
+found in Appendix ref:app-data-tables. The list of trades contains information
+on the unit price $\up{}$ ($\emwh$), the quantity (kW) and the traded product
+(hourly, quarterly or block). In this research, we focus on quarterly product
+times (15-minute intervals), as they provide the highest flexibility. Fleet
 controllers can promptly react to fluctuant electricity demand of the EV fleet
 by accurately adjusting the bid quantities. Future research could also consider
 other electricity products if lower prices justify decreased flexibility at that
@@ -233,8 +194,8 @@ the lowest price of all executed trades.
     \cup{} \defeq \min_{t \in \cal{T}} \up{t} \text{ ,}
 \end{equation*}
 where $\cal{T}$ is the set of all trades in a bidding interval. /Example:/ The
-critical unit price of the trades listed in Appendix ref:app-a is $\cup{}
-\!=\!51.00 \emwh$ (trades 8031392, 8031387 and 8031375). All buyers that
+critical unit price of the trades listed in Appendix ref:app-data-tables is
+$\cup{} \!=\!51.00 \emwh$ (trades 8031392, 8031387 and 8031375). All buyers that
 submitted bids with a price higher than the critical unit price, successfully
 procured electricity. Hence, accurate forecasts of the critical price allow to
 optimize the bidding behavior. For a detailed description of the intraday
@@ -253,5 +214,3 @@ continuous market see Chapter ref:sec-spot-market.
 
 [fn:3] https://procom-energy.de
 
-[fn:4] See https://www.gps.gov/systems/gps/performance/accuracy, accessed
-23^{th} February 2019.
