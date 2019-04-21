@@ -2,11 +2,13 @@
 #+AUTHOR:Tobias Richter
 
 #+INCLUDE: "./header.org"
+
 #+INCLUDE: "./chapters/introduction.org"
 #+INCLUDE: "./chapters/background.org"
 #+INCLUDE: "./chapters/empirical-setting.org"
 #+INCLUDE: "./chapters/model.org"
 #+INCLUDE: "./chapters/results.org"
+#+INCLUDE: "./chapters/appendix.org"
 
 * Conclusion
 # NOTE 5%
@@ -168,126 +170,7 @@ Discuss:
 
 #+LATEX: \clearpage
 #+LATEX: \appendix
-* Appendix: Data Tables label:app-data-tables
-#+LATEX: \renewcommand\thetable{\thesection.\arabic{table}}
-#+LATEX: \setcounter{table}{0}
-
-#+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
-#+CAPTION: List of Trades of the EPEX Spot Intraday Continuous Market
-#+ATTR_LATEX: :float sideways :align c|cccccccc :placement [hp]
-|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
-|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
-| Execution time      |      ID | Unit Price | Quantity | Buyer Area | Seller Area | Product | Product Time  | Delivery Date |
-|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
-| 2017-12-04 06:54:55 | 8031392 |      51.00 |     5500 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:26 | 8031391 |      59.00 |    10000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:26 | 8031390 |      58.90 |    10000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:15 | 8031389 |      52.30 |     7000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:13 | 8031386 |      59.00 |      500 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:13 | 8031387 |      51.00 |     3600 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:13 | 8031388 |      52.00 |     1400 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:53:02 | 8031385 |      58.90 |    11000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:38 | 8031380 |      60.00 |    10000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:38 | 8031381 |      57.50 |     8000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:38 | 8031382 |      58.00 |     2000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:38 | 8031383 |      58.90 |     4000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:38 | 8031384 |      60.00 |     4000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:52:27 | 8031379 |      52.30 |     8000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:51:33 | 8031378 |      66.00 |     5000 | TransnetBW | TransnetBW  | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:51:28 | 8031377 |      54.00 |     8000 | Amprion    | Amprion     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:51:24 | 8031376 |      54.00 |     7000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:49:34 | 8031375 |      51.00 |     4000 | TenneT     | TenneT      | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:49:26 | 8031374 |      54.00 |     5000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-| 2017-12-04 06:49:23 | 8031373 |      55.10 |     8000 | 50Hertz    | 50Hertz     | Quarter | 07:15 - 07:30 |    2017-12-04 |
-|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
-|---------------------+---------+------------+----------+------------+-------------+---------+---------------+---------------|
-#+LATEX:}
-#+LATEX: \clearpage
-
-* Appendix: Data Preprocessing label:app-data-processing
-The raw Car2Go dataset contained about 63 million data points (7.82 GB) and has
-been processed to only contain about 1.25 thousand data points (100 MB), while
-still compromising all necessary information. The following preprocessing steps
-have been taken to prepare the data for further analysis:
-
-1) Determine rental trips
-
-   Rental trips were inferred based on changing GPS coordinates between two data
-   points of the same EV (see Table ref:table-car2go-raw, 4^{th} to 5^{th} row).
-   Since the GPS accuracy of industry sensors is approximately 5 meters under
-   open sky, and worse near buildings, bridges, and trees[fn:5], measurement
-   errors occur. To reduce the number of falsely identified trips, a decreased
-   resolution of a 10-meter radius was calculated. Note that we hereby assume
-   that customers do not undertake trips, which begin and end at the same
-   location. In total, 1246040 customer rentals were determined.
-
-2) Determine trip distances
-
-   The trip distances were inferred based on the difference in SoC level before
-   and after the rental and the average energy consumption per kilometer.
-   Although the real distance that can be covered with a certain amount of
-   energy depends on driving style and traffic situation, we are confident that
-   the deviation will be small, since all trips take place within the same urban
-   space.
-
-3) Determine rental profits
-
-   The rental profits were inferred based on the trip duration and the estimated
-   trip distance. Car2Go has a minutely pricing scheme with an additional long
-   distance fee that applies when the customer drives more than a specified
-   range. The rental profits form an important piece of information for our
-   model since they determine the opportunity cost $\rho$ the fleet controller
-   has to account for if it denies the rental in favor of VPP activities.
-
-4) Clean data
-   - /Service trips/: 3308 rental trips were removed that had a trip duration
-     longer than the maximum allowed rental time of two days. We assume that
-     these trips were /service trips/ undertaken by Car2Go. When the EVs
-     returned with a higher SoC (e.g., they have been charged at the car repair
-     shop), the previous trip had to be altered to end at a charging station to
-     ensure charging consistency.
-   - /Incorrectly charged EVs/: 52 EVs were removed that showed incorrect
-     charging behavior. These EVs reported a battery level increase of more than 20%
-     between trips or during trips, while not being located at a charging station.
-
-#+LATEX: \clearpage
-* Appendix: DDQN Hyperparameters label:app-rl-hyperparams
-#+LATEX: \setcounter{table}{0}
-#+CAPTION[Hyperparameters for the dueling network DDQN algorithm]: Hyperparameters for the dueling network DDQN algorithm.
-#+ATTR_LATEX: :environment longtable :align lr :placement [hp]
-|--------------------------------+--------------------------------------|
-|--------------------------------+--------------------------------------|
-| Hyperparameter                 |                                Value |
-|--------------------------------+--------------------------------------|
-| Target network update interval |                                 0.01 |
-| Optimizer                      |              Adam cite:kingma14_adam |
-| Batch size                     |                                   32 |
-| Learning rate                  |                              10^{-3} |
-| Replay buffer size             |                                 10^5 |
-| Warm-up steps                  |                                 1000 |
-| Training steps                 |                                 10^5 |
-| Discount factor $\gamma$       |                                 0.99 |
-| Reward normalization           |                      r $\in$ [-1, 1] |
-| Gradient clipping              | Gradient in [-1, 1] for output layer |
-| Network architecture           |      See Appendix ref:rl-network-def |
-|--------------------------------+--------------------------------------|
-| \epsilon-greedy annealing      |               Linear over 10^5 steps |
-| \epsilon-greedy minimum value  |                                  0.1 |
-|--------------------------------+--------------------------------------|
-|--------------------------------+--------------------------------------|
-#+LATEX: \clearpage
-* Appendix: DDQN Network Definition label:rl-network-def
-
-#+INCLUDE: "./template/keras.tex" export latex
-
-#+LATEX: \clearpage
-bibliography:~/uni/ma-thesis/bibliography/references.bib
-bibliographystyle:apacite
 * Footnotes
 
-[fn:1] https://pypi.org/project/simpy/
-
-* Footnotes
-
-[fn:5] See https://www.gps.gov/systems/gps/performance/accuracy, accessed
+[fn:1] See https://www.gps.gov/systems/gps/performance/accuracy, accessed
 23^{th} February 2019.
