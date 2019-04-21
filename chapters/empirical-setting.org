@@ -25,9 +25,11 @@ operating large fleets of electric vehicles. This research addresses the third
 point: Using electric carsharing fleets to smartly participate in electricity
 markets. Carsharing providers, like Car2Go and DriveNow, operate their
 carsharing fleets in a free-float model, which allows customers to pick up and
-drop vehicles at any place within the operating zone of the provider. Customers
-pay by the minute and are offered incentives to park the EVs at charging
-stations at the end of their trip.
+drop vehicles at any place within the operating zone of the provider.
+\red{Free float carsharing is inherently uncertain, additional challenge.}
+Customers pay by the minute and are offered incentives to park the EVs at
+charging stations at the end of their trip.
+
 
 # NOTE: Further description how data was collected? API, 5 minutes, etc..?
 We obtained real-world trip data from Daimler's carsharing service Car2Go.

@@ -19,6 +19,7 @@
 
 # Styling
 #+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \newcommand{\red}[1]{\textcolor{red}{[#1]}}
 
 # Source Code listings
 #+LATEX_HEADER: \usepackage{lmodern}
@@ -26,7 +27,6 @@
 #+LATEX_HEADER: \usepackage[newfloat]{minted}
 #+LATEX_HEADER: \usepackage{tcolorbox}
 #+LATEX_HEADER: \tcbuselibrary{minted}
-
 
 # Custom Notatation commands
 #+LATEX_HEADER: \usepackage{notation/rl}
