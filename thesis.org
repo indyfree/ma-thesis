@@ -217,12 +217,13 @@ bidding strategy by dynamically adjusting the bidding quantities. The bidding
 quantities $\Pb{}, \Pi{}$ are based on the evaluated risk associated with
 bidding on the individual electricity markets. In Chapter ref:sec-model-rl, we
 introduced a RL approach that learns the risk factors $\lb{}$, $\li{}$ based on
-its observed environment and received reward signals. In Appendix ref:app-b, the
-hyperparameters are presented which we used to train the dueling DDQN algorithm
-and solving the controlled charging problem under uncertainty. The values were
-determined manually through experimentation for the best results. The speed of
-convergence was also used as a criterion, since the training environment Google
-Colaboratory only allows up to 12 hours of computing time.
+its observed environment and received reward signals. In Appendix
+ref:app-rl-hyperparams, the hyperparameters are presented which we used to train
+the dueling DDQN algorithm and solving the controlled charging problem under
+uncertainty. The values were determined manually through experimentation for the
+best results. The speed of convergence was also used as a criterion, since the
+training environment Google Colaboratory only allows up to 12 hours of computing
+time.
 
 Further, the imbalance costs $\beta$ were set to an artificially high value to
 incentivize the agent to learn to always avoid imbalances. Whenever the agents
