@@ -569,25 +569,28 @@ have been taken to prepare the data for further analysis:
 #+ATTR_LATEX: :environment longtable :align lr :placement [hp]
 |--------------------------------+--------------------------------------|
 |--------------------------------+--------------------------------------|
-| Hyperparameter                 | Value                                |
+| Hyperparameter                 |                                Value |
 |--------------------------------+--------------------------------------|
-| Target network update interval | 10 000                               |
-| Optimizer                      | Adam cite:kingma14_adam              |
-| Batch size                     | 32                                   |
-| Learning rate                  | 10^{-4}                              |
-| Replay buffer size             | 40^6                                 |
-| Warm-up steps                  | 50 000                               |
-| Training steps                 | 10^6                                 |
-| Discount factor $\gamma$       | 0.99                                 |
-| Reward normalization           | r $\in$ [-1, 1]                      |
+| Target network update interval |                                 0.01 |
+| Optimizer                      |              Adam cite:kingma14_adam |
+| Batch size                     |                                   32 |
+| Learning rate                  |                              10^{-3} |
+| Replay buffer size             |                                 10^5 |
+| Warm-up steps                  |                                 1000 |
+| Training steps                 |                                 10^5 |
+| Discount factor $\gamma$       |                                 0.99 |
+| Reward normalization           |                      r $\in$ [-1, 1] |
 | Gradient clipping              | Gradient in [-1, 1] for output layer |
-| Network architecture           | [TODO]                               |
+| Network architecture           |      See Appendix ref:rl-network-def |
 |--------------------------------+--------------------------------------|
-| \epsilon-greedy annealing      | Linear over 10^6 steps               |
-| \epsilon-greedy minimum value  | 0.1                                  |
+| \epsilon-greedy annealing      |               Linear over 10^5 steps |
+| \epsilon-greedy minimum value  |                                  0.1 |
 |--------------------------------+--------------------------------------|
 |--------------------------------+--------------------------------------|
+#+LATEX: \clearpage
 * Appendix: DDQN Network Definition label:rl-network-def
+
+#+INCLUDE: "./template/keras.tex" export latex
 
 #+LATEX: \clearpage
 bibliography:~/uni/ma-thesis/bibliography/references.bib

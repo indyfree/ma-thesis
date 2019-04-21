@@ -6,12 +6,6 @@
 #+LATEX_HEADER: \onehalfspacing
 #+OPTIONS: H:4
 
-# TODO: Consider Paragraph and Float spacings
-# #+LATEX_HEADER: \setlength\floatsep{0pt plus 0pt minus 0pt}
-# #+LATEX_HEADER: \setlength\textfloatsep{0pt plus 0pt minus 0pt}
-# #+LATEX_HEADER: \setlength\intextsep{0pt plus 0pt minus 0 pt}
-# #+LATEX_HEADER: \setlength{\parskip}{0pt plus 0pt minus 0 pt}
-
 # Typography
 #+LATEX_HEADER: \usepackage[official]{eurosym}
 #+LATEX_HEADER: \usepackage{amsmath}
@@ -25,6 +19,14 @@
 
 # Styling
 #+LATEX_HEADER: \usepackage{xcolor}
+
+# Source Code listings
+#+LATEX_HEADER: \usepackage{lmodern}
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \usepackage[newfloat]{minted}
+#+LATEX_HEADER: \usepackage{tcolorbox}
+#+LATEX_HEADER: \tcbuselibrary{minted}
+
 
 # Custom Notatation commands
 #+LATEX_HEADER: \usepackage{notation/rl}
