@@ -1,0 +1,87 @@
+\newtcblisting{tcbpythoncode}[1][Python]{%
+  colback         = yellow!5        ,
+  colframe        = yellow!50!black ,
+  listing only                      ,
+  title           = #1              ,
+  halign title    = right           ,
+  fonttitle       = \bfseries       ,
+  listing engine  = minted          ,
+  minted language = python
+}
+\begin{tcbpythoncode}
+from keras.models import Sequential
+from keras.layers import Dense, Activation, Flatten
+
+# Define sequential neural network
+model = Sequential()
+model.add(Flatten(input_shape=(1,) + nb_states))
+model.add(Dense(16))
+model.add(Activation("relu"))
+model.add(Dense(16))
+model.add(Activation("relu"))
+model.add(Dense(16))
+model.add(Activation("relu"))
+model.add(Dense(nb_actions))
+model.add(Activation("linear"))
+
+# Print summary
+model.summary()
+\end{tcbpythoncode}
+
+\newtcblisting{output-tobi}[1][Console output]{%
+  colback         = white        ,
+  colframe        = gray,
+  listing only                      ,
+  title           = #1              ,
+  halign title    = left           ,
+  fonttitle       = \bfseries       ,
+  listing engine  = minted          ,
+  minted language = python
+}
+
+\begin{output-tobi}
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+flatten_2 (Flatten)          (None, 1)                 0
+_________________________________________________________________
+dense_6 (Dense)              (None, 16)                32
+_________________________________________________________________
+activation_5 (Activation)    (None, 16)                0
+_________________________________________________________________
+dense_7 (Dense)              (None, 16)                272
+_________________________________________________________________
+activation_6 (Activation)    (None, 16)                0
+_________________________________________________________________
+dense_8 (Dense)              (None, 16)                272
+_________________________________________________________________
+activation_7 (Activation)    (None, 16)                0
+_________________________________________________________________
+dense_9 (Dense)              (None, 121)               2057
+_________________________________________________________________
+activation_8 (Activation)    (None, 121)               0
+=================================================================
+Total params: 2,633
+Trainable params: 2,633
+Non-trainable params: 0
+\end{output-tobi}
+
+% \begin{minted}
+% [
+% frame=single,
+% framesep=2mm,
+% baselinestretch=1.2,
+% linenos
+% ]
+% {python}
+%     model = Sequential()
+%     model.add(Flatten(input_shape=(1,) + nb_states))
+%     model.add(Dense(16))
+%     model.add(Activation("relu"))
+%     model.add(Dense(16))
+%     model.add(Activation("relu"))
+%     model.add(Dense(16))
+%     model.add(Activation("relu"))
+%     model.add(Dense(nb_actions))
+%     model.add(Activation("linear"))
+% \end{minted}
