@@ -14,7 +14,7 @@ from keras.layers import Dense, Activation, Flatten
 
 # Define sequential neural network
 model = Sequential()
-model.add(Flatten(input_shape=(1,) + nb_states))
+model.add(Flatten(nb_states))
 model.add(Dense(16))
 model.add(Activation("relu"))
 model.add(Dense(16))
@@ -65,23 +65,3 @@ Total params: 2,633
 Trainable params: 2,633
 Non-trainable params: 0
 \end{output-tobi}
-
-% \begin{minted}
-% [
-% frame=single,
-% framesep=2mm,
-% baselinestretch=1.2,
-% linenos
-% ]
-% {python}
-%     model = Sequential()
-%     model.add(Flatten(input_shape=(1,) + nb_states))
-%     model.add(Dense(16))
-%     model.add(Activation("relu"))
-%     model.add(Dense(16))
-%     model.add(Activation("relu"))
-%     model.add(Dense(16))
-%     model.add(Activation("relu"))
-%     model.add(Dense(nb_actions))
-%     model.add(Activation("linear"))
-% \end{minted}
