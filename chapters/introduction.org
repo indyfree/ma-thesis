@@ -46,6 +46,10 @@ electricity delivery.
 # 2. Solution:  Model, Data, Results
 # TODO: Citation needed
 # consisting of operating reserve VPPs and spot market VPPs,
+# TODO: Motivate RL.
+#   - En-par/Better than human decision making in specialized tasks
+#   - Generalize, unknown environments, raw input,...
+#   - Citations therefore
 
 We state that participating in the balancing market and intraday market at the
 same time can mitigate risks and increase profits of the fleet. In this
@@ -136,5 +140,7 @@ curtailed. EV fleets equipped with special vehicle-to-grid (V2G) devices can
 feed the electricity back into the grid when there is more demand than supply.
 This mechanism increases the utilization of renewable electricity generation and
 reduces the total CO_2 emissions.
+
+# TODO: Bullet-point contributions
 
 #+LATEX: \clearpage
