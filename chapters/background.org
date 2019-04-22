@@ -256,7 +256,7 @@ cite:mashhour11_biddin_strat_virtual_power_plant_2,he16_optim_biddin_strat_batte
 textcite:mashhour11_biddin_strat_virtual_power_plant_2 used stationary battery
 storage to participate in the spinning reserve market and the day-ahead market
 at the same time. The authors developed a non-equilibrium model, which solves
-the presented mixed-integer program with Genetic Programming (GP). Contrarily,
+the presented mixed-integer program with genetic programming. Contrarily,
 we use a model-free RL agent that learns an optimal policy (i.e., a trading
 strategy) from actions it takes in the environment (i.e., bidding on electricity
 markets). Using a model-free approach is especially beneficial for us, since
@@ -341,9 +341,9 @@ can not be fulfilled, result in substantial penalties from the system operator
 or electricity exchange. In other words, fleet operators have to avoid buying
 any amount of electricity, which they can't be sure to charge with available EVs
 at the delivery time. To address this issue, the authors developed a mean
-asymmetric weighted (MAW) objective function. They used it for their time-series
-based prediction model, to penalize committing an EV to VPP when it would have
-been rented out otherwise. Because of the two issues mentioned above,
+asymmetric weighted objective function. They used it for their time-series based
+prediction model, to penalize committing an EV to VPP when it would have been
+rented out otherwise. Because of the two issues mentioned above,
 textcite:kahlen18_elect_vehic_virtual_power_plant_dilem could only make very
 conservative estimations and commitments of overall available trading capacity,
 resulting in a high amount of missed profits. This effect is especially
