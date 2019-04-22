@@ -295,23 +295,47 @@ with bidding on the markets.
 
 # NOTE: Results heavily dependent on industry charging price, since on average
 # the balancing prices are 50% cheaper, and intraday 30% cheaper. Perform a run?
-The uncertainty of the available fleet charging power forecast plays an
-important role in determining the optimal bidding quantity. If the fleet
-controller is certain about the number of connected EVs that it can use for VPP
-activities in the future, it can aggressively trade the available charging power
-on the markets, without having to worry to turn away customers or facing risk of
-not being able to charge to committed amount. Since our model assumes
 
+The ability to accurately forecast the available fleet charging power plays an
+important role in determining the optimal bidding quantity to submit to the
+markets. If the fleet controller is certain about the number of connected EVs
+that it can use for VPP activities in the future, it can aggressively trade the
+available charging power on the markets, without being concerned about turning
+away customers or facing risk of not being able to charge to committed amount.
+In our previous experiments, we assumed a fixed prediction accuracy that we set
+to an estimate of what modern mobility demand forecasts capabilities. In order
+to test the robustness of the results and their dependence on the prediction
+accuracy, we conducted a sensitivity analysis. Therefore, we run five simulation
+runs of with the proposed control method, but fixated the prediction accuracy to
+increasing levels from 50% to 100% accurate forecasts, 7 days and 30 minutes
+ahead.
 
-*** Prediction Accuracy
-- Compare profits of (50%, 60%, 70%, 80%, 90%, 100%)
+#+CAPTION[Sensivity Analysis: Prediction Accuracy]: Sensivity Analysis: Prediction Accuracy label:fig-sens-accuracy
+#+ATTR_LATEX: :width 1\linewidth :placement [htbp]
+[[../fig/rl-accuracy.png]]
 
-*** Charging infrastructure
-- Fastchargers (22kw)
-- Tesla (Bigger battery, big charger)
-- Car batteries
-- More Charging Stations (infer charging stations)
+In Table ref:fig-sens-accuracy the results of the sensitivity analysis are
+presented. The left plot shows the effect of the prediction accuracy on the
+total gross profit increase, whereas the right plot shows the effect on the
+learned risk factors of the RL agent. Intuitively the realized profits increase
+with rising accuracy of the forecasts, while the estimated risk factors decrease
+with more accurate forecasts. \red{Sentence to learned risk factors} Remarkably,
+the magnitude of the effect on the profit increase is very prominent. After 1.5
+years of simulation time, a RL agent that can rely on perfect predictions (100%
+accuracy) generates almost twice as much profits from trading electricity than
+an agent that can only rely on predictions with 50% and 60% accuracy, 7 days and
+30 minutes ahead respectively. It is striking that the prediction accuracy has a
+larger effect \red{Quantitize!?} on the realized profits than the type of
+bidding strategy or choice of RL algorithm, which we examined in the previous
+chapters.
 
+# (48346 $\eur$ versus 96245 $\eur$)
+#+BEGIN_SRC python :exports none
+    return(96.24/48.33)
+#+END_SRC
+
+#+RESULTS:
+: 1.9913097454996895
 #+LATEX: \clearpage
 
 * Footnotes
