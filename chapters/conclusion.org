@@ -61,59 +61,80 @@ markets to the greatest extent possible without causing imbalances. Forth, we
 proposed the usage of a RL agent that learns to optimize the composition of the
 VPP portfolio and the associated risks of bidding on the markets. The agent
 dynamically determines a risk factor, depending available and predicted fleet
-and market information. Therefore, we formulated a MDP that is designed to work
-in previously unknown environments and uncertain conditions. The RL agent is
-designed with the focus on real-world applicability, generalizability and fast
-convergence rates. We expect the proposed approach to work with a variety of
-different EVs (e.g., electronic bikes) and independent of the fleets
-geographical location.
+and market information. Therefore, we formulated a MDP that is designed for
+agents to work in previously unknown environments and uncertain conditions. The
+RL agent is designed with the focus on real-world applicability and fast
+convergence rates. Because we aimed for generalizability, we expect the proposed
+approach to work in a variety of different settings, with different kinds of EVs
+(e.g., electronic bikes) and independent of the geographical location of the
+fleet.
 
-# - not limited to the training data set
+# - RL can learn to dynamically adjust bidding quantities by learning risk
+#   associated with bidding on each market. (What are the risks?)
+# - obtained better results than similar studies in the field. (how much and which?)
 
-# - obtained better results than similar studies in the
-# field. (how much and which?)
-
+# NOTE Sec: What we have found (include key numbers)
 # TODO: Double check numbers!
 We evaluated the proposed method with real-world carsharing data from Car2go in
-Stuttgart and German electricity market data from June 2017 till January 2018.
-The results show that our approach would increase the gross profits of the fleet
-by roughly 78 000 $\eur$ over the 1.5 year period. Free float carsharing has
-inherently uncertain demand patterns, since cars can be freely parked and picked
-up within the city area.
+Stuttgart and German electricity market data from June 2017 until January 2018.
+The results show that the developed method improves existing approaches and
+would increase the gross profits of the fleet by roughly $78 000\; \eur$ over
+the 1.5 year period. Since free float carsharing has inherently uncertain demand
+patterns, better results are expected with other kinds of EV fleets. We found
+that the integrated bidding strategy generates 49%-54% more profits, compared to
+the naive benchmark strategies. Fleet controllers following the integrated
+bidding strategy, can mitigate risks and increase profits by exploiting market
+properties of both markets. Further, we showed that the proposed RL agent can
+optimize the integrated bidding strategy under uncertainty by roughly 15%,
+almost \red{how much?} reaching the optimal solution with full information
+available. The agent was able to successfully estimate the bidding risk, avoid
+imbalances and keeping lost rentals to a minimum.
+\red{Balancing power, stabilized the grid}
+Additionally, we tested and compared the performance of
+modern RL algorithms and found that recent advances in deep RL do improve the
+robustness and convergence rates in real-world applications. Despite these
+improvements, all RL approaches needed more than 1.5 years of simulation time to
+learn to avoid imbalances penalties, which makes RL agents unsuitable to deploy
+in unseen fleet environments without prior training data. A sensitivity analysis
+of the prediction accuracy of the fleet balancing power showed that the accuracy
+has large impact on the fleet profitability. If the controllers predictions are
+very uncertain, the RL agent estimates high bidding risks and can only offer
+conservative amounts of balancing power on the markets. Surprisingly, the effect
+of prediction accuracy on the total gross profit increase is larger than the
+choice of bidding strategy or RL algorithm architecture, which leaves room for
+future research.
 
-At the same time the VPP activities have an environmental impact by reducing
-CO_2 through more efficient use of renewables.
 
-# Insights:
+
+# Contribution:
+- Integrated bidding strategy exploit multiple markets properties
+- Online learning algorithm (difference? -- real data?)
+- Advantage over forecast like Kahlen: General, unseen, etc..
+
+
+# Numbers:
+# - Profits total
+# - Comparison with benchmark (profits, mwh, utilization(!?))
+# - RL
+# - Sensitivity
+#
+
+# Practical Insights/Summary:
 # - RL works good
-# - Prediction is important
+# - Modern Deep RL architectures matter
+# - Prediction is more (?) important
+# - At the same time the VPP activities have an environmental impact by reducing
+# CO_2 through more efficient use of renewables. --> Grid needs to get rid of
+# surpluss electricity fast
+Impact on grid: Balancing power, mention balancing power.
 
-# NOTE Sec: What we have found
-- What we have shown/found (include key numbers)
-  - 1. RQ
-    - Integrated improves existing approaches
-    - Mitigate risk & improve profits through exploitation of different market setups
-  - 2. RQ
-    - RL Algorithm that
-    - Online learning algorithm (difference? -- real data?)
-    - RL can learn to dynamically adjust bidding quantities by learning risk
-      associated with bidding on each market. (What are the risks?)
-    - RL Architecture/Advancements matters
-    - RL takes a long time to learn
-    - Charging infrastructure & Advancement in battery technology/charging
-       technology matters
-
-# NOTE Sec: Discuss !
+# NOTE Sec: Discuss !!
 Discuss:
-- In free float carsharing, mobility demand patterns are extremely uncertain.
-  $\rightarrow$ lower bound.
-
 - Compare to other studies!
   - Fleet Charging
     - No uncertainty
     - Only one market
     - No sensitivity on accuracy prediction (We found very important)
-  - RL
   - Other approaches (VPP, stochastic)
        cite:kahlen18_elect_vehic_virtual_power_plant_dilem (no imbalance costs!)
        cite:vandael15_reinf_learn_heuris_ev_fleet
@@ -146,6 +167,8 @@ Discuss:
   - Training time in real time. Generalization to other cities?
 ** Future Research
 
+- This result shows that leaving promising room for future research of highly
+accurate mobility demand algorithms.
 - Model:
     - Investigate modern/current market design, that changed their bidding
       mechanisms to to better integrate renewable energy generators.
@@ -158,3 +181,4 @@ Discuss:
 - Prediction Algorithms improvement, reference to sensitivity analysis
 
 #+LATEX: \clearpage
+

@@ -151,15 +151,18 @@ strategies are resulting in 49%-54% more profits for the fleet than the single
 market strategies.
 
 A controller bidding according to the /Integrated (risk-averse)/ strategy, pays
-on average $0.10 \ekwh$ less than other risk-averse strategies. A controller
-with an /Integrated (risk-seeking)/ strategy, is even more profitable, despite
-having to account for lost rental profits. On the other side, the controller
-caused imbalances (highlighted red) which lead to high (unknown) market
-penalties or even exclusion from bidding activities. For this reason, imbalances
-need to be avoided, regardless of potential profits from a higher VPP
-utilization. We expect that the proposed RL agent learns a bidding strategy,
-which avoids imbalances while increasing profits at the same time. The upper
-bound of the optimal strategy /Integrated (full information)/.
+on average \red{$0.10 \ekwh$  How much?} less for charging the fleet than other
+risk-averse strategies. A controller with an /Integrated (risk-seeking)/
+strategy, is even more profitable, despite having to account for lost rental
+profits. On the other side, the controller caused imbalances (highlighted red)
+which lead to high (unknown) market penalties or even exclusion from bidding
+activities. For this reason, imbalances need to be avoided, regardless of
+potential profits from a higher VPP utilization. We expect that the proposed RL
+agent learns a bidding strategy, which avoids imbalances while increasing
+profits at the same time. The upper bound of the optimal strategy /Integrated
+(full information)/.
+
+\red{Balancing power, stability}
 
 # TODO: Explain VPP Utilization?
 # TODO: Risk-seeking should be lower, here: profits from buying energy, which
@@ -200,8 +203,9 @@ return(87.98 - 15.47)
 
 ** Reinforcement Learning Portfolio Optimization
 # NOTE: What about confidence intervals - Mean?
-# TODO: No mention of risk factors except for summary. Include numbers or graphs
-# of risks factors?
+# TODO: No mention of risk factors except for summary? Include numbers or graphs
+# of risks factors? --> Sensivity
+# NOTE: Possibly include numbers per EV
 
 Research Question 2 investigates whether a RL agent can optimize the integrated
 bidding strategy by dynamically adjusting the bidding quantities. The bidding
@@ -235,6 +239,7 @@ procured more electricity from the market that it can charge. To reach the
 optimal solution the gross profits would need to be increased by 3% further.
 Similarly, the RL algorithm increases the amount of electricity that the fleet
 charges from the electricity markets while avoiding imbalance at the same time.
+\red{Balancing power, renewables}
 
 In another experiment, we evaluated the performance of the proposed RL algorithm
 in comparison to other RL algorithms with a simpler architecture. In particular,
@@ -301,14 +306,14 @@ important role in determining the optimal bidding quantity to submit to the
 markets. If the fleet controller is certain about the number of connected EVs
 that it can use for VPP activities in the future, it can aggressively trade the
 available charging power on the markets, without being concerned about turning
-away customers or facing risk of not being able to charge to committed amount.
-In our previous experiments, we assumed a fixed prediction accuracy that we set
-to an estimate of what modern mobility demand forecasts capabilities. In order
-to test the robustness of the results and their dependence on the prediction
-accuracy, we conducted a sensitivity analysis. Therefore, we run five simulation
-runs of with the proposed control method, but fixated the prediction accuracy to
-increasing levels from 50% to 100% accurate forecasts, 7 days and 30 minutes
-ahead.
+away customers or facing the risk of not being able to charge the committed
+amount. In our previous experiments, we assumed a fixed prediction accuracy that
+we set to an estimate of what modern mobility demand forecasts capabilities. In
+order to test the robustness of the results and their dependence on the
+prediction accuracy, we conducted a sensitivity analysis. Therefore, we run five
+simulation runs with the previously introduced RL approach but fixated the
+prediction accuracy to increasing levels from 50% to 100% accurate forecasts, 7
+days and 30 minutes ahead.
 
 #+CAPTION[Sensivity Analysis: Prediction Accuracy]: Sensivity Analysis: Prediction Accuracy label:fig-sens-accuracy
 #+ATTR_LATEX: :width 1\linewidth :placement [htbp]
@@ -317,15 +322,15 @@ ahead.
 In Table ref:fig-sens-accuracy the results of the sensitivity analysis are
 presented. The left plot shows the effect of the prediction accuracy on the
 total gross profit increase, whereas the right plot shows the effect on the
-learned risk factors of the RL agent. Intuitively the realized profits increase
+learned risk factors of the RL agent. Intuitively the realized profit increases
 with rising accuracy of the forecasts, while the estimated risk factors decrease
 with more accurate forecasts. \red{Sentence to learned risk factors} Remarkably,
 the magnitude of the effect on the profit increase is very prominent. After 1.5
 years of simulation time, a RL agent that can rely on perfect predictions (100%
-accuracy) generates almost twice as much profits from trading electricity than
+accuracy) generates almost twice as much profit from trading electricity than
 an agent that can only rely on predictions with 50% and 60% accuracy, 7 days and
 30 minutes ahead respectively. It is striking that the prediction accuracy has a
-larger effect \red{Quantitize!?} on the realized profits than the type of
+larger effect \red{Quantitize!?} on the realized profit than the type of
 bidding strategy or choice of RL algorithm, which we examined in the previous
 chapters.
 
