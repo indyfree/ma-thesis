@@ -222,17 +222,17 @@ takes an action that causes imbalances (i.e., bid too much electricity), it will
 receive a highly negative reward signal, leading to a low estimated Q-value of
 that chosen action in a specific state.
 
-#+CAPTION[Comparison of gross profit results]: Comparison of gross profits and traded electricity between the proposed optimized integrated strategy and the other three naive charging strategies. The RL algorithm improves the achieved gross profit increase of the integrated bidding strategy on average by 16% and accomplishes nearly optimal results when compared to the benchmark strategy. label:fig-rl-profits
+#+CAPTION[Comparison of gross profit results]: Comparison of gross profits and traded electricity between the proposed optimized integrated strategy and the other three naive charging strategies. The RL algorithm improves the achieved gross profit increase of the integrated bidding strategy on average by 12% and accomplishes nearly optimal results when compared to the benchmark strategy. label:fig-rl-profits
 #+ATTR_LATEX: :width 1\linewidth :placement [h]
 [[../fig/rl-results.png]]
 
 In Figure ref:fig-rl-profits, the performance of the optimized integrated
 bidding strategy is presented. The proposed RL algorithm increases the gross
 profits of the fleet on average (n=5) by approximately 72-75% when compared with
-the naive single market strategies and by approximately 16% when compared with
+the naive single market strategies and by approximately 12% when compared with
 the naive integrated strategy. In none of the tested strategies the controller
 procured more electricity from the market that it can charge. To reach the
-optimal solution the gross profits would need to be increased by 1.5% further.
+optimal solution the gross profits would need to be increased by 3% further.
 Similarly, the RL algorithm increases the amount of electricity that the fleet
 charges from the electricity markets while avoiding imbalance at the same time.
 
