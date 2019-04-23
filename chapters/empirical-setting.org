@@ -42,10 +42,10 @@ processing steps outlined.
 ** Electronic Vehicle Fleet Data label:sec-data-car2go
 # NOTE: Here only description of data, no general blabla
 The Car2Go dataset consists of GPS data of around 500 Smart ED3 Fortwo vehicles
-in Stuttgart. These subcompact cars are equipped with a 17.6kWh battery and a
+in Stuttgart. These subcompact cars are equipped with a 17.6 kWh battery and a
 standard 3.6kW on-board charger. They fully charge in about six to seven hours
-and can reach a maximum driving distance of 145km according to the manufacturer.
-When equipped with an additional 22kW fast charger the charging time reduces to
+and can reach a maximum driving distance of 145 km according to the manufacturer.
+When equipped with an additional 22 kW fast charger the charging time reduces to
 about an hour.
 
 # TODO: Include trip prices
@@ -180,7 +180,7 @@ point in time. Additionally, the TSOs of the buyer and seller are listed in the
 dataset. They are only relevant if special conditions between TSO apply, for
 example when delivering electricity to other countries.
 
-#+CAPTION[Critical electricity prices]: Daily critical electricity market prices (average, standard deviation) from June 6, 2016 to January 1, 2018. Highly volatile prices, e.g., between 12:00 and 14:00, illustrate the benefits of an integrated trading strategy, which considers trading on both markets depending on the market conditions.
+#+CAPTION[Critical electricity prices]: Daily critical electricity market prices (average, standard deviation) from June 2016 to January 2018. Highly volatile prices, e.g., between 12:00 and 14:00, illustrate the benefits of an integrated trading strategy, which considers trading on both markets depending on the market conditions.
 #+ATTR_LATEX: :width 1\linewidth :placement [hp]
 [[../fig/critical-prices.png]]
 
