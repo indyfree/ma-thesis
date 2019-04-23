@@ -8,6 +8,19 @@
   listing engine  = minted          ,
   minted language = python
 }
+
+\newtcblisting{output-tobi}[1][Console output]{%
+  colback         = white        ,
+  colframe        = gray,
+  listing only                      ,
+  title           = #1              ,
+  halign title    = left           ,
+  fonttitle       = \bfseries       ,
+  listing engine  = minted          ,
+  minted language = python
+}
+
+\setminted{fontsize=\small,baselinestretch=1}
 \begin{tcbpythoncode}
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Flatten
@@ -27,17 +40,6 @@ model.add(Activation("linear"))
 # Print summary
 model.summary()
 \end{tcbpythoncode}
-
-\newtcblisting{output-tobi}[1][Console output]{%
-  colback         = white        ,
-  colframe        = gray,
-  listing only                      ,
-  title           = #1              ,
-  halign title    = left           ,
-  fonttitle       = \bfseries       ,
-  listing engine  = minted          ,
-  minted language = python
-}
 
 \begin{output-tobi}
 _________________________________________________________________
