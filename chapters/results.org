@@ -307,13 +307,13 @@ markets. If the fleet controller is certain about the number of connected EVs
 that it can use for VPP activities in the future, it can aggressively trade the
 available charging power on the markets, without being concerned about turning
 away customers or facing the risk of not being able to charge the committed
-amount. In our previous experiments, we assumed a fixed prediction accuracy that
-we set to an estimate of what modern mobility demand forecasts capabilities. In
-order to test the robustness of the results and their dependence on the
-prediction accuracy, we conducted a sensitivity analysis. Therefore, we run five
-simulation runs with the previously introduced RL approach but fixated the
-prediction accuracy to increasing levels from 50% to 100% accurate forecasts, 7
-days and 30 minutes ahead.
+amount of electricity. In our previous experiments, we assumed a fixed
+prediction accuracy that we set to an estimate of what modern mobility demand
+forecasts algorithms can achieve. In order to test the robustness of the results
+and their dependence on the prediction accuracy, we conducted a sensitivity
+analysis. Therefore, we tested the previously introduced RL approach with
+increasing levels of predecition accuracy, from 50% to 100% accuracate forecasts
+7 days and 30 minutes ahead.
 
 #+CAPTION[Sensivity Analysis: Prediction Accuracy]: Sensivity Analysis: Prediction Accuracy label:fig-sens-accuracy
 #+ATTR_LATEX: :width 1\linewidth :placement [htbp]
@@ -322,17 +322,29 @@ days and 30 minutes ahead.
 In Table ref:fig-sens-accuracy the results of the sensitivity analysis are
 presented. The left plot shows the effect of the prediction accuracy on the
 total gross profit increase, whereas the right plot shows the effect on the
-learned risk factors of the RL agent. Intuitively the realized profit increases
+learned risk factors of the RL agent. Intuitively, the realized profit increases
 with rising accuracy of the forecasts, while the estimated risk factors decrease
-with more accurate forecasts. \red{Sentence to learned risk factors} Remarkably,
-the magnitude of the effect on the profit increase is very prominent. After 1.5
-years of simulation time, a RL agent that can rely on perfect predictions (100%
-accuracy) generates almost twice as much profit from trading electricity than
-an agent that can only rely on predictions with 50% and 60% accuracy, 7 days and
-30 minutes ahead respectively. It is striking that the prediction accuracy has a
-larger effect \red{Quantitize!?} on the realized profit than the type of
-bidding strategy or choice of RL algorithm, which we examined in the previous
-chapters.
+with more accurate forecasts.
+
+Interestingly, the RL agent does not always estimate higher risks for bidding on
+the balancing market than on the intraday market,  despite lower accuracy levels
+for predicting the available charging power 7 days ahead than 30 minutes ahead.
+This result indicates that the RL performance underlies some variations. The
+agent succesfully learns to avoid imbalances first by estimating a high total
+risk and only later learns to optimize the portfolio by fine-tuning the risk
+factors of both markets. We are confident that the agent's limited amount of
+training steps is the reason of these variations in learning success and expect
+to achieve more robust results with a increased training time.
+
+Also remarkable is the magnitude of the prediction accuracy's effect on the
+profit increase. After 1.5 years of simulation time, a RL agent that can rely on
+perfect predictions (100% accuracy) generates almost twice as much profit from
+trading electricity than an agent that can only rely on predictions with 50% and
+60% accuracy, 7 days and 30 minutes ahead respectively. It is striking that the
+prediction accuracy has a larger effect (99.13% profit increase between lowest
+and highst accuracy) on the realized profit than the type of bidding strategy
+(73.10% profit increase between worst and best strategy), which we examined in
+the previous sections, leaving room for future research.
 
 # (48346 $\eur$ versus 96245 $\eur$)
 #+BEGIN_SRC python :exports none
