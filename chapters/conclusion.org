@@ -18,7 +18,7 @@ the business model of the fleet.
 
 # NOTE Sec: Problem
 # NOTE Mention risks? Mention portfolio (optimization)?
-However, there are certain risks associated  with this business model extension.
+However, there are certain risks associated with this business model extension.
 EVs can only be allocated to a VPP portfolio if they are connected to a charging
 station and have sufficient free battery capacity available, information which
 is unknown to the fleet at the time of market commitment. This uncertainty makes
@@ -55,19 +55,19 @@ we proposed a novel integrated bidding strategy that offers balancing services
 of a VPP portfolio to multiple electricity markets simultaneously. Instead of
 submitting only conservative amounts of battery capacity to a single market,
 like previous studies did
-cite:kahlen18_elect_vehic_virtual_power_plant_dilem,kahlen17_fleet, our proposed
+cite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem, our proposed
 strategy aims to maximize profits by procuring electricity from the multiple
 markets to the greatest extent possible without causing imbalances. Forth, we
 proposed the usage of a RL agent that learns to optimize the composition of the
 VPP portfolio and the associated risks of bidding on the markets. The agent
-dynamically determines a risk factor, depending available and predicted fleet
-and market information. Therefore, we formulated a MDP that is designed for
-agents to work in previously unknown environments and uncertain conditions. The
-RL agent is designed with the focus on real-world applicability and fast
-convergence rates. Because we aimed for generalizability, we expect the proposed
-approach to work in a variety of different settings, with different kinds of EVs
-(e.g., electronic bikes) and independent of the geographical location of the
-fleet.
+dynamically determines risk factors, dependent on available and predicted fleet
+information and market conditions. Therefore, we formulated a MDP that is
+designed for agents to work in previously unknown environments and uncertain
+conditions. The RL approach was developed with the focus on real-world
+applicability, fast convergence rates and generalizability. We expect the
+proposed approach to work in a variety of different settings, with different
+kinds of EVs (e.g., electronic bikes), independent of the geographical location
+of the fleet.
 
 # - RL can learn to dynamically adjust bidding quantities by learning risk
 #   associated with bidding on each market. (What are the risks?)
@@ -75,78 +75,78 @@ fleet.
 
 # NOTE Sec: What we have found (include key numbers)
 # TODO: Double check numbers!
-We evaluated the proposed method with real-world carsharing data from Car2go in
-Stuttgart and German electricity market data from June 2017 until January 2018.
-The results show that the developed method improves existing approaches and
-would increase the gross profits of the fleet by roughly $78 000\; \eur$ over
-the 1.5 year period. Since free float carsharing has inherently uncertain demand
-patterns, better results are expected with other kinds of EV fleets. We found
-that the integrated bidding strategy generates 49%-54% more profits, compared to
-the naive benchmark strategies. Fleet controllers following the integrated
-bidding strategy, can mitigate risks and increase profits by exploiting market
-properties of both markets. Further, we showed that the proposed RL agent can
-optimize the integrated bidding strategy under uncertainty by roughly 15%,
-almost \red{how much?} reaching the optimal solution with full information
-available. The agent was able to successfully estimate the bidding risk, avoid
-imbalances and keeping lost rentals to a minimum.
-\red{Balancing power, stabilized the grid}
-Additionally, we tested and compared the performance of
-modern RL algorithms and found that recent advances in deep RL do improve the
-robustness and convergence rates in real-world applications. Despite these
-improvements, all RL approaches needed more than 1.5 years of simulation time to
-learn to avoid imbalances penalties, which makes RL agents unsuitable to deploy
-in unseen fleet environments without prior training data. A sensitivity analysis
-of the prediction accuracy of the fleet balancing power showed that the accuracy
-has large impact on the fleet profitability. If the controllers predictions are
-very uncertain, the RL agent estimates high bidding risks and can only offer
-conservative amounts of balancing power on the markets. Surprisingly, the effect
-of prediction accuracy on the total gross profit increase is larger than the
-choice of bidding strategy or RL algorithm architecture, which leaves room for
-future research.
+The proposed method was evaluated in a series of expriments with real-world
+carsharing data from Car2go in Stuttgart and German electricity market data from
+June 2017 until January 2018. The results show that the developed method
+improves existing approaches and would increase the gross profits of the fleet
+by roughly $74 000\; \eur$ over a 1.5 year period. We found that the integrated
+bidding strategy generates 49%-54% more profits, compared to the naive benchmark
+strategies. Fleet controllers following the integrated bidding strategy can
+mitigate risks and increase profits by exploiting market properties of both
+markets. The fleet would also contribute to the integration of renewable energy
+resources by providing around 1400 MWh of balancing power to stabilize the
+electrical power grid. Since the inherently uncertain demand patterns of free
+float carsharing are imposing additional challenges on providing balancing
+services, better results are expected with other kinds of EV fleets.
 
+Further, we showed that the proposed RL agent can optimize the integrated
+bidding strategy under uncertainty by roughly 12%, missing the optimal result of
+a bidding strategy with full information available by only 3%. The agent was
+able to successfully estimate the bidding risk, avoid imbalances and keeping
+lost rentals to a minimum. Additionally, we tested and compared the performance
+of various modern RL algorithms and found that recent advances in deep RL do
+improve the robustness and convergence rates in real-world applications. Despite
+these improvements, all RL approaches needed more than 1.5 years of simulation
+time to learn to avoid imbalance penalties, which makes a RL approach unsuitable
+to deploy in unseen fleet environments without prior training data. A
+sensitivity analysis showed that the prediction accuracy of available fleet
+charging power has large impact on the fleet profitability. If the controllers
+predictions are very uncertain, the RL agent estimates high bidding risks and
+can only offer conservative amounts of balancing power on the markets.
+Surprisingly, the effect of prediction accuracy on the total gross profit
+increase is larger than the choice of bidding strategy, which emphasizes the
+need for highly accurate mobility demand forecasting algorithms.
 
+Our results compare well to other studies, while
+textcite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem reported
+an annual profit increase of up to $121 \eur$ (163$) per EV, the experiment
+conducted in this thesis yielded an increase of $111 \eur$ from charging cheaper
+than the regular industry price. In their model however, the authors did not
+take imbalance cost into account, which we found to be a determining factor in
+the bidding process. When examining a RL approach of EV fleet charging
+schedules, textcite:vandael15_reinf_learn_heuris_ev_fleet reported that after 20
+to 30 days of training, the algorithm converged to a near-optimal solution. In
+our experiments, convergence was reached only after training more than 1.5 years
+of simulation time. In contrast to their study, which focused the day-ahead
+market, our research focused the balancing market, where participants can not
+self-balance their portfolio on other markets, but are charged high imbalance
+penalties. Therefore, it was a hard requirement for our proposed RL agent to
+learn to never cause imbalances. Imbalances can occur up to one week after the
+agent decided on a risk factor for a single bid, which makes it challenging to
+connect the long-delayed reward signal to the taken action.
+textcite:chis16_reinf_learn_based_plug_in investigated a RL approach to reduce
+charging costs of an individual EV and reported cost savings of 10% to 50%.
+While the authors consider a fixed driving schedule of a single EV, our research
+considered charging an EV fleet with previously unknown mobility patterns.
+Despite the additional uncertainty, we could achieve a cost reduction of
+charging the fleet by 25%.
 
-# Contribution:
-- Integrated bidding strategy exploit multiple markets properties
-- Online learning algorithm (difference? -- real data?)
-- Advantage over forecast like Kahlen: General, unseen, etc..
+# NOTE: Mention Exploitation-Exploration dilemma?
 
-
-# Numbers:
-# - Profits total
-# - Comparison with benchmark (profits, mwh, utilization(!?))
-# - RL
-# - Sensitivity
-#
-
-# Practical Insights/Summary:
+# NOTE: Practical Insights/Summary:
 # - RL works good
 # - Modern Deep RL architectures matter
 # - Prediction is more (?) important
 # - At the same time the VPP activities have an environmental impact by reducing
-# CO_2 through more efficient use of renewables. --> Grid needs to get rid of
-# surpluss electricity fast
-Impact on grid: Balancing power, mention balancing power.
+#     CO_2 emissions through more efficient use of renewables. By adding more
+#     balancing power renewable energy generation does not to be curtailed.
+#     Grid needs to get rid of surplus electricity fast
 
 # NOTE Sec: Discuss !!
-Discuss:
-- Compare to other studies!
-  - Fleet Charging
-    - No uncertainty
-    - Only one market
-    - No sensitivity on accuracy prediction (We found very important)
-  - Other approaches (VPP, stochastic)
-       cite:kahlen18_elect_vehic_virtual_power_plant_dilem (no imbalance costs!)
-       cite:vandael15_reinf_learn_heuris_ev_fleet
-
-- Discuss results?
-  - Gross profits small - Mention before?
-  - Policy
-  - Investment
-  - V2G?
-  - Market Setup
+# - Advantage over forecast like Kahlen: General approach, unseen environments
 
 ** Limitations
+
 # We don't take market dynamics into account
 # # NOTE: Citatation from kahlen
 # The fleet controller offers bids and asks for every time interval. These offers
