@@ -145,40 +145,54 @@ charging the fleet by 25%.
 # NOTE Sec: Discuss !!
 # - Advantage over forecast like Kahlen: General approach, unseen environments
 
-** Limitations
+** Limitations and Future Work
 
-# We don't take market dynamics into account
-# # NOTE: Citatation from kahlen
-# The fleet controller offers bids and asks for every time interval. These offers
-# contain both a quantity and a reservation price, which depends on the state of
-# charge of the EV storage, as well as on the battery costs. However, the market
-# may or may not accept these offers depending on the composition of the offer
-# prices from the fleet owner and other market participants. The market auction
-# mechanism ultimately decides when EVs will charge and discharge.
+The conducted research has certain limitations related to the modeled
+electricity markets. First, we assume that future price information of the
+markets are available to the fleet controller. The controller exploits this
+information to optimally place bids, resulting that the bids always get accepted
+by the market at the best possible price. Although highly accurate forecasting
+algorithms exists cite:avci18_manag_elect_price_model_risk, we eliminated the
+remaining uncertainty completely. In reality, the markets may or may not accept
+the offered balancing services, which can compromise the profit of the fleet
+when it has to charge at the regular industry price instead. Second, at
+regulation level, the electricity markets are currently not easily accessible to
+single EVs, EV fleets or small VPPs. For example, the GCRM only allows
+participants which can provide a minimum quantity of 1 MW balancing power over a
+4-hour period. Since this is barely possible with a typical EV fleet consisting
+of 500 EVs with unknown rental patterns and the present charging infrastructure,
+this constraint was ignored in our model. We propose changes in the current
+market design to give equal access to DER, like EVs, and small-scale renewable
+energy sources. If we want to phase out conventional power plants, and increase
+the share of renewables in the energy mix, dependable balancing power needs to
+be provided from other resources, such as EVs. The markets should introduce
+bidding segments of 15 minutes or less, instead of 4 to 8 hour slots. Moreover,
+should the time between auction and physical delivery of balancing power be
+reduced as far as possible, to mitigate forecasting errors of available
+balancing power, which a major obstacle for renewable energy generators.
 
-- Model:
-  - Bidding Mechanism: one week ahead, always accepted
-  - Policy & Regulation: EVs not allowed to provide balancing power, minimum
-    bidding quantities 1MW.
-  - Markets: Fleet is a price-taker, what about larger fleets? Simulate market influence
-  - Deny rentals only in the same market period (More deny, less imbalance)
-- RL: See cite:vazquez-canteli19_reinf_learn_deman_respon conclusion for
-  limitations.
-  - Training time in real time. Generalization to other cities?
-** Future Research
+Future research should investigate, how these market design changes and
+modifications in the pricing structure e.g. the German "Mischpreisverfahren"
+introduced in X effects the profitability of using EV VPPs for providing
+balancing power.
 
-- This result shows that leaving promising room for future research of highly
-accurate mobility demand algorithms.
-- Model:
-    - Investigate modern/current market design, that changed their bidding
-      mechanisms to to better integrate renewable energy generators.
-      - Daily/Day-ahead tenders with 4 hour market periods.
+In terms of the developed model, we detected challenges in the convergence rate
+of the online learning method, which compromised the applicability of such an
+algorithm in a realistic setting without available training data. The reward
+structure of long-delayed imbalances
 
-      Mischpreisverfahren
+Future research can also investigate how a RL approach compares against
+stochastical programming methods like in
+cite:pandzic13_offer_model_virtual_power_plant. It has to be noted that RL is
+not always the best solution for all the problems. (See
+cite:vazquez-canteli19_reinf_learn_deman_respon conclusion for)
 
-       i.e. daily w/ 4h slots. German "Mischpreisverfahren"
-- RL: Long-delayed rewards, different reward structure, memory based
-- Prediction Algorithms improvement, reference to sensitivity analysis
+We also like to emphasize the need for highly accurate mobility demand
+forcasting algorithms. Without, ... we found...
+
+This result shows that leaving promising room for future research of highly
+accurate mobility demand algorithms. Prediction Algorithms improvement,
+reference to sensitivity analysis
 
 #+LATEX: \clearpage
 
