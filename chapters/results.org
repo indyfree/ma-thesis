@@ -148,19 +148,20 @@ their single market counterparts. The controller is able to capitalize on the
 most favorable market conditions and better utilizes the VPP by buying more
 electricity from the markets than charging the EVs regularly. The integrated
 strategies are resulting in 49%-54% more profits for the fleet than the single
-market strategies.
+market strategies and provide 31%-61% more balancing power for the grid.
 
 A controller bidding according to the /Integrated (risk-averse)/ strategy, pays
-on average \red{$0.10 \ekwh$  How much?} less for charging the fleet than other
-risk-averse strategies. A controller with an /Integrated (risk-seeking)/
+approximatly $0.35\ekwh$ less for charging the fleet than the regular industry
+price, summing up to an profit increase of up to $67040\; \eur$ over the 1.5
+year period. A controller bidding according to th /Integrated (risk-seeking)/
 strategy, is even more profitable, despite having to account for lost rental
 profits. On the other side, the controller caused imbalances (highlighted red)
 which lead to high (unknown) market penalties or even exclusion from bidding
 activities. For this reason, imbalances need to be avoided, regardless of
 potential profits from a higher VPP utilization. We expect that the proposed RL
 agent learns a bidding strategy, which avoids imbalances while increasing
-profits at the same time. The upper bound of the optimal strategy /Integrated
-(full information)/.
+profits at the same time. The best possible solution, given the prediction
+uncertainty, is given by the strategy /Integrated (full information)/.
 
 \red{Balancing power, stability}
 
@@ -170,19 +171,19 @@ profits at the same time. The upper bound of the optimal strategy /Integrated
 #+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
 #+CAPTION[Bidding strategy outcomes]: Outcomes of naive bidding strategies over a 1.5 year period. Integrated bidding strategies outperform single market strategies. label:table-profits
 #+ATTR_LATEX: :float sideways :align l|cccccc :placement [hp]
-|                                     | \thead{Balancing\\(risk-averse)} | \thead{Intraday\\(risk-averse)} | \thead{Integrated\\(risk-averse)} | \thead{Integrated\\(risk-seeking)} | \thead{Integrated\\(full information)} |
-|-------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
-|-------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
-| VPP utilization (%)                 |                               39 |                              47 |                                62 |                                 81 |                                     71 |
-| Energy bought (MWh)                 |                              803 |                             985 |                              1292 |                               1681 |                                   1473 |
-| Energy charged regularly (MWh)      |                             1278 |                            1096 |                               789 |                                400 |                                    608 |
-| Lost rental profits (1000 \eur)     |                                0 |                               0 |                                 0 |                              15.47 |                                      0 |
-| No. Lost rentals                    |                                0 |                               0 |                                 0 |                               1237 |                                      0 |
-| Imbalances (MWh)                    |                                0 |                               0 |                                 0 |              \textcolor{red}{1.01} |                                      0 |
-| Average electricity price ($\ekwh$) |                                - |                               - |                                 - |                                  - |                                      - |
-| Gross profit increase (1000 \eur)   |                            43.62 |                           45.08 |                           *67.04* |                            *72.51* |                                  77.36 |
-|-------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
-|-------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
+|                                          | \thead{Balancing\\(risk-averse)} | \thead{Intraday\\(risk-averse)} | \thead{Integrated\\(risk-averse)} | \thead{Integrated\\(risk-seeking)} | \thead{Integrated\\(full information)} |
+|------------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
+|------------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
+| VPP utilization (%)                      |                               39 |                              47 |                                62 |                                 81 |                                     71 |
+| Energy bought (MWh)                      |                              803 |                             985 |                              1292 |                               1681 |                                   1473 |
+| Energy charged regularly (MWh)           |                             1278 |                            1096 |                               789 |                                400 |                                    608 |
+| Average electricity price paid ($\ekwh$) |                            0.128 |                           0.121 |                             0.115 |                              0.111 |                                  0.110 |
+| Lost rental profits (1000 \eur)          |                                0 |                               0 |                                 0 |                              15.47 |                                      0 |
+| No. Lost rentals                         |                                0 |                               0 |                                 0 |                               1237 |                                      0 |
+| Imbalances (MWh)                         |                                0 |                               0 |                                 0 |              \textcolor{red}{1.01} |                                      0 |
+| Gross profit increase (1000 \eur)        |                            43.62 |                           45.08 |                           *67.04* |                            *72.51* |                                  77.36 |
+|------------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
+|------------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
 # #+TBLFM: @2=round(100*round(@3/(@3+@4),2))
 # ::@10=100* round((@9/17707.85),4)
 #+LATEX:}
@@ -205,7 +206,7 @@ return(87.98 - 15.47)
 # NOTE: What about confidence intervals - Mean?
 # TODO: No mention of risk factors except for summary? Include numbers or graphs
 # of risks factors? --> Sensivity
-# NOTE: Possibly include numbers per EV
+# TODO: Include total annual profit increase per EV and total balancing power
 
 Research Question 2 investigates whether a RL agent can optimize the integrated
 bidding strategy by dynamically adjusting the bidding quantities. The bidding
@@ -234,12 +235,12 @@ In Figure ref:fig-rl-profits, the performance of the optimized integrated
 bidding strategy is presented. The proposed RL algorithm increases the gross
 profits of the fleet on average (n=5) by approximately 72-75% when compared with
 the naive single market strategies and by approximately 12% when compared with
-the naive integrated strategy. In none of the tested strategies the controller
-procured more electricity from the market that it can charge. To reach the
-optimal solution the gross profits would need to be increased by 3% further.
-Similarly, the RL algorithm increases the amount of electricity that the fleet
-charges from the electricity markets while avoiding imbalance at the same time.
-\red{Balancing power, renewables}
+the naive integrated strategy. To reach the optimal benchmark solution the gross
+profits would only need to be increased by another 3%. The fleet provided a
+total of 1461 MWh balancing power to the grid and therby charged its EVs 25.3%
+cheaper than the regular industry price. In summary, the RL agent managed to
+optimize the VPP portfolio composition, increased the amount of traded
+electricity and avoided imbalance at the same time.
 
 In another experiment, we evaluated the performance of the proposed RL algorithm
 in comparison to other RL algorithms with a simpler architecture. In particular,
