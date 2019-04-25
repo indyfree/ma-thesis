@@ -82,9 +82,9 @@ charging station, they are suitable to provide such balancing services.
 Operating reserve providers have to be qualified by the TSO to participate in
 the market and are able to reliably provide the committed capacity. Although EV
 fleets are currently not qualified by the GCRM to be used as operating reserve,
-they could theoretically handle the minimum capacity requirements. Around 220
-EVs would need to simultaneously charge at standard 4.6kW charging stations to
-provide 1MW of downward regulating capacity.
+they could theoretically handle the minimum capacity requirements if they are
+large enough. Around 220 EVs would need to simultaneously charge at standard
+4.6kW charging stations to provide 1MW of downward regulating capacity.
 # TODO: Citation for EVs not currently allows to provide operating reserve
 # NOTE: Add: Fast chargers (22KW) would only need 50EVs, but batteries are depleted much
 # faster, hence SoC plays a larger role?
@@ -477,7 +477,8 @@ challenges in smart grids.
 The following chapter will give an overview of the most important Reinforcement
 Learning (RL) concepts and will introduce the corresponding mathematical
 formulations. If not noted otherwise, the notation, equations, and insights are
-adopted from cite:sutton18_reinf, the de-facto reference book of RL research.
+adopted from textcite:sutton18_reinf, the de-facto reference book of RL
+research.
 
 RL is an agent-based machine learning algorithm in which the agent learns to
 perform an optimal set of actions through interaction with its environment. The
@@ -526,9 +527,9 @@ delayed rewards to achieve its long-term goal.
 The /dynamics/ of a MDP are defined by the probability that a state $s'\in \S$
 and a reward $r\in\R$ occurs, given the preceding state $s\in\S$ and action
 $a\in\A$. In /finite/ MDPs, the random variables $R_t$ and $S_t$ have
-well-defined probability density functions (PDF), which are solely dependent on
-the previous state and action. Consequently, it is possible to define ($\defeq$)
-the /dynamics/ of the MDP as follows:
+well-defined probability density functions, which are solely dependent on the
+previous state and action. Consequently, it is possible to define ($\defeq$) the
+/dynamics/ of the MDP as follows:
 \begin{equation}
     p(s',r|s,a) \defeq \Pr{S_t=s',R_t=r|S_{t-1}=s,A_t=a},
 \end{equation}
@@ -572,9 +573,9 @@ the future. Consequently, value functions are formulated with respect to a
 /policy/ \pi. A policy is a mapping of states to actions; it describes the
 probability that an agent performs a certain action, based on the current state.
 More formally, the policy is defined as
-$\pi(a|s)\defeq\Pr{A_t\!=\!a|S_t\!=\!s}$, a PDF of all $a\!\in\!\A$ for each
-$s\!\in\!\S$. RL approaches mainly differ in how the policy is updated, based on
-the agent's interaction with the environment.
+$\pi(a|s)\defeq\Pr{A_t\!=\!a|S_t\!=\!s}$, a probability density function of all
+$a\!\in\!\A$ for each $s\!\in\!\S$. RL approaches mainly differ in how the
+policy is updated, based on the agent's interaction with the environment.
 
 In RL, value functions of states and value functions of state-action pairs are
 used. The /state-value function of policy/ $\pi$ is denoted as $\vpi(s)$ and is
