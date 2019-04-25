@@ -85,8 +85,9 @@ have been taken to prepare the data for further analysis:
      charging behavior. These EVs reported a battery level increase of more than 20%
      between trips or during trips, while not being located at a charging station.
 
-[fn:1] See https://www.gps.gov/systems/gps/performance/accuracy, accessed 23^{th} February 2019.
 #+LATEX: \clearpage
+
+[fn:1] See https://www.gps.gov/systems/gps/performance/accuracy, accessed 23^{th} February 2019.
 * Appendix: DDQN Hyperparameters label:app-rl-hyperparams
 #+LATEX: \setcounter{table}{0}
 #+CAPTION[Hyperparameters for the dueling network DDQN algorithm]: Hyperparameters for the dueling network DDQN algorithm.
