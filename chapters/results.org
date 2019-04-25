@@ -237,7 +237,7 @@ profits of the fleet on average (n=5) by approximately 72-75% when compared with
 the naive single market strategies and by approximately 12% when compared with
 the naive integrated strategy. To reach the optimal benchmark solution the gross
 profits would only need to be increased by another 3%. The fleet provided a
-total of 1461 MWh balancing power to the grid and therby charged its EVs 25.3%
+total of 1461 MWh balancing power to the grid and thereby charged the EVs 25.3%
 cheaper than the regular industry price. In summary, the RL agent managed to
 optimize the VPP portfolio composition, increased the amount of traded
 electricity and avoided imbalance at the same time.
