@@ -3,14 +3,14 @@
 
 #+INCLUDE: "./header.org"
 
-# #+INCLUDE: "./chapters/introduction.org"
-# #+INCLUDE: "./chapters/background.org"
-# #+INCLUDE: "./chapters/empirical-setting.org"
-# #+INCLUDE: "./chapters/model.org"
+#+INCLUDE: "./chapters/introduction.org"
+#+INCLUDE: "./chapters/background.org"
+#+INCLUDE: "./chapters/empirical-setting.org"
+#+INCLUDE: "./chapters/model.org"
 #+INCLUDE: "./chapters/results.org"
 #+INCLUDE: "./chapters/conclusion.org"
 
-# #+INCLUDE: "./chapters/appendix.org"
+#+INCLUDE: "./chapters/appendix.org"
 
-# bibliography:bibliography/references.bib
-# bibliographystyle:apacite
+bibliography:bibliography/references.bib
+bibliographystyle:apacite
