@@ -5,7 +5,7 @@
 *** TODO Report all numbers in result section that are used in conclusion
 - Utilization
 - Charged cheaper than (Eur/%)
-*** TODO Background Chapter first paragraph
+*** TODO Background Chapter first paragraph and electricity market theory first paragraph
 *** TODO Revise Background Literature Section and make story!
 *** TODO Lit Review Philipp VPP optimization paper
 ** Wording (stay concise!):
