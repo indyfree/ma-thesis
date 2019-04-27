@@ -1,20 +1,37 @@
 \thispagestyle{empty}
+\topskip0pt
+\vspace*{\fill}
 
 \section*{Abstract}
-This is an abstract
+Integrating weather-dependent renewable energy resources into the electricity
+system imposes challenges on the power grid. Balancing services are needed which
+can be provided by virtual power plants (VPP) that aggregate decentralized
+energy sources to consume or produce electricity on demand. Electric vehicle
+(EV) fleets can use the batteries of idle cars as combined storage to offer
+balancing services on smart electricity markets. However, there are risks
+associated with this business model extension. The fleet faces severe imbalance
+penalties if it can not charge the offered amount of balancing energy due to
+unpredicted mobility demand of the vehicles. It is at the risk of denying
+profitable customer rentals to ensure the fleet can fulfill all market
+commitments. We study the design of a decision support system that estimates
+these risks, dynamically adjust the composition of a VPP portfolio, and
+profitably places bids on multiple electricity markets simultaneously. Here we
+show that a reinforcement learning agent can optimize the VPP portfolio by
+learning from favorable market conditions and fleet demand uncertainties. In
+comparison to previous research, in which the bidding risks were unknown and
+fleets could only offer conservative amounts of balancing power to a single
+market, our proposed approach increases the amount of offered balancing power by
+$48\% - 82\%$  and achieves a charging cost reduction of the fleet by 25\%. In
+experiments with real-world carsharing data of 500 EVs, we found that the
+accuracy of mobility demand forecasting algorithms is crucial for a successful
+bidding strategy. Moreover, we show that recent advancements in deep
+reinforcement learning decrease the convergence time and improve the robustness
+of the results. Our results demonstrate how modern RL algorithms can be
+successfully used for fleet management, VPP optimization and demand response in
+the smart grid. We anticipate that distributed energy resources such as EVs will
+play an essential role in providing reliable back up power for the grid and
+formulate market design recommendations to allow easier access to these
+resources.
 
-\begin{itemize}
-\item One or two sentences providing a basic introduction to the field, comprehensible to a scientist in any discipline.
-\item Two to three sentences of more detailed background, comprehensible to
-scientists in related disciplines.
-\item One sentence clearly stating the general problem being addressed by this particular study.
-\item One sentence summarising the main result (with the words “here we show” or their equivalent).
-\item Two or three sentences explaining what the main result reveals in direct comparison to what was thought to be the case previously, or how the main result adds to previous knowledge.
-\item One or two sentences to put the results into a more general context.
-\item Two or three sentences to provide a broader perspective, readily comprehensible to a scientist in any discipline, may be included in the first paragraph
-\end{itemize}
-
-\begin{center}
-\includegraphics[width=.9\linewidth]{./fig/abstract.png}
-\end{center}
+\vspace*{\fill}
 \clearpage
