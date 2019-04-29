@@ -1,17 +1,11 @@
 * Background
-# NOTE: 30%
-# TODO: Introductary paragraph
-# TODO: Tell a story!
-
-# NOTE: Kahlen
-# This section describes relevant research and explains the general setting of
-# balancing renewable energy sources with EV fleets. In particular, we will
-# describe the research that has been done on charging EV fleets with variable
-# prices to save cost. Consequently, we position our research within the
-# literature on EVs and the vehicle-2-grid context of selling electricity back to
-# the grid. Next, we introduce the methodological back- ground and make a
-# comparison with the related topic of caching. Finally, we describe the
-# functioning of the electricity wholesale market.
+The following chapter describes the relevant research and the theoretical
+background of this thesis. First, we introduce smart electricity markets, give
+detailed explanations of two particular types of electricity markets,  and
+explain applications for EV fleets in the smart grid. Next, we discuss the
+related RL literature in the context of controlled EV charging. Finally, the
+methodological background is presented in the form of a comprehensive review of
+the most important concepts and formulations in RL theory.
 
 ** Smart Electricity Markets
 On electricity markets, actors participate in auctions to match the supply of
