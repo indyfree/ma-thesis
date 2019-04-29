@@ -110,32 +110,30 @@ to the actual energy $\Eb{}$ they supplied or consumed. Since providers get paid
 according to the submitted prices $\cp{}$ and $\ep{}$ (instead of a market
 clearing price) this type of auction is called /pay-as-bid/ auction.
 *** Spot Market label:sec-spot-market
-# TODO: Intraday mainly for balancing!!! Rephrase Intro+Lit Review to only provide
-# balancing i.e. sustainablility work?
 As mentioned in the previous chapter, the equilibrium of electricity supply and
 demand is ensured through a sequence of interdependent wholesale markets
 cite:pape16_are_fundam_enoug. Next to the balancing market at the end of the
 sequence, mainly two different types of spot markets exist, the day-ahead market
 and the intraday market. In this research, we consider the European Power
 Exchange (EPEX Spot) as it is the largest electricity market in Europe, with a
-total trading volume of approximately 567TWh in 2018[fn:3], but most electronic
+total trading volume of approximately 567 TWh in 2018[fn:3], but most
 spot markets in western economies work with similar market mechanisms.
 
-In Germany, the most important spot market is the day-ahead market with a
-trading volume of over 234TWh in 2018[fn:3]. Participants place asks and bids
+Germany's most important spot market is the day-ahead market with a
+trading volume of over 234 TWh in 2018[fn:3]. Participants place asks and bids
 for hourly contracts of the following day on the /EPEX Spot Day-ahead Auction/
 market until the market closes at 12pm on the day before delivery (see Figure
-ref:fig-electricity-markets). The day-ahead market plays an essential role in
+ref:fig-electricity-markets). The day-ahead market plays an important role in
 integrating volatile renewable energy sources (RES) into the power system
 cite:pape16_are_fundam_enoug. Generators forecast the expected generation
 capacity for the next day and sell those quantities on the market
 cite:karanfil17_role_contin_intrad_elect_market. After the market closes, the
 participants have the opportunity to trade the difference between the day-ahead
-forecast and the more accurate intraday forecast on the intraday market
-cite:kiesel17_econom_analy_intrad_elect_prices. In this way, RES generators can
-cost effectively self-balance their portfolios, instead of relying on balancing
-services provided by the TSO, which imposes high imbalance costs on participants
-cite:pape16_are_fundam_enoug.
+forecast and the more precise intraday forecast (forecasting error) on the
+intraday market cite:kiesel17_econom_analy_intrad_elect_prices. In this way, RES
+generators can cost effectively self-balance their portfolios, instead of
+relying on balancing services provided by the TSO, which imposes high imbalance
+costs on participants cite:pape16_are_fundam_enoug.
 
 On the /EPEX Spot Intraday Continuous/ market, electricity products are traded
 up until 5 minutes before physical delivery. Hourly contracts, as well as
@@ -143,33 +141,28 @@ up until 5 minutes before physical delivery. Hourly contracts, as well as
 auction, the intraday market is a continuous order-driven market. Participants
 can submit limit orders at any time during the trading window and equally change
 or withdraw the order at any time before the order is accepted. Limit orders are
-specified as price-quantity pairs: $(\Pi{}, \up{})$, where $\Pi{}$ is the
-traded amount of electrical power in kW and $\up{}$ is the price for the delivered
-energy unit (hour/quarter/block) in $\emwh$. When an order to buy
-(bid) matches an order to sell (ask), the trade immediately gets executed. The
-order book is visible to all participants, hence it is known which unmatched
-orders exist at the time of interest. The intraday market has a trading volume
-of 82TWh, which is considerably smaller than day-ahead market's volume. Despite
-that, the intraday market plays a vital role to the stability of the grid. All
-executed trades on the intraday market potentially reduce the activation of
-control reserve through the TSO.
+specified as price-quantity pairs $(\Pi{}, \up{})$, where $\Pi{}$ is the traded
+amount of electrical power in kW and $\up{}$ is the price for the delivered
+energy unit (hour/quarter/block) in $\emwh$. When an order to buy (bid) matches
+an order to sell (ask), the trade gets executed immediately. The order book is
+visible to all participants, it is known which unmatched orders exist at the
+time of interest. The intraday market has a trading volume of 82 TWh, which is
+considerably smaller than the day-ahead market's volume. Despite that, the
+intraday market plays a vital role to the stability of the grid. All executed
+trades on the intraday market potentially reduce the needed balancing power of
+the TSOs and thus can be seen as a type of balancing power
+cite:pape16_are_fundam_enoug.
 
 Purchasing electricity on the continuous intraday market is attractive for EV
-fleets with uncertain mobility demand. Due to the intradays market's short time
-before delivery, EV fleet operators can rely on highly accurate forecasts of
-available battery capacity to charge, before submitting an order to buy. In this
-way, they can reliably charge at a potentially lower price at the intraday
-market than the regular industry tariff. In an integrated bidding strategy, EV
-fleet operators can, similarly to RES generators, balance out forecast errors of
-available battery capacity on the intraday market. Trades on the intraday market
-can complement bids that have been committed to other markets earlier (e.g., to
-the secondary operating reserve market).
+fleets with uncertain mobility demand. The short time before delivery allows EV
+fleet operators to rely on highly accurate forecasts of available battery
+capacity, before submitting an order to buy. In this way, they can reliably
+charge at a potentially lower price at the intraday market than the regular
+industry tariff. In an integrated bidding strategy, EV fleet operators can
+(similarly to RES generators) balance out forecast errors of available battery
+capacity on the intraday market. For example can trades on the intraday market
+complement bids that have been committed earlier to the balancing market.
 ** EV Fleet Control in the Smart Grid
-# Former Section: Smart Charging and Balancing the Electric Grid with EV Fleets
-# NOTE: Section General Problem and Intro of Smart Charging
-# NOTE: The physical reinforcement of the power grid is a costly and lengthy
-# undertaking.
-# https://www.netzentwicklungsplan.de/de/besonderheiten-des-nep-2030-2019
 The increasing penetration of EVs has a substantial effect on electricity
 consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
