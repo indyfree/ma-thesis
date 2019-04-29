@@ -8,115 +8,107 @@ methodological background is presented in the form of a comprehensive review of
 the most important concepts and formulations in RL theory.
 
 ** Smart Electricity Markets
-On electricity markets, actors participate in auctions to match the supply of
-electricity generation and the demand for electricity consumption. Participants
-place asks (sale offers) and bids (purchase orders). The electricity price is
-determined by an auction mechanism, which can take different forms depending on
-the type of market. Germany, like many other western countries, has a
-liberalized energy system in which the generation and distribution of
-electricity are decoupled. Multiple electricity markets exist in a liberalized
-energy system. They differ in the auction design and in their reaction time
-between the order contract and the delivery of electricity. Day-ahead markets
-and spot markets have a reaction time between a day and several hours, whereas
-in operating reserve markets the reaction time ranges from minutes to seconds.
-The auction mechanism design is essential for electricity markets
-cite:kambil98_reeng_dutch_flower_auction. Electricity markets work according to
-the merit order principle in which resources are considered in ascending order
-of the energy price until the capacity demand is met. The clearing price is
-determined by the energy price, at the point where supply meets demand. Payment
-models differ in the markets: In contrast to day-ahead markets, where a uniform
-pricing schema is applied, in secondary reserve markets and intraday markets
-bidders, get compensated by the price they bid (pay-as-bid principle).
+On electricity markets, participants place asks (sale offers) and bids (purchase
+orders) in auctions to match the supply of electricity generation and the demand
+for electricity consumption. The electricity price is determined by an auction
+mechanism, which can take different forms depending on the type of market.
+Germany, like many other western countries, has a liberalized energy system in
+which the generation and distribution of electricity are decoupled. Multiple
+electricity markets exist in a liberalized energy system. They differ in the
+auction design and in their reaction time between the order contract and the
+delivery of electricity. Day-ahead markets and spot markets have a reaction time
+between a day and several hours, whereas in operating reserve markets the
+reaction time ranges from minutes to seconds. Most electricity markets work
+according to the merit order principle in which resources are considered in
+ascending order of the energy price until the capacity demand is met. The
+clearing price is determined by the energy price, at the point where supply
+meets demand. Payment models differ in the markets: In contrast to day-ahead
+markets, where a uniform pricing schema is applied, in secondary reserve markets
+and intraday markets, participants get compensated by the price they bid (pay-as-bid
+principle).
 
-# TODO: Paragraph: Smart Electricity Markets, Distributed, Decentralized, Renewables, VPP, EVs = RES
-# TODO: Smart Electricity Markets with EV fleet control
-# cite:kempton05_vehic_to_grid_power_implem,mwasilu14_elect_vehic_smart_grid_inter
+In smart electricity markets, EV fleet operators can offer the capacity of their
+EV batteries to different types of markets. On operating reserve markets, prices
+are usually more volatile and consequently more attractive for VPPs
+cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. But operating reserve
+markets also bear a higher risk for the fleet: Commitments have to be made up to
+one week in advance when customer demands are still uncertain. In order to avoid
+penalties for unfulfilled commitments only a conservative amount of capacity can
+be offered to the market. On the other hand, spot markets allow participants to
+continuously trade electricity products up to five minutes prior to delivery.
+Just minutes before delivery it is possible to predict the available battery
+capacity of the fleet with a high accuracy. This certainty creates the possibility
+to aggressively trade the available battery capacity with a low risk at the spot
+market.
+** Electricity Market Theory
+In the following chapter, we will explain the market design, market properties
+and bidding procedures of the balancing market and spot market in more detail,
+as they are the markets we include in our research.
 
-# TODO: Describe week ahead or day ahead commitment of balancing market?
-EV fleet operators can offer the capacity of their EV batteries on multiple
-markets at the same time to make use of the different market properties. On
-operating reserve markets, prices are usually more volatile and consequently more
-attractive for VPPs cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
-Operating reserve markets also bear a higher risk for the fleet: Commitments
-have to be made one week in advance when customer demands are still uncertain.
-In order to not face penalties for unfulfilled commitments only a conservative
-amount of capacity can be offered to the market. On the other hand, spot markets
-allow participants to continuously trade electricity products up to five minutes
-prior to delivery. At this point in time, it is possible to predict available
-battery capacity of the fleet with high accuracy. This certainty creates the
-possibility to trade the remaining available capacity with low risk at the spot
-market. In the following, we will explain the market design of balancing markets
-and spot markets in more detail, since they are the markets we included in our
-research.
-# TODO: Fix pointing arrows
-#+CAPTION[Electricity Market Design]: Interaction between electricity markets in relation to capacity allocation label:fig-electricity-markets
+#+CAPTION[Electricity Market Design]: Interaction between electricity markets in relation to capacity allocation. label:fig-electricity-markets
 #+ATTR_LATEX: :width \linewidth
 [[../fig/electricity-markets.png]]
-** Electricity Market Theory
 *** Balancing Market label:sec-balancing-market
-# NOTE: Consider changing heading to Operating reserve market / frequency
 The balancing market is a tool to balance frequency deviations in the power
 grid. It offers auctions for primary control reserve, secondary control reserve
 as well as tertiary control reserve (minute reserve), which primarily differ in
-the required ramp-up times of the participants. As depicted in Figure
-ref:fig-electricity-markets, the balancing market can be seen as the last link
-in a chain of electricity markets cite:veen16_elect_balan_market. \red{Explain!}
-In this study, we will look at the German Control Reserve Market (GCRM), one of
+the required ramp-up times of the participants.
+As depicted in Figure ref:fig-electricity-markets, the balancing market is
+conceptually placed at the intersection between the open electricity markets and
+the physical power system cite:veen16_elect_balan_market. It can be seen as the
+last link in a chain of electricity markets, although the lead time of capacity
+allocation is considerably longer than the at day-ahead or intraday markets.
+
+In this study, we will look at the German control reserve market (GCRM), one of
 the largest frequency regulation markets in the world. However, the presented
-concepts can be easily transferred to other balancing markets in unbundled
+concepts can be easily transferred to other balancing markets in liberalized
 energy systems, since the market design is similar
-cite:brandt17_evaluat_busin_model_vehic_grid_integ. Transmission Systems
-Operators (TSO) procure their required control reserve via tender auctions at
+cite:brandt17_evaluat_busin_model_vehic_grid_integ. Transmission systems
+operators (TSO) procure their required control reserve via tender auctions at
 the GCRM. The market conducts daily auctions for the three types of control
 reserve. This thesis focuses on the secondary operating reserve auction, in
-which participants must be able to supply or absorb a minimum of 1MW of power
-over a 4-hour interval with a reaction time of 30 seconds.[fn:1] Since EV
-batteries can absorb energy almost instantly, when they are connected to a
-charging station, they are suitable to provide such balancing services.
-Operating reserve providers have to be qualified by the TSO to participate in
-the market and are able to reliably provide the committed capacity. Although EV
-fleets are currently not qualified by the GCRM to be used as operating reserve,
-they could theoretically handle the minimum capacity requirements if they are
-large enough. Around 220 EVs would need to simultaneously charge at standard
-4.6kW charging stations to provide 1MW of downward regulating capacity.
-# TODO: Citation for EVs not currently allows to provide operating reserve
-# NOTE: Add: Fast chargers (22KW) would only need 50EVs, but batteries are depleted much
-# faster, hence SoC plays a larger role?
+which participants must be able to supply or absorb a minimum of 1 MW of power
+over a 4-hour interval within a reaction time of 30 seconds.[fn:1] Since EV
+batteries can absorb energy almost instantly when they are connected to a
+charging station, they are suitable to provide such balancing services that
+require fast ramp-up times. Operating reserve providers have to be qualified by
+the TSO to participate in the market and prove that they are able to reliably
+provide balancing power. Although EV fleets are currently not qualified by the
+GCRM to be used as operating reserve, they could theoretically handle the
+minimum capacity requirements if they are large enough. Around 220 EVs would
+need to simultaneously charge at standard 4.6 kW charging stations to provide 1
+MW of downward regulating capacity.
+
 Up until 28^{th} July 2018, auctions were held weekly, with two different
 segments each week (peak hours/non-peak hours). Afterwards, the auction
-mechanism changed to /daily/ auctions of six four-hour segments of positive and
+mechanism changed to daily auctions of six four-hour segments of positive and
 negative control reserve.[fn:2] Shorter auction cycles facilitate the
 integration of renewable energy generators into the secondary control reserve
 market, as they are dependent on accurate (short-term) capacity forecasts.
-# NOTE: Not mentioned only V2G before. Reference Lit review for justification?
 Positive control reserve is energy that is supplied to the grid, when the grid
-frequency falls below 50Hz. It can be provided by increasing the electricity
+frequency falls below 50 Hz. It can be provided by increasing the electricity
 generation or by reducing the grid load (i.e., electricity consumption). On the
 contrary, negative control reserve is required when the grid frequency rises
-above 50Hz and can be provided by adding grid load or reducing electricity
-generation. Since we do not consider V2G in this thesis, the EV fleets in our
-model are only able provide /negative control reserve/, which we will refer to
-as /control reserve/ until the end of the thesis. Market participants submit
-bids in the following form to the market: $(\Pb{}, \cp{}, \ep{})$, where $\Pb{}$
-is the amount of electrical power that can be supplied on demand in kW, $\cp{}$ is
-the capacity price for keeping the power available in $\emw$ and
-$\ep{}$ is the energy price for delivered energy in $\emwh$. The TSO
-determines the target quantity of energy to acquire per timeslot, it usually
-acquires much higher regulation capacity to minimize risks and activates the
-capacity on demand. The TSO accepts the bids based on the capacity price in a
-merit order. Providers, whose bids were accepted, instantly get compensated for
-the provided capacity: $R^c = \cp{} \times \Pb{}$. At the time regulation
-capacity is needed, usually a day to a week later, the TSO activates the
-capacity according to a merit order of the ascending /energy prices/ $\ep{}$.
-Hence, providers are also compensated according to the actual energy $\Eb{}$
-they supplied or consumed: $R^e = \ep{} \times \Eb{}$. Since provider get paid
-according to their submitted price $\ep{}$, instead of a market clearing price,
-this type of auction is called /pay-as-bid/ auction.
-# NOTE: Add more citations? brandt?
-# NOTE: Possible include example
-# NOTE: Mention New German Mischpreisverfahren.
-# NOTE: Market mechanism is a multi-unit, first-price, sealed-bid auction, which is settled on a ”pay-as-bid"
-# NOTE: Possible include market volume, average prices, etc..
+above 50 Hz and can be provided by adding grid load or reducing electricity
+generation. Since we do not consider V2G in this thesis (see next chapter), the
+EV fleets in our model are only able provide negative control reserve, which
+we will plainly refer to as /balancing power/ until the end of the thesis.
+
+Market participants submit bids in the form $(\Pb{}, \cp{}, \ep{})$ to the
+market, where $\Pb{}$ is the amount of electrical power that can be supplied on
+demand in kW, $\cp{}$ is the capacity price for keeping the power available in
+$\emw$ and $\ep{}$ is the energy price for delivered energy in $\emwh$. The TSOs
+determine the target quantity of balancing power to acquire per market period
+based on historical balancing data. They usually acquire much higher regulation
+capacity to minimize risks and activate the needed amount of capacity on demand.
+The TSOs accept the bids based on the capacity price in a merit order. Providers
+whose bids were accepted instantly get compensated for the provided capacity
+$\Pb{}$. At the time regulation capacity is needed, usually a day to a week
+later, the TSO activates the capacity according to a merit order of the
+ascending energy prices $\ep{}$. Hence, providers are also compensated according
+to the actual energy $\Eb{}$ they supplied or consumed. Since providers get paid
+according to the submitted prices $\cp{}$ and $\ep{}$ (instead of a market
+clearing price) this type of auction is called /pay-as-bid/ auction.
 *** Spot Market label:sec-spot-market
 # TODO: Intraday mainly for balancing!!! Rephrase Intro+Lit Review to only provide
 # balancing i.e. sustainablility work?
@@ -877,7 +869,7 @@ that aims to solve these difficulties.
 
 * Footnotes
 
-[fn:1] See https://regelleistung.net, accessed on 15^{th} February
+[fn:1] See https://regelleistung.net, accessed on the 15^{th} February
 2019, for further information on the market design and historical data.
 
 [fn:2]
