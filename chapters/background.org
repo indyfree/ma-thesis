@@ -168,15 +168,14 @@ consumption patterns. During charging periods, power flows and grid losses
 increase considerably and challenge the grid. Operators have to reinforce the
 grid to ensure that transformers and substations do not overload
 cite:sioshansi12_impac_elect_tarif_plug_in,lopes11_integ_elect_vehic_elect_power_system.
-Loading multiple EVs in the same neighborhood, or worse, whole EV fleets at
-once, stress the grid. In these cases, even brown- or blackouts can occur.
-cite:kim12_carbit. Despite these challenges, it is possible to support the
-physical reinforcement by adopting smart charging strategies. In smart charging,
-EVs get charged when the grid is less congested to ensure grid stability. Smart
-charging reduces peaks in electricity demand, called /Peak Cutting/, and
-complement the grid in times of low demand, called /Valley Filling/. Smart
-charging has been researched thoroughly in the IS literature, in the following
-we will outline some of the most important contributions.
+Charging multiple EVs in the same neighborhood, or worse, whole EV fleets, can
+even cause brown- or blackouts cite:kim12_carbit. Despite these challenges, it
+is possible to support the physical reinforcement of the grid by adopting smart
+charging strategies. In smart charging, EVs get charged when the grid is less
+congested to ensure grid stability. Smart charging reduces peaks in electricity
+demand (/peak cutting/) and complement the grid in times of low demand (/valley
+filling/). Smart charging has been researched thoroughly in the IS literature,
+in the following we will outline some of the most important contributions.
 
 
 # NOTE: Section Smart charging examples and studies
@@ -188,17 +187,17 @@ reduces average energy prices and thus benefit households economically. In
 another study, textcite:kara15_estim_benef_elect_vehic_smart investigated the
 effect of smart charging on public charging stations in California. Controlling
 for arrival and departure times, the authors presented beneficial results for
-the distribution system operator (DSO) and the owners of EVs. Their approach
-resulted in a price reduction in energy bills and a peak load reduction. An
-extension of the smart charging concept is Vehicle-to-Grid (V2G). When equipped
-with V2G devices, EVs can discharge their batteries back into the grid. Existing
-research has focused on this technology in respect to grid stabilization effects
-and arbitrage possibilities. For instance,
-textcite:schill11_elect_vehic_imper_elect_market showed that the usage of EVs
-can decrease average consumer electricity prices. Excess EV battery capacity can
-be used to charge in off-peak hours and discharge in peak hours, when the prices
-are higher. These arbitrage possibilities reverse welfare effects of generators
-and increase the overall welfare and consumer surplus.
+the distribution system operator and the owners of the EVs. Their approach
+resulted in a price reduction in energy bills and a peak load reduction of 37%.
+An extension of the smart charging concept is V2G. When equipped with V2G
+devices, EVs can discharge their batteries back into the grid. Existing research
+has focused on this technology in respect to grid stabilization effects and
+arbitrage possibilities. For instance,
+textcite:schill11_elect_vehic_imper_elect_market showed that the V2G usage of
+EVs can decrease average consumer electricity prices. Excess EV battery capacity
+can be used to charge in off-peak hours and discharge in peak hours, when the
+prices are higher. These arbitrage possibilities reverse welfare effects of
+generators and increase the overall welfare and consumer surplus.
 textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor found that the
 arbitrage opportunities are especially prominent when a high variability in
 electricity prices on the target electricity market exists. The authors stated
@@ -211,10 +210,10 @@ for smart charging.
 # NOTE: Kahlen and Brand both balancing market, Brand never used V2G
 textcite:peterson10_econom_using_plug_in_hybrid investigated energy arbitrage
 profitability with V2G in the light of battery depreciation effects in the US.
-The results of their study indicate that large-scale use of EV batteries for
+The results of their study indicate that the large-scale use of EV batteries for
 grid storage does not yield enough monetary benefits to incentivize EV owners to
 participate in V2G activities. Considering battery depreciation cost, the
-authors arrived at an annual profit of only 6\dollar - 72\dollar per EV.
+authors arrived at an annual profit of only 6\dollar -- 72\dollar per EV.
 textcite:brandt17_evaluat_busin_model_vehic_grid_integ evaluated a business
 model for parking garage operators operating on the German frequency regulation
 market. When taking infrastructure costs and battery depreciation costs into
@@ -224,92 +223,81 @@ and altered auction mechanisms, the authors arrived at negative profits.
 textcite:kahlen17_fleet used EV fleets to offer balancing services to the grid.
 Evaluating the impact of V2G in their model, the authors conclude that V2G would
 only be profitable if reserve power prices were twice as high. Considering the
-results from the studies mentioned above, our research does not include V2G,
-since only marginal profits are expected.
+negative results from the studies mentioned above, we did not include the
+V2G concept in our research.
 
 # NOTE: Section Trading strategies on multiple markets, battery depreciation
 In order to maximize profits, it is essential for market participants to develop
 successful bidding strategies. Several authors have investigated bidding
-strategies to jointly participate in multiple markets
-cite:mashhour11_biddin_strat_virtual_power_plant_2,he16_optim_biddin_strat_batter_storag.
+strategies to jointly participate in multiple markets:
 textcite:mashhour11_biddin_strat_virtual_power_plant_2 used stationary battery
 storage to participate in the spinning reserve market and the day-ahead market
 at the same time. The authors developed a non-equilibrium model, which solves
-the presented mixed-integer program with genetic programming. Contrarily,
-we use a model-free RL agent that learns an optimal policy (i.e., a trading
-strategy) from actions it takes in the environment (i.e., bidding on electricity
-markets). Using a model-free approach is especially beneficial for us, since
-additional unknown variables and constraints (i.e., customer mobility demand)
-complicate the formulation of a mathematical model.
-# TODO: Revise above paragraph, more clarity and concise
-textcite:he16_optim_biddin_strat_batter_storag conducted similar research to
-textcite:mashhour11_biddin_strat_virtual_power_plant_2. The authors additionally
-incorporated battery life cycle in their profit maximization model, which proved
-to be a decisive factor. In contrast to the authors, we jointly participated in
-the secondary operating reserve and spot market with the /non-stationary/
-storage of EV batteries. Because shared EVs have to satisfy mobility demand,
-they have to be charged in any case, which allows us to safely exclude battery
-depreciation from our model. Further, we chose the intraday market over the
-day-ahead market, as it has the lowest reaction time among the spot markets, and
-thus potentially offers higher profits
-cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor.
+the presented mixed-integer program with genetic programming. Contrarily to
+their study, we investigate the use of a model-free RL agent that learns an
+optimal policy (i.e., a trading strategy) from actions it takes in the
+environment (i.e., bidding on electricity markets).
+textcite:he16_optim_biddin_strat_batter_storag conducted similar research, in
+which they additionally incorporated battery depreciation costs in a profit
+maximization model, which proved to be a decisive factor. In contrast their
+study, we jointly participate in the secondary operating reserve and intraday
+market with the /non-stationary/ storage of EV batteries. Also, we can exclude
+battery depreciation from our model, since shared EVs have to satisfy mobility
+demand and be charged in any case.
 
 # NOTE: Section Intelligent Agents within Smart Charging and VPPs
 Previous studies often assume that car owners or households can directly trade
 on electricity markets. In reality, this is not possible due to the minimum
 capacity requirements of the markets, requirements that single EVs do not meet.
 For example, the German Control Reserve Market (GCRM) has a minimum trading
-capacity of 1MW to 5MW, depending on the specific market. In order to reach the
-minimum capacity, over 200 EVs would need to be connected to the grid via a
-standard 4.6kW charging station at the same time. textcite:ketter13_power_tac
-introduced the notion of electricity brokers, aggregators that act on behalf of
-a group of individuals or households to participate in electricity markets.
+capacity of 1 MW to 5 MW, while a typical EV has a charging power of 3.6 kW to
+22 kW. textcite:ketter13_power_tac introduced the notion of electricity brokers,
+aggregators that act on behalf of a group of individuals or households to
+participate in electricity markets.
 textcite:brandt17_evaluat_busin_model_vehic_grid_integ and
-textcite:kahlen14_balan_with_elect_vehic successfully showed that electricity
-brokers can overcome the capacity issues by aggregating EV batteries. In
-addition to electricity brokers, we apply the concept of Virtual Power Plants
-(VPPs). VPPs are flexible portfolios of distributed energy resources, which are
-presented with a single load profile to the system operator, making them
-eligible for market participation and ancillary service provisioning
+textcite:kahlen14_balan_with_elect_vehic showed that electricity brokers can
+overcome the capacity issues by aggregating EV batteries. In addition to
+electricity brokers, we apply the concept of VPPs. VPPs are flexible portfolios
+of distributed energy resources, which are presented with a single load profile
+to the system operator, making them eligible for market participation and
+ancillary service provisioning
 cite:pudjianto07_virtual_power_plant_system_integ. Hence, VPPs allow providing
-regulation capacity to the market without knowing which exact sources provide
-the promised capacity until the delivery time cite:kahlen17_fleet. This concept
-is specially useful when dealing with EV fleets: VPPs enable carsharing
-providers to issue bids and asks based on an estimate of available fleet
-capacity, without knowing beforehand which exact EVs will provide the capacity
-at the time of delivery. Based on the battery charge and the availability of
-EVs, an intelligent agent decides in real-time which vehicles provide the
-capacity.
+balancing power to the markets without knowing which exact sources provide the
+promised capacity until the delivery time. This concept is specially useful when
+dealing with EV fleets: VPPs enable carsharing providers to issue bids and asks
+based on an estimate of available fleet capacity, without knowing beforehand
+which exact EVs will provide the capacity at the time of delivery. Based on the
+battery level and the availability of EVs, an intelligent agent decides in
+real-time which vehicles provide the capacity.
+
 # NOTE: Section Carsharing and EV fleets
 Centrally managed EV fleets make it possible for carsharing providers to use the
 presented concepts as a viable business extension. Free float carsharing is a
 popular mobility concept that allows cars to be picked up and parked everywhere,
-and the customers are billed is by the minute. Free float carsharing offers
-flexibility to its users, saves resources, and reduces carbon emissions
+and the customers are billed is by the minute. This concept offers flexibility
+to its users, saves resources, and reduces carbon emissions
 cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Most previous studies
 concerned with the usage of EVs for electricity trading, assumed that trips are
 fixed and known in advance, e.g., in
 textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. The free float
 concept adds uncertainty and nondeterministic behavior, which make predictions
-about future rentals a complex issue.
-# NOTE: Section Kahlen in more detail and what we'll do differently
-textcite:kahlen17_fleet showed that it is possible to use free float carsharing
-fleets as VPPs to profitably offer balancing services to the grid. In their
-study, the authors compared cases from three different cities across Europe and
-the US. They used an event-based simulation, bootstrapped with real-world
-carsharing and secondary operating reserve market data from the respective
-cities. A central dilemma within their research was to decide whether an EV
-should be committed to a VPP or free for rent. Since rental profits are
-considerably higher than profits from electricity trading, it is crucial not to
-allocate an EV to a VPP when it could have been rented out otherwise. To deal
-with the asymmetric payoff, citeauthor:kahlen17_fleet used stratified sampling
-in their classifier. This method gives rental misclassifications higher weights,
-reducing the likelihood of EVs to participate in VPP activities. The authors
-used a Random Forest regression model to predict the available balancing
-capacity on an aggregated fleet level. Only at the delivery time, the agent
-decides which individual EVs provide the regulation capacity. This heuristic is
-based on the likelihood that the vehicle is rented out and on its expected
-rental benefits.
+about future rentals a complex issue. textcite:kahlen17_fleet showed that it is
+possible to use free float carsharing fleets as VPPs to profitably offer
+balancing services to the grid. In their study, the authors compared cases from
+three different cities across Europe and the US. They used an event-based
+simulation, bootstrapped with real-world carsharing and secondary operating
+reserve market data from the respective cities. A central dilemma within their
+research was to decide whether an EV should be committed to a VPP or free for
+rent. Since rental profits are considerably higher than profits from electricity
+trading, it is crucial to not allocate an EV to a VPP when it could have been
+rented out otherwise. To deal with the asymmetric payoff,
+citeauthor:kahlen17_fleet used stratified sampling in their classifier. This
+method gives rental misclassifications higher weights, reducing the likelihood
+of EVs to participate in VPP activities. The authors used a random forest
+regression model to predict the available balancing capacity on an aggregated
+fleet level. Only at the delivery time, the agent decides which individual EVs
+provide the regulation capacity. This heuristic is based on the likelihood that
+the vehicle is rented out and on its expected rental benefits.
 
 In a similar study, the authors showed that carsharing companies can participate
 in day-ahead markets for arbitrage purposes
@@ -318,11 +306,11 @@ used a sinusoidal time-series model to predict the available trading capacity.
 Another central problem for carsharing providers is that committed trades, which
 can not be fulfilled, result in substantial penalties from the system operator
 or electricity exchange. In other words, fleet operators have to avoid buying
-any amount of electricity, which they can't be sure to charge with available EVs
-at the delivery time. To address this issue, the authors developed a mean
-asymmetric weighted objective function. They used it for their time-series based
-prediction model, to penalize committing an EV to VPP when it would have been
-rented out otherwise. Because of the two issues mentioned above,
+any amount of electricity, which they can not be sure to charge with their
+available EVs at the delivery time. To address this issue, the authors developed
+a mean asymmetric weighted objective function. They used it for their
+time-series based prediction model to penalize committing an EV to VPP when it
+would have been rented out otherwise. Because of the two issues mentioned above,
 textcite:kahlen18_elect_vehic_virtual_power_plant_dilem could only make very
 conservative estimations and commitments of overall available trading capacity,
 resulting in a high amount of missed profits. This effect is especially
@@ -434,30 +422,30 @@ used to learn daily charging levels. In their research, the authors used
 function approximation and batch reinforcement learning, an offline, model-free
 learning method. textcite:ko18_mobil_aware_vehic_to_grid proposed a centralized
 controller for managing V2G activities in multiple microgrids. The proposed
-method considers mobility and electricity demands of microgrids, as well as SoC
-of the EVs. The authors formulated a MDP with discrete state and action spaces
-and use standard /Q-Learning/ with \epsilon-greedy policy to derive an optimal
-charging policy. The approach takes microgrid autonomy and electricity prices
-into special consideration.
+method considers mobility and electricity demands of autonomous microgrids, as
+well as SoC of the EVs. The authors formulated a MDP with discrete state and
+action spaces and use standard /Q-Learning/ with \epsilon-greedy policy to
+derive an optimal charging policy.
 
-# TODO: Mention Stochastic Programming approaches
-# cite:pandzic13_offer_model_virtual_power_plant
-# cite:nguyen16_biddin
-It should be noted that advanced RL methods and techniques are not the only
-solutions for problems in the smart grid, often basic algorithms and heuristics
-provide satisfactory results cite:vazquez-canteli19_reinf_learn_deman_respon.
-Despite that, our paper considers RL as an optimal fit for the design of our
-proposed intelligent agent. Given the ability to learn user behavior (e.g.,
-mobility demand) and the flexibility to adapt to the environment (e.g.,
+It should be noted that RL methods are not the only solution for problems in the
+smart grid, often basic algorithms and heuristics provide satisfactory results
+cite:vazquez-canteli19_reinf_learn_deman_respon. Another possibility are
+stochastic programming approaches, which rigorously model the problem as an
+optimization problem under uncertainty that can be analytically solved, for
+example textcite:pandzic13_offer_model_virtual_power_plant and
+textcite:nguyen16_biddin. Uncertainties (e.g., renewable energy generation or
+electricity prices) are modeled by a set of scenarios that are based on
+historical data. Despite that, we consider RL as an optimal fit for the design
+of our proposed intelligent agent. Given the ability to learn user behavior
+(e.g., mobility demand) and the flexibility to adapt to the environment (e.g.,
 electricity prices), RL methods are a promising way of solving complex
-challenges in smart grids.
+challenges in the smart grid.
 
 ** Reinforcement Learning Theory label:sec-reinforcement-learning
-The following chapter will give an overview of the most important Reinforcement
-Learning (RL) concepts and will introduce the corresponding mathematical
-formulations. If not noted otherwise, the notation, equations, and insights are
-adopted from textcite:sutton18_reinf, the de-facto reference book of RL
-research.
+The following chapter will give an overview of the most important RL concepts
+and will introduce the corresponding mathematical formulations. If not noted
+otherwise, the notation, equations, and explanations are adapted from
+textcite:sutton18_reinf, the de-facto reference book of RL research.
 
 RL is an agent-based machine learning algorithm in which the agent learns to
 perform an optimal set of actions through interaction with its environment. The
@@ -486,7 +474,7 @@ decision making and an idealized mathematical formulation of the RL problem. MDP
 allow to derive exact theoretical statements about the learning problem and
 possible solutions. Figure
 ref:agent-environment-interaction depicts the /agent-environment interaction/.
-#+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov decision process cite:sutton18_reinf \protect\footnotemark label:agent-environment-interaction
+#+CAPTION[Markov Decision Process]: The agent-environment interaction in a Markov Decision Process cite:sutton18_reinf \protect\footnotemark label:agent-environment-interaction
 #+ATTR_LATEX: :width 0.85\linewidth
 [[../fig/mdp-interaction.png]]
 #+LATEX: \footnotetext{\textbf{Figure 3.1} from "Reinforcement Learning: An Introduction" by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
