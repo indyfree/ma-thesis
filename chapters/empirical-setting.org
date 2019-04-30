@@ -1,17 +1,11 @@
 * Empirical Setting
-# NOTE: 10%
-# NOTE: Don't repeat stuff from first chapters
-# TODO: Reformulate or cite "high renewable content, causing suitable prices,
-# this suitable for VPPs" -- False
-# Suitable for VPPs to integrate RES providers on a larger scale
-# VPP citation?
-This research is embedded in the German carsharing and electricity markets.
-Germany is a suitable testbed, since it has a comparably high share of
-renewables in its energy mix and is pushing for an energy turnaround (German:
-/Energiewende/) since 2010 cite:bmu10_energ_concep_envir_sound_reliab_affor
-The high renewable energy content in the energy mix causes electricity prices to
-be volatile, which makes Germany an attractive location for the use of
-VPPs.
+This research is embedded in the German carsharing and electricity markets. We
+find that Germany is a suitable test bed for our experiments, since it has a
+comparably high share of renewables in its energy mix and is pushing for an
+energy turnaround (German: /Energiewende/) since 2010
+cite:bmu10_energ_concep_envir_sound_reliab_affor The comparatively high
+renewable energy content in the energy mix causes electricity prices to be more
+volatile, which makes Germany an attractive location for VPP activities.
 
 Germany is home to the carsharing providers Car2Go[fn:1] and DriveNow[fn:2],
 which operate large EV fleets across the globe. It has been argued that electric
@@ -21,29 +15,27 @@ cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Further, it is widely
 regarded that the future of mobility will be electric, shared, smart and
 eventually autonomous cite:burns13_sustain_mobil,sterling18_three_revol.
 Carsharing providers are already contributing to the first two points by
-operating large fleets of electric vehicles. This research addresses the third
+operating large fleets of electric vehicles. This thesis addresses the third
 point: Using electric carsharing fleets to smartly participate in electricity
 markets. Carsharing providers, like Car2Go and DriveNow, operate their
 carsharing fleets in a free-float model, which allows customers to pick up and
-drop vehicles at any place within the operating zone of the provider.
-\red{Free float carsharing is inherently uncertain, additional challenge.}
-Customers pay by the minute and are offered incentives to park the EVs at
-charging stations at the end of their trip.
+drop vehicles at any place within the operating zone of the provider. The
+free-float concept adds additional complexity to our research, since the
+mobility patterns are inherently uncertain and difficult to predict. Customers
+of Car2Go or DriveNow pay by the minute and are offered incentives to park the
+EVs at charging stations at the end of their trip.
 
-
-# NOTE: Further description how data was collected? API, 5 minutes, etc..?
-We obtained real-world trip data from Daimler's carsharing service Car2Go.
-Additionally, we collected freely available balancing market data from the GCRM
-platform website https://regelleistung.net. The data of the EPEX Spot market
-have kindly been provided by ProCom GmbH[fn:3] for research purposes. In the
-next chapters the different datasets are described, as well the most important
-processing steps outlined.
+We obtained real-world trip data from the carsharing service Car2Go, and
+collected freely available balancing market data from the GCRM platform
+website[fn:3] The data of the EPEX Spot market have kindly been provided by
+ProCom GmbH[fn:4] for research purposes. In the next chapters the different
+data sets are described, as well the most important processing steps outlined.
 
 ** Electronic Vehicle Fleet Data label:sec-data-car2go
 # NOTE: Here only description of data, no general blabla
-The Car2Go dataset consists of GPS data of around 500 Smart ED3 Fortwo vehicles
+The Car2Go data set consists of GPS data of around 500 Smart ED3 Fortwo vehicles
 in Stuttgart. These subcompact cars are equipped with a 17.6 kWh battery and a
-standard 3.6kW on-board charger. They fully charge in about six to seven hours
+standard 3.6 kW on-board charger. They fully charge in about six to seven hours
 and can reach a maximum driving distance of 145 km according to the manufacturer.
 When equipped with an additional 22 kW fast charger the charging time reduces to
 about an hour.
@@ -51,49 +43,37 @@ about an hour.
 # TODO: Include trip prices
 #+INCLUDE: "~/uni/ma-thesis/template/car2go_tables.tex" export latex
 
-# TODO: Exact number of charging stations, real or infered?
-In Table ref:table-car2go-raw the raw data is displayed, as we have obtained it
-by Car2Go. The dataset contains spatio-temporal attributes, such as timestamp,
-coordinates, and the address of the EVs in 5 minute intervals. Additionally,
-status attributes of the interior and exterior are given (not displayed).
-Especially relevant for our research is the state of charge ($SoC$, in %) and
-information whether the EV is plugged into a charging station. Note that the
-data only contain EVs that are /available for rent/, i.e., they are not
-currently rented out by a customer. EVs which are parked at a charging station
-are also not available until they have charged up to approximately 70% SoC. For
-further analysis, individual trips had to be reconstructed using the GPS data of
-the cars, moreover we inferred trip distances and trips prices based on Car2Go
+In Table ref:table-car2go-raw the raw data is displayed as we have obtained it
+by Car2Go. The data set contains spatio-temporal attributes, such as timestamp,
+coordinates, and the address of the EVs in 5-minute intervals. Additionally,
+status attributes of the interior and exterior are given, which are not
+displayed in the table. Especially relevant for our research is the state of
+charge ($SoC$, in %) and information whether the EV is plugged into a charging
+station or parked at a regular parking spot. Note that the data only contain EVs
+that are /available for rent/, meaning that they are currently not rented out by
+a customer. EVs which are plugged into a charging station are also not available
+until they have charged up to approximately 70% SoC. For further analysis,
+individual trips had to be reconstructed using the GPS data of the cars,
+moreover we inferred travelled trip distances and rental prices based on Car2Go
 specifications. See Appendix ref:app-data-processing for a detailed listing of
 the executed preprocessing steps.
 
-# NOTE: Graph of car2go parking and charging w/ confidence intervals?
-#       Already in results
-
-
 ** Balancing Market Data label:sec-data-balancing
-# TODO: Consistent wording: tender/auction tender period = weekly, daily;
-# segments, intervals, products, time windows
-In this research, we use market balancing data from the German secondary reserve
-market. The following chapter will give an overview of the dataset and
-preprocessing steps that were taken. The data encompasses weekly lists of
-anonymized bids between 01.06.2016 and 01.01.2018 and a dataset of activated
-control reserve in Germany during the same period. For a detailed description
-about the market design of balancing markets refer to Chapter
-ref:sec-balancing-market.
+We use market balancing data from the German secondary reserve market, which
+contain weekly lists of anonymized bids between 01.06.2016 and 01.01.2018 and a
+data set of activated control reserve in Germany during the same period. The
+bidding data consist of the traded electricity product, the offered balancing
+power $\Pb{}$ (MW), the capacity price $\cp{}$ ($\emw$), and the energy price
+$\ep{}$ ($\emwh$) of each bid. Four different products are traded, which are a
+combination of positive control reserve (POS) or negative control reserve (NEG)
+and the provided time segment, peak hours (HT) or non-peak hours (NT). Since
+negative prices are allowed on the secondary operating reserve market, the
+payment direction is included as well. Moreover, information about the amount of
+capacity that was accepted, either partially or fully, is listed. Bids, which
+were not accepted by the TSOs are not listed. An exemplary excerpt of the data
+set is displayed in Table ref:table-operating-reserve.
 
-The bidding data consists of the traded electricity product, the offered
-capacity $\Pb{}$ (MW), the capacity price $\cp{}$ ($\emw$), and the
-energy price $\ep{}$ ($\emwh$) of each bid. Four different products
-are traded, which are a combination of positive control reserve (feed
-electricity into the grid) or negative control reserve (take electricity from
-the grid) and the provided time segment (peak or non-peak hours). Since negative
-prices are allowed on the secondary operating reserve market, the payment
-direction is included as well. Moreover, information about the amount of
-capacity that was accepted, i.e., either partially or fully, is listed. Bids,
-which were not accepted by the TSOs are not listed. An exemplary excerpt of the
-dataset is displayed in Table ref:table-operating-reserve.
-
-#+CAPTION[Secondary Operating Reserve Market Data]: List of Bids of the German Secondary Reserve Market for the tender period 04.12.2017 - 11.12.2017. label:table-operating-reserve
+#+CAPTION[Secondary Operating Reserve Market Data]: List of bids of the German secondary reserve market for the tender period 04.12.2017 - 11.12.2017. label:table-operating-reserve
 #+ATTR_LATEX: :environment longtable :align c|ccccc :placement [hp]
 |---------+----------------+--------------+---------------+---------+----------|
 |---------+----------------+--------------+---------------+---------+----------|
@@ -123,37 +103,34 @@ electricity generation, providers are naturally dependent on accurate short-term
 forecasts, which are only possible with short tender periods and fine-grained
 bidding intervals.
 
-# NOTE: Mentioned Ascending order of bids
-# TODO: Mention assumption that bids >== critical price get accepted
-# Here or in bidding strategy section?
 In order to estimate the upper bound of profits that the EV fleet can earn by
 participating in the secondary operating reserve market, the /critical prices/
 $\ccp{}$ and $\cep{}$ were determined for each auctioned interval. Following
 textcite:brandt17_evaluat_busin_model_vehic_grid_integ, we define $\ccp{}$
-($\emw$) as the capacity price of the bid that was just barely
-accepted, whereas $\cep{}$ ($\emwh$) is the highest energy price
-that was payed for activated control reserve during that interval. For every
-15-minute interval within the given tender period of one week, the activated
-control reserve in that interval was matched with the accepted bids in that
-tender period. At the point where supply, i.e., offered capacity of bids, met
-demand, i.e., activated control reserve, the critical price $\cep{}$ was
-determined.
+($\emw$) as the capacity price of the bid that was just barely accepted, whereas
+$\cep{}$ ($\emwh$) is the highest energy price that was payed for activated
+control reserve during that interval. For every 15-minute interval within the
+given tender period of one week, the activated control reserve in that interval
+was matched with the accepted bids in that tender period. At the point where
+supply (offered capacity of bids) meets demand (activated balancing power), the
+critical price $\cep{}$ was determined.
 
-/Example/: The assumed critical prices for the secondary operating reserve
-tender interval of the 6^{th} December 2017 between 08:00 and 08:15 are obtained
-as follows: Three suppliers submitted a reserve capacity of 5MW, 15MW and 22MW
-respectively (see Table ref:table-operating-reserve). The critical capacity
-price $\ccp{}\!=\!200.3\emw$ is determined by the capacity price of the last
-(third) accepted bid in that time segment. The TSO reported that 18MW of control
-reserve were activated between 08:00 and 08:15. Hence, the second bid determines
-the critical energy price $\cep{}\!=\!251\emwh$, as control reserve capacity
-gets activated according to ascending order of the submitted energy prices. In
-this example the second bidder would get compensated with:
-$R\!=\!R^c + R^e\!=\!(10.73\emw\!\times\!15\mw) +
-(251\emwh\!\times13\mw\!\times\!0.25\text{h})\!=\! 976.7\eur$. Note that
-the second bidder get compensated for providing 13MW for 15 minutes (0.25h),
-instead of the submitted 15MW, since in total only 18MW of control capacity was
-activated, which was partly fulfilled by the 5MW of the first bidder.
+/Example/: The critical prices for the secondary operating reserve tender
+interval of the 6^{th} December 2017 between 08:00 and 08:15 were obtained as
+follows: Three suppliers submitted a negative reserve capacity of 5, 15 and 22
+MW respectively (see Table ref:table-operating-reserve, first three rows). The
+critical capacity price $\ccp{}\!=\!200.3\emw$ is determined by the capacity
+price of the last (third) accepted bid in that time segment. The TSO reported
+that 18 MW of control reserve were activated between 08:00 and 08:15. Hence, the
+second bid determines the critical energy price $\cep{}\!=\!251\emwh$, as
+control reserve capacity gets activated according to ascending order of the
+submitted energy prices. The second bidder would get compensated for the offered
+balancing capacity plus the actually provided balancing energy:
+$(10.73\emw\!\times\!15\;\mw) +
+(251\emwh\!\times13\;\mw\!\times\!0.25\;\text{h})\!=\! 976.7\;\eur$. Note that
+the second bidder would get compensated for providing 13 MW for 15 minutes (0.25
+h), instead of the submitted 15 MW, since 5 MW of the total 18 MW of activated
+control capacity were already provided by the first bidder.
 
 #+BEGIN_SRC python :exports none
     return((10.73*15)+(251*13*0.25))
@@ -161,12 +138,12 @@ activated, which was partly fulfilled by the 5MW of the first bidder.
 
 #+RESULTS:
 : 976.7
-** Spot Market Data label:sec-data-intraday
-# TODO: Trading windows times, Other types of orders, How are trades matched (equal, lower, higher)
-# TODO: Mention product == units!
-# TODO: Figure about prices developments over the day? Compare balancing & intraday?
-# Compare with EV availability
 
+#+CAPTION[Critical electricity prices]: Daily critical electricity market prices (average, standard deviation) from June 2016 to January 2018. Highly volatile prices, e.g., between 12:00 and 14:00, demonstrate the benefits of an integrated trading strategy, which considers trading on both markets depending on the market conditions. label:fig-price-comparison
+#+ATTR_LATEX: :width 1\linewidth :placement [htb]
+[[../fig/critical-prices.png]]
+
+** Intraday Market Data label:sec-data-intraday
 The data from the EPEX Spot Intraday Continuous encompass order books and
 executed trades from 01.06.2016 until 01.01.2018. An extract of the data can be
 found in Appendix ref:app-data-tables. The list of trades contains information
@@ -175,14 +152,8 @@ on the unit price $\up{}$ ($\emwh$), the quantity (kW) and the traded product
 times (15-minute intervals), as they provide the highest flexibility. Fleet
 controllers can promptly react to fluctuant electricity demand of the EV fleet
 by accurately adjusting the bid quantities. Future research could also consider
-other electricity products if lower prices justify decreased flexibility at that
-point in time. Additionally, the TSOs of the buyer and seller are listed in the
-dataset. They are only relevant if special conditions between TSO apply, for
-example when delivering electricity to other countries.
-
-#+CAPTION[Critical electricity prices]: Daily critical electricity market prices (average, standard deviation) from June 2016 to January 2018. Highly volatile prices, e.g., between 12:00 and 14:00, illustrate the benefits of an integrated trading strategy, which considers trading on both markets depending on the market conditions.
-#+ATTR_LATEX: :width 1\linewidth :placement [hp]
-[[../fig/critical-prices.png]]
+other electricity products if lower prices justify the decreased flexibility at
+that point in time.
 
 On the spot market, electricity trades can have a very short lead time of up to
 5 minutes before delivery. This market characteristic is beneficial for our
@@ -198,13 +169,15 @@ the lowest price of all executed trades.
 where $\cal{T}$ is the set of all trades in a bidding interval. /Example:/ The
 critical unit price of the trades listed in Appendix ref:app-data-tables is
 $\cup{} \!=\!51.00 \emwh$ (trades 8031392, 8031387 and 8031375). All buyers that
-submitted bids with a price higher than the critical unit price, successfully
+submitted bids with a price higher than the critical unit price successfully
 procured electricity. Hence, accurate forecasts of the critical price allow to
-optimize the bidding behavior. For a detailed description of the intraday
-continuous market see Chapter ref:sec-spot-market.
+optimize the bidding behavior.
 
-# TODO: Example?
-# TODO: 1-2 sentences
+In Figure ref:fig-price-comparison, a market comparison of the calculated
+critical prices of both presented data sets is depicted. The high standard
+deviation (error bands) of the prices illustrate the price volatility and
+highlights the possibility to profitably combine trading on both markets
+simultaneously.
 
 #+LATEX: \clearpage
 
@@ -214,5 +187,6 @@ continuous market see Chapter ref:sec-spot-market.
 
 [fn:2] https://www.drive-now.com
 
-[fn:3] https://procom-energy.de
+[fn:3] https://regelleistung.net
 
+[fn:4] https://procom-energy.de
