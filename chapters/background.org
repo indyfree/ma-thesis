@@ -330,7 +330,7 @@ markets in the future.
 
 ** Reinforcement Learning Controlled EV Charging
 
-Previous research shows that intelligent agents equipped with Reinforcement
+Previous research showed that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
 following chapter outlines different research approaches of RL in the domain of
 smart grids. For a more thorough description, mathematical formulations and
@@ -338,23 +338,25 @@ common issues, of RL refer to Chapter ref:sec-reinforcement-learning.
 
 textcite:reddy11_learn_behav_multip_auton_agent,reddy11_strat used autonomous
 broker agents to buy and sell electricity from DER on a proposed /Tariff
-Market/. The agents use Markov Decision Processes (MDPs) and RL to learn pricing
-strategies to profitably participate in the Tariff Market. To control for a
-large number of possible states in the domain, the authors used /Q-Learning/
-with derived state space features. Based on descriptive statistics, they defined
-derived price and market participant features. By engaging with its environment,
-the agent learns an optional sequence of actions (policy) based on the state of
-the agent. textcite:peters13_reinf_learn_approac_to_auton built on that work and
-further enhanced the method by using function approximation. Function
-approximation allows to efficiently learn strategies over large state spaces, by
-deriving a function that describes the states instead of defining discrete
-states. By using this technique, the agent can adapt to arbitrary economic
-signals from its environment, resulting in better performance than previous
-approaches. Moreover, the authors applied feature selection and regularization
-methods to explore the agent's adaption to the environment. These methods are
-particularly beneficial in smart markets because market design, structures, and
-conditions might change in the future. Hence, intelligent agents should be able
-to adapt to it cite:peters13_reinf_learn_approac_to_auton.
+Market/. The agents are modelled with a Markov decision process (MDP) and use RL
+to determine pricing strategies to profitably participate in the Tariff Market.
+To control for a large number of possible states in the domain, the authors used
+/Q-Learning/ with derived state space features. Based on descriptive statistics,
+they defined derived price and market participant features. By engaging with its
+environment, the agent learns an optional sequence of actions (policy) based on
+the state of the agent.
+
+textcite:peters13_reinf_learn_approac_to_auton built on that work and further
+enhanced the method by using function approximation. Function approximation
+allows to efficiently learn strategies over large state spaces, by learning a
+function representation of state values instead of learning single values of
+discrete states. By using this technique, the agent can adapt to arbitrary
+economic signals from its environment, resulting in better performance than
+previous approaches. Moreover, the authors applied feature selection and
+regularization methods to explore the agent's adaption to the environment. These
+methods are particularly beneficial in smart markets because market design,
+structures, and conditions might change in the future. Hence, intelligent agents
+should be able to adapt to it cite:peters13_reinf_learn_approac_to_auton.
 
 textcite:vandael15_reinf_learn_heuris_ev_fleet facilitated learned EV fleet
 charging behavior to optimally purchase electricity on the day-ahead market.
@@ -451,22 +453,22 @@ RL is an agent-based machine learning algorithm in which the agent learns to
 perform an optimal set of actions through interaction with its environment. The
 agents objective is to maximize the rewards it receives based on the actions it
 takes. Immediate rewards have to be weighted against long-term cumulative
-returns that also depend on the agent's future actions. The RL problem is
-formalized as Markov Decision Processes (MDPs) which will be introduced in
-Chapter ref:sec-mdp. A critical task of RL agents is to continuously estimate
-the value of the environment's state. Values indicate the long-term desirability
-of a state, that is the total amount of reward the agent can expect to
-accumulate over the future, following a learned set of actions, called the
-policy. Policies and values are covered in Chapter ref:sec-policies, whereas the
-core mathematical foundations for evaluating policies and updating value
-functions are introduced in Chapter ref:sec-bellman. When the model of the
-environment is fully known, the learning problem is reduced to a planning
-problem (Chapter ref:sec-dp) in which optimal policies can be computed with
-iterative approaches. Model-free RL approaches can be applied when rewards and
-state transitions are unknown, and the agent's behavior has to be learned from
-experience (Chapter ref:sec-td-learning). The last two chapter cover methods
-that solve the RL problem more efficiently, tackle new challenges and are widely
-used in practice and research.
+returns that depend on future actions of the agent. The RL problem is formalized
+as Markov Decision Processes (MDPs) which will be introduced in Chapter
+ref:sec-mdp. A critical task of RL agents is to continuously estimate the value
+of the environment's state. Values indicate the long-term desirability of a
+state, that is the total amount of reward the agent can expect to accumulate
+over the future, following a learned set of actions, called the policy. Policies
+and values are covered in Chapter ref:sec-policies, whereas the core
+mathematical foundations for evaluating policies and updating value functions
+are introduced in Chapter ref:sec-bellman. When the model of the environment is
+fully known, the learning problem is reduced to a planning problem (Chapter
+ref:sec-dp) in which optimal policies can be computed with iterative approaches.
+Model-free RL approaches can be applied when rewards and state transitions are
+unknown, and the agent's behavior has to be learned from experience (Chapter
+ref:sec-td-learning). The last two chapter cover methods that solve the RL
+problem more efficiently, tackle new challenges and are widely used in practice
+and research.
 
 *** Markov Decision Processes label:sec-mdp
 Markov Decision Processes (MDPs) are a classical formulation of sequential
