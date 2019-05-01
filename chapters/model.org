@@ -379,10 +379,10 @@ as new mobility contexts and smart electricity markets. As discussed in Chapter
 ref:sec-back-rl, RL is a suitable approach to achieve this goal and solve the
 proposed controlled charging problem eqref:eq-model-opti. Before we introduce
 the developed RL approach in Chapter ref:sec-model-rl, we illustrate the three
-decision phases of the previously described control mechanism with an detailed
-example in the next section.
+decision phases of the previously described control mechanism with a
+comprehensive example in the next section.
 
-*** Example: Control Mechanism Decision Phases
+*** Example: Decision Phases
 At 3pm on the 9^{th} of August 2017, the controller enters the first bidding
 phase for the market period $h$ = /16.08.2017 15:00-15:15/. It predicts that in
 that interval 250 EVs are connected to a charging station, resulting in 900 kW
@@ -478,30 +478,17 @@ return(kw)
 #+RESULTS:
 : 801
 
-
-# Assume:
-# - Bid maximum capacity price?
-# - What about balancing capacity prices? Future work?
-
-# Other assumptions:
-# 2) EV fleet charges at a fixed industry tariff otherwise
-
-# - Fleet capacity prediction made on non-simulated real-world SoC (w/o smart charging)?
-# - Fleet capacity predictions with simulated data?
-#   - Provide difference levels & descriptive statistics?
-
-
 ** Reinforcement Learning Approach label:sec-model-rl
 In the following chapter the developed RL approach is outlined. First, we define
 the charging problem as a MDP, and second, the learning algorithm is explained.
 Remember that the goal of the controlled charging problem is to choose a set of
 risk factors $\theta_{\lambda}$ that minimize the fleets total costs across all
 market periods. The controller is able to influence the costs, by setting the
-risk factors $\lb{}$, $\li{}$ each market period $h$. The risk factors influence
+risk factors $\lb{}$, $\li{}$ each market period $h$. The risk factors determine
 the bidding quantities $\Pb{h}$, $\Pi{h}$ that the controller submits to the
 balancing and intraday market, which in the end determine the fleet costs. The
 RL agent decides on the risk factors (i.e., takes an action) based on the
-observed state $\S$ every time step $h$ (usually denoted as $t$ in the RL
+observed state $S_{h}$ every time step $h$ (usually denoted as $t$ in the RL
 literature). The optimal set of risk factors is learned by the RL agent through
 estimating a policy $\pi(a|s)$ that maps every state $s\in\S$ to an action
 $a\in\A$.
@@ -516,28 +503,28 @@ is going to take. We observed the following factors that are associated with the
 bidding risk:
 1) The bidding period's time of the day
 
-   In times of volatile customer rental demand (e.g., during rush hour), the
-   uncertainty on the guaranteed amount of available EVs increases. Bidding for
-   these periods involves a higher risk of not being able to fulfill market
+   In times of volatile customer rental demand, for example during rush hour,
+   the uncertainty on the guaranteed amount of available EVs increases. Bidding
+   for these periods involves a higher risk of not being able to fulfill market
    commitments.
 2) The current and estimated future size of the VPP
 
    Large VPPs benefit from the /risk-pooling/ effect cite:kahlen17_fleet.
    Intuitively that means, larger VPPs are exposed to smaller risks: They have
-   an increased probability that "lost" charging power, due to unforeseen
-   rentals, can be substituted by the EVs of the VPP.
-
-# NOTE: Features as state space?
-Since forecasts of available charging power are already available, we define the
+   an increased probability that "lost" charging power, due to unforeseen EV
+   rentals, can be substituted by other EVs of the VPP.
+Since forecasts of available charging power are available by I-1, we define the
 predicted VPP size $\vpphat{h}$ as the as the necessary amount of EVs to provide
 the predicted charging power $\fPhat{}$ in time period $h$:
 \begin{equation}
     \vpphat{h} \defeq \left\lceil\frac{\fPhat{h}}{\gamma}\right\rceil \text{ ,}
 \end{equation}
-where $\gamma$ is the charging power per EV. /Example:/ When the controller
-predicted 910kW available charging power, the estimated future
-size of the VPP to charge with the predicted power is  =ceil(= $\!910\kw /
-3.6\kw\!$ =)= = 253.
+where $\gamma$ is the charging power per EV. The brackets $\lceil x \rceil$,
+some readers might not be familiar with, mean the smallest integer equal or
+greater than $x$, which can also be written as ceil($x$). /Example:/ When the
+controller predicted 910 kW available charging power, the required future size
+of the VPP to charge with the predicted power is $\text{ceil}(910\;\kw/3.6\;\kw)
+= 253$.
 
 
 #+BEGIN_SRC python :exports none
@@ -551,23 +538,23 @@ return(vpp(910, 3.6))
 #+RESULTS:
 : 253
 
-
-The state space is then defined as
-the set of all valid values of the elements of the following tuple:
+Based on the listed factors, we define the state space as the set of all
+valid values of the following tuple:
 \begin{equation}
     \S \defeq \left\langle t(h), \vpp{h}, \vpphat{h+2}, \vpphat{h+(7\!\times\!H)}\right\rangle \text{ ,}
 \end{equation}
 where:
-- $t(h)$ is the current daytime in hours, with discrete values in the range
-  $\big[0,\;23\big] \in \Ne$.
+- $t(h)$ is the bidding period's daytime in hours, with discrete values in the range
+  $\big[0,\;23\big]\in\Ne$.
 - $|VPP|_t$ is the current VPP size, with discrete values in the range
   $\big[0,\;|\F|\big] \in \Ne$.
 - $\vpphat{h+2}$ is the predicted VPP size 30 minutes ahead, with discrete values in the range
   $\big[0,\;|\F|\big] \in \Ne$.
 - $\vpphat{h+(7\!\times\!H)}$ is the predicted VPP size 7 days ahead, with discrete
   values in the range $\big[0,\;|\F|\big] \in \Ne$.
-The state space encompasses $|\F|^3\!\times\!24$ states. Assuming a fleet size
-$|\F|$ of 500 EVs, the state space consists of $3\!\times\!10^9$ different states.
+Considering all possible combinations of the values, the state space encompasses
+$24\!\times\!|\F|^3$ states. When assuming a fleet size $|\F|$ of 500 EVs, that
+are $3\!\times\!10^9$ different states.
 
 #+BEGIN_SRC python :exports none
 import math
@@ -589,28 +576,29 @@ where:
   with discrete values in the range $\big[0,1\big]$ in 0.05 increments.
 - $\li{}$ is the risk factor for bidding on the intraday market 30 minutes
   ahead, with discrete values in the range $\big[0,1\big]$ in 0.05 increments.
-The action space encompasses $20^2 = 400$ actions. The state space and action
-space were consciously discretized to achieve faster learning rates. Convergence
-in continuous spaces is theoretically achievable, but computationally more
-complex cite:sutton18_reinf. In order to facilitate faster learning in
-real-world settings, where long training periods are not desirable, we chose to
-not pursue this direction.
+Considering 20 discrete increments of the action values, the action space
+encompasses $20^2 = 400$ actions. The state space and action space were
+consciously discretized to achieve faster learning rates. Convergence in
+continuous spaces is theoretically achievable, but computationally more complex
+cite:sutton18_reinf. In order to facilitate faster learning in real-world
+settings, where long training periods are not desirable, we chose to not pursue
+this direction.
 
 # NOTE: Reward structure, possibilities
-The reward signal is naturally defined as the fleet costs that occurred in the last
-time step. When accumulating the rewards for all time steps, we arrive at the total
-fleet costs, which we aim to minimize:
+The reward signal is naturally defined as the fleet costs that occurred in the
+last time step. When accumulating the occurred rewards for all time steps, we
+arrive at the total fleet costs, which we aim to minimize:
 \begin{equation}
     R_{h+1} = \Cf{h} - \Cf{h-1} \text{ ,}
 \end{equation}
 where $\Cf{h}$ are the total accumulated fleet costs until the market period
-$h$. For a complete formulation of the cost function see
-eqref:eq-model-fleetcosts. The agent's actions directly determine the occurred
-costs or profits, and are presented to the agent in form of a positive or
-negative reward signal. The particular challenge in the proposed RL problem is
-the significantly /delayed reward/. Choosing a risk factor in time step $h$
-determines the reward up to 672 time steps later (7 days, with 15-minute time
-steps), when the electricity from the balancing market has to be charged.
+$h$. See eqref:eq-model-fleetcosts for a complete formulation of the cost
+function. The agent's actions directly determine the occurred costs or profits,
+and are presented to the agent in form of a positive or negative reward signal.
+The particular challenge in the proposed RL problem is the significantly
+/delayed reward/. Choosing a risk factor in time step $h$ determines the reward
+up to 672 time steps later (7 days, with 15-minute time steps), when the
+electricity from the balancing market has to be charged.
 
 #+BEGIN_SRC python :exports none
 return(7 * 24 * 4)
@@ -618,16 +606,16 @@ return(7 * 24 * 4)
 
 #+RESULTS:
 : 672
-*** Learning Algorithm
-This research proposes to solve the presented RL problem,  with the Double Deep
+*** Learning Algorithm label:sec-model-algo
+This research proposes to solve the presented RL problem, with the double deep
 Q-Network algorithm (DDQN), developed by
 textcite:hasselt16_deep_reinf_learn_doubl_q_learn. DDQN is a state-of-the-art,
 model-free RL approach that uses a deep neural network as function approximator
 to estimate optimal Q-values (see Chapter ref:sec-rl-fa for a explanation of
-function approximation methods). It combines the revolutionary Deep Q-Network
+function approximation methods). It combines the revolutionary deep Q-Network
 (DQN), originally proposed by
-textcite:mnih15_human_level_contr_throug_deep_reinf_learn with Double Q-Learning
-cite:hasselt10_doubl_q. In Double Q-Learning, experiences are randomly selected
+textcite:mnih15_human_level_contr_throug_deep_reinf_learn with double Q-Learning
+cite:hasselt10_doubl_q. In double Q-Learning, experiences are randomly selected
 to update two different value functions to select and evaluate actions (in
 contrast to just one function for both tasks). DDQN has shown to reduce
 overoptimistic action-value estimates of the DQN algorithm, resulting in more
@@ -638,42 +626,46 @@ textcite:wang15_duelin_networ_archit_deep_reinf_learn, this approach outperforms
 existing deep RL methods. Dueling networks lead to faster convergence rates in
 control problems with large action spaces than traditional single stream
 approaches. This property is especially beneficial for our proposed RL problem,
-as the defined action space (400 possible actions) is comparably large in
-comparison to classical control problems. In Figure ref:fig-model-dueling, the
-conventional single stream approach (top) versus the dueling architecture
-(bottom) is depicted. The dueling architecture consists of a neural network of
-any shape with two streams that separately estimate the state-value and the
-action advantages. These estimates are later combined into Q-values (see Figure
-ref:fig-model-dueling, green layer):
-\begin{equation}
+as the defined action space (400 possible actions) is still comparably large in
+comparison to classical control problems
+cite:sutton96_gener,barto83_neuron_adapt_elemen_that_can. In Figure
+ref:fig-model-dueling, the conventional single stream approach (top) versus the
+dueling architecture (bottom) is depicted. The dueling architecture consists of
+a neural network of any shape with two streams that separately estimate the
+state-value and the action advantages. These estimates are later combined into
+Q-values (see Figure ref:fig-model-dueling, green layer):
+\begin{equation} \label{eq-duel-q}
     Q(s,a) = V(s) + \left(A(s,a) - \frac{1}{|\A|} \sum_{a'} A(s,a')\right) \text{ ,}
 \end{equation}
 where $V$ and $A$ are estimates of the value function and action advantages
 respectively, represented by the two different streams in the network. By
-subtracting the mean action advantages (last term), identifiability ($V$ and $A$
-can be recovered, given $Q$) and stability of the optimization is ensured. The
-separated streams allow to learn which states are valuable without having to
-learn each state-action interaction individually. Like this, a general
-state-value is learned that can be shared across many different actions, leading
-to faster convergence cite:wang15_duelin_networ_archit_deep_reinf_learn.
+subtracting the mean action advantages (see eqref:eq-duel-q, last term),
+identifiability ($V$ and $A$ can be recovered, given $Q$) and stability of the
+optimization is ensured. The separated streams allow to learn which states are
+valuable without having to learn each state-action interaction individually.
+Like this, a general state-value is learned that can be shared across many
+different actions, leading to a faster convergence of dueling architectures
+cite:wang15_duelin_networ_archit_deep_reinf_learn.
 
+# TODO: Self-containing explanation
 #+CAPTION[Dueling Network Architecture]: The dueling network architecture cite:wang15_duelin_networ_archit_deep_reinf_learn label:fig-model-dueling
 #+ATTR_LATEX: :width 0.95\linewidth :placement [h]
 [[../fig/ddqn.pdf]]
 
-
 Our agent uses the dueling DDQN algorithm with a standard neural network
 architecture, similar to the one depicted in Figure ref:fig-ann. It consist of
-four input nodes (number of states), three fully-connected hidden layers with
-ReLU activation functions, and a linear output layer with two nodes (number of
-actions). Further, an \epsilon-greedy policy with a linear decreasing
-exploration rate was used. The RL agent was implemented with the neural networks
-API Keras[fn:1][fn:2], which is a high-level abstraction layer of TensorFlow.
-TensorFlow is the de-facto standard for robust and scalable machine learning in
-industry and research cite:abadi16_tensor. Further, we used the shared research
-environment Google Colaboratory to train and evaluate the agent. It offers
-free access to computing resources that are optimized for training machine
-learning models.[fn:3]
+four input nodes, three fully-connected hidden layers with ReLU activation
+functions, and a linear output layer with two nodes. Further, an \epsilon-greedy
+policy with a linear decreasing exploration rate was used. The exact network
+definition in source code can be found in Appendix ref:app-rl-network-def. We
+implemented the RL agent with the neural networks API Keras[fn:1][fn:2], which
+is a high-level abstraction layer of TensorFlow. TensorFlow is the de-facto
+standard for robust and scalable machine learning in industry and research
+cite:abadi16_tensor. Further, we used the shared research environment Google
+Colaboratory to train and evaluate the agent. It offers free access to computing
+resources that are optimized for training machine learning models.[fn:3]
+
+#+LATEX: \clearpage
 
 * Footnotes
 
@@ -687,4 +679,3 @@ equipped with a Intel(R) Xeon(R) CPU @ 2.30GHz (1 core, 2 threads), and 12GB
 available memory. Google Colaboratory can be used up to 12 hours of consecutive
 training time.
 
-#+LATEX: \clearpage
