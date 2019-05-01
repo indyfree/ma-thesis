@@ -422,7 +422,7 @@ function approximation and batch reinforcement learning, an offline, model-free
 learning method. textcite:ko18_mobil_aware_vehic_to_grid proposed a centralized
 controller for managing V2G activities in multiple microgrids. The proposed
 method considers mobility and electricity demands of autonomous microgrids, as
-well as SoC of the EVs. The authors formulated a MDP with discrete state and
+well as SoC of the EVs. The authors formulated an MDP with discrete state and
 action spaces and use standard /Q-Learning/ with \epsilon-greedy policy to
 derive an optimal charging policy.
 
@@ -489,7 +489,7 @@ rewards and successive states, and consequently also influence future rewards.
 The agent has to continuously make a trade-off between immediate rewards and
 delayed rewards to achieve its long-term goal.
 
-The /dynamics/ of a MDP are defined by the probability that a state $s'\in \S$
+The /dynamics/ of an MDP are defined by the probability that a state $s'\in \S$
 and a reward $r\in\R$ occurs, given the preceding state $s\in\S$ and action
 $a\in\A$. In /finite/ MDPs, the random variables $R_t$ and $S_t$ have
 well-defined probability density functions, which are solely dependent on the
@@ -504,7 +504,7 @@ $S_{t-1}$. When a state includes all information of all previous states, the
 state possesses the so-called /Markov property/. If not noted otherwise, the
 Markov property is assumed throughout the whole chapter. The dynamics function
 eqref:eq-dynamics allows computing the /state-transition probabilities/,
-another important characteristic of a MDP:
+another important characteristic of an MDP:
 \begin{equation}
     p(s'|s,a) \defeq \Pr{S_t\!=\!s'|S_{t-1}\!=\!s,A_t\!=\!a} = \sum_{r\in\R}{p(s', r|s, a)},
 \end{equation}
@@ -668,7 +668,7 @@ in finite MDPs with a fully known model of the environment.
 
 *** Temporal-Difference Learning label:sec-td-learning
 The previous chapter dealt with solving a planning problem, that is, computing
-an optimal solution (i.e., an optimal policy $\pi_*$) of a MDP when a model of
+an optimal solution (i.e., an optimal policy $\pi_*$) of an MDP when a model of
 the environment is fully known. In the following chapters, we will look at
 /model-free/ prediction and model-free control. As opposed to planning,
 model-free methods learn from experience and require no prior knowledge of the

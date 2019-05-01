@@ -124,7 +124,7 @@ high imbalance penalties instead. Therefore, our proposed RL agent had to learn
 never to cause imbalances, which can occur up to one week after the agent
 decides on a risk factor for a single bid. Such a long-delayed reward is
 traditionally challenging for an RL agent, which explains the lower convergence
-rate of our approach. textcite:chis16_reinf_learn_based_plug_in investigated a
+rate of our approach. textcite:chis16_reinf_learn_based_plug_in investigated an
 RL approach to reduce charging costs of an individual EV and reported cost
 savings of 10% to 50%. While the authors considered a fixed driving schedule of
 a single EV, our research considered charging a whole EV fleet with previously

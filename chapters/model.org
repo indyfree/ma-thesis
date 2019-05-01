@@ -3,7 +3,7 @@ We start by giving a high-level overview of the model, which proposes a solution
 for utilizing a VPP portfolio of EVs to profitably provide balancing services to
 the grid. A control mechanism procures energy from multiple electricity markets,
 allocates available EVs to the VPP, and intelligently dispatches EVs to charge
-the acquired amount of energy. The model employs a RL agent that learns an
+the acquired amount of energy. The model employs an RL agent that learns an
 optimal bidding strategy by interacting with the electricity markets and reacts
 to changing rental demands of the EV fleet.
 
@@ -480,7 +480,7 @@ return(kw)
 
 ** Reinforcement Learning Approach label:sec-model-rl
 In the following chapter the developed RL approach is outlined. First, we define
-the charging problem as a MDP, and second, the learning algorithm is explained.
+the charging problem as an MDP, and second, the learning algorithm is explained.
 Remember that the goal of the controlled charging problem is to choose a set of
 risk factors $\theta_{\lambda}$ that minimize the fleets total costs across all
 market periods. The controller is able to influence the costs, by setting the

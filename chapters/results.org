@@ -205,11 +205,11 @@ return(87.98 - 15.47)
 # of risks factors? --> Sensivity
 # TODO: Include total annual profit increase per EV and total balancing power
 
-Research question 2 investigates whether a RL agent can optimize the integrated
+Research question 2 investigates whether an RL agent can optimize the integrated
 bidding strategy by dynamically adjusting the bidding quantities. The bidding
 quantities $\Pb{}, \Pi{}$ are based on the evaluated risk associated with
 bidding on the individual electricity markets. In Chapter ref:sec-model-rl, we
-introduced a RL approach that learns the risk factors $\lb{}$, $\li{}$ based on
+introduced an RL approach that learns the risk factors $\lb{}$, $\li{}$ based on
 its observed environment and received reward signals. In Appendix
 ref:app-rl-hyperparams, the hyperparameters are presented which we used to train
 the dueling DDQN algorithm and solving the controlled charging problem under
@@ -335,14 +335,14 @@ training steps is the reason of these variations in learning success and expect
 to achieve more robust results with a increased training time.
 
 Also remarkable is the magnitude of the prediction accuracy's effect on the
-profit increase. After 1.5 years of simulation time, a RL agent that can rely on
-perfect predictions (100% accuracy) generates almost twice as much profit from
-trading electricity than an agent that can only rely on predictions with 50% and
-60% accuracy, 7 days and 30 minutes ahead respectively. It is striking that the
-prediction accuracy has a larger effect (99.13% profit increase between lowest
-and highst accuracy) on the realized profit than the type of bidding strategy
-(73.10% profit increase between worst and best strategy), which we examined in
-the previous sections, leaving room for future research.
+profit increase. After 1.5 years of simulation time, an RL agent that can rely
+on perfect predictions (100% accuracy) generates almost twice as much profit
+from trading electricity than an agent that can only rely on predictions with
+50% and 60% accuracy, 7 days and 30 minutes ahead respectively. It is striking
+that the prediction accuracy has a larger effect (99.13% profit increase between
+lowest and highst accuracy) on the realized profit than the type of bidding
+strategy (73.10% profit increase between worst and best strategy), which we
+examined in the previous sections, leaving room for future research.
 
 # (48346 $\eur$ versus 96245 $\eur$)
 #+BEGIN_SRC python :exports none
