@@ -384,48 +384,49 @@ example in the next section.
 
 *** Example: Control Mechanism Decision Phases
 At 3pm on the 9^{th} of August 2017, the controller enters the first bidding
-phase for the market period $h$ = /16.08.2017 15:00-15:15/. It predicts that at
-that point in time 250 EVs are connected to a charging station, resulting in
-900kW available fleet charging power ($\fPhat{h}\!=\!900\kw$), given the
-charging power of 3.6kW per EV. Assuming the available critical prices are
-$\ccp{h}\!=\!5\emw$, $\cep{h}\!=\!-10\emwh$, and $\cup{h}\!=\!10\emwh$ in that
-market period, the controller now evaluates the cheapest charging option. The
-flat industry electricity tariff is assumed to be $p^{ind}\!=\!0.15\ekwh$. The
-costs for charging with the maximal predicted amount of available power
-$\fPhat{h}$ from the balancing market ($\Cb{h}(900\kw)\!=\!-6.25\eur$) are less
-than charging from the intraday market ($\Ci{h}(900\kw)\!=\!2.25\eur$) or
-charging at the industry tariff
-($900\kw\!\times\!0.25\text{h}\!\times\!0.15\ekwh\!=\!33.75\eur$). In this
-example, the fleet operator will even get compensated for charging its fleet, by
-choosing the balancing market.
+phase for the market period $h$ = /16.08.2017 15:00-15:15/. It predicts that in
+that interval 250 EVs are connected to a charging station, resulting in 900 kW
+available fleet charging power ($\fPhat{h}\!=\!900\;\kw$), given the charging
+power of 3.6 kW per EV. Assuming the critical prices are $\ccp{h}\!=\!5\emw$,
+$\cep{h}\!=\!-10\emwh$, and $\cup{h}\!=\!10\emwh$ in that market period, the
+controller now evaluates the cheapest charging option. The flat industry
+electricity tariff is assumed to be $p^{ind}\!=\!0.15\ekwh$. The costs for
+charging with the predicted amount of available power from the balancing market
+($\Cb{h}(900\;\kw)\!=\!-6.25\;\eur$) are less than charging from the intraday
+market ($\Ci{h}(900\;\kw)\!=\!2.25\;\eur$) or charging at the industry tariff
+($900\;\kw\!\times\!0.25\;\text{h}\!\times\!0.15\ekwh\!=\!33.75\;\eur$). In this
+example, the fleet operator will even get paid 6.25 $\eur$ for charging the
+fleet by choosing the balancing market.
 
 In the next step, the controller has to submit bids to the balancing market. The
 RL agent determined that the risk of bidding on the balancing market is
 $\lb{h}\!=\!0.3$. Consequently, the controller sets the bidding quantity to
-$\Pb{h}\!=\!\fPhat{h}\!\times\!(1\!-\!\lb{h})\!=\!900\kw\!\times0.7\!=\!630\kw$
-and submits a bid to the market and updates its account with
-$\Cb{h}(630\kw)\!=\!-4.725\eur$.
+$\Pb{h}\!=\!\fPhat{h}\!\times\!(1\!-\!\lb{h})\!=\!900\;\kw\!\times0.7\!=\!630\;\kw$,
+submits a bid to the market, and accounts for charging costs of
+$\Cb{h}(630\;\kw)\!=\!-4.725\;\eur$.
 
 One week later, 30 minutes before electricity delivery time, the controller
 enters the second bidding phase. Due to the short time horizon, it predicts with
-high accuracy that only $\fPhat{h}\!=\!810\kw$ is available for the same market
-period /16.08.2017-15:00/. By trading at the intraday market, the controller can
-now charge the remaining available EVs with a low risk of procuring more energy
-than it can maximally charge. At this point in time, the RL agent determines a
-remaining risk of $\li{h}\!=\!0.05$, and sets the bidding quantity to
-$\Pi{h}\!=\!(810\kw\!-\!630\kw)\!\times\!(1\!-\!0.05)\!=\!171\kw$. The
-controller procures 171kW from the intraday market and updates its account with
-$\Ci{h}(171\kw)\!=\!0.4275\eur$.
+high accuracy that only $\fPhat{h}\!=\!810\;\kw$ (instead of 900 kW) is
+available for the market period /16.08.2017 15:00-15:15/. By trading at the
+intraday market, the controller can now charge the remaining available EVs with
+a low risk of procuring more energy than it can maximally charge. At this point,
+the RL agent determines a intraday bidding risk of $\li{h}\!=\!0.05$, and sets
+the bidding quantity to
+$\Pi{h}\!=\!(810\;\kw\!-\!630\;\kw)\!\times\!(1\!-\!0.05)\!=\!171\;\kw$. The
+controller procures 171 kW from the intraday market and accounts for charging
+costs of $\Ci{h}(171\;\kw)\!=\!0.4275\;\eur$.
 
 At electricity delivery time, the 16^{th} of August 2017 at 3:00pm, the
-controller detects 255 available EVs; EVs which are connected to a charging
-station and have enough battery capacity left to be charged in the next control
-period. It assigns 223 EVs to provide the total committed 801kW charging power
-for the market period time $\Delta h$ of 15 minutes. During that time, three
-customers want to rent out EVs that are allocated to the VPP. The first two
-rentals are accepted because two other EVs are available to charge instead. The
-third rental has be to refused, since no EV is remaining as substitution. The
-controller has to account for the opportunity costs of the lost rental $\oc$.
+controller detects 255 EVs that are eligible for VPP use; EVs that are connected
+to a charging station and have enough battery capacity left to charge during the
+next control period. It assigns 223 EVs to provide the total committed 801 kW
+charging power for the market period time $\Delta h$ of 15 minutes. During that
+time, three customers want to rent out EVs that are allocated to the VPP. The
+first two rentals are accepted because two other EVs of the VPP are available to
+charge instead. The third rental has be to refused, since no EV can substitute
+the charging power. Hence, the controller has to account for the opportunity
+costs of that lost rental $\oc$.
 
 #+BEGIN_SRC python :exports none :var h=15
 def bal_cost(p_c, p_e, P):
@@ -604,7 +605,7 @@ fleet costs, which we aim to minimize:
 \end{equation}
 where $\Cf{h}$ are the total accumulated fleet costs until the market period
 $h$. For a complete formulation of the cost function see
-\eqref{eq-model-fleetcosts}. The agent's actions directly determine the occurred
+eqref:eq-model-fleetcosts. The agent's actions directly determine the occurred
 costs or profits, and are presented to the agent in form of a positive or
 negative reward signal. The particular challenge in the proposed RL problem is
 the significantly /delayed reward/. Choosing a risk factor in time step $h$
