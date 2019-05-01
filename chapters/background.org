@@ -327,7 +327,7 @@ cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. This research followed
 textcite:kahlen17_fleet, who proposed to work on a combination of multiple
 markets in the future.
 
-** Reinforcement Learning Controlled EV Charging
+** Reinforcement Learning Controlled EV Charging label:ref-back-rl
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
@@ -807,8 +807,8 @@ $\mu(s)$:
     \MSVEm(\w) \defeq \sum_{s\in\S}{\mu(s)\bigg[\vpi(s)-\hat v(s,\w)\bigg]^2}, \text{ where } \w\in\Re^d
 \end{equation}
 Minimizing $\MSVEm$ in respect to $\hat v$ will yield a value function, which
-facilitates finding a better policy --- the primary goal of RL. Remember that $\hat v$
-can take any form of a linear or non-linear function of the state $s$.
+facilitates finding a better policy --- the primary goal of RL. Remember that
+$\hat v$ can take any form of a linear or non-linear function of the state $s$.
 
 In practice, deep artificial neural networks (ANNs) have shown great success as
 function approximators, which coined the term /deep reinforcement learning/

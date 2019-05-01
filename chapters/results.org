@@ -112,7 +112,7 @@ return(round((13.84 / 389.64),4) * 100)
  information of their environment into account and adjust the bidding quantities
  dynamically. Instead, the controller discounts the predicted amount of
  available charging power with a fixed risk factor $\lambda$ (see
- \eqref{eq-model-pb} and \eqref{eq-model-pi}). Naturally, the controller
+ eqref:eq-model-pb and eqref:eq-model-pi). Naturally, the controller
  estimates a higher risk for bidding on the balancing market week ahead than on
  the intraday market 30 minutes ahead. We defined following types of strategies:
 
