@@ -1,19 +1,19 @@
 * Conclusion
 # NOTE Sec: Setting
-Integrating volatile renewable energy sources into the electricity system
-imposes challenges on the electricity grid. In order to ensure grid stability
-and avoid blackouts, balancing power is necessary to match electricity supply and
-demand. Balancing power can be provided by VPPs that generate or consume energy
-within a short period of time and offer these services on the electricity
-markets cite:pudjianto07_virtual_power_plant_system_integ. EV fleet operators
-can utilize idle vehicles to form VPPs and offer available EV battery capacity
-as balancing power to the markets. The fleet can offer balancing services
-directly via tender auctions on the balancing market or via continuous trades on
-the intraday market, where participants procure or sell energy to self-balance
-their portfolios cite:pape16_are_fundam_enoug. Both markets have complementary
-properties in terms of price levels and lead times to delivery, which motivates the
-creation of a VPP portfolio to profitably participate in both markets and extend
-the business model of the fleet.
+Integrating volatile RES into the electricity system imposes challenges on the
+electricity grid. In order to ensure grid stability and avoid blackouts,
+balancing power is necessary to match electricity supply and demand. Balancing
+power can be provided by VPPs that generate or consume energy within a short
+period of time and offer these services on the electricity markets
+cite:pudjianto07_virtual_power_plant_system_integ. EV fleet operators can
+utilize idle vehicles to form VPPs and offer available EV battery capacity as
+balancing power to the markets. The fleet can offer balancing services directly
+via tender auctions on the balancing market or via continuous trades on the
+intraday market, where participants procure or sell energy to self-balance their
+portfolios cite:pape16_are_fundam_enoug. Both markets have complementary
+properties in terms of price levels and lead times to delivery, which motivates
+the creation of a VPP portfolio to profitably participate in both markets and
+extend the business model of the fleet.
 
 # NOTE Sec: Problem
 However, there are certain risks associated with this business model extension.
@@ -79,11 +79,11 @@ by roughly $75 000\; \eur$ over a 1.5 year period. We found that the integrated
 bidding strategy generates 49%-54% more profits compared to the naive benchmark
 strategies. Fleet controllers following the integrated bidding strategy can
 mitigate risks and increase profits by exploiting market properties of both
-markets. The fleet would also contribute to the integration of renewable energy
-resources by providing around 1400 MWh of balancing power to stabilize the
-electrical power grid. Since the inherently uncertain demand patterns of free
-float carsharing are imposing additional challenges on securely providing
-balancing services, better results are expected with other kinds of EV fleets.
+markets. The fleet would also contribute to the integration of RES by providing
+around 1400 MWh of balancing power to stabilize the electrical power grid. Since
+the inherently uncertain demand patterns of free float carsharing are imposing
+additional challenges on securely providing balancing services, better results
+are expected with other kinds of EV fleets.
 
 Furthermore, we showed that the proposed RL agent could optimize the integrated
 bidding strategy under uncertainty by roughly 12%, missing the optimal result of
@@ -150,17 +150,17 @@ least 1 MW of balancing power over a 4-hour period. Since it is barely possible
 to overcome this constraint with a typical EV fleet consisting of 500 EVs with
 unknown rental patterns and the existing charging infrastructure, it was ignored
 in our model. We propose changes in the current market design to give equal
-access to distributed energy resources, such as EVs. In order to phase out
-conventional power plants and increase the share of renewables in the energy
-mix, balancing power needs to be provided from other resources. Instead of 4 to
-8-hour segments, the markets should introduce bidding slots of 15 minutes or
-less. Moreover, the time between auction and physical delivery of balancing
-power should be reduced as far as possible. Smaller time frames mitigate
-forecasting errors, which are a major obstacle for renewable energy generators
-to efficiently offer their capacities to the markets. Future research should
-investigate how these market design changes and new modifications in the pricing
-structure (e.g., the German "Mischpreisverfahren") affect the profitability of
-using EV VPPs for providing balancing power.
+access to DER, such as EVs. In order to phase out conventional power plants and
+increase the share of renewables in the energy mix, balancing power needs to be
+provided from other resources. Instead of 4 to 8-hour segments, the markets
+should introduce bidding slots of 15 minutes or less. Moreover, the time between
+auction and physical delivery of balancing power should be reduced as far as
+possible. Smaller time frames mitigate forecasting errors, which are a major
+obstacle for renewable energy generators to efficiently offer their capacities
+to the markets. Future research should investigate how these market design
+changes and new modifications in the pricing structure (e.g., the German
+"Mischpreisverfahren") affect the profitability of using EV VPPs for providing
+balancing power.
 
 Finally, we see a limitation in the learning rate of the developed RL approach
 that concerns the applicability of such an algorithm in a real-world setting

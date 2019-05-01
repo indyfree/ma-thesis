@@ -1,16 +1,16 @@
 * Introduction
 Global climate change is one of the most substantial challenges of our time. It
 necessitates reducing carbon emissions and shifting to sustainable energy
-sources. However, the integration of renewable energy is a complex matter.
-Sustainable electricity production is dependent on the weather conditions, and
-difficult to integrate into the electrical power system. Changing weather
-conditions cause under- and oversupplies of intermittent solar and wind energy
-which are destabilizing the power grid. This thesis will explore a novel
-approach of integrating renewable energy into the power system by providing
-balancing power with virtual power plants (VPPs) of electric vehicles (EVs). The
-following chapter is structured as follows: First, the research motivation is
-described, the derived research questions are presented next, and finally, the
-relevance of this research explained.
+sources. However, the integration of renewable energy sources (RES) is a complex
+matter. Sustainable electricity production is dependent on the weather
+conditions, and difficult to integrate into the electrical power system.
+Changing weather conditions cause under- and oversupplies of intermittent solar
+and wind energy which are destabilizing the power grid. This thesis will explore
+a novel approach of integrating renewable energy into the power system by
+providing balancing power with virtual power plants (VPPs) of electric vehicles
+(EVs). The following chapter is structured as follows: First, the research
+motivation is described, the derived research questions are presented next, and
+finally, the relevance of this research explained.
 
 ** Research Motivation
 # 1. Motivation

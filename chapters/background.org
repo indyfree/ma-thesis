@@ -119,21 +119,21 @@ Exchange (EPEX Spot) as it is the largest electricity market in Europe, with a
 total trading volume of approximately 567 TWh in 2018[fn:3], but most
 spot markets in western economies work with similar market mechanisms.
 
-Germany's most important spot market is the day-ahead market with a
-trading volume of over 234 TWh in 2018[fn:3]. Participants place asks and bids
-for hourly contracts of the following day on the /EPEX Spot Day-ahead Auction/
+Germany's most important spot market is the day-ahead market with a trading
+volume of over 234 TWh in 2018[fn:3]. Participants place asks and bids for
+hourly contracts of the following day on the /EPEX Spot Day-ahead Auction/
 market until the market closes at 12pm on the day before delivery (see Figure
 ref:fig-electricity-markets). The day-ahead market plays an important role in
-integrating volatile renewable energy sources (RES) into the power system
-cite:pape16_are_fundam_enoug. Generators forecast the expected generation
-capacity for the next day and sell those quantities on the market
-cite:karanfil17_role_contin_intrad_elect_market. After the market closes, the
-participants have the opportunity to trade the difference between the day-ahead
-forecast and the more precise intraday forecast (forecasting error) on the
-intraday market cite:kiesel17_econom_analy_intrad_elect_prices. In this way, RES
-generators can cost effectively self-balance their portfolios, instead of
-relying on balancing services provided by the TSO, which imposes high imbalance
-costs on participants cite:pape16_are_fundam_enoug.
+integrating volatile RES into the power system cite:pape16_are_fundam_enoug.
+Generators forecast the expected generation capacity for the next day and sell
+those quantities on the market cite:karanfil17_role_contin_intrad_elect_market.
+After the market closes, the participants have the opportunity to trade the
+difference between the day-ahead forecast and the more precise intraday forecast
+(forecasting error) on the intraday market
+cite:kiesel17_econom_analy_intrad_elect_prices. In this way, RES generators can
+cost effectively self-balance their portfolios, instead of relying on balancing
+services provided by the TSO, which imposes high imbalance costs on participants
+cite:pape16_are_fundam_enoug.
 
 On the /EPEX Spot Intraday Continuous/ market, electricity products are traded
 up until 5 minutes before physical delivery. Hourly contracts, as well as
@@ -258,9 +258,8 @@ textcite:brandt17_evaluat_busin_model_vehic_grid_integ and
 textcite:kahlen14_balan_with_elect_vehic showed that electricity brokers can
 overcome the capacity issues by aggregating EV batteries. In addition to
 electricity brokers, we apply the concept of VPPs. VPPs are flexible portfolios
-of distributed energy resources, which are presented with a single load profile
-to the system operator, making them eligible for market participation and
-ancillary service provisioning
+of DER, which are presented with a single load profile to the system operator,
+making them eligible for market participation and ancillary service provisioning
 cite:pudjianto07_virtual_power_plant_system_integ. Hence, VPPs allow providing
 balancing power to the markets without knowing which exact sources provide the
 promised capacity until the delivery time. This concept is specially useful when
@@ -336,10 +335,10 @@ smart grids. For a more thorough description, mathematical formulations and
 common issues, of RL refer to Chapter ref:sec-reinforcement-learning.
 
 textcite:reddy11_learn_behav_multip_auton_agent,reddy11_strat used autonomous
-broker agents to buy and sell electricity from DER on a proposed /Tariff
-Market/. The agents are modelled with a Markov decision process (MDP) and use RL
-to determine pricing strategies to profitably participate in the Tariff Market.
-To control for a large number of possible states in the domain, the authors used
+broker agents to buy and sell electricity from DER on a /Tariff Market/. The
+agents are modelled with a Markov decision process (MDP) and use RL to determine
+pricing strategies to profitably participate in the Tariff Market. To control
+for a large number of possible states in the domain, the authors used
 /Q-Learning/ with derived state space features. Based on descriptive statistics,
 they defined derived price and market participant features. By engaging with its
 environment, the agent learns an optional sequence of actions (policy) based on
