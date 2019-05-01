@@ -1,9 +1,8 @@
 * Conclusion
-# NOTE 5%
 # NOTE Sec: Setting
 Integrating volatile renewable energy sources into the electricity system
 imposes challenges on the electricity grid. In order to ensure grid stability
-and avoid blackouts, balancing power is needed to match electricity supply and
+and avoid blackouts, balancing power is necessary to match electricity supply and
 demand. Balancing power can be provided by VPPs that generate or consume energy
 within a short period of time and offer these services on the electricity
 markets cite:pudjianto07_virtual_power_plant_system_integ. EV fleet operators
@@ -17,7 +16,6 @@ creation of a VPP portfolio to profitably participate in both markets and extend
 the business model of the fleet.
 
 # NOTE Sec: Problem
-# NOTE Mention risks? Mention portfolio (optimization)?
 However, there are certain risks associated with this business model extension.
 EVs can only be allocated to a VPP portfolio if they are connected to a charging
 station and have sufficient free battery capacity available, information which
@@ -25,18 +23,19 @@ is unknown to the fleet at the time of market commitment. This uncertainty makes
 it difficult for fleet operators to estimate the size of the VPP and calculate
 the optimal bidding quantities. Moreover, if fleet operators offer more
 balancing power than they can provide, they face high imbalance penalties from
-the markets. For a sustainable business model fleet operators also need to
-balance VPP activities with their primary offering, customer mobility. If the
-fleet is denying customer rentals to ensure that it can fulfill the market
-commitments, it has to account for opportunity costs of lost rentals that are
-higher than potential profits of offering the cars' batteries as balancing
-power.
+the markets. In order to operate a sustainable business, fleet operators also
+need to balance VPP activities with their primary offering, customer mobility.
+If the fleet is denying customer rentals to ensure that it can fulfill the
+market commitments, it must account for opportunity costs of lost rentals that
+may be higher than potential profits of offering the cars' batteries as
+balancing power.
 
 In the following chapter, we will summarize the conducted research of this
-thesis to address the aforementioned challenges. Furthermore, the contribution
-of this work is outlined, and the main results are presented and discussed.
-Finally, we list the limitations of this study and give insights on further
-areas of research.
+thesis to address the aforementioned challenges. We will outline the
+contribution of this work and present and discuss the main results of our
+research. Finally, we will list the limitations of this study and give insights
+on further areas of research.
+
 ** Contribution
 # NOTE Sec: What we have done
 #     1. Model (Control mechanism)
@@ -55,27 +54,22 @@ out the behavior of intelligent agents in the context of controlled EV charging.
 Third, we proposed a novel integrated bidding strategy that offers balancing
 services of a VPP portfolio to multiple electricity markets simultaneously.
 Instead of submitting only conservative amounts of battery capacity to a single
-market, like previous studies did
+market as previous studies did
 cite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem, our proposed
 strategy aims to maximize profits by procuring electricity from the multiple
-markets to the greatest extent possible without causing imbalances. Forth, we
-proposed the usage of a RL agent that learns to optimize the composition of the
+markets to the greatest extent possible without causing imbalances. Fourth, we
+proposed the usage of an RL agent that learns to optimize the composition of the
 VPP portfolio and the associated risks of bidding on the markets. The agent
 dynamically determines risk factors, dependent on the predicted fleet
-information and market conditions. Therefore, we formulated a MDP that is
+information and market conditions. Therefore, we formulated an MDP that is
 designed for agents to work in previously unknown environments and uncertain
 conditions. The RL approach was developed with the focus on real-world
 applicability, fast convergence rates, and generalizability. We expect the
 proposed approach to work in a variety of different settings, with different
-kinds of EVs (e.g., electric bikes), independent of the geographical location
-of the fleet.
-
-# - RL can learn to dynamically adjust bidding quantities by learning risk
-#   associated with bidding on each market. (What are the risks?)
-# - obtained better results than similar studies in the field. (how much and which?)
+kinds of EVs (e.g., electric bikes), independent of the geographical location of
+the fleet.
 
 ** Main Findings
-# NOTE Sec: What we have found (include key numbers)
 # TODO: Double check numbers!
 The proposed method was evaluated in a series of experiments with real-world
 carsharing data from Car2go in Stuttgart and German electricity market data from
@@ -91,63 +85,51 @@ electrical power grid. Since the inherently uncertain demand patterns of free
 float carsharing are imposing additional challenges on securely providing
 balancing services, better results are expected with other kinds of EV fleets.
 
-Further, we showed that the proposed RL agent could optimize the integrated
+Furthermore, we showed that the proposed RL agent could optimize the integrated
 bidding strategy under uncertainty by roughly 12%, missing the optimal result of
 a bidding strategy with full information available by only 3%. The agent was
-able to successfully estimate the bidding risk, avoid imbalances and keeping
-lost rentals to a minimum. Additionally, we tested and compared the performance
-of various modern RL algorithms and found that recent advances in deep RL do
-improve the robustness and convergence rates in real-world applications such as
+able to successfully estimate the bidding risk, avoid imbalances, and keep lost
+rentals to a minimum. Additionally, we tested and compared the performance of
+various modern RL algorithms and found that recent advances in deep RL do
+improve the robustness and convergence rates in real-world applications, such as
 controlled EV charging. Despite these improvements, all RL approaches needed
 more than 1.5 years of simulation time to learn to avoid imbalance penalties,
-which makes a RL approach unsuitable to deploy in unseen fleet environments
-without prior training data. A sensitivity analysis showed that the prediction
-accuracy of available fleet charging power has a large impact on the fleet
-profitability. If the forecasts about available EVs for VPP use in the future
-are very uncertain, the RL agent estimates high bidding risks and can only offer
-conservative amounts of balancing power on the markets. Surprisingly, the effect
-of prediction accuracy on the total gross profit increase is more pronounced
-than the choice of bidding strategy, which emphasizes the need for highly
-accurate mobility demand forecasting algorithms.
+which makes an RL approach unsuitable to deploy in unseen fleet environments
+without prior training data.
 
-Our results compare well to other studies, while
+A sensitivity analysis showed that the prediction accuracy of available fleet
+charging power has a large impact on the fleet profitability. If the forecasts
+about available EVs for VPP use in the future are very uncertain, the RL agent
+estimates high bidding risks and can only offer conservative amounts of
+balancing power on the markets. Surprisingly, the effect of prediction accuracy
+on the total gross profit increase is more pronounced than the choice of bidding
+strategy, which emphasizes the need for highly accurate mobility demand
+forecasting algorithms.
+
+Our results compare well to other studies. While
 textcite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem reported
 an annual profit increase of up to $121 \eur$ (163$) per EV, the experiment
 conducted in this thesis yielded an annual increase of $98 \eur$ per EV from
-charging cheaper than the regular industry price. In their model, however, the
-authors did not take imbalance cost into account, which we found to be a
-determining factor in the bidding process. When examining a RL approach of EV
-fleet charging schedules, textcite:vandael15_reinf_learn_heuris_ev_fleet
-reported that after 20 to 30 days of training, the algorithm converged to a
-near-optimal solution. In our experiments, convergence was reached only after
-training more than 1.5 years of simulation time. In contrast to their study, in
-which the fleet participated in the day-ahead market, our research focused the
-balancing markets, where participants can not self-balance their portfolio on
-other markets but are charged high imbalance penalties instead. Therefore, our
-proposed RL agent had to learn never to cause imbalances, which can occur up to
-one week after the agent decided on a risk factor for a single bid. Such a
-long-delayed reward is traditionally challenging for RL agent, which explains
-the lower convergence rate of our approach.
-textcite:chis16_reinf_learn_based_plug_in investigated a RL approach to reduce
-charging costs of an individual EV and reported cost savings of 10% to 50%.
-While the authors considered a fixed driving schedule of a single EV, our
-research considered charging a whole EV fleet with previously unknown mobility
-patterns. Despite the additional uncertainty, we could achieve a cost reduction
-of charging the fleet by 25%.
-
-# NOTE: Mention Exploitation-Exploration dilemma?
-
-# NOTE: Practical Insights/Summary:
-# - RL works good
-# - Modern Deep RL architectures matter
-# - Prediction is more (?) important
-# - At the same time the VPP activities have an environmental impact by reducing
-#     CO_2 emissions through more efficient use of renewables. By adding more
-#     balancing power renewable energy generation does not to be curtailed.
-#     Grid needs to get rid of surplus electricity fast
-
-# NOTE Sec: Discuss !!
-# - Advantage over forecast like Kahlen: General approach, unseen environments
+charging cheaper than the regular industry price. However, in their model,
+textcite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem did not
+take imbalance cost into account, which we found to be a determining factor in
+the bidding process. When examining an RL approach of EV fleet charging
+schedules, textcite:vandael15_reinf_learn_heuris_ev_fleet reported that after 20
+to 30 days of training, the algorithm converged to a near-optimal solution. In
+our experiments, convergence was reached only after training more than 1.5 years
+of simulation time. In contrast to their study, in which the fleet participated
+in the day-ahead market, our research focused on balancing markets, which
+restrict participants to self-balance their portfolio on other markets charge
+high imbalance penalties instead. Therefore, our proposed RL agent had to learn
+never to cause imbalances, which can occur up to one week after the agent
+decides on a risk factor for a single bid. Such a long-delayed reward is
+traditionally challenging for an RL agent, which explains the lower convergence
+rate of our approach. textcite:chis16_reinf_learn_based_plug_in investigated a
+RL approach to reduce charging costs of an individual EV and reported cost
+savings of 10% to 50%. While the authors considered a fixed driving schedule of
+a single EV, our research considered charging a whole EV fleet with previously
+unknown mobility patterns. Despite the additional uncertainty, we could achieve
+a cost reduction of charging the fleet by 25%.
 
 ** Limitations and Future Work
 
@@ -162,7 +144,7 @@ services, which can compromise the profit of the fleet when it has to charge at
 the regular industry price instead.
 
 Second, at a regulatory level, the electricity markets are currently not easily
-accessible to single EVs, EV fleets or small VPPs. For example, the GCRM only
+accessible to single EVs, EV fleets, or small VPPs. For example, the GCRM only
 allows actors to participate in the market, which can provide a quantity of at
 least 1 MW of balancing power over a 4-hour period. Since it is barely possible
 to overcome this constraint with a typical EV fleet consisting of 500 EVs with
@@ -171,28 +153,28 @@ in our model. We propose changes in the current market design to give equal
 access to distributed energy resources, such as EVs. In order to phase out
 conventional power plants and increase the share of renewables in the energy
 mix, balancing power needs to be provided from other resources. Instead of 4 to
-8-hour segments the markets should introduce bidding slots of 15 minutes or
+8-hour segments, the markets should introduce bidding slots of 15 minutes or
 less. Moreover, the time between auction and physical delivery of balancing
 power should be reduced as far as possible. Smaller time frames mitigate
 forecasting errors, which are a major obstacle for renewable energy generators
 to efficiently offer their capacities to the markets. Future research should
-investigate, how these market design changes and new modifications in the
-pricing structure (e.g., the German "Mischpreisverfahren") affects the
-profitability of using EV VPPs for providing balancing power.
+investigate how these market design changes and new modifications in the pricing
+structure (e.g., the German "Mischpreisverfahren") affect the profitability of
+using EV VPPs for providing balancing power.
 
-Lastly, we see a limitation in the learning rate of the developed RL approach
+Finally, we see a limitation in the learning rate of the developed RL approach
 that concerns the applicability of such an algorithm in a real-world setting
 without previously available training data. Future work should test and evaluate
 RL control algorithms in physical systems or real appliances in smart
-electricity markets. It has to be noted that despite the fast-paced development
+electricity markets. It should be noted that despite the fast-paced development
 of RL approaches and its success in many research areas, it is not always the
 best solution for all problem types
 cite:vazquez-canteli19_reinf_learn_deman_respon. Future research should
 investigate how RL approaches in the field of fleet control and VPP optimization
 compare against classical stochastic programming methods, for example from
-textcite:pandzic13_offer_model_virtual_power_plant. We also like to emphasize
-the need for highly accurate mobility demand forecasting algorithms. Our results
-showed that the accuracy of such algorithms has a high influence on the
-effectiveness of the fleet control operation.
+textcite:pandzic13_offer_model_virtual_power_plant. We would also like to
+emphasize the need for highly accurate mobility demand forecasting algorithms.
+Our results showed that the accuracy of such algorithms has a high influence on
+the effectiveness of the fleet control operation.
 
 #+LATEX: \clearpage
