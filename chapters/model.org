@@ -223,8 +223,8 @@ intraday market. The cost function for procuring electricity from the balancing
 market is defined as follows:
 \begin{equation} \label{eq-cost-balancing}
 \begin{split}
-    \Cb{h}(P) &\defeq -(P\!\times\!10^{-3} \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
-    &= -(P\!\times\!10^{-3} \times \ccp{h}) + (P \frac{\Delta h}{10^{3}} \times \cep{h}) \text{ ,}
+    \Cb{h}(P) &\defeq -(\frac{P}{10^{3}} \times \ccp{h}) + (\Eb{h} \times \cep{h}) \\
+    &= -(\frac{P}{10^{3}} \times \ccp{h}) + (\frac{P\Delta h}{10^{3}} \times \cep{h}) \text{ ,}
 \end{split}
 \end{equation}
 where $P$ (kW) is the amount of offered balancing power. The first term of the
@@ -243,7 +243,7 @@ The cost function for charging from the intraday market is defined similarly to
 \begin{equation}
 \begin{split}
     \Ci{h}(P) &\defeq \Ei{h} \times \cup{h} \\
-    &= P \frac{\Delta h}{10^{3}}\times \cup{h}
+    &= \frac{P\Delta h}{10^{3}}\times \cup{h}
 \end{split}
 \end{equation}
 Again, depending on the market situation, $\cup{}\!\in\!\Re$ can either be
