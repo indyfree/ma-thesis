@@ -1,83 +1,81 @@
 * Model
-# NOTE: 20%
-# NOTE: Mention VPP more clearly?
-
-# NOTE: Need to reformulate Intro+Following to only balancing
-The following chapter will introduce the model of this research. In its essence,
-we propose a solution for EV fleet providers to utilize a VPP portfolio to
-profitably provide balancing services to the grid on multiple markets. A control
-mechanism procures energy from electricity markets, allocates available EVs to
-VPPs, and intelligently dispatches EVs to charge the acquired amount of energy.
-The model employs a RL agent that learns an optimal bidding strategy by
-interacting with the electricity markets and reacts to changing rental demand of
-the EV fleet. This chapter is structured as follows: The information assumptions
-are listed first, the control mechanism is explained next, and finally, the RL
-approach is described in detail. The used notation in this chapter can be found
-in Table ref:table-notation.
+We start by giving a high-level overview of the model, which proposes a solution
+for utilizing a VPP portfolio of EVs to profitably provide balancing services to
+the grid. A control mechanism procures energy from multiple electricity markets,
+allocates available EVs to the VPP, and intelligently dispatches EVs to charge
+the acquired amount of energy. The model employs a RL agent that learns an
+optimal bidding strategy by interacting with the electricity markets and reacts
+to changing rental demands of the EV fleet.
 
 # NOTE: Section: Problem Description
-We formulate the problem as a /controlled EV charging/ problem. The EV fleet
-operator represents the /controller/, which aims to charge the fleet at minimal
-costs. First, the controller predicts the amount of energy it can charge in a
-given /market period/ $h$. The length of the market period $\Delta h$ and the
-market closing time depend on the considered electricity market. Second, the
+We formulate the research problem as a /controlled EV charging/ problem. The EV
+fleet operator represents the /controller/, which aims to charge the fleet at
+minimal costs. Therefore, it first predicts the amount of energy it can charge
+in a given /market period/ $h$. The length of the market period $\Delta h$ and
+the market closing time depend on the considered electricity market. Second, the
 controller places bids on one or multiple markets to procure the predicted
 amount of energy. Lastly, at electricity delivery time, the controller
-communicates with the EV fleet to control the charging in real-time. Online EV
-/control periods/ $t$ are typically shorter than market periods. In the
-empirical case that we consider, the market periods are 15 minutes long, while
-the EV control periods last 5 minutes. Nonetheless, the presented approach
-generalizes to other period lengths. During each control period, the controller
-has to take decisions which individual EVs it should dispatch to charge the
-procured amount of electricity. In times of unforeseen rental demand, this
-decision implies trading off commitments to the markets with compromising
-customer mobility by refusing customer rentals.
+communicates with the EV fleet to control the charging in real-time. EV /control
+periods/ $t$ are typically shorter than market periods. In the empirical case
+that we consider, the market periods are 15 minutes long, while the EV control
+periods last 5 minutes. Nonetheless, the presented approach generalizes to other
+period lengths. During each control period, the controller has to take decisions
+which individual EVs it should dispatch to charge the procured amount of
+electricity. In times of unforeseen rental demand, this decision implies trading
+off commitments to the markets with compromising customer mobility by refusing
+customer rentals.
 
+The rest of the chapter is structured as follows: The information and market
+assumptions are listed first. Next, we lay out the developed control mechanism,
+which we also illustrate with a comprehensive example. Finally, the RL approach
+is described, where we give details about the defined MDP and the employed
+learning algorithm. The required notation for the mathematical formulations are
+displayed in Table ref:table-notation.
 
 #+CAPTION[Table of Notation]: Table of Notation label:table-notation
 #+ATTR_LATEX: :environment longtable :align p{0.11\linewidth}|p{0.75\linewidth}|c :placement [hp]
-|---------------------------+---------------------------------------------------------------------------+---------|
-|---------------------------+---------------------------------------------------------------------------+---------|
-| Symbol                    | Description                                                               | Unit    |
-|---------------------------+---------------------------------------------------------------------------+---------|
-| $t$                       | Control period.                                                           | -       |
-| $h$                       | Market period.                                                            | -       |
-| $T$                       | Number of control periods in a market period.                             | -       |
-| $H$                       | Number of market periods in day.                                          | -       |
-| $N_h$                     | Total number of market periods.                                           | -       |
-| $\Delta t$                | Length of control period.                                                 | hours   |
-| $\Delta h$                | Length of market period.                                                  | hours   |
-|---------------------------+---------------------------------------------------------------------------+---------|
-| $\Pb{h}$                  | Amount of balancing power offered on the balancing market.                | kW      |
-| $\ccp{h}$                 | Critical capacity price in market period $h$.                             | $\emw$  |
-| $\cep{h}$                 | Critical energy price in market period $h$.                               | $\emwh$ |
-| $\Pi{h}$                  | Amount of power offered for the unit on the intraday market.              | kW      |
-| $\cup{h}$                 | Critical unit price in market period $h$.                                 | $\emwh$ |
-| $\Eb{h}$                  | Amount of energy charged from balancing market in market period h.        | MWh     |
-| $\Ei{h}$                  | Amount of energy charged from the intraday market in market period h.     | MWh     |
-|---------------------------+---------------------------------------------------------------------------+---------|
-| $\fP{t}$                  | Amount of available fleet charging power in control period $t$.           | kW      |
-| $\fPhat{t}$               | Predicted amount of available fleet charging power in control period $t$. | kW      |
-|---------------------------+---------------------------------------------------------------------------+---------|
-| $\Cb{h}(P)$               | Cost function for procuring electricity from the balancing market.        | $\eur$  |
-| $\Ci{h}(P)$               | Cost function for procuring electricity from the intraday market.         | $\eur$  |
-| $\oc$                     | Opportunity costs of lost rental of EV $i$ in control period $t$.         | $\eur$  |
-| $\beta_h$                 | Imbalance costs in market period $h$.                                     | $\eur$  |
-|---------------------------+---------------------------------------------------------------------------+---------|
-| $\lb{h}$                  | Balancing market risk factor.                                             | $[0,1]$ |
-| $\li{h}$                  | Intraday market risk factor.                                              | $[0,1]$ |
-| $\theta_{\lambda}$        | Set of risk factors for all market periods $h\!\in\!\{1,...,N_h\}$.       | -       |
-| $\Cf{}(\theta_{\lambda})$ | Cost function for the fleets total costs over all market periods $h$.     | $\eur$  |
-| $\Cf{h}$                  | Total accumulated fleet costs until market period $h$.                    | $\eur$  |
-|---------------------------+---------------------------------------------------------------------------+---------|
-| $i$                       | Electric Vehicle.                                                         | -       |
-| $\F$                      | Set of all EVs in the fleet                                               | -       |
-| $\c$                      | Dummy variable if EV is connected to a charging station.                  | 0/1     |
-| $\omega_{i}$              | Amount of electricity stored in EV.                                       | $\kwh$  |
-| $\Omega$                  | Maximum battery capacity of EV.                                           | $\kwh$  |
-| $\delta$                  | Charging power of EV at the charging station.                             | $\kw$   |
-| $p^{ind}$                 | Industry tariff                                                           | $\ekwh$ |
-|---------------------------+---------------------------------------------------------------------------+---------|
+|---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
+|---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
+| Symbol                    | Description                                                                                               | Unit    |
+|---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
+| $t$                       | Control period                                                                                            | -       |
+| $h$                       | Market period                                                                                             | -       |
+| $T$                       | Number of control periods in a market period                                                              | -       |
+| $H$                       | Number of market periods in day                                                                           | -       |
+| $N_h$                     | Total number of market periods                                                                            | -       |
+| $\Delta t$                | Length of control period                                                                                  | hours   |
+| $\Delta h$                | Length of market period                                                                                   | hours   |
+|---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
+| $\Pb{h}$                  | Amount of balancing power offered on the balancing market                                                 | kW      |
+| $\ccp{h}$                 | Critical capacity price in market period $h$                                                              | $\emw$  |
+| $\cep{h}$                 | Critical energy price in market period $h$                                                                | $\emwh$ |
+| $\Eb{h}$                  | Amount of energy charged from balancing market in market period h                                         | MWh     |
+| $\Pi{h}$                  | Amount of power offered for the unit on the intraday market                                               | kW      |
+| $\cup{h}$                 | Critical unit price in market period $h$                                                                  | $\emwh$ |
+| $\Ei{h}$                  | Amount of energy charged from the intraday market in market period h                                      | MWh     |
+|---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
+| $\fP{t}$                  | Amount of available fleet charging power in control period $t$                                            | kW      |
+| $\fPhat{t}$               | Predicted amount of available fleet charging power in control period $t$                                  | kW      |
+|---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
+| $\Cb{h}(P)$               | Cost function for procuring electricity from the balancing market dependent on the offered charging power | $\eur$  |
+| $\Ci{h}(P)$               | Cost function for procuring electricity from the intraday market dependent on the offered charging power  | $\eur$  |
+| $\oc$                     | Opportunity costs of lost rental of EV $i$ in control period $t$                                          | $\eur$  |
+| $\beta_h$                 | Imbalance costs in market period $h$                                                                      | $\eur$  |
+|---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
+| $\lb{h}$                  | Balancing market risk factor                                                                              | $[0,1]$ |
+| $\li{h}$                  | Intraday market risk factor                                                                               | $[0,1]$ |
+| $\theta_{\lambda}$        | Set of risk factors for all market periods $h\!\in\!\{1,\hdots,N_h\}$                                     | -       |
+| $\Cf{}(\theta_{\lambda})$ | Cost function for the fleets total costs over all market periods dependet on the chosen risk factors      | $\eur$  |
+| $\Cf{h}$                  | Total accumulated fleet costs until market period $h$                                                     | $\eur$  |
+|---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
+| $i$                       | Electric vehicle                                                                                          | -       |
+| $\F$                      | Set of all EVs in the fleet                                                                               | -       |
+| $\c$                      | Dummy variable indicating if EV $i$ is connected to a charging station                                    | 0/1     |
+| $\omega_{i}$              | Amount of electricity stored in the battery of EV $i$                                                     | $\kwh$  |
+| $\Omega$                  | Maximum battery capacity of the considered EV model                                                       | $\kwh$  |
+| $\delta$                  | Charging power of the considered EV model                                                                 | $\kw$   |
+| $p^{ind}$                 | Industry electricity tariff                                                                               | $\ekwh$ |
+|---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
 
 ** Assumptions label:sec-model-assumptions
 
