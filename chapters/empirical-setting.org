@@ -7,6 +7,8 @@ cite:bmu10_energ_concep_envir_sound_reliab_affor The comparatively high
 renewable energy content in the energy mix causes electricity prices to be more
 volatile, which makes Germany an attractive location for VPP activities.
 
+#+INCLUDE: "~/uni/ma-thesis/template/car2go_tables.tex" export latex
+
 Germany is home to the carsharing providers Car2Go[fn:1] and DriveNow[fn:2],
 which operate large EV fleets across the globe. It has been argued that electric
 carsharing can simultaneously solve several traditional mobility and
@@ -40,9 +42,6 @@ and can reach a maximum driving distance of 145 km according to the manufacturer
 When equipped with an additional 22 kW fast charger the charging time reduces to
 about an hour.
 
-# TODO: Include trip prices
-#+INCLUDE: "~/uni/ma-thesis/template/car2go_tables.tex" export latex
-
 In Table ref:table-car2go-raw the raw data is displayed as we have obtained it
 by Car2Go. The data set contains spatio-temporal attributes, such as timestamp,
 coordinates, and the address of the EVs in 5-minute intervals. Additionally,
@@ -73,8 +72,10 @@ capacity that was accepted, either partially or fully, is listed. Bids, which
 were not accepted by the TSOs are not listed. An exemplary excerpt of the data
 set is displayed in Table ref:table-operating-reserve.
 
+
+
 #+CAPTION[Secondary Operating Reserve Market Data]: List of bids of the German secondary reserve market for the tender period December 4, 2017 to December 11, 2017. label:table-operating-reserve
-#+ATTR_LATEX: :environment longtable :align c|ccccc :placement [hp]
+#+ATTR_LATEX: :environment longtable :align c|ccccc :placement [htbp]
 |---------+----------------+--------------+---------------+---------+----------|
 |---------+----------------+--------------+---------------+---------+----------|
 | Product | Capacity Price | Energy Price | Payment       | Offered | Accepted |
