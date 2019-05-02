@@ -326,7 +326,7 @@ cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. This research followed
 textcite:kahlen17_fleet, who proposed to work on a combination of multiple
 markets in the future.
 
-** Reinforcement Learning Controlled EV Charging label:ref-back-rl
+** Reinforcement Learning Controlled EV Charging label:sec-back-rl
 
 Previous research showed that intelligent agents equipped with Reinforcement
 Learning (RL) methods can successfully take action in the smart grid. The
