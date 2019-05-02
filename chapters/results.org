@@ -1,40 +1,41 @@
 * Results
-# NOTE: 15%
-
-The following chapter will cover the main results of this research. First, the
-simulation environment is presented. Second, we examine the economic
-sustainability of an integrated bidding strategy. Third, the RL approach that
-aims to optimize the VPP portfolio is evaluated. In the last section, we will
-perform sensitivity analyses on the limiting algorithmic factor, the prediction
-accuracy, and a limiting physical factor, the charging infrastructure.
+The following chapter will cover the main results of this research. First, our
+developed simulation environment is presented. Second, we examine the economic
+sustainability of an integrated bidding strategy that manages a portfolio of
+EVS. Here we compare the performance of the proposed control mechanism against
+predefined benchmark strategies. Third, the RL approach that aims to optimize
+the VPP portfolio is evaluated. In the last section, we show results of a
+sensitivity analysis on the prediction accuracy, which proved to be a decisive
+factor on the overall performance of the developed model.
 
 ** Simulation Environment
 As part of this research, we developed an event-based simulation platform called
 /FleetSim/. The platform allows researchers to develop and test out different
-smart charging and bidding strategies in realistic environment based on
+smart charging methods and bidding strategies in realistic environment based on
 real-world data. In FleetSim, intelligent agents centrally control the charging
 operation of an EV fleet and are responsible to meet the customer mobility
 demand with sufficiently charged vehicles. At the same time, the agents can
 create a VPP of EVs, provide balancing services to the grid, and take part in
-electricity trading. Trips are simulated on an individual level, charging
-decisions for individual EVs at a particular point in time has consequences for
-the rest of the simulation. For example can an insufficiently charged battery
-cause a ripple effect of lost rentals when the EV does not get parked at a
-charging station. The performance of the agents is evaluated based on the saved
-charging costs of buying cheaper electricity on the markets than the regular
-industry tariff. Also, the opportunity costs of losing rentals and the
-imbalances costs are considered.
+electricity trading. Rental trips of the fleet are simulated on an individual
+level. Charging decisions for individual EVs at a particular point in time have
+consequences for the rest of the simulation. For example can an insufficiently
+charged EV battery cause a ripple effect of lost rentals when the EV does not
+get parked at a charging station again. The performance of the agents is
+evaluated based on the saved charging costs of buying cheaper electricity on the
+markets than charging with the regular industry tariff. Also, the opportunity
+costs of losing rentals and the imbalances costs are considered.
 
-FleetSim facilitates easy sensitivity analyses, adaption to future market designs, and
-integration of novel data sets through its modular architecture and expandable
-design (see Figure ref:fig-fleetsim). We consider FleetSim as a research
-platform for sustainable and smart mobility similar to PowerTac
+FleetSim facilitates easy sensitivity analyses, adaption to future market
+designs, and integration of novel data sets through its modular architecture and
+expandable design (see Figure ref:fig-fleetsim). We consider FleetSim a research
+platform for sustainable and smart mobility, similar to PowerTac
 cite:ketter16_multiagent_comp_gaming. It builds on SimPy[fn:1], a process-based
 discrete-event simulation framework. FleetSim is available open source[fn:2] and
 can be readily installed as a Python package.
-#+CAPTION[FleetSim Architecture]: Architecture of FleetSim. label:fig-fleetsim
+#+CAPTION[The FleetSim Simulation Platform]: The FleetSim simulation platform. The modular design facilitates the straightforward integration of novel bidding strategies, future market designs, or new data sets. Sensitivity analyses can be easily performed by changing centrally stored simulation parameters. label:fig-fleetsim
 #+ATTR_LATEX: :width 1\linewidth :placement [hp]
 [[../fig/simulation-platform.png]]
+
 In order to simplify comparability and focus real-world applicability of the
 analysis, we set the same parameters for all conducted experiments (see Table
 ref:table-sim-params). They are corresponding to the real Car2Go specifications
@@ -67,17 +68,19 @@ on the results will later be determined in a sensitivity analysis.
 #+LATEX: \renewcommand{\arraystretch}{1}
 
 ** Integrated Bidding Strategy
+
 Research question 1 examines whether a fleet operator can use a VPP portfolio of
-EVs to profitably bid on multiple electricity markets. In Chapter
+EVs to profitably bid on multiple electricity markets simultaneously. In Chapter
 ref:sec-model-mechanism, we proposed a central control mechanism that charges
 the fleet with an integrated bidding strategy. The following section evaluates
-the results of the control mechanism in the simulation environment.
+the results of the controlled charging mechanism within the simulation
+environment.
 
 Table ref:table-sim-stats shows the descriptive statistics of the fleet
 utilization during a simulation run, with data from June 1, 2016 to January
 1, 2018. It can be observed that (a) the volatility of EVs parked at a charging
 station is remarkably high (large standard deviation), and (b) the fraction of
-EVs that can be utilized for VPP activities is diminishing low (3.55%). It is
+EVs that can be utilized for VPP activities is comparatively low (3.55%). It is
 apparent that a high uncertainty and the low share of EVs that can possibly
 generate profits are challenging the economic sustainability of our proposed
 model. Figure ref:fig-fleet-utilization shows that despite a changing rental
@@ -85,7 +88,7 @@ behavior throughout the day (e.g., rush hour peaks between 7:00-9:00 and
 17:00-19:00), the amount of EVs that can utilized for VPP activities is
 comparably stable throughout the day.
 
-#+CAPTION[Fleet Utilzation]: Daily fleet utilization (average, standard deviation) from June 2016 to January 2018. The blue error band is illustrating the large volatility in the amount of EVs that get parked at a charging station. The share of EVs that can be used as VPP is on average only 3.55% of the fleet's size. Most of the EVs are either not connected to a charging station or are already fully charged. label:fig-fleet-utilization
+#+CAPTION[Fleet Utilzation]: Daily fleet utilization (average, standard deviation) from June 2016 to January 2018. The blue error band is illustrating the large volatility in the amount of EVs that get parked at a charging station. The share of EVs that can be used as a VPP is on average only 3.55% of the fleet's size. Most of the EVs are either not connected to a charging station or are already fully charged. label:fig-fleet-utilization
 #+ATTR_LATEX: :width 1\linewidth :placement [h]
 [[../fig/fleet-utilization.png]]
 
@@ -95,46 +98,46 @@ return(round((13.84 / 389.64),4) * 100)
 
 #+RESULTS:
 : 3.55
-#+CAPTION[Summary statistics of the fleet]: Summary Statistics of the Fleet label:table-sim-stats
+#+CAPTION[Summary Statistics of the Fleet]: Summary Statistics of the Fleet (n=508) label:table-sim-stats
 #+ATTR_LATEX: :align l|cccc :placement [htb]
 |---------------+---------+-----+-----+-------|
 |---------------+---------+-----+-----+-------|
 | Statistic     | Average | Min | Max |   Std |
 |---------------+---------+-----+-----+-------|
-| Fleet size    |     508 |   - |   - |     - |
 | EVs available |  389.64 | 165 | 496 | 49.18 |
 | EVs connected |   61.23 |  34 | 290 | 61.11 |
 | VPP EVs       |   13.84 |   0 |  94 |  9.01 |
 |---------------+---------+-----+-----+-------|
 |---------------+---------+-----+-----+-------|
 
- We defined several "naive" bidding strategies to evaluate and benchmark the
- performance of our developed model. The strategies are naive in that sense that
- they are assuming a fixed risk associated with bidding at a specific
- electricity market. As opposed to the developed RL agent, they do not take
- information of their environment into account and adjust the bidding quantities
- dynamically. Instead, the controller discounts the predicted amount of
- available charging power with a fixed risk factor $\lambda$ (see
- eqref:eq-model-pb and eqref:eq-model-pi). Naturally, the controller
- estimates a higher risk for bidding on the balancing market week ahead than on
- the intraday market 30 minutes ahead. We defined following types of strategies:
+In order to evaluate the performance of the developed model, we defined several
+"naive" bidding strategies that we benchmark against our model. The strategies
+are naive in that sense that they are assuming a fixed risk associated with
+bidding on a specific electricity market. As opposed to the developed RL agent,
+they do not take information of their environment into account and do not adjust
+the bidding quantities dynamically. Instead, the controller discounts the
+predicted amount of available charging power with a fixed risk factor $\lambda$
+(see eqref:eq-model-pb and eqref:eq-model-pi). Naturally, the controller
+estimates a higher risk for bidding on the balancing market week ahead than on
+the intraday market 30 minutes ahead. We defined the following types of
+strategies:
 
  1) Risk-averse ($\lb{}\!=\!0.5$, $\li{}\!=\!0.3$)
 
-    The controller avoids denying rentals and causing imbalances at all costs. In
-    order to not commit more charging power that it can provide, it places only
-    bids for conservative amounts of electricity on the markets. The risk-averse
-    strategies /Balancing/ and /Intraday/ are comparable to similar strategies
-    developed by
+    The controller avoids denying rentals and causing imbalances at all costs.
+    In order to not commit more charging power that it can provide, it places
+    only bids for conservative amounts of electricity on the markets. The
+    risk-averse strategies /Balancing/ and /Intraday/ are comparable to similar
+    strategies developed by
     textcite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem.
 
  2) Risk-seeking ($\lb{}\!=\!0.2$, $\li{}\!=\!0.0$)
 
-    The controller aims to maximize its profits by trading as much electricity on
-    the markets as possible. It strives to fully utilize the VPP and allocate a
-    high percentage of available EVS to charge from the markets. Due to the
+    The controller aims to maximize its profits by trading as much electricity
+    on the markets as possible. It strives to fully utilize the VPP and allocate
+    a high percentage of available EVS to charge from the markets. Due to the
     rental uncertainty and a low estimated risk, the controller is prone to
-    offering more charging power to the markets that it can provide. This may
+    offering more charging power to the markets than it can provide. This may
     lead to lost rental costs or even imbalances.
 
  3) Full information
@@ -145,9 +148,8 @@ return(round((13.84 / 389.64),4) * 100)
     the markets without having to deny rentals or causing imbalances due to
     prediction uncertainties.
 
-# NOTE: Explain VPP Utilization?
 #+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
-#+CAPTION[Bidding strategy outcomes]: Outcomes of naive bidding strategies over a 1.5 year period. Integrated bidding strategies outperform single market strategies. label:table-profits
+#+CAPTION[Bidding Strategy Results]: Bidding Strategy Results for a 1.5-Year Period label:table-profits
 #+ATTR_LATEX: :float sideways :align l|cccccc :placement [hp]
 |                                          | \thead{Balancing\\(risk-averse)} | \thead{Intraday\\(risk-averse)} | \thead{Integrated\\(risk-averse)} | \thead{Integrated\\(risk-seeking)} | \thead{Integrated\\(full information)} |
 |------------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
@@ -166,14 +168,14 @@ return(round((13.84 / 389.64),4) * 100)
 # ::@10=100* round((@9/17707.85),4)
 #+LATEX:}
 
-# NOTE: Mention numbers?
 In Table ref:table-profits, the simulation results of all tested strategies are
-listed. As expected, the developed integrated bidding strategies outperform
-their single market counterparts. The controller is able to capitalize on the
-most favorable market conditions and can better utilize the VPP by buying more
-electricity from the markets than charging the EVs regularly. The integrated
-strategies are resulting in 49%-54% more profits for the fleet than the single
-market strategies and provide 31%-61% more balancing power for the grid.
+listed. As anticipated, the integrated bidding strategies outperform their
+single market counterparts. With this novel bidding strategy, the controller is
+able to capitalize on the most favorable market conditions and better utilize
+the VPP by increasing the share of traded electricity to charge the fleet. The
+integrated strategies are resulting in 49% - 54% more profits for the fleet than
+the single market strategies and provide 31% - 61% more balancing power for the
+grid.
 
 A controller bidding according to the /Integrated (risk-averse)/ strategy, pays
 approximately $0.35\ekwh$ less for charging the fleet than the regular industry
@@ -181,12 +183,12 @@ price, summing up to an profit increase of up to $67040\; \eur$ over the 1.5
 year period. A controller bidding according to the /Integrated (risk-seeking)/
 strategy, is even more profitable, despite having to account for lost rental
 profits. On the other side, the controller caused imbalances (highlighted red)
-which lead to high (unknown) market penalties or even exclusion from bidding
-activities. For this reason, imbalances need to be avoided, regardless of
-potential profits from a higher VPP utilization. We expect that the proposed RL
-agent learns a bidding strategy, which avoids imbalances while increasing
-profits at the same time. The best possible solution, given the prediction
-uncertainty, is given by the strategy /Integrated (full information)/.
+which lead to high market penalties or even exclusion from bidding activities.
+For this reason, imbalances need to be avoided, regardless of potential profits
+from a higher VPP utilization. We expect that the proposed RL agent learns a
+bidding strategy, which avoids imbalances while increasing profits at the same
+time. In the next section we will explore this particular challenge and present
+results of the RL algorithm.
 
 #+BEGIN_SRC python :exports none
 return(67.04 / 45.08)
@@ -203,9 +205,6 @@ return(87.98 - 15.47)
 : 72.51
 
 ** Reinforcement Learning Portfolio Optimization
-# NOTE: What about confidence intervals - Mean?
-# TODO: No mention of risk factors except for summary? Include numbers or graphs
-# of risks factors? --> Sensivity
 # TODO: Include total annual profit increase per EV and total balancing power
 
 Research question 2 investigates whether an RL agent can optimize the integrated
@@ -213,22 +212,21 @@ bidding strategy by dynamically adjusting the bidding quantities. The bidding
 quantities $\Pb{}, \Pi{}$ are based on the evaluated risk associated with
 bidding on the individual electricity markets. In Chapter ref:sec-model-rl, we
 introduced an RL approach that learns the risk factors $\lb{}$, $\li{}$ based on
-its observed environment and received reward signals. In Appendix
-ref:app-rl-hyperparams, the hyperparameters are presented which we used to train
-the dueling DDQN algorithm and solving the controlled charging problem under
-uncertainty. The values were determined manually through experimentation for the
-best results. The speed of convergence was also used as a criterion, since the
-training environment Google Colaboratory only allows up to 12 hours of computing
-time.
+its observed environment and received reward signals. The hyperparameters which
+we used to train the dueling DDQN algorithm and solving the controlled charging
+problem under uncertainty are presented in Appendix ref:app-rl-hyperparams. The
+values were determined manually through experimentation for the best results.
+The speed of convergence was also used as a criterion, since the training
+environment Google Colaboratory only allows up to 12 hours of computing time.
 
-Further, the imbalance costs $\beta$ were set to an artificially high value to
-incentivize the agent to learn to always avoid imbalances. Whenever the agents
-takes an action that causes imbalances (i.e., bid too much electricity), it will
-receive a highly negative reward signal, leading to a low estimated Q-value of
-that chosen action in a specific state.
+Furthermore, the imbalance costs $\beta$ were set to an artificially high value
+to incentivize the agent to learn to always avoid imbalances. Whenever the
+agents takes an action that causes imbalances, it will receive a highly negative
+reward signal, leading to a low estimated Q-value of that chosen action in a
+specific state.
 
-#+CAPTION[Comparison of gross profit results]: Comparison of gross profits and traded electricity between the proposed optimized integrated strategy and the other three naive charging strategies. The RL algorithm improves the achieved gross profit increase of the integrated bidding strategy on average by 12% and accomplishes nearly optimal results when compared to the benchmark strategy. label:fig-rl-profits
-#+ATTR_LATEX: :width 1\linewidth :placement [h]
+#+CAPTION[Comparison of gross profit results]: Comparison of gross profits and traded electricity between the proposed optimized integrated strategy and the other three naive charging strategies. The RL algorithm increases the achieved gross profits of the integrated bidding strategy on average by 12% and accomplishes nearly optimal results when compared to the benchmark strategy. label:fig-rl-profits
+#+ATTR_LATEX: :width 1\linewidth :placement [ht]
 [[../fig/rl-results.png]]
 
 In Figure ref:fig-rl-profits, the performance of the optimized integrated
@@ -257,51 +255,43 @@ electricity on the markets without committing to charge more electricity than it
 can. We compared the DQN algorithm
 cite:mnih15_human_level_contr_throug_deep_reinf_learn with the Double DQN
 algorithm cite:hasselt16_deep_reinf_learn_doubl_q_learn with and without the
-dueling architecture cite:wang15_duelin_networ_archit_deep_reinf_learn. In
-Figure ref:fig-rl-learning, the average (n=5) learning performances of the
-different RL approaches are displayed.
+dueling architecture cite:wang15_duelin_networ_archit_deep_reinf_learn.
 
-#+CAPTION[Comparison of RL algorithm learning performance]: Comparison of the learning performance between the proposed RL algorithm and the other three simpler algorithms, averaged over 5 training attempts. Each training period is performed in 1.5 years simulation time with real world data. The dueling DDQN algorithm (dark blue line) learns faster, and achieves better end results than prior algorithms. label:fig-rl-learning
-#+ATTR_LATEX: :width 1\linewidth :placement [h]
-[[../fig/rl-learning.png]]
+# #+CAPTION[Learning Performance of RL Algorithms]: Comparison of the learning performance between the proposed RL algorithm and the other three simpler algorithms, averaged over 5 training attempts. Each training period is performed in 1.5 years of simulation time with real world data. The dueling DDQN algorithm (dark blue line) learns faster, and achieves better end-results than prior algorithms. label:fig-rl-learning
+# #+ATTR_LATEX: :width 1\linewidth :placement [htb]
+# [[../fig/rl-learning.png]]
 
-The experiment shows that the dueling DDQN algorithm learns the fastest and
-shows a large increase in mean reward per action after roughly 60 episodes
-(about 227 days of simulation time) of training. The dueling DDQN algorithm
-shows the largest reward increase and highest reward per action after the whole
-training period, which makes it the best algorithm to solve the charging
-problem. Despite that it still has a larger mean absolute error than the DDQN
-algorithm, indicating that it is more likely to cause imbalances with the
-dueling architecture than without. None of the algorithms determined a policy
-that never caused imbalances after training on the full 1.5 years of simulation
-time (about one hour computing time). In other words, without prior training
-with existing data the RL agent would need more than one and a half years to
-learn to avoid imbalances. A possible explanation is the problem of learning
-from long delayed rewards, first discussed by
-textcite:watkins89_learn_from_delay_rewar. Long delayed rewards increase the
-difficulty of RL problems, since the agent needs to connect occurring decision
-outcomes to specific actions way back in the past. In the case of the presented
-controlled fleet charging problem, this effect is especially pronounced because
-a negative reward signal (caused imbalances) can occur up to 672 timesteps (one
-week) after the agent decided on the bidding quantity for the balancing market,
-whereas the reward signals from the intraday market occur almost immediately
-after 2 timesteps (30 minutes).
+# In Figure ref:fig-rl-learning the average learning performances of the different
+# RL approaches are displayed. The experiment shows that the dueling DDQN
+# algorithm learns the fastest and shows a large increase in mean reward per
+# action after roughly 60 episodes of training, which equals about 227 days of
+# simulation time. The dueling DDQN algorithm shows the largest reward increase
+# and highest reward per action after the whole training period, which makes it
+# the best algorithm to solve the charging problem. Despite that, it still has a
+# larger mean absolute error than the DDQN algorithm, indicating that it is more
+# likely to cause imbalances with the dueling architecture than without. None of
+# the algorithms determined a policy that never caused imbalances after training
+# on the full 1.5 years of simulation time, which is about one hour of computing
+# time. In other words, without prior training on existing data the RL agent would
+# need more than one and a half years to learn to avoid imbalances. A possible
+# explanation is the problem of learning from long delayed rewards, first
+# discussed by textcite:watkins89_learn_from_delay_rewar. Long delayed rewards
+# increase the difficulty of RL problems, since the agent needs to connect
+# occurring decision outcomes to specific actions way back in the past. In the
+# case of the presented controlled fleet charging problem, this effect is
+# especially pronounced because a negative reward signal, caused by imbalances,
+# can occur up to 672 timesteps (one week) after the agent decided on the bidding
+# quantity for the balancing market. In contrast, the reward signals from trading
+# on the intraday market occur almost immediately after 2 timesteps (30 minutes).
 
 In summary, both experiments show that our approach is able to learn a
 profit-maximizing bidding strategy under varying circumstances, without using
 any a priori information about the EV rental patterns. The proposed control
 mechanism improves existing approaches and the RL agent can successfully
-optimize the VPP portfolio strategy by estimating the risk that is associated
+optimize the VPP portfolio strategy by estimating the risks that are associated
 with bidding on the markets.
 
 ** Sensitivity Analysis
-# NOTE: Prediction Accuracy of available EV capacity
-# NOTE: Balancing accuracy always lower than intraday! Otherwise no sense
-# NOTE: Do predict electricity prices?
-
-# NOTE: Results heavily dependent on industry charging price, since on average
-# the balancing prices are 50% cheaper, and intraday 30% cheaper. Perform a run?
-
 The ability to accurately forecast the available fleet charging power plays an
 important role in determining the optimal bidding quantity to submit to the
 markets. If the fleet controller is certain about the number of connected EVs
@@ -313,47 +303,46 @@ prediction accuracy that we set to an estimate of what modern mobility demand
 forecasts algorithms can achieve. In order to test the robustness of the results
 and their dependence on the prediction accuracy, we conducted a sensitivity
 analysis. Therefore, we tested the previously introduced RL approach with
-increasing levels of prediction accuracy, from 50% to 100% accuracate forecasts
-7 days and 30 minutes ahead.
+increasing levels of prediction accuracy, from 50% to 100% accurate forecasts, 7
+days and 30 minutes ahead.
 
-#+CAPTION[Sensivity Analysis: Prediction Accuracy]: Sensivity Analysis: Prediction Accuracy label:fig-sens-accuracy
-#+ATTR_LATEX: :width 1\linewidth :placement [htbp]
+#+CAPTION[Sensivity Analysis of Prediction Accuracy]: Sensitivity analysis of the forecasting algorithms prediction accuracy. With increasing accuracy the estimated bidding risks decrease, while the realized gross profits grow considerably. label:fig-sens-accuracy
+#+ATTR_LATEX: :width 1\linewidth :placement [htb]
 [[../fig/rl-accuracy.png]]
 
-In Table ref:fig-sens-accuracy the results of the sensitivity analysis are
-presented. The left plot shows the effect of the prediction accuracy on the
-total gross profit increase, whereas the right plot shows the effect on the
-learned risk factors of the RL agent. Intuitively, the realized profit increases
-with rising accuracy of the forecasts, while the estimated risk factors decrease
-with more accurate forecasts.
+Figure ref:fig-sens-accuracy depicts the results of the performed sensitivity
+analysis. The left plot shows the effect of the prediction accuracy on the total
+gross profit increase, whereas the right plot shows the effect on the learned
+risk factors of the RL agent. Intuitively, the realized profit increases with
+rising accuracy of the forecasts, while the estimated risk factors decrease with
+more accurate forecasts. Interestingly, the RL agent does not always estimate
+higher risks for bidding on the balancing market than on the intraday market,
+despite lower accuracy levels for predicting the available charging power 7 days
+ahead than 30 minutes ahead. This result indicates that the RL performance
+underlies some variations, that could not be fully eliminated in the conducted
+experiments. We hypothesize that the agent learns to avoid imbalances first and
+only later learns to optimize the portfolio by fine-tuning the risk factors of
+both markets. We are confident that the agent's limited amount of training steps
+is the reason of these variations in the learning success and expect to achieve
+more robust results with an increased training period.
 
-Interestingly, the RL agent does not always estimate higher risks for bidding on
-the balancing market than on the intraday market,  despite lower accuracy levels
-for predicting the available charging power 7 days ahead than 30 minutes ahead.
-This result indicates that the RL performance underlies some variations. The
-agent succesfully learns to avoid imbalances first by estimating a high total
-risk and only later learns to optimize the portfolio by fine-tuning the risk
-factors of both markets. We are confident that the agent's limited amount of
-training steps is the reason of these variations in learning success and expect
-to achieve more robust results with a increased training time.
+Remarkable is the magnitude of the prediction accuracy's effect on the profit
+increase (see Figure ref:fig-sens-accuracy, left plot). After 1.5 years of
+simulation time, an RL agent that can rely on perfect predictions, with 100%
+accuracy, generates almost twice as much profit from trading electricity than an
+agent that can only rely on predictions with 50% and 60% accuracy, 7 days and 30
+minutes ahead respectively. It is striking that the prediction accuracy has a
+larger effect (99.13% profit increase between lowest and highest accuracy) on
+the realized profit than the type of bidding strategy (73.10% profit increase
+between worst and best strategy).
 
-Also remarkable is the magnitude of the prediction accuracy's effect on the
-profit increase. After 1.5 years of simulation time, an RL agent that can rely
-on perfect predictions (100% accuracy) generates almost twice as much profit
-from trading electricity than an agent that can only rely on predictions with
-50% and 60% accuracy, 7 days and 30 minutes ahead respectively. It is striking
-that the prediction accuracy has a larger effect (99.13% profit increase between
-lowest and highst accuracy) on the realized profit than the type of bidding
-strategy (73.10% profit increase between worst and best strategy), which we
-examined in the previous sections, leaving room for future research.
-
-# (48346 $\eur$ versus 96245 $\eur$)
 #+BEGIN_SRC python :exports none
     return(96.24/48.33)
 #+END_SRC
 
 #+RESULTS:
 : 1.9913097454996895
+
 #+LATEX: \clearpage
 
 * Footnotes
@@ -361,10 +350,3 @@ examined in the previous sections, leaving room for future research.
 [fn:1] https://pypi.org/project/simpy/
 
 [fn:2] https://github.com/indyfree/fleetsim
-
-[fn:3] Average prices of electricity for the industry with an annual consumption
-of 500 MWh - 2000 MWh in Germany 2017 cite:bmwi.19_prices_german.
-
-[fn:4] Rental fees according to the Car2Go pricing scheme. See
-https://www.car2go.com/media/data/germany/legal-documents/de-de-pricing-information.pdf,
-accessed 15^th March 2019.
