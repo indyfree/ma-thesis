@@ -59,6 +59,7 @@ displayed in Table ref:table-notation.
 |---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
 | $\Cb{h}(P)$               | Cost function for procuring electricity from the balancing market dependent on the offered charging power | $\eur$  |
 | $\Ci{h}(P)$               | Cost function for procuring electricity from the intraday market dependent on the offered charging power  | $\eur$  |
+| $p^{ind}$                 | Industry electricity tariff                                                                               | $\ekwh$ |
 | $\oc$                     | Opportunity costs of lost rental of EV $i$ in control period $t$                                          | $\eur$  |
 | $\beta_h$                 | Imbalance costs in market period $h$                                                                      | $\eur$  |
 |---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
@@ -68,13 +69,12 @@ displayed in Table ref:table-notation.
 | $\Cf{}(\theta_{\lambda})$ | Cost function for the fleets total costs over all market periods dependet on the chosen risk factors      | $\eur$  |
 | $\Cf{h}$                  | Total accumulated fleet costs until market period $h$                                                     | $\eur$  |
 |---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
-| $i$                       | Electric vehicle                                                                                          | -       |
 | $\F$                      | Set of all EVs in the fleet                                                                               | -       |
+| $i$                       | Electric vehicle                                                                                          | -       |
 | $\c$                      | Dummy variable indicating if EV $i$ is connected to a charging station                                    | 0/1     |
 | $\omega_{i}$              | Amount of electricity stored in the battery of EV $i$                                                     | $\kwh$  |
 | $\Omega$                  | Maximum battery capacity of the considered EV model                                                       | $\kwh$  |
 | $\delta$                  | Charging power of the considered EV model                                                                 | $\kw$   |
-| $p^{ind}$                 | Industry electricity tariff                                                                               | $\ekwh$ |
 |---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
 
 ** Assumptions label:sec-model-assumptions
