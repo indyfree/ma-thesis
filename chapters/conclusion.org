@@ -75,12 +75,12 @@ The proposed method was evaluated in a series of experiments with real-world
 carsharing data from Car2go in Stuttgart and German electricity market data from
 June 2017 until January 2018. The results show that the developed method
 improves existing approaches and would increase the gross profits of the fleet
-by roughly $75 000\; \eur$ over a 1.5 year period. We found that the integrated
-bidding strategy generates 49%-54% more profits compared to the naive benchmark
+by roughly $75 000\; \eur$ over a 1.5-year period. We found that the integrated
+bidding strategy generates 49% - 54% more profits compared to the naive benchmark
 strategies. Fleet controllers following the integrated bidding strategy can
 mitigate risks and increase profits by exploiting market properties of both
 markets. The fleet would also contribute to the integration of RES by providing
-around 1400 MWh of balancing power to stabilize the electrical power grid. Since
+around 1500 MWh of balancing power to stabilize the electrical power grid. Since
 the inherently uncertain demand patterns of free float carsharing are imposing
 additional challenges on securely providing balancing services, better results
 are expected with other kinds of EV fleets.
@@ -108,8 +108,8 @@ forecasting algorithms.
 
 Our results compare well to other studies. While
 textcite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem reported
-an annual profit increase of up to $121 \eur$ (163$) per EV, the experiment
-conducted in this thesis yielded an annual increase of $98 \eur$ per EV from
+an annual profit increase of up to $121\;\eur$ (163 $) per EV, the experiment
+conducted in this thesis yielded an annual increase of $98\; \eur$ per EV from
 charging cheaper than the regular industry price. However, in their model,
 textcite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem did not
 take imbalance cost into account, which we found to be a determining factor in
