@@ -707,7 +707,7 @@ stochastic policy is the /\epsilon-greedy policy/, which selects the action with
 the highest estimated value, except for a given probability \epsilon, it selects
 an action at random.
 
-#+CAPTION[On-policy control with Sarsa]: On-policy control with Sarsa cite:sutton18_reinf. \protect\footnotemark label:fig-sarsa
+#+CAPTION[On-Policy Control]: On-policy methods improve stochastic policies by iteratively updating and evaluating the same policy and its Q-values to converge to the optimal policy $\pi_*$ \cite{sutton18_reinf}. \protect\footnotemark label:fig-sarsa
 #+ATTR_LATEX: :width 0.85\linewidth
 [[../fig/on-policy.png]]
 #+LATEX: \footnotetext{The in-text figure of \textbf{Chapter 5.3} from \emph{Reinforcement Learning: An Introduction} by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
