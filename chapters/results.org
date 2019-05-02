@@ -46,21 +46,24 @@ on the results will later be determined in a sensitivity analysis.
 #+LATEX: \renewcommand{\arraystretch}{1.3}
 #+CAPTION[Simulation Parameters]: Simulation Parameters label:table-sim-params
 #+ATTR_LATEX: :align lr :placement [hp]
-|---------------------------------------------+--------------------------------------|
-|---------------------------------------------+--------------------------------------|
-| Parameter                                   | Value                                |
-|---------------------------------------------+--------------------------------------|
-| EV battery capacity ($\Omega$)              | 17.6 $\kwh$                          |
-| EV charging power   ($\gamma$)              | 3.6 $\kw$                            |
-| EV range                                    | 145 km                               |
-| Industry electricity price  ($p^{ind}$)     | 0.15[fn:3] $\ekwh$                   |
-| EV rental tariff                            | 0.24[fn:4] $\frac{\eur}{\text{min}}$ |
-| EV long distance fee ($>\text{200 km}$)     | 0.29[fn:4] $\frac{\eur}{\text{km}}$  |
-|---------------------------------------------+--------------------------------------|
-| Prediction accuracy $\fPhat{}$ week ahead   | 70%                                  |
-| Prediction accuracy $\fPhat{}$ 30 min ahead | 90%                                  |
-|---------------------------------------------+--------------------------------------|
-|---------------------------------------------+--------------------------------------|
+|---------------------------------------------+----------------------------------------------------------------------|
+|---------------------------------------------+----------------------------------------------------------------------|
+| Parameter                                   | Value                                                                |
+|---------------------------------------------+----------------------------------------------------------------------|
+| EV battery capacity ($\Omega$)              | 17.6 $\kwh$                                                          |
+| EV charging power   ($\gamma$)              | 3.6 $\kw$                                                            |
+| EV range                                    | 145 km                                                               |
+| Industry electricity price  ($p^{ind}$)     | 0.15\protect\footnotemark $\ekwh$                                    |
+| EV rental tariff                            | 0.24\protect\footnotemark $\frac{\eur}{\text{min}}$                  |
+| EV long distance fee ($>\text{200 km}$)     | 0.29\protect\footnotemark[\value{footnote}] $\frac{\eur}{\text{km}}$ |
+|---------------------------------------------+----------------------------------------------------------------------|
+| Prediction accuracy $\fPhat{}$ week ahead   | 70%                                                                  |
+| Prediction accuracy $\fPhat{}$ 30 min ahead | 90%                                                                  |
+|---------------------------------------------+----------------------------------------------------------------------|
+|---------------------------------------------+----------------------------------------------------------------------|
+#+LATEX: \addtocounter{footnote}{-2}
+#+LATEX: \stepcounter{footnote}\footnotetext{Average prices of electricity for the industry with an annual consumption of 500 MWh - 2000 MWh in Germany 2017 \cite{bmwi.19_prices_german}.}
+#+LATEX: \stepcounter{footnote}\footnotetext{Rental fees according to the Car2Go pricing scheme. See \url{https://www.car2go.com/media/data/germany/legal-documents/de-de-pricing-information.pdf}, accessed March 15, 2019.}
 #+LATEX: \renewcommand{\arraystretch}{1}
 
 ** Integrated Bidding Strategy
