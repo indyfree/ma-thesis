@@ -54,14 +54,7 @@ adjust the bidding quantities and dynamically determine bidding risks. The
 following fleet control tasks need to be performed by the agent in real-time: 1)
 Allocate available EVs to the VPP portfolio, 2) Determine the optimal VPP
 portfolio composition, and 3) Place bids and asks on multiple electricity
-markets with an integrated trading strategy. In experiments with real-world
-carsharing and electricity market data, we show that:
-- The proposed fleet control mechanism with an integrated bidding strategy
-  improves existing approaches by 49% - 54% through increasing the VPP
-  utilization and exploiting favorable market conditions.
-- The developed RL agent can optimize the VPP portfolio composition and
-  successfully determine bidding risks, further increasing the performance of the
-  approach by 12% to a near-optimal level.
+markets with an integrated trading strategy.
 
 ** Research Questions
 
