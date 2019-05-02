@@ -60,7 +60,7 @@ the executed preprocessing steps.
 
 ** Balancing Market Data label:sec-data-balancing
 We use market balancing data from the German secondary reserve market, which
-contain weekly lists of anonymized bids between 01.06.2016 and 01.01.2018 and a
+contain weekly lists of anonymized bids between June 1, 2016 and January 1, 2018 and a
 data set of activated control reserve in Germany during the same period. The
 bidding data consist of the traded electricity product, the offered balancing
 power $\Pb{}$ (MW), the capacity price $\cp{}$ ($\emw$), and the energy price
@@ -73,7 +73,7 @@ capacity that was accepted, either partially or fully, is listed. Bids, which
 were not accepted by the TSOs are not listed. An exemplary excerpt of the data
 set is displayed in Table ref:table-operating-reserve.
 
-#+CAPTION[Secondary Operating Reserve Market Data]: List of bids of the German secondary reserve market for the tender period 04.12.2017 - 11.12.2017. label:table-operating-reserve
+#+CAPTION[Secondary Operating Reserve Market Data]: List of bids of the German secondary reserve market for the tender period December 4, 2017 to December 11, 2017. label:table-operating-reserve
 #+ATTR_LATEX: :environment longtable :align c|ccccc :placement [hp]
 |---------+----------------+--------------+---------------+---------+----------|
 |---------+----------------+--------------+---------------+---------+----------|
@@ -145,15 +145,15 @@ control capacity were already provided by the first bidder.
 
 ** Intraday Market Data label:sec-data-intraday
 The data from the EPEX Spot Intraday Continuous encompass order books and
-executed trades from 01.06.2016 until 01.01.2018. An extract of the data can be
-found in Appendix ref:app-data-tables. The list of trades contains information
-on the unit price $\up{}$ ($\emwh$), the quantity (kW) and the traded product
-(hourly, quarterly or block). In this research, we focus on quarterly product
-times (15-minute intervals), as they provide the highest flexibility. Fleet
-controllers can promptly react to fluctuant electricity demand of the EV fleet
-by accurately adjusting the bid quantities. Future research could also consider
-other electricity products if lower prices justify the decreased flexibility at
-that point in time.
+executed trades from June 1, 2016 until December 1, 2018. An extract of the data
+can be found in Appendix ref:app-data-tables. The list of trades contains
+information on the unit price $\up{}$ ($\emwh$), the quantity (kW) and the
+traded product (hourly, quarterly or block). In this research, we focus on
+quarterly product times (15-minute intervals), as they provide the highest
+flexibility. Fleet controllers can promptly react to fluctuant electricity
+demand of the EV fleet by accurately adjusting the bid quantities. Future
+research could also consider other electricity products if lower prices justify
+the decreased flexibility at that point in time.
 
 On the spot market, electricity trades can have a very short lead time of up to
 5 minutes before delivery. This market characteristic is beneficial for our

@@ -87,7 +87,8 @@ have been taken to prepare the data for further analysis:
 
 #+LATEX: \clearpage
 
-[fn:1] See https://www.gps.gov/systems/gps/performance/accuracy, accessed 23^{th} February 2019.
+[fn:1] See https://www.gps.gov/systems/gps/performance/accuracy, accessed
+February 23, 2019.
 * Appendix: DDQN Hyperparameters label:app-rl-hyperparams
 #+LATEX: \setcounter{table}{0}
 #+CAPTION[Hyperparameters for the dueling network DDQN algorithm]: Hyperparameters for the dueling network DDQN algorithm.
