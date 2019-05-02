@@ -154,7 +154,7 @@ balancing market, once every week (e.g., Wednesdays at 3pm at the GCRM). In this
 phase, the controller places bids for every market period $h$ of the following
 week on the balancing market. The second phase, /Bidding Phase II/, takes places
 in every market period of $\Delta{h}\!=\!15$ minutes. At this point, the
-controller has the opportunity to place bids to the intraday market for the
+controller has the opportunity to place bids on the intraday market for the
 market period 30 minutes ahead. The third phase, /Dispatch Phase/, takes places
 in every control period of $\Delta{t}\!=\!5$ minutes. The controller has to
 dispatch available EVs to charge the procured electricity from the markets. The
@@ -165,8 +165,8 @@ The following sections highlight important parts of the three phases, formalize
 the model mathematically and provide detailed explanations and illustrative
 examples.
 
-#+CAPTION[Control Mechanism]: Control Mechanism label:fig-control-mechanism
-#+ATTR_LATEX: :width 1.05\linewidth :placement [p]
+#+CAPTION[Control Mechanism]: The central control mechanism of the fleet. In order to profitably charge the fleet, the controller has to take decisions in three distinct phases before electricity delivery. The controller needs to predict the available charging power, decide on the bidding quantities to submit to the markets, and intelligently dispatch EVs to charge the procured amount of electricity. label:fig-control-mechanism
+#+ATTR_LATEX: :width 1.05\linewidth :placement [htbp]
 [[../fig/control-mechanism.png]]
 
 *** Fleet Charging Power Prediction
