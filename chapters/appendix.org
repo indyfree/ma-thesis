@@ -91,7 +91,7 @@ have been taken to prepare the data for further analysis:
 February 23, 2019.
 * Appendix: DDQN Hyperparameters label:app-rl-hyperparams
 #+LATEX: \setcounter{table}{0}
-#+CAPTION[Hyperparameters for the dueling network DDQN algorithm]: Hyperparameters for the dueling network DDQN algorithm.
+#+CAPTION[Hyperparameters for the Dueling Network DDQN Algorithm]: Hyperparameters for the Dueling Network DDQN Algorithm.
 #+ATTR_LATEX: :environment longtable :align lr :placement [hp]
 |--------------------------------+--------------------------------------|
 |--------------------------------+--------------------------------------|
