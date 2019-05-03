@@ -1,7 +1,7 @@
 * Introduction
 Global climate change is one of the most substantial challenges of our time. It
 necessitates reducing carbon emissions and shifting to sustainable energy
-sources. However, the integration of renewable energy sources (RES) is a complex
+production. However, the integration of renewable energy sources (RES) is a complex
 matter. Sustainable electricity production is dependent on the weather
 conditions, and difficult to integrate into the electrical power system.
 Changing weather conditions cause under- and oversupplies of intermittent solar
@@ -36,9 +36,10 @@ rental demand forecasts help determining the amount of electricity that can be
 traded on the market. EV fleet operators can also participate on multiple
 electricity markets simultaneously. They can take advantage of distinctive
 market properties, such as the auction mechanism or the lead time to delivery,
-to optimize their bidding strategy and reduce the risks. Still, the ultimate
-risk remains that the fleet could made commitments to the markets it cannot
-fulfill due to unforeseen rental demand at the time of electricity delivery.
+to optimize their bidding strategy and reduce the bidding risks. Still, the
+ultimate risk remains that the fleet could made commitments to the markets it
+cannot fulfill due to unforeseen rental demand at the time of electricity
+delivery.
 
 # 2. Solution:  Model, Data, Results
 We state that participating in the balancing market and intraday market
@@ -66,7 +67,7 @@ research questions:
    /integrated bidding strategy look like for EV fleet operators that manage VPP
    portfolios?/
 
-2. /Can a reinforcement learning agent optimize VPP portfolios by learning the
+2. /Can an RL agent optimize VPP portfolios by learning the
    risks that are associated with bidding on the individual/ /electricity
    markets?/
 
@@ -84,11 +85,11 @@ advanced RL techniques for the smart grid
 cite:vazquez-canteli19_reinf_learn_deman_respon. We specifically build on
 research that has been carried out by
 textcite:kahlen17_fleet,kahlen18_elect_vehic_virtual_power_plant_dilem. In their
-papers, the authors concentrate on trading electricity on one market at a time.
-As proposed by the authors, we take this research further and use a VPP of EVs
-to participate on multiple types of electricity markets simultaneously. In this
-way we create a VPP portfolio that offers EV batteries as storage options to the
-markets with an integrated bidding strategy.
+papers, the authors concentrate on trading EV battery capacity on one market at
+a time. As proposed by the authors, we take this research further and use a VPP
+of EVs to participate on multiple types of electricity markets simultaneously.
+In this way we create a VPP portfolio that offers EV batteries as storage
+options to the markets with an integrated bidding strategy.
 
 From a business perspective, this thesis is relevant to carsharing companies
 operating EV fleets, such as Car2Go or DriveNow. We show how these companies can
@@ -103,20 +104,20 @@ German electricity markets and trip data from a German carsharing provider.
 This thesis also contributes to the overall welfare of society. First, VPPs of
 EVs provide extra balancing services to the power grid. VPPs consume excess
 electricity almost instantly and stabilize the power grid. By integrating more
-intermittent renewable electricity sources into the grid, such balancing
-services will become indispensable in the future. Second, a reduction of
-electricity prices for the end-consumer is expected. Integrating VPPs into the
-power grid increases the efficiency of the whole system and, hence, will lower
-the prices. textcite:kahlen18_elect_vehic_virtual_power_plant_dilem show
-results, where electricity prices decrease up to 3.4% on the wholesale market.
-We anticipate similar results in our research. Third, VPPs can lead to a
-decrease in CO_2 emissions. With an increasing share of renewable energy
-production, the supply of sustainable electricity can excess the total
-electricity demand at times of good weather conditions. A VPP can consume this
-electricity by charging the EV fleet and the sustainable energy production does
-not need to be curtailed. EVs that are equipped with special vehicle-to-grid
-(V2G) devices can feed the electricity back into the grid when there is more
-demand than supply. This mechanism increases the utilization of renewable
-electricity generation and reduces the total CO_2 emissions.
+intermittent RES into the grid, such balancing services will become
+indispensable in the future. Second, a reduction of electricity prices for the
+end-consumer is expected. Integrating VPPs into the power grid increases the
+efficiency of the whole system and, hence, will lower the prices.
+textcite:kahlen18_elect_vehic_virtual_power_plant_dilem show results, where
+electricity prices decrease up to 3.4% on the wholesale market. We anticipate
+similar results in our research. Third, VPPs can lead to a decrease in CO_2
+emissions. With an increasing share of renewable energy production, the supply
+of sustainable electricity can excess the total electricity demand at times of
+good weather conditions. A VPP can consume this electricity by charging the EV
+fleet and the sustainable energy production does not need to be curtailed. EVs
+that are equipped with special vehicle-to-grid (V2G) devices can feed the
+electricity back into the grid when there is more demand than supply. This
+mechanism increases the utilization of renewable electricity generation and
+reduces the total CO_2 emissions.
 
 #+LATEX: \clearpage
