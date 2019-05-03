@@ -159,8 +159,7 @@ far as possible. Smaller time frames mitigate forecasting errors, which are a
 major obstacle for renewable energy generators to efficiently offer their
 capacities to the markets. Future research should investigate how these market
 design changes and new modifications in the pricing structure (e.g., the German
-"Mischpreisverfahren") affect the profitability of using EV VPPs for providing
-balancing power.
+"Mischpreisverfahren") affect the profitability of using EV batteries as VPPs.
 
 Finally, we see a limitation in the learning rate of the developed RL approach
 that concerns the applicability of such an algorithm in a real-world setting
