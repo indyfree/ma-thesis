@@ -178,7 +178,6 @@ in a control period $t$ is given by the number of EVs that are connected to a
 charging station, with enough free battery capacity to charge the next control
 period $t\!+\!1$.
 
-# TODO: Explain why minimum? Unexpected rentals?
 By assumption I-1, the predicted charging power of the fleet is available to the
 controller. However, when the controller procures electricity from the markets,
 the fleet has to charge with the committed charging power throughout the whole
@@ -653,16 +652,16 @@ cite:wang15_duelin_networ_archit_deep_reinf_learn.
 
 Our agent uses the dueling DDQN algorithm with a standard ANN architecture. The
 ANN consist of four input nodes, three fully-connected hidden layers with ReLU
-cite:nair10_rectif activation functions, and a linear output layer with two
-nodes. Further, an \epsilon-greedy policy with a linear decreasing exploration
-rate was used. The exact network definition can be found in Appendix
-ref:app-rl-network-def. We implemented the RL agent with the neural networks API
-Keras[fn:1][fn:2], which is a high-level abstraction layer of TensorFlow.
-TensorFlow is the de-facto standard for robust and scalable machine learning in
-industry and research cite:abadi16_tensor. Further, we used the shared research
-environment Google Colaboratory to train and evaluate the agent. It offers free
-access to computing resources that are optimized for training machine learning
-models.[fn:3]
+cite:nair10_rectif_linear_units_improv_restr_boltz_machin activation functions,
+and a linear output layer with two nodes. Further, an \epsilon-greedy policy
+with a linear decreasing exploration rate was used. The exact network definition
+can be found in Appendix ref:app-rl-network-def. We implemented the RL agent
+with the neural networks API Keras[fn:1][fn:2], which is a high-level
+abstraction layer of TensorFlow. TensorFlow is the de-facto standard for robust
+and scalable machine learning in industry and research cite:abadi16_tensor.
+Further, we used the shared research environment Google Colaboratory to train
+and evaluate the agent. It offers free access to computing resources that are
+optimized for training machine learning models.[fn:3]
 
 #+LATEX: \clearpage
 

@@ -64,7 +64,7 @@ uncertainty on the results will later be determined in a sensitivity analysis.
 |---------------------------------------------+----------------------------------------------------------------------|
 #+LATEX: \addtocounter{footnote}{-2}
 #+LATEX: \stepcounter{footnote}\footnotetext{Rental fees according to the Car2Go pricing scheme. See \url{https://www.car2go.com/media/data/germany/legal-documents/de-de-pricing-information.pdf}, accessed March 15, 2019.}
-#+LATEX: \stepcounter{footnote}\footnotetext{Average prices of electricity for the industry with an annual consumption of 500 MWh - 2000 MWh in Germany 2017 \cite{bmwi.19_prices_german}.}
+#+LATEX: \stepcounter{footnote}\footnotetext{Average prices of electricity for the industry with an annual consumption of 500 MWh - 2000 MWh in Germany 2017 \cite{bmwi19_prices_elect_indus_german_from}.}
 #+LATEX: \renewcommand{\arraystretch}{1}
 
 ** Integrated Bidding Strategy

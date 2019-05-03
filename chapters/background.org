@@ -380,40 +380,41 @@ the same transformer. The RL agents learned to charge at minimal costs, without
 overloading the transformer. textcite:dusparic13_multi utilized /W-Learning/ to
 simultaneously learn multiple policies (i.e., objectives such as ensuring
 minimum battery charged or ensuring charging at low costs).
-textcite:taylor14_accel_learn_trans_learn extended this research by employing
-Transfer Learning and /Distributed W-Learning/ to achieve communication between
-the learning processes of the agents in a multi-objective, multi-agent setting.
-textcite:dauer13_market_based_ev_charg_coord proposed a market-based EV fleet
-charging solution. The authors introduced a double-auction call market where
-agents trade the available transformer capacity, complying with the minimum
-required State of Charge (SoC). The participating EV agents autonomously learn
-their bidding strategy with standard /Q-Learning/ and discrete state and action
-spaces.
+textcite:taylor14_accel_learn_multi_objec_system extended this research by
+employing Transfer Learning and /Distributed W-Learning/ to achieve
+communication between the learning processes of the agents in a multi-objective,
+multi-agent setting. textcite:dauer13_market_based_ev_charg_coord proposed a
+market-based EV fleet charging solution. The authors introduced a double-auction
+call market where agents trade the available transformer capacity, complying
+with the minimum required State of Charge (SoC). The participating EV agents
+autonomously learn their bidding strategy with standard /Q-Learning/ and
+discrete state and action spaces.
 
 textcite:di13_elect_vehic presented a multi-agent solution to minimize charging
 costs of EVs, a solution that requires neither prior knowledge of electricity
 prices nor future price predictions. Similar to
 textcite:dauer13_market_based_ev_charg_coord, the authors employed standard
 /Q-Learning/ and the \epsilon-greedy approach for action selection.
-textcite:vaya14_optim also proposed a multi-agent approach, in which the
-individual EVs are agents that actively place bids in the spot market. Again,
-the agents use /Q-Learning/, with an \epsilon-greedy policy to learn their
-optimal bidding strategy. The latter relies on the agents willingness-to-pay
-which depends on the urgency to charge. State variables, such as SoC, time of
-departure and price development on the market, determine the urgency to charge.
-The authors compared this approach with a centralized, aggregator-based approach
-that they developed in another paper cite:vaya15_optim_biddin_strat_plug_in.
-Compared to the centralized approach, in which the aggregator manages charging
-and places bids for the whole fleet, the multi-agent approach causes slightly
-higher costs but solves scalability and privacy problems.
+textcite:vaya14_optim_biddin_plug_elect_vehic also proposed a multi-agent
+approach, in which the individual EVs are agents that actively place bids in the
+spot market. Again, the agents use /Q-Learning/, with an \epsilon-greedy policy
+to learn their optimal bidding strategy. The latter relies on the agents
+willingness-to-pay which depends on the urgency to charge. State variables, such
+as SoC, time of departure and price development on the market, determine the
+urgency to charge. The authors compared this approach with a centralized,
+aggregator-based approach that they developed in another paper
+cite:vaya15_optim_biddin_strat_plug_in. Compared to the centralized approach, in
+which the aggregator manages charging and places bids for the whole fleet, the
+multi-agent approach causes slightly higher costs but solves scalability and
+privacy problems.
 
-textcite:shi11_real consider a V2G control problem, while assuming real-time
-pricing. The authors proposed an online learning algorithm which they modeled as
-a discrete-time MDP and solved through /Q-Learning/. The algorithm controls the
-V2G actions of the EV and can react to real-time price signals of the market. In
-this single-agent approach, the action space compromises only charging,
-discharging and regulation actions. The limited action spaces makes it
-relatively easy to learn an optimal policy.
+textcite:shi11_real_time_vehic_grid_contr consider a V2G control problem, while
+assuming real-time pricing. The authors proposed an online learning algorithm
+which they modeled as a discrete-time MDP and solved through /Q-Learning/. The
+algorithm controls the V2G actions of the EV and can react to real-time price
+signals of the market. In this single-agent approach, the action space
+compromises only charging, discharging and regulation actions. The limited
+action spaces makes it relatively easy to learn an optimal policy.
 textcite:chis16_reinf_learn_based_plug_in looked at reducing the costs of
 charging for a single EV using known day-ahead prices and predicted next-day
 prices. A Bayesian ANN was employed for prediction and /fitted Q-Learning/ was
@@ -432,13 +433,13 @@ cite:vazquez-canteli19_reinf_learn_deman_respon. Another possibility are
 stochastic programming approaches, which rigorously model the problem as an
 optimization problem under uncertainty that can be analytically solved, see for
 example textcite:pandzic13_offer_model_virtual_power_plant and
-textcite:nguyen16_biddin. Uncertainties (e.g., renewable energy generation or
-electricity prices) are modeled by a set of scenarios that are based on
-historical data. Despite that, we consider RL as an optimal fit for the design
-of our proposed intelligent agent. Given the ability to learn user behavior
-(e.g., mobility demand) and the flexibility to adapt to the environment (e.g.,
-electricity prices), RL methods are a promising way of solving complex
-challenges in the smart grid.
+textcite:nguyen16_biddin_strat_virtual_power_plant. Uncertainties (e.g.,
+renewable energy generation or electricity prices) are modeled by a set of
+scenarios that are based on historical data. Despite that, we consider RL as an
+optimal fit for the design of our proposed intelligent agent. Given the ability
+to learn user behavior (e.g., mobility demand) and the flexibility to adapt to
+the environment (e.g., electricity prices), RL methods are a promising way of
+solving complex challenges in the smart grid.
 
 ** Reinforcement Learning Theory label:sec-reinforcement-learning
 The following chapter will give an overview of the most important RL concepts
