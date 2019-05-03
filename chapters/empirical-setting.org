@@ -3,7 +3,7 @@ This research is embedded in the German carsharing and electricity markets. We
 find that Germany is a suitable test bed for our experiments, since it has a
 comparably high share of renewables in its energy mix and is pushing for an
 energy turnaround (German: /Energiewende/) since 2010
-cite:bmu10_energ_concep_envir_sound_reliab_affor The comparatively high
+cite:bmu10_energ_concep_envir_sound_reliab_affor. The comparatively high
 renewable energy content in the energy mix causes electricity prices to be more
 volatile, which makes Germany an attractive location for VPP activities.
 
@@ -17,19 +17,19 @@ cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Further, it is widely
 regarded that the future of mobility will be electric, shared, smart and
 eventually autonomous cite:burns13_sustain_mobil,sterling18_three_revol.
 Carsharing providers are already contributing to the first two points by
-operating large fleets of electric vehicles. This thesis addresses the third
-point: Using electric carsharing fleets to smartly participate in electricity
-markets. Carsharing providers, like Car2Go and DriveNow, operate their
-carsharing fleets in a free-float model, which allows customers to pick up and
-drop vehicles at any place within the operating zone of the provider. The
-free-float concept adds additional complexity to our research, since the
-mobility patterns are inherently uncertain and difficult to predict. Customers
-of Car2Go or DriveNow pay by the minute and are offered incentives to park the
-EVs at charging stations at the end of their trip.
+operating large EV fleets. This thesis addresses the third point: Using electric
+carsharing fleets to smartly participate in electricity markets. Carsharing
+providers, like Car2Go and DriveNow, operate their carsharing fleets in a
+free-float model, which allows customers to pick up and drop vehicles at any
+place within the operating zone of the provider. The free-float concept adds
+additional complexity to our research, since the mobility patterns are
+inherently uncertain and difficult to predict. Customers of Car2Go or DriveNow
+pay by the minute and are offered incentives to park the EVs at charging
+stations at the end of their trip.
 
 We obtained real-world trip data from the carsharing service Car2Go, and
 collected freely available balancing market data from the GCRM platform
-website[fn:3] The data of the EPEX Spot market have kindly been provided by
+website.[fn:3] The data of the EPEX Spot market have kindly been provided by
 ProCom GmbH[fn:4] for research purposes. In the next chapters the different
 data sets are described, as well the most important processing steps outlined.
 
@@ -46,31 +46,31 @@ In Table ref:table-car2go-raw the raw data is displayed as we have obtained it
 by Car2Go. The data set contains spatio-temporal attributes, such as timestamp,
 coordinates, and the address of the EVs in 5-minute intervals. Additionally,
 status attributes of the interior and exterior are given, which are not
-displayed in the table. Especially relevant for our research is the state of
-charge ($SoC$, in %) and information whether the EV is plugged into a charging
-station or parked at a regular parking spot. Note that the data only contain EVs
-that are /available for rent/, meaning that they are currently not rented out by
-a customer. EVs which are plugged into a charging station are also not available
-until they have charged up to approximately 70% SoC. For further analysis,
-individual trips had to be reconstructed using the GPS data of the cars,
-moreover we inferred travelled trip distances and rental prices based on Car2Go
-specifications. See Appendix ref:app-data-processing for a detailed listing of
-the executed preprocessing steps.
+displayed in the table. Especially relevant for our research is the SoC (%)
+and information whether the EV is plugged into a charging station or parked at a
+regular parking spot. Note that the data only contain EVs that are /available
+for rent/, meaning that they are currently not rented out by a customer. EVs
+which are plugged into a charging station are also not available until they have
+charged up to approximately 70% SoC. For further analysis, individual trips had
+to be reconstructed using the GPS data of the cars, moreover we inferred
+travelled trip distances and rental prices based on Car2Go specifications. See
+Appendix ref:app-data-processing for a detailed listing of the executed
+preprocessing steps.
 
 ** Balancing Market Data label:sec-data-balancing
 We use market balancing data from the German secondary reserve market, which
-contain weekly lists of anonymized bids between June 1, 2016 and January 1, 2018 and a
-data set of activated control reserve in Germany during the same period. The
-bidding data consist of the traded electricity product, the offered balancing
-power $\Pb{}$ (MW), the capacity price $\cp{}$ ($\emw$), and the energy price
-$\ep{}$ ($\emwh$) of each bid. Four different products are traded, which are a
-combination of positive control reserve (POS) or negative control reserve (NEG)
-and the provided time segment, peak hours (HT) or non-peak hours (NT). Since
-negative prices are allowed on the secondary operating reserve market, the
-payment direction is included as well. Moreover, information about the amount of
-capacity that was accepted, either partially or fully, is listed. Bids, which
-were not accepted by the TSOs are not listed. An exemplary excerpt of the data
-set is displayed in Table ref:table-operating-reserve.
+contain weekly lists of anonymized bids between June 1, 2016 and January 1,
+2018, and a data set of activated control reserve in Germany during the same
+period. The bidding data consist of the traded electricity product, the offered
+balancing power $\Pb{}$ (MW), the capacity price $\cp{}$ ($\emw$), and the
+energy price $\ep{}$ ($\emwh$) of each bid. Four different products are traded,
+which are a combination of positive control reserve (POS) or negative control
+reserve (NEG) and the provided time segment, peak hours (HT) or non-peak hours
+(NT). Since negative prices are allowed on the secondary operating reserve
+market, the payment direction is included as well. Moreover, information about
+the amount of capacity that was accepted, either partially or fully, is listed.
+Bids, which were not accepted by the TSOs are not listed. An exemplary excerpt
+of the data set is displayed in Table ref:table-operating-reserve.
 
 
 
@@ -92,7 +92,7 @@ set is displayed in Table ref:table-operating-reserve.
 |---------+----------------+--------------+---------------+---------+----------|
 |---------+----------------+--------------+---------------+---------+----------|
 
-In this study, we assume that bidding on 15-minute intervals in secondary
+In this study, we assume that bidding for 15-minute intervals in secondary
 operating reserve auctions will be possible in future energy markets. As
 mentioned in Chapter ref:sec-balancing-market, the market design of the GCRM
 secondary operating reserve tender was adjusted in 2017. Daily tenders with
@@ -117,14 +117,14 @@ supply (offered capacity of bids) meets demand (activated balancing power), the
 critical price $\cep{}$ was determined.
 
 /Example/: The critical prices for the secondary operating reserve tender
-interval of the 6^{th} December 2017 between 08:00 and 08:15 were obtained as
-follows: Three suppliers submitted a negative reserve capacity of 5, 15 and 22
-MW respectively (see Table ref:table-operating-reserve, first three rows). The
+interval of December 6, 2017 between 08:00 and 08:15 were obtained as follows:
+Three suppliers submitted a negative reserve capacity of 5, 15 and 22 MW
+respectively (see Table ref:table-operating-reserve, first three rows). The
 critical capacity price $\ccp{}\!=\!200.3\emw$ is determined by the capacity
 price of the last (third) accepted bid in that time segment. The TSO reported
 that 18 MW of control reserve were activated between 08:00 and 08:15. Hence, the
 second bid determines the critical energy price $\cep{}\!=\!251\emwh$, as
-control reserve capacity gets activated according to ascending order of the
+control reserve capacity gets activated according to an ascending order of the
 submitted energy prices. The second bidder would get compensated for the offered
 balancing capacity plus the actually provided balancing energy:
 $(10.73\emw\!\times\!15\;\mw) +
@@ -176,7 +176,7 @@ optimize the bidding behavior.
 
 In Figure ref:fig-price-comparison, a market comparison of the calculated
 critical prices of both presented data sets is depicted. The high standard
-deviation (error bands) of the prices illustrate the price volatility and
+deviation (error bands) of the prices illustrates the price volatility and
 highlights the possibility to profitably combine trading on both markets
 simultaneously.
 
