@@ -8,12 +8,12 @@ period of time and offer these services on the electricity markets
 cite:pudjianto07_virtual_power_plant_system_integ. EV fleet operators can
 utilize idle vehicles to form VPPs and offer available EV battery capacity as
 balancing power to the markets. The fleet can offer balancing services directly
-via tender auctions on the balancing market or via continuous trades on the
-intraday market, where participants procure or sell energy to self-balance their
-portfolios cite:pape16_are_fundam_enoug. Both markets have complementary
-properties in terms of price levels and lead times to delivery, which motivates
-the creation of a VPP portfolio to profitably participate in both markets and
-extend the business model of the fleet.
+via tender auctions on the balancing market or indirectly via continuous trades
+on the intraday market, where participants procure or sell energy to
+self-balance their portfolios cite:pape16_are_fundam_enoug. Both markets have
+complementary properties in terms of price levels and lead times to delivery,
+which motivates the creation of a VPP portfolio to profitably participate in
+both markets and extend the business model of the fleet.
 
 # NOTE Sec: Problem
 However, there are certain risks associated with this business model extension.
@@ -92,17 +92,17 @@ able to successfully estimate the bidding risk, avoid imbalances, and keep lost
 rentals to a minimum. Additionally, we tested and compared the performance of
 various modern RL algorithms and found that recent advances in deep RL do
 improve the robustness and convergence rates in real-world applications, such as
-controlled EV charging. Despite these improvements, all RL approaches needed
-more than 1.5 years of simulation time to learn to avoid imbalance penalties,
-which makes an RL approach unsuitable to deploy in unseen fleet environments
-without prior training data.
+controlled EV charging. Despite these improvements, all tested RL approaches
+needed more than 1.5 years of simulation time to learn to avoid imbalance
+penalties, which makes an RL approach unsuitable to deploy in unseen fleet
+environments without prior training data.
 
 A sensitivity analysis showed that the prediction accuracy of available fleet
 charging power has a large impact on the fleet profitability. If the forecasts
 about available EVs for VPP use in the future are very uncertain, the RL agent
 estimates high bidding risks and can only offer conservative amounts of
 balancing power on the markets. Surprisingly, the effect of prediction accuracy
-on the total gross profit increase is more pronounced than the choice of bidding
+on the total gross profit is more pronounced than the choice of bidding
 strategy, which emphasizes the need for highly accurate mobility demand
 forecasting algorithms.
 
@@ -119,17 +119,17 @@ to 30 days of training, the algorithm converged to a near-optimal solution. In
 our experiments, convergence was reached only after training more than 1.5 years
 of simulation time. In contrast to their study, in which the fleet participated
 in the day-ahead market, our research focused on balancing markets, which
-restrict participants to self-balance their portfolio on other markets charge
-high imbalance penalties instead. Therefore, our proposed RL agent had to learn
-never to cause imbalances, which can occur up to one week after the agent
+restrict participants to self-balance their portfolio on other markets and
+charge high imbalance penalties instead. Therefore, our proposed RL agent had to
+learn never to cause imbalances, which can occur up to one week after the agent
 decides on a risk factor for a single bid. Such a long-delayed reward is
-traditionally challenging for an RL agent, which explains the lower convergence
-rate of our approach. textcite:chis16_reinf_learn_based_plug_in investigated an
-RL approach to reduce charging costs of an individual EV and reported cost
-savings of 10% to 50%. While the authors considered a fixed driving schedule of
-a single EV, our research considered charging a whole EV fleet with previously
-unknown mobility patterns. Despite the additional uncertainty, we could achieve
-a cost reduction of charging the fleet by 25%.
+traditionally challenging for RL algorithms, which explains the lower
+convergence rate of our approach. textcite:chis16_reinf_learn_based_plug_in
+investigated an RL approach to reduce charging costs of an individual EV and
+reported cost savings of 10% to 50%. While the authors considered a fixed
+driving schedule of a single EV, our research considered charging a whole EV
+fleet with previously unknown mobility patterns. Despite the additional
+uncertainty, we could achieve a cost reduction of charging the fleet by 25%.
 
 ** Limitations and Future Work
 
@@ -148,17 +148,17 @@ accessible to single EVs, EV fleets, or small VPPs. For example, the GCRM only
 allows actors to participate in the market, which can provide a quantity of at
 least 1 MW of balancing power over a 4-hour period. Since it is barely possible
 to overcome this constraint with a typical EV fleet consisting of 500 EVs with
-unknown rental patterns and the existing charging infrastructure, it was ignored
-in our model. We propose changes in the current market design to give equal
-access to DER, such as EVs. In order to phase out conventional power plants and
-increase the share of renewables in the energy mix, balancing power needs to be
-provided from other resources. Instead of 4 to 8-hour segments, the markets
-should introduce bidding slots of 15 minutes or less. Moreover, the time between
-auction and physical delivery of balancing power should be reduced as far as
-possible. Smaller time frames mitigate forecasting errors, which are a major
-obstacle for renewable energy generators to efficiently offer their capacities
-to the markets. Future research should investigate how these market design
-changes and new modifications in the pricing structure (e.g., the German
+unknown rental patterns and the existing charging infrastructure, we ignored the
+constraint in our model. We propose changes in the current market design to give
+equal access to DER, such as EVs. In order to phase out conventional power
+plants and increase the share of renewables in the energy mix, balancing power
+needs to be provided from other resources. Instead of 4 to 8-hour segments, the
+markets should introduce bidding slots of 15 minutes or less. Moreover, the time
+between auction and physical delivery of balancing power should be reduced as
+far as possible. Smaller time frames mitigate forecasting errors, which are a
+major obstacle for renewable energy generators to efficiently offer their
+capacities to the markets. Future research should investigate how these market
+design changes and new modifications in the pricing structure (e.g., the German
 "Mischpreisverfahren") affect the profitability of using EV VPPs for providing
 balancing power.
 
