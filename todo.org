@@ -2,53 +2,40 @@
 
 * Inbox
 ** Content
-*** TODO Further introduce DQN, Action-Advantages, Boltzmann temperature
-*** TODO Report all numbers in result section that are used in conclusion
+*** CANCELLED Further introduce DQN, Action-Advantages, Boltzmann temperature
+*** CANCELLED Report all numbers in result section that are used in conclusion
 - Utilization
 - Charged cheaper than (Eur/%)
-*** TODO Revise critical price figure description.
-*** TODO Add self-sustained description to RL figure.
+*** DONE Revise critical price figure description.
+*** DONE Add self-sustained description to RL figure.
 ** Wording (stay concise!):
-*** TODO Acronyme articels: aN RL (Agent), aN MDP
-*** TODO Chapters are 1. and 2. level, Sections are third level headings.
-*** TODO Introduce "Portfolio composition (of RL agent)"
-*** TODO regulation capacity, balancing power, frequency regulation...
-*** TODO tender period, segment, interval, time period, market period.
-*** TODO tender, auction, bid, trade
-*** TODO carsharing company/provider
-*** TODO EV fleet, controller, operator...
-*** TODO Mobility demand, fleet capacity
-*** TODO Smart charging/ balancing the grid? Common theme!
-*** TODO the data/data set/datasets, data plural or singular? (See twitter)
-*** TODO Rental profits --> rental revenue / trip price?
-*** TODO Rephrase thesis to EV fleet only. Carsharing only one form, yet the most uncertain. Thus good example.
-*** TODO Mobility demand/Rental demand? Generalize? Somebody notices?
+*** CANCELLED Chapters are 1. and 2. level, Sections are third level headings.
+*** CANCELLED Introduce "Portfolio composition (of RL agent)"
+*** DONE regulation capacity, balancing power, frequency regulation...
+*** CANCELLED tender period, segment, interval, time period, market period.
+*** CANCELLED tender, auction, bid, trade
+*** CANCELLED carsharing company/provider
+*** DONE EV fleet, controller, operator...
+*** CANCELLED Mobility demand, fleet capacity
+*** CANCELLED Smart charging/ balancing the grid? Common theme!
+*** CANCELLED the data/data set/datasets, data plural or singular? (See twitter)
+*** CANCELLED Rental profits --> rental revenue / trip price?
+*** CANCELLED Rephrase thesis to EV fleet only. Carsharing only one form, yet the most uncertain. Thus good example.
+*** CANCELLED Mobility demand/Rental demand? Generalize? Somebody notices?
 ** Format
-*** TODO Units with space
-*** TODO Consistent Date formatting
-*** TODO Footnotes numbering with tables
+*** DONE Units with space
+*** DONE Consistent Date formatting
+*** DONE Footnotes numbering with tables
 *** TODO Check page border spacing of Notation pages
 *** TODO Fix paragraph spacing
-*** TODO Use abbreviations only after 3+ mentions?
 *** TODO Put notation in RL chapter if only abbr, otherwise also use electricity/price abbr as p,soc,...
 ** Structure:
 *** TODO Bullet-point contributions at end of introduction
 
 [[file:~/uni/ma-thesis/chapters/introduction.org::#%20TODO:%20Bullet-point%20contributions][Relevance]]
-*** TODO First and last sentence of a paragraph should explain it well enough
 ** Citations:
 *** TODO When webpage with pdf as source, put in bibtex not footnotes
 ** Review
-*** Comment Literature Review (Ilaria)
-Structure the whole section in a stricter way. I mean that the question I always
-asked myself why reading was: "so what?" What is you Ziel? As far as I
-understand, you wanna motivate you methodology by showing what previous
-literature has done, and how the methodology can be improved (?). If this is the
-case, I would state it clearly under Section 2. and then explain what is the
-structure of 2.1 and 2.2.
-Should you maybe provide more definition? In my guidelines, the literature
-review is also the Teil in which I should have defined all the terms/concepts
-that I used later on.
 * Done
 ** DONE Background Neural Network Figure smaller and with inputs + outputs
 ** DONE Move Car2Go data preprocessing to Appendix
@@ -61,3 +48,16 @@ that I used later on.
 ** DONE Lit Review Philipp VPP optimization paper
 ** DONE Background Chapter first paragraph and electricity market theory first paragraph
 ** DONE Revise Background Literature Section and make story!
+** DONE Acronyme articels: aN RL (Agent), aN MDP
+** DONE First and last sentence of a paragraph should explain it well enough
+** CANCELLED Comment Literature Review (Ilaria)
+Structure the whole section in a stricter way. I mean that the question I always
+asked myself why reading was: "so what?" What is you Ziel? As far as I
+understand, you wanna motivate you methodology by showing what previous
+literature has done, and how the methodology can be improved (?). If this is the
+case, I would state it clearly under Section 2. and then explain what is the
+structure of 2.1 and 2.2.
+Should you maybe provide more definition? In my guidelines, the literature
+review is also the Teil in which I should have defined all the terms/concepts
+that I used later on.
+** DONE Use abbreviations only after 3+ mentions?
