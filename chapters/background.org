@@ -825,7 +825,7 @@ Chapter ref:sec-model-algo. Despite that, RL theory is mostly limited to tabular
 and linear approximation methods. Refer to
 textcite:bengio09_learn_deep_archit_ai for a comprehensive review of deep
 learning methods.
-#+CAPTION[Sample Artificial Neural Network]: A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes. When approximating the action-value function $\qpi(s,a)$ the number of input nodes equals the size of the state space and the number of output nodes the size of the action space. The learned connection weights $\w$ on the arrows between the layers are ommitted in this figure. \protect\footnotemark label:fig-ann
+#+CAPTION[Artificial Neural Network Architecture]: A sample ANN consisting of four input nodes, two fully connected hidden layers and two output nodes. When approximating the action-value function $\qpi(s,a)$ the number of input nodes equals the size of the state space and the number of output nodes the size of the action space. The learned connection weights $\w$ on the arrows between the layers are ommitted in this figure. \protect\footnotemark label:fig-ann
 #+ATTR_LATEX: :width 0.7\linewidth
 [[../fig/ann.png]]
 #+LATEX: \footnotetext{Adapted from \textbf{Figure 9.14} from \emph{Reinforcement Learning: An Introduction} by Richard S. Sutton and Andew G. Barto is licencsed under CC BY-NC-ND 2.0 (https://creativecommons.org/licenses/by-nc-nd/2.0/)}
