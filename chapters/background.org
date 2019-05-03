@@ -19,13 +19,13 @@ auction design and in their reaction time between the order contract and the
 delivery of electricity. Day-ahead markets and spot markets have a reaction time
 between a day and several hours, whereas in operating reserve markets the
 reaction time ranges from minutes to seconds. Most electricity markets work
-according to the merit order principle in which resources are considered in
+according to the merit order principle in which resources are considered in an
 ascending order of the energy price until the capacity demand is met. The
 clearing price is determined by the energy price, at the point where supply
 meets demand. Payment models differ in the markets: In contrast to day-ahead
-markets, where a uniform pricing schema is applied, in secondary reserve markets
-and intraday markets, participants get compensated by the price they bid (pay-as-bid
-principle).
+markets, where an uniform pricing schema is applied, in secondary reserve
+markets and intraday markets, participants get compensated by the price they bid
+(pay-as-bid principle).
 
 In smart electricity markets, EV fleet operators can offer the capacity of their
 EV batteries to different types of markets. On operating reserve markets, prices
@@ -33,13 +33,13 @@ are usually more volatile and consequently more attractive for VPPs
 cite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. But operating reserve
 markets also bear a higher risk for the fleet: Commitments have to be made up to
 one week in advance when customer demands are still uncertain. In order to avoid
-penalties for unfulfilled commitments only a conservative amount of capacity can
-be offered to the market. On the other hand, spot markets allow participants to
-continuously trade electricity products up to five minutes prior to delivery.
+penalties for unfulfilled commitments, only a conservative amount of capacity
+can be offered to the market. On the other hand, spot markets allow participants
+to continuously trade electricity products up to five minutes prior to delivery.
 Just minutes before delivery it is possible to predict the available battery
-capacity of the fleet with a high accuracy. This certainty creates the possibility
-to aggressively trade the available battery capacity with a low risk at the spot
-market.
+capacity of the fleet with a high accuracy. This certainty creates the
+opportunity to aggressively trade the available battery capacity with a low risk
+at the spot market.
 ** Electricity Market Theory
 In the following chapter, we will explain the market design, market properties
 and bidding procedures of the balancing market and spot market in more detail,
@@ -48,16 +48,17 @@ as they are the markets we include in our research.
 #+CAPTION[Electricity Market Design]: Interaction between electricity markets in relation to capacity allocation. label:fig-electricity-markets
 #+ATTR_LATEX: :width \linewidth
 [[../fig/electricity-markets.png]]
+
 *** Balancing Market label:sec-balancing-market
 The balancing market is a tool to balance frequency deviations in the power
-grid. It offers auctions for primary control reserve, secondary control reserve
+grid. It offers auctions for primary control reserve, secondary control reserve,
 as well as tertiary control reserve (minute reserve), which primarily differ in
-the required ramp-up times of the participants.
-As depicted in Figure ref:fig-electricity-markets, the balancing market is
-conceptually placed at the intersection between the open electricity markets and
-the physical power system cite:veen16_elect_balan_market. It can be seen as the
-last link in a chain of electricity markets, although the lead time of capacity
-allocation is considerably longer than the at day-ahead or intraday markets.
+the required ramp-up times of the participants. As depicted in Figure
+ref:fig-electricity-markets, the balancing market is conceptually placed at the
+intersection between the open electricity markets and the physical power system
+cite:veen16_elect_balan_market. It can be seen as the last link in a chain of
+electricity markets, although the lead time of capacity allocation is
+considerably longer than the at the day-ahead market or the intraday market.
 
 In this study, we will look at the German control reserve market (GCRM), one of
 the largest frequency regulation markets in the world. However, the presented
@@ -75,24 +76,24 @@ require fast ramp-up times. Operating reserve providers have to be qualified by
 the TSO to participate in the market and prove that they are able to reliably
 provide balancing power. Although EV fleets are currently not qualified by the
 GCRM to be used as operating reserve, they could theoretically handle the
-minimum capacity requirements if they are large enough. Around 220 EVs would
+minimum capacity requirements if they were large enough. Around 220 EVs would
 need to simultaneously charge at standard 4.6 kW charging stations to provide 1
 MW of downward regulating capacity.
 
-Up until 28^{th} July 2018, auctions were held weekly, with two different
-segments each week (peak hours/non-peak hours). Afterwards, the auction
-mechanism changed to daily auctions of six four-hour segments of positive and
-negative control reserve.[fn:2] Shorter auction cycles facilitate the
-integration of renewable energy generators into the secondary control reserve
-market, as they are dependent on accurate (short-term) capacity forecasts.
-Positive control reserve is energy that is supplied to the grid, when the grid
-frequency falls below 50 Hz. It can be provided by increasing the electricity
-generation or by reducing the grid load (i.e., electricity consumption). On the
-contrary, negative control reserve is required when the grid frequency rises
-above 50 Hz and can be provided by adding grid load or reducing electricity
-generation. Since we do not consider V2G in this thesis (see next chapter), the
-EV fleets in our model are only able provide negative control reserve, which
-we will plainly refer to as /balancing power/ until the end of the thesis.
+Up until July 28, 2018, auctions were held weekly, with two different segments
+each week (peak hours/non-peak hours). Afterwards, the auction mechanism changed
+to daily auctions of six four-hour segments of positive and negative control
+reserve.[fn:2] Shorter auction cycles facilitate the integration of renewable
+energy generators into the secondary control reserve market, as they are
+dependent on accurate short-term capacity forecasts. Positive control reserve is
+energy that is supplied to the grid, when the grid frequency falls below 50 Hz.
+It can be provided by increasing the electricity generation or by reducing the
+grid load (i.e., electricity consumption). On the contrary, negative control
+reserve is required when the grid frequency rises above 50 Hz and can be
+provided by adding grid load or reducing electricity generation. Since we do not
+consider V2G in this thesis, the EV fleets in our model are only able provide
+negative control reserve, which we will plainly refer to as /balancing power/
+until the end of the thesis.
 
 Market participants submit bids in the form $(\Pb{}, \cp{}, \ep{})$ to the
 market, where $\Pb{}$ is the amount of electrical power that can be supplied on
@@ -145,9 +146,9 @@ specified as price-quantity pairs $(\Pi{}, \up{})$, where $\Pi{}$ is the traded
 amount of electrical power in kW and $\up{}$ is the price for the delivered
 energy unit (hour/quarter/block) in $\emwh$. When an order to buy (bid) matches
 an order to sell (ask), the trade gets executed immediately. The order book is
-visible to all participants, it is known which unmatched orders exist at the
-time of interest. The intraday market has a trading volume of 82 TWh, which is
-considerably smaller than the day-ahead market's volume. Despite that, the
+visible to all participants, hence it is known which unmatched orders exist at
+the time of interest. The intraday market has a trading volume of 82 TWh, which
+is considerably smaller than the day-ahead market's volume. Despite that, the
 intraday market plays a vital role to the stability of the grid. All executed
 trades on the intraday market potentially reduce the needed balancing power of
 the TSOs and thus can be seen as a type of balancing power
@@ -173,9 +174,10 @@ even cause brown- or blackouts cite:kim12_carbit. Despite these challenges, it
 is possible to support the physical reinforcement of the grid by adopting smart
 charging strategies. In smart charging, EVs get charged when the grid is less
 congested to ensure grid stability. Smart charging reduces peaks in electricity
-demand (/peak cutting/) and complement the grid in times of low demand (/valley
-filling/). Smart charging has been researched thoroughly in the IS literature,
-in the following we will outline some of the most important contributions.
+demand (/peak cutting/) and complement the grid in times of low demand
+(/valley filling/). Smart charging has been researched thoroughly in the IS
+literature, in the following we will outline some of the most important
+contributions.
 
 
 # NOTE: Section Smart charging examples and studies
@@ -197,7 +199,7 @@ textcite:schill11_elect_vehic_imper_elect_market showed that the V2G usage of
 EVs can decrease average consumer electricity prices. Excess EV battery capacity
 can be used to charge in off-peak hours and discharge in peak hours, when the
 prices are higher. These arbitrage possibilities reverse welfare effects of
-generators and increase the overall welfare and consumer surplus.
+generators and increase the overall welfare and the consumer surplus.
 textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor found that the
 arbitrage opportunities are especially prominent when a high variability in
 electricity prices on the target electricity market exists. The authors stated
@@ -213,7 +215,7 @@ profitability with V2G in the light of battery depreciation effects in the US.
 The results of their study indicate that the large-scale use of EV batteries for
 grid storage does not yield enough monetary benefits to incentivize EV owners to
 participate in V2G activities. Considering battery depreciation cost, the
-authors arrived at an annual profit of only 6\dollar -- 72\dollar per EV.
+authors arrived at an annual profit of only six to seventy-two dollar per EV.
 textcite:brandt17_evaluat_busin_model_vehic_grid_integ evaluated a business
 model for parking garage operators operating on the German frequency regulation
 market. When taking infrastructure costs and battery depreciation costs into
@@ -223,8 +225,8 @@ and altered auction mechanisms, the authors arrived at negative profits.
 textcite:kahlen17_fleet used EV fleets to offer balancing services to the grid.
 Evaluating the impact of V2G in their model, the authors conclude that V2G would
 only be profitable if reserve power prices were twice as high. Considering the
-negative results from the studies mentioned above, we did not include the
-V2G concept in our research.
+negative results from the studies mentioned above, we did not include the V2G
+concept in our research.
 
 # NOTE: Section Trading strategies on multiple markets, battery depreciation
 In order to maximize profits, it is essential for market participants to develop
@@ -272,12 +274,11 @@ real-time which vehicles provide the capacity.
 # NOTE: Section Carsharing and EV fleets
 Centrally managed EV fleets make it possible for carsharing providers to use the
 presented concepts as a viable business extension. Free float carsharing is a
-popular mobility concept that allows cars to be picked up and parked everywhere,
-and the customers are billed is by the minute. This concept offers flexibility
-to its users, saves resources, and reduces carbon emissions
-cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Most previous studies
-concerned with the usage of EVs for electricity trading, assumed that trips are
-fixed and known in advance, e.g., in
+popular mobility concept that allows cars to be picked up and parked everywhere
+This concept offers flexibility to its users, saves resources, and reduces
+carbon emissions cite:firnkorn15_free_float_elect_carsh_fleet_smart_cities. Most
+previous studies, concerned with the usage of EVs for electricity trading,
+assumed that trips are fixed and known in advance, see for example
 textcite:tomic07_using_fleet_elect_drive_vehic_grid_suppor. The free float
 concept adds uncertainty and nondeterministic behavior, which make predictions
 about future rentals a complex issue. textcite:kahlen17_fleet showed that it is
@@ -308,7 +309,7 @@ or electricity exchange. In other words, fleet operators have to avoid buying
 any amount of electricity, which they can not be sure to charge with their
 available EVs at the delivery time. To address this issue, the authors developed
 a mean asymmetric weighted objective function. They used it for their
-time-series based prediction model to penalize committing an EV to VPP when it
+time-series based prediction model to penalize committing an EV to a VPP when it
 would have been rented out otherwise. Because of the two issues mentioned above,
 textcite:kahlen18_elect_vehic_virtual_power_plant_dilem could only make very
 conservative estimations and commitments of overall available trading capacity,
@@ -328,11 +329,11 @@ markets in the future.
 
 ** Reinforcement Learning Controlled EV Charging label:sec-back-rl
 
-Previous research showed that intelligent agents equipped with Reinforcement
-Learning (RL) methods can successfully take action in the smart grid. The
-following chapter outlines different research approaches of RL in the domain of
-smart grids. For a more thorough description, mathematical formulations and
-common issues, of RL refer to Chapter ref:sec-reinforcement-learning.
+Previous research showed that intelligent agents equipped with RL methods can
+successfully take action in the smart grid. The following chapter outlines
+different research approaches of RL in the domain of smart grids. For a more
+thorough description, mathematical formulations and common issues, of RL refer
+to Chapter ref:sec-reinforcement-learning.
 
 textcite:reddy11_learn_behav_multip_auton_agent,reddy11_strat used autonomous
 broker agents to buy and sell electricity from DER on a /Tariff Market/. The
@@ -340,21 +341,21 @@ agents are modelled with a Markov decision process (MDP) and use RL to determine
 pricing strategies to profitably participate in the Tariff Market. To control
 for a large number of possible states in the domain, the authors used
 /Q-Learning/ with derived state space features. Based on descriptive statistics,
-they defined derived price and market participant features. By engaging with its
-environment, the agent learns an optional sequence of actions (policy) based on
-the state of the agent.
+they defined price features and market participant features. By engaging with
+its environment, the agent learns an optional sequence of actions, called
+policy.
 
 textcite:peters13_reinf_learn_approac_to_auton built on that work and further
 enhanced the method by using function approximation. Function approximation
 allows to efficiently learn strategies over large state spaces, by learning a
-function representation of state values instead of learning single values of
-discrete states. By using this technique, the agent can adapt to arbitrary
-economic signals from its environment, resulting in better performance than
-previous approaches. Moreover, the authors applied feature selection and
-regularization methods to explore the agent's adaption to the environment. These
-methods are particularly beneficial in smart markets because market design,
-structures, and conditions might change in the future. Hence, intelligent agents
-should be able to adapt to it cite:peters13_reinf_learn_approac_to_auton.
+function representation of state values instead of single values of discrete
+states. By using this technique, the agent can adapt to arbitrary economic
+signals from its environment, resulting in a better performance than previous
+approaches. Moreover, the authors applied feature selection and regularization
+methods to explore the agent's adaption to the environment. These methods are
+particularly beneficial in smart markets because market design, structures, and
+conditions might change in the future, and intelligent agents should be able to
+adapt to it cite:peters13_reinf_learn_approac_to_auton.
 
 textcite:vandael15_reinf_learn_heuris_ev_fleet facilitated learned EV fleet
 charging behavior to optimally purchase electricity on the day-ahead market.
@@ -400,7 +401,7 @@ the agents use /Q-Learning/, with an \epsilon-greedy policy to learn their
 optimal bidding strategy. The latter relies on the agents willingness-to-pay
 which depends on the urgency to charge. State variables, such as SoC, time of
 departure and price development on the market, determine the urgency to charge.
-The authors compared this approach with a centralized aggregator-based approach
+The authors compared this approach with a centralized, aggregator-based approach
 that they developed in another paper cite:vaya15_optim_biddin_strat_plug_in.
 Compared to the centralized approach, in which the aggregator manages charging
 and places bids for the whole fleet, the multi-agent approach causes slightly
@@ -422,14 +423,14 @@ learning method. textcite:ko18_mobil_aware_vehic_to_grid proposed a centralized
 controller for managing V2G activities in multiple microgrids. The proposed
 method considers mobility and electricity demands of autonomous microgrids, as
 well as SoC of the EVs. The authors formulated an MDP with discrete state and
-action spaces and use standard /Q-Learning/ with \epsilon-greedy policy to
+action spaces and use standard /Q-Learning/ with an \epsilon-greedy policy to
 derive an optimal charging policy.
 
 It should be noted that RL methods are not the only solution for problems in the
 smart grid, often basic algorithms and heuristics provide satisfactory results
 cite:vazquez-canteli19_reinf_learn_deman_respon. Another possibility are
 stochastic programming approaches, which rigorously model the problem as an
-optimization problem under uncertainty that can be analytically solved, for
+optimization problem under uncertainty that can be analytically solved, see for
 example textcite:pandzic13_offer_model_virtual_power_plant and
 textcite:nguyen16_biddin. Uncertainties (e.g., renewable energy generation or
 electricity prices) are modeled by a set of scenarios that are based on
