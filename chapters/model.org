@@ -60,7 +60,7 @@ displayed in Table ref:table-notation.
 | $\Cb{h}(P)$               | Cost function for procuring electricity from the balancing market dependent on the offered charging power | $\eur$  |
 | $\Ci{h}(P)$               | Cost function for procuring electricity from the intraday market dependent on the offered charging power  | $\eur$  |
 | $p^{ind}$                 | Industry electricity tariff                                                                               | $\ekwh$ |
-| $\oc$                     | Opportunity costs of lost rental of EV $i$ in control period $t$                                          | $\eur$  |
+| $\oc$                     | Opportunity costs of losing rental of EV $i$ in control period $t$                                        | $\eur$  |
 | $\beta_h$                 | Imbalance costs in market period $h$                                                                      | $\eur$  |
 |---------------------------+-----------------------------------------------------------------------------------------------------------+---------|
 | $\lb{h}$                  | Balancing market risk factor                                                                              | $[0,1]$ |
@@ -116,11 +116,11 @@ textcite:pandzic13_offer_model_virtual_power_plant.
 - M-1. :: Balancing market mechanism
 
      We assume that the controller is able to submit bids of any quantity for
-     single 15-minute market periods 7 days ahead. Since the critical capacity
-     and energy prices are available by I-2, the controller submits bids in the
-     form $(\Pb{},\ccp{},\cep{})$. By construction of the critical prices, the
-     submitted bid will always get accepted by the TSOs and the offered
-     balancing capacity fully activated.
+     single 15-minute market periods 7 days ahead to the balancing market. Since
+     the critical capacity and energy prices are available by I-2, the
+     controller submits bids in the form $(\Pb{},\ccp{},\cep{})$. By
+     construction of the critical prices, the submitted bid will always get
+     accepted by the TSOs and the offered balancing capacity fully activated.
 
 - M-2. :: Intraday market mechanism
 
@@ -225,7 +225,7 @@ eqref:eq-cost-balancing:
 Again, depending on the market situation, $\cup{}\!\in\!\Re$ can either be
 negative or positive, resulting in costs or profits for the fleet. Contrarily to
 the balancing market, on the intraday market the fleet does not get compensated
-for keeping the charging power available; only the amount of charged energy affects the
+for keeping the charging power available, only the amount of charged energy affects the
 costs.
 
 The costs of charging influence the controllers market decision and the
@@ -255,10 +255,10 @@ when individual EVs do not have enough SoC for planned trips of arriving
 customers.
 
 The controller faces additional risks by bidding one week ahead on the balancing
-market (in contrast to only 30 minutes ahead on the intraday market). This is
-because predictions are more uncertain with a larger time horizon. To account
-for all the mentioned risks, we introduce a /risk factor/ $\lambda \in \Re_{0
-\leq \lambda \leq 1}$, where $\lambda\!=\!0$ indicates no risk, and
+market, in contrast to bidding only 30 minutes ahead on the intraday market.
+This is because predictions are more uncertain with a larger time horizon. To
+account for all the mentioned risks, we introduce a /risk factor/ $\lambda \in
+\Re_{0 \leq \lambda \leq 1}$, where $\lambda\!=\!0$ indicates no risk, and
 $\lambda\!=\!1$ indicates a high risk. The controller determines the bidding
 quantity $\Pb{h}$ by discounting the predicted available fleet charging power
 $\fPhat{h}$ with the possible risk $\lambda_{h}$ of imbalance or opportunity
@@ -274,11 +274,11 @@ costs:
 where $h$ is the market period of interest one week ahead. If the controller can
 buy electricity at the intraday market at a lower price, it does not place a bid
 at the balancing market (see eqref:eq-model-pb, first condition). If the
-controller can charge cheaper at the regular industry tariff $p^{ind}$, it does
-not place a bid either (see eqref:eq-model-pb, second condition). In all other
-cases, the controller submits $\Pb{h}$ to the market. The bidding quantity for
-the intraday market $\Pi{h}$ depends on the previously committed charging power
-$\Pb{h}$ and the newly predicted charging power $\fPhat{h}$:
+controller can charge cheaper at the regular industry tariff $p^{ind}$ (see
+eqref:eq-model-pb, second condition), it does not place a bid either. In all
+other cases, the controller submits $\Pb{h}$ to the market. The bidding quantity
+for the intraday market $\Pi{h}$ depends on the previously committed charging
+power $\Pb{h}$ and the newly predicted charging power $\fPhat{h}$:
 \begin{equation} \label{eq-model-pi}
   \Pi{h} \defeq
   \begin{cases}
@@ -311,18 +311,18 @@ with the charging speed of $\gamma$ (kW) in control period $t$. $\gamma$ is
 limited by either the EVs build-in charger, or the charging power of the
 connected charging station. In this model we assume $\gamma$ is equal for all
 considered EVs and charging stations. /Example:/ Assuming a charging power of
-$\gamma\!=\!3.3\;\kw$, an EV battery capacity of $\Omega\!=\!17.6\;\kwh$, and
+$\gamma\!=\!3.6\;\kw$, an EV battery capacity of $\Omega\!=\!17.6\;\kwh$, and
 control periods of 5 minutes, the amount of energy charged in one control period
-is $3.3\;\kw\!\times\frac{5}{60}\text{h}\!=\!0.275\;\kwh$. Hence, the maximally
+is $3.6\;\kw\!\times\frac{5}{60}\text{h}\!=\!0.3\;\kwh$. Hence, the maximally
 charged electricity $\omega_{i}$ of an EV to be eligible for VPP use is
-$17.6-\!0.275\!=\!17.325\;\kwh$.
+$17.6-\!0.3\!=\!17.3\;\kwh$.
 
 #+BEGIN_SRC python :exports none
-return(3.3 * (5/60))
+return(3.6 * (5/60))
 #+END_SRC
 
 #+RESULTS:
-: 0.27499999999999997
+: 0.3
 
 #+BEGIN_SRC python :exports none
 return(17.6 - 0.275)
@@ -331,7 +331,6 @@ return(17.6 - 0.275)
 #+RESULTS:
 : 17.325000000000003
 
-# TODO: How do we known $\oc$?
 Remember that the fleet has to provide the total committed charging power
 $\Pb{h}+\Pi{h}$ across all control periods $t$ of the market period $h$,
 independent of which individual EVs are actually charging the electricity. This
@@ -383,11 +382,11 @@ decision phases of the previously described control mechanism with a
 comprehensive example in the next section.
 
 *** Example: Decision Phases
-At 3pm on the 9^{th} of August 2017, the controller enters the first bidding
-phase for the market period $h$ = /16.08.2017 15:00-15:15/. It predicts that in
-that interval 250 EVs are connected to a charging station, resulting in 900 kW
-available fleet charging power ($\fPhat{h}\!=\!900\;\kw$), given the charging
-power of 3.6 kW per EV. Assuming the critical prices are $\ccp{h}\!=\!5\emw$,
+On August 9, 2017 at 3pm, the controller enters the first bidding phase for the
+market period $h$ = /16.08.2017 15:00-15:15/. It predicts that in that interval
+250 EVs are connected to a charging station, resulting in 900 kW available fleet
+charging power ($\fPhat{h}\!=\!900\;\kw$), given the charging power of 3.6 kW
+per EV. Assuming the critical prices are $\ccp{h}\!=\!5\emw$,
 $\cep{h}\!=\!-10\emwh$, and $\cup{h}\!=\!10\emwh$ in that market period, the
 controller now evaluates the cheapest charging option. The flat industry
 electricity tariff is assumed to be $p^{ind}\!=\!0.15\ekwh$. The costs for
@@ -414,19 +413,19 @@ a low risk of procuring more energy than it can maximally charge. At this point,
 the RL agent determines a intraday bidding risk of $\li{h}\!=\!0.05$, and sets
 the bidding quantity to
 $\Pi{h}\!=\!(810\;\kw\!-\!630\;\kw)\!\times\!(1\!-\!0.05)\!=\!171\;\kw$. The
-controller procures 171 kW from the intraday market and accounts for charging
-costs of $\Ci{h}(171\;\kw)\!=\!0.4275\;\eur$.
+controller procures 171 kW from the intraday market and accounts for the
+charging costs of $\Ci{h}(171\;\kw)\!=\!0.4275\;\eur$.
 
-At electricity delivery time, the 16^{th} of August 2017 at 3:00pm, the
-controller detects 255 EVs that are eligible for VPP use; EVs that are connected
-to a charging station and have enough battery capacity left to charge during the
-next control period. It assigns 223 EVs to provide the total committed 801 kW
-charging power for the market period time $\Delta h$ of 15 minutes. During that
-time, three customers want to rent out EVs that are allocated to the VPP. The
-first two rentals are accepted because two other EVs of the VPP are available to
-charge instead. The third rental has be to refused, since no EV can substitute
-the charging power. Hence, the controller has to account for the opportunity
-costs of that lost rental $\oc$.
+At electricity delivery time, August 16, 2017 at 3pm, the controller detects
+255 EVs that are eligible for VPP use; EVs that are connected to a charging
+station and have enough battery capacity left to charge during the next control
+period. It assigns 223 EVs to provide the total committed 801 kW charging power
+for the market period time $\Delta h$ of 15 minutes. During that time, three
+customers want to rent out EVs that are allocated to the VPP. The first two
+rentals are accepted because two other EVs of the VPP are available to charge
+instead. The third rental has be to refused, since no EV can substitute the
+charging power. Hence, the controller has to account for the opportunity costs
+of that lost rental $\oc$.
 
 #+BEGIN_SRC python :exports none :var h=15
 def bal_cost(p_c, p_e, P):
@@ -488,19 +487,19 @@ risk factors $\lb{}$, $\li{}$ each market period $h$. The risk factors determine
 the bidding quantities $\Pb{h}$, $\Pi{h}$ that the controller submits to the
 balancing and intraday market, which in the end determine the fleet costs. The
 RL agent decides on the risk factors (i.e., takes an action) based on the
-observed state $S_{h}$ every time step $h$ (usually denoted as $t$ in the RL
-literature). The optimal set of risk factors is learned by the RL agent through
-estimating a policy $\pi(a|s)$ that maps every state $s\in\S$ to an action
-$a\in\A$.
+observed state $S_{h}$ every market period $h$ (usually denoted as time step $t$
+in the RL literature). The optimal set of risk factors is learned by the RL
+agent through estimating a policy $\pi(a|s)$ that maps every state $s\in\S$ to
+an action $a\in\A$.
 *** Markov Decision Process Definition
 
 MDPs are defined by the state space $\S$, the action space $\A$, a set of reward
 signals $\R$ and the state-transition probabilities $p(s'|a,s)$. When
-$p(s'|a,s)$ is unknown, as it is in our case, it is possible to use a
-model-free approach (see Chapter ref:sec-td-learning). The state space
-compromises the observed information the agent uses to decide on the action it
-is going to take. We observed the following factors that are associated with the
-bidding risk:
+$p(s'|a,s)$ is unknown, as it is in our case, it is possible to use a model-free
+approach (see Chapter ref:sec-td-learning). The state space compromises the
+observed information the agent uses to decide on the action it is going to take.
+We observed the following factors that influence the risk of bidding on the
+markets:
 1) The bidding period's time of the day
 
    In times of volatile customer rental demand, for example during rush hour,
@@ -582,23 +581,24 @@ consciously discretized to achieve faster learning rates. Convergence in
 continuous spaces is theoretically achievable, but computationally more complex
 cite:sutton18_reinf. In order to facilitate faster learning in real-world
 settings, where long training periods are not desirable, we chose to not pursue
-this direction.
+this direction further.
 
 # NOTE: Reward structure, possibilities
 The reward signal is naturally defined as the fleet costs that occurred in the
-last time step. When accumulating the occurred rewards for all time steps, we
-arrive at the total fleet costs, which we aim to minimize:
+last time step:
 \begin{equation}
     R_{h+1} = \Cf{h} - \Cf{h-1} \text{ ,}
 \end{equation}
 where $\Cf{h}$ are the total accumulated fleet costs until the market period
-$h$. See eqref:eq-model-fleetcosts for a complete formulation of the cost
-function. The agent's actions directly determine the occurred costs or profits,
-and are presented to the agent in form of a positive or negative reward signal.
-The particular challenge in the proposed RL problem is the significantly
-/delayed reward/. Choosing a risk factor in time step $h$ determines the reward
-up to 672 time steps later (7 days, with 15-minute time steps), when the
-electricity from the balancing market has to be charged.
+$h$. When accumulating the occurred rewards for all time steps, we arrive at the
+total fleet costs, which we aim to minimize. See eqref:eq-model-fleetcosts for a
+complete formulation of the cost function. The agent's actions directly
+determine the occurred costs or profits, and are presented to the agent in form
+of a positive or negative reward signal. The particular challenge in the
+proposed RL problem is the significantly /delayed reward/. Choosing a risk
+factor in time step $h$ determines the reward up to 672 time steps later (7
+days, with 15-minute time steps), when the electricity from the balancing market
+has to be charged.
 
 #+BEGIN_SRC python :exports none
 return(7 * 24 * 4)
@@ -610,10 +610,10 @@ return(7 * 24 * 4)
 This research proposes to solve the presented RL problem, with the double deep
 Q-Network algorithm (DDQN), developed by
 textcite:hasselt16_deep_reinf_learn_doubl_q_learn. DDQN is a state-of-the-art,
-model-free RL approach that uses a deep neural network as function approximator
-to estimate optimal Q-values (see Chapter ref:sec-rl-fa for a explanation of
-function approximation methods). It combines the revolutionary deep Q-Network
-(DQN), originally proposed by
+model-free RL approach that uses a deep neural network as a function
+approximator to estimate optimal Q-values (see Chapter ref:sec-rl-fa for a
+explanation of function approximation methods). It combines the revolutionary
+deep Q-Network (DQN), originally proposed by
 textcite:mnih15_human_level_contr_throug_deep_reinf_learn with double Q-Learning
 cite:hasselt10_doubl_q. In double Q-Learning, experiences are randomly selected
 to update two different value functions to select and evaluate actions (in
@@ -647,7 +647,7 @@ Like this, a general state-value is learned that can be shared across many
 different actions, leading to a faster convergence of dueling architectures
 cite:wang15_duelin_networ_archit_deep_reinf_learn.
 
-#+CAPTION[Dueling Network Architecture]: The dueling network architecture cite:wang15_duelin_networ_archit_deep_reinf_learn. The two separate streams achieve faster convergence rates by learning individual state values and action advantages first and only later combining them to Q-values  label:fig-model-dueling
+#+CAPTION[Dueling Network Architecture]: The dueling network architecture cite:wang15_duelin_networ_archit_deep_reinf_learn. The two separate streams achieve faster convergence rates by learning individual state values and action advantages first, and only later combining them into Q-values. label:fig-model-dueling
 #+ATTR_LATEX: :width 0.95\linewidth :placement [h]
 [[../fig/ddqn.pdf]]
 
