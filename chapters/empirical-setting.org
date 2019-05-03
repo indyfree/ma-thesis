@@ -140,7 +140,7 @@ control capacity were already provided by the first bidder.
 #+RESULTS:
 : 976.7
 
-#+CAPTION[Critical electricity prices]: Daily critical electricity market prices (average, standard deviation) from June 2016 to January 2018. Highly volatile prices, e.g., between 12:00 and 14:00, demonstrate the benefits of an integrated trading strategy, which considers trading on both markets depending on the market conditions. label:fig-price-comparison
+#+CAPTION[Critical Electricity Prices]: Daily critical electricity market prices (average, standard deviation) from June 2016 to January 2018. Highly volatile prices, e.g., between 12:00 and 14:00, demonstrate the benefits of an integrated trading strategy, which considers trading on both markets depending on the market conditions. label:fig-price-comparison
 #+ATTR_LATEX: :width 1\linewidth :placement [htb]
 [[../fig/critical-prices.png]]
 

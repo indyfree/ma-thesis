@@ -88,7 +88,7 @@ behavior throughout the day (e.g., rush hour peaks between 7:00-9:00 and
 17:00-19:00), the amount of EVs that can utilized for VPP activities is
 comparably stable throughout the day.
 
-#+CAPTION[Fleet Utilzation]: Daily fleet utilization (average, standard deviation) from June 2016 to January 2018. The blue error band is illustrating the large volatility in the amount of EVs that get parked at a charging station. The share of EVs that can be used as a VPP is on average only 3.55% of the fleet's size. Most of the EVs are either not connected to a charging station or are already fully charged. label:fig-fleet-utilization
+#+CAPTION[Daily Fleet Utilzation]: Daily fleet utilization (average, standard deviation) from June 2016 to January 2018. The blue error band is illustrating the large volatility in the amount of EVs that get parked at a charging station. The share of EVs that can be used as a VPP is on average only 3.55% of the fleet's size. Most of the EVs are either not connected to a charging station or are already fully charged. label:fig-fleet-utilization
 #+ATTR_LATEX: :width 1\linewidth :placement [h]
 [[../fig/fleet-utilization.png]]
 
@@ -225,7 +225,7 @@ agents takes an action that causes imbalances, it will receive a highly negative
 reward signal, leading to a low estimated Q-value of that chosen action in a
 specific state.
 
-#+CAPTION[Comparison of gross profit results]: Comparison of gross profits and traded electricity between the proposed optimized integrated strategy and the other three naive charging strategies. The RL algorithm increases the achieved gross profits of the integrated bidding strategy on average by 12% and accomplishes nearly optimal results when compared to the benchmark strategy. label:fig-rl-profits
+#+CAPTION[Comparison of Gross Profit Results]: Comparison of gross profits and traded electricity between the proposed optimized integrated strategy and the other three naive charging strategies. The RL algorithm increases the achieved gross profits of the integrated bidding strategy on average by 12% and accomplishes nearly optimal results when compared to the benchmark strategy. label:fig-rl-profits
 #+ATTR_LATEX: :width 1\linewidth :placement [ht]
 [[../fig/rl-results.png]]
 
