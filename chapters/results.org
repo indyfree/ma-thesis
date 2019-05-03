@@ -205,8 +205,6 @@ return(87.98 - 15.47)
 : 72.51
 
 ** Reinforcement Learning Portfolio Optimization
-# TODO: Include total annual profit increase per EV and total balancing power
-
 Research question 2 investigates whether an RL agent can optimize the integrated
 bidding strategy by dynamically adjusting the bidding quantities. The bidding
 quantities $\Pb{}, \Pi{}$ are based on the evaluated risk associated with

@@ -70,7 +70,6 @@ kinds of EVs (e.g., electric bikes), independent of the geographical location of
 the fleet.
 
 ** Main Findings
-# TODO: Double check numbers!
 The proposed method was evaluated in a series of experiments with real-world
 carsharing data from Car2go in Stuttgart and German electricity market data from
 June 2017 until January 2018. The results show that the developed method

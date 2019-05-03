@@ -26,15 +26,15 @@
 *** DONE Units with space
 *** DONE Consistent Date formatting
 *** DONE Footnotes numbering with tables
-*** TODO Check page border spacing of Notation pages
-*** TODO Fix paragraph spacing
-*** TODO Put notation in RL chapter if only abbr, otherwise also use electricity/price abbr as p,soc,...
+*** DONE Check page border spacing of Notation pages
+*** DONE Fix paragraph spacing
+*** CANCELLED Put notation in RL chapter if only abbr, otherwise also use electricity/price abbr as p,soc,...
 ** Structure:
-*** TODO Bullet-point contributions at end of introduction
+*** CANCELLED Bullet-point contributions at end of introduction
 
 [[file:~/uni/ma-thesis/chapters/introduction.org::#%20TODO:%20Bullet-point%20contributions][Relevance]]
 ** Citations:
-*** TODO When webpage with pdf as source, put in bibtex not footnotes
+*** CANCELLED When webpage with pdf as source, put in bibtex not footnotes
 ** Review
 * Done
 ** DONE Background Neural Network Figure smaller and with inputs + outputs
