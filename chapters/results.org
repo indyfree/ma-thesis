@@ -149,7 +149,7 @@ strategies:
     prediction uncertainties.
 
 #+LATEX: {\captionsetup[table]{aboveskip=0.5cm}
-#+CAPTION[Bidding Strategy Results]: Bidding Strategy Results for a 1.5-Year Period label:table-profits
+#+CAPTION[Bidding Strategy Results]: Bidding Strategy Results for a 1.5-year Period label:table-profits
 #+ATTR_LATEX: :float sideways :align l|cccccc :placement [hp]
 |                                          | \thead{Balancing\\(risk-averse)} | \thead{Intraday\\(risk-averse)} | \thead{Integrated\\(risk-averse)} | \thead{Integrated\\(risk-seeking)} | \thead{Integrated\\(full information)} |
 |------------------------------------------+----------------------------------+---------------------------------+-----------------------------------+------------------------------------+----------------------------------------|
