@@ -257,32 +257,32 @@ cite:mnih15_human_level_contr_throug_deep_reinf_learn with the Double DQN
 algorithm cite:hasselt16_deep_reinf_learn_doubl_q_learn with and without the
 dueling architecture cite:wang15_duelin_networ_archit_deep_reinf_learn.
 
-# #+CAPTION[Learning Performance of RL Algorithms]: Comparison of the learning performance between the proposed RL algorithm and the other three simpler algorithms, averaged over 5 training attempts. Each training period is performed in 1.5 years of simulation time with real world data. The dueling DDQN algorithm (dark blue line) learns faster, and achieves better end-results than prior algorithms. label:fig-rl-learning
-# #+ATTR_LATEX: :width 1\linewidth :placement [htb]
-# [[../fig/rl-learning.png]]
+#+CAPTION[Learning Performance of RL Algorithms]: Comparison of the learning performance between the proposed RL algorithm and the other three simpler algorithms, averaged over 5 training attempts. Each training period is performed in 1.5 years of simulation time with real world data. The dueling DDQN algorithm (dark blue line) learns faster, and achieves better end-results than prior algorithms. label:fig-rl-learning
+#+ATTR_LATEX: :width 1\linewidth :placement [htb]
+[[../fig/rl-learning.png]]
 
-# In Figure ref:fig-rl-learning the average learning performances of the different
-# RL approaches are displayed. The experiment shows that the dueling DDQN
-# algorithm learns the fastest and shows a large increase in mean reward per
-# action after roughly 60 episodes of training, which equals about 227 days of
-# simulation time. The dueling DDQN algorithm shows the largest reward increase
-# and highest reward per action after the whole training period, which makes it
-# the best algorithm to solve the charging problem. Despite that, it still has a
-# larger mean absolute error than the DDQN algorithm, indicating that it is more
-# likely to cause imbalances with the dueling architecture than without. None of
-# the algorithms determined a policy that never caused imbalances after training
-# on the full 1.5 years of simulation time, which is about one hour of computing
-# time. In other words, without prior training on existing data the RL agent would
-# need more than one and a half years to learn to avoid imbalances. A possible
-# explanation is the problem of learning from long delayed rewards, first
-# discussed by textcite:watkins89_learn_from_delay_rewar. Long delayed rewards
-# increase the difficulty of RL problems, since the agent needs to connect
-# occurring decision outcomes to specific actions way back in the past. In the
-# case of the presented controlled fleet charging problem, this effect is
-# especially pronounced because a negative reward signal, caused by imbalances,
-# can occur up to 672 timesteps (one week) after the agent decided on the bidding
-# quantity for the balancing market. In contrast, the reward signals from trading
-# on the intraday market occur almost immediately after 2 timesteps (30 minutes).
+In Figure ref:fig-rl-learning the average learning performances of the different
+RL approaches are displayed. The experiment shows that the dueling DDQN
+algorithm learns the fastest and shows a large increase in mean reward per
+action after roughly 60 episodes of training, which equals about 227 days of
+simulation time. The dueling DDQN algorithm shows the largest reward increase
+and highest reward per action after the whole training period, which makes it
+the best algorithm to solve the charging problem. Despite that, it still has a
+larger mean absolute error than the DDQN algorithm, indicating that it is more
+likely to cause imbalances with the dueling architecture than without. None of
+the algorithms determined a policy that never caused imbalances after training
+on the full 1.5 years of simulation time, which is about one hour of computing
+time. In other words, without prior training on existing data the RL agent would
+need more than one and a half years to learn to avoid imbalances. A possible
+explanation is the problem of learning from long delayed rewards, first
+discussed by textcite:watkins89_learn_from_delay_rewar. Long delayed rewards
+increase the difficulty of RL problems, since the agent needs to connect
+occurring decision outcomes to specific actions way back in the past. In the
+case of the presented controlled fleet charging problem, this effect is
+especially pronounced because a negative reward signal, caused by imbalances,
+can occur up to 672 timesteps (one week) after the agent decided on the bidding
+quantity for the balancing market. In contrast, the reward signals from trading
+on the intraday market occur almost immediately after 2 timesteps (30 minutes).
 
 In summary, both experiments show that our approach is able to learn a
 profit-maximizing bidding strategy under varying circumstances, without using
